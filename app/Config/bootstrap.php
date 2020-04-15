@@ -84,8 +84,8 @@
  *	));
  */
 Cache::config('default', array('engine' => 'File', 'mask' => 0777));
-/*Cache::config('drugs', array(
-    'engine' => 'Memcache',
+Cache::config('drugs', array(
+    'engine' => 'File',
     'duration' => '+1 month',
     'path' => CACHE . 'drugs' . DS,
     'servers' => array('127.0.0.1:11211'), 
@@ -95,7 +95,7 @@ Cache::config('default', array('engine' => 'File', 'mask' => 0777));
 ));
 
 Cache::config('facs', array(
-    'engine' => 'Memcache',
+    'engine' => 'File',
     'duration' => '+1 month',
     'path' => CACHE . 'facs' . DS,
     'prefix' => 'cake_facilities_',
@@ -110,7 +110,7 @@ Cache::config('long', array(
     'probability' => 100,
     'mask' => 0777,
     'path' => CACHE . 'long' . DS,
-));*/
+));
 
 
 CakePlugin::load('AclExtras');

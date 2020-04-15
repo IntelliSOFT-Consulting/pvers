@@ -41,8 +41,8 @@ class HelpInfo extends AppModel {
 			$help_infos = $this->find('all');
 			Cache::write('help_infos', $this->compagt($help_infos), 'long');
 		}
-		// return $help_infos;
-		return $this->compagt($help_infos);
+		return $help_infos;
+		// return $this->compagt($help_infos);
     }
 
 	public function compagt($help_infos) {
