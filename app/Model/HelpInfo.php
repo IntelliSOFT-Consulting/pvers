@@ -53,7 +53,7 @@ class HelpInfo extends AppModel {
 		return $helps;
 	}
 
-	public function afterSave($created) {
+	public function afterSave($created, $options) {
 		// Cache::clear(false,  $config = 'default');
 		// clearCache();
 		$file = new File(CACHE . 'long' . DS . 'cake_help_infos');
