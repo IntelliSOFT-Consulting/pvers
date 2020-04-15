@@ -43,7 +43,8 @@ class AppController extends Controller {
         'RequestHandler', 
 		'Session'
     );
-    public $helpers = array('Html', 'Form', 'Session', 'Javascript', 'Ajax', 'AssetCompress.AssetCompress');
+    // public $helpers = array('Html', 'Form', 'Session', 'Javascript', 'Ajax', 'AssetCompress.AssetCompress');
+    public $helpers = array('Html', 'Form', 'Session', 'AssetCompress.AssetCompress');
     // public $uses = array('HelpInfo');
 
     public function beforeFilter() {
