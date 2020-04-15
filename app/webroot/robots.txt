@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /sadrs/view/
+Disallow: /pqmps/view/

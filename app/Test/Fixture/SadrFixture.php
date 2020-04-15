@@ -1,0 +1,137 @@
+<?php
+/**
+ * SadrFixture
+ *
+ */
+class SadrFixture extends CakeTestFixture {
+
+/**
+ * Fields
+ *
+ * @var array
+ */
+	public $fields = array(
+		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
+		'user_id' => array('type' => 'integer', 'null' => true, 'default' => NULL),
+		'initial_report' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'follow_up_report' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'name_of_institution' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'institution_code' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'address' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'contact' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'patient_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'ip_no' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'date_of_birth' => array('type' => 'date', 'null' => true, 'default' => NULL),
+		'patient_address' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'ward' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'gender_male' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'gender_female' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'known_allergy' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'pregnancy_status' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'first_trimester' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'second_trimester' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'third_trimester' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'weight' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 10, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'height' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 10, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'diagnosis' => array('type' => 'text', 'null' => true, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'description_of_reaction' => array('type' => 'text', 'null' => true, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'severity_mild' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'severity_moderate' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'severity_severe' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'severity_fatal' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'severity_unknown' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'drug_withdrawn' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'dose_increased' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'dose_reduced' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'dose_not_changed' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'action_unknown' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'recovering' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'recovered' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'requires_hospitalization' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'congenital_anomaly' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'prevent_permanent_damage' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'outcome_unknown' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'certain' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'probable' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'possible' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'unlikely' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'conditional' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'unassessable' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'any_other_comment' => array('type' => 'text', 'null' => true, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'reporter_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'report_date' => array('type' => 'date', 'null' => true, 'default' => NULL),
+		'reporter_email' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'reporter_phone' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'reporter_designation' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'reporter_signature' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
+		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
+	);
+
+/**
+ * Records
+ *
+ * @var array
+ */
+	public $records = array(
+		array(
+			'id' => 1,
+			'user_id' => 1,
+			'initial_report' => 1,
+			'follow_up_report' => 1,
+			'name_of_institution' => 'Lorem ipsum dolor sit amet',
+			'institution_code' => 'Lorem ipsum dolor sit amet',
+			'address' => 'Lorem ipsum dolor sit amet',
+			'contact' => 'Lorem ipsum dolor sit amet',
+			'patient_name' => 'Lorem ipsum dolor sit amet',
+			'ip_no' => 'Lorem ipsum dolor sit amet',
+			'date_of_birth' => '2012-05-15',
+			'patient_address' => 'Lorem ipsum dolor sit amet',
+			'ward' => 'Lorem ipsum dolor sit amet',
+			'gender_male' => 1,
+			'gender_female' => 1,
+			'known_allergy' => 1,
+			'pregnancy_status' => 1,
+			'first_trimester' => 1,
+			'second_trimester' => 1,
+			'third_trimester' => 1,
+			'weight' => 'Lorem ip',
+			'height' => 'Lorem ip',
+			'diagnosis' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+			'description_of_reaction' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+			'severity_mild' => 1,
+			'severity_moderate' => 1,
+			'severity_severe' => 1,
+			'severity_fatal' => 1,
+			'severity_unknown' => 1,
+			'drug_withdrawn' => 1,
+			'dose_increased' => 1,
+			'dose_reduced' => 1,
+			'dose_not_changed' => 1,
+			'action_unknown' => 1,
+			'recovering' => 1,
+			'recovered' => 1,
+			'requires_hospitalization' => 1,
+			'congenital_anomaly' => 1,
+			'prevent_permanent_damage' => 1,
+			'outcome_unknown' => 1,
+			'certain' => 1,
+			'probable' => 1,
+			'possible' => 1,
+			'unlikely' => 1,
+			'conditional' => 1,
+			'unassessable' => 1,
+			'any_other_comment' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+			'reporter_name' => 'Lorem ipsum dolor sit amet',
+			'report_date' => '2012-05-15',
+			'reporter_email' => 'Lorem ipsum dolor sit amet',
+			'reporter_phone' => 'Lorem ipsum dolor sit amet',
+			'reporter_designation' => 'Lorem ipsum dolor sit amet',
+			'reporter_signature' => 'Lorem ipsum dolor sit amet',
+			'created' => '2012-05-15 09:36:38',
+			'modified' => '2012-05-15 09:36:38'
+		),
+	);
+}

@@ -1,0 +1,86 @@
+<?php
+	$this->assign('PQMP', 'active');
+ ?>
+ 
+  <!-- SADR
+================================================== -->
+<section id="sadrsadd">
+	<div class="page-header">
+		<h1>Form For Reporting Poor Quality Medicinal Products  <small>(PINK FORM)</small></h1>
+	</div>	 
+	
+	<div class="row-fluid">
+		<div class="span6 feature-block">
+			<h2><span class="slash">//</span> Report</h2>
+			 <?php 	
+				echo $this->Form->create('Pqmp', array(
+					'action' => 'add',
+					'class' => 'well form-horizontal formbackp',
+					'inputDefaults' => array(
+						'div' => array('class' => 'control-group'),
+						'label' => array('class' => 'control-label'),
+						'between' => '<div class="controls">',
+						'after' => '</div>',
+						'class' => '',
+						'format' => array('before', 'label', 'between', 'input', 'after','error'),
+						'error' => array('attributes' => array( 'class' => 'controls help-block')),
+					 ),		
+				));
+			
+				echo $this->Form->input('reporter_email', array(
+							'type' => 'email', 
+							'div' => array('class' => 'control-group required'),
+							'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS')
+						));
+			
+				echo $this->Form->end(array(
+						'label' => 'Submit',
+						'value' => 'Save',
+						'class' => 'btn btn-primary',
+						'id' => 'SadrSubmitEmail', 'title'=>'Start a New PQMP', 
+						'data-content' => 'Please provide us with your email address to start filling in the PQMP.',
+						'div' => array(
+							'class' => 'form-actions',
+						)
+					));
+			?>
+		</div> <!-- /span6 -->
+
+		<div class="span6 feature-block">
+			<h2><span class="slash">//</span> Search PQMP by UNIQUE ID</h2>
+			<?php 	
+				echo $this->Form->create('Pqmp', array(
+					'action' => 'find',
+					'class' => 'well form-horizontal formbackp',
+					'inputDefaults' => array(
+						'div' => array('class' => 'control-group'),
+						'label' => array('class' => 'control-label'),
+						'between' => '<div class="controls">',
+						'after' => '</div>',
+						'class' => '',
+						'format' => array('before', 'label', 'between', 'input', 'after','error'),
+						'error' => array('attributes' => array( 'class' => 'controls help-block')),
+					 ),		
+				));
+			
+				echo $this->Form->input('search', array(
+							'div' => array('class' => 'control-group required'),
+							'label' => array('class' => 'control-label required', 'text' => 'FORM ID')
+						));
+			
+				echo $this->Form->end(array(
+						'label' => 'Submit',
+						'value' => 'Save',
+						'class' => 'btn btn-primary',
+						'id' => 'SadrSearchForm', 
+						'title'=>'Search for an SADR', 
+						'data-content' => 'Input a Form Id to search for.',
+						'div' => array(
+							'class' => 'form-actions',
+						)
+					));
+			?>
+			</div> <!-- /span6 -->
+		</div> <!-- /span6 -->
+	</div> <!-- /row -->
+</section> <!-- /section -->

@@ -1,0 +1,135 @@
+<?php
+/**
+ * PqmpFixture
+ *
+ */
+class PqmpFixture extends CakeTestFixture {
+
+/**
+ * Fields
+ *
+ * @var array
+ */
+	public $fields = array(
+		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
+		'user_id' => array('type' => 'integer', 'null' => true, 'default' => NULL),
+		'facility_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'district_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'province_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'facility_address' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'facility_phone' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'brand_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'generic_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'batch_number' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'manufacture_date' => array('type' => 'date', 'null' => true, 'default' => NULL),
+		'expiry_date' => array('type' => 'date', 'null' => true, 'default' => NULL),
+		'receipt_date' => array('type' => 'date', 'null' => true, 'default' => NULL),
+		'name_of_manufacturer' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'country_of_origin' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'supplier_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'supplier_address' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'oral_tablets' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'oral_suspension' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'injection' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'diluent' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'suspension_powder' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'injection_powder' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'eye_drops' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'ear_drops' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'nebuliser_solution' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'cream' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'ointment' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'liniment' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'paste' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'colour_change' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'separating' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'powdering' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'caking' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'moulding' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'odour_change' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'mislabeling' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'incomplete_pack' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'complaint_description' => array('type' => 'text', 'null' => true, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'require_refrigeration_yes' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'require_refrigeration_no' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'product_at_facility_yes' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'product_at_facility_no' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'returned_by_client_yes' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'returned_by_client_no' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'stored_to_recommendations_yes' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'stored_to_recommendations_no' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+		'comments' => array('type' => 'text', 'null' => true, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'reporter_name' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'contact_number' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'job_title' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'signature' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
+		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
+	);
+
+/**
+ * Records
+ *
+ * @var array
+ */
+	public $records = array(
+		array(
+			'id' => 1,
+			'user_id' => 1,
+			'facility_name' => 'Lorem ipsum dolor sit amet',
+			'district_name' => 'Lorem ipsum dolor sit amet',
+			'province_name' => 'Lorem ipsum dolor sit amet',
+			'facility_address' => 'Lorem ipsum dolor sit amet',
+			'facility_phone' => 'Lorem ipsum dolor sit amet',
+			'brand_name' => 'Lorem ipsum dolor sit amet',
+			'generic_name' => 'Lorem ipsum dolor sit amet',
+			'batch_number' => 'Lorem ipsum dolor sit amet',
+			'manufacture_date' => '2012-05-15',
+			'expiry_date' => '2012-05-15',
+			'receipt_date' => '2012-05-15',
+			'name_of_manufacturer' => 'Lorem ipsum dolor sit amet',
+			'country_of_origin' => 'Lorem ipsum dolor sit amet',
+			'supplier_name' => 'Lorem ipsum dolor sit amet',
+			'supplier_address' => 'Lorem ipsum dolor sit amet',
+			'oral_tablets' => 1,
+			'oral_suspension' => 1,
+			'injection' => 1,
+			'diluent' => 1,
+			'suspension_powder' => 1,
+			'injection_powder' => 1,
+			'eye_drops' => 1,
+			'ear_drops' => 1,
+			'nebuliser_solution' => 1,
+			'cream' => 1,
+			'ointment' => 1,
+			'liniment' => 1,
+			'paste' => 1,
+			'colour_change' => 1,
+			'separating' => 1,
+			'powdering' => 1,
+			'caking' => 1,
+			'moulding' => 1,
+			'odour_change' => 1,
+			'mislabeling' => 1,
+			'incomplete_pack' => 1,
+			'complaint_description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+			'require_refrigeration_yes' => 1,
+			'require_refrigeration_no' => 1,
+			'product_at_facility_yes' => 1,
+			'product_at_facility_no' => 1,
+			'returned_by_client_yes' => 1,
+			'returned_by_client_no' => 1,
+			'stored_to_recommendations_yes' => 1,
+			'stored_to_recommendations_no' => 1,
+			'comments' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+			'reporter_name' => 'Lorem ipsum dolor sit amet',
+			'contact_number' => 'Lorem ipsum dolor sit amet',
+			'job_title' => 'Lorem ipsum dolor sit amet',
+			'signature' => 'Lorem ipsum dolor sit amet',
+			'created' => '2012-05-15 09:38:17',
+			'modified' => '2012-05-15 09:38:17'
+		),
+	);
+}
