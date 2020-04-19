@@ -122,6 +122,11 @@ CakePlugin::load('Media', array('bootstrap'=>true));
 CakePlugin::load('Acl', array('bootstrap' => true));
 // Asset Compress
 CakePlugin::load('AssetCompress');
+CakePlugin::load('DebugKit');
+Configure::write('Dispatcher.filters', array(
+    'AssetDispatcher',
+    'CacheDispatcher'
+));
 // CakePlugin::load('cakephp-dompdf-view', array('bootstrap' => true));
 // CakePlugin::load('CakePdf', array('bootstrap' => true));
 // CakePlugin::load('ReportManager',array('bootstrap' => true)); 
