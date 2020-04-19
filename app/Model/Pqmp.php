@@ -217,7 +217,7 @@ class Pqmp extends AppModel {
 		return true;
 	}
 
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		// if (!empty($this->data['Pqmp']['manufacture_date'])) {
 			// $this->data['Pqmp']['manufacture_date'] = $this->dateFormatBeforeSave($this->data['Pqmp']['manufacture_date']);
 		// }
@@ -236,7 +236,7 @@ class Pqmp extends AppModel {
 		return true;
 	}
 
-	function afterFind($results) {
+	function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
 			if (isset($val['Pqmp']['id'])) {
 				$results[$key]['Pqmp']['id'] = $this->Luhn($val['Pqmp']['id']);

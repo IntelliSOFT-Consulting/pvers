@@ -99,7 +99,7 @@ class Aefi extends AppModel {
         ),
     );
 
-    public function beforeSave() {
+    public function beforeSave($options = array()) {
 		if (!empty($this->data['Aefi']['date_of_birth'])) {
 			$this->data['Aefi']['date_of_birth'] = implode('-', $this->data['Aefi']['date_of_birth']);
 		} else {
@@ -108,7 +108,7 @@ class Aefi extends AppModel {
 		return true;
 	}
 
-	function afterFind($results) {
+	function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
 			if (isset($val['Aefi']['id'])) {
 				$results[$key]['Aefi']['id'] = $this->Luhn($val['Aefi']['id']);

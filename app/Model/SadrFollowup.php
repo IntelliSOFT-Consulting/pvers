@@ -149,7 +149,7 @@ class SadrFollowup extends AppModel {
 		// return false;
 	// }
 
-	function afterFind($results) {
+	function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
 			if (isset($val['SadrFollowup']['id'])) {
 				$results[$key]['SadrFollowup']['id'] = $this->Luhn($val['SadrFollowup']['id']);

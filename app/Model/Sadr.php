@@ -326,7 +326,7 @@ class Sadr extends AppModel {
 		return true;
 	}
 
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		if (!empty($this->data['Sadr']['date_of_birth'])) {
 			$this->data['Sadr']['date_of_birth'] = implode('-', $this->data['Sadr']['date_of_birth']);
 		} else {
@@ -348,7 +348,7 @@ class Sadr extends AppModel {
 		return true;
 	}
 
-	function afterFind($results) {
+	function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
 			if (isset($val['Sadr']['id'])) {
 				$results[$key]['Sadr']['id'] = $this->Luhn($val['Sadr']['id']);

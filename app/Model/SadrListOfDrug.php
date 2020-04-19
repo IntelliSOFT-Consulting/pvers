@@ -122,7 +122,7 @@ class SadrListOfDrug extends AppModel {
 		return true;
     }
 
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		if (!empty($this->data['SadrListOfDrug']['start_date'])) {
 			$this->data['SadrListOfDrug']['start_date'] = $this->dateFormatBeforeSave($this->data['SadrListOfDrug']['start_date']);
 		}
@@ -132,7 +132,7 @@ class SadrListOfDrug extends AppModel {
 		return true;
 	}
 
-	function afterFind($results) {
+	function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
 			if (isset($val['SadrListOfDrug']['start_date'])) {
 				$results[$key]['SadrListOfDrug']['start_date'] = $this->dateFormatAfterFind($val['SadrListOfDrug']['start_date']);
