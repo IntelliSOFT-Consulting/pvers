@@ -26,7 +26,7 @@ $ cake/console/cake media init
 
 Some directories must be writable so that the webserver (assuming it
 runs under a different user) can store files in there.
-$ chmod −R a+rwX webroot/media/{transfer,filter} 
+$ chmod -R a+rwX webroot/media/{transfer,filter}
 
 Expanding on the blog tutorial we add the following fields to our 
 posts table: dirname, basename. This will allow us to associate 
@@ -264,7 +264,7 @@ file.
 Now that one exception is generated versions derived from the coupled file
 *will not* get deleted automatically. For this piece of functionality you'll
 need to implement the logic on your own. Following a snippet which does this in
-an exemplaric way.  Add it to to the model you've attached Generator and
+an exemplary way.  Add it to to the model you've attached Generator and
 Coupler behaviors to.
 
 {{{

@@ -14,14 +14,13 @@
 
 ##Installation
 1. Clone into /path/to/app/Plugin 
-``git clone https://aeolu@github.com/aeolu/CakePHP-Media-Plugin.git Media``
+``git clone https://bmcclure@github.com/bmcclure/CakePHP-Media-Plugin.git Media``
 2. Add as a submodule
-``git submodule add https://aeolu@github.com/aeolu/CakePHP-Media-Plugin.git Plugin/Media``
+``git submodule add https://bmcclure@github.com/bmcclure/CakePHP-Media-Plugin.git Plugin/Media``
 3. Load the plugin.
 <pre>
     ``//Within your bootstrap.php``
-    ``CakePlugin::load('Media');``
-    ``require APP . 'Plugin' . DS . 'Media' . DS . 'Config' . DS . 'core.php';``
+    ``CakePlugin::load('Media', array('bootstrap'=>true));`
 </pre>
 4. Initialize Media files.
 ``cake Media.Media init``
@@ -52,7 +51,7 @@ Do you want to create it now?
 </pre>
 
 5. Set the permissions for the Media folder:
-<pre>chmod 777 -R webroot/media/{transfer,filter}</pre>
+<pre>chmod -R 777 webroot/media/{transfer,filter}</pre>
 
 ##Upload and View Image
 1. Set the model as media transfer user
@@ -72,8 +71,8 @@ Do you want to create it now?
 ``echo $this->Form->input('checksum', array('type'=>'hidden'));``
 ``echo $this->Form->end(__('Submit'));``
 </pre>
-3. To view image:
+3. To view image, add the Media helper to your controller and use:
 <pre>
-``<?php echo $this->Html->image( '../media/transfer/img/' . h($employee['User']['basename']), array('alt' => __('Profile Picture'), 'border' => '0')); ?>``
+``<?php echo $this->Media->embed(h($employee['User']['basename'])); ?>``
 </pre>
 4. ENJOY!

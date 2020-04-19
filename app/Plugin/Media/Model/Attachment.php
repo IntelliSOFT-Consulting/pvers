@@ -2,45 +2,51 @@
 /**
  * Attachment Model File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.models
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Model
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
+
+App::uses('MediaAppModel', 'Media.Model');
 
 /**
  * Attachment Model Class
  *
  * A ready-to-use model combining multiple behaviors.
  *
- * @package    media
- * @subpackage media.models
+ * @package       Media.Model
+ *
+ * @property CouplerBehavior $Coupler
+ * @property MetaBehavior $Meta
+ * @property GeneratorBehavior $Generator
+ * @property PolymorphicBehavior $Polymorphic
+ * @property TransferBehavior $Transfer
  */
 class Attachment extends MediaAppModel {
+
 /**
  * actsAs property
  *
  * @var array
- * @access public
  */
-	var $actsAs = array(
+	public $actsAs = array(
 		'Media.Transfer' => array(
-			'trustClient' => false,
+			'trustClient'       => false,
 			'transferDirectory' => MEDIA_TRANSFER,
-			'createDirectory' => true,
-			'alternativeFile' => 100
+			'createDirectory'   => true,
+			'alternativeFile'   => 100
 		),
 		'Media.Generator' => array(
-			'baseDirectory' => MEDIA_TRANSFER,
+			'baseDirectory'   => MEDIA_TRANSFER,
 			'filterDirectory' => MEDIA_FILTER,
 			'createDirectory' => true,
 		),
@@ -65,18 +71,17 @@ class Attachment extends MediaAppModel {
  * settings for single rules.
  *
  * `checkExtension()` and `checkMimeType()` take both a blacklist and
- * a whitelist. If you are on windows make sure that you addtionally
+ * a whitelist. If you are on windows make sure that you additionally
  * specify the `'tmp'` extension in case you are using a whitelist.
  *
  * @var array
- * @access public
  */
-	var $validate = array(
+	public $validate = array(
 		'file' => array(
 			'resource'   => array('rule' => 'checkResource'),
 			'access'     => array('rule' => 'checkAccess'),
 			'location'   => array('rule' => array('checkLocation', array(
-				MEDIA_TRANSFER, '/tmp/'
+				MEDIA_TRANSFER, MEDIA_UPLOAD_TMP_DIR
 			))),
 			'permission' => array('rule' => array('checkPermission', '*')),
 			'size'       => array('rule' => array('checkSize', '5M')),
@@ -98,9 +103,8 @@ class Attachment extends MediaAppModel {
  * Supply a fancy Path field
  *
  * @var array
- * @access public
  */
-	var $virtualFields = array(
+	public $virtualFields = array(
 		'path' => "CONCAT_WS('/', dirname, basename)"
 	);
 
@@ -123,7 +127,7 @@ class Attachment extends MediaAppModel {
  * @param array $process version, directory, instructions
  * @return boolean `true` if version for the file was successfully stored
  */
-	// function makeVersion($file, $process) {
+	// public function makeVersion($file, $process) {
 	// }
 
 /**
@@ -136,7 +140,7 @@ class Attachment extends MediaAppModel {
  * @param array $from Information about the source file
  * @return string The path to the destination file or false
  */
-	// function transferTo($via, $from) {
+	// public function transferTo($via, $from) {
 	// }
+
 }
-?>

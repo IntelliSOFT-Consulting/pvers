@@ -2,30 +2,29 @@
 /**
  * Transfer Validation File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.libs
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Lib
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
+
 App::uses('Validation', 'Utility');
 App::uses('MediaValidation', 'Media.Lib');
 
 /**
  * Transfer Validation Class
  *
- * @package    media
- * @subpackage media.libs
+ * @package       Media.Lib
  */
-class TransferValidation extends MediaValidation {
+class TransferValidation {
 
 /**
  * Checks if subject is transferable
@@ -38,7 +37,7 @@ class TransferValidation extends MediaValidation {
 		 || TransferValidation::uploadedFile($check) /* This must appear above file */
 		 || MediaValidation::file($check)
 		 || TransferValidation::url($check)) {
-		  	return !TransferValidation::blank($check);
+			return !TransferValidation::blank($check);
 		}
 		return false;
 	}
@@ -72,11 +71,11 @@ class TransferValidation extends MediaValidation {
 		if (!is_array($check)) {
 			return false;
 		}
-		if (!array_key_exists('name',$check)
-		 || !array_key_exists('type',$check)
-		 || !array_key_exists('tmp_name',$check)
-		 || !array_key_exists('error',$check)
-		 || !array_key_exists('size',$check)) {
+		if (!array_key_exists('name', $check)
+		 || !array_key_exists('type', $check)
+		 || !array_key_exists('tmp_name', $check)
+		 || !array_key_exists('error', $check)
+		 || !array_key_exists('size', $check)) {
 			return false;
 		}
 		return true;
@@ -85,7 +84,8 @@ class TransferValidation extends MediaValidation {
 /**
  * Checks if subject is an uploaded file
  *
- * @param mixed $check
+ * @param mixed $check Absolute path to file
+ * @return boolean
  */
 	public static function uploadedFile($check) {
 		return MediaValidation::file($check) && is_uploaded_file($check);
@@ -94,19 +94,20 @@ class TransferValidation extends MediaValidation {
 /**
  * Validates url
  *
- * @param string string to check
- * @param array options for allowing different url parts currently only scheme is supported
+ * @param string $check String to check
+ * @param array $options Options for allowing different url parts currently only scheme is supported
+ * @return boolean
  */
 	public static function url($check, $options = array()) {
 		if (!is_string($check)) {
 			return false;
 		}
 		if (isset($options['scheme'])) {
-			if (!preg_match('/^(' . implode('|', (array) $options['scheme']) . ':)+/', $check)) {
+			if (!preg_match('/^(' . implode('|', (array)$options['scheme']) . ':)+/', $check)) {
 				return false;
 			}
 		}
 		return Validation::url($check);
 	}
+
 }
-?>

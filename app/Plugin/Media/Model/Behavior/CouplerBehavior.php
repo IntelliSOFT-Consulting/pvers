@@ -2,20 +2,22 @@
 /**
  * Coupler Behavior File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.models.behaviors
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Model.Behavior
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
+
+App::uses('File', 'Utility');
+App::uses('ModelBehavior', 'Model');
 
 /**
  * Coupler Behavior Class
@@ -45,12 +47,9 @@
  * For more information on options and arguments for the task call:
  * $cake media help
  *
- * @see SyncTask
- * @package    media
- * @subpackage media.models.behaviors
+ * @see           SyncTask
+ * @package       Media.Model.Behavior
  */
- App::uses('File', 'Utility');
-
 class CouplerBehavior extends ModelBehavior {
 
 /**
@@ -68,16 +67,17 @@ class CouplerBehavior extends ModelBehavior {
 /**
  * Setup
  *
- * @param Model $Model
- * @param array $settings See defaultSettings for configuration options
+ * @see $_defaultSettings
+ * @param Model $Model Model using this behavior
+ * @param array $settings Configuration settings for $Model
  * @return void
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		if (!isset($this->settings[$Model->alias])) {
 			$this->settings[$Model->alias] = $this->_defaultSettings;
 		}
 
-		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], (array) $settings);
+		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], (array)$settings);
 	}
 
 /**
@@ -94,13 +94,14 @@ class CouplerBehavior extends ModelBehavior {
  * Parses contents of the `file` field if present and generates a normalized path
  * relative to the path set in the `baseDirectory` option.
  *
- * @param Model $Model
- * @return boolean
+ * @param Model $Model Model using this behavior
+ * @param array $options Options passed from Model::save().
+ * @return mixed False if the operation should abort. Any other result will continue.
  */
-	public function beforeSave($Model) {
+	public function beforeSave(Model $Model, $options = array()) {
 		if (!$Model->exists()) {
 			if (!isset($Model->data[$Model->alias]['file'])) {
-				unset($Model->data[$Model->alias]);
+				//unset($Model->data[$Model->alias]);
 				return true;
 			}
 		} else {
@@ -130,6 +131,7 @@ class CouplerBehavior extends ModelBehavior {
 		}
 
 		extract($this->settings[$Model->alias]);
+		/* @var $baseDirectory string */
 
 		if (isset($Model->data[$Model->alias]['file'])) {
 			$File = new File($Model->data[$Model->alias]['file']);
@@ -156,12 +158,13 @@ class CouplerBehavior extends ModelBehavior {
  * the file couldn't be deleted the callback will stop the delete operation and
  * not continue to delete the record.
  *
- * @param Model $Model
- * @param boolean $cascade
- * @return boolean
+ * @param Model $Model Model using this behavior
+ * @param boolean $cascade If true records that depend on this record will also be deleted
+ * @return mixed False if the operation should abort. Any other result will continue.
  */
-	public function beforeDelete($Model, $cascade = true) {
+	public function beforeDelete(Model $Model, $cascade = true) {
 		extract($this->settings[$Model->alias]);
+		/* @var $baseDirectory string */
 
 		$result = $Model->find('first', array(
 			'conditions' => array($Model->primaryKey => $Model->id),
@@ -183,18 +186,19 @@ class CouplerBehavior extends ModelBehavior {
 /**
  * Callback, adds the `file` field to each result.
  *
- * @param Model $Model
- * @param array $results
- * @param boolean $primary
- * @return array
+ * @param Model $Model Model using this behavior
+ * @param mixed $results The results of the find operation
+ * @param boolean $primary Whether this model is being queried directly (vs. being queried as an association)
+ * @return mixed An array value will replace the value of $results - any other value will be ignored.
  */
-	public function afterFind($Model, $results, $primary = false) {
+	public function afterFind(Model $Model, $results, $primary = false) {
 		if (empty($results)) {
 			return $results;
 		}
 		extract($this->settings[$Model->alias]);
+		/* @var $baseDirectory string */
 
-		foreach ($results as $key => &$result) {
+		foreach ($results as &$result) {
 			if (!isset($result[$Model->alias]['dirname'], $result[$Model->alias]['basename'])) {
 				continue;
 			}
@@ -211,16 +215,16 @@ class CouplerBehavior extends ModelBehavior {
 /**
  * Checks if an alternative text is given only if a file is submitted
  *
- * @param Model $Model
- * @param array $field
+ * @param Model $Model Model using this behavior
+ * @param array $check Value to check
  * @return boolean
  */
-	public function checkRepresent($Model, $field) {
+	public function checkRepresent(Model $Model, $check) {
 		if (!isset($Model->data[$Model->alias]['file'])) {
 			return true;
 		}
-		$value = current($field);
+		$value = current($check);
 		return !empty($value);
 	}
+
 }
-?>

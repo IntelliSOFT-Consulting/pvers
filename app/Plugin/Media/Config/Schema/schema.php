@@ -2,26 +2,24 @@
 /**
  * Media Schema File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.config.sql
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Config.Schema
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
 /**
  * Media Schema Class
  *
- * @package    media
- * @subpackage media.config.sql
+ * @package       Media.Config.Schema
  */
 class MediaSchema extends CakeSchema {
 
@@ -29,9 +27,9 @@ class MediaSchema extends CakeSchema {
  * before
  *
  * @param array $event
- * @access public
+ * @return boolean
  */
-	function before($event = array()) {
+	public function before($event = array()) {
 		return true;
 	}
 
@@ -39,29 +37,27 @@ class MediaSchema extends CakeSchema {
  * after
  *
  * @param array $event
- * @access public
  */
-	function after($event = array()) {
+	public function after($event = array()) {
 	}
 
 /**
  * attachments
  *
  * @var array
- * @access public
  */
-	var $attachments = array(
-		'id'          => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'extra' => 'auto_increment', 'length' => 10),
-		'model'       => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 255),
-		'foreign_key' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
-		'dirname'     => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 255),
-		'basename'    => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 255),
-		'checksum'    => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 255),
-		'group'       => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 255),
-		'alternative' => array('type' => 'string', 'null' => true, 'default' => NULL,'length' => 50),
-		'created'     => array('type' => 'datetime', 'null' => true, 'default' => NULL),
-		'modified'    => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+	public $attachments = array(
+		'id'          => array('type' => 'integer', 'key' => 'primary'),
+		'model'       => array('type' => 'string'),
+		'foreign_key' => array('type' => 'integer', 'length' => 10),
+		'dirname'     => array('type' => 'string', 'null' => true),
+		'basename'    => array('type' => 'string'),
+		'checksum'    => array('type' => 'string', 'null' => true),
+		'group'       => array('type' => 'string', 'null' => true),
+		'alternative' => array('type' => 'string', 'null' => true),
+		'created'     => array('type' => 'datetime', 'null' => true),
+		'modified'    => array('type' => 'datetime', 'null' => true),
 		'indexes'     => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
 	);
+
 }
-?>

@@ -58,7 +58,7 @@ The helper learned HTML5 and now supports audio and video elements.
 
 With the introduction of HTML5 support the @embed()@ method has largely been
 rewritten from scratch. The method now produces object tag free markup; for
-embeding media using the object syntax use the @embedAsObject()@ method.
+embedding media using the object syntax use the @embedAsObject()@ method.
  
 While removing support for assets the @link()@ method has been removed. Use the
 built-in one from the html helper.

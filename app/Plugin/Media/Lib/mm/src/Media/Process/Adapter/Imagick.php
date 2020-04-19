@@ -2,12 +2,12 @@
 /**
  * mm: the PHP media library
  *
- * Copyright (c) 2007-2010 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright  2007-2010 David Persson <nperson@gmx.de>
+ * @copyright  2007-2012 David Persson <nperson@gmx.de>
  * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link       http://github.com/davidpersson/mm
  */
@@ -171,6 +171,11 @@ class Media_Process_Adapter_Imagick extends Media_Process_Adapter {
 		$height = (integer) $height;
 
 		return $this->_object->resizeImage($width, $height, Imagick::FILTER_LANCZOS, 1);
+	}
+
+	public function fitInsideWhite($width, $height, $new_width, $new_height){
+		return $this->resize($new_width, $new_height)
+			&& $this->_object->extentImage($width, $height, (($new_width - $width) / 2), (($new_height - $height) / 2));
 	}
 
 	public function cropAndResize($cropLeft, $cropTop, $cropWidth, $cropHeight, $resizeWidth, $resizeHeight) {

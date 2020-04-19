@@ -2,49 +2,58 @@
 /**
  * Media Validation Test Case File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.tests.cases.libs
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Test.Case.Lib
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
-App::import('Lib','Media.MediaValidation');
-require_once dirname(dirname(dirname(__FILE__))) . DS . 'Fixture' . DS . 'test_data.php';
+
+App::uses('MediaValidation', 'Media.Lib');
+
+require_once dirname(dirname(__FILE__)) . DS . 'constants.php';
+require_once dirname(dirname(dirname(__FILE__))) . DS . 'Fixture' . DS . 'TestData.php';
 
 /**
  * Transfer Validation Test Case Class
  *
- * @package    media
- * @subpackage media.tests.cases.libs
+ * @package       Media.Test.Case.Lib
  */
 class MediaValidationTest extends CakeTestCase {
-	function setUp() {
-		$this->TestData = new TestData();
+
+/**
+ * @var TestData
+ */
+	public $Data;
+
+	public function setUp() {
+		parent::setUp();
+		$this->Data = new TestData();
 	}
 
-	function tearDown() {
-		$this->TestData->flushFiles();
+	public function tearDown() {
+		parent::tearDown();
+		$this->Data->cleanUp();
 	}
 
-	function testMimeType() {
+	public function testMimeType() {
 		$check = 'image/png';
 		$result = MediaValidation::mimeType($check);
 		$this->assertTrue($result);
 
 		$check = 'image/png';
-		$result = MediaValidation::mimeType($check,array('image/png'));
+		$result = MediaValidation::mimeType($check, array('image/png'));
 		$this->assertFalse($result);
 
 		$check = 'image/png';
-		$result = MediaValidation::mimeType($check,array('image/png'),array('image/png'));
+		$result = MediaValidation::mimeType($check, array('image/png'), array('image/png'));
 		$this->assertFalse($result);
 
 		$check = 'in/val/id';
@@ -56,18 +65,18 @@ class MediaValidationTest extends CakeTestCase {
 		$this->assertFalse($result);
 	}
 
-	function testExtension() {
+	public function testExtension() {
 		$check = 'png';
 		$result = MediaValidation::extension($check);
 		$this->assertTrue($result);
 
 		$check = 'tar.gz';
 		$result = MediaValidation::extension($check, false, array('tar', 'gz'));
-		$this->assertTrue($result);
+		$this->assertFalse($result);
 
 		$check = 'tar.gz';
 		$result = MediaValidation::extension($check, false, array('tar.gz'));
-		$this->assertFalse($result);
+		$this->assertTrue($result);
 
 		$check = 'png';
 		$result = MediaValidation::extension($check, array('png'));
@@ -114,94 +123,95 @@ class MediaValidationTest extends CakeTestCase {
 		$deny = array('bin', 'class', 'dll', 'dms', 'exe', 'lha');
 		$allow = array('pdf', 'tmp');
 		$check = 'tmp';
-		$result = MediaValidation::extension($check);
+		$result = MediaValidation::extension($check, $deny, $allow);
 		$this->assertTrue($result);
 
 		$deny = array('bin', 'class', 'dll', 'dms', 'exe', 'lha');
 		$allow = array('*');
 		$check = 'tmp';
-		$result = MediaValidation::extension($check);
+		$result = MediaValidation::extension($check, $deny, $allow);
 		$this->assertTrue($result);
 	}
 
-	function testSize() {
-		$result = MediaValidation::size('1M','2M');
+	public function testSize() {
+		$result = MediaValidation::size('1M', '2M');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::size('1K','2M');
+		$result = MediaValidation::size('1K', '2M');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::size('1M','1K');
+		$result = MediaValidation::size('1M', '1K');
 		$this->assertFalse($result);
 
-		$result = MediaValidation::size('1048576','2M');
+		$result = MediaValidation::size('1048576', '2M');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::size(1048576,'2M');
+		$result = MediaValidation::size(1048576, '2M');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::size('1M','1M');
+		$result = MediaValidation::size('1M', '1M');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::size('1048576','1M');
+		$result = MediaValidation::size('1048576', '1M');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::size(1048576,10);
+		$result = MediaValidation::size(1048576, 10);
 		$this->assertFalse($result);
 
-		$result = MediaValidation::size('','2M');
+		$result = MediaValidation::size('', '2M');
 		$this->assertFalse($result);
-
 	}
 
-	function testLocation() {
+	public function testLocation() {
 		$result = MediaValidation::location(TMP);
 		$this->assertFalse($result);
 
-		$result = MediaValidation::location(TMP,true);
+		$result = MediaValidation::location(TMP, true);
 		$this->assertTrue($result);
 
-		$result = MediaValidation::location(TMP,array(DS));
+		$topMostDir = current(explode(DS, TMP)) . DS;
+
+		$result = MediaValidation::location(TMP, array($topMostDir));
 		$this->assertTrue($result);
 
-		$result = MediaValidation::location(TMP.DS.DS.DS,array(DS));
+		$result = MediaValidation::location(TMP . DS . DS . DS, array($topMostDir));
 		$this->assertTrue($result);
 
-		$result = MediaValidation::location(TMP.DS.'file.png',array(DS));
+		$result = MediaValidation::location(TMP . DS . 'file.png', array($topMostDir));
 		$this->assertTrue($result);
 
-		$result = MediaValidation::location(TMP,array(TMP.'subdir'));
+		$result = MediaValidation::location(TMP, array(TMP . 'subdir'));
 		$this->assertFalse($result);
 
-		$result = MediaValidation::location('http://cakeforge.org',true);
+		$result = MediaValidation::location('http://cakeforge.org', true);
 		$this->assertTrue($result);
 
 		$result = MediaValidation::location('http://cakeforge.org');
 		$this->assertFalse($result);
 
-		$result = MediaValidation::location('http://cakeforge.org',array(TMP));
+		$result = MediaValidation::location('http://cakeforge.org', array(TMP));
 		$this->assertFalse($result);
 
-		$result = MediaValidation::location('http://cakeforge.org',array(TMP,'http://'));
+		$result = MediaValidation::location('http://cakeforge.org', array(TMP, 'http://'));
 		$this->assertTrue($result);
 
-		$result = MediaValidation::location('http://cakeforge.org','http://rosa');
+		$result = MediaValidation::location('http://cakeforge.org', 'http://rosa');
 		$this->assertFalse($result);
 
-		$result = MediaValidation::location('http://cakeforge.org','http://cakeforge.org');
+		$result = MediaValidation::location('http://cakeforge.org', 'http://cakeforge.org');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::location('http://cakeforge.org/bla/?x=?$§c $%.org','http://cakeforge.org');
+		$result = MediaValidation::location('http://cakeforge.org/bla/?x=?$§c $%.org', 'http://cakeforge.org');
 		$this->assertFalse($result);
 
-		$result = MediaValidation::location('http://cakeforge.org/bla','http://cakeforge.org');
+		$result = MediaValidation::location('http://cakeforge.org/bla', 'http://cakeforge.org');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::location('http://cakeforge.org/bla?x=do','http://cakeforge.org');
+		$result = MediaValidation::location('http://cakeforge.org/bla?x=do', 'http://cakeforge.org');
 		$this->assertTrue($result);
 	}
 
-	function testAccess() {
+	public function testAccess() {
 		$result = MediaValidation::access('0444', 'r');
 		$this->assertTrue($result);
 
@@ -211,7 +221,7 @@ class MediaValidationTest extends CakeTestCase {
 		$result = MediaValidation::access('0004', 'r');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::access('0111','r');
+		$result = MediaValidation::access('0111', 'r');
 		$this->assertFalse($result);
 
 		$result = MediaValidation::access('0222', 'w');
@@ -224,72 +234,72 @@ class MediaValidationTest extends CakeTestCase {
 		$this->assertFalse($result);
 	}
 
-	function testPermission() {
+	public function testPermission() {
 		$result = MediaValidation::permission('0111');
 		$this->assertFalse($result);
 
 		$result = MediaValidation::permission(0111);
 		$this->assertFalse($result);
 
-		$result = MediaValidation::permission('0111','-x');
+		$result = MediaValidation::permission('0111', '-x');
 		$this->assertFalse($result);
 
-		$result = MediaValidation::permission('0111','-x');
+		$result = MediaValidation::permission('0111', '-x');
 		$this->assertFalse($result);
 
-		$result = MediaValidation::permission('0000','-x');
+		$result = MediaValidation::permission('0000', '-x');
 		$this->assertTrue($result);
 
-		$result = MediaValidation::permission('0666','-x');
+		$result = MediaValidation::permission('0666', '-x');
 		$this->assertTrue($result);
 	}
 
-	function testFile() {
+	public function testFile() {
 		$file = __FILE__;
 		$result = MediaValidation::file($file);
 		$this->assertTrue($result);
 
-		$file = $this->TestData->getFile('image-jpg.jpg');
-		$result = MediaValidation::file($file,false);
+		$file = $this->Data->getFile('image-jpg.jpg');
+		$result = MediaValidation::file($file, false);
 		$this->assertTrue($result);
 
-		$file = DS.'i-am-not-a-file.png';
+		$file = $this->Data->settings['base'] . 'i-am-not-a-file.png';
 		$result = MediaValidation::file($file);
 		$this->assertFalse($result);
 
-		$file = DS;
+		$file = TMP;
 		$result = MediaValidation::file($file);
 		$this->assertFalse($result);
 
-		$file = DS;
-		$result = MediaValidation::file($file,false);
+		$file = TMP;
+		$result = MediaValidation::file($file, false);
 		$this->assertTrue($result);
 	}
 
-	function testFolder() {
+	public function testFolder() {
 		$file = dirname(__FILE__);
 		$result = MediaValidation::folder($file);
 		$this->assertTrue($result);
 
-		$file = $this->TestData->getFile('image-jpg.jpg');
-		$result = MediaValidation::folder($file,false);
+		$file = $this->Data->getFile('image-jpg.jpg');
+		$result = MediaValidation::folder($file, false);
 		$this->assertTrue($result);
 
-		$file = DS.'i-am-not-a-file.png';
+		$file = $this->Data->settings['base'] . 'i-am-not-a-file.png';
 		$result = MediaValidation::folder($file);
 		$this->assertFalse($result);
 
-		$file = DS;
+		$file = TMP;
 		$result = MediaValidation::folder($file);
 		$this->assertTrue($result);
 
-		$file = DS;
-		$result = MediaValidation::folder($file,false);
+		$file = TMP;
+		$result = MediaValidation::folder($file, false);
 		$this->assertTrue($result);
 
-		$file = DS.DS.DS.DS;
-		$result = MediaValidation::folder($file,false);
+		$file = TMP . DS . DS . DS;
+		$result = MediaValidation::folder($file, false);
 		$this->assertTrue($result);
 	}
+
 }
-?>

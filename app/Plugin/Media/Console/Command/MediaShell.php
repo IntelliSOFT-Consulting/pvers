@@ -2,22 +2,22 @@
 /**
  * Media Shell File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.shells
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Console.Command
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
+
 App::uses('ConnectionManager', 'Model');
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'Config' . DS. 'core.php');
+App::uses('Shell', 'Console');
 App::uses('Folder', 'Utility');
 
 Configure::write('Cache.disable', true);
@@ -25,42 +25,40 @@ Configure::write('Cache.disable', true);
 /**
  * Media Shell Class
  *
- * @package    media
- * @subpackage media.shells
+ * @package       Media.Console.Command
+ *
+ * @property MakeTask $Make
+ * @property SyncTask $Sync
  */
 class MediaShell extends Shell {
 
 /**
  * Tasks
  *
- * @var string
- * @access public
+ * @var array
  */
-	var $tasks = array('Sync', 'Make');
+	public $tasks = array('Media.Sync', 'Media.Make');
 
 /**
  * Verbose mode
  *
  * @var boolean
- * @access public
  */
-	var $verbose = false;
+	public $verbose = false;
 
 /**
  * Quiet mode
  *
  * @var boolean
- * @access public
  */
-	var $quiet = false;
+	public $quiet = false;
 
 /**
  * Startup
  *
- * @access public
  * @return void
  */
-	 function startup() {
+	public function startup() {
 		$this->verbose = isset($this->params['verbose']);
 		$this->quiet = isset($this->params['quiet']);
 		parent::startup();
@@ -69,31 +67,29 @@ class MediaShell extends Shell {
 /**
  * Welcome
  *
- * @access protected
  * @return void
  */
-	function _welcome() {
+	protected function _welcome() {
 		$this->hr();
-		$this->out('Media Shell');
+		$this->out(__d('media_console', 'Media Shell'));
 		$this->hr();
 	}
 
 /**
  * Main
  *
- * @access public
  * @return void
  */
-	 function main() {
-		$this->out('[I]nitialize Media Directory');
-		$this->out('[P]rotect Transfer Directory');
-		$this->out('[S]ynchronize');
-		$this->out('[M]ake');
-		$this->out('[H]elp');
-		$this->out('[Q]uit');
+	public function main() {
+		$this->out(__d('media_console', '[I]nitialize Media Directory'));
+		$this->out(__d('media_console', '[P]rotect Transfer Directory'));
+		$this->out(__d('media_console', '[S]ynchronize'));
+		$this->out(__d('media_console', '[M]ake'));
+		$this->out(__d('media_console', '[H]elp'));
+		$this->out(__d('media_console', '[Q]uit'));
 
 		$action = $this->in(
-			__('What would you like to do?', true),
+			__d('media_console', 'What would you like to do?'),
 			array('I', 'P', 'S', 'M', 'H', 'Q'),
 			'q'
 		);
@@ -128,14 +124,12 @@ class MediaShell extends Shell {
 /**
  * Initializes directory structure
  *
- * @access public
  * @return void
  */
-	function init() {
-		$message = 'Do you want to create missing media directories now?';
-
+	public function init() {
+		$message = __d('media_console', 'Do you want to create missing media directories now?');
 		if ($this->in($message, 'y,n', 'n') == 'n') {
-			return false;
+			return;
 		}
 
 		$short = array('aud', 'doc', 'gen', 'img', 'vid');
@@ -179,34 +173,33 @@ class MediaShell extends Shell {
 
 		$this->out();
 		$this->protect();
-		$this->out('Remember to set the correct permissions on transfer and filter directory.');
+		$this->out(__d('media_console', 'Remember to set the correct permissions on transfer and filter directory.'));
 	}
 
 /**
  * Protects the transfer directory
  *
- * @access public
- * @return void
+ * @return boolean
  */
-	function protect() {
+	public function protect() {
 		if (MEDIA_TRANSFER_URL === false) {
-			$this->out('The content of the transfer directory is not served.');
+			$this->out(__d('media_console', 'The content of the transfer directory is not served.'));
 			return true;
 		}
 
 		$file = MEDIA_TRANSFER . '.htaccess';
 
 		if (is_file($file)) {
-			$this->err($this->shortPath($file) . ' is already present.');
+			$this->err(__d('media_console', '%s is already present.', $this->shortPath($file)));
 			return true;
 		}
 		if (strpos(MEDIA_TRANSFER, WWW_ROOT) === false) {
-			$this->err($this->shortPath($file) . ' is not in your webroot.');
-			return;
+			$this->err(__d('media_console', '%s is not in your webroot.', $this->shortPath($file)));
+			return true;
 		}
-		$this->out('Your transfer directory is missing a htaccess file to block requests.');
+		$this->out(__d('media_console', 'Your transfer directory is missing a htaccess file to block requests.'));
 
-		if ($this->in('Do you want to create it now?', 'y,n', 'n') == 'n') {
+		if ($this->in(__d('media_console', 'Do you want to create it now?'), 'y,n', 'n') == 'n') {
 			return false;
 		}
 
@@ -215,7 +208,7 @@ class MediaShell extends Shell {
 		$File->append("Deny from all\n");
 		$File->close();
 
-		$this->out($this->shortPath($File->pwd()) . ' created.');
+		$this->out(__d('media_console', '%s created.', $this->shortPath($File->pwd())));
 		$this->out('');
 		return true;
 	}
@@ -223,9 +216,9 @@ class MediaShell extends Shell {
 /**
  * Displays help contents
  *
- * @access public
+ * @return void
  */
-	function help() {
+	public function help() {
 		// 63 chars ===============================================================
 		$this->out("NAME");
 		$this->out("\tmedia -- the 23rd shell");
@@ -248,7 +241,7 @@ class MediaShell extends Shell {
 		$this->out("\tmake [-force] [-version name] [sourcefile/sourcedir] [destinationdir]");
 		$this->out("\t\tProcess a file or directory according to filters.");
 		$this->out('');
-		$this->out("\t\t-version name Restrict command to a specfic filter version (e.g. xxl).");
+		$this->out("\t\t-version name Restrict command to a specific filter version (e.g. xxl).");
 		$this->out("\t\t-force Overwrite files if they exist.");
 		$this->out('');
 		$this->out("\thelp");
@@ -268,10 +261,9 @@ class MediaShell extends Shell {
  *
  * @param mixed $value
  * @param mixed $text
- * @access public
  * @return void
  */
-	function progress($value, $text = null) {
+	public function progress($value, $text = null) {
 		static $target = 0;
 
 		if ($this->quiet) {
@@ -285,5 +277,5 @@ class MediaShell extends Shell {
 			$this->out($out);
 		}
 	}
+
 }
-?>

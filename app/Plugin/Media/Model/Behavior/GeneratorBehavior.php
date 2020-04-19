@@ -2,20 +2,23 @@
 /**
  * Generator Behavior File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.models.behaviors
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Model.Behavior
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
+
+App::uses('MediaVersion', 'Media.Model');
+App::uses('ModelBehavior', 'Model');
+
 require_once 'Media/Process.php';
 require_once 'Mime/Type.php';
 
@@ -30,7 +33,7 @@ require_once 'Mime/Type.php';
  * To connect TransferBehavior and GeneratorBehavior with each other it is important
  * to specify TransferBehavior before GeneratorBehavior:
  * {{{
- *     var $actAs = array(
+ *     public $actAs = array(
  *         'Media.Transfer',
  *         'Media.Generator'
  *     );
@@ -40,8 +43,7 @@ require_once 'Mime/Type.php';
  * automatically. See docs/FAQ for an in depth explanation and docs/TUTORIAL
  * for a snippet you can use to implement this functionality.
  *
- * @package    media
- * @subpackage media.models.behaviors
+ * @package       Media.Model.Behavior
  */
 class GeneratorBehavior extends ModelBehavior {
 
@@ -90,18 +92,19 @@ class GeneratorBehavior extends ModelBehavior {
 /**
  * Setup
  *
- * @param Model $Model
- * @param array $settings See defaultSettings for configuration options
+ * @see $_defaultSettings
+ * @param Model $Model Model using this behavior
+ * @param array $settings Configuration settings for $Model
  * @return void
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		$this->_defaultSettings['filter'] = $Model->alias;
 
 		if (!isset($this->settings[$Model->alias])) {
 			$this->settings[$Model->alias] = $this->_defaultSettings;
 		}
 
-		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], (array) $settings);
+		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], (array)$settings);
 	}
 
 /**
@@ -110,11 +113,12 @@ class GeneratorBehavior extends ModelBehavior {
  * Triggers `make()` if both `dirname` and `basename` fields are present.
  * Otherwise skips and returns `true` to continue the save operation.
  *
- * @param Model $Model
- * @param boolean $created
+ * @param Model $Model Model using this behavior
+ * @param boolean $created True if this save created a new record
+ * @param array $options Options passed from Model::save().
  * @return boolean
  */
-	public function afterSave($Model, $created) {
+	public function afterSave(Model $Model, $created, $options = array()) {
 		$item = $Model->data[$Model->alias];
 
 		if (isset($item['dirname'], $item['basename'])) {
@@ -132,7 +136,7 @@ class GeneratorBehavior extends ModelBehavior {
  * Also creates the destination directory if enabled by settings.
  *
  * If the `makeVersion()` method is implemented in the current model it'll be used
- * for generating a specifc version of the file (i.e. `s`, `m` or `l`) otherwise
+ * for generating a specific version of the file (i.e. `s`, `m` or `l`) otherwise
  * the method within this behavior is going to be used.
  *
  * If you already have generated versions of files and change the filter
@@ -150,8 +154,17 @@ class GeneratorBehavior extends ModelBehavior {
  * @param string $file Path to a file relative to `baseDirectory`  or an absolute path to a file
  * @return boolean
  */
-	public function make($Model, $file) {
+	public function make(Model $Model, $file) {
 		extract($this->settings[$Model->alias]);
+		/* @var $baseDirectory string */
+		/* @var $filterDirectory string */
+		/* @var $createDirectory boolean */
+		/* @var $createDirectoryMode integer */
+		/* @var $mode integer */
+		/* @var $filter array|string */
+		/* @var $mergeFilter boolean */
+		/* @var $overwrite boolean */
+		/* @var $guessExtension boolean */
 
 		list($file, $relativeFile) = $this->_file($Model, $file);
 		$relativeDirectory = DS . rtrim(dirname($relativeFile), '.');
@@ -214,7 +227,7 @@ class GeneratorBehavior extends ModelBehavior {
  *                    Most methods are made available through the `Media_Process_*`
  *                    classes. The class is chosen depending on the type of media
  *                    being processed. Since each one of those classes exposes
- *                    different methods the availaibility of those depends on the
+ *                    different methods the availability of those depends on the
  *                    type of media being processed.
  *
  *                    Please see the documentation for the mm library for further
@@ -229,7 +242,7 @@ class GeneratorBehavior extends ModelBehavior {
  *                    `array('clone' => <type>)`
  *
  *                    In case an instruction method is neither builtin nor available
- *                    through one of the `Media_Proces_*` classes, the `passthru()`
+ *                    through one of the `Media_Process_*` classes, the `passthru()`
  *                    method is invoked on that media object. The concrete implementation
  *                    of `passthru()` and therefore how it deals with the data passed
  *                    to it *highly* depends on the adapter in use.
@@ -240,8 +253,17 @@ class GeneratorBehavior extends ModelBehavior {
  * @param array $process directory, version, instructions
  * @return boolean `true` if version for the file was successfully stored
  */
-	public function makeVersion($Model, $file, $process) {
+	public function makeVersion(Model $Model, $file, $process) {
 		extract($this->settings[$Model->alias]);
+		/* @var $baseDirectory string */
+		/* @var $filterDirectory string */
+		/* @var $createDirectory boolean */
+		/* @var $createDirectoryMode integer */
+		/* @var $mode integer */
+		/* @var $filter array|string */
+		/* @var $mergeFilter boolean */
+		/* @var $overwrite boolean */
+		/* @var $guessExtension boolean */
 
 		/* Process builtin instructions */
 		if (isset($process['instructions']['clone'])) {
@@ -270,7 +292,7 @@ class GeneratorBehavior extends ModelBehavior {
 				$args = null;
 			}
 			if (method_exists($Media, $method)) {
-				$result = call_user_func_array(array($Media, $method), (array) $args);
+				$result = call_user_func_array(array($Media, $method), (array)$args);
 			} else {
 				$result = $Media->passthru($method, $args);
 			}
@@ -333,8 +355,18 @@ class GeneratorBehavior extends ModelBehavior {
  * @param string $file
  * @return array
  */
-	protected function _file($Model, $file) {
+	protected function _file(Model $Model, $file) {
 		extract($this->settings[$Model->alias]);
+		/* @var $baseDirectory string */
+		/* @var $filterDirectory string */
+		/* @var $createDirectory boolean */
+		/* @var $createDirectoryMode integer */
+		/* @var $mode integer */
+		/* @var $filter array|string */
+		/* @var $mergeFilter boolean */
+		/* @var $overwrite boolean */
+		/* @var $guessExtension boolean */
+
 		$file = str_replace(array('\\', '/'), DS, $file);
 
 		if (!is_file($file)) {
@@ -358,29 +390,32 @@ class GeneratorBehavior extends ModelBehavior {
  * @param string $file
  * @return array
  */
-	public function filter($Model, $file) {
+	public function filter(Model $Model, $file) {
 		$name = Mime_Type::guessName($file);
 
 		$filter = $this->settings[$Model->alias]['filter'];
+		$filters = (array)Configure::read('Media.filter');
 
 		$default = false;
 		if (!is_array($filter)) {
-			$filters = Configure::read('Media.filter');
-
-			if (is_string($filter) && isset($filters[$filter])) {
+			if (array_key_exists($filter, $filters)) {
 				$filter = $filters[$filter];
 			} else {
-				$filter = $filters['default'];
+				$filter = $filters;
 				$default = true;
 			}
 		}
 
 		if (($default !== true) && ($this->settings[$Model->alias]['mergeFilter'] === true)) {
-			$filter = array_merge($filters['default'], (array)$filter);
+			$filter = array_merge($filters, $filter);
+		}
+
+		// TODO Maybe trigger a notice in case no filter is defined for the given MIME-Type.
+		if (!isset($filter[$name])) {
+			return array();
 		}
 
 		return $filter[$name];
-    }
-}
+	}
 
-?>
+}

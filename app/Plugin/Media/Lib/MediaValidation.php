@@ -2,29 +2,28 @@
 /**
  * Media Validation File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.libs
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Lib
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
+
 App::uses('Validation', 'Utility');
 
 /**
  * Media Validation Class
  *
- * @package    media
- * @subpackage media.libs
+ * @package       Media.Lib
  */
-class MediaValidation extends Validation {
+class MediaValidation {
 
 /**
  * Checks if MIME type is (not) one of given MIME types
@@ -47,7 +46,7 @@ class MediaValidation extends Validation {
 		if ($deny === true || (is_array($deny) && in_array($check, $deny))) {
 			return false;
 		}
-		if($allow !== true && (is_array($allow) && !in_array($check, $allow))) {
+		if ($allow !== true && (is_array($allow) && !in_array($check, $allow))) {
 			return false;
 		}
 		return true;
@@ -66,15 +65,17 @@ class MediaValidation extends Validation {
  * @return boolean
  */
 	public static function extension($check, $deny = false, $allow = true) {
-		if (!is_string($check) || !preg_match('/^[\w0-9]+(\.[\w0-9]+)?$/', $check)) {
+		if (!is_string($check) || !preg_match('/^[^\.]+?(\.[^\.]+)?$/', $check)) {
 			return false;
 		}
+
 		list($deny, $allow) = self::_normalize($deny, $allow);
 
-		if ($deny === true || (is_array($deny) && Validation::extension($check, $deny))) {
+		if ($deny === true || (is_array($deny) && in_array(strtolower($check), array_map('strtolower', $deny)))) {
 			return false;
 		}
-		if ($allow !== true && (is_array($allow) && !Validation::extension($check, $allow))) {
+
+		if ($allow !== true && (is_array($allow) && !in_array(strtolower($check), array_map('strtolower', $allow)))) {
 			return false;
 		}
 		return true;
@@ -100,7 +101,7 @@ class MediaValidation extends Validation {
 		$maxSizes = array();
 
 		if ($max !== false && $max = self::_toComputableSize($max)) {
-			 $maxSizes[] = $max;
+			$maxSizes[] = $max;
 		}
 		if ($max = self::_toComputableSize(ini_get('post_max_size'))) {
 			$maxSizes[] = $max;
@@ -131,7 +132,7 @@ class MediaValidation extends Validation {
 			$check = $width * $height;
 		}
 		if (strpos($max, 'x') !== false) {
-			list($width, $height) = explode('x' , $max);
+			list($width, $height) = explode('x', $max);
 			$max = $width * $height;
 		}
 		return $check <= $max;
@@ -166,7 +167,7 @@ class MediaValidation extends Validation {
 					return true;
 				}
 			}
-		} elseif(MediaValidation::file($check, false)) {
+		} elseif (MediaValidation::file($check, false)) {
 			$check = dirname($check);
 			if (!Folder::isAbsolute($check)) {
 				return false;
@@ -244,9 +245,9 @@ class MediaValidation extends Validation {
 
 /**
  * Checks if subject is an (existent) file
- * Please note, that directoires are not treated as files in strict mode
+ * Please note, that directories are not treated as files in strict mode
  *
- * @param string $file Absolute path to file
+ * @param string $check Absolute path to file
  * @param boolean $strict Enable checking for actual existence of file
  * @return boolean
  */
@@ -287,11 +288,12 @@ class MediaValidation extends Validation {
  * @param mixed Array containing multiple strings, or a single string
  * @return mixed
  */
-	public static function _normalize() {
+	protected static function _normalize() {
 		$args = func_get_args();
 
 		if (count($args) > 1) {
-			foreach($args as $param) {
+			$result = array();
+			foreach ($args as $param) {
 				$result[] = self::_normalize($param);
 			}
 			return $result;
@@ -332,19 +334,19 @@ class MediaValidation extends Validation {
 		}
 
 		$sizeUnit = strtoupper(substr($sizeString, -1));
-	    $size = (integer)substr($sizeString, 0, -1);
+		$size = (integer)substr($sizeString, 0, -1);
 
-	    switch ($sizeUnit) {
+		switch ($sizeUnit) {
 			case 'Y': $size *= 1024; /* Yotta */
 			case 'Z': $size *= 1024; /* Zetta */
 			case 'E': $size *= 1024; /* Exa */
-	        case 'P': $size *= 1024; /* Peta */
+			case 'P': $size *= 1024; /* Peta */
 			case 'T': $size *= 1024; /* Tera */
 			case 'G': $size *= 1024; /* Giga */
 			case 'M': $size *= 1024; /* Mega */
 			case 'K': $size *= 1024; /* Kilo */
-	    }
-	    return $size;
+		}
+		return $size;
 	}
+
 }
-?>

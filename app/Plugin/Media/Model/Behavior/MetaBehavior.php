@@ -2,30 +2,29 @@
 /**
  * Meta Behavior File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
  *
- * PHP version 5
- * CakePHP version 1.3
+ * PHP 5
+ * CakePHP 2
  *
- * @package    media
- * @subpackage media.models.behaviors
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
- * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
- * @link       http://github.com/davidpersson/media
+ * @copyright     2007-2012 David Persson <davidpersson@gmx.de>
+ * @link          http://github.com/davidpersson/media
+ * @package       Media.Model.Behavior
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
-App::uses('Inflector', 'Utility');
-App::uses('Cache', 'Cache');
 
-//require_once 'Mime/Type.php';
-//require_once 'Media/Info.php';
-App::uses('Type', 'mm/Mime');
-App::uses('Info', 'mm/Media');
+App::uses('Cache', 'Cache');
+App::uses('Inflector', 'Utility');
+App::uses('ModelBehavior', 'Model');
+
+require_once 'Mime/Type.php';
+require_once 'Media/Info.php';
 
 /**
- * Coupler Behavior Class
+ * Meta Behavior Class
  *
  * If you set metadataLevel to a value greater then zero, you’ll get additional
  * metadata on each consecutive find operation.
@@ -38,10 +37,25 @@ App::uses('Info', 'mm/Media');
  *      $result = $this->Document->metadata('/tmp/cern.jpg', 2);
  * }}}
  *
- * @package    media
- * @subpackage media.models.behaviors
+ * @package       Media.Model.Behavior
  */
 class MetaBehavior extends ModelBehavior {
+
+/**
+ * Cache configuration.
+ *
+ * config
+ *   The name of the cache configuration to use
+ *
+ * keyPrefix
+ *   The prefix to use for the cache data identifier
+ *
+ * @var array
+ */
+	public static $cacheConfig = array(
+		'config'    => 'default',
+		'keyPrefix' => 'media_metadata_'
+	);
 
 /**
  * Default settings
@@ -72,14 +86,17 @@ class MetaBehavior extends ModelBehavior {
  * @param array $settings See defaultSettings for configuration options
  * @return void
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		if (!isset($this->settings[$Model->alias])) {
 			$this->settings[$Model->alias] = $this->_defaultSettings;
 		}
 
-		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], (array) $settings);
+		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], (array)$settings);
 
-		$this->__cached[$Model->alias] = Cache::read('media_metadata_' . $Model->alias);
+		extract(MetaBehavior::$cacheConfig);
+		/* @var $config string */
+		/* @var $keyPrefix string */
+		$this->__cached[$Model->alias] = Cache::read($keyPrefix . $Model->alias, $config);
 	}
 
 /**
@@ -88,9 +105,13 @@ class MetaBehavior extends ModelBehavior {
  * @return void
  */
 	public function __destruct() {
+		extract(MetaBehavior::$cacheConfig);
+		/* @var $config string */
+		/* @var $keyPrefix string */
+
 		foreach ($this->__cached as $alias => $data) {
 			if ($data) {
-				Cache::write('media_metadata_' . $alias, $data);
+				Cache::write($keyPrefix . $alias, $data, $config);
 			}
 		}
 	}
@@ -100,14 +121,16 @@ class MetaBehavior extends ModelBehavior {
  *
  * Adds metadata to be stored in table if a record is about to be created.
  *
- * @param Model $Model
- * @return boolean
+ * @param Model $Model Model using this behavior
+ * @param array $options Options passed from Model::save().
+ * @return mixed False if the operation should abort. Any other result will continue.
  */
-	public function beforeSave($Model) {
-		if ($Model->exists() || !isset($Model->data[$Model->alias]['file'])) {
+	public function beforeSave(Model $Model, $options = array()) {
+		if (!isset($Model->data[$Model->alias]['file'])) {
 			return true;
 		}
 		extract($this->settings[$Model->alias]);
+		/* @var $level integer */
 
 		$Model->data[$Model->alias] += $this->metadata(
 			$Model, $Model->data[$Model->alias]['file'], $level
@@ -120,18 +143,19 @@ class MetaBehavior extends ModelBehavior {
  *
  * Adds metadata of corresponding file to each result.
  *
- * @param Model $Model
- * @param array $results
- * @param boolean $primary
- * @return array
+ * @param Model $Model Model using this behavior
+ * @param mixed $results The results of the find operation
+ * @param boolean $primary Whether this model is being queried directly (vs. being queried as an association)
+ * @return mixed An array value will replace the value of $results - any other value will be ignored.
  */
-	public function afterFind($Model, $results, $primary = false) {
+	public function afterFind(Model $Model, $results, $primary = false) {
 		if (empty($results)) {
 			return $results;
 		}
 		extract($this->settings[$Model->alias]);
+		/* @var $level integer */
 
-		foreach ($results as $key => &$result) {
+		foreach ($results as &$result) {
 			if (!isset($result[$Model->alias]['file'])) {
 				continue;
 			}
@@ -152,17 +176,18 @@ class MetaBehavior extends ModelBehavior {
  * @param integer $level level of amount of info to add, `0` disable, `1` for basic, `2` for detailed info
  * @return mixed Array with results or false if file is not readable
  */
-	public function metadata($Model, $file, $level = 1) {
+	public function metadata(Model $Model, $file, $level = 1) {
 		if ($level < 1) {
 			return array();
 		}
-		extract($this->settings[$Model->alias]);
 		$File = new File($file);
 
 		if (!$File->readable()) {
 			return false;
 		}
 		$checksum = $File->md5(true);
+
+		$data = array();
 
 		if (isset($this->__cached[$Model->alias][$checksum])) {
 			$data = $this->__cached[$Model->alias][$checksum];
@@ -184,7 +209,8 @@ class MetaBehavior extends ModelBehavior {
 				foreach ($Info->all() as $key => $value) {
 					$data[2][Inflector::underscore($key)] = $value;
 				}
-			} catch (Exception $E) {}
+			} catch (Exception $E) {
+			}
 		}
 
 		for ($i = $level, $result = array(); $i > 0; $i--) {
@@ -193,6 +219,5 @@ class MetaBehavior extends ModelBehavior {
 		$this->__cached[$Model->alias][$checksum] = $data;
 		return $result;
 	}
-}
 
-?>
+}
