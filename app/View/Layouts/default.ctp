@@ -44,15 +44,15 @@ $cakeDescription = __d('pv', 'PV');
 		echo $this->Html->meta(array("name"=>"author", "content"=>"Intellisoft"));
 		
 
-		// echo $this->Html->css('jquery-ui-1.8.20.custom');
-		// echo $this->Html->css('bootstrap');
-		// echo $this->Html->css('style');
-		// echo $this->Html->css('bootstrap-responsive');
+		echo $this->Html->css('jquery-ui-1.8.20.custom');
+		echo $this->Html->css('bootstrap');
+		echo $this->Html->css('style');
+		echo $this->Html->css('bootstrap-responsive');
 		
-		// echo $this->Html->css('pv');
-		// echo $this->Html->css('compatibility_hacks');
-		// echo $this->Html->css('style-responsive');
-		echo $this->AssetCompress->css('default');
+		echo $this->Html->css('pv');
+		echo $this->Html->css('compatibility_hacks');
+		echo $this->Html->css('style-responsive');
+		// echo $this->AssetCompress->css('default');
 		
 		// echo $this->Html->script('jquery-1.7.2');
 		// echo $this->Html->script('jquery-ui-1.8.20.custom.min');

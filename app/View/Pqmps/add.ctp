@@ -26,7 +26,7 @@
 			</div>	
 			 <?php 	
 				echo $this->Form->create('Pqmp', array(
-					'action' => 'add',
+					'url' => 'add',
 					'inputDefaults' => array(
 						'div' => array('class' => 'control-group'),
 						'label' => array('class' => 'control-label'),
@@ -65,7 +65,7 @@
 			</div>	 
 			<?php 	
 				echo $this->Form->create('Pqmp', array(
-					'action' => 'find',
+					'url' => 'find',
 					'class' => 'well', 	
 				));
 			
@@ -88,7 +88,7 @@
 			</div>	 
 			<?php 	
 				echo $this->Form->create('Message', array(
-					'action' => 'add',
+					'url' => array('controller' => 'messages', 'action' => 'add'),
 					'class' => 'well', 	
 				));
 			

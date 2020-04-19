@@ -1,44 +1,223 @@
-<div class="aefis form">
-<?php echo $this->Form->create('Aefi');?>
-	<fieldset>
-		<legend><?php echo __('Add Aefi'); ?></legend>
-	<?php
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('county_id');
-		echo $this->Form->input('sub_county_id');
-		echo $this->Form->input('designation_id');
-		echo $this->Form->input('report_type');
-		echo $this->Form->input('name_of_institution');
-		echo $this->Form->input('institution_code');
-		echo $this->Form->input('patient_name');
-		echo $this->Form->input('ip_no');
-		echo $this->Form->input('date_of_birth');
-		echo $this->Form->input('ward');
-		echo $this->Form->input('gender');
-		echo $this->Form->input('date_of_onset_of_reaction');
-		echo $this->Form->input('description_of_reaction');
-		echo $this->Form->input('action_taken');
-		echo $this->Form->input('outcome');
-		echo $this->Form->input('reporter_name');
-		echo $this->Form->input('reporter_email');
-		echo $this->Form->input('reporter_phone');
-		echo $this->Form->input('submitted');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+<?php 
+	$this->assign('SADR', 'active');
+ ?>
 
-		<li><?php echo $this->Html->link(__('List Aefis'), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Counties'), array('controller' => 'counties', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New County'), array('controller' => 'counties', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Sub Counties'), array('controller' => 'sub_counties', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Sub County'), array('controller' => 'sub_counties', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Designations'), array('controller' => 'designations', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Designation'), array('controller' => 'designations', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+      <!-- SADR
+    ================================================== -->
+    <section id="aefisadd">
+	<div class="page-header" id="aefi_add_header">
+		<h1>Adverse Event Following Immunization Form </h1>  
+	</div>	 
+	
+	<div class="row-fluid">	
+		<div class="span5 columns">
+			<div class="row-fluid">
+				<div class="span12" id="aefi_add_left_content">
+					<div class="accordion" id="accordion2">
+						<div class="accordion-group">
+						  <div class="accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+							  EXPLANATORY NOTES
+							</a>
+						  </div>
+						  <div id="collapseThree" class="accordion-body collapse in">
+							<div class="accordion-inner">
+								  <!-- Headings & Paragraph Copy -->
+								  <div class="row-fluid">
+									<div class="span12">
+									  	<h3>GUIDELINES ON COMPLETION OF THE FORM	</h3>
+										<h4>WHEN TO COMPLETE THIS FORM	</h4>
+										<p>An adverse event following immunization (AEFI) is defined as any unfavorable medical occurrence which follows immunization and which may or may not be caused by the usage of the vaccine. The adverse event may be any unfavorable or unintended sign, abnormal laboratory finding, symptom or disease.	</p>								
+										
+										<p><b>Complete this form when any of the following Adverse Events Following Immunization (AEFI) occurs:	</b>
+											
+										1.    Serious Events (results in death, hospitalization or prolongation of hospitalization) persistent or significant disability/incapacity, or is life-threatening	
+											
+										2.    Injection Site Abscesses	
+										3.    BCG Lymphadenitis-Lumps In The Armpit Following BCG Vaccination	
+										4. Severe Local Reaction –  Redness, swelling or pain extends past the nearest joint; inability to move the limb; Redness, swelling or pain persist for more than 3 days	
+											
+										5. Fever (≥ 38°C)  in conjunction with another reportable adverse event	
+										6. Allergic reaction- anaphylaxis, hives, bronchospasm, edema	
+										7. Clusters of events(> 2 cases of same event in same month) apart from fever	
+										8. Any Uncommon Or Unexpected Events and events that are of public concern including (but not limited to ) seizures 	
+											
+										-       Report even if you are not certain the vaccine caused the event or you do not have all the details.	
+											
+										 -   Indicate if it is an initial or follow-up report	
+										-       Information on the Manufacturer and Expiry dates of the Vaccine and/or diluents may be obtained from the label of its container. If multiple vaccines are suspected, provide the required information on each of them.  	
+										</p>
+											
+										<h4>WHAT HAPPENS TO SUBMITTED REPORTS	</h4>
+										
+										<p>Data obtained from this and other reports will be assessed and used improve service delivery in the Ministry of Health. Data will also be periodically submitted to the Uppsala Monitoring Centre, WHO, Sweden, and this will contribute to global vaccine safety information.   	
+											
+											
+										All information is handled in strict confidence; patient and reporter identity will not be disclosed in response to any public request. 	
+											
+										<b>Submission does not mean admission that the health worker or manufacturer or the product caused or contributed to the event. </b>
+										</p>
+
+										<address>
+											<strong>THE PHARMACY AND POISONS BOARD</strong><br>
+											Lenana Road.<br>
+											<abbr title="Post Office Box">P.O. Box</abbr> 27663-00506 NAIROBI<br>
+											<abbr title="Telephone Number">Tel:</abbr> (020)-2716905 / 6 Ext 114 
+											<abbr title="Fascimile">Fax:</abbr> (020)-2713431 / 2713409 <br>
+											E-mail: <a href="mailto:#">pv@pharmacyboardkenya.org</a>
+
+											
+										  </address>
+									</div>
+															
+								  </div>
+							   
+							</div>
+						  </div>
+						</div>				
+					</div>			
+				</div><!--/span-->
+			</div><!--/row-->
+	
+		</div> <!-- /span5 -->
+
+		<div class="span3 columns">
+			<div class="page-header" id="aefi_add_middle_header">
+					<h3>Report Type<br></h3>		
+			</div>	
+			 <?php 	
+				echo $this->Form->create('Aefi', array(
+					'url' => 'add',
+					'inputDefaults' => array(
+						'div' => array('class' => 'control-group'),
+						'label' => array('class' => 'control-label'),
+						'between' => '<div class="controls">',
+						'after' => '</div>',
+						'class' => '',
+						'format' => array('before', 'label', 'between', 'input', 'after','error'),
+						'error' => array('attributes' => array( 'class' => 'controls help-block')),
+					 ),		
+				));
+				echo $this->Form->input('report_type', array(
+					'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'report_type',
+					'before' => '<div class="control-group required"> <label class="control-label required"> Report Type </label>
+									<div class="controls"> <input type="hidden" value="" id="AefiReportType_" name="data[Aefi][report_type]"> <label class="radio">',
+					'after' => '</label>',
+					'options' => array('Initial Report' => 'Initial Report'),
+					'onclick' => ' $("#AefiFormId").attr("disabled", "disabled"); $("#form_id").hide();',
+				));
+				echo $this->Form->input('report_type', array(
+					'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'report_type',
+					'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+					'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+					'before' => '<label class="radio">',
+					'after' => '</label> </div> </div>',	
+					'options' => array('Follow-up Report' => 'Follow-up Report'),
+					'onclick' => ' $("#AefiFormId").removeAttr("disabled"); $("#form_id").show();',
+				));
+						
+				echo $this->Form->input('form_id', array(
+							'type' => 'text',
+							'div' => array('class' => 'control-group required', 'id' => 'form_id'),
+							'label' => array('class' => 'control-label required', 'text' => 'UNIQUE FORM ID'),
+							'after'=>'<p class="help-block" style="color:#C09853; font-weight:normal"> Please enter the ID of the previous report.<br> You can get it from your email. </p></div>',
+						));	
+				
+				echo $this->Form->input('reporter_email', array(
+							'type' => 'email', 'value' => $this->Session->read('Auth.User.email'), 
+							'div' => array('class' => 'control-group required'),
+							'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS'.' <span style="color:red;">*</span>'),
+							'title'=> null, 'data-content' => null,
+							'after'=>'<p class="help-block" style="color:#C09853; font-weight:normal"> This information is <span class="label label-success">Confidential</span> </p></div>',
+							'class' => null.''
+						));
+				if($this->Session->read('Auth.User.initial_email')) echo $this->Form->input('emails', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.initial_email')));
+				
+				echo $this->Form->input('bot_stop', array(
+							'div' => array('style' => 'display:none')
+						));						
+				echo $this->Form->end(array(
+						'label' => 'Go to report',
+						'value' => 'Save',
+						'class' => 'btn btn-primary tooltipper',
+						'id' => 'AefiSubmitEmail', 'title'=>'Start a New SADR', 
+						'div' => array(
+							'class' => 'form-actions',
+						)
+					));
+				?>		
+		</div> <!-- /span6 -->
+		<div class="span4 columns">
+			<div class="page-header">
+				<h3>Search for Initial Report<small> Use Report ID</small></h3>			
+			</div>	 
+			<?php 	
+				echo $this->Form->create('Aefi', array(
+					'url' => 'find',
+					'class' => 'well', 	
+				));
+			
+				echo $this->Form->input('search', array(
+							'div' => false,	'label' => false, 'class' => "input-medium search-query", 'placeholder' => 'Report ID...'
+						));
+			
+				echo $this->Form->end(array(
+						'label' => 'Search',
+						'value' => 'Save',
+						'class' => 'btn',
+						'id' => 'AefiSearchForm', 
+						'title'=>'Search for an SADR', 
+						'data-content' => 'Input a Form Id to search for.',
+						'div' => false,
+					));
+			?>
+			<div class="page-header">
+				<h3>Search for follow up report<small> Use Report ID
+			</div>	 
+			<?php 	
+				echo $this->Form->create('AefiFollowup', array(
+					'url' => array('controller' => 'aefi-followups', 'action' => 'find'),
+					'class' => 'well', 	
+				));
+			
+				echo $this->Form->input('search', array(
+							'div' => false,	'label' => false, 'class' => "input-medium search-query", 'placeholder' => 'Report ID...'
+						));
+			
+				echo $this->Form->end(array(
+						'label' => 'Search',
+						'value' => 'Save',
+						'class' => 'btn',
+						'id' => 'AefiFollowupSearchForm', 
+						'title'=>'Search for a Follow up SADR report', 
+						'data-content' => 'Input a Form Id to search for.',
+						'div' => false,
+					));
+			?>
+			<div class="page-header">
+				<h3>Request for Submitted reports <small>Get all reports you have submitted using this email address...</small></h3>	
+			</div>	 
+			<?php 	
+				echo $this->Form->create('Message', array(
+					'url' => array('controller' => 'messages', 'action' => 'add'),
+					'class' => 'well', 	
+				));
+			
+				echo $this->Form->email('receiver', array(
+							'div' => false,	'label' => false, 'class' => "input-medium search-query", 'placeholder' => 'Email...'
+						));
+				echo $this->Form->input('sent', array('type' => 'hidden', 'value' => 2));
+				
+				echo $this->Form->end(array(
+						'label' => 'Request',
+						'value' => 'Save',
+						'class' => 'btn',
+						'id' => 'AefiFollowupSearchForm', 
+						'title'=>'Search for a Follow up SADR report', 
+						'data-content' => 'Input a Form Id to search for.',
+						'div' => false,
+					));
+			?>
+		</div> <!-- /span6 -->
+	   </div> <!-- /row-fluid -->
+	</section>

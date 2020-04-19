@@ -104,6 +104,10 @@ class AppController extends Controller {
 			$this->request->data['Pqmp']['id'] = $this->Pqmp->Luhn_Verify($this->request->data['Pqmp']['id']);
 		}
 		
+		if (!empty($this->request->data['Aefi']['id'])) {
+			$this->request->data['Aefi']['id'] = $this->Aefi->Luhn_Verify($this->request->data['Aefi']['id']);
+		}
+		
 		if (!empty($this->request->data['SadrListOfDrug'])) {
 			foreach ($this->request->data['SadrListOfDrug'] as $key => $val) {
 				if (!empty($val['id'])) {

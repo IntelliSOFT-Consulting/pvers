@@ -19,7 +19,7 @@ class UsersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		// remove initDb
-		$this->Auth->allow('register', 'login', 'forgotPassword', 'resetPassword', 'logout');
+		$this->Auth->allow('register', 'login', 'forgotPassword', 'resetPassword', 'logout', 'initDB');
 	}
 
 
@@ -366,6 +366,7 @@ class UsersController extends AppController {
 		$group->id = 2;
 		$this->Acl->deny($group, 'controllers');
 		$this->Acl->allow($group, 'controllers/Sadrs');
+		$this->Acl->allow($group, 'controllers/Aefis');
 		$this->Acl->allow($group, 'controllers/SadrFollowups');
 		$this->Acl->allow($group, 'controllers/Pqmps');
 		$this->Acl->allow($group, 'controllers/Attachments');
@@ -395,6 +396,8 @@ class UsersController extends AppController {
 		$this->Acl->deny($group, 'controllers');
 		$this->Acl->allow($group, 'controllers/Sadrs/sadrIndex');
 		$this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
+		$this->Acl->allow($group, 'controllers/Aefis/sadrIndex');
+		$this->Acl->allow($group, 'controllers/Aefis/institutionCodes');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/sadrIndex');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/followupIndex');
 		$this->Acl->allow($group, 'controllers/Pqmps/pqmpIndex');
@@ -406,6 +409,8 @@ class UsersController extends AppController {
 		$this->Acl->deny($group, 'controllers');
 		$this->Acl->allow($group, 'controllers/Sadrs/sadrIndex');
 		$this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
+		$this->Acl->allow($group, 'controllers/Aefis/sadrIndex');
+		$this->Acl->allow($group, 'controllers/Aefis/institutionCodes');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/sadrIndex');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/followupIndex');
 		$this->Acl->allow($group, 'controllers/Pqmps/pqmpIndex');

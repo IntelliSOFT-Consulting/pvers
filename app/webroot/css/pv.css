@@ -31,11 +31,21 @@
 	border:2.5pt solid blue;
 }
 .formbackp {
-	background-color: #FCC2E7;
-	border: 2px solid #3E58A7;
+  background-color: #FCC2E7;
+  border: 2px solid #3E58A7;
 }
 .vformbackp {
-	background-color:#FCC2E7; 
+  background-color:#FCC2E7; 
+  margin:4mm;  
+  padding:4mm;  
+  border:2.5pt solid blue;
+}
+.formbacka {
+	background-color: #64c8df69;
+	border: 2px solid #3E58A7;
+}
+.vformbacka {
+	background-color:#64c8df69; 
 	margin:4mm;  
 	padding:4mm;  
 	border:2.5pt solid blue;
