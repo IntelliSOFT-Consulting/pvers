@@ -236,59 +236,59 @@
 				  	<!-- <p class="help-block">	(please tick) </p> -->
 					<?php
 						echo $this->Form->input('bcg', array(
-													'before' => '<div class="control-group">',
+							'type' => 'checkbox',	'before' => '<div class="control-group">',
 													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiBcg_" name="data[Aefi][bcg]">
 																	<label class="checkbox">',
 													'after' => 'BCG Lymphadenitis </label>',));
 						echo $this->Form->input('convulsion', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiConvulsion_" name="data[Aefi][convulsion]">
 																	<label class="checkbox">',
 													'after' => 'Separating	</label>',));
 						echo $this->Form->input('urticaria', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiUrticaria_" name="data[Aefi][urticaria]">
 																	<label class="checkbox">',
 													'after' => 'Generalized urticaria (hives) </label>',));
 						echo $this->Form->input('high_fever', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiHighFever_" name="data[Aefi][high_fever]">
 																	<label class="checkbox">',
 													'after' => 'High Fever	</label>',));
 						echo $this->Form->input('abscess', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiAbscess_" name="data[Aefi][abscess]">
 																	<label class="checkbox">',
 													'after' => 'Injection site abscess </label>',));
 						echo $this->Form->input('local_reaction', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiLocalReaction_" name="data[Aefi][local_reaction]">
 																	<label class="checkbox">',
 													'after' => 'Severe Local Reaction	</label>',));
 						
 						echo $this->Form->input('anaphylaxis', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiAnaphylaxis_" name="data[Aefi][anaphylaxis]">
 																	<label class="checkbox">',
 													'after' => 'Anaphylaxis </label>',));
 						echo $this->Form->input('meningitis', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiMeningitis_" name="data[Aefi][meningitis]">
 																	<label class="checkbox">',
 													'after' => 'Encephalopathy, Encephalitis/Meningitis</label>',));
 						echo $this->Form->input('paralysis', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiParalysis_" name="data[Aefi][paralysis]">
 																	<label class="checkbox">',
 													'after' => 'Paralysis</label>',));
 						echo $this->Form->input('toxic_shock', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiToxicShock_" name="data[Aefi][toxic_shock]">
 																	<label class="checkbox">',
 													'after' => 'Toxic shock </label>',));
 						echo $this->Form->input('complaint_other', array(
-													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiComlaintOther_" name="data[Aefi][complaint_other]">
 																	<label class="checkbox">',
 													'after' => 'Other	</label>',

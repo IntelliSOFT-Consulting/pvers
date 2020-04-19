@@ -117,7 +117,7 @@ CakePlugin::load('AclExtras');
 // CakePlugin::load('MeioUpload');
 CakePlugin::load('Search');
 // Load Media Plugin
-CakePlugin::load('Media');
+CakePlugin::load('Media', array('bootstrap'=>true));
 // Load Acl Plugin
 CakePlugin::load('Acl', array('bootstrap' => true));
 // Asset Compress

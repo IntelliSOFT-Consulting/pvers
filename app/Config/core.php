@@ -36,7 +36,7 @@
 /**
  * Load core config file for Media plugin for attachments
  */
-	require APP . 'Plugin' . DS . 'Media' . DS . 'Config' . DS . 'core.php';
+	// require APP . 'Plugin' . DS . 'Media' . DS . 'Config' . DS . 'core.php';
 
 	 Configure::write('google-analytics.tracker-code', 'UA-36787484-1'); // Google Analytics Enabled
 	//Configure::write('google-analytics.tracker-code', false); //  Google Analytics disabled
