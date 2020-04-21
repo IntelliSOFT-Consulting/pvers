@@ -29,7 +29,7 @@ class FacilityCodesController extends AppController {
 		}
                 $codes = array();
 		foreach ($coders as $key => $value) {
-			$codes[] = array('value' => $value['FacilityCode']['facility_code'], 'label' => $value['FacilityCode']['facility_name'], 
+			$codes[] = array('value' => $value['FacilityCode']['facility_code'], 'label' => $value['FacilityCode']['facility_name'],  'sub_county' => $value['FacilityCode']['district'], 
 							 'desc' => $value['FacilityCode']['county'], 'addr' => $value['FacilityCode']['official_address']);
 		}
 		$this->set('codes', $codes);

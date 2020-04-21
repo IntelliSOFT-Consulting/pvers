@@ -54,8 +54,8 @@ class SadrListOfDrug extends AppModel {
 
 	public $validate = array(
 		'drug_name' => array(
-			'notEmpty' => array(
-				'rule'     => 'notEmpty',
+			'notBlank' => array(
+				'rule'     => 'notBlank',
 				'required' => true,
 				'message'  => 'Please specify the suspected drug'
 			),
@@ -75,22 +75,22 @@ class SadrListOfDrug extends AppModel {
 			),
 		),
 		'route_id' => array(
-			'notEmpty' => array(
-				'rule'     => 'notEmpty',
+			'notBlank' => array(
+				'rule'     => 'notBlank',
 				'required' => true,
 				'message'  => 'Please specify the route'
 			),
 		),
 		'frequency_id' => array(
-			'notEmpty' => array(
-				'rule'     => 'notEmpty',
+			'notBlank' => array(
+				'rule'     => 'notBlank',
 				'required' => true,
 				'message'  => 'Please specify the frequency'
 			),
 		),
 		/*'Indication' => array(
-			'notEmpty' => array(
-				'rule'     => 'notEmpty',
+			'notBlank' => array(
+				'rule'     => 'notBlank',
 				'required' => true,
 				'message'  => 'Please specify the indication'
 			),

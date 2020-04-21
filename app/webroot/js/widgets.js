@@ -123,6 +123,8 @@
 	$(document).ready(function() {
 		$( "#SadrCountyId" ).combobox();
 		$( "#SadrSubCountyId" ).combobox();
+		$( "#AefiCountyId" ).combobox();
+		$( "#AefiSubCountyId" ).combobox();
 		$( "#PqmpCountyId" ).combobox();
 		$( "#PqmpSubCountyId" ).combobox();
 		$( "#UserCountyId" ).combobox();

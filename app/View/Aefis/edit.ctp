@@ -9,7 +9,7 @@
 	$this->Html->script('jquery.ui.autocomplete', array('inline' => false));
 	$this->Html->script('jquery.ui.dialog', array('inline' => false));
 	$this->Html->script('widgets', array('inline' => false));
-	// $this->Html->script('aefi', array('inline' => false));
+	$this->Html->script('aefi', array('inline' => false));
 	// $this->AssetCompress->addScript(array(
 	// 		'jquery.ui.core.js', 'jquery.ui.widget.js', 'jquery.ui.mouse.js', 'jquery.ui.draggable.js', 'jquery.ui.button.js',
 	// 		'jquery.ui.position.js', 'jquery.ui.autocomplete.js', 'jquery.ui.dialog.js', 'widgets.js', 'aefi.js'), 'aefi-edit.js'
@@ -159,7 +159,7 @@
 						));
 						echo $this->Form->input('vaccination_type', array(
 							        'options' => array('static' => 'static', 'mass' => 'mass', 'outreach' => 'outreach'),
-									'label' => array('class' => 'control-label', 'text' => 'TYPE OF VACCINATION SERVICE'),
+									'label' => array('class' => 'control-label required', 'text' => 'TYPE OF VACCINATION SERVICE <span style="color:red;">*</span>'),
 									'empty' => true,
 									'after'=>'<p class="help-block">	(static, mass, outreach) </p></div>'
 								));
@@ -168,7 +168,7 @@
 				<div class="span6">
 					<?php
 						echo $this->Form->input('guardian_name', array(
-							'label' => array('class' => 'control-label required', 'text' =>  'NAME OF GUARDIAN <span style="color:red;">*</span>'),		
+							'label' => array('class' => 'control-label required', 'text' =>  'NAME OF GUARDIAN'),		
 						'after'=>'<p class="help-block">	(If patient is a child) </p></div>',					
 						));
 
@@ -245,7 +245,7 @@
 							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiConvulsion_" name="data[Aefi][convulsion]">
 																	<label class="checkbox">',
-													'after' => 'Separating	</label>',));
+													'after' => 'Convulsion	</label>',));
 						echo $this->Form->input('urticaria', array(
 							'type' => 'checkbox',	'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="AefiUrticaria_" name="data[Aefi][urticaria]">
@@ -354,7 +354,7 @@
 					<?php
 						echo $this->Form->input('outcome', array(
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<div class="control-group"> <input type="hidden" value="" id="SadrOutcome_" name="data[Sadr][outcome]"> <label class="radio">',
+							'before' => '<div class="control-group"> <input type="hidden" value="" id="AefiOutcome_" name="data[Aefi][outcome]"> <label class="radio">',
 							'after' => '</label>',
 							'options' => array('recovered/resolved' => 'Recovered/resolved'),
 						));

@@ -135,7 +135,7 @@ class AefisController extends AppController {
 	public function view($id = null) {
 		$this->Aefi->id = $this->Aefi->Luhn_Verify($id);
 		if (!$this->Aefi->exists()) {
-			$this->Session->setFlash(__('Could not verify theadverse event following immunization report ID. Please ensure the ID is correct.'), 'flash_error');
+			$this->Session->setFlash(__('Could not verify the adverse event following immunization report ID. Please ensure the ID is correct.'), 'flash_error');
 			$this->redirect('/');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -153,12 +153,6 @@ class AefisController extends AppController {
 		Configure::load('appwide');
 		$this->set('root', Configure::read('Domain.root'));
 		$this->set('aefi', $this->Aefi->read(null));
-		$routes = $this->Aefi->AefiListOfDrug->Route->find('list');
-		$this->set(compact('routes'));
-		$frequency = $this->Aefi->AefiListOfDrug->Frequency->find('list');
-		$this->set(compact('frequency'));
-		$dose = $this->Aefi->AefiListOfDrug->Dose->find('list');
-		$this->set(compact('dose'));
 	}
 
 	public function admin_view($id = null) {
@@ -218,17 +212,7 @@ class AefisController extends AppController {
 		$aefi = Sanitize::clean($aefi, array('escape' => true));
 		$this->set('aefi', $aefi);
 		//if(!$aefi['Aefi']['vigiflow_id']) {
-			$routes = $this->Aefi->AefiListOfDrug->Route->find('list');
-			$this->set(compact('routes'));
-			$frequency = $this->Aefi->AefiListOfDrug->Frequency->find('list');
-			$this->set(compact('frequency'));
-			$dose = $this->Aefi->AefiListOfDrug->Dose->find('list');
-			$this->set(compact('dose'));
 			if ($this->RequestHandler->isXml()) {
-				$doseUnit = $this->Aefi->AefiListOfDrug->Dose->find('list', array('fields' => array('id', 'icsr_code')));
-				$this->set(compact('doseUnit'));
-				$routesMatch = $this->Aefi->AefiListOfDrug->Route->find('list', array('fields' => array('id', 'icsr_code')));
-				$this->set(compact('routesMatch'));
 				$this->Aefi->saveField('submitted', 3);
 			}
 			$this->response->download('AEFI_'.$aefi['Aefi']['id']);

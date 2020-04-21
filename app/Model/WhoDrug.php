@@ -29,8 +29,8 @@ class WhoDrug extends AppModel {
 			),
 		),
 		'drug_name' => array(
-            'notEmpty' => array(
-                'rule'     => 'notEmpty',
+            'notBlank' => array(
+                'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a name'
             ),

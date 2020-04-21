@@ -1,8 +1,8 @@
 <?php 
-	$this->assign('SADR', 'active');
+	$this->assign('AEFI', 'active');
  ?>
 
-      <!-- SADR
+      <!-- AEFI
     ================================================== -->
     <section id="aefisadd">
 	<div class="page-header" id="aefi_add_header">
@@ -140,7 +140,7 @@
 						'label' => 'Go to report',
 						'value' => 'Save',
 						'class' => 'btn btn-primary tooltipper',
-						'id' => 'AefiSubmitEmail', 'title'=>'Start a New SADR', 
+						'id' => 'AefiSubmitEmail', 'title'=>'Start a New AEFI', 
 						'div' => array(
 							'class' => 'form-actions',
 						)
@@ -166,7 +166,7 @@
 						'value' => 'Save',
 						'class' => 'btn',
 						'id' => 'AefiSearchForm', 
-						'title'=>'Search for an SADR', 
+						'title'=>'Search for an AEFI', 
 						'data-content' => 'Input a Form Id to search for.',
 						'div' => false,
 					));
@@ -189,7 +189,7 @@
 						'value' => 'Save',
 						'class' => 'btn',
 						'id' => 'AefiFollowupSearchForm', 
-						'title'=>'Search for a Follow up SADR report', 
+						'title'=>'Search for a Follow up AEFI report', 
 						'data-content' => 'Input a Form Id to search for.',
 						'div' => false,
 					));
@@ -213,7 +213,7 @@
 						'value' => 'Save',
 						'class' => 'btn',
 						'id' => 'AefiFollowupSearchForm', 
-						'title'=>'Search for a Follow up SADR report', 
+						'title'=>'Search for a Follow up AEFI report', 
 						'data-content' => 'Input a Form Id to search for.',
 						'div' => false,
 					));

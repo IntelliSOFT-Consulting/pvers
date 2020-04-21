@@ -18,19 +18,19 @@
             <table id="listOfVaccinesTable"  class="table table-bordered table-condensed table-pvborder">
                 <thead>
                   <tr>
-                    <th colspan="7" style="width: 65%">Details of Vaccines</th>
-                    <th colspan="5">Details of Diluents</th>
+                    <th colspan="8" style="width: 70%"><label class="required">Details of Vaccines</label></th>
+                    <th colspan="4"><label class="required">Details of Diluents</label></th>
                   </tr>
                   <tr>
-                    <th colspan="2" style="width: 20%"> Name of Vaccine <small class="help-block">(e.g. BCG, DPT-Hib-HeB)</small></th>
-                    <th style="width: 7%"> Dose No.</th>
-                    <th> Date vaccinated <br><small class="help-block">Format dd-mm-yyyy</small></th>
+                    <th colspan="2" style="width: 20%"> <label class="required">Name of Vaccine <span style="color:red;">*</span></label><small class="help-block">(e.g. BCG, DPT-Hib-HeB)</small></th>
+                    <th style="width: 7%"> <label class="required">Dose No.</label></th>
+                    <th> <label class="required"> Date vaccinated <span style="color:red;">*</span><br><small class="help-block">(dd-mm-yyyy)</small></label></th>
                     <th> Route,site of vaccination <br><small class="help-block">(i.m.,s.c., i.d.)</small></th>
-                    <th style="width: 5%"> Batch/Lot number </th>
-                    <th> Manufacturer's Name </th>
-                    <th> Expiry date </th>
-                    <th> Batch/ Lot Number </th>
-                    <th style="width: 10%"> Manufacturer's Name </th>
+                    <th style="width: 5%"> <label class="required">Batch/Lot number <span style="color:red;">*</span></label></th>
+                    <th> <label class="required">Manufacturer's Name <span style="color:red;">*</span></label></th>
+                    <th> <label class="required">Expiry date <span style="color:red;">*</span></label></th>
+                    <th style="width: 7%"> <label class="required">Batch/ Lot Number <span style="color:red;">*</span></label></th>
+                    <th style="width: 10%">Manufacturer's Name</th>
                     <th> Expiry date </th>
                     <th> # </th>
                   </tr>
