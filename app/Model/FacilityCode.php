@@ -34,7 +34,7 @@ class FacilityCode extends AppModel {
 		return $suggestions;
     }
 
-    public function afterSave($created) {
+    public function afterSave($created, $options = array()) {
 		Cache::clear(false,  $config = 'facs');
 		clearCache();
 	}

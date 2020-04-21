@@ -54,7 +54,7 @@ class DrugDictionary extends AppModel {
         ),
 	);
 
-    public function afterSave($created) {
+    public function afterSave($created, $options = array()) {
 		Cache::clear(false,  $config = 'drugs');
 		clearCache();
 	}
