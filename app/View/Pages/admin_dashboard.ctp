@@ -35,6 +35,13 @@
 				</li>
 				<li>
 				<?php
+					echo $this->Html->link('<i class="icon-hand-right"></i> AEFI Reports <span class="badge badge-success">'.$count_aefis.'</span><small class="muted"> - unprocessed</small>',
+						array('controller' => 'aefis', 'action' => 'index', 'submitted'=>'2', 'admin' => true),
+						array('escape' => false));
+				?>
+				</li>
+				<li>
+				<?php
 					echo $this->Html->link('<i class="icon-hand-right"></i> FILE ATTACHMENTS',
 						array('controller' => 'attachments', 'action' => 'index', 'admin' => true),
 						array('escape' => false));

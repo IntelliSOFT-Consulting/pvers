@@ -50,7 +50,7 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = array('Feedback', 'Sadr', 'Pqmp', 'SadrFollowup');
+	public $uses = array('Feedback', 'Sadr', 'Aefi', 'Pqmp', 'SadrFollowup');
 
 	public function admin_index() {
 
@@ -61,6 +61,7 @@ class PagesController extends AppController {
 		$this->Feedback->recursive = -1;
 		$this->set('feedbacks', $this->Feedback->find('list', array('limit' => 5, 'order' => array('Feedback.created' => 'desc'))));
 		$this->set('count_sadrs', $this->Sadr->find('count', array('conditions' => array('Sadr.submitted' => '2'))));
+		$this->set('count_aefis', $this->Aefi->find('count', array('conditions' => array('Aefi.submitted' => '2'))));
 		$this->set('count_pqmps', $this->Pqmp->find('count', array('conditions' => array('Pqmp.submitted' => '2', 'Pqmp.created >' => date("Y-m-d H:i:s", strtotime("-3 day"))))));
 		$this->set('count_feedbacks', $this->Feedback->find('count', array('conditions' => array('Feedback.created >' => date("Y-m-d H:i:s", strtotime("-3 day"))))));
 		if($this->request->is('post')) {

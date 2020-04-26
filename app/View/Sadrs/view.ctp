@@ -23,7 +23,7 @@
 				<p>Your feedback is confidential .....</p>
 			 <?php
 				echo $this->Form->create('Feedback', array(
-					'action' => 'add',
+					'url' => 'add',
 					'inputDefaults' => array(
 						'div' => array('class' => 'control-group'),
 						'label' => array('class' => 'control-label'),

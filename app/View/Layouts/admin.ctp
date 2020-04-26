@@ -190,13 +190,13 @@ $cakeDescription = __d('pv', 'PV');
 	  <hr>
 
 	  <footer>
-		<p>&copy; PPB 2012</p>
+		<p>&copy; PPB <?php echo date('Y'); ?></p>
 	  </footer>
 
 	</div><!--/.fluid-container-->
 
 	<?php
-		echo $this->element('sql_dump');
+		// echo $this->element('sql_dump');
 		//echo $this->Html->script('jquery-1.7.2'); // Include jQuery library
 		//echo $this->Js->writeBuffer(); // Write cached scripts
 	?>

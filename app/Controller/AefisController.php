@@ -138,6 +138,12 @@ class AefisController extends AppController {
 			$this->Session->setFlash(__('Could not verify the adverse event following immunization report ID. Please ensure the ID is correct.'), 'flash_error');
 			$this->redirect('/');
 		}
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+        }
+
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if (isset($this->request->data['continueEditing'])) {
 				$this->Aefi->saveField('submitted', 0);
@@ -152,7 +158,14 @@ class AefisController extends AppController {
 		}
 		Configure::load('appwide');
 		$this->set('root', Configure::read('Domain.root'));
-		$this->set('aefi', $this->Aefi->read(null));
+		$aefi = $this->Aefi->read(null);
+		$this->set('aefi', $aefi);
+		// $this->render('pdf/view');
+
+		if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+        }
 	}
 
 	public function admin_view($id = null) {
@@ -164,13 +177,14 @@ class AefisController extends AppController {
 
 		Configure::load('appwide');
 		$this->set('root', Configure::read('Domain.root'));
-		$this->set('aefi', $this->Aefi->read(null));
-		$routes = $this->Aefi->AefiListOfDrug->Route->find('list');
-		$this->set(compact('routes'));
-		$frequency = $this->Aefi->AefiListOfDrug->Frequency->find('list');
-		$this->set(compact('frequency'));
-		$dose = $this->Aefi->AefiListOfDrug->Dose->find('list');
-		$this->set(compact('dose'));
+		$aefi = $this->Aefi->read(null);
+		$this->set('aefi', $aefi);
+		// $this->render('pdf/view');
+
+		if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+        }
 		if ($this->RequestHandler->isXml()) {
 			$this->response->download('AEFI_'.date('Y_m_d_His'));
 		}

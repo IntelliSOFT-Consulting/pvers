@@ -11,6 +11,44 @@ App::uses('AppModel', 'Model');
 class Aefi extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	public $actsAs = array('Search.Searchable', 'Deactivatable' => array(
+		'field' => array('active' => true),
+		'force' => true,
+	));
+
+	public $filterArgs = array(
+        array('name' => 'name_of_institution', 'type' => 'like'),
+        array('name' => 'id', 'type' => 'like'),
+        array('name' => 'submitted', 'type' => 'value'),
+        array('name' => 'submit', 'type' => 'query', 'method' => 'orConditions', 'encode' => true),
+		array('name' => 'range', 'type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Sadr.created BETWEEN ? AND ?'),
+    );
+
+  public function orConditions($data = array()) {
+            $filter = $data['submit'];
+            if ($filter == '0') {
+              $cond = array(
+                    $this->alias . '.submitted' => array('0', '1'),
+                    $this->alias . '.active' => '1'
+                );
+            } else {
+              $cond = array(
+                    $this->alias . '.submitted' => array('2', '3', '4', '5', '6'),
+                    $this->alias . '.active' => '1'
+                );
+            }
+            return $cond;
+        }
+
+	public function makeRangeCondition($data = array()) {
+		if(!empty($data['start_date'])) $start_date = date('Y-m-d', strtotime($data['start_date']));
+		else $start_date = date('Y-m-d', strtotime('2012-05-01'));
+
+		if(!empty($data['end_date'])) $end_date = date('Y-m-d', strtotime($data['end_date']));
+		else $end_date = date('Y-m-d');
+
+		return array($start_date, $end_date);
+	}
 
 /**
  * belongsTo associations
