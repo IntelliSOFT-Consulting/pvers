@@ -182,6 +182,7 @@ class Sadr extends AppModel {
             'ageOrDate' => array(
                 'rule'     => 'ageOrDate',
                 // 'required' => true,
+				'allowEmpty' => true,
                 'message'  => 'Please specify the patient\'s date / Year of birth or age group'
             ),
         ),
@@ -279,7 +280,7 @@ class Sadr extends AppModel {
 		)
 	);
 
-	protected function dateAfterStartDates($field = null) {
+	public function dateAfterStartDates($field = null) {
 		if (!empty($this->data['SadrListOfDrug'])) {
 			foreach ($this->data['SadrListOfDrug'] as $val) {
 				if(!empty($field['date_of_onset_of_reaction']['day']) && !empty($field['date_of_onset_of_reaction']['month']) && !empty($field['date_of_onset_of_reaction']['year'])) {
@@ -292,23 +293,23 @@ class Sadr extends AppModel {
 		return true;
 	}
 
-	protected function formIdExists($field = null) {
+	public function formIdExists($field = null) {
 		return $this->find('count', array('conditions' => array('Sadr.id' => $this->Luhn_Verify($field['form_id'])))) > 0;
 	}
 
-	protected function atLeastYear($field = null) {
+	public function atLeastYear($field = null) {
 		return !empty($field['date_of_onset_of_reaction']['year']);
 	}
 
-	protected function ageOrDate($field = null) {
+	public function ageOrDate($field = null) {
 		return !empty($field['date_of_birth']['year']) || !empty($this->data['Sadr']['age_group']);
 	}
 
-	protected function instOrAddress($field = null) {
+	public function instOrAddress($field = null) {
 		return !empty($field['patient_address']) || !empty($this->data['Sadr']['name_of_institution']);
 	}
 
-	protected function greaterBirth($field = null) {
+	public function greaterBirth($field = null) {
 		if(!empty($field['date_of_onset_of_reaction']['year']) && isset($this->data['Sadr']['date_of_birth']['year'])) {
 			return $field['date_of_onset_of_reaction']['year'] >= $this->data['Sadr']['date_of_birth']['year'];
 		}

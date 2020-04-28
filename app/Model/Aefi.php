@@ -135,6 +135,13 @@ class Aefi extends AppModel {
   //               'message'  => 'The Unique form ID provided does not exist.'
   //           ),
   //       ),
+		'list' => array(
+            'atLeastOneVaccine' => array(
+                'rule'     => 'atLeastOneVaccine',
+                // 'required' => true,
+                'message'  => 'Please add at least one vaccine below'
+            ),
+        ),
 		'name_of_institution' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
@@ -149,13 +156,14 @@ class Aefi extends AppModel {
                 'message'  => 'Please provide a patient\'s name'
             ),
         ),
-		// 'date_of_birth' => array(
-  //           'ageOrDate' => array(
-  //               'rule'     => 'ageOrDate',
-  //               // 'required' => true,
-  //               'message'  => 'Please specify the patient\'s date / Year of birth or age group'
-  //           ),
-  //       ),
+		'date_of_birth' => array(
+            'ageOrDate' => array(
+                'rule'     => 'ageOrDate',
+                // 'required' => false,
+				'allowEmpty' => true,
+                'message'  => 'Please specify the patient\'s date / Year of birth or age group'
+            ),
+        ),
 		'county_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -237,11 +245,18 @@ class Aefi extends AppModel {
 				$this->data['Aefi']['complaint_other'] > 0;
 	}
 
-	protected function ageOrDate($field = null) {
-		return !empty($field['date_of_birth']['year']) || !empty($this->data['Aefi']['age_months']);
+	public function atLeastOneVaccine($field = null) {
+		if (!empty($this->data['AefiListOfVaccine'])) {
+			return count($this->data['AefiListOfVaccine']) > 0;
+		} 
+		return false;
 	}
 
-	protected function treatOrSpecimen($field = null) {
+	public function ageOrDate($field = null) {
+		return !empty($this->data['Aefi']['date_of_birth']['year']) || !empty($this->data['Aefi']['age_months']);
+	}
+
+	public function treatOrSpecimen($field = null) {
 		return !empty($this->data['Aefi']['treatment_given']) || !empty($this->data['Aefi']['specimen_collected']);
 	}
 

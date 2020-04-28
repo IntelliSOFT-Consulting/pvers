@@ -45,7 +45,7 @@
 			?>
 
 			<?php
-				echo $this->Form->input('Aefi.id', array());
+				echo $this->Form->input('id', array());
 				echo $this->Form->input('Aefi.report_type', array('type' => 'hidden'));
 			?>
 
@@ -483,7 +483,7 @@
 
 <script type="text/javascript">
 			var myarray = <?php echo json_encode($this->validationErrors); ?>;
-			$(function() {
+			/*$(function() {
 				if($(".alert-info:contains('saved')").length > 0) {
 					$('<div></div>').appendTo('body')
 					  .html('<div> <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Report successfully saved. Please submit the report to PPB if you have completed it.</p></div>')
@@ -509,5 +509,5 @@
 					      }
 					  });
 				}
-			});
+			});*/
 		</script>
