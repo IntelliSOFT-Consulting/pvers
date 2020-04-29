@@ -300,7 +300,7 @@ class AefisController extends AppController {
                         $this->Session->setFlash(__('The followup could not be saved. Please, try again.'), 'alerts/flash_error');
                         $this->redirect($this->referer());
                     }
-                } elseif ($this->request->data['Aefi']['report_type'] == 'Initial Report' && $this->Aefi->validates(array('fieldList' => $fieldlist)) && empty($this->data['Aefi']['bot_stop'])) {
+                } elseif ($this->request->data['Aefi']['report_type'] == 'Initial Report' && $this->Aefi->validates(array('fieldList' => array('device', 'report_type', 'reporter_email'))) && empty($this->data['Aefi']['bot_stop'])) {
                     $device = 0;
                     $fieldlist = array('device', 'report_type', 'reporter_email');
                     if($this->RequestHandler->isMobile()) {
