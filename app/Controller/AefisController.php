@@ -274,28 +274,32 @@ class AefisController extends AppController {
                                 'conditions' => array('Aefi.id' => $this->Aefi->Luhn_Verify($this->data['Aefi']['form_id']))
                                 )
                             ), 'Aefi.id');
-                    if (empty($aefi['Aefi']['id'])) {
+                    if (empty($aefi['Aefi'])) {
                         $this->Session->setFlash(__('Invalid AEFI id'), 'flash_warning');
                         $this->redirect(array('controller' => 'aefis', 'action' => 'add'));
+                    } elseif ($aefi['Aefi']['submitted'] == 0) {
+                        $this->Session->setFlash(__('Initial AEFI has not yet been submitted to PPB. Please submit first.'), 'flash_info');
+                        $this->redirect(array('controller' => 'aefis', 'action' => 'edit', $this->data['Aefi']['form_id']));
                     }
                     $aefi = Hash::remove($aefi, 'AefiListOfVaccine.{n}.id');
                     $aefi = Hash::remove($aefi, 'Attachment.{n}.id');
+                    $aefi['Aefi']['submitted'] = 0;
                     $data_save = $aefi['Aefi'];
-                    $data_save['AefiListOfVaccine'] = $sae['AefiListOfVaccine'];
-                    $data_save['Attachment'] = $sae['Attachment'];
+                    $data_save['AefiListOfVaccine'] = $aefi['AefiListOfVaccine'];
+                    if(isset($aefi['Attachment'])) $data_save['Attachment'] = $aefi['Attachment'];
                     $data_save['aefi_id'] = $this->Aefi->Luhn_Verify($this->data['Aefi']['form_id']);
 
-                    $count = $this->Aefi->find('count',  array('conditions' => array(
-                                'Sae.reference_no LIKE' => $sae['Sae']['reference_no'].'%',
-                                )));
-                    $count = ($count < 10) ? "0$count" : $count;
-                    $data_save['reference_no'] = $sae['Sae']['reference_no'].'_F'.$count;
-                    $data_save['report_type'] = 'Followup';
-                    $data_save['approved'] = 0;
+                    // $count = $this->Aefi->find('count',  array('conditions' => array(
+                    //             'Aefi.reference_no LIKE' => $aefi['Aefi']['reference_no'].'%',
+                    //             )));
+                    // $count = ($count < 10) ? "0$count" : $count;
+                    $data_save['reference_no'] = $this->data['Aefi']['form_id'];
+                    $data_save['report_type'] = 'Follow-up Report';
+                    // $data_save['approved'] = 0;
 
-                    if ($this->Sae->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
-                            $this->Session->setFlash(__('Follow up '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
-                            $this->redirect(array('action' => 'edit', $this->Sae->id));               
+                    if ($this->Aefi->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                            $this->Session->setFlash(__('Follow up '.$this->Aefi->Luhn($this->Aefi->id).' has been created'), 'flash_success');
+                            $this->redirect(array('action' => 'edit', $this->Aefi->Luhn($this->Aefi->id)));            
                     } else {
                         $this->Session->setFlash(__('The followup could not be saved. Please, try again.'), 'alerts/flash_error');
                         $this->redirect($this->referer());

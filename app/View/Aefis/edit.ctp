@@ -87,9 +87,15 @@
 			<div class="row-fluid">
 				<div class="span6">
 					<div class="control-group">
-						<?php
-							echo '<label class="control-label required">Report Type: </label>';
-						?>
+						<label class="control-label required">Report Type: </label>
+						<div class="controls">
+							<span class="input-xlarge uneditable-input">
+							<?php
+								echo $this->request->data['Aefi']['report_type'];
+								if($this->request->data['Aefi']['report_type'] = 'Follow-up Report') echo " (Initial Report: ".$this->request->data['Aefi']['reference_no'].")";
+							?>
+							</span>
+						</div>				
 					</div>
 					<?php
 						echo $this->Form->input('institution_code', array(

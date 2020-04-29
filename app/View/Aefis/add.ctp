@@ -31,21 +31,21 @@
 										
 										<p><b>Complete this form when any of the following Adverse Events Following Immunization (AEFI) occurs:	</b>
 											
-										1.    Serious Events (results in death, hospitalization or prolongation of hospitalization) persistent or significant disability/incapacity, or is life-threatening	
+										<br>1. Serious Events (results in death, hospitalization or prolongation of hospitalization) persistent or significant disability/incapacity, or is life-threatening	
 											
-										2.    Injection Site Abscesses	
-										3.    BCG Lymphadenitis-Lumps In The Armpit Following BCG Vaccination	
-										4. Severe Local Reaction –  Redness, swelling or pain extends past the nearest joint; inability to move the limb; Redness, swelling or pain persist for more than 3 days	
+										<br>2. Injection Site Abscesses	
+										<br>3. BCG Lymphadenitis-Lumps In The Armpit Following BCG Vaccination	
+										<br>4. Severe Local Reaction –  Redness, swelling or pain extends past the nearest joint; inability to move the limb; Redness, swelling or pain persist for more than 3 days	
 											
-										5. Fever (≥ 38°C)  in conjunction with another reportable adverse event	
-										6. Allergic reaction- anaphylaxis, hives, bronchospasm, edema	
-										7. Clusters of events(> 2 cases of same event in same month) apart from fever	
-										8. Any Uncommon Or Unexpected Events and events that are of public concern including (but not limited to ) seizures 	
+										<br>5. Fever (≥ 38°C)  in conjunction with another reportable adverse event	
+										<br>6. Allergic reaction- anaphylaxis, hives, bronchospasm, edema	
+										<br>7. Clusters of events(> 2 cases of same event in same month) apart from fever	
+										<br>8. Any Uncommon Or Unexpected Events and events that are of public concern including (but not limited to ) seizures 	
 											
-										-       Report even if you are not certain the vaccine caused the event or you do not have all the details.	
+										<br>- Report even if you are not certain the vaccine caused the event or you do not have all the details.	
 											
-										 -   Indicate if it is an initial or follow-up report	
-										-       Information on the Manufacturer and Expiry dates of the Vaccine and/or diluents may be obtained from the label of its container. If multiple vaccines are suspected, provide the required information on each of them.  	
+										<br>- Indicate if it is an initial or follow-up report	
+										<br>- Information on the Manufacturer and Expiry dates of the Vaccine and/or diluents may be obtained from the label of its container. If multiple vaccines are suspected, provide the required information on each of them.  	
 										</p>
 											
 										<h4>WHAT HAPPENS TO SUBMITTED REPORTS	</h4>
