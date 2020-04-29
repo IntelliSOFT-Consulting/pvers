@@ -9,10 +9,7 @@ App::uses('AppModel', 'Model');
 class Pqmp extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	public $actsAs = array('Search.Searchable', 'Deactivatable' => array(
-		'field' => array('active' => true),
-		'force' => true,
-	));
+	public $actsAs = array('Search.Searchable');
 	public $filterArgs = array(
         array('name' => 'brand_name', 'type' => 'like'),
         array('name' => 'id', 'type' => 'like'),

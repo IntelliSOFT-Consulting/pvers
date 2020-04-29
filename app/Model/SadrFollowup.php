@@ -11,10 +11,7 @@ App::uses('AppModel', 'Model');
 class SadrFollowup extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-    public $actsAs = array('Search.Searchable', 'Deactivatable' => array(
-		'field' => array('active' => true),
-		'force' => true,
-	));
+    public $actsAs = array('Search.Searchable');
 	public $filterArgs = array(
         array('name' => 'description_of_reaction', 'type' => 'like'),
         array('name' => 'submitted', 'type' => 'value'),

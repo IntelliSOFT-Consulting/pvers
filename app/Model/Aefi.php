@@ -11,10 +11,7 @@ App::uses('AppModel', 'Model');
 class Aefi extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	public $actsAs = array('Search.Searchable', 'Deactivatable' => array(
-		'field' => array('active' => true),
-		'force' => true,
-	));
+	public $actsAs = array('Search.Searchable');
 
 	public $filterArgs = array(
         array('name' => 'name_of_institution', 'type' => 'like'),
@@ -92,6 +89,12 @@ class Aefi extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+        'AefiFollowup' => array(
+            'className' => 'Aefi',
+            'foreignKey' => 'aefi_id',
+            'dependent' => true,
+            'conditions' => array('AefiFollowup.report_type' => 'Follow-up Report'),
+        ),
 		'Attachment' => array(
 			'className' => 'Attachment',
 			'foreignKey' => 'aefi_id',
