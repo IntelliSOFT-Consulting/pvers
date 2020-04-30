@@ -9,7 +9,7 @@
     ================================================== -->
 	<h3>ADVERSE EVENT FOLLOWING IMMUNIZATION REPORTS<small> Filter, Search, and export AEFI Reports</small></h3>
 		<hr>
-		<?php // echo $this->Ajax->submit('Submit', array('url'=> array('controller'=>'ajax', 'action'=>'edit'), 'update' => 'post')); ?>
+		
 <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">
@@ -249,8 +249,12 @@
 								<td><?php echo h($aefi['Aefi']['name_of_institution']); ?>&nbsp;</td>
 								<td><?php echo h($aefi['Aefi']['created']); ?>&nbsp;</td>
 								<td>
-									<?php echo $this->Html->link('<span class="label label-success tooltipper" title="View"><i class="icon-plus-sign icon-white"></i> </span>', '#',
-											array('id' => $aefi['Aefi']['id'], 'class' => 'tabCreator', 'escape' => false)); ?>&nbsp;
+									<?php //echo $this->Html->link('<span class="label label-success tooltipper" title="View"><i class="icon-plus-sign icon-white"></i> </span>', '#',
+											//array('id' => $aefi['Aefi']['id'], 'class' => 'tabCreator', 'escape' => false)); 
+										  echo $this->Html->link('<span class="label label-success tooltipper" title="View"><i class="icon-plus-sign icon-white"></i> </span>',
+											array('action' => 'view', $aefi['Aefi']['id']),
+											array('escape' => false, 'target' => '_blank'));
+											?>&nbsp;
 									<?php echo $this->Html->link('<span class="label label-info tooltipper" title="Edit"><i class="icon-pencil icon-white"></i> </span>' ,
 											array('controller' => 'aefis', 'action' => 'edit', $aefi['Aefi']['id']),
 											array('escape' => false, 'target' => '_blank')); ?>&nbsp;
@@ -306,7 +310,7 @@ $(document).ready(function() {
 		 cssclass : 'input-small'
 	});
 	// ___________________________________ $( "#tabs" ).tabs();___________________________________________________
-	var $tabs = $( "#tabs").tabs({
+	/*var $tabs = $( "#tabs").tabs({
 		tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
 		add: function(event, ui) {
 			$tabs.tabs('select', '#' + ui.panel.id);
@@ -343,7 +347,7 @@ $(document).ready(function() {
 	$( "#tabs span.ui-icon-close" ).live( "click", function() {
 		var index = $( "li", $tabs ).index( $( this ).parent() );
 		$tabs.tabs( "remove", index );
-	});
+	});*/
 
 
 	//_____________________________________________END TABS SECTION________________________________________________

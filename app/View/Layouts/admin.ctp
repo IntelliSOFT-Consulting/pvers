@@ -135,6 +135,9 @@ $cakeDescription = __d('pv', 'PV');
 					<li>
 						<?php echo $this->Html->link('PQMP Reports', array('controller' => 'pqmps', 'action' => 'index', 'submitted'=>'2', 'admin' => true, 'plugin' => false )); ?>
 					</li>
+					<li>
+						<?php echo $this->Html->link('AEFI Reports', array('controller' => 'aefis', 'action' => 'index', 'submitted'=>'2', 'admin' => true, 'plugin' => false )); ?>
+					</li>
 					<li class="divider"></li>
 					<li>
 						<?php echo $this->Html->link('File Attachments', array('controller' => 'attachments', 'action' => 'index', 'admin' => true, 'plugin' => false )); ?>

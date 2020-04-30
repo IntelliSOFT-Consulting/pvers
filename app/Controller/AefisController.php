@@ -180,10 +180,14 @@ class AefisController extends AppController {
         $aefi = $this->Aefi->read(null);
         $this->set('aefi', $aefi);
         // $this->render('pdf/view');
-
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+        }
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
             $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+            $this->render('view');
         }
         if ($this->RequestHandler->isXml()) {
             $this->response->download('AEFI_'.date('Y_m_d_His'));

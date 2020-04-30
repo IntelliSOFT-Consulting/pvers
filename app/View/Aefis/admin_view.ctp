@@ -8,6 +8,8 @@
 <section id="aefisview">
 	<div class="row-fluid">
 		<div class="span12">
+		<?php echo $this->Html->link('<< List AEFIS', array('controller'=>'aefis', 'action'=>'index'), array('class' => 'btn-link')); ?>
+		<br>
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#">Initial Report ID: <?php 	echo $aefi['Aefi']['id']; ?></a></li>
 			<li></li>
