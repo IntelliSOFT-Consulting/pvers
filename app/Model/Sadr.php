@@ -313,7 +313,7 @@ class Sadr extends AppModel {
 		return  true;
 	}
 
-	public function beforeValidate(){
+	public function beforeValidate($options = array()){
 		if (isset($this->data['SadrListOfDrug'])) {
 			foreach ($this->data['SadrListOfDrug'] as $val){
 				if ($val['suspected_drug'] == 1) {
