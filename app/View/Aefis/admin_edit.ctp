@@ -37,7 +37,7 @@
 					'class' => 'well form-horizontal formbacka',
 					'inputDefaults' => array(
 						'div' => array('class' => 'control-group'),
-						'label' => array('class' => 'control-label'),
+						'label' => array('class' => 'control-label required'),
 						'between' => '<div class="controls">',
 						'after' => '</div>',
 						'class' => '',
@@ -60,12 +60,12 @@
 				</div>
 				<div class="span8" style="text-align: center;">
 					<h2>MINISTRY OF HEALTH</h2>
-					<p class="lead">UNIT OF VACCINES AND IMMUNIZATION SERVICES</p>
+					<p class="lead">National Vaccines and Immunization Program</p>
 					<h3>AEFI Reporting Form</h3>
 				</div>
 				<div class="span2">
 					<?php
-						echo $this->Html->image('med-blue.png', array('alt' => 'AEFI'));
+						echo $this->Html->image('vaccinate.png', array('alt' => 'AEFI'));
 					?>
 				</div>
 			</div><br>
@@ -102,7 +102,7 @@
 					</div>
 					<?php
 						echo $this->Form->input('institution_code', array(
-							'label' => array('class' => 'control-label', 'text' => 'INSTITUTION CODE'),
+							'label' => array('class' => 'control-label required', 'text' => 'INSTITUTION CODE'),
 							'placeholder' => 'MFL CODE' ,
 						));
 
@@ -117,7 +117,7 @@
 								));
 						echo $this->Form->input('sub_county_id', array(
 							        'options' => $sub_counties,
-									'label' => array('class' => 'control-label', 'text' => 'SUB-COUNTY'),
+									'label' => array('class' => 'control-label required', 'text' => 'SUB-COUNTY'),
 									'empty' => true, 'between' => '<div class="controls ui-widget">',
 								));
 					?>
@@ -132,15 +132,15 @@
 						echo $this->Form->input('patient_name', array(
 							'label' => array('class' => 'control-label required', 'text' =>  'PATIENT\'S NAME <span style="color:red;">*</span>'),							
 						));
-						echo $this->Form->input('ip_no', array('label' => array('class' => 'control-label', 'text' => 'IP/OP NO.'), ));
+						echo $this->Form->input('ip_no', array('label' => array('class' => 'control-label required', 'text' => 'IP/OP NO.'), ));
 					?>
 					<div class="well-mine" style="background-color: #8EEAEA;">
 					<?php
 						echo $this->Form->input('date_of_birth', array(
-							'type' => 'date',
-							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => true,
+							'type' => 'date', 
+							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(choose day)', 'month' => '(choose month)', 'year' => '(choose year)'),
 							'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH <span style="color:red;">*</span>'),
-							'title'=> 'select beginning of the month if unsure', 
+							//'title'=> 'Year is mandatory. Pick first day of the month if unsure.', 
 							'after'=>' <a style="font-weight:normal" onclick="$(\'.birthdate\').removeAttr(\'disabled\'); $(\'.birthdate\').val(\'\');
 								$(\'#AefiAgeGroup\').attr(\'disabled\',\'disabled\'); $(\'#AefiAgeGroup\').val(\'\');" >
 								<em class="accordion-toggle">clear!</em></a>
@@ -151,7 +151,7 @@
 					?>
 					<h5 class="controls">--OR--</h5>
 					<?php
-						echo $this->Form->input('age_months', array('label' => array('class' => 'control-label', 'text' => 'Age in months'), ));
+						echo $this->Form->input('age_months', array('label' => array('class' => 'control-label required', 'text' => 'Age in months'), ));
 
 					?>
 					</div>
@@ -159,11 +159,11 @@
 					<?php
 						echo $this->Form->input('patient_county', array(
 							        'options' => $counties,
-									'label' => array('class' => 'control-label', 'text' => 'COUNTY'),
+									'label' => array('class' => 'control-label required', 'text' => 'COUNTY'),
 									'empty' => true, 
 								));
 						echo $this->Form->input('vaccination_center', array(
-							'label' => array('class' => 'control-label', 'text' => 'VACCINATION CENTRE'),
+							'label' => array('class' => 'control-label required', 'text' => 'VACCINATION CENTRE'),
 							'class' => 'span11'
 						));
 						echo $this->Form->input('vaccination_type', array(
@@ -224,13 +224,13 @@
 
 						echo $this->Form->input('patient_sub_county', array(
 							        'options' => $sub_counties,
-									'label' => array('class' => 'control-label', 'text' => 'SUB-COUNTY'),
+									'label' => array('class' => 'control-label required', 'text' => 'SUB-COUNTY'),
 									'empty' => true, 
 								));
 
 						echo $this->Form->input('vaccination_county', array(
 							        'options' => $counties,
-									'label' => array('class' => 'control-label', 'text' => 'COUNTY OF VACCINATION CENTRE'),
+									'label' => array('class' => 'control-label required', 'text' => 'COUNTY OF VACCINATION CENTRE'),
 									'empty' => true, 
 								));
 					?>
@@ -365,6 +365,49 @@
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
 							'before' => '<div class="control-group"> <input type="hidden" value="" id="AefiOutcome_" name="data[Aefi][outcome]"> <label class="radio">',
 							'after' => '</label>',
+							'options' => array('recovered/resolved' => 'Recovered/resolved'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio">',	'after' => '</label>',
+							'options' => array('recovering/resolving' => 'Recovering/resolving'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio">',	'after' => '</label>',
+							'options' => array('not recovered/not resolved' => 'Not recovered/not resolved'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio">',	'after' => '</label>',
+							'options' => array('fatal - unrelated to reaction' => 'Fatal - unrelated to reaction'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio">',	'after' => '</label>',
+							'options' => array('fatal - reaction may be contributory' => 'Fatal - reaction may be contributory'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio">',	'after' => '</label>',
+							'options' => array('fatal - due to reaction' => 'Fatal - due to reaction'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'outcome',
+							'format' => array('before', 'label', 'between', 'input','error', 'after'),
+							'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+							'before' => '<label class="radio">',
+							'after' => '</label>
+								<a class="button"
+										onclick="$(\'.outcome\').removeAttr(\'checked\');" >
+										<em class="accordion-toggle">clear!</em></a>
+							</div>',
+							'options' => array('Unknown' => 'Unknown'),
+						));
+						/*echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<div class="control-group"> <input type="hidden" value="" id="AefiOutcome_" name="data[Aefi][outcome]"> <label class="radio">',
+							'after' => '</label>',
 							'options' => array('Recovered' => 'Recovered'),
 						));
 						echo $this->Form->input('outcome', array(
@@ -394,7 +437,7 @@
 										<em class="accordion-toggle">clear!</em></a>
 							</div>',
 							'options' => array('Unknown' => 'Unknown'),
-						));
+						));*/
 					?>
 				</div><!--/span-->
 			</div><!--/row-->

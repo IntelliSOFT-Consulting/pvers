@@ -396,7 +396,7 @@ class UsersController extends AppController {
 		$this->Acl->deny($group, 'controllers');
 		$this->Acl->allow($group, 'controllers/Sadrs/sadrIndex');
 		$this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
-		$this->Acl->allow($group, 'controllers/Aefis/sadrIndex');
+		$this->Acl->allow($group, 'controllers/Aefis/aefiIndex');
 		$this->Acl->allow($group, 'controllers/Aefis/institutionCodes');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/sadrIndex');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/followupIndex');
@@ -409,7 +409,7 @@ class UsersController extends AppController {
 		$this->Acl->deny($group, 'controllers');
 		$this->Acl->allow($group, 'controllers/Sadrs/sadrIndex');
 		$this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
-		$this->Acl->allow($group, 'controllers/Aefis/sadrIndex');
+		$this->Acl->allow($group, 'controllers/Aefis/aefiIndex');
 		$this->Acl->allow($group, 'controllers/Aefis/institutionCodes');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/sadrIndex');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/followupIndex');

@@ -73,12 +73,6 @@ class AefisController extends AppController {
         if (strpos($this->request->url,'xls') !== false){
             $this->helpers[] = 'PhpExcel';
             $this->Aefi->recursive = 1;
-            $routes = $this->Aefi->AefiListOfDrug->Route->find('list');
-            $this->set(compact('routes'));
-            $frequency = $this->Aefi->AefiListOfDrug->Frequency->find('list');
-            $this->set(compact('frequency'));
-            $dose = $this->Aefi->AefiListOfDrug->Dose->find('list');
-            $this->set(compact('dose'));
         }
         if ($this->RequestHandler->isXml()) {
             $this->Aefi->recursive = 1;

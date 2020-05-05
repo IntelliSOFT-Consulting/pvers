@@ -270,9 +270,17 @@ class Aefi extends AppModel {
 			$this->data['Aefi']['date_of_birth'] = '';
 		}
 
+		if (!empty($this->data['Aefi']['time_aefi_started'])) {
+			$this->data['Aefi']['time_aefi_started'] = implode(':', $this->data['Aefi']['time_aefi_started']);
+		} else {
+			$this->data['Aefi']['time_aefi_started'] = '';
+		}
 
 		if(empty($this->data['Aefi']['age_months'])){
 			$this->data['Sadr']['age_months'] = '';
+		}
+		if (!empty($this->data['Aefi']['date_aefi_started'])) {
+			$this->data['Aefi']['date_aefi_started'] = $this->dateFormatBeforeSave($this->data['Aefi']['date_aefi_started']);
 		}
 		return true;
 	}
@@ -287,7 +295,14 @@ class Aefi extends AppModel {
 				$a = explode('-', $val['Aefi']['date_of_birth']);
 				$results[$key]['Aefi']['date_of_birth'] = array('day'=> $a[0],'month'=> $a[1],'year'=> $a[2]);
 			}
-
+			if (!empty($val['Aefi']['time_aefi_started'])) {
+				if(empty($val['Aefi']['time_aefi_started'])) $val['Aefi']['time_aefi_started'] = ':';
+				$a = explode(':', $val['Aefi']['time_aefi_started']);
+				$results[$key]['Aefi']['time_aefi_started'] = array('hour'=> $a[0],'min'=> $a[1]);
+			}
+			if (isset($val['Aefi']['date_aefi_started'])) {
+				$results[$key]['Aefi']['date_aefi_started'] = $this->dateFormatAfterFind($val['Aefi']['date_aefi_started']);
+			}
 		}
 		return $results;
 	}

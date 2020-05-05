@@ -109,6 +109,12 @@
 								array('controller' => 'pqmps', 'action' => 'pqmpIndex') , array('escape' => false)); 
 							?>
 						</li>
+						<li>
+							<?php 	
+								echo $this->Html->link('<span>AEFI Reports</span>', 
+								array('controller' => 'aefis', 'action' => 'aefiIndex') , array('escape' => false)); 
+							?>
+						</li>
 					</ul>
 				</li>
 				<li class="art-hmenu-li-separator"><span class="art-hmenu-separator"> </span></li>
