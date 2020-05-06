@@ -164,7 +164,7 @@ class Aefi extends AppModel {
                 'rule'     => 'ageOrDate',
                 // 'required' => false,
 				'allowEmpty' => true,
-                'message'  => 'Please specify the patient\'s date / Year of birth or age group'
+                'message'  => 'Please specify the patient\'s date / Year of birth or age in months'
             ),
         ),
 		'county_id' => array(

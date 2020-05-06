@@ -109,8 +109,11 @@
 
 				<table style="width: 100%;">
 					<tr>
+						<td colspan="4"><h5 style="text-align: center; color: #884805;">TYPE OF AEFI</h5> </td>
+					</tr>
+					<tr>
 						<td style="width: 5%;"></td>
-						<td style="width: 45%;">
+						<td style="width: 30%;">
 							<p> <?php echo ($aefi['Aefi']['bcg']   ? $ichecked : $nchecked ); ?> BCG Lymphadenitis </p>
 							<p> <?php echo ($aefi['Aefi']['convulsion']   ? $ichecked : $nchecked ); ?> Convulsion </p>
 							<p> <?php echo ($aefi['Aefi']['urticaria']   ? $ichecked : $nchecked ); ?> Generalized urticaria (hives) </p>
@@ -124,7 +127,32 @@
 							<p> <?php echo ($aefi['Aefi']['complaint_other']   ? $ichecked : $nchecked ); ?> Other </p>
 							<p> <?php echo $aefi['Aefi']['complaint_other_specify']; ?> </p>
 						</td>
-						<td style="width: 50%; vertical-align: top;">
+						<td style="width: 30%">
+							<table>
+								<tbody>
+								<tr>
+									<td style="width: 50%;">DATE AEFI STARTED </td>
+									<td><strong><?php echo $aefi['Aefi']['date_aefi_started'] ?>	</strong></td>
+								</tr>
+								<tr>
+									<td style="width: 50%;">TIME </td>
+									<td><strong>
+										<?php
+											if(isset($aefi['Aefi']['time_aefi_started']['hour'])) echo $aefi['Aefi']['time_aefi_started']['hour'].':';
+											if(isset($aefi['Aefi']['time_aefi_started']['min'])) echo $aefi['Aefi']['time_aefi_started']['min'];
+										?></strong>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+									  Describe AEFI (Signs & Symptoms) <br>
+									  <strong><?php echo $aefi['Aefi']['aefi_symptoms'] ?>	</strong>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</td>
+						<td style="width: 35%; vertical-align: top;">
 							<p><strong>Brief details on the event</strong></p>
 							<strong><?php echo $aefi['Aefi']['description_of_reaction'] ?>	</strong>
 						</td>
@@ -181,6 +209,21 @@
 					<tr>
 						<td style="width: 25%;">Past medical history</td>
 						<td style="width: 75%;"><strong><?php echo $aefi['Aefi']['medical_history'] ?>	</strong></td>
+					</tr>
+				</table>
+				 <hr>
+
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;">Serious</td>
+						<td style="width: 75%;"><strong><?php echo $aefi['Aefi']['serious'] ?>	</strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">If Yes</td>
+						<td style="width: 75%;"><strong>
+							<?php echo $aefi['Aefi']['serious_yes'] ?>	<br>
+							<?php echo $aefi['Aefi']['serious_other'] ?>	
+						</strong></td>
 					</tr>
 				</table>
 				 <hr>
