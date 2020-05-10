@@ -27,9 +27,9 @@
 									<div class="span12">
 									  	<h3>GUIDELINES ON COMPLETION OF THE FORM	</h3>
 										<h4>WHEN TO COMPLETE THIS FORM	</h4>
-										<p>An adverse event following immunization (AEFI) is defined as any unfavorable medical occurrence which follows immunization and which may or may not be caused by the usage of the vaccine. The adverse event may be any unfavorable or unintended sign, abnormal laboratory finding, symptom or disease.	</p>								
+										<p>An <em>adverse event following immunization (AEFI)</em> is defined as any unfavorable medical occurrence which follows immunization and which may or may not be caused by the usage of the vaccine. The adverse event may be any unfavorable or unintended sign, abnormal laboratory finding, symptom or disease.	</p>								
 										
-										<p><b>Complete this form when any of the following Adverse Events Following Immunization (AEFI) occurs:	</b>
+										<p><b>Complete the AEFI reporting form when any Adverse Event Following Immunization (AEFI) occurs and especially those of parental and/or health worker concern e.g.</b>
 											
 										<br>1. Serious Events (results in death, hospitalization or prolongation of hospitalization) persistent or significant disability/incapacity, or is life-threatening	
 											
@@ -37,23 +37,25 @@
 										<br>3. BCG Lymphadenitis-Lumps In The Armpit Following BCG Vaccination	
 										<br>4. Severe Local Reaction –  Redness, swelling or pain extends past the nearest joint; inability to move the limb; Redness, swelling or pain persist for more than 3 days	
 											
-										<br>5. Fever (≥ 38°C)  in conjunction with another reportable adverse event	
+										<br>5. Seizures
 										<br>6. Allergic reaction- anaphylaxis, hives, bronchospasm, edema	
 										<br>7. Clusters of events(> 2 cases of same event in same month) apart from fever	
-										<br>8. Any Uncommon Or Unexpected Events and events that are of public concern including (but not limited to ) seizures 	
+										<br>8. Any Uncommon Or Unexpected Events and events that are of public concern 	
 											
 										<br>- Report even if you are not certain the vaccine caused the event or you do not have all the details.	
 											
-										<br>- Indicate if it is an initial or follow-up report	
-										<br>- Information on the Manufacturer and Expiry dates of the Vaccine and/or diluents may be obtained from the label of its container. If multiple vaccines are suspected, provide the required information on each of them.  	
+										<br>- Indicate if it is an <b>initial</b> or <b>follow-up</b> report	
+										<br>- Information on the Manufacturer and Expiry dates of the Vaccine and/or diluents may be obtained from the label of its container. If multiple vaccines are suspected, provide the required information on each of them.
+										<br>- Enter date of birth if available, if not enter the age at the time the AEFI began 
+										<br>- Where more than one AEFI if they occur in the same patient and same time tick the multiple options provided, also provide a description of the AEFI in the space provided
 										</p>
 											
 										<h4>WHAT HAPPENS TO SUBMITTED REPORTS	</h4>
 										
-										<p>Data obtained from this and other reports will be assessed and used improve service delivery in the Ministry of Health. Data will also be periodically submitted to the Uppsala Monitoring Centre, WHO, Sweden, and this will contribute to global vaccine safety information.   	
+										<p>Data obtained from this and other reports will be assessed and used improve policy and service delivery in the Ministry of Health  	
+										<br>
 											
-											
-										All information is handled in strict confidence; patient and reporter identity will not be disclosed in response to any public request. 	
+										All information is handled in strict confidence 	
 											
 										<b>Submission does not mean admission that the health worker or manufacturer or the product caused or contributed to the event. </b>
 										</p>

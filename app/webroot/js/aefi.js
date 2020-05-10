@@ -84,5 +84,8 @@ $(document).ready(function() {
 			$('#AefiComplaintOtherSpecify').val('');
 		}
 	});
-	
+	// $('#AefiPatientName').datetimepicker({
+ //        format: 'd-m-Y H:i'
+ //      });
+	// console.log('kariss');
 });

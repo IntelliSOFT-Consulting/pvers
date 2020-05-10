@@ -14,7 +14,7 @@
 	<ul>
 		<li><a href="#tabs-1">
 			<?php
-				$aC = $bC = $cC = $dC = $eC = $fC = $gC = $submitted = '';
+				$aC = $bC = $cC = $dC = $eC = $fC = $gC = $aS = $bS = $Serious = $submitted = '';
 				if (isset($this->request->params['named']['submitted'])) {
 					if($this->request->params['named']['submitted'] == '2') {
 						echo 'Submitted'; $bC = 'active';
@@ -32,6 +32,13 @@
 						echo 'All'; $aC = 'active';
 					}
 					$submitted = $this->request->params['named']['submitted'];
+				} else if(isset($this->request->params['named']['serious'])) {
+					if($this->request->params['named']['serious'] == 'Yes') {
+						echo 'Serious'; $aS = 'active';
+					} else {
+						echo 'Not Serious'; $bS = 'active';
+					}
+					$serious = $this->request->params['named']['serious'];
 				} else {
 					echo 'All'; $aC = 'active';
 				}
@@ -58,6 +65,16 @@
 						  <li class="<?php echo $bC; ?>">
 							<?php echo $this->Html->link('<span class="badge badge-success">1</span> SUBMITTED',
 										array('controller' => 'aefis', 'action' => 'index', 'submitted'=>'2', 'admin' => true),
+										array('escape' => false)); ?>
+						  </li>
+						  <li class="<?php echo $aS; ?>">
+							<?php echo $this->Html->link('&nbsp;<i class="icon-minus"></i> SERIOUS',
+										array('controller' => 'aefis', 'action' => 'index', 'serious'=>'Yes', 'admin' => true),
+										array('escape' => false)); ?>
+						  </li>
+						  <li class="<?php echo $bS; ?>">
+							<?php echo $this->Html->link('&nbsp;<i class="icon-minus"></i> NOT SERIOUS',
+										array('controller' => 'aefis', 'action' => 'index', 'serious'=>'No', 'admin' => true),
 										array('escape' => false)); ?>
 						  </li>
 						  <li class="<?php echo $dC; ?>">

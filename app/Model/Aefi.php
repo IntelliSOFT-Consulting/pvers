@@ -17,6 +17,7 @@ class Aefi extends AppModel {
         array('name' => 'name_of_institution', 'type' => 'like'),
         array('name' => 'id', 'type' => 'like'),
         array('name' => 'submitted', 'type' => 'value'),
+        array('name' => 'serious', 'type' => 'value'),
         array('name' => 'submit', 'type' => 'query', 'method' => 'orConditions', 'encode' => true),
 		array('name' => 'range', 'type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Sadr.created BETWEEN ? AND ?'),
     );

@@ -8,7 +8,7 @@
 ?>
     <div class="row-fluid">
       <div class="span12">
-        <h3 style="text-align: center;">Vaccines <button  type="button" class="btn btn-success btn-small" id="addAefiVaccine">
+        <h3 style="text-align: center;">Suspected Vaccine(s) <button  type="button" class="btn btn-success btn-small" id="addAefiVaccine">
                           Add     <i class="icon-plus"></i>
                         </button></h3>
       </div>
@@ -28,13 +28,13 @@
                   </tr>
                   <tr>
                     <th colspan="2" style="width: 20%"> <label class="required">Name of Vaccine <span style="color:red;">*</span></label><small class="help-block">(e.g. BCG, DPT-Hib-HeB)</small></th>
-                    <th style="width: 7%"> <label class="required">Dose No.</label></th>
-                    <th> <label class="required"> Date vaccinated <span style="color:red;">*</span><br><small class="help-block">(dd-mm-yyyy)</small></label></th>
+                    <th style="width: 7%"> <label>Dose No.</label></th>
+                    <th style="width: 13%"> <label class="required"> Date & Time vaccinated <span style="color:red;">*</span><br><small class="help-block">(dd-mm-yyyy 24Hr:Min)</small></label></th>
                     <th> Route,site of vaccination <br><small class="help-block">(i.m.,s.c., i.d.)</small></th>
-                    <th style="width: 5%"> <label class="required">Batch/Lot number <span style="color:red;">*</span></label></th>
-                    <th> <label class="required">Manufacturer's Name <span style="color:red;">*</span></label></th>
-                    <th> <label class="required">Expiry date <span style="color:red;">*</span></label></th>
-                    <th style="width: 7%"> <label class="required">Batch/ Lot Number <span style="color:red;">*</span></label></th>
+                    <th style="width: 5%"> <label>Batch/Lot number </label></th>
+                    <th> <label>Manufacturer's Name </label></th>
+                    <th> <label>Expiry date </label></th>
+                    <th style="width: 7%"> <label>Batch/ Lot Number </label></th>
                     <th style="width: 10%">Manufacturer's Name</th>
                     <th> Expiry date </th>
                     <th> # </th>
@@ -52,7 +52,7 @@
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.id');
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccine_name', array(
                             'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span11 autosave-ignore',));
+                            'after' => false, 'class' => 'span11 autosave-ignore vaxname',));
                         ?>
                     </td>
                     <td>
@@ -66,7 +66,7 @@
                         <?php                            
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_date', array(
                             'type' => 'text', 'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span11 autosave-ignore',));
+                            'after' => false, 'class' => 'span11 autosave-ignore date-pick-field',));
                         ?>
                     </td> 
                     <td>
@@ -92,7 +92,7 @@
                         <?php
                         echo $this->Form->input('AefiListOfVaccine.'.$i.'.expiry_date', array(
                             'type' => 'text', 'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span11 autosave-ignore',));
+                            'after' => false, 'class' => 'span11 autosave-ignore date-pick-expire',));
                         ?>
                     </td>
                     
@@ -114,7 +114,7 @@
                       <?php
                         echo $this->Form->input('AefiListOfVaccine.'.$i.'.diluent_expiry_date', array(
                             'type' => 'text', 'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span11 autosave-ignore',));
+                            'after' => false, 'class' => 'span11 autosave-ignore date-pick-expire',));
                       ?>
                     </td>
                     <td>

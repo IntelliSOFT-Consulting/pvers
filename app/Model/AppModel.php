@@ -41,9 +41,15 @@ class AppModel extends Model {
 	function dateFormatAfterFind($dateString) {
 		return date('d-m-Y', strtotime($dateString));
 	}
+	function dateTimeFormatAfterFind($dateString) {
+		return date('d-m-Y H:i', strtotime($dateString));
+	}
 
 	public function dateFormatBeforeSave($dateString) {
 		return date('Y-m-d', strtotime($dateString));
+	}
+	public function dateTimeFormatBeforeSave($dateString) {
+		return date('Y-m-d H:i', strtotime($dateString));
 	}
 	
 	function Luhn_Verify($number, $iterations = 3){

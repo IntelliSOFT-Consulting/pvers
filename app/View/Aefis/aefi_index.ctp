@@ -6,7 +6,7 @@
     ================================================== -->
     <section id="aefisadd">
 		<h3>Adverse Event Following Immunization Reports</h3>
-		<p>List of the aefi reports that you have submitted.</p>
+		<p>List of the aefi reports that you have submitted...</p>
 		<hr>
 	<div class="row-fluid">
 		<div class="span2 columns">

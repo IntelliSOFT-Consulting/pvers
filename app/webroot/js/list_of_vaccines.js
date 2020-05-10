@@ -19,13 +19,37 @@ $(function() {
         showAnim:'show'
       });
 
-      var dates4 = $('.date-pick-field').datepicker({
-        minDate:"-100Y", maxDate:"-0D", 
-        dateFormat:'dd-mm-yy', 
-        showButtonPanel:true, 
-        changeMonth:true, 
-        changeYear:true, 
-        showAnim:'show'
+      // var dates4 = $('.date-pick-field').datepicker({
+      //   minDate:"-100Y", maxDate:"-0D", 
+      //   dateFormat:'dd-mm-yy', 
+      //   showButtonPanel:true, 
+      //   changeMonth:true, 
+      //   changeYear:true, 
+      //   showAnim:'show'
+      // });
+      $('.date-pick-field').datetimepicker({
+        format: 'd-m-Y H:i'
+      });
+
+      var availableVax = [
+        "BCG",
+        "bOPV (Bivalent Oral Polio Vaccine)",
+        "Pentavalent (DTP-HepB-Hib)",
+        "PCV (Pneumoccocal Conjugate Vaccine)",
+        "IPV (Inactivated Polio Vaccine)",
+        "Measles Rubella (MR)",
+        "Yellow Fever",
+        "Rotavirus",
+        "Malaria Vaccine (RTSS)",
+        "HPV (Human Papilloma Virus)",
+        "Tetanus Diphtheria",
+        "Anti-Rabies Vaccine",
+        "Typhoid Vaccine",
+        "Hepatitis B vaccine",
+        "Influenza vaccine"
+      ];
+      $('.vaxname').autocomplete({
+        source: availableVax
       });
 
       var dates3 = 0;     //TODO:search for date time fields and use
@@ -66,7 +90,7 @@ $(function() {
           <tr>\
             <td>{i2}</td>\
             <td><input type="hidden" name="data[AefiListOfVaccine][{i}][id]" id="AefiListOfVaccine{i}Id">\
-                <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccine_name]" class="span11" required="required" maxlength="200" type="text" id="AefiListOfVaccine{i}VaccineName"></div></td>\
+                <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccine_name]" class="span11 vaxname" required="required" maxlength="200" type="text" id="AefiListOfVaccine{i}VaccineName"></div></td>\
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][dosage]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine{i}Dosage"></div> </td>\
             <td>\
