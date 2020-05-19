@@ -41,11 +41,41 @@
   border:2.5pt solid blue;
 }
 .formbacka {
-	background-color: #64c8df69;
-	border: 2px solid #3E58A7;
+  background-color: #64c8df69;
+  border: 2px solid #3E58A7;
 }
 .vformbacka {
-	background-color:#64c8df69; 
+  background-color:#64c8df69; 
+  margin:4mm;  
+  padding:4mm;  
+  border:2.5pt solid blue;
+}
+.formbackd {
+  background-color: #CCFFCC;
+  border: 2px solid #3E58A7;
+}
+.vformbackd {
+  background-color: #CCFFCC; 
+  margin:4mm;  
+  padding:4mm;  
+  border:2.5pt solid blue;
+}
+.formbackm {
+  background-color: #CCECFF;
+  border: 2px solid #3E58A7;
+}
+.vformbackm {
+  background-color: #CCECFF; 
+  margin:4mm;  
+  padding:4mm;  
+  border:2.5pt solid blue;
+}
+.formbackt {
+	background-color: #FFFFCC;
+	border: 2px solid #3E58A7;
+}
+.vformbackt {
+	background-color: #FFFFCC; 
 	margin:4mm;  
 	padding:4mm;  
 	border:2.5pt solid blue;

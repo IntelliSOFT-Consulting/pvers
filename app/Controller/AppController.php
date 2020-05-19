@@ -42,6 +42,7 @@ class AppController extends Controller {
         ),
         'RequestHandler', 
 		'Session',
+		'Flash',
         'DebugKit.Toolbar' => array('panels' => array('DebugKit.history'))
     );
     // public $helpers = array('Html', 'Form', 'Session', 'Javascript', 'Ajax', 'AssetCompress.AssetCompress');

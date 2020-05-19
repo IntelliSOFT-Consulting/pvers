@@ -295,7 +295,7 @@
                                 'rows' => '7',
                                 'label' => array('class' => 'required', 'text' => 'Brief details on the event <span style="color:red;">*</span>'),
                                 'between' => false, 'div' => false,
-                                'title'=>$help_infos['description_of_reaction']['title'], 'data-content' => $help_infos['description_of_reaction']['content'],
+                                'title'=> 'Description of reaction', 'data-content' => 'Description of reaction',
                                 'after'=>'<p class="help-block">    (including timeline of occurrence) </p>',
                                 'class' => 'span8',
 
@@ -325,7 +325,7 @@
                         echo $this->Form->input('serious', array(
                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'serious',
                          'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">SERIOUS <span style="color:red;">*</span></label> </div>
-                                         <div class="controls">  <input type="hidden" value="" id="AefiGender_" name="data[Aefi][serious]"> <label class="radio inline">',
+                                         <div class="controls">  <input type="hidden" value="" id="Serious_" name="data[Aefi][serious]"> <label class="radio inline">',
                          'after' => '</label>',
                          'options' => array('Yes' => 'Yes'),
                         ));

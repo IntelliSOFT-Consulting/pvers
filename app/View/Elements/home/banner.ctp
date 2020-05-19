@@ -78,8 +78,26 @@
 			<li class="art-hmenu-li-separator"><span class="art-hmenu-separator"> </span></li>
 			<li>
 				<?php 	
-						echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">Report AEFI</span>', 
+						echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">AEFI</span>', 
 						array('controller' => 'aefis', 'action' => 'add') , array('escape' => false)); 
+				?>			
+			</li>
+			<li>
+				<?php 	
+						echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">Devices</span>', 
+						array('controller' => 'devices', 'action' => 'add') , array('escape' => false)); 
+				?>			
+			</li>
+			<li>
+				<?php 	
+						echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">Medication Error</span>', 
+						array('controller' => 'medications', 'action' => 'add') , array('escape' => false)); 
+				?>			
+			</li>
+			<li>
+				<?php 	
+						echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">Transfusion</span>', 
+						array('controller' => 'transfusions', 'action' => 'add') , array('escape' => false)); 
 				?>			
 			</li>
 			<li class="art-hmenu-li-separator"><span class="art-hmenu-separator"> </span></li>
