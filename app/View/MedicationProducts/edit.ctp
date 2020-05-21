@@ -1,0 +1,36 @@
+<div class="medicationProducts form">
+<?php echo $this->Form->create('MedicationProduct'); ?>
+	<fieldset>
+		<legend><?php echo __('Edit Medication Product'); ?></legend>
+	<?php
+		echo $this->Form->input('id');
+		echo $this->Form->input('medication_id');
+		echo $this->Form->input('generic_name_i');
+		echo $this->Form->input('product_name_i');
+		echo $this->Form->input('dosage_form_i');
+		echo $this->Form->input('dosage_i');
+		echo $this->Form->input('manufacturer_i');
+		echo $this->Form->input('strength_i');
+		echo $this->Form->input('container_i');
+		echo $this->Form->input('generic_name_ii');
+		echo $this->Form->input('product_name_ii');
+		echo $this->Form->input('dosage_form_ii');
+		echo $this->Form->input('dosage_ii');
+		echo $this->Form->input('manufacturer_ii');
+		echo $this->Form->input('strength_ii');
+		echo $this->Form->input('container_ii');
+		echo $this->Form->input('modifed');
+	?>
+	</fieldset>
+<?php echo $this->Form->end(__('Submit')); ?>
+</div>
+<div class="actions">
+	<h3><?php echo __('Actions'); ?></h3>
+	<ul>
+
+		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('MedicationProduct.id')), array('confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('MedicationProduct.id')))); ?></li>
+		<li><?php echo $this->Html->link(__('List Medication Products'), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('List Medications'), array('controller' => 'medications', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Medication'), array('controller' => 'medications', 'action' => 'add')); ?> </li>
+	</ul>
+</div>

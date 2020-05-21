@@ -392,7 +392,9 @@
             </div>
             <hr>
 
-            <h4 style="text-align: center;  color: #884805;">COMPONENT INFORMATION</h4>
+            <!-- <h4 style="text-align: center;  color: #884805;">COMPONENT INFORMATION</h4> -->
+            <?php echo $this->element('multi/list_of_pints');?>
+
             <div class="row-fluid">
                 <div class="span12">
                     <?php                        
@@ -415,7 +417,7 @@
             
             <div class="row-fluid">
                 <div class="span12">
-                    <h3 class="controls" style="text-decoration: underline;">LAB INVESTIGATION: (Transfusion manager)</h3>
+                    <h4 style="text-decoration: underline; color: #884805; text-align: center;">LAB INVESTIGATION: (Transfusion manager)</h4>
                 </div>
             </div>
 
@@ -587,26 +589,142 @@
             </div>
             <hr>
 
+            <p style="padding-left: 15px;">8. Compatibility testing recipient serum (pretransfusion sample) and donor cells (pack) </p>
             <div class="row-fluid">
-                <div class="span12">
-                    <div style="padding-left: 15px;">
+                <div class="span4">
+                    <h4 class="required controls">Compatible</h4>
                     <?php
-                       echo $this->Form->input('direct_result', array(
-                                'rows' => '2',
-                                'label' => array('class' => 'required', 'text' => 'Suggest any recommendations, or describe policies or procedures you instituted or plan to institute to prevent future similar errors. If available, kindly attach an investigational report e.g. Root Cause Analysis (RCA)'),
-                                'between' => false, 'div' => false,
-                                'after'=>'<p class="help-block">     </p>',
-                                'class' => 'span11',
-
-                            ));
+                        echo $this->Form->input('compatible_saline_rt', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'compatible_saline_rt',
+                            'before' => '<div class="control-group"><label class="control-label required">Saline Rt</label><label class="radio controls">',    
+                            'after' => '</label></div>',
+                            'options' => array('Compatible' => ''),
+                        ));
+                        echo $this->Form->input('compatible_saline_ii', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'compatible_saline_ii',
+                            'before' => '<div class="control-group"><label class="control-label required">Saline 37</label><label class="radio controls">',    
+                            'after' => '</label></div>',
+                            'options' => array('Compatible' => ''),
+                        ));
+                        echo $this->Form->input('compatible_ahg', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'compatible_ahg',
+                            'before' => '<div class="control-group"><label class="control-label required">AHG</label><label class="radio controls">',    
+                            'after' => '</label></div>',
+                            'options' => array('Compatible' => ''),
+                        ));
+                        echo $this->Form->input('compatible_albumin', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'compatible_albumin',
+                            'before' => '<div class="control-group"><label class="control-label required">Albumin 37</label><label class="radio controls">',    
+                            'after' => '</label></div>',
+                            'options' => array('Compatible' => ''),
+                        ));
                     ?>
-                    </div>
+                </div>
+                <div class="span4">
+                    <h4 class="required controls">Incompatible</h4>
+                    <?php
+                        echo $this->Form->input('compatible_saline_rt', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'compatible_saline_rt',
+                            'before' => '<div class="control-group"><label class="radio controls">',    
+                            'after' => '</label></div>',
+                            'options' => array('Incompatible' => ''),
+                        ));
+                        echo $this->Form->input('compatible_saline_ii', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'compatible_saline_ii',
+                            'before' => '<div class="control-group"><label class="radio controls" style="padding-top: 3px;">',    
+                            'after' => '</label></div>',
+                            'options' => array('Incompatible' => ''),
+                        ));
+                        echo $this->Form->input('compatible_ahg', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'compatible_ahg',
+                            'before' => '<div class="control-group"><label class="radio controls" style="padding-top: 3px;">',    
+                            'after' => '</label></div>',
+                            'options' => array('Incompatible' => ''),
+                        ));
+                        echo $this->Form->input('compatible_albumin', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'compatible_albumin',
+                            'before' => '<div class="control-group"><label class="radio controls" style="padding-top: 3px;">',    
+                            'after' => '</label></div>',
+                            'options' => array('Incompatible' => ''),
+                        ));
+                    ?>
+                </div>  
+                <div class="span4">
+                    <?php
+                        echo '<div class="control-group"><span class="help-inline" style="padding-top: 15px;"><a class="tooltipper" data-original-title="Clear selection"
+                                onclick="$(\'.compatible_saline_rt\').removeAttr(\'checked disabled\')">
+                                <em class="accordion-toggle">clear!</em></a> </span></div>';
+                        echo '<div class="control-group"><span class="help-inline" style="padding-top: 15px;"><a class="tooltipper" data-original-title="Clear selection"
+                                onclick="$(\'.compatible_saline_ii\').removeAttr(\'checked disabled\')">
+                                <em class="accordion-toggle">clear!</em></a> </span></div>';
+                        echo '<div class="control-group"><span class="help-inline" style="padding-top: 15px;"><a class="tooltipper" data-original-title="Clear selection"
+                                onclick="$(\'.compatible_ahg\').removeAttr(\'checked disabled\')">
+                                <em class="accordion-toggle">clear!</em></a> </span></div>';
+                        echo '<div class="control-group"><span class="help-inline" style="padding-top: 15px;"><a class="tooltipper" data-original-title="Clear selection"
+                                onclick="$(\'.compatible_albumin\').removeAttr(\'checked disabled\')">
+                                <em class="accordion-toggle">clear!</em></a> </span></div>';
+                    ?>
+                </div>            
+            </div>
+            <hr>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <?php 
+                        echo '<label class="required" style="padding-left: 15px;">If negative (inconclusive results in 8) set up compatibility with enzyme treated cells </label>';          
+                        echo $this->Form->input('negative_result', array(
+                            'rows' => 2, 'label' => array('class' => 'control-label required', 'text' => 'Result'), 'placeholder' => 'Result'
+                        ));
+
+                        echo '<label class="required" style="padding-left: 15px;">In case of blood group O transfused to A or B or AB individual: Establish from the donor unit </label>';
+                        echo $this->Form->input('anti_a', array(
+                            'label' => array('class' => 'control-label required', 'text' => 'Anti A titres')
+                        ));
+                        echo $this->Form->input('anti_b', array(
+                            'label' => array('class' => 'control-label required', 'text' => 'Anti B titres')
+                        ));
+                    ?>
+                </div>
+                <div class="span6">
+                    <?php 
+                        echo $this->Form->input('urinalysis', array(
+                            'label' => array('class' => 'control-label required', 'text' => 'Urinalysis')
+                        ));
+                        echo $this->Form->input('evaluation', array(
+                            'label' => array('class' => 'control-label required', 'text' => 'Evaluation'), 'placeholder' => 'Diagnosis'
+                        ));
+
+                        echo $this->Form->input('adverse_reaction', array(
+                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
+                          'class' => 'adverse_reaction',
+                          'before' => '<div class="control-group ">   <label class="control-label required">
+                            General</label>  <div class="controls">
+                            <input type="hidden" value="" id="TransfusionReactionGeneral_" name="data[Transfusion][adverse_reaction]"> <label class="radio inline">',
+                          'after' => '</label>',
+                          'options' => array('Yes' => 'Yes'),
+                        )); 
+                        echo $this->Form->input('adverse_reaction', array(
+                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
+                          'class' => 'adverse_reaction',
+                          'before' => '<label class="radio inline">', 'after' => '</label>',
+                          'options' => array('No' => 'No')
+                        )); 
+                        echo $this->Form->input('adverse_reaction', array(
+                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'adverse_reaction',
+                          'format' => array('before', 'label', 'between', 'input', 'after', 'error'),
+                          'error' => array('attributes' => array('wrap' => 'p', 'class' => 'controls required error')),
+                          'before' => '<label class="radio inline">',
+                          'after' => '</label>
+                                <span class="help-inline" style="padding-top: 5px;"><a class="tooltipper" data-original-title="Clear selection"
+                                onclick="$(\'.adverse_reaction\').removeAttr(\'checked disabled\')">
+                                <em class="accordion-toggle">clear!</em></a> </span>
+
+                                </div> </div>',
+                          'options' => array('Inconclusive' => 'Inconclusive'),
+                        ));
+                    ?>
                 </div>
             </div>
-
-            <h5 style="text-align: center; color: #884805;">Attachments</h5>
-            <?php echo $this->element('multi/attachments'); ?>
-            
 
             <hr>
             <div class="row-fluid">
@@ -637,6 +755,8 @@
                 </div><!--/span-->
             </div><!--/row-->
 
+            <h5 style="text-align: center; color: #884805;">Attachments</h5>
+            <?php echo $this->element('multi/attachments'); ?>
 
             <div class="form-actions">
                 <div class="row-fluid">

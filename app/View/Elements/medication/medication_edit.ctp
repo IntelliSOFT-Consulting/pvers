@@ -493,6 +493,7 @@
                 </div>            
             </div>
             <hr>
+            <?php echo $this->element('multi/list_of_products');?>
 
             <div class="row-fluid">
                 <div class="span12">

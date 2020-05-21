@@ -40,4 +40,33 @@ class Transfusion extends AppModel {
 			'order' => ''
 		)
 	);
+
+	public $hasMany = array(        
+		'Attachment' => array(
+			'className' => 'Attachment',
+			'foreignKey' => 'transfusion_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Pint' => array(
+			'className' => 'Pint',
+			'foreignKey' => 'transfusion_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 }
