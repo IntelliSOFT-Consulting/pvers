@@ -64,15 +64,15 @@
 			<li class="art-hmenu-li-separator"><span class="art-hmenu-separator"> </span></li>
 			<li>
 				<?php 	
-						echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">Report SADR</span>', 
-						array('controller' => 'sadrs', 'action' => 'add') , array('escape' => false)); 
+						// echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">Report SADR</span>', 
+						// array('controller' => 'sadrs', 'action' => 'add') , array('escape' => false)); 
 				?>			
 			</li>
 			<li class="art-hmenu-li-separator"><span class="art-hmenu-separator"> </span></li>
 			<li>
 				<?php 	
-						echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">Report PQMP</span>', 
-						array('controller' => 'pqmps', 'action' => 'add') , array('escape' => false)); 
+						// echo $this->Html->link('<span class="l"></span><span class="r"></span> <span class="t">Report PQMP</span>', 
+						// array('controller' => 'pqmps', 'action' => 'add') , array('escape' => false)); 
 				?>			
 			</li>
 			<li class="art-hmenu-li-separator"><span class="art-hmenu-separator"> </span></li>
