@@ -414,26 +414,32 @@
                     <div class="required"><label class="required"><strong>AEFI Outcome:</strong><span style="color:red;">*</span></label></div> <br/>
                     <!-- <h5>OUTCOME:</h5>  <br> -->
                     <?php
+                        //Recovered/Resolved, Recovering/Resolving, Not recovered/Not resolved/Ongoing, Recovered/Resolved with sequelae, Fatal, unknown
                         echo $this->Form->input('outcome', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
                             'before' => '<div class="control-group"> <input type="hidden" value="" id="AefiOutcome_" name="data[Aefi][outcome]"> <label class="radio">',
                             'after' => '</label>',
-                            'options' => array('Recovered' => 'Recovered'),
+                            'options' => array('Recovered/Resolved' => 'Recovered/Resolved'),
                         ));
                         echo $this->Form->input('outcome', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
                             'before' => '<label class="radio">',    'after' => '</label>',
-                            'options' => array('Recovering' => 'Recovering'),
+                            'options' => array('Recovering/Resolving' => 'Recovering/Resolving'),
                         ));
                         echo $this->Form->input('outcome', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
                             'before' => '<label class="radio">',    'after' => '</label>',
-                            'options' => array('Not recovered' => 'Not recovered'),
+                            'options' => array('Not recovered/Not resolved/Ongoing' => 'Not recovered/Not resolved/Ongoing'),
                         ));
                         echo $this->Form->input('outcome', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
                             'before' => '<label class="radio">',    'after' => '</label>',
-                            'options' => array('Died' => 'Died'),
+                            'options' => array('Recovered/Resolved with sequelae' => 'Recovered/Resolved with sequelae'),
+                        ));
+                        echo $this->Form->input('outcome', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+                            'before' => '<label class="radio">',    'after' => '</label>',
+                            'options' => array('Fatal' => 'Fatal'),
                         ));
                         echo $this->Form->input('outcome', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'outcome',
