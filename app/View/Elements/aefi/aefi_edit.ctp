@@ -372,6 +372,12 @@
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'serious_yes',
                           'before' => '<label class="radio inline">', 'after' => '</label>',
+                          'options' => array('Missing cost or prolonged hospitalization' => 'Missing cost or prolonged hospitalization')
+                        )); 
+                        echo $this->Form->input('serious_yes', array(
+                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
+                          'class' => 'serious_yes',
+                          'before' => '<label class="radio inline">', 'after' => '</label>',
                           'options' => array('Congenital anomaly' => 'Congenital anomaly')
                         )); 
                         echo $this->Form->input('serious_yes', array(
