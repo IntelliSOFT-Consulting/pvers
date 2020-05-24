@@ -1,76 +1,83 @@
 $(document).ready(function() {
 	count = 0;
-	//MUST DO: FIND OUT WAY OF CHECKING IF VARIABLE EXISTS
-	// for(key in myarray.Aefi) { 
-	// 	count++; 
-	// }
-
- //    if (count > 0) {
-	// 	alert('The report could not be submitted. Please review the fields marked in red and then resubmit.');
-	// }
-		
-	// var cache2 = {},	lastXhr;
-	// $( "#AefiInstitutionCode" ).autocomplete({
-	// 	source: function( request, response ) {
-	// 		var term = request.term;
-	// 		if ( term in cache2 ) {
-	// 			response( cache2[ term ] );
-	// 			return;
-	// 		}
-
-	// 		lastXhr = $.getJSON( "/facility_codes/autocomplete.json", request, function( data, status, xhr ) {
-	// 			cache2[ term ] = data;
-	// 			if ( xhr === lastXhr ) {
-	// 				response( data );
-	// 			}
-	// 		});
-	// 	},
-	// 	select: function( event, ui ) {
-	// 		$( "#AefiNameOfInstitution" ).val( ui.item.label );
-	// 		$( "#AefiInstitutionCode" ).val( ui.item.value );
-	// 		$( "#AefiSubCountyId" ).val( ui.item.sub_county );
-	// 		$("#AefiCountyId").combobox('autocomplete', ui.item.desc);  
-	// 		return false;
-	// 	}
-	// })
-	// .data( "autocomplete" )._renderItem = function( ul, item ) {
-	// 		return $( "<li></li>" )
-	// 			.data( "item.autocomplete", item )
-	// 			.append( "<a>" + item.value + " - " + item.label + "</a>" )
-	// 			.appendTo( ul );
-	// };
 	
-	// var cache3 = {},	lastXhr;
-	// $( "#AefiNameOfInstitution" ).autocomplete({
-	// 	source: function( request, response ) {
-	// 		var term = request.term;
-	// 		if ( term in cache3 ) {
-	// 			response( cache3[ term ] );
-	// 			return;
-	// 		}
+	$('.date-pick-expire').datepicker({
+        minDate:"-100Y", maxDate:"+7Y", 
+        dateFormat:'dd-mm-yy', 
+        showButtonPanel:true, 
+        changeMonth:true, 
+        changeYear:true, 
+        showAnim:'show'
+  	});
+	$( "#MedicationCountyId" ).combobox();
 
-	// 		lastXhr = $.getJSON( "/facility_codes/autocomplete.json", request, function( data, status, xhr ) {
-	// 			cache3[ term ] = data;
-	// 			if ( xhr === lastXhr ) {
-	// 				response( data );
-	// 			}
-	// 		});
-	// 	},
-	// 	select: function( event, ui ) {
-	// 		$( "#AefiNameOfInstitution" ).val( ui.item.label );
-	// 		$( "#AefiInstitutionCode" ).val( ui.item.value );
-	// 		$( "#AefiSubCountyId" ).val( ui.item.sub_county );
-	// 		$("#AefiCountyId").combobox('autocomplete', ui.item.desc);  
+    $('.date-pick-field').datepicker({
+        minDate:"-100Y", maxDate:"0", 
+        dateFormat:'dd-mm-yy'
+    });
+
+ 	var cache2 = {},	lastXhr;
+	$( "#MedicationInstitutionCode" ).autocomplete({
+		source: function( request, response ) {
+			var term = request.term;
+			if ( term in cache2 ) {
+				response( cache2[ term ] );
+				return;
+			}
+
+			lastXhr = $.getJSON( "/facility_codes/autocomplete.json", request, function( data, status, xhr ) {
+				cache2[ term ] = data;
+				if ( xhr === lastXhr ) {
+					response( data );
+				}
+			});
+		},
+		select: function( event, ui ) {
+			$( "#MedicationNameOfInstitution" ).val( ui.item.label );
+			$( "#MedicationInstitutionCode" ).val( ui.item.value );
+			$( "#MedicationInstitutionContact" ).val( ui.item.phone );
+			$("#MedicationCountyId").combobox('autocomplete', ui.item.desc);  
+			return false;
+		}
+	})
+	.data( "autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( "<a>" + item.value + " - " + item.label + "</a>" )
+				.appendTo( ul );
+	};
+	
+	var cache3 = {},	lastXhr;
+	$( "#MedicationNameOfInstitution" ).autocomplete({
+		source: function( request, response ) {
+			var term = request.term;
+			if ( term in cache3 ) {
+				response( cache3[ term ] );
+				return;
+			}
+
+			lastXhr = $.getJSON( "/facility_codes/autocomplete.json", request, function( data, status, xhr ) {
+				cache3[ term ] = data;
+				if ( xhr === lastXhr ) {
+					response( data );
+				}
+			});
+		},
+		select: function( event, ui ) {
+			$( "#MedicationNameOfInstitution" ).val( ui.item.label );
+			$( "#MedicationInstitutionCode" ).val( ui.item.value );
+			$( "#MedicationInstitutionContact" ).val( ui.item.phone );
+			$("#MedicationCountyId").combobox('autocomplete', ui.item.desc);  
 			
-	// 		return false;
-	// 	}
-	// })
-	// .data( "autocomplete" )._renderItem = function( ul, item ) {
-	// 		return $( "<li></li>" )
-	// 			.data( "item.autocomplete", item )
-	// 			.append( "<a>" + item.value + " - " + item.label + "</a>" )
-	// 			.appendTo( ul );
-	// };
+			return false;
+		}
+	})
+	.data( "autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( "<a>" + item.value + " - " + item.label + "</a>" )
+				.appendTo( ul );
+	};
 
 	// if ($("#AefiComplaintOther:checked").val() == '1') {
 	// 	$("#AefiComplaintOtherSpecify").removeAttr("disabled");

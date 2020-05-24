@@ -1,16 +1,23 @@
 $(document).ready(function() {
 	count = 0;
 	//MUST DO: FIND OUT WAY OF CHECKING IF VARIABLE EXISTS
-	for(key in myarray.Aefi) { 
-		count++; 
-	}
+	$('.date-pick-expire').datepicker({
+        minDate:"-100Y", maxDate:"+7Y", 
+        dateFormat:'dd-mm-yy', 
+        showButtonPanel:true, 
+        changeMonth:true, 
+        changeYear:true, 
+        showAnim:'show'
+  	});
+	$( "#DeviceCountyId" ).combobox();
 
-    if (count > 0) {
-		alert('The report could not be submitted. Please review the fields marked in red and then resubmit.');
-	}
+    $('.date-pick-field').datepicker({
+        minDate:"-100Y", maxDate:"0", 
+        dateFormat:'dd-mm-yy'
+    });
 		
 	var cache2 = {},	lastXhr;
-	$( "#AefiInstitutionCode" ).autocomplete({
+	$( "#DeviceInstitutionCode" ).autocomplete({
 		source: function( request, response ) {
 			var term = request.term;
 			if ( term in cache2 ) {
@@ -26,10 +33,9 @@ $(document).ready(function() {
 			});
 		},
 		select: function( event, ui ) {
-			$( "#AefiNameOfInstitution" ).val( ui.item.label );
-			$( "#AefiInstitutionCode" ).val( ui.item.value );
-			$( "#AefiSubCountyId" ).val( ui.item.sub_county );
-			$("#AefiCountyId").combobox('autocomplete', ui.item.desc);  
+			$( "#DeviceNameOfInstitution" ).val( ui.item.label );
+			$( "#DeviceInstitutionCode" ).val( ui.item.value );
+			$("#DeviceCountyId").combobox('autocomplete', ui.item.desc);  
 			return false;
 		}
 	})
@@ -41,7 +47,7 @@ $(document).ready(function() {
 	};
 	
 	var cache3 = {},	lastXhr;
-	$( "#AefiNameOfInstitution" ).autocomplete({
+	$( "#DeviceNameOfInstitution" ).autocomplete({
 		source: function( request, response ) {
 			var term = request.term;
 			if ( term in cache3 ) {
@@ -57,10 +63,9 @@ $(document).ready(function() {
 			});
 		},
 		select: function( event, ui ) {
-			$( "#AefiNameOfInstitution" ).val( ui.item.label );
-			$( "#AefiInstitutionCode" ).val( ui.item.value );
-			$( "#AefiSubCountyId" ).val( ui.item.sub_county );
-			$("#AefiCountyId").combobox('autocomplete', ui.item.desc);  
+			$( "#DeviceNameOfInstitution" ).val( ui.item.label );
+			$( "#DeviceInstitutionCode" ).val( ui.item.value );
+			$("#DeviceCountyId").combobox('autocomplete', ui.item.desc);  
 			
 			return false;
 		}
@@ -72,19 +77,20 @@ $(document).ready(function() {
 				.appendTo( ul );
 	};
 
-	if ($("#AefiComplaintOther:checked").val() == '1') {
-		$("#AefiComplaintOtherSpecify").removeAttr("disabled");
+
+	/*if ($("#DeviceComplaintOther:checked").val() == '1') {
+		$("#DeviceComplaintOtherSpecify").removeAttr("disabled");
 	}	
-	$('#AefiComplaintOther').click(function(){
+	$('#DeviceComplaintOther').click(function(){
 	   if($(this).is(":checked")){
-			$('#AefiComplaintOtherSpecify').removeAttr("disabled");
+			$('#DeviceComplaintOtherSpecify').removeAttr("disabled");
 		}
 	   else {
-			$('#AefiComplaintOtherSpecify').attr("disabled", "disabled");
-			$('#AefiComplaintOtherSpecify').val('');
+			$('#DeviceComplaintOtherSpecify').attr("disabled", "disabled");
+			$('#DeviceComplaintOtherSpecify').val('');
 		}
-	});
-	// $('#AefiPatientName').datetimepicker({
+	});*/
+	// $('#DevicePatientName').datetimepicker({
  //        format: 'd-m-Y H:i'
  //      });
 	// console.log('kariss');

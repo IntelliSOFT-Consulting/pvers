@@ -47,10 +47,10 @@ class DevicesController extends AppController {
  */
     public function index() {
         $this->Device->recursive = 0;
-        $this->set('aefis', $this->paginate());
+        $this->set('devices', $this->paginate());
     }
 
-    public function aefiIndex() {
+    public function deviceIndex() {
         $this->Prg->commonProcess();
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
@@ -71,7 +71,7 @@ class DevicesController extends AppController {
             $this->Device->recursive = 1;
             $this->response->download('DEVICES_'.date('Y_m_d_His'));
         }
-        $this->set('aefis', $this->paginate());
+        $this->set('devices', $this->paginate());
     }
 
     public function admin_index() {
@@ -99,7 +99,7 @@ class DevicesController extends AppController {
             $this->Device->recursive = 1;
             $this->response->download('DEVICES_'.date('Y_m_d_His'));
         }
-        $this->set('aefis', $this->paginate());
+        $this->set('devices', $this->paginate());
     }
 
     public function institutionCodes() {
@@ -113,7 +113,7 @@ class DevicesController extends AppController {
                     'Device.created' => 'asc'
                 )
             );
-            $this->set('aefis', $this->paginate());
+            $this->set('devices', $this->paginate());
         }
     }
 /**
@@ -128,7 +128,7 @@ class DevicesController extends AppController {
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
-            // $this->response->download('DEVICE_'.$aefi['Device']['id'].'.pdf');
+            // $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
@@ -145,13 +145,13 @@ class DevicesController extends AppController {
         }
         Configure::load('appwide');
         $this->set('root', Configure::read('Domain.root'));
-        $aefi = $this->Device->read(null);
-        $this->set('aefi', $aefi);
+        $device = $this->Device->read(null);
+        $this->set('device', $device);
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
-            $this->response->download('DEVICE_'.$aefi['Device']['id'].'.pdf');
+            $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
     }
 
@@ -164,16 +164,16 @@ class DevicesController extends AppController {
 
         Configure::load('appwide');
         $this->set('root', Configure::read('Domain.root'));
-        $aefi = $this->Device->read(null);
-        $this->set('aefi', $aefi);
+        $device = $this->Device->read(null);
+        $this->set('device', $device);
         // $this->render('pdf/view');
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
-            // $this->response->download('DEVICE_'.$aefi['Device']['id'].'.pdf');
+            // $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
-            $this->response->download('DEVICE_'.$aefi['Device']['id'].'.pdf');
+            $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
             $this->render('view');
         }
         if ($this->RequestHandler->isXml()) {
@@ -189,7 +189,7 @@ class DevicesController extends AppController {
         }
         Configure::load('appwide');
         $this->set('root', Configure::read('Domain.root'));
-        $this->set('aefi', $this->Device->read(null));
+        $this->set('device', $this->Device->read(null));
         $this->Device->saveField('submitted', 1);
     }
 
@@ -213,14 +213,14 @@ class DevicesController extends AppController {
             $this->Session->setFlash(__('Could not verify the adverse event following immunization report ID. Please ensure the ID is correct.'), 'flash_error');
             $this->redirect(array('action' => 'add'));
         }
-        $aefi = $this->Device->read(null);
-        $aefi = Sanitize::clean($aefi, array('escape' => true));
-        $this->set('aefi', $aefi);
-        //if(!$aefi['Device']['vigiflow_id']) {
+        $device = $this->Device->read(null);
+        $device = Sanitize::clean($device, array('escape' => true));
+        $this->set('device', $device);
+        //if(!$device['Device']['vigiflow_id']) {
             if ($this->RequestHandler->isXml()) {
                 $this->Device->saveField('submitted', 3);
             }
-            $this->response->download('DEVICE_'.$aefi['Device']['id']);
+            $this->response->download('DEVICE_'.$device['Device']['id']);
         //} else {
         //  $this->Session->setFlash(__('The report could not be exported to E2B. It is already linked with a vigiflow ID'), 'flash_error');
         //  $this->redirect($this->referer());
@@ -244,7 +244,7 @@ class DevicesController extends AppController {
                 unset($this->Device->validate['form_id']);
                 $this->beforeSaving();
                 if ($this->Device->saveAssociated($this->request->data)) {
-                    $response['message'] = 'Thank you for submitting the report. A copy of the aefi report has been sent to the email address you provided';
+                    $response['message'] = 'Thank you for submitting the report. A copy of the device report has been sent to the email address you provided';
                     $response['id'] = $this->Device->Luhn($this->Device->id);
                     $this->set('message', $response);
                 } else {
@@ -260,28 +260,28 @@ class DevicesController extends AppController {
 
                 if ($this->request->data['Device']['report_type'] == 'Follow-up Report') {
                     #Check if report exists and owner
-                    $aefi = Hash::remove($this->Device->find('first', array(
+                    $device = Hash::remove($this->Device->find('first', array(
                                 'contain' => array('DeviceListOfVaccine', 'Attachment'),
                                 'conditions' => array('Device.id' => $this->Device->Luhn_Verify($this->data['Device']['form_id']))
                                 )
                             ), 'Device.id');
-                    if (empty($aefi['Device'])) {
+                    if (empty($device['Device'])) {
                         $this->Session->setFlash(__('Invalid DEVICE id'), 'flash_warning');
-                        $this->redirect(array('controller' => 'aefis', 'action' => 'add'));
-                    } elseif ($aefi['Device']['submitted'] == 0) {
+                        $this->redirect(array('controller' => 'devices', 'action' => 'add'));
+                    } elseif ($device['Device']['submitted'] == 0) {
                         $this->Session->setFlash(__('Initial DEVICE has not yet been submitted to PPB. Please submit first.'), 'flash_info');
-                        $this->redirect(array('controller' => 'aefis', 'action' => 'edit', $this->data['Device']['form_id']));
+                        $this->redirect(array('controller' => 'devices', 'action' => 'edit', $this->data['Device']['form_id']));
                     }
-                    $aefi = Hash::remove($aefi, 'DeviceListOfVaccine.{n}.id');
-                    $aefi = Hash::remove($aefi, 'Attachment.{n}.id');
-                    $aefi['Device']['submitted'] = 0;
-                    $data_save = $aefi['Device'];
-                    $data_save['DeviceListOfVaccine'] = $aefi['DeviceListOfVaccine'];
-                    if(isset($aefi['Attachment'])) $data_save['Attachment'] = $aefi['Attachment'];
-                    $data_save['aefi_id'] = $this->Device->Luhn_Verify($this->data['Device']['form_id']);
+                    $device = Hash::remove($device, 'DeviceListOfVaccine.{n}.id');
+                    $device = Hash::remove($device, 'Attachment.{n}.id');
+                    $device['Device']['submitted'] = 0;
+                    $data_save = $device['Device'];
+                    $data_save['DeviceListOfVaccine'] = $device['DeviceListOfVaccine'];
+                    if(isset($device['Attachment'])) $data_save['Attachment'] = $device['Attachment'];
+                    $data_save['device_id'] = $this->Device->Luhn_Verify($this->data['Device']['form_id']);
 
                     // $count = $this->Device->find('count',  array('conditions' => array(
-                    //             'Device.reference_no LIKE' => $aefi['Device']['reference_no'].'%',
+                    //             'Device.reference_no LIKE' => $device['Device']['reference_no'].'%',
                     //             )));
                     // $count = ($count < 10) ? "0$count" : $count;
                     $data_save['reference_no'] = $this->data['Device']['form_id'];
@@ -333,12 +333,12 @@ class DevicesController extends AppController {
         $this->set('title_for_layout', 'Edit Device '.$id);
         $this->Device->id = $this->Device->Luhn_Verify($id);
         if (!$this->Device->exists()) {
-            // throw new NotFoundException(__('Invalid aefi'));
+            // throw new NotFoundException(__('Invalid device'));
             $this->Session->setFlash(__('Could not verify the adverse event following immunization report ID. Please ensure the ID is correct.'), 'flash_error');
             $this->redirect(array('action' => 'add'));
         } else {
-            $aefi = $this->Device->read(null);
-            if ($aefi['Device']['submitted'] > 1) {
+            $device = $this->Device->read(null);
+            if ($device['Device']['submitted'] > 1) {
                 $this->Session->setFlash(__('The Report has been sent to PPB. You don\'t have permissions to edit it further.'), 'flash_error');
                 $this->redirect(array('action' => 'view', $id));
             }
@@ -371,10 +371,10 @@ class DevicesController extends AppController {
                             if($validate == 'first') {
                                 $this->Device->saveField('submitted', 2);
                                 $this->Session->setFlash(__('Thank you for submitting the report.
-                                A copy of the aefi report has been sent to the email address you provided'), 'flash_success');
+                                A copy of the device report has been sent to the email address you provided'), 'flash_success');
                                 $this->redirect(array('action' => 'view', $this->Device->Luhn($this->Device->id)));
                             } else {
-                                $this->Session->setFlash(__('The aefi has been saved'), 'flash_success');
+                                $this->Session->setFlash(__('The device has been saved'), 'flash_success');
                                 $this->redirect(array('action' => 'edit', $this->Device->Luhn($this->Device->id)));
                             }
                         } else {
@@ -393,11 +393,11 @@ class DevicesController extends AppController {
                 $this->redirect(array('action' => 'edit', $id));
             }
         } else {
-            $this->request->data = $aefi;
+            $this->request->data = $device;
         }
 
-        // $this->set('attachments', $this->Device->Attachment->find('all', array('conditions'=> array('Attachment.aefi_id' => $aefi['Device']['id']))));
-        // $this->set('attachments', $aefi['Attachment']);
+        // $this->set('attachments', $this->Device->Attachment->find('all', array('conditions'=> array('Attachment.device_id' => $device['Device']['id']))));
+        // $this->set('attachments', $device['Attachment']);
         $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
         $designations = $this->Device->Designation->find('list');
@@ -408,11 +408,11 @@ class DevicesController extends AppController {
         $this->set('title_for_layout', 'Edit Device '.$id);
         $this->Device->id = $this->Device->Luhn_Verify($id);
         if (!$this->Device->exists()) {
-            // throw new NotFoundException(__('Invalid aefi'));
+            // throw new NotFoundException(__('Invalid device'));
             $this->Session->setFlash(__('Could not verify the adverse event following immunization report ID. Please ensure the ID is correct.'), 'flash_error');
             $this->redirect(array('action' => 'index'));
         } else {
-            $aefi = $this->Device->read(null);
+            $device = $this->Device->read(null);
         }
         // pr($this->Device);
         if ($this->request->is('post') || $this->request->is('put')) {
@@ -441,11 +441,11 @@ class DevicesController extends AppController {
             }
         } else {
             // $this->request->data = $this->Device->read(null);
-            $this->request->data = $aefi;
+            $this->request->data = $device;
         }
 
-        // $this->set('attachments', $this->Device->Attachment->find('all', array('conditions'=> array('Attachment.aefi_id' => $aefi['Device']['id']))));
-        $this->set('attachments', $aefi['Attachment']);
+        // $this->set('attachments', $this->Device->Attachment->find('all', array('conditions'=> array('Attachment.device_id' => $device['Device']['id']))));
+        $this->set('attachments', $device['Attachment']);
         $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
         $sub_counties = $this->Device->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));

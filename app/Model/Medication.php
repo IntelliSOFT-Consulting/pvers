@@ -69,4 +69,26 @@ class Medication extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+	public function beforeSave($options = array()) {
+
+		if (!empty($this->data['Medication']['time_of_event'])) {
+			$this->data['Medication']['time_of_event'] = implode(':', $this->data['Medication']['time_of_event']);
+		} else {
+			$this->data['Medication']['time_of_event'] = '';
+		}
+
+		return true;
+	}
+
+	function afterFind($results, $primary = false) {
+		foreach ($results as $key => $val) {
+			if (!empty($val['Medication']['time_of_event'])) {
+				if(empty($val['Medication']['time_of_event'])) $val['Medication']['time_of_event'] = ':';
+				$a = explode(':', $val['Medication']['time_of_event']);
+				$results[$key]['Medication']['time_of_event'] = array('hour'=> $a[0],'min'=> $a[1]);
+			}
+		}
+		return $results;
+	}
 }

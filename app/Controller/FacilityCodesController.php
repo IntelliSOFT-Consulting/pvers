@@ -30,7 +30,7 @@ class FacilityCodesController extends AppController {
                 $codes = array();
 		foreach ($coders as $key => $value) {
 			$codes[] = array('value' => $value['FacilityCode']['facility_code'], 'label' => $value['FacilityCode']['facility_name'],  'sub_county' => $value['FacilityCode']['district'], 
-							 'desc' => $value['FacilityCode']['county'], 'addr' => $value['FacilityCode']['official_address']);
+							 'desc' => $value['FacilityCode']['county'], 'addr' => $value['FacilityCode']['official_address'], 'phone' => $value['FacilityCode']['official_mobile']);
 		}
 		$this->set('codes', $codes);
         $this->set('_serialize', 'codes');

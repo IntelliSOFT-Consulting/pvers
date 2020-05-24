@@ -278,7 +278,7 @@ class Aefi extends AppModel {
 		}
 
 		if(empty($this->data['Aefi']['age_months'])){
-			$this->data['Sadr']['age_months'] = '';
+			$this->data['Aefi']['age_months'] = '';
 		}
 		if (!empty($this->data['Aefi']['date_aefi_started'])) {
 			$this->data['Aefi']['date_aefi_started'] = $this->dateFormatBeforeSave($this->data['Aefi']['date_aefi_started']);

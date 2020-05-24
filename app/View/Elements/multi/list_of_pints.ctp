@@ -22,7 +22,7 @@
                 <thead>
                   <tr>
                     <th></th>
-                    <th style="width: 35%"> <label class="required">Type of component</th>
+                    <th style="width: 35%"> <label class="required">Type of component</label></th>
                     <th> <label>Pint No.</label></th>
                     <th> Expiry Date</th>
                     <th> Volume Transfused </th>

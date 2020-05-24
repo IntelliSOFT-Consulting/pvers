@@ -102,7 +102,7 @@
                         ));
                         echo $this->Form->input('ip_no', array('label' => array('class' => 'control-label required', 'text' => 'IP/OP NO.'), ));
                     ?>
-                    <div class="well-mine" style="background-color: #8EEAEA;">
+                    <div class="well-mine" style="background-color: #e6e6dfcc;">
                     <?php
                         echo $this->Form->input('date_of_birth', array(
                             'type' => 'date', 

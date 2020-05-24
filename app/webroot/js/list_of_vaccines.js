@@ -97,12 +97,12 @@ $(function() {
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_date]" class="span11 date-pick-field" type="text" required="required" id="AefiListOfVaccine{i}VaccinationDate"></div> </td>\
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_route]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine0VaccinationRoute"></div> </td>\
-            <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][batch_number]" class="span11"  required="required" maxlength="255" type="text" id="AefiListOfVaccine{i}BatchNumber"></div> </td>\
-            <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccine_manufacturer]" class="span11"  required="required" maxlength="255" type="text" id="AefiListOfVaccine{i}VaccineManufacturer"></div> </td>\
+            <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][batch_number]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}BatchNumber"></div> </td>\
+            <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccine_manufacturer]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}VaccineManufacturer"></div> </td>\
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][expiry_date]" class="span11 date-pick-expire" type="text" id="AefiListOfVaccine{i}ExpiryDate"></div> </td>\
             <td>\
-              <div class="control-group"><input name="data[AefiListOfVaccine][{i}][diluent_batch_number]" class="span11"  required="required" maxlength="55" type="text" id="AefiListOfVaccine{i}DiluentBatchNumber"></div> </td>\
+              <div class="control-group"><input name="data[AefiListOfVaccine][{i}][diluent_batch_number]" class="span11"  maxlength="55" type="text" id="AefiListOfVaccine{i}DiluentBatchNumber"></div> </td>\
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][diluent_manufacturer]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine{i}DiluentManufacturer"></div> </td>\
             <td>\

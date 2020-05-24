@@ -7,14 +7,14 @@
 ?>
     <div class="row-fluid">
       <div class="span12">
-        <h3>Product details: Please complete the following for products involved. Kindly attach a separate page for additional products <button  type="button" class="btn btn-success btn-small" id="addMedicationProduct">
+        <h4>Product details: Please complete the following for products involved. Click Add for additional products <button  type="button" class="btn btn-success btn-small" id="addMedicationProduct">
                           Add     <i class="icon-plus"></i>
                         </button>
               <?php
                 echo $this->Form->input('list', array('type' => 'hidden', 'value' => ''));
                 echo $this->Form->error('Medication.list', array('wrap' => 'span', 'class' => 'control-group required error'));
               ?>
-                        </h3>
+                        </h4>
       </div>
     </div>
     <div class="row-fluid">
@@ -23,7 +23,7 @@
                 <thead>
                   <tr>
                     <th></th>
-                    <th style="width: 35%"> <label class="required">Product Description</th>
+                    <th style="width: 35%"> <label class="required">Product Description</label></th>
                     <th> <label>Product No. 1 (intended)</label></th>
                     <th> Product No. 2 (error)</th>
                     <th> # </th>

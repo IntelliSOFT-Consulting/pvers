@@ -111,15 +111,16 @@ $(function() {
     }
 
     function updateLPRTr(myobj){
-      myobj
-       .closest('td')
-       .siblings()
-       .wrapInner('<div style="display: block;" />')
-       .closest('tr')
-       .find('td > div')
-       .slideUp(300, function(){
-          $(this).closest('tr').remove();
-       });
+      // console.log(myobj.closest('tr').remove);
+      console.log(myobj.closest('td').attr('rowspan'));
+      rows = parseInt(myobj.closest('td').attr('rowspan'));
+      $tr = myobj.closest('tr');
+      for (var i = 0; i <= rows-2; i++) {
+         $tr.next().remove();
+      }
+      $tr.slideUp(300, function(){
+            $(this).remove();
+      });
     };
 
 });

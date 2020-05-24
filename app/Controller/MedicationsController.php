@@ -14,7 +14,7 @@ class MedicationsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Security' => array('csrfExpires' => '+1 hour', 'validatePost' => false), 'Search.Prg', 'RequestHandler');
+	public $components = array('Security' => array('csrfExpires' => '+1 hour', 'validatePost' => false), 'Search.Prg', 'RequestHandler', 'Paginator');
     public $paginate = array();
     public $presetVars = array();
 
@@ -88,9 +88,9 @@ class MedicationsController extends AppController {
 			throw new NotFoundException(__('Invalid medication'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Medication->save($this->request->data)) {
+			if ($this->Medication->saveAssociated($this->request->data)) {
 				$this->Flash->success(__('The medication has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'view', $this->Medication->id));
 			} else {
 				$this->Flash->error(__('The medication could not be saved. Please, try again.'));
 			}

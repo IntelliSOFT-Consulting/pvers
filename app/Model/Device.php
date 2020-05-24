@@ -40,4 +40,38 @@ class Device extends AppModel {
 			'order' => ''
 		)
 	);
+
+	/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'Attachment' => array(
+			'className' => 'Attachment',
+			'foreignKey' => 'device_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'ListOfDevice' => array(
+			'className' => 'ListOfDevice',
+			'foreignKey' => 'device_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 }

@@ -8,7 +8,11 @@ $(document).ready(function() {
     if (count > 0) {
 		alert('The report could not be submitted. Please review the fields marked in red and then resubmit.');
 	}
-		
+	
+
+	$( "#AefiCountyId" ).combobox();
+	$( "#AefiSubCountyId" ).combobox();
+
 	var cache2 = {},	lastXhr;
 	$( "#AefiInstitutionCode" ).autocomplete({
 		source: function( request, response ) {
