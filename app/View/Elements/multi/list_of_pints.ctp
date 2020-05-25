@@ -6,14 +6,14 @@
 ?>
     <div class="row-fluid">
       <div class="span12">
-        <h3 style="text-align: center;">COMPONENT INFORMATION <button  type="button" class="btn btn-success btn-small" id="addTransfusionPint">
+        <h5 style="text-align: center;">COMPONENT INFORMATION <button  type="button" class="btn btn-success btn-small" id="addPint">
                           Add     <i class="icon-plus"></i>
                         </button>
               <?php
                 echo $this->Form->input('list', array('type' => 'hidden', 'value' => ''));
                 echo $this->Form->error('Transfusion.list', array('wrap' => 'span', 'class' => 'control-group required error'));
               ?>
-                        </h3>
+                        </h5>
       </div>
     </div>
     <div class="row-fluid">

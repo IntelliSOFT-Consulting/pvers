@@ -25,12 +25,12 @@
                     <?php
                         echo $this->Html->image('coa.png', array('alt' => 'COA'));
                     ?>
-                    <h3>MINISTRY OF HEALTH</h3>
-                    <h3>PHARMACY AND POISONS BOARD</h3>
-                    <h3>P.O. Box 27663-00506 NAIROBI</h3>
-                    <h3>Tel: (020)-3562107 Ext 114, 0720 608811, 0733 884411 Fax: (020) 2713431/2713409</h3>
-                    <h3><b>Email:</b> pv@pharmacyboardkenya.org</h3>
-                    <h3 style="color: red;">ADVERSE TRANSFUSION REACTION FORM </h3>
+                    <h4>MINISTRY OF HEALTH</h4>
+                    <h4>PHARMACY AND POISONS BOARD</h4>
+                    <h4>P.O. Box 27663-00506 NAIROBI</h4>
+                    <h4>Tel: (020)-3562107 Ext 114, 0720 608811, 0733 884411 Fax: (020) 2713431/2713409</h4>
+                    <h4><b>Email:</b> pv@pharmacyboardkenya.org</h4>
+                    <h4 style="color: red;">ADVERSE TRANSFUSION REACTION FORM </h4>
                 </div>
             </div>
             <hr>
@@ -685,6 +685,7 @@
                         ));
                     ?>
                 </div>
+
                 <div class="span6">
                     <?php 
                         echo $this->Form->input('urinalysis', array(
@@ -698,7 +699,7 @@
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'adverse_reaction',
                           'before' => '<div class="control-group ">   <label class="control-label required">
-                            General</label>  <div class="controls">
+                            Was the adverse reaction related to transfusion?  </label>  <div class="controls">
                             <input type="hidden" value="" id="TransfusionReactionGeneral_" name="data[Transfusion][adverse_reaction]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Yes' => 'Yes'),
@@ -725,38 +726,75 @@
                     ?>
                 </div>
             </div>
-
             <hr>
+
+
+                <h5 style="text-align: center; color: #884805;">Attachments</h5>
+                <?php echo $this->element('multi/attachments'); ?>
+
             <div class="row-fluid">
                 <div class="span6">
                     <?php
                         echo $this->Form->input('reporter_name', array(
                             'div' => array('class' => 'control-group required'),
-                            'label' => array('class' => 'control-label required', 'text' => 'Name of Person Reporting <span style="color:red;">*</span>'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Name of Initial reporter <span style="color:red;">*</span>'),
                         ));
                         echo $this->Form->input('reporter_email', array(
                             'type' => 'email',
                             'div' => array('class' => 'control-group required'),
                             'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS <span style="color:red;">*</span>')
                         ));
-
+                        
                     ?>
                 </div><!--/span-->
                 <div class="span6">
                     <?php
                         echo $this->Form->input('designation_id',
-                                array('label' => array('class' => 'control-label required', 'text' => 'DESIGNATION'.' <span style="color:red;">*</span>'), 'empty'=>true ));
+                                array('label' => array('class' => 'control-label required', 'text' => 'Cadre/designation '.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone', array(
                             'div' => array('class' => 'control-group'),
                             'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
                         ));
-
+                        
+                        echo $this->Form->input('reporter_date', array(
+                            'type' => 'text', 'class' => 'date-pick-field',
+                            'label' => array('class' => 'control-label required', 'text' => 'Date of report'),
+                        ));
+                    ?>
+                </div><!--/span-->
+            </div><!--/row-->
+            <h4 style="text-align: center; color: #884805;">If Person Submitting if Different from Reporter</h4> <br/>
+            <div class="row-fluid">
+                <div class="span6">
+                    <?php
+                        echo $this->Form->input('reporter_name_diff', array(
+                            'div' => array('class' => 'control-group required'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Name <span style="color:red;">*</span>'),
+                        ));
+                        echo $this->Form->input('reporter_email_diff', array(
+                            'type' => 'email',
+                            'div' => array('class' => 'control-group required'),
+                            'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS <span style="color:red;">*</span>')
+                        ));
+                    ?>
+                </div><!--/span-->
+                <div class="span6">
+                    <?php
+                        echo $this->Form->input('reporter_designation_diff', array(
+                            'type' => 'select', 'options' => $designations, 'empty' => true,
+                            'label' => array('class' => 'control-label required', 'text' => 'Cadre/designation '.' <span style="color:red;">*</span>'), 'empty'=>true ));
+                        echo $this->Form->input('reporter_phone_diff', array(
+                            'div' => array('class' => 'control-group'),
+                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                        ));                        
+                        echo $this->Form->input('reporter_date_diff', array(
+                            'type' => 'text', 'class' => 'date-pick-field',
+                            'label' => array('class' => 'control-label required', 'text' => 'Date of Submission'),
+                        ));
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
 
-            <h5 style="text-align: center; color: #884805;">Attachments</h5>
-            <?php echo $this->element('multi/attachments'); ?>
 
             <div class="form-actions">
                 <div class="row-fluid">

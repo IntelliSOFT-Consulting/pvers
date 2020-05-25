@@ -16,8 +16,9 @@ $(function() {
         showAnim:'show'
       });
 
-      $('.date-pick-field').datetimepicker({
-        format: 'd-m-Y H:i'
+      $('.date-pick-field').datepicker({
+          minDate:"-100Y", maxDate:"0", 
+          dateFormat:'dd-mm-yy'
       });
 
     }
@@ -56,7 +57,7 @@ $(function() {
             <td>\
               <div class="control-group"><input name="data[Pint][{i}][expiry_date]" class="span11 date-pick-expire" type="text" id="Pint{i}ExpiryDate"></div> </td>\
             <td>\
-              <div class="control-group"><input name="data[Pint][{i}][volume_transfused]" class="span11"  required="required" maxlength="55" id="Pint{i}VolumeTransfused"></div> </td>\
+              <div class="control-group"><input name="data[Pint][{i}][volume_transfused]" class="span11" maxlength="55" id="Pint{i}VolumeTransfused"></div> </td>\
             <td>\
               <button type="button" class="btn btn-danger btn-sm remove-pint" value=""> <i class="icon-minus"></i> </button>\
             </td>\

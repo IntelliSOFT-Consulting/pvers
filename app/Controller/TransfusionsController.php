@@ -88,9 +88,9 @@ class TransfusionsController extends AppController {
 			throw new NotFoundException(__('Invalid transfusion'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Transfusion->save($this->request->data)) {
+			if ($this->Transfusion->saveAssociated($this->request->data)) {
 				$this->Flash->success(__('The transfusion has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'view', $this->Transfusion->id));
 			} else {
 				$this->Flash->error(__('The transfusion could not be saved. Please, try again.'));
 			}

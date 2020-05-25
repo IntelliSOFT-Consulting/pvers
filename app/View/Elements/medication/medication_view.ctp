@@ -198,27 +198,117 @@
 			  	<table  style="width: 100%;" class="table table-bordered table-condensed table-pvborder">
 	                <thead>
 	                  <tr>
-	                  	<th colspan="2" style="width: 15%"> <label class="required">Brand Name/Commercial Name</th>
-	                    <th> <label>Serial/Lot No.</label></th>
-	                    <th> <label>Common Name</label></th>
-	                    <th> <label>Manufacturer's Name</label></th>
-	                    <th> <label>Manufacture Date </label></th>
-	                    <th> <label>Expiry date </label></th>
+	                  	<th></th>
+	                    <th style="width: 35%"> <label class="required">Product Description</label></th>
+	                    <th> <label>Product No. 1 (intended)</label></th>
+	                    <th> Product No. 2 (error)</th>
 	                  </tr>
 	                </thead>
 	                <tbody>
 	                  <?php
 	                  	$i = 0;
-	                     foreach ($medication['ListOfMedication'] as $listOfMedication): 
+	                     foreach ($medication['MedicationProduct'] as $medicaTionProduct): 
 	                  ?>
+	                  
 	                  <tr>
-	                    <td><?= $i+1; ?></td>
-	                    <td><?php echo $listOfMedication['brand_name'];?></td>
-	                    <td><?php echo $listOfMedication['serial_no'];?></td>
-	                    <td><?php echo $listOfMedication['common_name'];?></td>
-	                    <td><?php echo $listOfMedication['manufacturer'];?></td>
-	                    <td><?php echo $listOfMedication['manufacture_date'];?></td>
-	                    <td><?php echo $listOfMedication['expiry_date'];?></td>              
+	                    <td rowspan="8" class="sailor"><?= $i+1; ?></td>
+	                    <td>
+	                        Generic name (active ingredient)
+	                    </td>
+	                    <td>
+	                        <?php
+	                          echo $medicaTionProduct['generic_name_i'];
+	                        ?>
+	                    </td>                    
+	                    <td>
+	                        <?php
+	                        echo $medicaTionProduct['generic_name_ii'];
+	                        ?>
+	                    </td> 
+	                    <td rowspan="8">
+	                        
+	                    </td>
+	                  </tr>
+	                  <tr>
+	                    <td>Brand/ Product Name</td>
+	                    <td>
+	                        <?php
+	                          echo $medicaTionProduct['product_name_i'];
+	                        ?>
+	                    </td>                    
+	                    <td>
+	                        <?php
+	                        echo $medicaTionProduct['product_name_ii'];
+	                        ?>
+	                    </td> 
+	                  </tr>
+	                  <tr>
+	                    <td>Dosage form</td>
+	                    <td>
+	                        <?php
+	                          echo $medicaTionProduct['dosage_form_i'];
+	                        ?>
+	                    </td>                    
+	                    <td>
+	                        <?php
+	                        echo $medicaTionProduct['dosage_form_ii'];
+	                        ?>
+	                    </td> 
+	                  </tr>
+	                  <tr>
+	                    <td>Dose, frequency, duration, route</td>
+	                    <td>
+	                        <?php
+	                          echo $medicaTionProduct['dosage_i'];
+	                        ?>
+	                    </td>                    
+	                    <td>
+	                        <?php
+	                        echo $medicaTionProduct['dosage_ii'];
+	                        ?>
+	                    </td> 
+	                  </tr>
+	                  <tr>
+	                    <td colspan="3"><p><i>Please fill below if error involved look alike (similar) product packaging</i></p></td>
+	                  </tr>
+	                  <tr>
+	                    <td>Manufacturer</td>
+	                    <td>
+	                        <?php
+	                          echo $medicaTionProduct['manufacturer_i'];
+	                        ?>
+	                    </td>                    
+	                    <td>
+	                        <?php
+	                        echo $medicaTionProduct['manufacturer_ii'];
+	                        ?>
+	                    </td> 
+	                  </tr>
+	                  <tr>
+	                    <td>Strength/concentration</td>
+	                    <td>
+	                        <?php
+	                          echo $medicaTionProduct['strength_i'];
+	                        ?>
+	                    </td>                    
+	                    <td>
+	                        <?php
+	                        echo $medicaTionProduct['strength_ii'];
+	                        ?>
+	                    </td> 
+	                  </tr>
+	                  <tr>
+	                    <td>Type and size of container</td>
+	                    <td>
+	                        <?php
+	                          echo $medicaTionProduct['container_i'];
+	                        ?>
+	                    </td>                    
+	                    <td>
+	                        <?php
+	                        echo $medicaTionProduct['container_ii'];
+	                        ?>
+	                    </td> 
 	                  </tr>
 	                
 	                <?php endforeach; ?>
@@ -226,36 +316,14 @@
 	                </tbody>
           		</table>
 				<hr>
+				
 
 				<table style="width: 100%;">
 					<tr>
-						<td colspan="6"><h4 style="text-align: center; color: #884805;">Incident information</h4> </td>
+						<td>Suggest any recommendations, or describe policies or procedures you instituted or plan to institute to prevent future similar errors. If available, kindly attach an investigational report e.g. Root Cause Analysis (RCA)</td>
 					</tr>
 					<tr>
-						<td style="width: 25%;">Date of onset of the incident</td>
-						<td colspan="5"><strong><?php echo $medication['Medication']['date_onset_incident'] ?>	</strong></td>
-					</tr>
-					<tr>
-						<td style="width: 25%;">Event classification</td>
-						<td colspan="5"><strong><?php echo $medication['Medication']['serious'] ?>	</strong></td>
-					</tr>
-					<tr>
-						<td style="width: 15%;">Reason for seriousness</td>
-						<td style="width: 15%;"><strong>
-							<?php echo $medication['Medication']['serious_yes']; if($medication['Medication']['serious_yes'] == 'Death') echo ' - '.$medication['Medication']['death_date']; ?>	</strong>
-						</td>
-						<td style="width: 15%;">Description of event</td>
-						<td style="width: 15%;"><strong><?php echo $medication['Medication']['description_of_reaction'] ?>	</strong></td>
-						<td style="width: 15%;">Remedial Action/Corrective action/preventive action taken by the healthcare facility relevant to the care of the patient</td>
-						<td style="width: 15%;"><strong><?php echo $medication['Medication']['remedial_action'] ?>	</strong></td>
-					</tr>
-				</table>
-				<hr>
-
-				<table style="width: 100%;">
-					<tr>
-						<td style="width: 25%;">Patient Outcome</td>
-						<td style="width: 75%;"><strong><?php echo $medication['Medication']['outcome'] ?>	</strong></td>
+						<td><strong><?php echo $medication['Medication']['direct_result'] ?>	</strong></td>
 					</tr>
 				</table>
 				 <hr>

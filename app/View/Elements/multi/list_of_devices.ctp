@@ -18,7 +18,7 @@
             <table id="listOfDevicesTable"  class="table table-bordered table-condensed table-pvborder">
                 <thead>
                   <tr>
-                    <th colspan="2" style="width: 15%"> <label class="required">Brand Name/Commercial Name</th>
+                    <th colspan="2" style="width: 15%"> <label class="required">Brand Name/Commercial Name</label></th>
                     <th> <label>Serial/Lot No.</label></th>
                     <th> <label>Common Name</label></th>
                     <th> <label>Manufacturer's Name</label></th>
