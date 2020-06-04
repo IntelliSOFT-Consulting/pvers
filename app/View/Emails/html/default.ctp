@@ -14,10 +14,34 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<?php
-$content = explode("\n", $content);
 
-foreach ($content as $line):
-	echo '<p> ' . $line . "</p>\n";
-endforeach;
-?>
+
+<div align="center">
+	<br />
+	<table align="center" bgcolor="#FFFFFF" border="0" cellpadding="10" cellspacing="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; width: 100%; border: 10px solid #488E48;">
+		<tbody>
+			<tr>
+				<td bgcolor="488E48">
+					<h3 style="font-family: Georgia, &quot;Times New Roman&quot;, Times, serif; font-size: 24px; color: rgb(255, 255, 255);">
+						The Pharmacy and Poisons Board</h3>
+					<p style="color: #fff;">
+						<strong>PvERS</strong>: Pharmacovigilance Electronic Reporting System</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<?php
+						/*$content = explode("\n", $content);
+
+						foreach ($content as $line):
+							echo '<p> ' . $line . "</p>\n";
+						endforeach;*/
+						echo $message;
+					?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+

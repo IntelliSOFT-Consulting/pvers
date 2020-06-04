@@ -36,6 +36,23 @@
  */
 	Configure::write('debug', 2);
 
+	Configure::write('CakePdf', array(
+        'engine' => 'CakePdf.WkHtmlToPdf',
+        // 'options' => array(
+        //     'print-media-type' => false,
+        //     'outline' => true,
+        //     'dpi' => 96
+        // ),
+        // 'margin' => array(
+        //     'bottom' => 15,
+        //     'left' => 50,
+        //     'right' => 30,
+        //     'top' => 45
+        // ),
+        'orientation' => 'portrait',
+        'download' => true
+    ));
+
 /**
  * Configure the Error handler used to handle errors for your application. By default
  * ErrorHandler::handleError() is used. It will display errors using Debugger, when debug > 0
@@ -161,7 +178,8 @@
  *	`manager_index()` and `/manager/controller/index`
  */
 	//Configure::write('Routing.prefixes', array('admin'));
-
+	Configure::write('Routing.prefixes', array('admin', 'manager', 'reporter', 'partner'));
+	
 /**
  * Turn off all caching application-wide.
  */
@@ -233,12 +251,12 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+	Configure::write('Security.salt', 'pharmacovigilance');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '76859309657453542496749683645');
+	Configure::write('Security.cipherSeed', '27312');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).

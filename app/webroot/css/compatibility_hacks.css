@@ -1,0 +1,445 @@
+
+/*------------------------------------------------------------------
+[4. Content / #content]
+*/
+
+#content {	
+    border: none;
+}
+
+#content .inner {
+	min-height: 400px;
+	padding-top: 0;
+	padding-bottom: 2em;
+	
+	
+	background: #fff;
+}
+
+#content .container {
+	padding-top: 3em;
+	
+	border-top: 8px solid #81994D;
+}
+
+
+
+
+
+/*------------------------------------------------------------------
+[6. Extra / #extra]
+*/
+
+#extra {	
+	border-top: 1px solid #000;
+}
+
+#extra .inner {
+	padding: 20px;
+	
+	color: #fff;
+	
+	background-color: #222;
+	
+	border-top: 1px solid #555;
+}
+
+#extra h3 {	
+	font-weight: 400;
+}
+
+
+
+
+/*------------------------------------------------------------------
+[7. Footer / #footer]
+*/
+
+#footer {
+	border-top: 1px solid #000;
+}
+
+#footer .inner {	
+	padding: 20px 0;
+	
+	background: #111;
+	
+	border-top: 1px solid #222;	
+}
+
+.footer-links {	
+	width: 49%;
+	display: inline-block;
+	margin: 0;
+
+	list-style: none;
+}
+
+.footer-links li {
+	margin-bottom: 1.25em;
+}
+
+.footer-links a {
+	color: #777;
+}
+
+
+/*------------------------------------------------------------------
+[9. Subheader / #subheader]
+*/
+
+#subheader {	
+	color: #EEE;
+
+}
+
+#subheader h1
+, #subheader h2
+, #subheader h3
+, #subheader h4
+, #subheader h5
+, #subheader h6 {
+	margin-bottom: 0;
+	
+	font-size: 27px;
+	font-weight: 400;
+	
+	text-shadow: 1px 1px 2px rgba(0,0,0,.4);
+}
+
+
+/*------------------------------------------------------------------
+[13. Miscellaneous]
+*/
+
+.big-intro {
+	font-size: 28px;
+	line-height: 1.7em;
+	color: #888;
+	
+	padding: 25px 0;
+	
+	border: 1px dotted #CCC;	
+	border-right: none;
+	border-left: none;
+}
+
+
+
+.slash {
+	padding-right: .25em;
+	color: #81994D;
+}
+
+
+/*--------------------------------------------------------------------
+	[WHCMS]
+*/
+
+.whmcscontainer p {
+    margin-bottom: 3px;
+}
+
+.whmcscontainer h1 {
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing:-2px;
+    text-shadow: 0 0 2px #ccc;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.whmcscontainer h2 {
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing:-2px;
+    text-shadow: 0 0 2px #ccc;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.whmcscontainer h3 {
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing:-1px;
+    text-shadow: 0 0 2px #ccc;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.whmcscontainer h1 small, .whmcscontainer h2 small, .whmcscontainer h3 small {
+    letter-spacing: -1px;
+    text-shadow: 0 0 0;
+    font-weight: 500;
+}
+
+
+.whmcscontainer {
+    max-width: 96%;
+    margin: 0 auto;
+}
+
+.whmcscontainer .contentpadded {
+    padding: 15px;
+}
+
+.whmcscontainer img {
+    vertical-align: top;
+    border: 0;
+}
+
+
+
+.whmcscontainer .page-header {
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 17px;
+}
+
+.whmcscontainer .error ul {
+    margin: 10px 0 10px 30px;
+}
+
+.whmcscontainer .error ul li {
+    color: #fff;
+}
+
+.footerdivider {
+    border-top: 1px solid #e8e8e8;
+}
+
+.whmcscontainer .footer {
+    margin: 0;
+    padding: 15px;
+    font-family: Tahoma;
+    font-size: 11px;
+    background-color: #efefef;
+    color: #666;
+}
+
+.whmcscontainer .footer #languagefrm select {
+    margin: 0 0 0 5px;
+    padding: 4px;
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #666;
+    height: 25px;
+    line-height: 25px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.whmcscontainer .footer #copyright {
+    float: right;
+    line-height: 24px;
+}
+
+
+
+
+.whmcscontainer .footer {
+    background-color: #fff;
+}
+
+/* Containers */
+
+.whmcscontainer .col4 {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+}
+
+.whmcscontainer .col2half {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 50%;
+}
+
+.whmcscontainer .col30 {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 30%;
+}
+
+.whmcscontainer .col40 {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 40%;
+}
+
+.whmcscontainer .col60 {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 60%;
+}
+
+.whmcscontainer .col70 {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 70%;
+}
+
+.whmcscontainer .center80 {
+    margin: 0 auto;
+    padding: 0;
+    width: 80%;
+}
+
+.whmcscontainer .row {
+    margin: 0;
+    padding: 0 0 15px 0;
+}
+
+.whmcscontainer .row .multicol {
+    float: left;
+    margin: 0 50px 0 0;
+}
+
+.whmcscontainer .internalpadding {
+    padding: 5px;
+}
+
+.whmcscontainer .halfwidthcontainer {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.whmcscontainer .logincontainer {
+    width: 280px;
+    margin: 0 auto 100px auto;
+}
+
+.whmcscontainer fieldset.onecol label {
+    color: #404040;
+    float: left;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: right;
+    width: 225px;
+}
+
+.whmcscontainer fieldset.onecol .inputs-list label {
+    float: none;
+    width: auto;
+    line-height: 18px;
+    padding: 0;
+    text-align: left;
+    white-space: normal;
+}
+
+.whmcscontainer fieldset.onecol div.input {
+    margin-left: 245px;
+}
+
+
+.whmcscontainer label.full {
+    float: none;
+    text-align: left;
+    width: auto;
+}
+
+.whmcscontainer .alert-message.error a, .whmcscontainer .alert-message.success a, .whmcscontainer .alert-message.info a {
+    color: #fff;
+    text-decoration: underline;
+}
+.whmcscontainer .alert-message.error a:hover, .whmcscontainer .alert-message.success a:hover, .whmcscontainer .alert-message.info a:hover {
+    text-decoration: none;
+}
+.whmcscontainer .alert-message.block-message.warning a, .whmcscontainer .alert-message.block-message.error a, .whmcscontainer .alert-message.block-message.success a, .whmcscontainer .alert-message.block-message.info a {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* Login */
+
+.whmcscontainer .loginbtn {
+    display: inline;
+}
+.whmcscontainer .rememberme {
+    display: inline;
+    padding: 0 0 0 20px;
+}
+.whmcscontainer .rememberme label {
+    display: inline;
+}
+
+/* Announcements */
+
+.whmcscontainer .tweetbutton {
+    float: right;
+    margin: 0 0 20px 30px;
+}
+
+/* Password Strength */
+
+.whmcscontainer #pwstrengthbox {
+    width: 200px;
+    border: 1px solid #ccc;
+    line-height: 28px;
+    text-align: center;
+    background-color: #fff;
+    color: #9A9A9A;
+    font-weight: normal;
+}
+
+.whmcscontainer #pwstrengthbox.strong {
+    background-color: #33CC00;
+    border: 1px solid #289F00;
+    color: #fff;
+    font-weight: bold;
+}
+
+.whmcscontainer #pwstrengthbox.moderate {
+    background-color: #ff6600;
+    border: 1px solid #C44F00;
+    color: #fff;
+    font-weight: bold;
+}
+
+.whmcscontainer #pwstrengthbox.weak {
+    background-color: #cc0000;
+    border: 1px solid #9D0000;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* New styles below */
+
+label.valid {
+  width: 24px;
+  /*height: 24px;
+  background: url(images/valid.png) center center no-repeat;*/
+  display: inline-block;
+  text-indent: -9999px;
+}
+label.error {
+	font-weight: bold;
+	color: red;
+	padding: 2px 8px;
+	margin-top: 2px;
+}
+
+.pqmpbanner {
+padding: 10px;
+margin-bottom: 10px;
+background: #87e0fd; /* Old browsers */
+background: -moz-linear-gradient(top,  #87e0fd 78%, #05abe0 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(78%,#87e0fd), color-stop(100%,#05abe0)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #87e0fd 78%,#05abe0 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #87e0fd 78%,#05abe0 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #87e0fd 78%,#05abe0 100%); /* IE10+ */
+background: linear-gradient(top,  #87e0fd 78%,#05abe0 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=0 ); /* IE6-9 */
+
+}
+
+#tabs { margin-top: 1em; }
+#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+#add_tab { cursor: pointer; }

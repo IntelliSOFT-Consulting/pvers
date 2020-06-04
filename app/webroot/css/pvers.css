@@ -1,0 +1,225 @@
+
+
+/* Body and structure
+-------------------------------------------------- */
+body {
+    padding-top: 60px;
+    /*padding-bottom: 40px;*/
+}
+.sidebar-nav {
+	padding: 9px 0;
+}
+
+@media (max-width: 980px) {
+	/* Enable use of floated navbar text */
+	.navbar-text.pull-right {
+		float: none;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+}
+
+.navbar-default .navbar-inner {
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d6dbbf+0,feffe8+100 */
+background: #d6dbbf; /* Old browsers */
+background: -moz-linear-gradient(top,  #d6dbbf 0%, #feffe8 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #d6dbbf 0%,#feffe8 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #d6dbbf 0%,#feffe8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6dbbf', endColorstr='#feffe8',GradientType=0 ); /* IE6-9 */
+}
+
+.navbar-admin .navbar-inner {
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d6dbbf+0,feffe8+100 */
+background: #d6dbbf; /* Old browsers */
+background: -moz-linear-gradient(top,  #d6dbbf 0%, #feffe8 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #d6dbbf 0%,#feffe8 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #d6dbbf 0%,#feffe8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6dbbf', endColorstr='#feffe8',GradientType=0 ); /* IE6-9 */
+}
+
+.navbar-manager .navbar-inner {
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ebd7ed+0,feffe8+100 */
+background: #ebd7ed; /* Old browsers */
+background: -moz-linear-gradient(top,  #ebd7ed 0%, #feffe8 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ebd7ed 0%,#feffe8 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ebd7ed 0%,#feffe8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebd7ed', endColorstr='#feffe8',GradientType=0 ); /* IE6-9 */
+}
+
+.navbar-reporter .navbar-inner {
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#98bede+0,deefff+100 */
+background: #98bede; /* Old browsers */
+background: -moz-linear-gradient(top,  #98bede 0%, #deefff 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #98bede 0%,#deefff 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #98bede 0%,#deefff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#98bede', endColorstr='#deefff',GradientType=0 ); /* IE6-9 */
+}
+
+.navbar-partner .navbar-inner {
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#9ee8fa+0,d6f9ff+100 */
+background: #9ee8fa; /* Old browsers */
+background: -moz-linear-gradient(top,  #9ee8fa 0%, #d6f9ff 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #9ee8fa 0%,#d6f9ff 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #9ee8fa 0%,#d6f9ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ee8fa', endColorstr='#d6f9ff',GradientType=0 ); /* IE6-9 */
+}
+
+  .custom-combobox {
+    position: relative;
+    display: inline-block;
+  }
+  .custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+  }
+  .custom-combobox-input {
+    margin: 0;
+    padding: 5px 10px;
+  }
+
+/*Footer*/
+.context-dark, .bg-gray-dark, .bg-primary {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-classic a, .footer-classic a:focus, .footer-classic a:active {
+    color: #ffffff;
+}
+.nav-list li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.nav-list li a:hover:before {
+    margin-left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.social-inner ul, .social-inner ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.social-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 23px;
+    font: 900 13px/1 "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+.social-container .col {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.nav-list li a:before {
+    content: "\f14f";
+    font: 400 21px/1 "Material Design Icons";
+    color: #4d6de6;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: -28px;
+    margin-right: 7px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .22s ease;
+}
+
+.footer-default {
+  background: #37462d;
+}
+.footer-reporter {
+  background: #35354b;
+}
+.footer-manager {
+  background: #354b48;
+}
+.footer-admin {
+  background: #061e1b;
+}
+.footer-partner {
+  background: #512915;
+}
+
+/* Forms
+-------------------------------------------------- */
+.formback {
+  background-color: #FFFD77;
+  border: 2px solid #3E58A7;
+  border-radius: 7px;
+}
+
+.formbackp {
+  background-color: #FCC2E7;
+  border: 2px solid #3E58A7;
+  border-radius: 7px;
+}
+
+.formbacka {
+  background-color: #f9f9f4;
+  border: 2px solid #3E58A7;
+  border-radius: 7px;
+}
+
+.formbackd {
+  background-color: #CCFFCC;
+  border: 2px solid #3E58A7;
+  border-radius: 7px;
+}
+
+.formbackm {
+  background-color: #CCECFF;
+  border: 2px solid #3E58A7;
+  border-radius: 7px;
+}
+
+.formbackt {
+  background-color: #FFFFCC;
+  border: 2px solid #3E58A7;
+  border-radius: 7px;
+}
+
+.accordion-toggle {
+    cursor: pointer;
+}
+form .required {
+  font-weight: bold;
+}
+
+form .required label:after {
+  color: #ED1D24;
+  /*content: '*';*/
+  display:inline;
+}
+
+p.error {
+  color: #b94a48;
+}
+
+p.tablenums {
+  color: #BEBEC5; 
+  text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.center-pills {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    color: #ffffff;
+    background-color: #82991a;
+}
+
+.form-horizontal .help-block {
+  font-weight: normal;
+  color: #C09853;
+    margin-bottom: 0;
+    margin-top: 2px;
+}

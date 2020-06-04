@@ -67,6 +67,21 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::load('DebugKit'); // Loads a single plugin named DebugKit
  */
 
+CakePlugin::load('DebugKit');
+CakePlugin::load('AclExtras');
+CakePlugin::load('Utils');
+CakePlugin::load('Search');
+// CakePlugin::load(array('CakeResque' => array('bootstrap' => true))); 
+CakePlugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
+CakePlugin::load('Media', array('bootstrap'=>true));
+// require APP . 'Plugin' . DS . 'Media' . DS . 'Config' . DS . 'bootstrap.php';
+CakePlugin::load('CsvView');
+CakePlugin::load('Shim', ['bootstrap' => true]);
+CakePlugin::load('Tools', ['bootstrap' => true]);
+CakePlugin::load('Queue');
+
+/**
+
 /**
  * To prefer app translation over plugin translation, you can set
  *

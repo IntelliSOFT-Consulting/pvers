@@ -1,0 +1,68 @@
+1,"","",\N,\N,\N
+2,"oral","oral","048",\N,\N
+3,"intravenous drip","intravenous drip","041",\N,\N
+4,"intravenous bolus","intravenous bolus","040",\N,\N
+5,"subcutaneous","subcutaneous","058",\N,\N
+6,"nasal","nasal","045",\N,\N
+7,"sublingual","sublingual","060",\N,\N
+8,"topical","topical","061",\N,\N
+9,"rectal","rectal","054",\N,\N
+10,"intra-articular","intra-articular","014",\N,\N
+11,"intrathecal","intrathecal","037",\N,\N
+12,"intra-arterial","intra-arterial","013",\N,\N
+13,"auricular (otic)","auricular (otic)","001",\N,\N
+14,"buccal","buccal","002",\N,\N
+15,"cutaneous","cutaneous","003",\N,\N
+16,"dental","dental","004",\N,\N
+17,"endocervical","endocervical","005",\N,\N
+18,"endosinusial","endosinusial","006",\N,\N
+19,"endotracheal","endotracheal","007",\N,\N
+20,"epidural","epidural","008",\N,\N
+21,"extra-amniotic","extra-amniotic","009",\N,\N
+22,"hemodialysis","hemodialysis","010",\N,\N
+23,"intra corpus cavernosum","intra corpus cavernosum","011",\N,\N
+24,"intra-amniotic","intra-amniotic","012",\N,\N
+25,"intracardiac","intracardiac","016",\N,\N
+26,"intracavernous","intracavernous","017",\N,\N
+27,"intracerebral","intracerebral","018",\N,\N
+28,"intracervical","intracervical","019",\N,\N
+29,"intracisternal","intracisternal","020",\N,\N
+30,"intracorneal","intracorneal","021",\N,\N
+31,"intracoronary","intracoronary","022",\N,\N
+32,"intradermal","intradermal","023",\N,\N
+33,"intradiscal (intraspinal)","intradiscal (intraspinal)","024",\N,\N
+34,"intrahepatic","intrahepatic","025",\N,\N
+35,"intralesional","intralesional","026",\N,\N
+36,"intralymphatic","intralymphatic","027",\N,\N
+37,"intramedullar (bone marrow)","intramedullar (bone marrow)","028",\N,\N
+38,"intrameningeal","intrameningeal","029",\N,\N
+39,"intramuscular","intramuscular","030",\N,\N
+40,"intraocular","intraocular","031",\N,\N
+41,"intrapericardial","intrapericardial","032",\N,\N
+42,"intraperitoneal","intraperitoneal","033",\N,\N
+43,"intrapleural","intrapleural","034",\N,\N
+44,"intrasynovial","intrasynovial","035",\N,\N
+45,"intrathoracic","intrathoracic","038",\N,\N
+46,"intratracheal","intratracheal","039",\N,\N
+47,"intratumor","intratumor","036",\N,\N
+48,"intra-uterine","intra-uterine","015",\N,\N
+49,"intravenous (nos)","intravenous (nos)","042",\N,\N
+50,"intravesical","intravesical","043",\N,\N
+51,"iontophoresis","iontophoresis","044",\N,\N
+52,"occlusive dressing technique","occlusive dressing technique","046",\N,\N
+53,"ophthalmic","ophthalmic","047",\N,\N
+54,"oropharingeal","oropharingeal","049",\N,\N
+55,"other","other","050",\N,\N
+56,"parenteral","parenteral","051",\N,\N
+57,"periarticular","periarticular","052",\N,\N
+58,"perineural","perineural","053",\N,\N
+59,"respiratory (inhalation)","respiratory (inhalation)","055",\N,\N
+60,"retrobulbar","retrobulbar","056",\N,\N
+61,"subdermal","subdermal","059",\N,\N
+62,"sunconjunctival","sunconjunctival","057",\N,\N
+63,"transdermal","transdermal","062",\N,\N
+64,"transmammary","transmammary","063",\N,\N
+65,"transplacental","transplacental","064",\N,\N
+66,"unknown","unknown","065",\N,\N
+67,"urethral","urethral","066",\N,\N
+68,"vaginal","vaginal","067",\N,\N
