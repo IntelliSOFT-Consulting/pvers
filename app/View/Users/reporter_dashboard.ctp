@@ -33,8 +33,8 @@
                     <?php
                       echo '<ol>';
                       foreach ($aefis as $aefi) {
-                        if($aefi['Aefi']['submitted'] < 1) {
-                            echo $this->Html->link('<li>'.$aefi['Aefi']['created'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'aefis', 'action' => 'edit', $aefi['Aefi']['id']),
+                        if($aefi['Aefi']['submitted'] > 1) {
+                            echo $this->Html->link('<li>'.$aefi['Aefi']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'aefis', 'action' => 'edit', $aefi['Aefi']['id']),
                               array('escape' => false));   
                         } else {
                             echo $this->Html->link('<li>'.$aefi['Aefi']['reference_no'].'</li>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
@@ -50,8 +50,8 @@
                     <?php
                       echo '<ol>';
                       foreach ($pqmps as $pqmp) {
-                        if($pqmp['Pqmp']['submitted'] < 1) {
-                            echo $this->Html->link('<li>'.$pqmp['Pqmp']['created'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id']),
+                        if($pqmp['Pqmp']['submitted'] > 1) {
+                            echo $this->Html->link('<li>'.$pqmp['Pqmp']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id']),
                               array('escape' => false));   
                         } else {
                             echo $this->Html->link('<li>'.$pqmp['Pqmp']['reference_no'].'</li>', array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id']),
@@ -70,7 +70,7 @@
                   <?php
                     echo '<ol>';
                     foreach ($devices as $device) {
-                      if($device['Device']['submitted'] < 1) {
+                      if($device['Device']['submitted'] > 1) {
                           echo $this->Html->link('<li>'.$device['Device']['report_title'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'devices', 'action' => 'edit', $device['Device']['id']),
                             array('escape' => false));   
                       } else {
@@ -87,8 +87,8 @@
                     <?php
                       echo '<ol>';
                       foreach ($medications as $medication) {
-                        if($medication['Medication']['submitted'] < 1) {
-                            echo $this->Html->link('<li>'.$medication['Medication']['created'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'medications', 'action' => 'edit', $medication['Medication']['id']),
+                        if($medication['Medication']['submitted'] > 1) {
+                            echo $this->Html->link('<li>'.$medication['Medication']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'medications', 'action' => 'edit', $medication['Medication']['id']),
                               array('escape' => false));   
                         } else {
                             echo $this->Html->link('<li>'.$medication['Medication']['reference_no'].'</li>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
@@ -104,8 +104,8 @@
                     <?php
                       echo '<ol>';
                       foreach ($transfusions as $transfusion) {
-                        if($transfusion['Transfusion']['submitted'] < 1) {
-                            echo $this->Html->link('<li>'.$transfusion['Transfusion']['created'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'transfusions', 'action' => 'edit', $transfusion['Transfusion']['id']),
+                        if($transfusion['Transfusion']['submitted'] > 1) {
+                            echo $this->Html->link('<li>'.$transfusion['Transfusion']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'transfusions', 'action' => 'edit', $transfusion['Transfusion']['id']),
                               array('escape' => false));   
                         } else {
                             echo $this->Html->link('<li>'.$transfusion['Transfusion']['reference_no'].'</li>', array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),

@@ -497,7 +497,7 @@ class AefisController extends AppController {
         }
         $aefi = $this->Aefi->read(null, $id);
         if ($aefi['Aefi']['submitted'] > 1) {
-                $this->Session->setFlash(__('The sae has been submitted'), 'alerts/flash_info');
+                $this->Session->setFlash(__('The AEFI has been submitted'), 'alerts/flash_info');
                 $this->redirect(array('action' => 'view', $this->Aefi->id));
         }
         if ($aefi['Aefi']['user_id'] !== $this->Auth->user('id')) {

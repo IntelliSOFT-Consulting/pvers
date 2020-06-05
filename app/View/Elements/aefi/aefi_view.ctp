@@ -30,7 +30,7 @@
 						<td style="width: 25%;">INSTITUTION NAME</td>
 						<td style="width: 45%;"><strong><?php echo $aefi['Aefi']['name_of_institution'] ?></strong></td>
 						<td style="width: 15%;">REPORT ID: </td>
-						<td style="width: 15%;"><strong><?php echo $aefi['Aefi']['id'] ?></strong></td>
+						<td style="width: 15%;"><strong><?php echo $aefi['Aefi']['reference_no'] ?></strong></td>
 					</tr>
 				</table>
 				<table style="width: 100%;">
