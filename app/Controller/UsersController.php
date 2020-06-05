@@ -384,7 +384,7 @@ class UsersController extends AppController {
 
         $transfusions = $this->User->Transfusion->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Transfusion.id','Transfusion.user_id', 'Transfusion.submitted', 'Transfusion.created', 'Transfusion.created'),
+            'fields' => array('Transfusion.id','Transfusion.user_id', 'Transfusion.reference_no', 'Transfusion.submitted', 'Transfusion.created', 'Transfusion.created'),
             'order' => array('Transfusion.created' => 'desc'),
             'conditions' => array('Transfusion.user_id' => $this->Auth->User('id')),
         ));
