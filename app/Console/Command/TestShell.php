@@ -1,5 +1,4 @@
 <?php
-App::uses('String', 'Utility');
 App::uses('Sanitize', 'Utility');
 App::uses('Router', 'Routing');
 config('routes');

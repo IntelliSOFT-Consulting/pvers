@@ -97,9 +97,7 @@ class QueueGenericEmailTask extends QueueTask {
         $Email->emailFormat('html');
         $Email->to($data['email']);
 
-        // $Email->subject(String::insert($messages['Message']['subject'], $variables));
         $Email->subject($data['subject']);
-        // $Email->viewVars(array('message' => String::insert($messages['Message']['content'], $variables)));
         $Email->viewVars(array('message' => $data['message']));
         $this->log($Email, 'generic-email');
         if(!$Email->send()) {

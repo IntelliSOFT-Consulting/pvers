@@ -1,7 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
-App::uses('String', 'Utility');
+App::uses('CakeText', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
 
@@ -527,8 +527,8 @@ class AefisController extends AppController {
                     $datum = array(
                         'email' => $aefi['Aefi']['reporter_email'],
                         'id' => $id, 'user_id' => $this->Auth->User('id'), 'type' => 'reporter_aefi_submit', 'model' => 'Aefi',
-                        'subject' => String::insert($message['Message']['subject'], $variables),
-                        'message' => String::insert($message['Message']['content'], $variables)
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
                       );
 
                     $this->loadModel('Queue.QueuedTask');
@@ -550,8 +550,8 @@ class AefisController extends AppController {
                       $datum = array(
                         'email' => $user['User']['email'],
                         'id' => $id, 'user_id' => $user['User']['id'], 'type' => 'reporter_aefi_submit', 'model' => 'Aefi',
-                        'subject' => String::insert($message['Message']['subject'], $variables),
-                        'message' => String::insert($message['Message']['content'], $variables)
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
                       );
 
                       $this->QueuedTask->createJob('GenericEmail', $datum);

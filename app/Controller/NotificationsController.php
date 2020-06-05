@@ -1,6 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-App::uses('String', 'Utility');
+App::uses('CakeText', 'Utility');
 App::uses('Sanitize', 'Utility');
 App::uses('Router', 'Routing');
 config('routes');
@@ -165,7 +165,7 @@ class NotificationsController extends AppController {
 			'model' => 'Application',
 			'foreign_key' => $review['Review']['application_id'],
 			'title' => $messages['reviewer_new_application_subject'].' '.$variables['protocol_no'],
-			'system_message' => String::insert($messages['reviewer_new_application'], $variables),
+			'system_message' => CakeText::insert($messages['reviewer_new_application'], $variables),
 			'user_message' => $review['Review']['text'],
 			),
 		);

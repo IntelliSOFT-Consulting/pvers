@@ -1,5 +1,4 @@
 <?php
-App::uses('String', 'Utility');
 App::uses('Sanitize', 'Utility');
 App::uses('Router', 'Routing');
 config('routes');
@@ -24,9 +23,7 @@ class GenericEmailShell extends Shell {
         $Email->emailFormat('html');
         $Email->to($this->args[0]['email']);
 
-        // $Email->subject(String::insert($messages['Message']['subject'], $variables));
         $Email->subject($this->args[0]['subject']);
-        // $Email->viewVars(array('message' => String::insert($messages['Message']['content'], $variables)));
         $Email->viewVars(array('message' => $this->args[0]['message']));
         $this->log($Email, 'generic-email');
         if(!$Email->send()) {

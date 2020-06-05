@@ -1,7 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('Validation', 'Utility');
-App::uses('String', 'Utility');
+App::uses('CakeText', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
 /**
@@ -119,8 +119,8 @@ class UsersController extends AppController {
 				$datum = array(
 					'email' => $user['User']['email'],
 					'id' => $user['User']['id'], 'user_id' => $user['User']['id'], 'type' => 'user_registration', 'model' => 'User',
-					'subject' => String::insert($user_email['Message']['subject'], $variables),
-					'message' => String::insert($user_email['Message']['content'], $variables)
+					'subject' => CakeText::insert($user_email['Message']['subject'], $variables),
+					'message' => CakeText::insert($user_email['Message']['content'], $variables)
 				);
 				// In your controller
 				$this->loadModel('Queue.QueuedTask');
@@ -249,7 +249,6 @@ class UsersController extends AppController {
  */
 
 	public function register() {
-
         if ($this->request->is('post')) {
             $this->User->create();
             $this->request->data['User']['group_id'] = 3;
@@ -272,8 +271,8 @@ class UsersController extends AppController {
 				$datum = array(
 					'email' => $user['User']['email'],
 					'id' => $id, 'user_id' => $user['User']['id'], 'type' => 'user_registration', 'model' => 'User',
-					'subject' => String::insert($user_email['Message']['subject'], $variables),
-					'message' => String::insert($user_email['Message']['content'], $variables)
+					'subject' => CakeText::insert($user_email['Message']['subject'], $variables),
+					'message' => CakeText::insert($user_email['Message']['content'], $variables)
 				);
 				// In your controller
 				$this->loadModel('Queue.QueuedTask');
@@ -296,8 +295,8 @@ class UsersController extends AppController {
                     $datum = array(
 						'email' => $user['User']['email'],
 						'id' => $manager['User']['id'], 'user_id' => $manager['User']['id'], 'type' => 'manager_registration', 'model' => 'User',
-						'subject' => String::insert($manager_nt['Message']['subject'], $variables),
-						'message' => String::insert($manager_nt['Message']['content'], $variables)
+						'subject' => CakeText::insert($manager_nt['Message']['subject'], $variables),
+						'message' => CakeText::insert($manager_nt['Message']['content'], $variables)
 					);
 
 					$this->QueuedTask->createJob('GenericNotification', $datum);
