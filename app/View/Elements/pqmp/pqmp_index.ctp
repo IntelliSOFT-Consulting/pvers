@@ -7,14 +7,14 @@
     
   <?php
     echo $this->Session->flash();
-    if ($redir == 'applicant') {
+    if ($redir == 'reporter') {
   ?>
   <div class="row-fluid">
     <div class="span12">
     <?php
-      echo $this->Html->link('<i class="icon-file"></i> New PQMP',
-               array('controller' => 'applications', 'action' => 'index'),
-               array('escape' => false, 'class' => 'btn btn-success',  'style'=>'margin-right: 10px;'));
+      echo $this->Html->link('<i class="fa fa-file-o" aria-hidden="true"></i> New PQMP',
+               array('controller' => 'pqmps', 'action' => 'add'),
+               array('escape' => false, 'class' => 'btn btn-success'));
     ?>
     </div>
   </div>
@@ -121,20 +121,28 @@
         <td>
           <?php 
             // echo h($pqmp['Pqmp']['reference_no']); 
-            echo $this->Html->link($pqmp['Pqmp']['reference_no'], array('action' => 'view', $pqmp['Pqmp']['id']), array('escape'=>false));
+            if($pqmp['Pqmp']['submitted'] > 1) {
+              echo $this->Html->link($pqmp['Pqmp']['reference_no'], array('action' => 'view', $pqmp['Pqmp']['id']), array('escape'=>false));
+            } else {
+              echo $this->Html->link($pqmp['Pqmp']['reference_no'], array('action' => 'edit', $pqmp['Pqmp']['id']), array('escape'=>false));
+            }
         ?>&nbsp;</td>
         <td><?php echo h($pqmp['Pqmp']['brand_name']); 
               ?>&nbsp;
         </td>
         <td><?php echo h($pqmp['Pqmp']['created']); ?>&nbsp;</td>
         <td class="actions">
-            <?php if($pqmp['Pqmp']['submitted'] > 1) echo $this->Html->link(__('<label class="label label-info">View</label>'), array('action' => 'view', $pqmp['Pqmp']['id']), array('escape' => false)); ?>
-            <?php if($redir === 'applicant' && $pqmp['Pqmp']['submitted'] < 1) echo $this->Html->link(__('<label class="label label-success">Edit</label>'), array('action' => 'edit', $pqmp['Pqmp']['id']), array('escape' => false)); ?>
-            <?php
-              if($pqmp['Pqmp']['submitted'] < 1 && $redir === 'applicant') {
-                echo $this->Form->postLink(__('<label class="label label-important">Delete</label>'), array('action' => 'delete', $pqmp['Pqmp']['id'], 1), array('escape' => false), __('Are you sure you want to delete # %s?', $pqmp['Pqmp']['id']));
-              } 
-            ?>            
+          <?php 
+              if($pqmp['Pqmp']['submitted'] > 1) {
+                echo $this->Html->link('<span class="label label-info tooltipper" title="View"><i class="fa fa-eye" aria-hidden="true"></i> View </span>',
+                  array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id']),
+                  array('escape' => false));
+              } else {
+                echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>' ,
+                  array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id']),
+                  array('escape' => false));
+              }
+            ?>        
         </td>
     </tr>
 <?php endforeach; ?>
@@ -145,7 +153,6 @@
 
 <script type="text/javascript">
 $(function() {
-  $(".morecontent").expander();
   var adates = $('#PqmpStartDate, #PqmpEndDate').datepicker({
           minDate:"-100Y",
           maxDate:"-0D",

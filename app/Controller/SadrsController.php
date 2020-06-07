@@ -72,7 +72,7 @@ class SadrsController extends AppController {
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
-          $this->csv_export($this->Sae->find('all', 
+          $this->csv_export($this->Sadr->find('all', 
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
@@ -137,6 +137,20 @@ class SadrsController extends AppController {
 			$this->response->download('SADRS_'.date('Y_m_d_His'));
 		}
 		$this->set('sadrs', $this->paginate());
+    }
+
+    private function csv_export($csadrs = ''){
+        //todo: check if data exists in $users
+        $_serialize = 'csadrs';
+        $_header = array('Id', 'Reference Number', 
+            'Created',
+            );
+        $_extract = array('Sadr.id', 'Sadr.reference_no', 
+            'Sadr.created');
+
+        $this->response->download('SADRS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact('csadrs', '_serialize', '_header', '_extract'));
     }
 
 	public function institutionCodes() {

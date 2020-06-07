@@ -57,7 +57,7 @@ class TransfusionsController extends AppController {
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
-          $this->csv_export($this->Sae->find('all', 
+          $this->csv_export($this->Transfusion->find('all', 
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
@@ -66,6 +66,19 @@ class TransfusionsController extends AppController {
         $this->set('transfusions', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    private function csv_export($ctransfusions = ''){
+        //todo: check if data exists in $users
+        $_serialize = 'ctransfusions';
+        $_header = array('Id', 'Reference Number', 
+            'Created',
+            );
+        $_extract = array('Transfusion.id', 'Transfusion.reference_no', 
+            'Transfusion.created');
+
+        $this->response->download('TRANSFUSIONS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact('ctransfusions', '_serialize', '_header', '_extract'));
+    }
 /**
  * view method
  *

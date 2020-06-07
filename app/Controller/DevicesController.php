@@ -67,7 +67,7 @@ class DevicesController extends AppController {
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
-          $this->csv_export($this->Sae->find('all', 
+          $this->csv_export($this->Device->find('all', 
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
@@ -128,6 +128,20 @@ class DevicesController extends AppController {
         $this->set('devices', $this->paginate());
     }
 
+    private function csv_export($cdevices = ''){
+        //todo: check if data exists in $users
+        $_serialize = 'cdevices';
+        $_header = array('Id', 'Reference Number', 
+            'Created',
+            );
+        $_extract = array('Device.id', 'Device.reference_no', 
+            'Device.created');
+
+        $this->response->download('DEVICES_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact('cdevices', '_serialize', '_header', '_extract'));
+    }
+    
     public function institutionCodes() {
         if($this->Auth->user('institution_code')) {
             $this->Device->recursive = -1;

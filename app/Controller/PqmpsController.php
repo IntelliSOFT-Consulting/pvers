@@ -52,7 +52,7 @@ class PqmpsController extends AppController {
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
-          $this->csv_export($this->Sae->find('all', 
+          $this->csv_export($this->Pqmps->find('all', 
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
@@ -110,6 +110,20 @@ class PqmpsController extends AppController {
 		$this->set('pqmps', $this->paginate());
     }
 
+    private function csv_export($cpqmps = ''){
+        //todo: check if data exists in $users
+        $_serialize = 'cpqmps';
+        $_header = array('Id', 'Reference Number', 
+            'Created',
+            );
+        $_extract = array('Pqmp.id', 'Pqmp.reference_no', 
+            'Pqmp.created');
+
+        $this->response->download('PQMPS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact('cpqmps', '_serialize', '_header', '_extract'));
+    }
+    
 /**
  * view method
  *

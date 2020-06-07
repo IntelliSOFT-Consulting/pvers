@@ -205,16 +205,18 @@
 								<td><?php echo h($sadr['Sadr']['report_title']); ?>&nbsp;</td>
 								<td><?php echo h($sadr['Sadr']['created']); ?>&nbsp;</td>
 								<td>
-									<?php
-									if($sadr['Sadr']['submitted'] < 1) {
-										echo $this->Html->link('<span class="label label-info tooltipper" title="Edit"><i class="icon-pencil icon-white"></i>Edit </span>' ,
-											array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
-											array('escape' => false, 'target' => '_blank'));
-									} else {
-										echo $this->Html->link('<span class="label label-success tooltipper" title="View"><i class="icon-plus-sign icon-white"></i>View </span>',
+								  <?php
+									if($sadr['Sadr']['submitted'] > 1) {
+										echo $this->Html->link('<span class="label label-primary tooltipper" title="View"><i class="icon-plus-sign icon-white"></i>View </span>',
 											array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
 											array('escape' => false, 'target' => '_blank'));
-									}?>&nbsp;
+									} else {
+										echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="icon-pencil icon-white"></i>Edit </span>' ,
+											array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
+											array('escape' => false, 'target' => '_blank'));
+									}
+								  ?>
+									&nbsp;
 								</td>
 							</tr>
 						<?php endforeach; ?>

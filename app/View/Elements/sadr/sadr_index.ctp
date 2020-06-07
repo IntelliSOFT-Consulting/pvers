@@ -7,14 +7,14 @@
     
   <?php
     echo $this->Session->flash();
-    if ($redir == 'applicant') {
+    if ($redir == 'reporter') {
   ?>
   <div class="row-fluid">
     <div class="span12">
     <?php
-      echo $this->Html->link('<i class="icon-file"></i> New SADR/SUSAR',
-               array('controller' => 'applications', 'action' => 'index'),
-               array('escape' => false, 'class' => 'btn btn-success',  'style'=>'margin-right: 10px;'));
+      echo $this->Html->link('<i class="fa fa-file-o" aria-hidden="true"></i> New SADR',
+               array('controller' => 'sadrs', 'action' => 'add'),
+               array('escape' => false, 'class' => 'btn btn-success'));
     ?>
     </div>
   </div>
@@ -49,7 +49,7 @@
               <?php
                 echo $this->Form->input('start_date',
                   array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
-                      'label' => array('class' => 'required', 'text' => 'SADR/SUSAR Create Dates'), 'placeHolder' => 'Start Date'));
+                      'label' => array('class' => 'required', 'text' => 'SADR Create Dates'), 'placeHolder' => 'Start Date'));
                 echo $this->Form->input('end_date',
                   array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index',
                        'after' => '<a style="font-weight:normal" onclick="$(\'.unauthorized_index\').val(\'\');" >
@@ -121,8 +121,12 @@
         <td><?php echo h($sadr['Sadr']['id']); ?>&nbsp;</td>
         <td>
           <?php 
-            // echo h($sadr['Sadr']['reference_no']); 
-            echo $this->Html->link($sadr['Sadr']['reference_no'], array('action' => 'view', $sadr['Sadr']['id']), array('escape'=>false));
+            // echo h($sadr['Sadr']['reference_no']);             
+            if($sadr['Sadr']['submitted'] > 1) {
+              echo $this->Html->link($sadr['Sadr']['reference_no'], array('action' => 'view', $sadr['Sadr']['id']), array('escape'=>false));
+            } else {
+              echo $this->Html->link($sadr['Sadr']['reference_no'], array('action' => 'edit', $sadr['Sadr']['id']), array('escape'=>false));
+            }
         ?>&nbsp;</td>
         <td><?php echo h($sadr['Sadr']['report_type']); 
                   if($sadr['Sadr']['report_type'] == 'Followup') {
@@ -136,13 +140,17 @@
         <td><?php echo h($sadr['Sadr']['patient_name']); ?>&nbsp;</td>
         <td><?php echo h($sadr['Sadr']['created']); ?>&nbsp;</td>
         <td class="actions">
-            <?php if($sadr['Sadr']['submitted'] > 1) echo $this->Html->link(__('<label class="label label-info">View</label>'), array('action' => 'view', $sadr['Sadr']['id']), array('escape' => false)); ?>
-            <?php if($redir === 'applicant' && $sadr['Sadr']['submitted'] < 1) echo $this->Html->link(__('<label class="label label-success">Edit</label>'), array('action' => 'edit', $sadr['Sadr']['id']), array('escape' => false)); ?>
-            <?php
-              if($sadr['Sadr']['submitted'] < 1 && $redir === 'applicant') {
-                echo $this->Form->postLink(__('<label class="label label-important">Delete</label>'), array('action' => 'delete', $sadr['Sadr']['id'], 1), array('escape' => false), __('Are you sure you want to delete # %s?', $sadr['Sadr']['id']));
-              } 
-            ?>            
+            <?php 
+              if($sadr['Sadr']['submitted'] > 1) {
+                echo $this->Html->link('<span class="label label-info tooltipper" title="View"><i class="fa fa-eye" aria-hidden="true"></i> View </span>',
+                  array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
+                  array('escape' => false));
+              } else {
+                echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>' ,
+                  array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
+                  array('escape' => false));
+              }
+            ?> 
         </td>
     </tr>
 <?php endforeach; ?>
@@ -151,10 +159,10 @@
   </div>
 </div>
 
+
 <script type="text/javascript">
 $(function() {
-  $(".morecontent").expander();
-  var adates = $('#SadrStartDate, #SadrEndDate').datepicker({
+  var adates = $('#PqmpStartDate, #PqmpEndDate').datepicker({
           minDate:"-100Y",
           maxDate:"-0D",
           dateFormat:'dd-mm-yy',
@@ -165,7 +173,7 @@ $(function() {
           changeYear:true,
           showAnim:'show',
           onSelect: function( selectedDate ) {
-            var option = this.id == "SadrStartDate" ? "minDate" : "maxDate",
+            var option = this.id == "PqmpStartDate" ? "minDate" : "maxDate",
               instance = $( this ).data( "datepicker" ),
               date = $.datepicker.parseDate(
                 instance.settings.dateFormat ||

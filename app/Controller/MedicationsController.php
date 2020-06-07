@@ -57,7 +57,7 @@ class MedicationsController extends AppController {
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
-          $this->csv_export($this->Sae->find('all', 
+          $this->csv_export($this->Medication->find('all', 
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
@@ -66,6 +66,20 @@ class MedicationsController extends AppController {
         $this->set('medications', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    private function csv_export($cmedications = ''){
+        //todo: check if data exists in $users
+        $_serialize = 'cmedications';
+        $_header = array('Id', 'Reference Number', 
+            'Created',
+            );
+        $_extract = array('Medication.id', 'Medication.reference_no', 
+            'Medication.created');
+
+        $this->response->download('MEDICATIONS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact('cmedications', '_serialize', '_header', '_extract'));
+    }
+    
 /**
  * view method
  *

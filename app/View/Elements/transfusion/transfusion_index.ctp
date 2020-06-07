@@ -7,14 +7,14 @@
     
   <?php
     echo $this->Session->flash();
-    if ($redir == 'applicant') {
+    if ($redir == 'reporter') {
   ?>
   <div class="row-fluid">
     <div class="span12">
     <?php
-      echo $this->Html->link('<i class="icon-file"></i> New TRANSFUSION',
-               array('controller' => 'applications', 'action' => 'index'),
-               array('escape' => false, 'class' => 'btn btn-success',  'style'=>'margin-right: 10px;'));
+      echo $this->Html->link('<i class="fa fa-file-o" aria-hidden="true"></i> New Blood Transfusion Reaction',
+               array('controller' => 'transfusions', 'action' => 'add'),
+               array('escape' => false, 'class' => 'btn btn-success'));
     ?>
     </div>
   </div>
@@ -120,19 +120,26 @@
         <td><?php echo h($transfusion['Transfusion']['id']); ?>&nbsp;</td>
         <td>
           <?php 
-            // echo h($transfusion['Transfusion']['reference_no']); 
-            echo $this->Html->link($transfusion['Transfusion']['reference_no'], array('action' => 'view', $transfusion['Transfusion']['id']), array('escape'=>false));
+            if($transfusion['Transfusion']['submitted'] > 1) {
+              echo $this->Html->link($transfusion['Transfusion']['reference_no'], array('action' => 'view', $transfusion['Transfusion']['id']), array('escape'=>false));
+            } else {
+              echo $this->Html->link($transfusion['Transfusion']['reference_no'], array('action' => 'edit', $transfusion['Transfusion']['id']), array('escape'=>false));
+            }
         ?>&nbsp;
         </td>
         <td><?php echo h($transfusion['Transfusion']['patient_name']); ?>&nbsp;</td>
         <td><?php echo h($transfusion['Transfusion']['created']); ?>&nbsp;</td>
         <td class="actions">
-            <?php if($transfusion['Transfusion']['submitted'] > 1) echo $this->Html->link(__('<label class="label label-info">View</label>'), array('action' => 'view', $transfusion['Transfusion']['id']), array('escape' => false)); ?>
-            <?php if($redir === 'applicant' && $transfusion['Transfusion']['submitted'] < 1) echo $this->Html->link(__('<label class="label label-success">Edit</label>'), array('action' => 'edit', $transfusion['Transfusion']['id']), array('escape' => false)); ?>
-            <?php
-              if($transfusion['Transfusion']['submitted'] < 1 && $redir === 'applicant') {
-                echo $this->Form->postLink(__('<label class="label label-important">Delete</label>'), array('action' => 'delete', $transfusion['Transfusion']['id'], 1), array('escape' => false), __('Are you sure you want to delete # %s?', $transfusion['Transfusion']['id']));
-              } 
+            <?php 
+              if($transfusion['Transfusion']['submitted'] > 1) {
+                echo $this->Html->link('<span class="label label-info tooltipper" title="View"><i class="fa fa-eye" aria-hidden="true"></i> View </span>',
+                  array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),
+                  array('escape' => false));
+              } else {
+                echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>' ,
+                  array('controller' => 'transfusions', 'action' => 'edit', $transfusion['Transfusion']['id']),
+                  array('escape' => false));
+              }
             ?>            
         </td>
     </tr>
@@ -144,7 +151,6 @@
 
 <script type="text/javascript">
 $(function() {
-  $(".morecontent").expander();
   var adates = $('#TransfusionStartDate, #TransfusionEndDate').datepicker({
           minDate:"-100Y",
           maxDate:"-0D",
