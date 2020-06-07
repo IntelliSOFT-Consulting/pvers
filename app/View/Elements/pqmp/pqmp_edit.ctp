@@ -1,30 +1,28 @@
 <?php
-	$this->assign('PQMP', 'active');
-?>
+				//echo $this->element('banner');
+		echo $this->Session->flash();
+
+		echo $this->Form->create('Pqmp', array(
+			 'type' => 'file',
+			 'class' => 'form-horizontal',
+			 'inputDefaults' => array(
+				'div' => array('class' => 'control-group'),
+				'label' => array('class' => 'control-label'),
+				'between' => '<div class="controls">',
+				'after' => '</div>',
+				'class' => '',
+				'format' => array('before', 'label', 'between', 'input', 'after','error'),
+				'error' => array('attributes' => array('class' => 'controls help-block')),
+			 ),
+		));
+	?>
+
   <!-- PQMP EDIT
 ================================================== -->
-<section id="pqmpsedit">
 	<div class="row-fluid">
-		<div class="span12">
+		<div class="span10 formbackp">
 
-			<?php
-				//echo $this->element('banner');
-				echo $this->Session->flash();
-
-				echo $this->Form->create('Pqmp', array(
-					 'type' => 'file',
-					 'class' => 'well form-horizontal formbackp',
-					 'inputDefaults' => array(
-						'div' => array('class' => 'control-group'),
-						'label' => array('class' => 'control-label'),
-						'between' => '<div class="controls">',
-						'after' => '</div>',
-						'class' => '',
-						'format' => array('before', 'label', 'between', 'input', 'after','error'),
-						'error' => array('attributes' => array('class' => 'controls help-block')),
-					 ),
-				));
-			?>
+			
 
 			<?php echo $this->Form->input('id'); ?>
 
@@ -637,56 +635,51 @@
             </div><!--/row-->
 
 			<?php echo $this->element('help/product_problems'); ?>
-
-			<div class="form-actions">
-					<div class="row-fluid">
-						<div class="span4">
-							<?php
-
-								echo $this->Form->button('Save Changes', array(
-										'name' => 'saveChanges',
-										'formnovalidate' => 'formnovalidate',
-										'class' => 'btn btn-primary mapop',
-										'id' => 'PqmpSaveChanges', 'title'=>'Save & continue editing',
-										'data-content' => 'Save changes to form without submitting it.
-																								The form will still be available for further editing.',
-										'div' => false,
-									));
-							?>
-						</div>
-						<div class="span4">
-							<?php
-
-								echo $this->Form->button('Save and Submit Report', array(
-									'name' => 'submitReport',
-									'onclick'=>"return confirm('Are you sure you wish to submit the form to PPB? You will not be able to edit it later.');",
-									'class' => 'btn btn-success mapop',
-									'id' => 'PqmpSubmitReport', 'title'=>'Save and Submit Report',
-									'data-content' => 'Save the report and submit it to the pharmacy and Poisons Board. You will also get a copy of this report.',
-									'div' => false,
-								));
-
-							?>
-						</div>
-						<div class="span4">
-							<?php
-								echo $this->Form->button('Cancel', array(
-										'name' => 'cancelReport',
-										'class' => 'btn mapop',
-										'id' => 'PqmpCancelReport', 'title'=>'Cancel form',
-										'data-content' => 'Cancel form and go back to home page.',
-										'div' => false,
-									));
-
-							?>
-						</div>
-					</div>
-				</div>
 				<?php
 					echo $this->Form->end();
 				?>
 
 		</div>
-		</div>
-	</div>
-</section>
+		<div class="span2">
+            <div class="my-sidebar" data-spy="affix" >
+            <div class="awell">
+                <?php
+                  echo $this->Form->button('<i class="fa fa-floppy-o" aria-hidden="true"></i> Save Changes', array(
+                      'name' => 'saveChanges',
+                      'class' => 'btn btn-success mapop',
+                      'formnovalidate' => 'formnovalidate',
+                      'id' => 'SadrSaveChanges', 'title'=>'Save & continue editing',
+                      'data-content' => 'Save changes to form without submitting it.
+                                                  The form will still be available for further editing.',
+                      'div' => false,
+                    ));
+                ?>
+                <br>
+                <hr>
+                <?php
+                  echo $this->Form->button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit', array(
+                      'name' => 'submitReport',
+                      'onclick'=>"return confirm('Are you sure you wish to submit the protocol review report?');",
+                      'class' => 'btn btn-primary btn-block mapop',
+                      'id' => 'SiteInspectionSubmitReport', 'title'=>'Save and Submit Report',
+                      'data-content' => 'Submit report for peer review and approval.',
+                      'div' => false,
+                    ));
+
+                ?>
+                <br>
+                <hr>
+                <?php
+                    echo $this->Form->button('<i class="fa fa-trash-o" aria-hidden="true"></i> Cancel', array(
+                            'name' => 'cancelReport',
+                            'class' => 'btn btn-danger btn-block mapop',
+                            'id' => 'SadrCancelReport', 'title'=>'Cancel form',
+                            'data-content' => 'Cancel form and go back to home page.',
+                            'div' => false,
+                        ));
+
+                ?>
+               </div>
+            </div>
+        </div>
+	 </div>

@@ -1,14 +1,5 @@
 <?php
-    $this->assign('AEFI', 'active');
-    $this->Html->script('jquery.ui.core', array('inline' => false));
-    $this->Html->script('jquery.ui.widget', array('inline' => false));
-    $this->Html->script('jquery.ui.mouse', array('inline' => false));
-    $this->Html->script('jquery.ui.draggable', array('inline' => false));
-    $this->Html->script('jquery.ui.button', array('inline' => false));
-    $this->Html->script('jquery.ui.position', array('inline' => false));
-    $this->Html->script('jquery.ui.autocomplete', array('inline' => false));
-    $this->Html->script('jquery.ui.dialog', array('inline' => false));
-    $this->Html->script('widgets', array('inline' => false));
+    $this->assign('DEV', 'active');
     $this->Html->script('device', array('inline' => false));
     $this->Html->css('jquery.datetimepicker', null, array('inline' => false));
     $this->Html->script('jquery.datetimepicker.full', array('inline' => false));
@@ -25,7 +16,7 @@
         <div class="span12">
 
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#" id="device_edit_tab1"><?php    echo 'Initial Report ID: '.$this->data['Device']['id']; ?></a></li>
+            <li class="active"><a href="#" id="device_edit_tab1"><?php    echo 'Initial Report ID: '.$this->data['Device']['reference_no']; ?></a></li>
             <!-- <li id="device_edit_tab2">Follow up Reports()</li> -->
         </ul>
 

@@ -391,7 +391,7 @@ class DevicesController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Device->create();
         $this->Device->save(['Device' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'DEVICE/'.date('Y').'/'.$count,
+            'reference_no' => 'MD/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
@@ -403,7 +403,7 @@ class DevicesController extends AppController {
             'contact' => $this->Auth->User('institution_contact'),
             'name_of_institution' => $this->Auth->User('name_of_institution')
             ]], false);
-        $this->Session->setFlash(__('The DEVICE has been created'), 'alerts/flash_success');
+        $this->Session->setFlash(__('The Medical Device Incident has been created'), 'alerts/flash_success');
         $this->redirect(array('action' => 'edit', $this->Device->id));
     }
 

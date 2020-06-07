@@ -1,19 +1,21 @@
 <?php
-                echo $this->Session->flash();
-                echo $this->Form->create('Transfusion', array(
-                    'type' => 'file',
-                    'class' => 'well form-horizontal formbackt',
-                    'inputDefaults' => array(
-                        'div' => array('class' => 'control-group'),
-                        'label' => array('class' => 'control-label required'),
-                        'between' => '<div class="controls">',
-                        'after' => '</div>',
-                        'class' => '',
-                        'format' => array('before', 'label', 'between', 'input', 'after','error'),
-                        'error' => array('attributes' => array( 'class' => 'controls help-block')),
-                     ),
-                ));
-            ?>
+        echo $this->Session->flash();
+        echo $this->Form->create('Transfusion', array(
+            'type' => 'file',
+            'class' => 'form-horizontal',
+            'inputDefaults' => array(
+                'div' => array('class' => 'control-group'),
+                'label' => array('class' => 'control-label required'),
+                'between' => '<div class="controls">',
+                'after' => '</div>',
+                'class' => '',
+                'format' => array('before', 'label', 'between', 'input', 'after','error'),
+                'error' => array('attributes' => array( 'class' => 'controls help-block')),
+             ),
+        ));
+    ?>
+    <div class="row-fluid">
+        <div class="span10 formbackt">
 
             <?php
                 echo $this->Form->input('id', array());
@@ -39,7 +41,7 @@
                 <p class="controls" id="transfusion_edit_tip"> <span class="label label-important">Tip:</span> Fields marked with <span style="color:red;">*</span> are mandatory</p>
                 </div>
                 <div class="span6" id="transfusion_edit_form_id">
-                  <h2> <?php    echo  'Form ID: '.$this->data['Transfusion']['reference_no']; ?></h2>                  
+                  <h5> <?php    echo  'Form ID: '.$this->data['Transfusion']['reference_no']; ?></h5>                  
                 </div>
             </div><!--/row-->
             
@@ -188,7 +190,7 @@
             <div class="row-fluid">
                 <div class="span6">
                     <div style="padding-left: 15px;">
-                    <div class="required"><label class="required"><strong>Type of reaction</label></div> 
+                    <div class="required"><label class="required"><strong>Type of reaction</strong></label></div> 
                     <?php
                         echo $this->Form->input('reaction_general', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
@@ -795,50 +797,51 @@
                 </div><!--/span-->
             </div><!--/row-->
 
+        </div>
+        <div class="span2">
+            <div class="my-sidebar" data-spy="affix" >
+                <div class="awell">
+                    <?php
+                      echo $this->Form->button('<i class="fa fa-floppy-o" aria-hidden="true"></i> Save Changes', array(
+                          'name' => 'saveChanges',
+                          'class' => 'btn btn-success mapop',
+                          'formnovalidate' => 'formnovalidate',
+                          'id' => 'SadrSaveChanges', 'title'=>'Save & continue editing',
+                          'data-content' => 'Save changes to form without submitting it.
+                                                      The form will still be available for further editing.',
+                          'div' => false,
+                        ));
+                    ?>
+                    <br>
+                    <hr>
+                    <?php
+                      echo $this->Form->button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit', array(
+                          'name' => 'submitReport',
+                          'onclick'=>"return confirm('Are you sure you wish to submit the protocol review report?');",
+                          'class' => 'btn btn-primary btn-block mapop',
+                          'id' => 'SiteInspectionSubmitReport', 'title'=>'Save and Submit Report',
+                          'data-content' => 'Submit report for peer review and approval.',
+                          'div' => false,
+                        ));
 
-            <div class="form-actions">
-                <div class="row-fluid">
-                    <div class="span4">
-                        <?php
+                    ?>
+                    <br>
+                    <hr>
+                    <?php
+                        echo $this->Form->button('<i class="fa fa-trash-o" aria-hidden="true"></i> Cancel', array(
+                                'name' => 'cancelReport',
+                                'class' => 'btn btn-danger btn-block mapop',
+                                'id' => 'SadrCancelReport', 'title'=>'Cancel form',
+                                'data-content' => 'Cancel form and go back to home page.',
+                                'div' => false,
+                            ));
 
-                            echo $this->Form->button('Save Changes', array(
-                                    'name' => 'saveChanges',
-                                    'formnovalidate' => 'formnovalidate',
-                                    'class' => 'btn btn-primary mapop',
-                                    'id' => 'TransfusionSaveChanges', 'title'=>'Save & continue editing',
-                                    'data-content' => 'Save changes to form without submitting it.
-                                                                                            The form will still be available for further editing.',
-                                    'div' => false,
-                                ));
-                        ?>
-                    </div>
-                    <div class="span4">
-                        <?php
-                            echo $this->Form->button('Save and Submit Report', array(
-                                    'name' => 'submitReport',
-                                    'onclick'=>"return confirm('Are you sure you wish to submit the form to PPB? You will not be able to edit it later.');",
-                                    'class' => 'btn btn-success mapop',
-                                    'id' => 'TransfusionSubmitReport', 'title'=>'Save and Submit Report',
-                                    'data-content' => 'Save the report and submit it to the Pharmacy and Poisons Board. You will also get a copy of this report.',
-                                    'div' => false,
-                                ));
-
-                        ?>
-                    </div>
-                    <div class="span4">
-                        <?php
-                            echo $this->Form->button('Cancel', array(
-                                    'name' => 'cancelReport',
-                                    'class' => 'btn mapop',
-                                    'id' => 'TransfusionCancelReport', 'title'=>'Cancel form',
-                                    'data-content' => 'Cancel form and go back to home page.',
-                                    'div' => false,
-                                ));
-
-                        ?>
-                    </div>
+                    ?>
+                   </div>
                 </div>
             </div>
-            <?php
-                echo $this->Form->end();
-            ?>
+    </div>  
+
+    <?php
+        echo $this->Form->end();
+    ?>

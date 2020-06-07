@@ -1,20 +1,21 @@
 <?php
-                echo $this->Session->flash();
-                echo $this->Form->create('Medication', array(
-                    'type' => 'file',
-                    'class' => 'well form-horizontal formbackm',
-                    'inputDefaults' => array(
-                        'div' => array('class' => 'control-group'),
-                        'label' => array('class' => 'control-label required'),
-                        'between' => '<div class="controls">',
-                        'after' => '</div>',
-                        'class' => '',
-                        'format' => array('before', 'label', 'between', 'input', 'after','error'),
-                        'error' => array('attributes' => array( 'class' => 'controls help-block')),
-                     ),
-                ));
-            ?>
-
+        echo $this->Session->flash();
+        echo $this->Form->create('Medication', array(
+            'type' => 'file',
+            'class' => 'form-horizontal',
+            'inputDefaults' => array(
+                'div' => array('class' => 'control-group'),
+                'label' => array('class' => 'control-label required'),
+                'between' => '<div class="controls">',
+                'after' => '</div>',
+                'class' => '',
+                'format' => array('before', 'label', 'between', 'input', 'after','error'),
+                'error' => array('attributes' => array( 'class' => 'controls help-block')),
+             ),
+        ));
+    ?>
+    <div class="row-fluid">
+        <div class="span10 formbackm">
             <?php
                 echo $this->Form->input('id', array());
                 echo $this->Form->input('Medication.report_type', array('type' => 'hidden'));
@@ -39,10 +40,10 @@
                 <p class="controls" id="medication_edit_tip"> <span class="label label-important">Tip:</span> Fields marked with <span style="color:red;">*</span> are mandatory</p>
                 </div>
                 <div class="span6" id="medication_edit_form_id">
-                  <h2> <?php    echo  'Form ID: '.$this->data['Medication']['reference_no']; ?></h2>                  
+                  <h5> <?php    echo  'Form ID: '.$this->data['Medication']['reference_no']; ?></h5>                  
                 </div>
             </div><!--/row-->
-            
+
             <div class="row-fluid">
                 <div class="span6">
                     <?php
@@ -56,7 +57,7 @@
                     <?php
                         echo $this->Form->input('time_of_event', array('type' => 'time', 'timeFormat' => 24, 'interval' => 5, 'class' => 'span4', 'style' => 'display: inline;', 
                             'label' => array('class' => 'control-label required', 'text' => 'Time of Event'),
-                            'after' => '<p class="help-block"> 24hr:min </p>'
+                            'after' => '<p class="help-block"> 24hr:min </p></div>'
                             )
                         );
                     ?>
@@ -64,7 +65,6 @@
                 </div>
             </div>
             <hr>
-
             <div class="row-fluid">
                 <div class="span6">
                     
@@ -148,9 +148,8 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
-                <hr>
-
-            <h4 style="text-align: center; color: #884805;">Details on the medication error</h4>
+            <hr>
+             <h4 style="text-align: center; color: #884805;">Details on the medication error</h4>
             <div class="row-fluid">
                 <div class="span6">
                     <?php
@@ -302,7 +301,6 @@
                 </div>
             </div>
             <hr>
-
             <div class="row-fluid">
                 <div class="span12">
                     <h4 class="controls" style="text-decoration: underline;">Please tick the appropriate Error Outcome Category (Tick one appropriate box below):</h4>
@@ -583,51 +581,52 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
+            
+        </div>
+        <div class="span2">
+            <div class="my-sidebar" data-spy="affix">
+                <div class="awell">
+                    <?php
+                      echo $this->Form->button('<i class="fa fa-floppy-o" aria-hidden="true"></i> Save Changes', array(
+                          'name' => 'saveChanges',
+                          'class' => 'btn btn-success mapop',
+                          'formnovalidate' => 'formnovalidate',
+                          'id' => 'SadrSaveChanges', 'title'=>'Save & continue editing',
+                          'data-content' => 'Save changes to form without submitting it.
+                                                      The form will still be available for further editing.',
+                          'div' => false,
+                        ));
+                    ?>
+                    <br>
+                    <hr>
+                    <?php
+                      echo $this->Form->button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit', array(
+                          'name' => 'submitReport',
+                          'onclick'=>"return confirm('Are you sure you wish to submit the protocol review report?');",
+                          'class' => 'btn btn-primary btn-block mapop',
+                          'id' => 'SiteInspectionSubmitReport', 'title'=>'Save and Submit Report',
+                          'data-content' => 'Submit report for peer review and approval.',
+                          'div' => false,
+                        ));
 
+                    ?>
+                    <br>
+                    <hr>
+                    <?php
+                        echo $this->Form->button('<i class="fa fa-trash-o" aria-hidden="true"></i> Cancel', array(
+                                'name' => 'cancelReport',
+                                'class' => 'btn btn-danger btn-block mapop',
+                                'id' => 'SadrCancelReport', 'title'=>'Cancel form',
+                                'data-content' => 'Cancel form and go back to home page.',
+                                'div' => false,
+                            ));
 
-            <div class="form-actions">
-                <div class="row-fluid">
-                    <div class="span4">
-                        <?php
-
-                            echo $this->Form->button('Save Changes', array(
-                                    'name' => 'saveChanges',
-                                    'formnovalidate' => 'formnovalidate',
-                                    'class' => 'btn btn-primary mapop',
-                                    'id' => 'MedicationSaveChanges', 'title'=>'Save & continue editing',
-                                    'data-content' => 'Save changes to form without submitting it.
-                                                                                            The form will still be available for further editing.',
-                                    'div' => false,
-                                ));
-                        ?>
-                    </div>
-                    <div class="span4">
-                        <?php
-                            echo $this->Form->button('Save and Submit Report', array(
-                                    'name' => 'submitReport',
-                                    'onclick'=>"return confirm('Are you sure you wish to submit the form to PPB? You will not be able to edit it later.');",
-                                    'class' => 'btn btn-success mapop',
-                                    'id' => 'MedicationSubmitReport', 'title'=>'Save and Submit Report',
-                                    'data-content' => 'Save the report and submit it to the Pharmacy and Poisons Board. You will also get a copy of this report.',
-                                    'div' => false,
-                                ));
-
-                        ?>
-                    </div>
-                    <div class="span4">
-                        <?php
-                            echo $this->Form->button('Cancel', array(
-                                    'name' => 'cancelReport',
-                                    'class' => 'btn mapop',
-                                    'id' => 'MedicationCancelReport', 'title'=>'Cancel form',
-                                    'data-content' => 'Cancel form and go back to home page.',
-                                    'div' => false,
-                                ));
-
-                        ?>
-                    </div>
+                    ?>
+                   </div>
                 </div>
             </div>
+        </div>
+
             <?php
                 echo $this->Form->end();
             ?>

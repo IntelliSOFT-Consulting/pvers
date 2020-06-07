@@ -12,7 +12,7 @@
 		<div class="span12">
 
 			<div id="printAreade">
-				<div class="vformback">
+				<div class="formback">
 
 				<?php
 					echo $this->Html->image('sadr_header.gif', array('alt' => 'SADR'));

@@ -144,7 +144,7 @@ class TransfusionsController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Transfusion->create();
         $this->Transfusion->save(['Transfusion' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'TRN/'.date('Y').'/'.$count,
+            'reference_no' => 'BT/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
@@ -156,7 +156,7 @@ class TransfusionsController extends AppController {
             'contact' => $this->Auth->User('institution_contact'),
             'name_of_institution' => $this->Auth->User('name_of_institution')
             ]], false);
-        $this->Session->setFlash(__('The TRANSFUSION has been created'), 'alerts/flash_success');
+        $this->Session->setFlash(__('The Blood Transfusion Reaction has been created'), 'alerts/flash_success');
         $this->redirect(array('action' => 'edit', $this->Transfusion->id));
     }
 /**
@@ -258,14 +258,14 @@ class TransfusionsController extends AppController {
                     }
                     //**********************************    END   *********************************
 
-                    $this->Session->setFlash(__('The TRANSFUSION has been submitted to PPB'), 'alerts/flash_success');
+                    $this->Session->setFlash(__('The blood transfusion reaction report has been submitted to PPB'), 'alerts/flash_success');
                     $this->redirect(array('action' => 'view', $this->Transfusion->id));      
                 }
                 // debug($this->request->data);
-                $this->Session->setFlash(__('The TRANSFUSION has been saved'), 'alerts/flash_success');
+                $this->Session->setFlash(__('The blood transfusion reaction report has been saved'), 'alerts/flash_success');
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('The TRANSFUSION could not be saved. Please, try again.'), 'alerts/flash_error');
+                $this->Session->setFlash(__('The blood transfusion reaction report could not be saved. Please, try again.'), 'alerts/flash_error');
             }
         } else {
             $this->request->data = $this->Transfusion->read(null, $id);

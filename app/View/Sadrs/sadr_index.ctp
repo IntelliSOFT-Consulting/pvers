@@ -206,7 +206,7 @@
 								<td><?php echo h($sadr['Sadr']['created']); ?>&nbsp;</td>
 								<td>
 									<?php
-									if($sadr['Sadr']['submitted'] == '0') {
+									if($sadr['Sadr']['submitted'] < 1) {
 										echo $this->Html->link('<span class="label label-info tooltipper" title="Edit"><i class="icon-pencil icon-white"></i>Edit </span>' ,
 											array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
 											array('escape' => false, 'target' => '_blank'));

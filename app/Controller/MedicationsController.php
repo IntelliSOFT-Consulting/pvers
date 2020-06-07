@@ -143,7 +143,7 @@ class MedicationsController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Medication->create();
         $this->Medication->save(['Medication' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'MED/'.date('Y').'/'.$count,
+            'reference_no' => 'ME/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
