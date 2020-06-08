@@ -38,7 +38,8 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
 
       echo $this->Html->script('jquery/jquery-1.12.4');
     	echo $this->Html->script('jquery-ui-1.12.1/jquery-ui');
-    	echo $this->Html->script('bootstrap/bootstrap.min');
+      echo $this->Html->script('bootstrap/bootstrap.min');
+    	echo $this->Html->script('pvers');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

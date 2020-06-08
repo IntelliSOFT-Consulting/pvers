@@ -14,8 +14,13 @@
                     echo '<ol>';
                     foreach ($sadrs as $sadr) {
                       if($sadr['Sadr']['submitted'] > 1) {
-                          echo $this->Html->link('<li>'.$sadr['Sadr']['report_title'].' <small class="muted">('.$sadr['Sadr']['reference_no'].')</small></li>', array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
-                            array('escape' => false, 'class' => 'text-success'));  
+                        echo "<li>";
+                          echo $this->Html->link($sadr['Sadr']['report_title'].' <small class="muted">('.$sadr['Sadr']['reference_no'].')</small>', array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
+                            array('escape' => false, 'class' => 'text-success'));
+                          echo "&nbsp;";
+                          // echo $this->Html->link('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'sadrs', 'action' => 'followup', $sadr['Sadr']['id']), array('escape' => false, 'class' => ''));
+                          echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'sadrs' , 'action' => 'followup', $sadr['Sadr']['id']), array('escape' => false), __('Add a followup report?'));
+                        echo "</li>";
                       } else {
                           echo $this->Html->link('<li>'.$sadr['Sadr']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
                             array('escape' => false)); 
@@ -25,8 +30,7 @@
                     echo $this->Html->link('<p> >> All </p>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false)); 
                     echo $this->Form->postLink('Report SADR', array('controller' => 'sadrs' , 'action' => 'add'), array('class' => 'btn btn-primary btn-mini'), __('Report New ADR?'));
 
-                    // echo $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> Add Follow-up', array('controller' => 'sadrs', 'action' => 'index'),
-                    //           array('escape' => false, 'class' => 'btn btn-inverse btn-mini pull-right'));
+                    
                   ?>
                 </div>
                 <div class="span4 formbacka" style="padding: 4px;">   

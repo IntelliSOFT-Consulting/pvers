@@ -1,5 +1,7 @@
 <?php
 	$this->assign('SADR', 'active');
+	$this->Html->script('jquery/combobox', array('inline' => false));
+	$this->Html->script('sadr', array('inline' => false));
  ?>
 
       <!-- SADR
@@ -118,7 +120,6 @@
 			</div>
 			<hr>
 
-            <h4 style="text-align: center; color: #884805;">PATIENT INFORMATION</h4>
 			<div class="row-fluid">
 				<div class="span6">
 					<?php
@@ -157,6 +158,7 @@
 			</div><!--/row-->
 			 <hr>
 
+            <h5 style="text-align: center; color: #884805;">PATIENT INFORMATION</h5>
 			<div class="row-fluid">
 				<div class="span6">
 					<?php
@@ -172,7 +174,8 @@
 						
 						echo $this->Form->input('date_of_birth', array(
 							'type' => 'date',
-							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => true,
+							// 'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => true,
+							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(choose day)', 'month' => '(choose month)', 'year' => '(choose year)'),
 							'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH <span style="color:red;">*</span>'),
 							'title'=> 'select beginning of the month if unsure', 'data-content' => 'If selected, year is mandatory.',
 							'after'=>' <a style="font-weight:normal" onclick="$(\'.birthdate\').removeAttr(\'disabled\'); $(\'.birthdate\').val(\'\');
@@ -824,14 +827,9 @@
 	            <br>
 	            <hr>
 	            <?php
-					echo $this->Form->button('<i class="fa fa-trash-o" aria-hidden="true"></i> Cancel', array(
-							'name' => 'cancelReport',
-							'class' => 'btn btn-danger btn-block mapop',
-							'id' => 'SadrCancelReport', 'title'=>'Cancel form',
-							'data-content' => 'Cancel form and go back to home page.',
-							'div' => false,
-						));
-
+					
+					echo $this->Html->link('<i class="fa fa-times" aria-hidden="true"></i> Cancel', array('controller' => 'users', 'action' => 'dashboard'),
+                              array('escape' => false, 'class' => 'btn btn-danger btn-block'));  
 				?>
 	           </div>
 	        </div>

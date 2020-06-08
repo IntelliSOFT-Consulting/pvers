@@ -81,7 +81,13 @@ class Sadr extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		), 
+        'SadrFollowup' => array(
+            'className' => 'Sadr',
+            'foreignKey' => 'sadr_id',
+            'dependent' => true,
+            'conditions' => array('SadrFollowup.report_type' => 'Followup'),
+        )
 	);
 
 /**

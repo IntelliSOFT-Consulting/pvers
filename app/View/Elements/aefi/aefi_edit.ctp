@@ -532,13 +532,8 @@
                     <br>
                     <hr>
                     <?php
-                        echo $this->Form->button('<i class="fa fa-trash-o" aria-hidden="true"></i> Cancel', array(
-                                'name' => 'cancelReport',
-                                'class' => 'btn btn-danger btn-block mapop',
-                                'id' => 'SadrCancelReport', 'title'=>'Cancel form',
-                                'data-content' => 'Cancel form and go back to home page.',
-                                'div' => false,
-                            ));
+                        echo $this->Html->link('<i class="fa fa-times" aria-hidden="true"></i> Cancel', array('controller' => 'users', 'action' => 'dashboard'),
+                              array('escape' => false, 'class' => 'btn btn-danger btn-block'));  
 
                     ?>
                    </div>

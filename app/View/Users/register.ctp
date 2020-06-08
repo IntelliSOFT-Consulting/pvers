@@ -1,5 +1,6 @@
 <?php
 	$this->assign('Register', 'active');
+	$this->Html->script('jquery/combobox', array('inline' => false));
 	$this->Html->script('register', array('inline' => false));
 ?>
 

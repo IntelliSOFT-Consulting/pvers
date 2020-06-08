@@ -113,14 +113,14 @@
                     <td><?php 
                         echo $this->Form->input('SadrListOfMedicine.'.$i.'.start_date', array(
                             'type' => 'text', 'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span12 date-pick-field',));
+                            'after' => false, 'class' => 'span12 date-pick-from',));
                       ?>
                     </td>
                     <td>
                         <?php
                         echo $this->Form->input('SadrListOfMedicine.'.$i.'.stop_date', array(
                             'type' => 'text', 'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span12 date-pick-expire',));
+                            'after' => false, 'class' => 'span12 date-pick-to',));
                         ?>
                     </td>
                     

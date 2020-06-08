@@ -8,8 +8,8 @@ $(function() {
     reloadMedicines();
     function reloadMedicines(){
       //console.log('reload stuff called!!');
-      var dates2 = $('.date-pick-expire').datepicker({
-        minDate:"-100Y", maxDate:"+5Y", 
+      var dates2 = $('.date-pick-from, .date-pick-to').datepicker({
+        minDate:"-100Y", maxDate:"-0D", 
         dateFormat:'dd-mm-yy', 
         showButtonPanel:true, 
         changeMonth:true, 

@@ -398,6 +398,43 @@ class SadrsController extends AppController {
 		}
 	}
 
+    public function reporter_followup($id = null) {
+        if ($this->request->is('post')) {
+            $this->Sadr->id = $id;
+            if (!$this->Sadr->exists()) {
+                throw new NotFoundException(__('Invalid SADR'));
+            }
+            $sadr = Hash::remove($this->Sadr->find('first', array(
+                        'contain' => array('SadrListOfDrug', 'SadrListOfMedicine'),
+                        'conditions' => array('Sadr.id' => $id)
+                        )
+                    ), 'Sadr.id');
+
+            $sadr = Hash::remove($sadr, 'SadrListOfDrug.{n}.id');
+            $sadr = Hash::remove($sadr, 'SadrListOfMedicine.{n}.id');
+            $data_save = $sadr['Sadr'];
+            $data_save['SadrListOfDrug'] = $sadr['SadrListOfDrug'];
+            if(isset($sadr['SadrListOfMedicine'])) $data_save['SadrListOfMedicine'] = $sadr['SadrListOfMedicine'];
+            $data_save['sadr_id'] = $id;
+
+            $count = $this->Sadr->find('count',  array('conditions' => array(
+                        'Sadr.reference_no LIKE' => $sadr['Sadr']['reference_no'].'%',
+                        )));
+            $count = ($count < 10) ? "0$count" : $count;
+            $data_save['reference_no'] = $sadr['Sadr']['reference_no'].'_F'.$count;
+            $data_save['report_type'] = 'Followup';
+            $data_save['submitted'] = 0;
+
+            if ($this->Sadr->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                    $this->Session->setFlash(__('Follow up '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
+                    $this->redirect(array('action' => 'edit', $this->Sadr->id));               
+            } else {
+                $this->Session->setFlash(__('The followup could not be saved. Please, try again.'), 'alerts/flash_error');
+                $this->redirect($this->referer());
+            }
+        }
+    }
+
 	public function reporter_add() {        
         $count = $this->Sadr->find('count',  array('conditions' => array(
             'Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));

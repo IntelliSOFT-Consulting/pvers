@@ -1,14 +1,7 @@
 $(document).ready(function() {
-	count = 0;
-	//MUST DO: FIND OUT WAY OF CHECKING IF VARIABLE EXISTS
-	for(key in myarray.Sadr) { 
-		count++; 
-	}
 
-    if (count > 0) {
-		alert('The report could not be submitted. Please review the fields marked in red and then resubmit.');
-	}
-		
+	$( "#SadrCountyId" ).combobox();
+
 	var cache2 = {},	lastXhr;
 	$( "#SadrInstitutionCode" ).autocomplete({
 		source: function( request, response ) {
@@ -29,17 +22,11 @@ $(document).ready(function() {
 			$( "#SadrNameOfInstitution" ).val( ui.item.label );
 			$( "#SadrInstitutionCode" ).val( ui.item.value );
 			$( "#SadrAddress" ).val( ui.item.addr );
-			$("#SadrCountyId").combobox('autocomplete', ui.item.desc);  
+      $( "#SadrInstitutionContact" ).val( ui.item.phone );
 			return false;
 		}
-	})
-	.data( "autocomplete" )._renderItem = function( ul, item ) {
-			return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( "<a>" + item.value + " - " + item.label + "</a>" )
-				.appendTo( ul );
-	};
-	
+	});
+
 	var cache3 = {},	lastXhr;
 	$( "#SadrNameOfInstitution" ).autocomplete({
 		source: function( request, response ) {
@@ -59,16 +46,9 @@ $(document).ready(function() {
 		select: function( event, ui ) {
 			$( "#SadrNameOfInstitution" ).val( ui.item.label );
 			$( "#SadrInstitutionCode" ).val( ui.item.value );
-			$( "#SadrAddress" ).val( ui.item.addr );
-			$("#SadrCountyId").combobox('autocomplete', ui.item.desc);  
-			
+      		$( "#SadrAddress" ).val( ui.item.addr );
+			$( "#SadrInstitutionContact" ).val( ui.item.phone );
 			return false;
 		}
 	})
-	.data( "autocomplete" )._renderItem = function( ul, item ) {
-			return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( "<a>" + item.value + " - " + item.label + "</a>" )
-				.appendTo( ul );
-	};
 });

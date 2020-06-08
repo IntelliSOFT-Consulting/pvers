@@ -14,31 +14,57 @@
 			<div id="printAreade">
 				<div class="formback">
 
-				<?php
-					echo $this->Html->image('sadr_header.gif', array('alt' => 'SADR'));
-				?>
-				<br>
+				<p><b>(FOM001/MIP/PMS/SOP/001)</b></p>
+	            <div class="row-fluid">
+	                <div class="span12" style="text-align: center;">
+	                    <?php
+	                        echo $this->Html->image('coa.png', array('alt' => 'COA'));
+	                    ?>
+	                    <h4>MINISTRY OF HEALTH</h4>
+	                    <h4>PHARMACY AND POISONS BOARD</h4>
+	                    <h4>P.O. Box 27663-00506 NAIROBI</h4>
+	                    <h4>Tel: (020)-3562107 Ext 114, 0720 608811, 0733 884411 Fax: (020) 2713431/2713409</h4>
+	                    <h4><b>Email:</b> pv@pharmacyboardkenya.org</h4>
+	                    <h4 style="color: red;">SUSPECTED ADVERSE DRUG REACTION REPORTING FORM</h4>
+	                </div>
+	            </div>
 
-				<table style="width: 100%;">
+				<table class="table" style="width: 100%;">
 					<tr>
 						<td style="width: 25%;">REPORT TITLE:</td>
 						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['report_title'] ?></strong></td>
 						<td style="width: 25%;">REPORT ID: </td>
-						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['reference_no'] ?></strong></td>
+						<td style="width: 25%;">
+							<p><strong><?php echo $sadr['Sadr']['reference_no'] ?></strong></p>
+							<p><strong><?php echo $sadr['Sadr']['report_type'] ?></strong></p>
+						</td>
 					</tr>
 				</table>
-				 <hr>
+
+				<table class="table" style="width: 100%;">
+					<tr>
+						<td style="width: 50%;">
+							<h4>The report is on:</h4>
+							<p> <?php echo ($sadr['Sadr']['report_sadr']   ? $ichecked : $nchecked ); ?> Suspected adverse drug reaction  </p>
+							<p> <?php echo ($sadr['Sadr']['report_therapeutic']   ? $ichecked : $nchecked ); ?> Therapeutic ineffectiveness </p>
+						</td>
+						<td style="width: 50%;">
+							<h4>Product category (Tick appropriate box)</h4>
+							<p> <?php echo ($sadr['Sadr']['medicinal_product']   ? $ichecked : $nchecked ); ?> Medicinal product  </p>
+							<p> <?php echo ($sadr['Sadr']['blood_products']   ? $ichecked : $nchecked ); ?> Blood and blood products  </p>
+							<p> <?php echo ($sadr['Sadr']['herbal_product']   ? $ichecked : $nchecked ); ?> Herbal product   </p>
+							<p> <?php echo ($sadr['Sadr']['cosmeceuticals']   ? $ichecked : $nchecked ); ?> Cosmeceuticals   </p>
+							<p> <?php echo ($sadr['Sadr']['product_other']   ? $ichecked : $nchecked ); ?> Others  </p>
+							<p> <?php echo $sadr['Sadr']['product_specify']; ?>   </p>
+						</td>
+					</tr>
+				</table>
+				<hr>
 
 				<table style="width: 100%;">
 					<tr>
-						<td style="width: 25%;">REPORT TYPE:</td>
-						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['report_type'] ?>	</strong></td>
 						<td style="width: 25%;">COUNTY: </td>
 						<td style="width: 25%;"><strong><?php echo $sadr['County']['county_name'] ?>	</strong></td>
-					</tr>
-					<tr>
-						<td style="width: 25%;"></td>
-						<td style="width: 25%;"> </td>
 						<td style="width: 25%;">SUB-COUNTY: </td>
 						<td style="width: 25%;"><strong><?php echo $sadr['SubCounty']['sub_county_name'] ?>	</strong></td>
 					</tr>
@@ -179,7 +205,6 @@
 					</tr>
 				</table>
 				 <hr>
-				<?php echo $this->element('help/assessment'); ?>
 
 				<table style="width: 100%;">
 					<tr>
@@ -231,7 +256,6 @@
 					</tr>
 				</table>
 				 <hr>
-				<?php echo $this->element('help/explanatory'); ?>
 
 				</div> <!-- /art-sheet -->
 			</div> <!-- /art-sheet -->

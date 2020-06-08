@@ -9,37 +9,37 @@
              </li>
              <li class="<?php echo $this->fetch('SADR') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-file-text" aria-hidden="true"></i> SADRs',
+                    echo $this->Html->link('<i class="fa fa-ambulance" aria-hidden="true"></i> SADRs',
                         array('controller' => 'sadrs', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>             
              <li class="<?php echo $this->fetch('AEFI') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-file-text-o" aria-hidden="true"></i> AEFIs',
+                    echo $this->Html->link('<i class="fa fa-child" aria-hidden="true"></i> AEFIs',
                         array('controller' => 'aefis', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
              <li class="<?php echo $this->fetch('PQMP') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-file-text-o" aria-hidden="true"></i> PQMPs',
+                    echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> PQMPs',
                         array('controller' => 'pqmps', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
              <li class="<?php echo $this->fetch('DEV') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-file-word-o" aria-hidden="true"></i> Devices',
+                    echo $this->Html->link('<i class="fa fa-stethoscope" aria-hidden="true"></i> Devices',
                         array('controller' => 'devices', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
              <li class="<?php echo $this->fetch('MED') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-file-word-o" aria-hidden="true"></i> Medication Errors',
+                    echo $this->Html->link('<i class="fa fa-chain-broken" aria-hidden="true"></i> Medication Errors',
                         array('controller' => 'medications', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
              <li class="<?php echo $this->fetch('TRN') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-file-word-o" aria-hidden="true"></i> Transfusion Reactions',
+                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusion Reactions',
                         array('controller' => 'transfusions', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>

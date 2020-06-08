@@ -79,7 +79,16 @@ Information supplied by you will contribute to the improvement of drug safety an
             </div><!--/span-->
           </div><!--/row-->
         </div><!--/span-->
-        <div class="span3 well">
+        <?php if($this->Session->read('Auth.User')) { ?>
+	        <div class="span3">  
+	        	<ul class="nav nav-tabs nav-stacked">
+	              <li class="active"><a href="#">Home</a></li>
+	              <li><a href="#">Profile</a></li>
+	              <li><a href="#">Messages</a></li>
+            	</ul>
+            </div>
+        <?php } else { ?>
+        <div class="span3 well">        	
             <legend style="text-align: center;" class="text-success"> <i class="fa fa-key"></i> Sign in</legend>
 			<form method="POST" action="/users/login" accept-charset="UTF-8">
 				<div class="input-prepend">
@@ -98,5 +107,6 @@ Information supplied by you will contribute to the improvement of drug safety an
 	            <a href="/users/forgotPassword" class="pull-right">Forgot password?</a></small>
 			</form> 
 		</div>
+		<?php } ?>
 
     </div><!--/row-->

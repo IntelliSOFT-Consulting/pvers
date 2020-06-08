@@ -602,6 +602,7 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Sadrs/sadrIndex');
 		$this->Acl->allow($group, 'controllers/Sadrs/reporter_index');
 		$this->Acl->allow($group, 'controllers/Sadrs/reporter_add');
+		$this->Acl->allow($group, 'controllers/Sadrs/reporter_followup');
 		$this->Acl->allow($group, 'controllers/Sadrs/reporter_edit');
 		$this->Acl->allow($group, 'controllers/Sadrs/reporter_view');
 		$this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
