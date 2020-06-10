@@ -16,7 +16,9 @@ $(document).ready(function() {
         dateFormat:'dd-mm-yy'
     });
 
- 	var cache2 = {},	lastXhr;
+ 	$( "#MedicationCountyId" ).combobox();
+
+	var cache2 = {},	lastXhr;
 	$( "#MedicationInstitutionCode" ).autocomplete({
 		source: function( request, response ) {
 			var term = request.term;
@@ -35,18 +37,11 @@ $(document).ready(function() {
 		select: function( event, ui ) {
 			$( "#MedicationNameOfInstitution" ).val( ui.item.label );
 			$( "#MedicationInstitutionCode" ).val( ui.item.value );
-			$( "#MedicationInstitutionContact" ).val( ui.item.phone );
-			$("#MedicationCountyId").combobox('autocomplete', ui.item.desc);  
+      		$( "#MedicationInstitutionContact" ).val( ui.item.phone );
 			return false;
 		}
-	})
-	.data( "autocomplete" )._renderItem = function( ul, item ) {
-			return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( "<a>" + item.value + " - " + item.label + "</a>" )
-				.appendTo( ul );
-	};
-	
+	});
+
 	var cache3 = {},	lastXhr;
 	$( "#MedicationNameOfInstitution" ).autocomplete({
 		source: function( request, response ) {
@@ -67,32 +62,7 @@ $(document).ready(function() {
 			$( "#MedicationNameOfInstitution" ).val( ui.item.label );
 			$( "#MedicationInstitutionCode" ).val( ui.item.value );
 			$( "#MedicationInstitutionContact" ).val( ui.item.phone );
-			$("#MedicationCountyId").combobox('autocomplete', ui.item.desc);  
-			
 			return false;
 		}
 	})
-	.data( "autocomplete" )._renderItem = function( ul, item ) {
-			return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( "<a>" + item.value + " - " + item.label + "</a>" )
-				.appendTo( ul );
-	};
-
-	// if ($("#AefiComplaintOther:checked").val() == '1') {
-	// 	$("#AefiComplaintOtherSpecify").removeAttr("disabled");
-	// }	
-	// $('#AefiComplaintOther').click(function(){
-	//    if($(this).is(":checked")){
-	// 		$('#AefiComplaintOtherSpecify').removeAttr("disabled");
-	// 	}
-	//    else {
-	// 		$('#AefiComplaintOtherSpecify').attr("disabled", "disabled");
-	// 		$('#AefiComplaintOtherSpecify').val('');
-	// 	}
-	// });
-	// $('#AefiPatientName').datetimepicker({
- //        format: 'd-m-Y H:i'
- //      });
-	// console.log('kariss');
 });

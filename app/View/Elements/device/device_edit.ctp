@@ -685,7 +685,9 @@
                     <?php
                         // echo $this->Form->input('death_date', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label', 'text' => 'Date of death'),));
 
-                        echo $this->Form->input('description_of_reaction', array('label' => array('class' => 'control-label required', 'text' => 'Description of event'),));
+                        echo $this->Form->input('description_of_reaction', array(
+                            'between' => false, 'div' => false, 'after'=>'<p class="help-block">     </p>',
+                            'label' => array('class' => 'control-label required', 'text' => 'Description of event'),));
                     ?>
                 </div>
                 <div class="span4">

@@ -1,5 +1,6 @@
 <?php
     $this->assign('MED', 'active');
+    $this->Html->script('jquery/combobox', array('inline' => false));
     $this->Html->script('medication', array('inline' => false));
     $this->Html->css('jquery.datetimepicker', null, array('inline' => false));
     $this->Html->script('jquery.datetimepicker.full', array('inline' => false));

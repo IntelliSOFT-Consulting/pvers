@@ -610,6 +610,7 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Aefis/institutionCodes');
 		$this->Acl->allow($group, 'controllers/Aefis/reporter_index');
 		$this->Acl->allow($group, 'controllers/Aefis/reporter_add');
+		$this->Acl->allow($group, 'controllers/Aefis/reporter_followup');
 		$this->Acl->allow($group, 'controllers/Aefis/reporter_edit');
 		$this->Acl->allow($group, 'controllers/Aefis/reporter_view');
 		$this->Acl->allow($group, 'controllers/Pqmps/reporter_index');
@@ -618,6 +619,7 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Pqmps/reporter_view');
 		$this->Acl->allow($group, 'controllers/Devices/reporter_index');
 		$this->Acl->allow($group, 'controllers/Devices/reporter_add');
+		$this->Acl->allow($group, 'controllers/Devices/reporter_followup');
 		$this->Acl->allow($group, 'controllers/Devices/reporter_edit');
 		$this->Acl->allow($group, 'controllers/Devices/reporter_view');
 		$this->Acl->allow($group, 'controllers/Medications/reporter_index');

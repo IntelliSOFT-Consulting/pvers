@@ -421,6 +421,42 @@ class DevicesController extends AppController {
         $this->redirect(array('action' => 'edit', $this->Device->id));
     }
 
+    public function reporter_followup($id = null) {
+        if ($this->request->is('post')) {
+            $this->Device->id = $id;
+            if (!$this->Device->exists()) {
+                throw new NotFoundException(__('Invalid Medical Device Report ID'));
+            }
+            $device = Hash::remove($this->Device->find('first', array(
+                        'contain' => array('ListOfDevice', 'Attachment'),
+                        'conditions' => array('Device.id' => $id)
+                        )
+                    ), 'Device.id');
+
+            $device = Hash::remove($device, 'ListOfDevice.{n}.id');
+            $device = Hash::remove($device, 'Attachment.{n}.id');
+            $data_save = $device['Device'];
+            $data_save['ListOfDevice'] = $device['ListOfDevice'];
+            if(isset($device['Attachment'])) $data_save['Attachment'] = $device['Attachment'];
+            $data_save['device_id'] = $id;
+
+            $count = $this->Device->find('count',  array('conditions' => array(
+                        'Device.reference_no LIKE' => $device['Device']['reference_no'].'%',
+                        )));
+            $count = ($count < 10) ? "0$count" : $count;
+            $data_save['reference_no'] = $device['Device']['reference_no'].'_F'.$count;
+            $data_save['report_type'] = 'Followup';
+            $data_save['submitted'] = 0;
+
+            if ($this->Device->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                    $this->Session->setFlash(__('Follow up '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
+                    $this->redirect(array('action' => 'edit', $this->Device->id));               
+            } else {
+                $this->Session->setFlash(__('The followup could not be saved. Please, try again.'), 'alerts/flash_error');
+                $this->redirect($this->referer());
+            }
+        }
+    }
 /**
  * edit method
  *

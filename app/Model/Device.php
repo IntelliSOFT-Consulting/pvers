@@ -56,6 +56,12 @@ class Device extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+        'DeviceFollowup' => array(
+            'className' => 'Device',
+            'foreignKey' => 'device_id',
+            'dependent' => true,
+            'conditions' => array('DeviceFollowup.report_type' => 'Followup'),
+        ),
 		'Attachment' => array(
 			'className' => 'Attachment',
 			'foreignKey' => 'device_id',

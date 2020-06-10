@@ -272,7 +272,7 @@ class MedicationsController extends AppController {
                     }
                     //**********************************    END   *********************************
 
-                    $this->Session->setFlash(__('The MEDICATION has been submitted to PPB'), 'alerts/flash_success');
+                    $this->Session->setFlash(__('The Medication Error Report has been submitted to PPB'), 'alerts/flash_success');
                     $this->redirect(array('action' => 'view', $this->Medication->id));      
                 }
                 // debug($this->request->data);

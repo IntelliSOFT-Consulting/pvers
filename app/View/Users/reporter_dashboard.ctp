@@ -39,8 +39,12 @@
                       echo '<ol>';
                       foreach ($aefis as $aefi) {
                         if($aefi['Aefi']['submitted'] > 1) {
-                            echo $this->Html->link('<li>'.$aefi['Aefi']['reference_no'].'</li>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
-                              array('escape' => false, 'class' => 'text-success'));  
+                            echo "<li>";
+                              echo $this->Html->link($aefi['AefiListOfVaccine'][0]['vaccine_name'].' <small class="muted">('.$aefi['Aefi']['reference_no'].')</small>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
+                                array('escape' => false, 'class' => 'text-success'));
+                              echo "&nbsp;";
+                              echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'aefis' , 'action' => 'followup', $aefi['Aefi']['id']), array('escape' => false), __('Add a followup report?'));
+                            echo "</li>";
                         } else {
                             echo $this->Html->link('<li>'.$aefi['Aefi']['created'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'aefis', 'action' => 'edit', $aefi['Aefi']['id']),
                               array('escape' => false)); 
@@ -76,8 +80,12 @@
                     echo '<ol>';
                     foreach ($devices as $device) {
                       if($device['Device']['submitted'] > 1) {
-                          echo $this->Html->link('<li>'.$device['Device']['report_title'].' <small class="muted">('.$device['Device']['reference_no'].')</small></li>', array('controller' => 'devices', 'action' => 'view', $device['Device']['id']),
-                            array('escape' => false, 'class' => 'text-success'));  
+                          echo "<li>";
+                            echo $this->Html->link($device['Device']['report_title'].' <small class="muted">('.$device['Device']['reference_no'].')</small>', array('controller' => 'devices', 'action' => 'view', $device['Device']['id']),
+                              array('escape' => false, 'class' => 'text-success'));
+                            echo "&nbsp;";
+                            echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'devices' , 'action' => 'followup', $device['Device']['id']), array('escape' => false), __('Add a followup report?'));
+                          echo "</li>";
                       } else {
                           echo $this->Html->link('<li>'.$device['Device']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'devices', 'action' => 'edit', $device['Device']['id']),
                             array('escape' => false)); 
@@ -93,7 +101,7 @@
                       echo '<ol>';
                       foreach ($medications as $medication) {
                         if($medication['Medication']['submitted'] > 1) {
-                            echo $this->Html->link('<li>'.$medication['Medication']['report_title'].' <small class="muted">('.$medication['Medication']['reference_no'].')</small></li>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
+                            echo $this->Html->link('<li>'.$medication['MedicationProduct'][0]['generic_name_i'].' <small class="muted">('.$medication['Medication']['reference_no'].')</small></li>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
                               array('escape' => false, 'class' => 'text-success'));  
                         } else {
                             echo $this->Html->link('<li>'.$medication['Medication']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'medications', 'action' => 'edit', $medication['Medication']['id']),

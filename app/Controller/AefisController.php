@@ -421,6 +421,41 @@ class AefisController extends AppController {
         $this->Session->setFlash(__('The AEFI has been created'), 'alerts/flash_success');
         $this->redirect(array('action' => 'edit', $this->Aefi->id));
     }
+
+    public function reporter_followup($id = null) {
+        if ($this->request->is('post')) {
+            $this->Aefi->id = $id;
+            if (!$this->Aefi->exists()) {
+                throw new NotFoundException(__('Invalid AEFI'));
+            }
+            $aefi = Hash::remove($this->Aefi->find('first', array(
+                        'contain' => array('AefiListOfVaccine'),
+                        'conditions' => array('Aefi.id' => $id)
+                        )
+                    ), 'Aefi.id');
+
+            $aefi = Hash::remove($aefi, 'AefiListOfVaccine.{n}.id');
+            $data_save = $aefi['Aefi'];
+            $data_save['AefiListOfVaccine'] = $aefi['AefiListOfVaccine'];
+            $data_save['aefi_id'] = $id;
+
+            $count = $this->Aefi->find('count',  array('conditions' => array(
+                        'Aefi.reference_no LIKE' => $aefi['Aefi']['reference_no'].'%',
+                        )));
+            $count = ($count < 10) ? "0$count" : $count;
+            $data_save['reference_no'] = $aefi['Aefi']['reference_no'].'_F'.$count;
+            $data_save['report_type'] = 'Followup';
+            $data_save['submitted'] = 0;
+
+            if ($this->Aefi->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                    $this->Session->setFlash(__('Follow up '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
+                    $this->redirect(array('action' => 'edit', $this->Aefi->id));               
+            } else {
+                $this->Session->setFlash(__('The followup could not be saved. Please, try again.'), 'alerts/flash_error');
+                $this->redirect($this->referer());
+            }
+        }
+    }
 /**
  * edit method
  *
