@@ -399,27 +399,58 @@ class UsersController extends AppController {
     }
 
     public function manager_dashboard() {
-        $applications = $this->Application->find('all', array(
-            'limit' => 5,
-            'fields' => array('Application.id','Application.created', 'Application.study_drug', 'Application.submitted', 'Application.protocol_no'),
-            'order' => array('Application.created' => 'desc'),
-            'conditions' => array('submitted' => 1),
-            'contain' => array(),
+        $sadrs = $this->User->Sadr->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created'),
+            'order' => array('Sadr.created' => 'desc'),
+            'conditions' => array('Sadr.submitted >' => 1),
         ));
-        $this->set('applications', $applications);
-        $this->User->Notification->recursive = -1;
+        $this->set('sadrs', $sadrs);        
+
+        $aefis = $this->User->Aefi->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created'),
+            'order' => array('Aefi.created' => 'desc'),
+            'conditions' => array('Aefi.submitted >' => 1),
+        ));
+        $this->set('aefis', $aefis);        
+
+        $pqmps = $this->User->Pqmp->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Pqmp.id','Pqmp.user_id', 'Pqmp.created', 'Pqmp.submitted', 'Pqmp.brand_name', 'Pqmp.reference_no', 'Pqmp.created'),
+            'order' => array('Pqmp.created' => 'desc'),
+            'conditions' => array('Pqmp.submitted >' => 1),
+        ));
+        $this->set('pqmps', $pqmps);        
+
+        $devices = $this->User->Device->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created'),
+            'order' => array('Device.created' => 'desc'),
+            'conditions' => array('Device.submitted >' => 1),
+        ));
+        $this->set('devices', $devices);        
+
+        $medications = $this->User->Medication->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.created', 'Medication.reference_no', 'Medication.created'),
+            'order' => array('Medication.created' => 'desc'),
+            'conditions' => array('Medication.submitted >' => 1),
+        ));
+        $this->set('medications', $medications);        
+
+        $transfusions = $this->User->Transfusion->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Transfusion.id','Transfusion.user_id', 'Transfusion.reference_no', 'Transfusion.submitted', 'Transfusion.created', 'Transfusion.created'),
+            'order' => array('Transfusion.created' => 'desc'),
+            'conditions' => array('Transfusion.submitted >' => 1),
+        ));
+        $this->set('transfusions', $transfusions);        
+
         $this->set('notifications', $this->User->Notification->find('all', array(
-            'conditions' => array('Notification.user_id' => $this->Auth->User('id')), 'order' => 'Notification.created DESC', 'limit' => 5
-        )));
+            'conditions' => array('Notification.user_id' => $this->Auth->User('id')), 'order' => 'Notification.created DESC', 'limit' => 12
+            )));
         $this->set('messages', $this->Message->find('list', array('fields' => array('name', 'style'))));
-        $this->set('users', $this->User->find('list', array('conditions' => array('User.group_id' => 3, 'User.is_active' => 1))));
-        $this->set('saes', $this->Sae->find('all', array(
-            'order' => 'Sae.created DESC'
-            )));
-        $this->set('meetingDates', $this->MeetingDate->find('all', array(
-            'limit' => 5,
-            'conditions' => array('MeetingDate.approved >' => 0), 'order' => 'MeetingDate.created DESC'
-            )));
     }
 
     public function partner_dashboard() {
@@ -572,6 +603,9 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Aefis');
 		$this->Acl->allow($group, 'controllers/SadrFollowups');
 		$this->Acl->allow($group, 'controllers/Pqmps');
+		$this->Acl->allow($group, 'controllers/Devices');
+		$this->Acl->allow($group, 'controllers/Medications');
+		$this->Acl->allow($group, 'controllers/Transfusions');
 		$this->Acl->allow($group, 'controllers/Attachments');
 		$this->Acl->allow($group, 'controllers/Counties');
 		$this->Acl->allow($group, 'controllers/Countries');

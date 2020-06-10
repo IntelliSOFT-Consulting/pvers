@@ -61,6 +61,30 @@ class PqmpsController extends AppController {
         $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
     
+	public function manager_index() {
+        $this->Prg->commonProcess();
+        $page_options = array('25' => '25', '20' => '20');
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($page_options);
+
+        $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
+        // $criteria['Pqmp.user_id'] = $this->Auth->User('id');
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Pqmp.created' => 'desc');
+        $this->paginate['contain'] = array('County');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Pqmps->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end pdf export
+        $this->set('page_options', $page_options);
+        $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
+    
     public function admin_index() {
         $this->Prg->commonProcess();
 		if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
