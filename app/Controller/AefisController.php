@@ -85,7 +85,7 @@ class AefisController extends AppController {
             else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
-        // $criteria['Aefi.user_id'] = $this->Auth->User('id');
+        $criteria['Aefi.submitted'] = 2;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
         $this->paginate['contain'] = array('County');

@@ -10,7 +10,7 @@ config('routes');
  * @property Notification $Notification
  */
 class NotificationsController extends AppController {
-    public $uses = array('Notification', 'User', 'Application', 'Amendment','Review', 'Message');
+    public $uses = array('Notification', 'User', 'Message');
     public $paginate = array();
     public $components = array('Search.Prg');
     public $presetVars = true; // using the model configuration
@@ -20,7 +20,7 @@ class NotificationsController extends AppController {
  *
  * @return void
  */
-	public function applicant_index() {
+	public function reporter_index() {
         $this->Prg->commonProcess();
         $page_options = array('20' => '20', '25' => '25');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
@@ -43,7 +43,7 @@ class NotificationsController extends AppController {
         $this->set('page_options', $page_options);
         $this->set('notifications', $this->paginate(), array('encode' => false));
     }
-	public function reviewer_index() {
+	public function partner_index() {
         $this->Prg->commonProcess();
         $page_options = array('20' => '20', '25' => '25');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
@@ -96,12 +96,6 @@ class NotificationsController extends AppController {
         $this->index();
     }
 	public function manager_index() {
-        $this->index();
-    }
-    public function inspector_index() {
-        $this->index();
-    }
-    public function monitor_index() {
         $this->index();
     }
 
@@ -225,6 +219,10 @@ class NotificationsController extends AppController {
 		if (!$this->Notification->exists()) {
 			throw new NotFoundException(__('Invalid Notification'));
 		}
+		$notification = $this->Notification->read(null);
+		if ($notification['Notification']['user_id'] !== $this->Auth->user('id')) {
+			throw new NotFoundException(__('You do not have permission to delelte!!'));
+		}
 		if(!$this->Notification->isOwnedBy($id, $this->Auth->user('id'))) {
 			$this->set('message', 'You do not have permission to access this resource');
 			$this->set('_serialize', 'message');
@@ -254,21 +252,6 @@ class NotificationsController extends AppController {
 		$this->redirect($this->referer());
 	}
 	public function admin_delete($id = null) {
-		if (!$this->request->is('post')) {
-            throw new MethodNotAllowedException();
-        }
-        $this->Notification->id = $id;
-        if (!$this->Notification->exists()) {
-            throw new NotFoundException(__('Invalid notification'));
-        }
-        if ($this->Notification->delete()) {
-            $this->Session->setFlash(__('Notification deleted'));
-            $this->redirect($this->referer());
-        }
-        $this->Session->setFlash(__('Notification was not deleted'), 'alerts/flash_error');
-		$this->redirect($this->referer());
-	}
-	public function inspector_delete($id = null) {
 		if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }

@@ -84,7 +84,7 @@ class DevicesController extends AppController {
             else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Device->parseCriteria($this->passedArgs);
-        // $criteria['Device.user_id'] = $this->Auth->User('id');
+        $criteria['Device.submitted'] = 2;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
         $this->paginate['contain'] = array('County');

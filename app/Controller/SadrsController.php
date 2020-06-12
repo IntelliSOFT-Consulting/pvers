@@ -89,7 +89,7 @@ class SadrsController extends AppController {
             else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Sadr->parseCriteria($this->passedArgs);
-        // $criteria['Sadr.user_id'] = $this->Auth->User('id');
+        $criteria['Sadr.submitted'] = 2;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
         $this->paginate['contain'] = array('County');
@@ -315,7 +315,7 @@ class SadrsController extends AppController {
  * download methods
  */
 	public function download($id = null) {
-		$this->Sadr->id = $this->Sadr->Luhn_Verify($id);
+		$this->Sadr->id = $id;
 		if (!$this->Sadr->exists()) {
 			$this->Session->setFlash(__('Could not verify the suspected adverse drug report ID. Please ensure the ID is correct.'), 'flash_error');
 			$this->redirect(array('action' => 'add'));

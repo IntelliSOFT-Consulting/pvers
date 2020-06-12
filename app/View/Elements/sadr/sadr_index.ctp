@@ -75,7 +75,7 @@
                   ));
 
                   echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));echo "<br>";
-                  echo $this->Html->link('<i class="icon-file-alt"></i> Excel', array('action' => 'index', 'ext' => 'csv'), array('class' => 'btn btn-success', 'escape' => false));
+                  echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv'), array('class' => 'btn btn-success', 'escape' => false));
                 ?>
               </th>
           </tr>
@@ -146,7 +146,10 @@
                   array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
                   array('escape' => false));
                 echo "&nbsp;";
-                echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> Followup </span>', array('controller' => 'sadrs' , 'action' => 'followup', $sadr['Sadr']['id']), array('escape' => false), __('Add a followup report?'));
+                if($redir == 'reporter') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> Followup </span>', array('controller' => 'sadrs' , 'action' => 'followup', $sadr['Sadr']['id']), array('escape' => false), __('Add a followup report?'));
+                echo "&nbsp;";
+                if($redir == 'manager') echo $this->Form->postLink('<span class="label label-success tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i>
+ </span>', array('controller' => 'sadrs' , 'action' => 'download', $sadr['Sadr']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
               } else {
                 echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>' ,
                   array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),

@@ -43,6 +43,12 @@
                         array('controller' => 'transfusions', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
+             <li class="<?php echo $this->fetch('NT') ?>">
+                <?php
+                    echo $this->Html->link('<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Notifications',
+                        array('controller' => 'notifications', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
+                    ?>
+             </li>
              <?php /* ?><?php */ ?>
              <li class="<?php echo $this->fetch('ContactUs') ?>">
                 <?php

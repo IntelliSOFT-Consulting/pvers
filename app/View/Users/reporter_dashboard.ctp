@@ -16,19 +16,20 @@
                       if($sadr['Sadr']['submitted'] > 1) {
                         echo "<li>";
                           echo $this->Html->link($sadr['Sadr']['report_title'].' <small class="muted">('.$sadr['Sadr']['reference_no'].')</small>', array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
-                            array('escape' => false, 'class' => 'text-success'));
+                            array('escape' => false, 'class' => 'text-'.((isset($sadr['Sadr']['serious']) && $sadr['Sadr']['serious'] == 'Yes') ? 'error' : 'success')));
                           echo "&nbsp;";
-                          // echo $this->Html->link('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'sadrs', 'action' => 'followup', $sadr['Sadr']['id']), array('escape' => false, 'class' => ''));
                           echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'sadrs' , 'action' => 'followup', $sadr['Sadr']['id']), array('escape' => false), __('Add a followup report?'));
                         echo "</li>";
                       } else {
-                          echo $this->Html->link('<li>'.$sadr['Sadr']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
+                        echo "<li>";
+                          echo $this->Html->link($sadr['Sadr']['reference_no'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
                             array('escape' => false)); 
+                        echo "</li>";
                       }
                     }
                     echo '</ol>';
-                    echo $this->Html->link('<p> >> All </p>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false)); 
-                    echo $this->Form->postLink('Report SADR', array('controller' => 'sadrs' , 'action' => 'add'), array('class' => 'btn btn-primary btn-mini'), __('Report New ADR?'));
+                    echo $this->Html->link('All SADRs >>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                    echo $this->Form->postLink('Report SADR', array('controller' => 'sadrs' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini pull-right'), __('Report New ADR?'));
 
                     
                   ?>
@@ -41,17 +42,20 @@
                         if($aefi['Aefi']['submitted'] > 1) {
                             echo "<li>";
                               echo $this->Html->link($aefi['AefiListOfVaccine'][0]['vaccine_name'].' <small class="muted">('.$aefi['Aefi']['reference_no'].')</small>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
-                                array('escape' => false, 'class' => 'text-success'));
+                                array('escape' => false, 'class' => 'text-'.((isset($aefi['Aefi']['serious']) && $aefi['Aefi']['serious'] == 'Yes') ? 'error' : 'success')));
                               echo "&nbsp;";
                               echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'aefis' , 'action' => 'followup', $aefi['Aefi']['id']), array('escape' => false), __('Add a followup report?'));
                             echo "</li>";
                         } else {
-                            echo $this->Html->link('<li>'.$aefi['Aefi']['created'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'aefis', 'action' => 'edit', $aefi['Aefi']['id']),
-                              array('escape' => false)); 
+                            echo "<li>";
+                              echo $this->Html->link($aefi['Aefi']['created'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'aefis', 'action' => 'edit', $aefi['Aefi']['id']),
+                                array('escape' => false)); 
+                            echo "</li>";
                         }
                       }
                       echo '</ol>';
-                      echo $this->Form->postLink('Report AEFI', array('controller' => 'aefis' , 'action' => 'add'), array('class' => 'btn btn-primary btn-mini'), __('Report New AEFI?'));
+                    echo $this->Html->link('All AEFIs >>', array('controller' => 'aefis', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                      echo $this->Form->postLink('Report AEFI', array('controller' => 'aefis' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New AEFI?'));
                     ?>
                 </div>
                 <div class="span4 formbackp" style="padding: 4px;">
@@ -60,15 +64,20 @@
                       echo '<ol>';
                       foreach ($pqmps as $pqmp) {
                         if($pqmp['Pqmp']['submitted'] > 1) {
-                            echo $this->Html->link('<li>'.$pqmp['Pqmp']['brand_name'].' <small class="muted">('.$pqmp['Pqmp']['reference_no'].')</small></li>', array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id']),
-                              array('escape' => false, 'class' => 'text-success'));  
+                          echo "<li>";
+                            echo $this->Html->link($pqmp['Pqmp']['brand_name'].' <small class="muted">('.$pqmp['Pqmp']['reference_no'].')</small>', array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id']),
+                              array('escape' => false, 'class' => 'text-success')); 
+                          echo "</li>";
                         } else {
-                            echo $this->Html->link('<li>'.$pqmp['Pqmp']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id']),
+                          echo "<li>";
+                            echo $this->Html->link($pqmp['Pqmp']['reference_no'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id']),
                               array('escape' => false)); 
+                          echo "</li>";
                         }
                       }
                       echo '</ol>';
-                      echo $this->Form->postLink('Report PQMP', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-primary btn-mini'), __('Report New PQMP?'));
+                    echo $this->Html->link('All PQMPs >>', array('controller' => 'pqmps', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                      echo $this->Form->postLink('Report PQMP', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New PQMP?'));
                     ?>
                 </div>
             </div>
@@ -82,17 +91,20 @@
                       if($device['Device']['submitted'] > 1) {
                           echo "<li>";
                             echo $this->Html->link($device['Device']['report_title'].' <small class="muted">('.$device['Device']['reference_no'].')</small>', array('controller' => 'devices', 'action' => 'view', $device['Device']['id']),
-                              array('escape' => false, 'class' => 'text-success'));
+                              array('escape' => false, 'class' => 'text-'.((isset($device['Device']['serious']) && in_array($device['Device']['serious'], ['Fatal', 'Serious'])) ? 'error' : 'success')));
                             echo "&nbsp;";
                             echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'devices' , 'action' => 'followup', $device['Device']['id']), array('escape' => false), __('Add a followup report?'));
                           echo "</li>";
                       } else {
-                          echo $this->Html->link('<li>'.$device['Device']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'devices', 'action' => 'edit', $device['Device']['id']),
+                        echo "<li>";
+                          echo $this->Html->link($device['Device']['reference_no'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'devices', 'action' => 'edit', $device['Device']['id']),
                             array('escape' => false)); 
+                        echo "</li>";
                       }
                     }
-                    echo '</ol>';                    
-                    echo $this->Form->postLink('Report Medical Device', array('controller' => 'devices' , 'action' => 'add'), array('class' => 'btn btn-primary btn-mini'), __('Report New Medical Device?'));
+                    echo '</ol>';      
+                    echo $this->Html->link('All Device Incidents >>', array('controller' => 'devices', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));              
+                    echo $this->Form->postLink('Report Medical Device', array('controller' => 'devices' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Medical Device?'));
                   ?>
                 </div>
                 <div class="span4 formbackm" style="padding: 4px;">  
@@ -101,15 +113,20 @@
                       echo '<ol>';
                       foreach ($medications as $medication) {
                         if($medication['Medication']['submitted'] > 1) {
-                            echo $this->Html->link('<li>'.$medication['MedicationProduct'][0]['generic_name_i'].' <small class="muted">('.$medication['Medication']['reference_no'].')</small></li>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
+                          echo "<li>";
+                            echo $this->Html->link($medication['MedicationProduct'][0]['generic_name_i'].' <small class="muted">('.$medication['Medication']['reference_no'].')</small>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
                               array('escape' => false, 'class' => 'text-success'));  
+                          echo "</li>";
                         } else {
-                            echo $this->Html->link('<li>'.$medication['Medication']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'medications', 'action' => 'edit', $medication['Medication']['id']),
+                          echo "<li>";
+                            echo $this->Html->link($medication['Medication']['reference_no'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'medications', 'action' => 'edit', $medication['Medication']['id']),
                               array('escape' => false)); 
+                          echo "</li>";
                         }
                       }
                       echo '</ol>';
-                      echo $this->Form->postLink('Report Medication Error', array('controller' => 'medications' , 'action' => 'add'), array('class' => 'btn btn-primary btn-mini'), __('Report New Medication Error?'));
+                    echo $this->Html->link('All Medication Errors >>', array('controller' => 'medications', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                      echo $this->Form->postLink('Report Medication Error', array('controller' => 'medications' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Medication Error?'));
                     ?>
                 </div>
                 <div class="span4 formbackt" style="padding: 4px;">
@@ -118,15 +135,20 @@
                       echo '<ol>';
                       foreach ($transfusions as $transfusion) {
                         if($transfusion['Transfusion']['submitted'] > 1) {
-                            echo $this->Html->link('<li>'.$transfusion['Transfusion']['report_title'].' <small class="muted">('.$transfusion['Transfusion']['reference_no'].')</small></li>', array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),
-                              array('escape' => false, 'class' => 'text-success'));  
+                          echo "<li>";
+                            echo $this->Html->link($transfusion['Transfusion']['report_title'].' <small class="muted">('.$transfusion['Transfusion']['reference_no'].')</small>', array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),
+                              array('escape' => false, 'class' => 'text-success')); 
+                          echo "</li>";
                         } else {
-                            echo $this->Html->link('<li>'.$transfusion['Transfusion']['reference_no'].' <small class="muted">(unsubmitted)</small></li>', array('controller' => 'transfusions', 'action' => 'edit', $transfusion['Transfusion']['id']),
+                          echo "<li>";
+                            echo $this->Html->link($transfusion['Transfusion']['reference_no'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'transfusions', 'action' => 'edit', $transfusion['Transfusion']['id']),
                               array('escape' => false)); 
+                          echo "</li>";
                         }
                       }
                       echo '</ol>';
-                      echo $this->Form->postLink('Report Transfusion', array('controller' => 'transfusions' , 'action' => 'add'), array('class' => 'btn btn-primary btn-mini'), __('Report New Transfusion Reaction?'));
+                    echo $this->Html->link('All Blood Transfusion Reports >>', array('controller' => 'transfusions', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                      echo $this->Form->postLink('Report Transfusion', array('controller' => 'transfusions' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Transfusion Reaction?'));
                     ?>
                 </div>
             </div>

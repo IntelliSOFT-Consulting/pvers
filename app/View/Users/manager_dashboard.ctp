@@ -16,11 +16,12 @@
                       if($sadr['Sadr']['submitted'] > 1) {
                         echo "<li>";
                           echo $this->Html->link($sadr['Sadr']['report_title'].' <small class="muted">('.$sadr['Sadr']['reference_no'].')</small>', array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
-                            array('escape' => false, 'class' => 'text-success'));
+                            array('escape' => false, 'class' => 'text-'.((isset($sadr['Sadr']['serious']) && $sadr['Sadr']['serious'] == 'Yes') ? 'error' : 'success')));
                         echo "</li>";
                       } 
                     }
                     echo '</ol>';
+                    echo '<p>'.$this->Html->link('All SADRs >>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link')).'<>';
                     echo $this->Html->link('<p> >> All </p>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false));                     
                   ?>
                 </div>
@@ -45,8 +46,10 @@
                       echo '<ol>';
                       foreach ($pqmps as $pqmp) {
                         if($pqmp['Pqmp']['submitted'] > 1) {
-                            echo $this->Html->link('<li>'.$pqmp['Pqmp']['brand_name'].' <small class="muted">('.$pqmp['Pqmp']['reference_no'].')</small></li>', array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id']),
-                              array('escape' => false, 'class' => 'text-success'));  
+                          echo "<li>";
+                            echo $this->Html->link($pqmp['Pqmp']['brand_name'].' <small class="muted">('.$pqmp['Pqmp']['reference_no'].')</small>', array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id']),
+                              array('escape' => false, 'class' => 'text-success')); 
+                          echo "</li>"; 
                         } 
                       }
                       echo '</ol>';
@@ -63,7 +66,7 @@
                       if($device['Device']['submitted'] > 1) {
                           echo "<li>";
                             echo $this->Html->link($device['Device']['report_title'].' <small class="muted">('.$device['Device']['reference_no'].')</small>', array('controller' => 'devices', 'action' => 'view', $device['Device']['id']),
-                              array('escape' => false, 'class' => 'text-success'));
+                              array('escape' => false, 'class' => 'text-'.((isset($device['Device']['serious']) && in_array($device['Device']['serious'], ['Fatal', 'Serious'])) ? 'error' : 'success')));
                           echo "</li>";
                       } 
                     }
@@ -76,8 +79,10 @@
                       echo '<ol>';
                       foreach ($medications as $medication) {
                         if($medication['Medication']['submitted'] > 1) {
-                            echo $this->Html->link('<li>'.$medication['MedicationProduct'][0]['generic_name_i'].' <small class="muted">('.$medication['Medication']['reference_no'].')</small></li>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
-                              array('escape' => false, 'class' => 'text-success'));  
+                          echo "<li>";
+                            echo $this->Html->link($medication['MedicationProduct'][0]['generic_name_i'].' <small class="muted">('.$medication['Medication']['reference_no'].')</small>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
+                              array('escape' => false, 'class' => 'text-success')); 
+                          echo "</li>";
                         } 
                       }
                       echo '</ol>';
@@ -89,8 +94,10 @@
                       echo '<ol>';
                       foreach ($transfusions as $transfusion) {
                         if($transfusion['Transfusion']['submitted'] > 1) {
-                            echo $this->Html->link('<li>'.$transfusion['Transfusion']['report_title'].' <small class="muted">('.$transfusion['Transfusion']['reference_no'].')</small></li>', array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),
-                              array('escape' => false, 'class' => 'text-success'));  
+                          echo "<li>";
+                            echo $this->Html->link($transfusion['Transfusion']['report_title'].' <small class="muted">('.$transfusion['Transfusion']['reference_no'].')</small>', array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),
+                              array('escape' => false, 'class' => 'text-success')); 
+                          echo "</li>";
                         } 
                       }
                       echo '</ol>';

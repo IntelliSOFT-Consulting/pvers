@@ -330,7 +330,7 @@
                           'class' => 'operator',
                           'before' => '<div class="control-group ">   <label class="control-label required">
                             2. Operator of the device at time of onset</label>  <div class="controls">
-                            <input type="hidden" value="" id="DeviceSerious_" name="data[Device][operator]"> <label class="radio inline">',
+                            <input type="hidden" value="" id="DeviceOperator_" name="data[Device][operator]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Healthcare professional' => 'Healthcare professional'),
                         )); 
@@ -370,7 +370,7 @@
                           'class' => 'device_usage',
                           'before' => '<div class="control-group ">   <label class="control-label required">
                             3. Usage of device (choose whichever applies)</label>  <div class="controls">
-                            <input type="hidden" value="" id="DeviceSerious_" name="data[Device][device_usage]"> <label class="radio inline">',
+                            <input type="hidden" value="" id="DeviceUsage_" name="data[Device][device_usage]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Single use' => 'Single use'),
                         )); 
@@ -427,7 +427,7 @@
                         echo $this->Form->input('device_availability', array(
                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'device_availability',
                          'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">5. Availability of device for evaluation</label> </div>
-                                         <div class="controls">  <input type="hidden" value="" id="Serious_" name="data[Device][device_availability]"> <label class="radio inline">',
+                                         <div class="controls">  <input type="hidden" value="" id="DeviceAvailability_" name="data[Device][device_availability]"> <label class="radio inline">',
                          'after' => '</label>',
                          'options' => array('Yes' => 'Yes'),
                         ));

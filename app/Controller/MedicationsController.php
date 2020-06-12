@@ -74,7 +74,7 @@ class MedicationsController extends AppController {
             else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Medication->parseCriteria($this->passedArgs);
-        // $criteria['Medication.user_id'] = $this->Auth->User('id');
+        $criteria['Medication.submitted'] = 2;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Medication.created' => 'desc');
         $this->paginate['contain'] = array('County');

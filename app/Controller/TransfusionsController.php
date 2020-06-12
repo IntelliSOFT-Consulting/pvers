@@ -74,7 +74,7 @@ class TransfusionsController extends AppController {
             else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Transfusion->parseCriteria($this->passedArgs);
-        // $criteria['Transfusion.user_id'] = $this->Auth->User('id');
+        $criteria['Transfusion.submitted'] = 2;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
         $this->paginate['contain'] = array('County');

@@ -344,7 +344,7 @@ class UsersController extends AppController {
     public function reporter_dashboard() {
         $sadrs = $this->User->Sadr->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created'),
+            'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created', 'Sadr.serious'),
             'order' => array('Sadr.created' => 'desc'),
             'conditions' => array('Sadr.user_id' => $this->Auth->User('id')),
         ));
@@ -352,7 +352,7 @@ class UsersController extends AppController {
 
         $aefis = $this->User->Aefi->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created'),
+            'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
             'order' => array('Aefi.created' => 'desc'),
             'conditions' => array('Aefi.user_id' => $this->Auth->User('id')),
         ));
@@ -368,7 +368,7 @@ class UsersController extends AppController {
 
         $devices = $this->User->Device->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created'),
+            'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created', 'Device.serious'),
             'order' => array('Device.created' => 'desc'),
             'conditions' => array('Device.user_id' => $this->Auth->User('id')),
         ));
@@ -399,6 +399,61 @@ class UsersController extends AppController {
     }
 
     public function manager_dashboard() {
+        $sadrs = $this->User->Sadr->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created', 'Sadr.serious'),
+            'order' => array('Sadr.created' => 'desc'),
+            'conditions' => array('Sadr.submitted >' => 1),
+        ));
+        $this->set('sadrs', $sadrs);        
+
+        $aefis = $this->User->Aefi->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
+            'order' => array('Aefi.created' => 'desc'),
+            'conditions' => array('Aefi.submitted >' => 1),
+        ));
+        $this->set('aefis', $aefis);        
+
+        $pqmps = $this->User->Pqmp->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Pqmp.id','Pqmp.user_id', 'Pqmp.created', 'Pqmp.submitted', 'Pqmp.brand_name', 'Pqmp.reference_no', 'Pqmp.created'),
+            'order' => array('Pqmp.created' => 'desc'),
+            'conditions' => array('Pqmp.submitted >' => 1),
+        ));
+        $this->set('pqmps', $pqmps);        
+
+        $devices = $this->User->Device->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created', 'Device.serious'),
+            'order' => array('Device.created' => 'desc'),
+            'conditions' => array('Device.submitted >' => 1),
+        ));
+        $this->set('devices', $devices);        
+
+        $medications = $this->User->Medication->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.created', 'Medication.reference_no', 'Medication.created'),
+            'order' => array('Medication.created' => 'desc'),
+            'conditions' => array('Medication.submitted >' => 1),
+        ));
+        $this->set('medications', $medications);        
+
+        $transfusions = $this->User->Transfusion->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Transfusion.id','Transfusion.user_id', 'Transfusion.reference_no', 'Transfusion.submitted', 'Transfusion.created', 'Transfusion.created'),
+            'order' => array('Transfusion.created' => 'desc'),
+            'conditions' => array('Transfusion.submitted >' => 1),
+        ));
+        $this->set('transfusions', $transfusions);        
+
+        $this->set('notifications', $this->User->Notification->find('all', array(
+            'conditions' => array('Notification.user_id' => $this->Auth->User('id')), 'order' => 'Notification.created DESC', 'limit' => 12
+            )));
+        $this->set('messages', $this->Message->find('list', array('fields' => array('name', 'style'))));
+    }
+
+    public function partner_dashboard() {
         $sadrs = $this->User->Sadr->find('all', array(
             'limit' => 7, 'contain' => array(),
             'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created'),
@@ -451,33 +506,6 @@ class UsersController extends AppController {
             'conditions' => array('Notification.user_id' => $this->Auth->User('id')), 'order' => 'Notification.created DESC', 'limit' => 12
             )));
         $this->set('messages', $this->Message->find('list', array('fields' => array('name', 'style'))));
-    }
-
-    public function partner_dashboard() {
-        $applications = $this->Application->find('all', array(
-            'limit' => 10,
-            'fields' => array('Application.id','Application.user_id', 'Application.created', 'Application.protocol_no', 'Application.submitted'),
-            'order' => array('Application.created' => 'desc'),
-            'contain' => array(),
-            'conditions' => array('Application.user_id' => $this->Auth->User('id')),
-        ));
-        $this->set('applications', $applications);
-
-        $this->set('messages', $this->Message->find('list', array('fields' => array('name', 'style'))));
-        if ($this->request->is('post')) {
-            $this->Application->create();
-            $this->request->data['Application']['user_id'] = $this->Auth->User('id');
-            $fieldList = array('user_id');
-            if (isset($this->request->data['Application']['email_address'])) $fieldList[] = 'email_address';
-            if (isset($this->request->data['Application']['protocol_no'])) $fieldList[] = 'protocol_no';
-            if ($this->Application->save($this->request->data, true, $fieldList)) {
-                $this->Session->setFlash(__('The application has been created'), 'alerts/flash_success');
-                $this->redirect(array('controller' => 'applications', 'action' => 'partner_edit', $this->Application->id));
-            } else {
-                $this->Session->setFlash(__('The application could not be saved. Please, try again.'), 'alerts/flash_error');
-                // $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-            }
-        }
     }
 
     public function admin_dashboard() {
@@ -625,8 +653,8 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Users/edit');
 		$this->Acl->allow($group, 'controllers/Users/admin_index');
 		$this->Acl->allow($group, 'controllers/Users/admin_add');
+        $this->Acl->allow($group, 'controllers/Notifications');
 		$this->Acl->deny($group, 'controllers/Acl');
-		$this->Acl->allow($group, 'controllers/Groups/admin_index');
 
 		//Allow reporters to some
 		$group->id = 3;
@@ -668,6 +696,8 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/SadrFollowups/followupIndex');
 		$this->Acl->allow($group, 'controllers/Pqmps/pqmpIndex');
 		$this->Acl->allow($group, 'controllers/Users/changePassword');
+        $this->Acl->allow($group, 'controllers/Notifications/reporter_index');
+        $this->Acl->allow($group, 'controllers/Notifications/delete');
 
 		//Allow institution administrators to some
 		$group->id = 4;
@@ -682,6 +712,8 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Pqmps/pqmpIndex');
 		$this->Acl->allow($group, 'controllers/Users/changePassword');
 		$this->Acl->allow($group, 'controllers/Users/edit');
+        $this->Acl->allow($group, 'controllers/Notifications/partner_index');
+        $this->Acl->allow($group, 'controllers/Notifications/delete');
 
 		echo "all done";
 		exit;

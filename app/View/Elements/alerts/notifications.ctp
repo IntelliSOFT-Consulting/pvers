@@ -1,5 +1,5 @@
 <?php
-$this->assign('NOT', 'active');
+// $this->assign('NOT', 'active');
 
 	foreach ($notifications as $notification) {
       echo '<div class="alert alert-'.$messages[$notification['Notification']['type']].'" id="'.$notification['Notification']['id'].'">';
@@ -14,5 +14,6 @@ $this->assign('NOT', 'active');
       echo '</div>';
   }
 
-// echo $this->Html->link('All notifications >>', array('controller' => 'notifications', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-info'));
+echo $this->Html->link('All notifications >>', array('controller' => 'notifications', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-info'));
+
 ?>

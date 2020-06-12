@@ -69,7 +69,7 @@ class PqmpsController extends AppController {
             else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
-        // $criteria['Pqmp.user_id'] = $this->Auth->User('id');
+        $criteria['Pqmp.submitted'] = 2;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
         $this->paginate['contain'] = array('County');
