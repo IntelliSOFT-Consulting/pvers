@@ -4,47 +4,35 @@ App::uses('AppModel', 'Model');
  * Feedback Model
  *
  * @property User $User
- * @property Sadr $Sadr
  */
 class Feedback extends AppModel {
-
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	public $useTable = 'feedbacks';
-    public $actsAs = array('Search.Searchable');
-	public $filterArgs = array(
-        array('name' => 'feedback', 'type' => 'query', 'method' => 'orConditions', 'encode' => true),
-		array('name' => 'range', 'type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Feedback.created BETWEEN ? AND ?'),
-    );
+	public $actsAs = array('Containable', 'Search.Searchable');
+    public $filterArgs = array(
+            'name' => array('type' => 'query', 'method' => 'findByName', 'field' => 'Feedback.user_id'),
+            'subject' => array('type' => 'like', 'encode' => true),
+            'feedback' => array('type' => 'like', 'encode' => true),
+        );
 
-	 // public $filterArgs = array(
-  //               'filter' => array('type' => 'query', 'method' => 'orConditions', 'encode' => true),
-  //           );
-        public function orConditions($data = array()) {
-            $filter = $data['feedback'];
-            $cond = array(
-                'OR' => array(
-                    $this->alias . '.feedback LIKE' => '%' . $filter . '%',
-                    $this->alias . '.email LIKE' => '%' . $filter . '%',
-                ));
+    public function findByName($data = array()) {
+       		$cond = array($this->alias.'.user_id' => $this->User->find('list', array(
+                'conditions' => array(
+                    'OR' => array(
+                        'User.name LIKE' => '%' . $data['name'] . '%',
+                        'User.email LIKE' => '%' . $data['name'] . '%',
+                        'User.email LIKE' => '%' . $data['name'] . '%', )),
+                'fields' => array('id', 'id')
+                    )));
             return $cond;
-        }
-
-	public function makeRangeCondition($data = array()) {
-		if(!empty($data['start_date'])) $start_date = date('Y-m-d', strtotime($data['start_date']));
-		else $start_date = date('Y-m-d', strtotime('2012-05-01'));
-
-		if(!empty($data['end_date'])) $end_date = date('Y-m-d', strtotime($data['end_date']));
-		else $end_date = date('Y-m-d');
-
-		return array($start_date, $end_date);
-	}
+    }
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
  * belongsTo associations
  *
  * @var array
  */
-	public $displayField = 'feedback';
+
 	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
@@ -52,22 +40,40 @@ class Feedback extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'Sadr' => array(
-			'className' => 'Sadr',
-			'foreignKey' => 'sadr_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
 		)
 	);
 
+	public $hasMany = array(
+    	'Reply' => array(
+            'className' => 'Feedback',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            // 'conditions' => array('Attachment.model' => 'Application', 'Attachment.group' => 'attachment'),
+                                   // 'className' => 'Feedback',
+                                   // 'foreignKey' => 'application_id',
+                                   // 'dependent' => false,
+                      )
+        );
+
 	public $validate = array(
-        'feedback' => array(
+	'email' => array(
+            'notEmpty' => array(
+                'rule'     => 'email',
+                'required' => true,
+                'message'  => 'Please provide a valid email address'
+            ),
+        ),
+	'subject' => array(
 	      'notempty' => array(
 	        'rule' => array('notempty'),
-	        'message' => 'Message required',
-	      )
-	  )
-      );
+	        'message' => 'Subject cannot be empty!',
+	      ),
+	    ),
+	'feedback' => array(
+	      'notempty' => array(
+	        'rule' => array('notempty'),
+	        'message' => 'Message body cannot be empty!',
+	      ),
+	    ),
+	 );
 }

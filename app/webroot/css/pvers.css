@@ -155,6 +155,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ee8fa', end
   border-radius: 7px;
 }
 
+.pformback {
+  background-color: #f5f8f9;
+  border: 2px solid #3E58A7;
+  border-radius: 7px;
+}
+
 .formbackp {
   background-color: #FCC2E7;
   border: 2px solid #3E58A7;
