@@ -2,6 +2,7 @@
 	$this->assign('PADR', 'active');
 	$this->Html->script('jquery/combobox', array('inline' => false));
 	$this->Html->script('padr', array('inline' => false));
+	$this->Html->css('padr', false, array('inline' => false));
  ?>
 
       <!-- PADR
@@ -39,7 +40,7 @@
                 </div>
             </div>
 
-            <div style="background-color: lightseagreen;"><h5 style="text-align: center; text-decoration: underline;">REPORTER INFORMATION</h5></div>
+            <div style="background-color: lightseagreen;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE PERSON REPORTING</h5></div>
             <div class="row-fluid">
                 <div class="span6">
                     <?php
@@ -50,7 +51,7 @@
                         echo $this->Form->input('reporter_email', array(
                             'type' => 'email',
                             'div' => array('class' => 'control-group required'),
-                            'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS <span style="color:red;">*</span>')
+                            'label' => array('class' => 'control-label required', 'text' => 'Email Address <span style="color:red;">*</span>')
                         ));
                         
                     ?>
@@ -60,30 +61,30 @@
                         echo $this->Form->input('relation', array(
                         	'type' => 'select', 'empty'=>true ,
                         	'label' => array('class' => 'control-label required', 'text' => 'Relation'.' <span style="color:red;">*</span>'), 
-                        	'options' => array('Self' => 'Self', 'Parent' => 'Parent', 'Guardian' => 'Guardian')
+                        	'options' => array('Self' => 'Self', 'Parent' => 'Parent', 'Guardian' => 'Guardian', 'Other' => 'Other')
                         	));
                         echo $this->Form->input('reporter_phone', array(
                             'div' => array('class' => 'control-group'),
-                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                            'label' => array('class' => 'control-label required', 'text' => 'Mobile No.')
                         ));
                         
                         echo $this->Form->input('county_id', array(
 									'label' => array('class' => 'control-label required',
-									'text' => 'COUNTY'),
+									'text' => 'County'),
 									'empty' => true, 'between' => '<div class="controls ui-widget">',
 								));
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
 
-            <div style="background-color: lightblue;"><h5 style="text-align: center; text-decoration: underline;">PATIENT INFORMATION</h5></div>
+            <div style="background-color: lightblue;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE PATIENT</h5></div>
 			<div class="row-fluid">
 				<div class="span6">
 					<?php
 						echo $this->Form->input('patient_name', array(
-							'label' => array('class' => 'control-label required', 'text' =>  'PATIENT\'S INITIALS <span style="color:red;">*</span>'),
-							'after'=>'<p class="help-block"> e.g E.O.O </p></div>',
-							'class' => 'tooltipper',
+							'label' => array('class' => 'control-label required', 'text' =>  'Patient\'s Name <span style="color:red;">*</span>'),
+							// 'after'=>'<span class="muted"> or initials e.g E.O.O </span></div>',
+							'placeholder' => 'Name or Initials' ,'class' => 'tooltipper',
 						));
 					?>
 				</div><!--/span-->
@@ -92,134 +93,87 @@
 						
 						echo $this->Form->input('gender', array(
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'gender',
-							'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">GENDER <span style="color:red;">*</span></label> </div>
+							'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">Gender <span style="color:red;">*</span></label> </div>
 											<div class="controls">  <input type="hidden" value="" id="PadrGender_" name="data[Padr][gender]"> <label class="radio inline">',
 							'after' => '</label>',
 							'options' => array('Male' => 'Male'),
 						));
 						echo $this->Form->input('gender', array(
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'gender',
-							'before' => '<label class="radio inline">',	'after' => '</label>',
-							'options' => array('Female' => 'Female'),
-						));
-						echo $this->Form->input('gender', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'gender',
 							'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
 							'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
 							'before' => '<label class="radio inline">',
-							'after' => '</label> <label>
+							'after' => '</label>
 										<a class="tooltipper" data-original-title="Clears the checked value"
-										onclick="$(\'.gender, #pregnancy_stati :input\').removeAttr(\'checked disabled\')">
-										<em class="accordion-toggle">clear!</em></a> </label>
+										onclick="$(\'.gender\').removeAttr(\'checked disabled\')">
+										<em class="accordion-toggle">clear!</em></a> 
 										</div> </div>',
-							'options' => array('Unknown' => 'Unknown'),
+							'options' => array('Female' => 'Female'),
 						));
 
 					?>
 				</div><!--/span-->
 			</div><!--/row-->
 			<div class="row-fluid">
-				<div class="span12">					
-					<div class="well">
-					<div class="row-fluid">
-					<div class="span6">
+				<div class="span7">					
+					
 					<?php
 						
 						echo $this->Form->input('date_of_birth', array(
 							'type' => 'date',
 							// 'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => true,
 							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
-							'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH <span style="color:red;">*</span>'),
+							'label' => array('class' => 'control-label required', 'text' => 'Date of Birth <span style="color:red;">*</span>'),
 							'title'=> 'select beginning of the month if unsure', 'data-content' => 'If selected, year is mandatory.',
 							'after'=>' <a style="font-weight:normal" onclick="$(\'.birthdate\').removeAttr(\'disabled\'); $(\'.birthdate\').val(\'\');
 								$(\'#PadrAgeGroup\').attr(\'disabled\',\'disabled\'); $(\'#PadrAgeGroup\').val(\'\');" >
 								<em class="accordion-toggle">clear!</em></a>
 								<p class="help-block">	If selected, year is mandatory.  </p></div>',
-							'class' => 'tooltipper span4',
+							'class' => 'tooltipper span3',
 						));
 
 					?>
-					</div>
-					<div class="span1">
-					<h5 class="text-success text-center">--OR--</h5>
-					</div>
-					<div class="span5">
-					<?php
-						echo $this->Form->input('age_group', array(
-							'type' => 'select',
-							'empty' => true,
-							'options' => array(
-												'neonate'=>'neonate',
-												'infant' => 'infant',
-												'child' => 'child',
-												'adolescent' => 'adolescent',
-												'adult' => 'adult',
-												'elderly' => 'elderly',
-												),
-							'label' => array('class' => 'control-label required', 'text' => 'AGE GROUP'),
-							'after' => '<a onclick="$(\'#PadrAgeGroup\').removeAttr(\'disabled\'); $(\'#PadrAgeGroup\').val(\'\');
-									$(\'.birthdate\').attr(\'disabled\',\'disabled\'); $(\'.birthdate\').val(\'\');" >
-								<em class="accordion-toggle">clear!</em></a> </div>',
-						));
-
-					?>
-					</div>
-					</div>
-					</div>
 				</div>
+				<div class="span5"></div>
 			</div>
 
 			<div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">SIDE EFFECT</h5></div>
 			<div class="row-fluid">
-				<div class="span6">
+				<div class="span4">
 					<?php
 						
 						echo $this->Form->input('description_of_reaction', array(
-							'class' => 'span11', 'rows' => '4',
-							'label' => array('class' => 'control-label required', 'text' => 'Describe the reaction <span style="color:red;">*</span>'),
-							'after'=>'<p class="help-block">What were the signs of the side effect?</p></div>',
+							'class' => 'span11', 'rows' => '2', 'between' => false, 'div' => false,
+							'label' => array('class' => 'required', 'text' => 'Describe the reaction <span style="color:red;">*</span>'),
+							'after'=>'<span class="help-block">What were the signs of the side effect?</span>',
 						));
 
 					?>
 				</div><!--/span-->
-				<div class="span6">
+				<div class="span4">
 					<?php
 						echo $this->Form->input('date_of_onset_of_reaction', array(
-							'type' => 'date',
+							'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
 							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
-							'label' => array('class' => 'control-label required', 'text' => 'When did the reaction start?'),
-							'after'=>'<p class="help-block"> When did the reaction start? </p></div>',
+							'label' => array('class' => 'required', 'text' => 'When did the reaction start?'),
+							'class' => 'span4',
 						));
+					?>
+				</div>
+				<div class="span4">
+					<?php
 						echo $this->Form->input('date_of_end_of_reaction', array(
-							'type' => 'date',
+							'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
 							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
-							'label' => array('class' => 'control-label required', 'text' => 'When did the reaction end?'),
-							'after'=>'<p class="help-block"> When the side effect ended (if it ended) </p></div>',
+							'label' => array('class' => 'required', 'text' => 'When did the reaction end? <span class="muted">(if it ended)</span>'),
+							'class' => 'span4',
 						));
 					?>
 				</div>
 			</div><!--/row-->
-			<hr>
                       
             <?php echo $this->element('multi/padr_list_of_medicines');?>
 
-            
-
-			<div class="row-fluid">
-				<div class="span12">
-					<?php
-						echo $this->Form->input('any_other_comment', array('class' => 'span8',  'rows' => '2', 'label' => array('class' => 'control-label',
-																					'text' => 'ANY OTHER COMMENT')));
-					?>
-				</div><!--/span-->
-			</div><!--/row-->
-			 <hr>
-
-			<?php echo $this->element('multi/attachments'); ?>
-
-			
-
-			
 
 		</div> <!-- /span -->
 		<div class="span2">

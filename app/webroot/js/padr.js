@@ -1,7 +1,20 @@
 $(document).ready(function() {
 
 	$( "#PadrCountyId" ).combobox();
+	var dates2 = $('.date-pick-from, .date-pick-to').datepicker({
+        minDate:"-100Y", maxDate:"-0D", 
+        dateFormat:'dd-mm-yy', 
+        showButtonPanel:true, 
+        changeMonth:true, 
+        changeYear:true, 
+        showAnim:'show'
+      });
 
+      $('.date-pick-field').datepicker({
+          minDate:"-100Y", maxDate:"0", 
+          dateFormat:'dd-mm-yy'
+      });
+      
 	var cache2 = {},	lastXhr;
 	$( "#PadrInstitutionCode" ).autocomplete({
 		source: function( request, response ) {

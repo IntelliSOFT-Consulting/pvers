@@ -5,26 +5,16 @@
  */
   $this->Html->script('padr_list_of_medicines', array('inline' => false));
 ?>
-    <div class="row-fluid">
-      <div class="span12">
-        <h5>Medicine details: Please complete the following for medicines involved. Click Add for additional medicines <button  type="button" class="btn btn-success btn-small" id="addPadrlistofMedicine">
-                          Add     <i class="icon-plus"></i>
-                        </button>
-              <?php
-                echo $this->Form->input('list', array('type' => 'hidden', 'value' => ''));
-                echo $this->Form->error('Medication.list', array('wrap' => 'span', 'class' => 'control-group required error'));
-              ?>
-                        </h5>
-      </div>
-    </div>
+  <div style="background-color: #f5f5a4;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE MEDICINE THAT CAUSED THE REACTION</h5></div>
+
     <div class="row-fluid">
         <div class="span12">
-            <table id="listOfPadrlistofMedicinesTable"  class="table table-bordered table-condensed table-pvborder">
+            <table id="listOfPadrListOfMedicinesTable"  class="table table-bordered table-condensed table-pvborder">
                 <tbody>
                   <?php
                     // $i = 0;
-                    if (!empty($this->request->data['PadrlistofMedicine'])) {
-                      $dr = count($this->request->data['PadrlistofMedicine'])-1;
+                    if (!empty($this->request->data['PadrListOfMedicine'])) {
+                      $dr = count($this->request->data['PadrListOfMedicine'])-1;
                     } else {
                       $dr = 0;
                     }
@@ -33,14 +23,14 @@
                   <tr>
                     <td rowspan="3" class="sailor"><?= $i+1; ?></td>
                     <td><?php
-                          echo $this->Form->input('PadrlistofMedicine.'.$i.'.id', array('type' => 'hidden'));                          
+                          echo $this->Form->input('PadrListOfMedicine.'.$i.'.id', array('type' => 'hidden'));                          
                         ?>
                         Name of Medicine
                     </td>
                     <td>
                         <?php
-                          echo $this->Form->input('PadrlistofMedicine.'.$i.'.product_name', array(
-                            'label' => false, 'between' => false,
+                          echo $this->Form->input('PadrListOfMedicine.'.$i.'.product_name', array(
+                            'label' => false, 'between' => false, 'div' => false,
                             'after' => false, 'class' => 'span11',));
                         ?>
                     </td>
@@ -49,13 +39,13 @@
                     </td>                 
                     <td>
                         <?php
-                        echo $this->Form->input('PadrlistofMedicine.'.$i.'.manufacturer', array(
-                            'type' => 'text', 'label' => false, 'between' => false,
+                        echo $this->Form->input('PadrListOfMedicine.'.$i.'.manufacturer', array(
+                            'type' => 'text', 'label' => false, 'between' => false, 'div' => false,
                             'after' => false, 'class' => 'span11',));
                         ?>
                     </td> 
                     <td rowspan="3">
-                        <button  type="button" class="btn btn-danger btn-sm remove-product"  value="<?php if (isset($medication['PadrlistofMedicine'][$i]['id'])) { echo $medication['PadrlistofMedicine'][$i]['id']; } ?>" >
+                        <button  type="button" class="btn btn-danger btn-small remove-padr-product"  value="<?php if (isset($medication['PadrListOfMedicine'][$i]['id'])) { echo $medication['PadrListOfMedicine'][$i]['id']; } ?>" >
                               <i class="icon-minus"></i>
                         </button>
                     </td>
@@ -64,17 +54,19 @@
                     <td>When did you start taking the medicine?</td>
                     <td>
                         <?php
-                          echo $this->Form->input('PadrlistofMedicine.'.$i.'.start_date', array(
-                            'type' => 'text', 'label' => false, 'between' => false, 'class' => 'datepickers',
-                            'after' => false, 'class' => 'span11',));
+                          echo $this->Form->input('PadrListOfMedicine.'.$i.'.start_date', array(
+                            'type' => 'text', 'label' => false, 'between' => false,  'div' => false,
+                            'class' => 'date-pick-from span11',
+                            'after' => false));
                         ?>
                     </td>
                     <td>When did you stop taking the medicine?</td>
                     <td>
                         <?php
-                        echo $this->Form->input('PadrlistofMedicine.'.$i.'.end_date', array(
-                            'type' => 'text', 'label' => false, 'between' => false, 'class' => 'datepickers',
-                            'after' => false, 'class' => 'span11 autosave-ignore',));
+                        echo $this->Form->input('PadrListOfMedicine.'.$i.'.end_date', array(
+                            'type' => 'text', 'label' => false, 'between' => false, 
+                             'div' => false, 'class' => 'date-pick-to span11',
+                            'after' => false));
                         ?>
                     </td> 
                   </tr>
@@ -82,9 +74,9 @@
                     <td>Expiry date of the medicine</td>
                     <td>
                         <?php
-                          echo $this->Form->input('PadrlistofMedicine.'.$i.'.expiry_date', array(
-                            'label' => false, 'between' => false, 'class' => 'datepickers',
-                            'after' => false, 'class' => 'span11',));
+                          echo $this->Form->input('PadrListOfMedicine.'.$i.'.expiry_date', array(
+                            'type' => 'text', 'label' => false, 'between' => false,  'div' => false, 'class' => 'date-pick-field span11',
+                            'after' => false));
                         ?>
                     </td>                    
                     <td>  </td> 
@@ -93,9 +85,9 @@
 
                 
                 <?php } ?>
-
+                <tr><td colspan="6"><label class="required"> For additional medicines, click <button  type="button" class="btn btn-success btn-mini" id="addPadrListOfMedicine"> Add <i class="fa fa-plus-square" aria-hidden="true"></i>  </button> </label>  </td></tr>
                 </tbody>
           </table>
         </div><!--/span-->
     </div><!--/row-->
-    <hr>
+

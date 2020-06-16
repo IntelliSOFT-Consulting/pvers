@@ -54,12 +54,12 @@ class PadrsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Padr->create();
-            $this->Padr->Behaviors->attach('Tools.Captcha');
+            // $this->Padr->Behaviors->attach('Tools.Captcha');
 			if ($this->Padr->save($this->request->data)) {
-				$this->Flash->success(__('The report has been saved.'));
+				$this->Flash->success(__('Your changes have been saved. Please submit the report when you finish.'), 'flash_success');
 				return $this->redirect(array('action' => 'edit', $this->Padr->id));
 			} else {
-				$this->Flash->error(__('The report could not be saved. Please, try again.'));
+				$this->Flash->error(__('The report could not be created. Please, try again.'), 'flash_error');
 			}
 		}
 		
@@ -76,26 +76,21 @@ class PadrsController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Padr->exists($id)) {
-			throw new NotFoundException(__('Invalid padr'));
+			throw new NotFoundException(__('Invalid report id'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Padr->save($this->request->data)) {
-				$this->Flash->success(__('The padr has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Flash->success(__('The report has been saved.'), 'flash_success');
+				return $this->redirect(array('action' => 'edit', $this->Padr->id));
 			} else {
-				$this->Flash->error(__('The padr could not be saved. Please, try again.'));
+				$this->Flash->error(__('The report could not be saved. Please, try again.'), 'flash_error');
 			}
 		} else {
 			$options = array('conditions' => array('Padr.' . $this->Padr->primaryKey => $id));
 			$this->request->data = $this->Padr->find('first', $options);
 		}
-		$sadrs = $this->Padr->Sadr->find('list');
-		$users = $this->Padr->User->find('list');
 		$counties = $this->Padr->County->find('list');
-		$subCounties = $this->Padr->SubCounty->find('list');
-		$designations = $this->Padr->Designation->find('list');
-		$vigiflows = $this->Padr->Vigiflow->find('list');
-		$this->set(compact('sadrs', 'users', 'counties', 'subCounties', 'designations', 'vigiflows'));
+		$this->set(compact('counties'));
 	}
 
 /**

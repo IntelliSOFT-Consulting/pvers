@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Padr Model
  *
- * @property Sadr $Sadr
+ * @property Padr $Padr
  * @property User $User
  * @property County $County
  * @property SubCounty $SubCounty
@@ -21,13 +21,6 @@ class Padr extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Sadr' => array(
-			'className' => 'Sadr',
-			'foreignKey' => 'sadr_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
@@ -73,4 +66,48 @@ class Padr extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+	public function beforeSave($options = array()) {
+		if (!empty($this->data['Padr']['date_of_birth'])) {
+			$this->data['Padr']['date_of_birth'] = implode('-', $this->data['Padr']['date_of_birth']);
+		} else {
+			$this->data['Padr']['date_of_birth'] = '';
+		}
+
+		if (!empty($this->data['Padr']['date_of_onset_of_reaction'])) {
+			$this->data['Padr']['date_of_onset_of_reaction'] = implode('-', $this->data['Padr']['date_of_onset_of_reaction']);
+		} else {
+			$this->data['Padr']['date_of_onset_of_reaction'] = '';
+		}
+
+		if (!empty($this->data['Padr']['date_of_end_of_reaction'])) {
+			$this->data['Padr']['date_of_end_of_reaction'] = implode('-', $this->data['Padr']['date_of_end_of_reaction']);
+		} else {
+			$this->data['Padr']['date_of_end_of_reaction'] = '';
+		}
+
+		return true;
+	}
+
+	public function afterFind($results, $primary = false) {
+		foreach ($results as $key => $val) {
+			if (!empty($val['Padr']['date_of_birth'])) {
+				if(empty($val['Padr']['date_of_birth'])) $val['Padr']['date_of_birth'] = '--';
+				$a = explode('-', $val['Padr']['date_of_birth']);
+				$results[$key]['Padr']['date_of_birth'] = array('day'=> $a[0],'month'=> $a[1],'year'=> $a[2]);
+			}
+			if (!empty($val['Padr']['date_of_onset_of_reaction'])) {
+				if(empty($val['Padr']['date_of_onset_of_reaction'])) $val['Padr']['date_of_onset_of_reaction'] = '--';
+				$b = explode('-', $val['Padr']['date_of_onset_of_reaction']);
+				$results[$key]['Padr']['date_of_onset_of_reaction'] = array('day'=> $b[0],'month'=> $b[1],'year'=> $b[2]);
+			}
+			if (!empty($val['Padr']['date_of_end_of_reaction'])) {
+				if(empty($val['Padr']['date_of_end_of_reaction'])) $val['Padr']['date_of_end_of_reaction'] = '--';
+				$b = explode('-', $val['Padr']['date_of_end_of_reaction']);
+				$results[$key]['Padr']['date_of_end_of_reaction'] = array('day'=> $b[0],'month'=> $b[1],'year'=> $b[2]);
+			}
+			
+		}
+		return $results;
+	}
 }
