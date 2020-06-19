@@ -16,7 +16,7 @@ $(function() {
       });
 
       $('.date-pick-field').datepicker({
-          minDate:"-100Y", maxDate:"0", 
+          minDate:"-100Y",  
           dateFormat:'dd-mm-yy'
       });
     }

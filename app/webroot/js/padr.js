@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$( "#PadrCountyId" ).combobox();
+	// $( "#PadrCountyId" ).combobox();
 	var dates2 = $('.date-pick-from, .date-pick-to').datepicker({
         minDate:"-100Y", maxDate:"-0D", 
         dateFormat:'dd-mm-yy', 
@@ -11,7 +11,7 @@ $(document).ready(function() {
       });
 
       $('.date-pick-field').datepicker({
-          minDate:"-100Y", maxDate:"0", 
+          minDate:"-100Y", 
           dateFormat:'dd-mm-yy'
       });
       

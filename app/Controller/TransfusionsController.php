@@ -231,7 +231,7 @@ class TransfusionsController extends AppController {
         }
         $transfusion = $this->Transfusion->read(null, $id);
         if ($transfusion['Transfusion']['submitted'] > 1) {
-                $this->Session->setFlash(__('The sae has been submitted'), 'alerts/flash_info');
+                $this->Session->setFlash(__('The blood transfusion incident has been submitted'), 'alerts/flash_info');
                 $this->redirect(array('action' => 'view', $this->Transfusion->id));
         }
         if ($transfusion['Transfusion']['user_id'] !== $this->Auth->user('id')) {
@@ -277,7 +277,7 @@ class TransfusionsController extends AppController {
                     foreach ($users as $user) {
                       $variables = array(
                         'name' => $user['User']['name'], 'reference_no' => $transfusion['Transfusion']['reference_no'], 
-                        'reference_link' => $html->link($transfusion['Transfusion']['reference_no'], array('controller' => 'saes', 'action' => 'view', $transfusion['Transfusion']['id'], 'manager' => true, 'full_base' => true), 
+                        'reference_link' => $html->link($transfusion['Transfusion']['reference_no'], array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id'], 'manager' => true, 'full_base' => true), 
                           array('escape' => false)),
                         'modified' => $transfusion['Transfusion']['modified']
                       );

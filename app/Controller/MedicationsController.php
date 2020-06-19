@@ -232,7 +232,7 @@ class MedicationsController extends AppController {
         }
         $medication = $this->Medication->read(null, $id);
         if ($medication['Medication']['submitted'] > 1) {
-                $this->Session->setFlash(__('The sae has been submitted'), 'alerts/flash_info');
+                $this->Session->setFlash(__('The medication has been submitted'), 'alerts/flash_info');
                 $this->redirect(array('action' => 'view', $this->Medication->id));
         }
         if ($medication['Medication']['user_id'] !== $this->Auth->user('id')) {
@@ -278,7 +278,7 @@ class MedicationsController extends AppController {
                     foreach ($users as $user) {
                       $variables = array(
                         'name' => $user['User']['name'], 'reference_no' => $medication['Medication']['reference_no'], 
-                        'reference_link' => $html->link($medication['Medication']['reference_no'], array('controller' => 'saes', 'action' => 'view', $medication['Medication']['id'], 'manager' => true, 'full_base' => true), 
+                        'reference_link' => $html->link($medication['Medication']['reference_no'], array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id'], 'manager' => true, 'full_base' => true), 
                           array('escape' => false)),
                         'modified' => $medication['Medication']['modified']
                       );

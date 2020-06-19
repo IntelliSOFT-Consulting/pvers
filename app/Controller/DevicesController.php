@@ -569,7 +569,7 @@ class DevicesController extends AppController {
         }
         $device = $this->Device->read(null, $id);
         if ($device['Device']['submitted'] > 1) {
-                $this->Session->setFlash(__('The sae has been submitted'), 'alerts/flash_info');
+                $this->Session->setFlash(__('The medical device incident has been submitted'), 'alerts/flash_info');
                 $this->redirect(array('action' => 'view', $this->Device->id));
         }
         if ($device['Device']['user_id'] !== $this->Auth->user('id')) {
@@ -615,7 +615,7 @@ class DevicesController extends AppController {
                     foreach ($users as $user) {
                       $variables = array(
                         'name' => $user['User']['name'], 'reference_no' => $device['Device']['reference_no'], 
-                        'reference_link' => $html->link($device['Device']['reference_no'], array('controller' => 'saes', 'action' => 'view', $device['Device']['id'], 'manager' => true, 'full_base' => true), 
+                        'reference_link' => $html->link($device['Device']['reference_no'], array('controller' => 'devices', 'action' => 'view', $device['Device']['id'], 'manager' => true, 'full_base' => true), 
                           array('escape' => false)),
                         'modified' => $device['Device']['modified']
                       );

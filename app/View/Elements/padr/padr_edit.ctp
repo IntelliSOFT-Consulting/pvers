@@ -13,7 +13,7 @@
 		echo $this->Session->flash();
 		echo $this->Form->create('Padr', array(
 			'type' => 'file',
-			'class' => 'form-horizontal',
+			'class' => 'form-horizontal',			
 			'inputDefaults' => array(
 				'div' => array('class' => 'control-group'),
 				'label' => array('class' => 'control-label'),
@@ -27,7 +27,7 @@
 	?>
 	<div class="row-fluid">
 		<div class="span10 pformback">
-
+		   
 			<?php
 				echo $this->Form->input('Padr.id', array());
 			?>
@@ -60,7 +60,7 @@
                     <?php
                         echo $this->Form->input('relation', array(
                         	'type' => 'select', 'empty'=>true ,
-                        	'label' => array('class' => 'control-label required', 'text' => 'Relation'.' <span style="color:red;">*</span>'), 
+                        	'label' => array('class' => 'control-label required', 'text' => 'Relation'), 
                         	'options' => array('Self' => 'Self', 'Parent' => 'Parent', 'Guardian' => 'Guardian', 'Other' => 'Other')
                         	));
                         echo $this->Form->input('reporter_phone', array(
@@ -70,7 +70,7 @@
                         
                         echo $this->Form->input('county_id', array(
 									'label' => array('class' => 'control-label required',
-									'text' => 'County'),
+									'text' => 'County <span style="color:red;">*</span>'),
 									'empty' => true, 'between' => '<div class="controls ui-widget">',
 								));
                     ?>
@@ -138,77 +138,74 @@
 			</div>
 
 			<div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">SIDE EFFECT</h5></div>
-			<div class="row-fluid">
-				<div class="span4">
-					<?php
-						
-						echo $this->Form->input('description_of_reaction', array(
-							'class' => 'span11', 'rows' => '2', 'between' => false, 'div' => false,
-							'label' => array('class' => 'required', 'text' => 'Describe the reaction <span style="color:red;">*</span>'),
-							'after'=>'<span class="help-block">What were the signs of the side effect?</span>',
-						));
+			<div style="padding: 10px;">
+				<div class="row-fluid">
+					<div class="span4">
+						<?php
+							
+							echo $this->Form->input('description_of_reaction', array(
+								'class' => 'span11', 'rows' => '2', 'between' => false, 'div' => false,
+								'label' => array('class' => 'required', 'text' => 'Describe the reaction <span style="color:red;">*</span>'),
+								'after'=>'<span class="help-block">What were the signs of the side effect?</span>',
+							));
 
-					?>
-				</div><!--/span-->
-				<div class="span4">
-					<?php
-						echo $this->Form->input('date_of_onset_of_reaction', array(
-							'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
-							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
-							'label' => array('class' => 'required', 'text' => 'When did the reaction start?'),
-							'class' => 'span4',
-						));
-					?>
-				</div>
-				<div class="span4">
-					<?php
-						echo $this->Form->input('date_of_end_of_reaction', array(
-							'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
-							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
-							'label' => array('class' => 'required', 'text' => 'When did the reaction end? <span class="muted">(if it ended)</span>'),
-							'class' => 'span4',
-						));
-					?>
-				</div>
-			</div><!--/row-->
+						?>
+					</div><!--/span-->
+					<div class="span4">
+						<?php
+							echo $this->Form->input('date_of_onset_of_reaction', array(
+								'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
+								'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
+								'label' => array('class' => 'required', 'text' => 'When did the reaction start?'),
+								'class' => 'span4',
+							));
+						?>
+					</div>
+					<div class="span4">
+						<?php
+							echo $this->Form->input('date_of_end_of_reaction', array(
+								'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
+								'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
+								'label' => array('class' => 'required', 'text' => 'When did the reaction end? <span class="muted">(if it ended)</span>'),
+								'class' => 'span4',
+							));
+						?>
+					</div>
+				</div><!--/row-->
+			</div>
                       
             <?php echo $this->element('multi/padr_list_of_medicines');?>
 
-
+            <div class="row-fluid">
+            	<div class="span4">            		
+		            <label class="required pull-right" style="color: purple;">Please solve the riddle <i class="fa fa-smile-o" aria-hidden="true"></i></label>
+            	</div>
+            	<div class="span8">
+            		<?php
+		            	echo $this->Captcha->input('Padr', array('label' => false, 'type' => 'number'));
+		            ?>
+            	</div>
+            </div>
+            
 		</div> <!-- /span -->
 		<div class="span2">
 			<div class="my-sidebar" data-spy="affix" >
 	          <div class="awell">
 	            <?php
-	              echo $this->Form->button('<i class="fa fa-floppy-o" aria-hidden="true"></i> Save Changes', array(
+	              echo $this->Form->button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit Report', array(
 	                  'name' => 'saveChanges',
-	                  'class' => 'btn btn-success mapop',
-					  'formnovalidate' => 'formnovalidate',
-	                  'id' => 'PadrSaveChanges', 'title'=>'Save & continue editing',
-	                  'data-content' => 'Save changes to form without submitting it.
-	                                              The form will still be available for further editing.',
+	                  'class' => 'btn btn-primary mapop',
+	                  'id' => 'PadrSaveChanges', 	                  
+	                  'onclick'=>"return confirm('Are you sure you wish to submit the report?');",
 	                  'div' => false,
 	                ));
-	            ?>
-	            <br>
-	            <hr>
-	            <?php
-	              echo $this->Form->button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit', array(
-	                  'name' => 'submitReport',
-	                  'onclick'=>"return confirm('Are you sure you wish to submit the protocol review report?');",
-	                  'class' => 'btn btn-primary btn-block mapop',
-	                  'id' => 'SiteInspectionSubmitReport', 'title'=>'Save and Submit Report',
-	                  'data-content' => 'Submit report for peer review and approval.',
-	                  'div' => false,
-	                ));
-
 	            ?>
 	            <br>
 	            <hr>
 	            <?php
 					
-					echo $this->Html->link('<i class="fa fa-times" aria-hidden="true"></i> Cancel', array('controller' => 'users', 'action' => 'dashboard'),
-                              array('escape' => false, 'class' => 'btn btn-danger btn-block'));  
+					echo $this->Html->link('<i class="fa fa-times" aria-hidden="true"></i> Cancel', array('controller' => 'pages', 'action' => 'home'),
+                              array('escape' => false, 'class' => 'btn btn-block btn-danger'));  
 				?>
 	           </div>
 	        </div>

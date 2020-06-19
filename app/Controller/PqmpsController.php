@@ -425,7 +425,7 @@ class PqmpsController extends AppController {
         }
         $pqmp = $this->Pqmp->read(null, $id);
         if ($pqmp['Pqmp']['submitted'] > 1) {
-                $this->Session->setFlash(__('The sae has been submitted'), 'alerts/flash_info');
+                $this->Session->setFlash(__('The pqmp has been submitted'), 'alerts/flash_info');
                 $this->redirect(array('action' => 'view', $this->Pqmp->id));
         }
         if ($pqmp['Pqmp']['user_id'] !== $this->Auth->user('id')) {
@@ -471,7 +471,7 @@ class PqmpsController extends AppController {
                     foreach ($users as $user) {
                       $variables = array(
                         'name' => $user['User']['name'], 'reference_no' => $pqmp['Pqmp']['reference_no'], 
-                        'reference_link' => $html->link($pqmp['Pqmp']['reference_no'], array('controller' => 'saes', 'action' => 'view', $pqmp['Pqmp']['id'], 'manager' => true, 'full_base' => true), 
+                        'reference_link' => $html->link($pqmp['Pqmp']['reference_no'], array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id'], 'manager' => true, 'full_base' => true), 
                           array('escape' => false)),
                         'modified' => $pqmp['Pqmp']['modified']
                       );

@@ -1,6 +1,6 @@
 <?php
 	$this->assign('MED', 'active');
-	$this->Html->script('jqprint.0.3', array('inline' => false));
+	$this->Html->script('jquery/jqprint.0.3', array('inline' => false));
  ?>
 
       <!-- MEDICATION

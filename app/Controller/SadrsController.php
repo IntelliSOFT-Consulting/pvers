@@ -579,7 +579,7 @@ class SadrsController extends AppController {
         }
         $sadr = $this->Sadr->read(null, $id);
         if ($sadr['Sadr']['submitted'] > 1) {
-                $this->Session->setFlash(__('The sae has been submitted'), 'alerts/flash_info');
+                $this->Session->setFlash(__('The sadr has been submitted'), 'alerts/flash_info');
                 $this->redirect(array('action' => 'view', $this->Sadr->id));
         }
         if ($sadr['Sadr']['user_id'] !== $this->Auth->user('id')) {
@@ -596,7 +596,7 @@ class SadrsController extends AppController {
                     $this->Sadr->saveField('submitted', 2);
                     $sadr = $this->Sadr->read(null, $id);
 
-                    //******************       Send Email and Notifications to Applicant and Managers          *****************************
+                    //******************       Send Email and Notifications to Reporter and Managers          *****************************
                     $this->loadModel('Message');
                     $html = new HtmlHelper(new ThemeView());
                     $message = $this->Message->find('first', array('conditions' => array('name' => 'reporter_sadr_submit')));
@@ -625,7 +625,7 @@ class SadrsController extends AppController {
                     foreach ($users as $user) {
                       $variables = array(
                         'name' => $user['User']['name'], 'reference_no' => $sadr['Sadr']['reference_no'], 
-                        'reference_link' => $html->link($sadr['Sadr']['reference_no'], array('controller' => 'saes', 'action' => 'view', $sadr['Sadr']['id'], 'manager' => true, 'full_base' => true), 
+                        'reference_link' => $html->link($sadr['Sadr']['reference_no'], array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id'], 'manager' => true, 'full_base' => true), 
                           array('escape' => false)),
                         'modified' => $sadr['Sadr']['modified']
                       );

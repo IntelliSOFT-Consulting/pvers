@@ -616,7 +616,7 @@ class AefisController extends AppController {
                     foreach ($users as $user) {
                       $variables = array(
                         'name' => $user['User']['name'], 'reference_no' => $aefi['Aefi']['reference_no'], 
-                        'reference_link' => $html->link($aefi['Aefi']['reference_no'], array('controller' => 'saes', 'action' => 'view', $aefi['Aefi']['id'], 'manager' => true, 'full_base' => true), 
+                        'reference_link' => $html->link($aefi['Aefi']['reference_no'], array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id'], 'manager' => true, 'full_base' => true), 
                           array('escape' => false)),
                         'modified' => $aefi['Aefi']['modified']
                       );
