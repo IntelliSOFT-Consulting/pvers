@@ -57,13 +57,13 @@ class AttachmentsController extends AppController {
 	
 	public function download($id = null) {
 		$this->viewClass = 'Media';
-		$this->Attachment->id = $this->Attachment->Luhn_Verify($id);
+		$this->Attachment->id = $id;
 		if (!$this->Attachment->exists()) {
 			// throw new NotFoundException(__('Invalid attachment'));
 			$this->Session->setFlash(__('The requested file does not exist!.'), 'flash_error');
 			$this->redirect($this->referer());
 		} else { 
-			$attachment = $this->Attachment->read(null, $this->Attachment->Luhn_Verify($id));
+			$attachment = $this->Attachment->read(null, $id);
 			// Render app/webroot/files/example.docx
 			$params = array(
 				'id'        => $attachment['Attachment']['basename'],
@@ -78,14 +78,14 @@ class AttachmentsController extends AppController {
 	
 	public function admin_download($id = null) {
 		$this->viewClass = 'Media';
-		$this->Attachment->id = $this->Attachment->Luhn_Verify($id);
+		$this->Attachment->id = $id;
 		if (!$this->Attachment->exists()) {
 			// throw new NotFoundException(__('Invalid attachment'));
 			$this->Session->setFlash(__('The requested file does not exist!.'), 'flash_error');
 			$this->redirect($this->referer());
 		} else { 
 			try{
-				$attachment = $this->Attachment->read(null, $this->Attachment->Luhn_Verify($id));
+				$attachment = $this->Attachment->read(null, $id);
 				// Render app/webroot/files/example.docx
 				$params = array(
 					'id'        => $attachment['Attachment']['basename'],
@@ -158,9 +158,9 @@ class AttachmentsController extends AppController {
 			throw new MethodNotAllowedException();
 		}
 		if($id) {
-			$this->Attachment->id = $this->Attachment->Luhn_Verify($id);
+			$this->Attachment->id = $id;
 		} else {
-			$this->Attachment->id = $this->Attachment->Luhn_Verify($this->data['id']);		
+			$this->Attachment->id = $this->data['id'];		
 		}
 		if (!$this->Attachment->exists()) {
 			throw new NotFoundException(__('Invalid attachment'));

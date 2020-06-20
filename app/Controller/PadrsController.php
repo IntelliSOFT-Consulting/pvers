@@ -122,7 +122,7 @@ class PadrsController extends AppController {
                     $padr = $this->Padr->read();
                     $variables = array(
                       'name' => $padr['Padr']['reporter_name'], 'reference_no' => $padr['Padr']['reference_no'],
-                      'reference_link' => $html->link($padr['Padr']['reference_no'], array('controller' => 'padrs', 'action' => 'view', $padr['Padr']['token'], 'reporter' => true, 'full_base' => true), 
+                      'reference_link' => $html->link($padr['Padr']['reference_no'], array('controller' => 'padrs', 'action' => 'view', $padr['Padr']['token'], 'full_base' => true), 
                         array('escape' => false)),
                       'modified' => $padr['Padr']['modified']
                       );
@@ -215,7 +215,7 @@ class PadrsController extends AppController {
                     $padr = $this->Padr->read();
                     $variables = array(
                       'name' => $padr['Padr']['reporter_name'], 'reference_no' => $padr['Padr']['reference_no'],
-                      'reference_link' => $html->link($padr['Padr']['reference_no'], array('controller' => 'padrs', 'action' => 'view', $padr['Padr']['token'], 'reporter' => true, 'full_base' => true), 
+                      'reference_link' => $html->link($padr['Padr']['reference_no'], array('controller' => 'padrs', 'action' => 'view', $padr['Padr']['token'], 'full_base' => true), 
                         array('escape' => false)),
                       'modified' => $padr['Padr']['modified']
                       );

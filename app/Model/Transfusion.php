@@ -52,18 +52,11 @@ class Transfusion extends AppModel {
 
 	public $hasMany = array(        
 		'Attachment' => array(
-			'className' => 'Attachment',
-			'foreignKey' => 'transfusion_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
+            'className' => 'Attachment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('Attachment.model' => 'Transfusion', 'Attachment.group' => 'attachment'),
+      	),
 		'Pint' => array(
 			'className' => 'Pint',
 			'foreignKey' => 'transfusion_id',

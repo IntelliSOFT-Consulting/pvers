@@ -1,8 +1,7 @@
 <?php
     $this->assign('SADR', 'active');
-?>
-
-
-<?php 
   echo $this->element('sadr/sadr_index'); 
+  	// $this->extend('sadr/sadr_index');
 ?>
+
+

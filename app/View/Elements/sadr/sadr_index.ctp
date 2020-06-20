@@ -2,84 +2,248 @@
     $this->assign('SADR', 'active');
 ?>
 
-<div class="row-fluid">
-  <div class="span12">
-    
+   
   <?php
     echo $this->Session->flash();
-    if ($redir == 'reporter') {
   ?>
   <div class="row-fluid">
     <div class="span12">
     <?php
-      echo $this->Html->link('<i class="fa fa-file-o" aria-hidden="true"></i> New SADR',
-               array('controller' => 'sadrs', 'action' => 'add'),
-               array('escape' => false, 'class' => 'btn btn-success'));
+      if ($redir == 'reporter') {
+        echo $this->Html->link('<i class="fa fa-file-o" aria-hidden="true"></i> New SADR',
+                 array('controller' => 'sadrs', 'action' => 'add'),
+                 array('escape' => false, 'class' => 'btn btn-success'));
+      }
     ?>
+    <h3>SADR:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small></h3>  <hr class="soften" style="margin: 7px 0px;">
     </div>
   </div>
-    <hr>
-    <?php } ?>
 
-    <div class="marketing">
-      <div class="row-fluid">
-            <div class="span12">
-              <h3>SADR:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small></h3>
-              <hr class="soften" style="margin: 7px 0px;">
-            </div>
-        </div>
-    </div>
-
+<div class="row-fluid">
+  <div class="span12">
     <?php
         echo $this->Form->create('Sadr', array(
           'url' => array_merge(array('action' => 'index'), $this->params['pass']),
           'class' => 'ctr-groups', 'style'=>array('padding:9px;', 'background-color: #F5F5F5'),
         ));
       ?>
-      <table class="table table-condensed table-bordered" style="margin-bottom: 2px;">
-        <thead>
+      <table class="table table-condensed" style="margin-bottom: 2px;">
+        <tbody>
           <tr>
-            <th style="width: 15%;">
+            <td>
               <?php
                 echo $this->Form->input('reference_no',
-                    array('div' => false, 'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Reference No.')));
+                    array(
+                      'div' => false,
+                      'placeholder' => '*sadr/2020*',
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Reference No.'))
+                );
               ?>
-              </th>
-              <th>
+            </td>
+            <td>
               <?php
-                echo $this->Form->input('start_date',
-                  array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
-                      'label' => array('class' => 'required', 'text' => 'SADR Create Dates'), 'placeHolder' => 'Start Date'));
-                echo $this->Form->input('end_date',
-                  array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index',
-                       'after' => '<a style="font-weight:normal" onclick="$(\'.unauthorized_index\').val(\'\');" >
-                            <em class="accordion-toggle">clear!</em></a>',
-                      'label' => false, 'placeHolder' => 'End Date'));
+                echo $this->Form->input('report_title',
+                    array(
+                      'div' => false,
+                      'placeholder' => '*rash*',
+                      'class' => 'unauthorized_index span10', 'label' => array('class' => 'required', 'text' => 'Report Title'))
+                );
               ?>
-              </th>
-              <th>
+            </td>
+            <td colspan="2">
+                <?php
+                  echo $this->Form->input('start_date',
+                    array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
+                        'label' => array('class' => 'required', 'text' => 'Report Dates'), 'placeHolder' => 'Start Date'));
+                  echo $this->Form->input('end_date',
+                    array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index',
+                         'after' => '<a style="font-weight:normal" onclick="$(\'.unauthorized_index\').val(\'\');" >
+                              <em class="accordion-toggle">clear!</em></a>',
+                        'label' => false, 'placeHolder' => 'End Date'));
+                ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('name_of_institution',
+                    array(
+                      'div' => false, 'placeholder' => '*institution*',
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Institution'))
+                );
+              ?>
+            </td>
+            <td>
+                <h5>Serious?</h5>
+                <?php
+                  echo $this->Form->input('serious', array(
+                      'options' => array('Yes' => 'Yes', 'No' => 'No'), 'legend' => false,
+                      'type' => 'radio'
+                  ));
+                ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('county_id',
+                    array(
+                      'div' => false, 'empty' => true,
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'County'))
+                );
+              ?>
+            </td>
+          </tr>
+          <tr>
+              <td>
+              <?php
+                  echo $this->Form->input('drug_name',
+                      array('div' => false, 'placeholder' => 'drug name',
+                        'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Drug Name')));
+              ?>
+              </td>
+              <td>
+              <?php
+                  echo $this->Form->input('medicine_name',
+                      array('div' => false, 'placeholder' => 'drug name', 'class' => 'input-small unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Medicine Name')));
+              ?>
+              </td>
+              <td colspan="2">
+                <h5>Report on:</h5>
+                <?php
+                    echo $this->Form->input('report_sadr', array('label' => 'SADR', 'hiddenField' => false));
+                    echo $this->Form->input('report_therapeutic', array('label' => 'Therapeutic Ineffectiveness', 'hiddenField' => false));
+                ?>
+              </td>
+              <td>
+                <h5>Product</h5>
+                <?php
+                    echo $this->Form->input('medicinal_product', array('label' => 'Medicinal', 'hiddenField' => false));
+                    echo $this->Form->input('blood_products', array('label' => 'Blood product', 'hiddenField' => false));
+                ?>
+              </td>
+              <td>
+                <h5>category</h5>
+                <?php
+                    echo $this->Form->input('herbal_product', array('label' => 'Herbal product', 'hiddenField' => false));
+                    echo $this->Form->input('cosmeceuticals', array('label' => 'Cosmeceuticals', 'hiddenField' => false));
+                ?>
+              </td>
+              <td>
+                <?php
+                    echo $this->Form->input('product_other', array('label' => 'Other', 'hiddenField' => false));
+                    echo $this->Form->input('product_specify', array('label' => false, 'class' => 'input-small', 'placeholder' => '(specify)'));
+                ?>
+              </td>              
+          </tr>
+          <tr>
+            <td>                   
+              <?php
+                  echo $this->Form->input('patient_name',
+                      array('div' => false, 'placeholder' => 'Patient name',
+                        'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => '*Patient Name*')));
+              ?>          
+            </td>
+            <td>
+              <h5>Report Type?</h5> 
+               <?php
+                  echo $this->Form->input('report_type', array(
+                      'options' => array('Initial' => 'Initial', 'Followup' => 'Followup'), 'legend' => false,
+                      'type' => 'radio'
+                  ));
+                ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('serious_reason', array('type' => 'select',
+                  'empty' => true, 'class' => 'span12',
+                  'options' => array('Hospitalization/ Prolonged Hospitalization' => 'Hospitalization',
+                    'Disability' => 'Disability', 
+                    'Congenital anomality' => 'Congenital anomality',
+                    'Life threatening' => 'Life threatening',
+                    'Death' => 'Death'),
+                  'label' => array('class' => 'required', 'text' => 'Seriousness Criteria')
+                  ));
+              ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('outcome', array('type' => 'select',
+                  'empty' => true, 'class' => 'input-small',
+                  'options' => array('recovered/resolved' => 'Recovered/resolved',
+                    'recovering/resolving' => 'Recovering/resolving', 
+                    'recovered/resolved with sequelae' => 'Recovered/resolved with sequelae',
+                    'not recovered/not resolved' => 'Not recovered/not resolved',
+                    'fatal - unrelated to reaction' => 'Fatal - unrelated to reaction',
+                    'fatal - reaction may be contributory' => 'Fatal - reaction may be contributory',
+                    'fatal - due to reaction' => 'Fatal - due to reaction',
+                    'Unknown' => 'Unknown'),
+                  'label' => array('class' => 'required', 'text' => 'Outcome')
+                  ));
+              ?>
+            </td>
+            <td>
+              <?php
+                  echo $this->Form->input('reporter',
+                      array('div' => false, 'class' => 'input-small unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Reporter'), 'placeholder' => 'Name/Email'));
+              ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('designation_id',
+                    array(
+                      'div' => false, 'empty' => true,
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Designation'))
+                );
+              ?>
+            </td>
+            <td>
+              <h5>Gender</h5>
+                <?php
+                  echo $this->Form->input('gender', array(
+                      'options' => array('Male' => 'Male', 'Female' => 'Female', 'Unknown' => 'Unknown'), 'legend' => false,
+                      'type' => 'radio'
+                  ));
+                ?>
+            </td>
+          </tr>
+          <tr>
+              <td><label for="SadrPages" class="required">Pages</label></td>
+              <td>                
                 <?php
                   echo $this->Form->input('pages', array(
-                    'type' => 'select', 'div' => false, 'class' => 'span12', 'selected' => $this->request->params['paging']['Sadr']['limit'],
+                    'type' => 'select', 'div' => false, 'class' => 'input-small', 'selected' => $this->request->params['paging']['Sadr']['limit'],
                     'empty' => true,
                     'options' => $page_options,
-                    'label' => array('class' => 'required', 'text' => 'Pages'),
+                    'label' => false,
                   ));
                 ?>
-              </th>
-              <th rowspan="2" style="width: 14%;">
+              </td>
+              <td>
+                <?php
+                  // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
+                  echo $this->Form->input('submit', array('type' => 'checkbox', 'hiddenField' => false, 
+                      'label' => array('class' => '', 'text' => 'Include Unsubmitted?')));
+                ?>                
+              </td>
+              <td></td>
+              <td>
                 <?php
                   echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
-                      'class' => 'btn btn-inverse', 'div' => 'control-group', 'div' => false,
+                      'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
+                      'formnovalidate' => 'formnovalidate',
                       'style' => array('margin-bottom: 5px')
                   ));
-
-                  echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));echo "<br>";
+                ?>
+              </td>
+              <td>
+                <?php
+                  echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));
+                ?>
+              </td>
+              <td>
+                <?php
                   echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv'), array('class' => 'btn btn-success', 'escape' => false));
                 ?>
-              </th>
+              </td>
           </tr>
-        </thead>
+        </tbody>
       </table>
     <p>
       <?php
@@ -96,9 +260,9 @@
     <div class="pagination">
       <ul>
       <?php
-        echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false));
-        echo $this->Paginator->numbers(array('separator' => '', 'tag' => 'li', 'currentClass' => 'active'));
-        echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false ));
+        echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'disabledTag' => 'a', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'currentTag' => 'a', 'escape' => false));
+        echo $this->Paginator->numbers(array('separator' => '','tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active')); 
+        echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'disabledTag' => 'a', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false ));
       ?>
       </ul>
     </div>
@@ -108,7 +272,7 @@
             <tr>
         <th><?php echo $this->Paginator->sort('id'); ?></th>
         <th><?php echo $this->Paginator->sort('reference_no'); ?></th>
-        <th><?php echo $this->Paginator->sort('report_type'); ?></th>
+        <th><?php echo $this->Paginator->sort('report_title'); ?></th>
         <th><?php echo $this->Paginator->sort('patient_name'); ?></th>
         <th><?php echo $this->Paginator->sort('created'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
@@ -128,13 +292,14 @@
               echo $this->Html->link($sadr['Sadr']['reference_no'], array('action' => 'edit', $sadr['Sadr']['id']), array('escape'=>false));
             }
         ?>&nbsp;</td>
-        <td><?php echo h($sadr['Sadr']['report_type']); 
-                  if($sadr['Sadr']['report_type'] == 'Followup') {
-                    echo "<br> Initial: ";
-                    echo $this->Html->link(
-                      '<label class="label label-info">'.substr($sadr['Sadr']['reference_no'], 0, strpos($sadr['Sadr']['reference_no'], '_')).'</label>', 
-                      array('action' => 'view', $sadr['Sadr']['sadr_id']), array('escape' => false));
-                  }
+        <td><?php 
+              echo $this->Text->truncate($sadr['Sadr']['report_title'], 42); 
+                if($sadr['Sadr']['report_type'] == 'Followup') {
+                  echo "<br> Initial: ";
+                  echo $this->Html->link(
+                    '<label class="label label-info">'.substr($sadr['Sadr']['reference_no'], 0, strpos($sadr['Sadr']['reference_no'], '_')).'</label>', 
+                    array('action' => 'view', $sadr['Sadr']['sadr_id']), array('escape' => false));
+                }
               ?>&nbsp;
         </td>
         <td><?php echo h($sadr['Sadr']['patient_name']); ?>&nbsp;</td>
@@ -171,14 +336,14 @@ $(function() {
           minDate:"-100Y",
           maxDate:"-0D",
           dateFormat:'dd-mm-yy',
-          format: 'dd-mm-yyyy',
+          format: 'dd-mm-yy',
           endDate: '-0d',
           showButtonPanel:true,
           changeMonth:true,
           changeYear:true,
           showAnim:'show',
           onSelect: function( selectedDate ) {
-            var option = this.id == "AefiStartDate" ? "minDate" : "maxDate",
+            var option = this.id == "SadrStartDate" ? "minDate" : "maxDate",
               instance = $( this ).data( "datepicker" ),
               date = $.datepicker.parseDate(
                 instance.settings.dateFormat ||

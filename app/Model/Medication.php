@@ -53,18 +53,11 @@ class Medication extends AppModel {
 
 	public $hasMany = array(        
 		'Attachment' => array(
-			'className' => 'Attachment',
-			'foreignKey' => 'medication_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
+            'className' => 'Attachment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('Attachment.model' => 'Medication', 'Attachment.group' => 'attachment'),
+      	),
 		'MedicationProduct' => array(
 			'className' => 'MedicationProduct',
 			'foreignKey' => 'medication_id',

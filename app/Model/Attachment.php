@@ -32,31 +32,8 @@ class Attachment extends AppModel {
 		return array($start_date, $end_date);
 	}
 		
-	public $belongsTo = array(
-		'Sadr' => array(
-			'className' => 'Sadr',
-			'foreignKey' => 'sadr_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Pqmp' => array(
-			'className' => 'Pqmp',
-			'foreignKey' => 'pqmp_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'SadrFollowup' => array(
-			'className' => 'SadrFollowup',
-			'foreignKey' => 'sadr_followup_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
 	
-	var $validate = array(
+	/*var $validate = array(
 		'file' => array(
 			'resource'   => array(
 				'rule' => 'checkResource',
@@ -71,7 +48,34 @@ class Attachment extends AppModel {
 				'message' => 'The photo you have uploaded is too large. Resize the photo to within 640x480 pixels. Refer to the help section below on how to resize.'
 			)
 		)
-	);
+	);*/
+	var $validate = array(
+		'file' => array(
+			// 'resource'   => array('rule' => 'checkResource'),
+			'resource'   => array(
+				'rule' => 'checkResource',
+				'allowEmpty' => false,
+				'message' => 'Please attach a file!'
+			),
+			'access'     => array('rule' => 'checkAccess'),
+			// 'location'   => array('rule' => array('checkLocation', array(
+				// MEDIA_TRANSFER, '/tmp/'
+			// ))),
+			'permission' => array('rule' => array('checkPermission', '*')),
+			'size'       => array('rule' => array('checkSize', '5M')),
+			// 'pixels'     => array('rule' => array('checkPixels', '1600x1600')),  // removed image restriction
+			// 'extension'  => array('rule' => array('checkExtension', false, array(
+				// 'jpg', 'jpeg', 'png', 'tif', 'tiff', 'gif', 'pdf', 'tmp'
+			// ))),
+			// 'mimeType'   => array('rule' => array('checkMimeType', false, array(
+			// 	'image/jpeg', 'image/png', 'image/tiff', 'image/gif', 'application/pdf'	)))
+		),
+		'alternative' => array(
+			'rule'       => 'checkRepresent',
+			'on'         => 'create',
+			'required'   => false,
+			'allowEmpty' => true,
+		));
 	
 	// function afterFind($results) {
 		// foreach ($results as $key => $val) {

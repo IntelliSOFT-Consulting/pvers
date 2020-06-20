@@ -568,8 +568,8 @@
 				</div><!--/span-->
 			</div><!--/row-->
 			<hr>
-
-			<?php echo $this->element('multi/attachments'); ?>
+			
+			<?php echo $this->element('multi/attachments', ['model' => 'Pqmp', 'group' => 'attachment']); ?>
 
 			<div class="row-fluid">
                 <div class="span6">

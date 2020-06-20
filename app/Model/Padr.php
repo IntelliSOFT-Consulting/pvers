@@ -64,7 +64,13 @@ class Padr extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+		'Attachment' => array(
+            'className' => 'Attachment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('Attachment.model' => 'Padr', 'Attachment.group' => 'attachment'),
+      	)
 	);
 
 	public $validate = array(

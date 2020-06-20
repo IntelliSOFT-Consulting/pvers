@@ -471,7 +471,7 @@
                 </div><!--/span-->
             </div><!--/row-->
 
-            <?php echo $this->element('multi/attachments'); ?>
+            <?php echo $this->element('multi/attachments', ['model' => 'Aefi', 'group' => 'attachment']); ?>
 
             <div class="row-fluid">
                 <div class="span6">

@@ -14,25 +14,83 @@ class Sadr extends AppModel {
     public $actsAs = array('Search.Searchable');
 
 	public $filterArgs = array(
-        array('name' => 'report_title', 'type' => 'like'),
-        array('name' => 'id', 'type' => 'like'),
-        array('name' => 'submitted', 'type' => 'value'),
-        array('name' => 'submit', 'type' => 'query', 'method' => 'orConditions', 'encode' => true),
-        array('name' => 'device', 'type' => 'value'),
-		array('name' => 'range', 'type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Sadr.created BETWEEN ? AND ?'),
+        'reference_no' => array('type' => 'like', 'encode' => true),
+        'report_title' => array('type' => 'like', 'encode' => true),
+        'name_of_institution' => array('type' => 'like', 'encode' => true),
+        'serious' => array('type' => 'like', 'encode' => true),
+        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Sadr.reporter_date BETWEEN ? AND ?'),
+        'start_date' => array('type' => 'query', 'method' => 'dummy'),
+        'end_date' => array('type' => 'query', 'method' => 'dummy'),
+        'county_id' => array('type' => 'value'),
+        'drug_name' => array('type' => 'query', 'method' => 'findByDrugName', 'encode' => true),
+        'medicine_name' => array('type' => 'query', 'method' => 'findByMedicineName', 'encode' => true),
+        'report_sadr' => array('type' => 'value'),
+        'report_therapeutic' => array('type' => 'value'),
+        'medicinal_product' => array('type' => 'value'),
+        'blood_products' => array('type' => 'value'),
+        'herbal_product' => array('type' => 'value'),
+        'cosmeceuticals' => array('type' => 'value'),
+        'product_other' => array('type' => 'value'),
+        'product_specify' => array('type' => 'like', 'encode' => true),
+        'patient_name' => array('type' => 'like', 'encode' => true),
+        'report_type' => array('type' => 'value'),
+        'serious_reason' => array('type' => 'value'),
+        'outcome' => array('type' => 'value'),
+        'reporter' => array('type' => 'query', 'method' => 'reporterFilter', 'encode' => true),
+        'designation_id' => array('type' => 'value'),
+        'gender' => array('type' => 'value'),
+        'submit' => array('type' => 'query', 'method' => 'orConditions', 'encode' => true),
     );
 
-  public function orConditions($data = array()) {
+    public function dummy($data = array()) {
+    	return array( '1' => '1');
+    }
+
+    public function findByDrugName($data = array()) {
+            $cond = array($this->alias.'.id' => $this->SadrListOfDrug->find('list', array(
+                'conditions' => array(
+                    'OR' => array(
+                        'SadrListOfDrug.drug_name LIKE' => '%' . $data['drug_name'] . '%',
+                        'SadrListOfDrug.brand_name LIKE' => '%' . $data['drug_name'] . '%', )),
+                'fields' => array('sadr_id', 'sadr_id')
+                    )));
+            return $cond;
+    }
+
+    public function findByMedicineName($data = array()) {
+            $cond = array($this->alias.'.id' => $this->SadrListOfMedicine->find('list', array(
+                'conditions' => array(
+                    'OR' => array(
+                        'SadrListOfMedicine.drug_name LIKE' => '%' . $data['medicine_name'] . '%',
+                        'SadrListOfMedicine.brand_name LIKE' => '%' . $data['medicine_name'] . '%', )),
+                'fields' => array('sadr_id', 'sadr_id')
+                    )));
+            return $cond;
+    }
+
+    public function reporterFilter($data = array()) {
+            $filter = $data['reporter'];
+            $cond = array(
+                'OR' => array(
+                    $this->alias . '.reporter_name LIKE' => '%' . $filter . '%',
+                    $this->alias . '.reporter_email LIKE' => '%' . $filter . '%',
+                    $this->alias . '.reporter_name_diff LIKE' => '%' . $filter . '%',
+                    $this->alias . '.reporter_email_diff LIKE' => '%' . $filter . '%',
+                ));
+            return $cond;
+    }
+
+  	public function orConditions($data = array()) {
             $filter = $data['submit'];
             if ($filter == '0') {
               $cond = array(
-                    $this->alias . '.submitted' => array('0', '1'),
-                    $this->alias . '.active' => '1'
+                    $this->alias . '.submitted' => array('1', '2', '3'),
+                    // $this->alias . '.active' => '1'
                 );
             } else {
               $cond = array(
-                    $this->alias . '.submitted' => array('2', '3', '4', '5', '6'),
-                    $this->alias . '.active' => '1'
+                    $this->alias . '.submitted' => array('0', '1', '2', '3', '4', '5', '6'),
+                    // $this->alias . '.active' => '1'
                 );
             }
             return $cond;
@@ -96,19 +154,6 @@ class Sadr extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Attachment' => array(
-			'className' => 'Attachment',
-			'foreignKey' => 'sadr_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'SadrListOfDrug' => array(
 			'className' => 'SadrListOfDrug',
 			'foreignKey' => 'sadr_id',
@@ -122,6 +167,12 @@ class Sadr extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+		'Attachment' => array(
+            'className' => 'Attachment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('Attachment.model' => 'Sadr', 'Attachment.group' => 'attachment'),
+      	),
 		'SadrListOfMedicine' => array(
 			'className' => 'SadrListOfMedicine',
 			'foreignKey' => 'sadr_id',

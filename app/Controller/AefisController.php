@@ -14,8 +14,8 @@ class AefisController extends AppController {
     public $components = array('Search.Prg', 'RequestHandler');
     public $paginate = array();
     public $presetVars = true;
+    public $page_options = array('25' => '25', '50' => '50', '100' => '100');
 
-    public $uses = array('Aefi', 'Attachment');
 
     /*public function beforeFilter() {
         parent::beforeFilter();
@@ -55,10 +55,10 @@ class AefisController extends AppController {
     }*/
     public function reporter_index() {
         $this->Prg->commonProcess();
-        $page_options = array('25' => '25', '20' => '20');
+        $this->page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($page_options);
+            else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
         $criteria['Aefi.user_id'] = $this->Auth->User('id');
@@ -73,16 +73,15 @@ class AefisController extends AppController {
               ));
         }
         //end pdf export
-        $this->set('page_options', $page_options);
+        $this->set('page_options', $this->page_options);
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
     public function manager_index() {
         $this->Prg->commonProcess();
-        $page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($page_options);
+            else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
         $criteria['Aefi.submitted'] = 2;
@@ -97,7 +96,11 @@ class AefisController extends AppController {
               ));
         }
         //end pdf export
-        $this->set('page_options', $page_options);
+        $this->set('page_options', $this->page_options);
+        $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 

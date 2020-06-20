@@ -731,8 +731,8 @@
             <hr>
 
 
-                <h5 style="text-align: center; color: #884805;">Attachments</h5>
-                <?php echo $this->element('multi/attachments'); ?>
+            
+            <?php echo $this->element('multi/attachments', ['model' => 'Transfusion', 'group' => 'attachment']); ?>
 
             <div class="row-fluid">
                 <div class="span6">

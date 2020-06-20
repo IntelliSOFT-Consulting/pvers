@@ -88,10 +88,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ee8fa', end
 .footer-classic a, .footer-classic a:focus, .footer-classic a:active {
     color: #ffffff;
 }
-.nav-list li {
+/*.nav-list li {
     padding-top: 5px;
     padding-bottom: 5px;
-}
+}*/
 
 .nav-list li a:hover:before {
     margin-left: 0;
@@ -228,4 +228,12 @@ p.tablenums {
   color: #C09853;
     margin-bottom: 0;
     margin-top: 2px;
+}
+
+.babayao h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
+}
+
+hr {
+  margin: 5px;
 }

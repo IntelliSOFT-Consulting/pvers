@@ -94,18 +94,11 @@ class Pqmp extends AppModel {
  */
 	public $hasMany = array(
 		'Attachment' => array(
-			'className' => 'Attachment',
-			'foreignKey' => 'pqmp_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
+            'className' => 'Attachment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('Attachment.model' => 'Pqmp', 'Attachment.group' => 'attachment'),
+      	),
 	);
 
 	public $validate = array(

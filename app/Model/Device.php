@@ -63,18 +63,11 @@ class Device extends AppModel {
             'conditions' => array('DeviceFollowup.report_type' => 'Followup'),
         ),
 		'Attachment' => array(
-			'className' => 'Attachment',
-			'foreignKey' => 'device_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
+            'className' => 'Attachment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('Attachment.model' => 'Device', 'Attachment.group' => 'attachment'),
+      	),
 		'ListOfDevice' => array(
 			'className' => 'ListOfDevice',
 			'foreignKey' => 'device_id',

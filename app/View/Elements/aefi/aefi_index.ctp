@@ -36,50 +36,220 @@
           'class' => 'ctr-groups', 'style'=>array('padding:9px;', 'background-color: #F5F5F5'),
         ));
       ?>
-      <table class="table table-condensed table-bordered" style="margin-bottom: 2px;">
-        <thead>
+      <table class="table table-condensed" style="margin-bottom: 2px;">
+        <tbody>
           <tr>
-            <th style="width: 15%;">
+            <td>
               <?php
                 echo $this->Form->input('reference_no',
-                    array('div' => false, 'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Reference No.')));
+                    array(
+                      'div' => false,
+                      'placeholder' => '*aefi/2020*',
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Reference No.'))
+                );
               ?>
-              </th>
-              <th>
+            </td>
+            <td>
               <?php
-                echo $this->Form->input('start_date',
-                  array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
-                      'label' => array('class' => 'required', 'text' => 'AEFI Create Dates'), 'placeHolder' => 'Start Date'));
-                echo $this->Form->input('end_date',
-                  array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index',
-                       'after' => '<a style="font-weight:normal" onclick="$(\'.unauthorized_index\').val(\'\');" >
-                            <em class="accordion-toggle">clear!</em></a>',
-                      'label' => false, 'placeHolder' => 'End Date'));
+                echo $this->Form->input('vaccine_name',
+                    array(
+                      'div' => false,
+                      'placeholder' => '*bcg*',
+                      'class' => 'unauthorized_index span10', 'label' => array('class' => 'required', 'text' => 'Name of Vaccine'))
+                );
               ?>
-              </th>
-              <th>
+            </td>
+            <td colspan="2">
+                <?php
+                  echo $this->Form->input('start_date',
+                    array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
+                        'label' => array('class' => 'required', 'text' => 'Report Dates'), 'placeHolder' => 'Start Date'));
+                  echo $this->Form->input('end_date',
+                    array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index',
+                         'after' => '<a style="font-weight:normal" onclick="$(\'.unauthorized_index\').val(\'\');" >
+                              <em class="accordion-toggle">clear!</em></a>',
+                        'label' => false, 'placeHolder' => 'End Date'));
+                ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('name_of_institution',
+                    array(
+                      'div' => false, 'placeholder' => '*institution*',
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Institution'))
+                );
+              ?>
+            </td>
+            <td>
+                <h5>Serious?</h5>
+                <?php
+                  echo $this->Form->input('serious', array(
+                      'options' => array('Yes' => 'Yes', 'No' => 'No'), 'legend' => false,
+                      'type' => 'radio'
+                  ));
+                ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('county_id',
+                    array(
+                      'div' => false, 'empty' => true,
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'County'))
+                );
+              ?>
+            </td>
+          </tr>
+          <tr>
+              <td>
+              <?php
+                  echo $this->Form->input('bcg', array('label' => 'BCG Lymphadenitis', 'hiddenField' => false));
+                  echo $this->Form->input('convulsion', array('label' => 'Convulsion', 'hiddenField' => false));
+                  echo $this->Form->input('urticaria', array('label' => 'Generalized urticaria', 'hiddenField' => false));
+              ?>
+              </td>
+              <td>
+              <?php
+                  echo $this->Form->input('high_fever', array('label' => 'High Fever', 'hiddenField' => false));
+                  echo $this->Form->input('abscess', array('label' => 'Injection site abscess', 'hiddenField' => false));
+              ?>
+              </td>
+              <td colspan="2">
+                <?php
+                    echo $this->Form->input('local_reaction', array('label' => 'Severe Local Reaction', 'hiddenField' => false));
+                    echo $this->Form->input('anaphylaxis', array('label' => 'Anaphylaxis', 'hiddenField' => false));
+                ?>
+              </td>
+              <td>
+                <?php
+                    echo $this->Form->input('meningitis', array('label' => 'Encephalopathy', 'hiddenField' => false));
+                    echo $this->Form->input('paralysis', array('label' => 'Paralysis', 'hiddenField' => false));
+                ?>
+              </td>
+              <td>
+                <?php
+                    echo $this->Form->input('toxic_shock', array('label' => 'Toxic shock', 'hiddenField' => false));
+                    // echo $this->Form->input('cosmeceuticals', array('label' => 'Cosmeceuticals', 'hiddenField' => false));
+                ?>
+              </td>
+              <td>
+                <?php
+                    echo $this->Form->input('complaint_other', array('label' => 'Other', 'hiddenField' => false));
+                    echo $this->Form->input('complaint_other_specify', array('type' => 'text', 'label' => false, 'class' => 'input-small', 'placeholder' => '(specify)'));
+                ?>
+              </td>              
+          </tr>
+          <tr>
+            <td>                   
+              <?php
+                  echo $this->Form->input('patient_name',
+                      array('div' => false, 'placeholder' => 'Patient name',
+                        'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => '*Patient Name*')));
+              ?>          
+            </td>
+            <td>
+              <h5>Report Type?</h5> 
+               <?php
+                  echo $this->Form->input('report_type', array(
+                      'options' => array('Initial' => 'Initial', 'Followup' => 'Followup'), 'legend' => false,
+                      'type' => 'radio'
+                  ));
+                ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('serious_reason', array('type' => 'select',
+                  'empty' => true, 'class' => 'span12',
+                  'options' => array('Missing cost or prolonged hospitalization' => 'Missing cost or prolonged hospitalization',
+                    'Persistent or significant disability' => 'Persistent or significant disability', 
+                    'Congenital anomality' => 'Congenital anomality',
+                    'Life threatening' => 'Life threatening',
+                    'Death' => 'Death'),
+                  'label' => array('class' => 'required', 'text' => 'Seriousness Criteria')
+                  ));
+              ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('outcome', array('type' => 'select',
+                  'empty' => true, 'class' => 'input-small',
+                  'options' => array('recovered/resolved' => 'Recovered/resolved',
+                    'recovering/resolving' => 'Recovering/resolving', 
+                    'recovered/resolved with sequelae' => 'Recovered/resolved with sequelae',
+                    'not recovered/not resolved' => 'Not recovered/not resolved',
+                    'fatal - unrelated to reaction' => 'Fatal - unrelated to reaction',
+                    'fatal - reaction may be contributory' => 'Fatal - reaction may be contributory',
+                    'fatal - due to reaction' => 'Fatal - due to reaction',
+                    'Unknown' => 'Unknown'),
+                  'label' => array('class' => 'required', 'text' => 'Outcome')
+                  ));
+              ?>
+            </td>
+            <td>
+              <?php
+                  echo $this->Form->input('reporter',
+                      array('div' => false, 'class' => 'input-small unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Reporter'), 'placeholder' => 'Name/Email'));
+              ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('designation_id',
+                    array(
+                      'div' => false, 'empty' => true,
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Designation'))
+                );
+              ?>
+            </td>
+            <td>
+              <h5>Gender</h5>
+                <?php
+                  echo $this->Form->input('gender', array(
+                      'options' => array('Male' => 'Male', 'Female' => 'Female', 'Unknown' => 'Unknown'), 'legend' => false,
+                      'type' => 'radio'
+                  ));
+                ?>
+            </td>
+          </tr>
+          <tr>
+              <td><label for="AefiPages" class="required">Pages</label></td>
+              <td>                
                 <?php
                   echo $this->Form->input('pages', array(
-                    'type' => 'select', 'div' => false, 'class' => 'span12', 'selected' => $this->request->params['paging']['Aefi']['limit'],
+                    'type' => 'select', 'div' => false, 'class' => 'input-small', 'selected' => $this->request->params['paging']['Aefi']['limit'],
                     'empty' => true,
                     'options' => $page_options,
-                    'label' => array('class' => 'required', 'text' => 'Pages'),
+                    'label' => false,
                   ));
                 ?>
-              </th>
-              <th rowspan="2" style="width: 14%;">
+              </td>
+              <td>
+                <?php
+                  // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
+                  echo $this->Form->input('submit', array('type' => 'checkbox', 'hiddenField' => false, 
+                      'label' => array('class' => '', 'text' => 'Include Unsubmitted?')));
+                ?>                
+              </td>
+              <td></td>
+              <td>
                 <?php
                   echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
-                      'class' => 'btn btn-inverse', 'div' => 'control-group', 'div' => false,
+                      'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
+                      'formnovalidate' => 'formnovalidate',
                       'style' => array('margin-bottom: 5px')
                   ));
-
-                  echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));echo "<br>";
-                  echo $this->Html->link('<i class="icon-file-alt"></i> Excel', array('action' => 'index', 'ext' => 'csv'), array('class' => 'btn btn-success', 'escape' => false));
                 ?>
-              </th>
+              </td>
+              <td>
+                <?php
+                  echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));
+                ?>
+              </td>
+              <td>
+                <?php
+                  echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv'), array('class' => 'btn btn-success', 'escape' => false));
+                ?>
+              </td>
           </tr>
-        </thead>
+        </tbody>
       </table>
     <p>
       <?php
@@ -96,9 +266,9 @@
     <div class="pagination">
       <ul>
       <?php
-        echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false));
-        echo $this->Paginator->numbers(array('separator' => '', 'tag' => 'li', 'currentClass' => 'active'));
-        echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false ));
+        echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'disabledTag' => 'a', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'currentTag' => 'a', 'escape' => false));
+        echo $this->Paginator->numbers(array('separator' => '','tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active')); 
+        echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'disabledTag' => 'a', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false ));
       ?>
       </ul>
     </div>
