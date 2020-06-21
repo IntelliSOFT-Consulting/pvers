@@ -35,8 +35,8 @@
                 echo $this->Form->input('reference_no',
                     array(
                       'div' => false,
-                      'placeholder' => '*sadr/2020*',
-                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Reference No.'))
+                      'placeholder' => 'sadr/2020',
+                      'class' => 'span12', 'label' => array('class' => 'required', 'text' => 'Reference No.'))
                 );
               ?>
             </td>
@@ -45,7 +45,7 @@
                 echo $this->Form->input('report_title',
                     array(
                       'div' => false,
-                      'placeholder' => '*rash*',
+                      'placeholder' => 'rash',
                       'class' => 'unauthorized_index span10', 'label' => array('class' => 'required', 'text' => 'Report Title'))
                 );
               ?>
@@ -66,7 +66,7 @@
               <?php
                 echo $this->Form->input('name_of_institution',
                     array(
-                      'div' => false, 'placeholder' => '*institution*',
+                      'div' => false, 'placeholder' => 'institution',
                       'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Institution'))
                 );
               ?>
@@ -137,7 +137,7 @@
               <?php
                   echo $this->Form->input('patient_name',
                       array('div' => false, 'placeholder' => 'Patient name',
-                        'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => '*Patient Name*')));
+                        'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Patient Name')));
               ?>          
             </td>
             <td>

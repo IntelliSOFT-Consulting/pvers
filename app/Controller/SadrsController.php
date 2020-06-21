@@ -53,10 +53,7 @@ class SadrsController extends AppController {
 /**
  * index method
  */
-	/*public function index() {
-		$this->Sadr->recursive = 0;
-		$this->set('sadrs', $this->paginate());
-	}*/
+
 	public function reporter_index() {
         $this->Prg->commonProcess();
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
@@ -113,74 +110,13 @@ class SadrsController extends AppController {
         $this->set('sadrs', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
-    public function sadrIndex() {
-        $this->Prg->commonProcess();
-		if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-		if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-        else $this->paginate['limit'] = 20;
-		if (isset($this->passedArgs['id']) && $this->Sadr->Luhn_Verify($this->passedArgs['id'])) $this->passedArgs['id'] = $this->Sadr->Luhn_Verify($this->passedArgs['id']);
-		$criteria = $this->Sadr->parseCriteria($this->passedArgs);
-		if($this->Auth->User('group_id') != 4) $criteria['Sadr.user_id'] = $this->Auth->user('id');
-		else $criteria['Sadr.institution_code'] = $this->Auth->user('ward');
-        $this->paginate['conditions'] = $criteria;
-        $this->paginate['order'] = array('Sadr.created' => 'desc');
- 		$this->Sadr->recursive = -1;
-
-		if (strpos($this->request->url,'xls') !== false){
-			$this->helpers[] = 'PhpExcel';
-			$this->Sadr->recursive = 1;
-			$routes = $this->Sadr->SadrListOfDrug->Route->find('list');
-			$this->set(compact('routes'));
-			$frequency = $this->Sadr->SadrListOfDrug->Frequency->find('list');
-			$this->set(compact('frequency'));
-			$dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
-			$this->set(compact('dose'));
-		}
-		if ($this->RequestHandler->isXml()) {
-			$this->Sadr->recursive = 1;
-			$this->response->download('SADRS_'.date('Y_m_d_His'));
-		}
-		$this->set('sadrs', $this->paginate());
-    }
-
-    public function admin_index() {
-        $this->Prg->commonProcess();
-		if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-		if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-        else $this->paginate['limit'] = 20;
-		if (isset($this->passedArgs['id']) && $this->Sadr->Luhn_Verify($this->passedArgs['id'])) $this->passedArgs['id'] = $this->Sadr->Luhn_Verify($this->passedArgs['id']);
-		$criteria = $this->Sadr->parseCriteria($this->passedArgs);
-        $this->paginate['conditions'] = $criteria;
-        $this->paginate['order'] = array('Sadr.created' => 'desc');
- 		$this->Sadr->recursive = -1;
-
-		if (strpos($this->request->url,'xls') !== false){
-			$this->helpers[] = 'PhpExcel';
-			$this->Sadr->recursive = 1;
-			$routes = $this->Sadr->SadrListOfDrug->Route->find('list');
-			$this->set(compact('routes'));
-			$frequency = $this->Sadr->SadrListOfDrug->Frequency->find('list');
-			$this->set(compact('frequency'));
-			$dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
-			$this->set(compact('dose'));
-		}
-		if ($this->RequestHandler->isXml()) {
-			$this->Sadr->recursive = 1;
-			$this->response->download('SADRS_'.date('Y_m_d_His'));
-		}
-		$this->set('sadrs', $this->paginate());
-    }
-
     private function csv_export($csadrs = ''){
         //todo: check if data exists in $users
         $_serialize = 'csadrs';
-        $_header = array('Id', 'Reference Number', 
-            'Created',
-            );
-        $_extract = array('Sadr.id', 'Sadr.reference_no', 
-            'Sadr.created');
+        $_header = array('Id');
+        $_extract = array('Sadr.id');
 
-        $this->response->download('SADRS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        // $this->response->download('AEFIS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
         $this->viewClass = 'CsvView.Csv';
         $this->set(compact('csadrs', '_serialize', '_header', '_extract'));
     }

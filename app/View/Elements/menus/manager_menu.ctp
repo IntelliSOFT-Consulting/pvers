@@ -43,6 +43,37 @@
                         array('controller' => 'transfusions', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
+
+
+           <li class="dropdown <?php echo $this->fetch('Reports') ?>">
+             <a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop4" href="#">
+                <i class="fa fa-bar-chart" aria-hidden="true"></i> Reports <b class="caret"></b></a>
+              <ul aria-labelledby="drop4" role="menu" class="dropdown-menu">
+                 <li><?php
+                            echo $this->Html->link('<i class="icon-signal"></i> SADRS by Designation',  array('controller' => 'reports', 'action'=>'sadrs_by_designation', 'admin' => false ),
+                                      array('escape' => false, 'tabindex' => '-1'));
+                        ?>
+                </li>
+                <li><?php
+                            echo $this->Html->link('<i class="icon-signal"></i> AEFIs by Designation',  array('controller' => 'reports', 'action'=>'aefis_by_designation', 'admin' => false ),
+                                      array('escape' => false, 'tabindex' => '-1'));
+                        ?>
+                </li>
+                <li><?php
+                            echo $this->Html->link('<i class="icon-signal"></i> PQMPs by Designation',  array('controller' => 'reports', 'action'=>'pqmps_by_designation', 'admin' => false ),
+                                      array('escape' => false, 'tabindex' => '-1'));
+                        ?>
+                </li>
+                <li><?php
+                            echo $this->Html->link('<i class="icon-signal"></i> Devices by Designation',  array('controller' => 'reports', 'action'=>'devices_by_designation', 'admin' => false ),
+                                      array('escape' => false, 'tabindex' => '-1'));
+                        ?>
+                </li>
+              <li class="divider"></li>
+                 
+            </ul>
+           </li>
+
              <li class="<?php echo $this->fetch('NT') ?>">
                 <?php
                     echo $this->Html->link('<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Notifications',

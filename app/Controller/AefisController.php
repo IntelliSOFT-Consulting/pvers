@@ -80,7 +80,7 @@ class AefisController extends AppController {
     public function manager_index() {
         $this->Prg->commonProcess();
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+        if (!empty($this->request->query['pages'])) $this->paginate['limit'] = $this->request->query['pages'];
             else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
@@ -102,58 +102,6 @@ class AefisController extends AppController {
         $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
-    }
-
-    public function aefiIndex() {
-        $this->Prg->commonProcess();
-        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-        else $this->paginate['limit'] = 20;
-        if (isset($this->passedArgs['id']) && $this->Aefi->Luhn_Verify($this->passedArgs['id'])) $this->passedArgs['id'] = $this->Aefi->Luhn_Verify($this->passedArgs['id']);
-        $criteria = $this->Aefi->parseCriteria($this->passedArgs);
-        if($this->Auth->User('group_id') != 4) $criteria['Aefi.user_id'] = $this->Auth->user('id');
-        else $criteria['Aefi.institution_code'] = $this->Auth->user('ward');
-        $this->paginate['conditions'] = $criteria;
-        $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->Aefi->recursive = -1;
-
-        if (strpos($this->request->url,'xls') !== false){
-            $this->helpers[] = 'PhpExcel';
-            $this->Aefi->recursive = 1;
-        }
-        if ($this->RequestHandler->isXml()) {
-            $this->Aefi->recursive = 1;
-            $this->response->download('AEFIS_'.date('Y_m_d_His'));
-        }
-        $this->set('aefis', $this->paginate());
-    }
-
-    public function admin_index() {
-        $this->Prg->commonProcess();
-        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-        else $this->paginate['limit'] = 20;
-        if (isset($this->passedArgs['id']) && $this->Aefi->Luhn_Verify($this->passedArgs['id'])) $this->passedArgs['id'] = $this->Aefi->Luhn_Verify($this->passedArgs['id']);
-        $criteria = $this->Aefi->parseCriteria($this->passedArgs);
-        $this->paginate['conditions'] = $criteria;
-        $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->Aefi->recursive = -1;
-
-        if (strpos($this->request->url,'xls') !== false){
-            $this->helpers[] = 'PhpExcel';
-            $this->Aefi->recursive = 1;
-            $routes = $this->Aefi->AefiListOfDrug->Route->find('list');
-            $this->set(compact('routes'));
-            $frequency = $this->Aefi->AefiListOfDrug->Frequency->find('list');
-            $this->set(compact('frequency'));
-            $dose = $this->Aefi->AefiListOfDrug->Dose->find('list');
-            $this->set(compact('dose'));
-        }
-        if ($this->RequestHandler->isXml()) {
-            $this->Aefi->recursive = 1;
-            $this->response->download('AEFIS_'.date('Y_m_d_His'));
-        }
-        $this->set('aefis', $this->paginate());
     }
 
     private function csv_export($csadrs = ''){

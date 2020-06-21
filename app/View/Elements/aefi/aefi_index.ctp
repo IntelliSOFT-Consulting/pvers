@@ -18,7 +18,6 @@
     ?>
     </div>
   </div>
-    <hr>
     <?php } ?>
 
     <div class="marketing">
@@ -44,8 +43,8 @@
                 echo $this->Form->input('reference_no',
                     array(
                       'div' => false,
-                      'placeholder' => '*aefi/2020*',
-                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Reference No.'))
+                      'placeholder' => 'aefi/2020',
+                      'class' => 'span12', 'label' => array('class' => 'required', 'text' => 'Reference No.'))
                 );
               ?>
             </td>
@@ -54,7 +53,7 @@
                 echo $this->Form->input('vaccine_name',
                     array(
                       'div' => false,
-                      'placeholder' => '*bcg*',
+                      'placeholder' => 'bcg',
                       'class' => 'unauthorized_index span10', 'label' => array('class' => 'required', 'text' => 'Name of Vaccine'))
                 );
               ?>
@@ -75,7 +74,7 @@
               <?php
                 echo $this->Form->input('name_of_institution',
                     array(
-                      'div' => false, 'placeholder' => '*institution*',
+                      'div' => false, 'placeholder' => 'institution',
                       'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Institution'))
                 );
               ?>
@@ -143,7 +142,7 @@
               <?php
                   echo $this->Form->input('patient_name',
                       array('div' => false, 'placeholder' => 'Patient name',
-                        'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => '*Patient Name*')));
+                        'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Patient Name')));
               ?>          
             </td>
             <td>
@@ -158,7 +157,7 @@
             <td>
               <?php
                 echo $this->Form->input('serious_reason', array('type' => 'select',
-                  'empty' => true, 'class' => 'span12',
+                  'empty' => true, 'class' => 'input',
                   'options' => array('Missing cost or prolonged hospitalization' => 'Missing cost or prolonged hospitalization',
                     'Persistent or significant disability' => 'Persistent or significant disability', 
                     'Congenital anomality' => 'Congenital anomality',
