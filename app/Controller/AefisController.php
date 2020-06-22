@@ -74,6 +74,10 @@ class AefisController extends AppController {
         }
         //end pdf export
         $this->set('page_options', $this->page_options);
+        $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
@@ -92,7 +96,7 @@ class AefisController extends AppController {
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
           $this->csv_export($this->Aefi->find('all', 
-                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'], 'limit' => 1000)
               ));
         }
         //end pdf export
@@ -104,18 +108,12 @@ class AefisController extends AppController {
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
-    private function csv_export($csadrs = ''){
+    private function csv_export($caefis = ''){
         //todo: check if data exists in $users
-        $_serialize = 'csadrs';
-        $_header = array('Id', 'Reference Number', 
-            'Created',
-            );
-        $_extract = array('Aefi.id', 'Aefi.reference_no', 
-            'Aefi.created');
-
-        $this->response->download('AEFIS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
-        $this->viewClass = 'CsvView.Csv';
-        $this->set(compact('csadrs', '_serialize', '_header', '_extract'));
+        $this->response->download('AEFIs_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->set(compact('caefis'));
+        $this->layout = false;
+        $this->render('csv_export');
     }
 
     public function institutionCodes() {

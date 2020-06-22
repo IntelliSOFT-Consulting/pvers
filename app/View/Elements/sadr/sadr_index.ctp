@@ -5,6 +5,7 @@
    
   <?php
     echo $this->Session->flash();
+    // debug($this->request->query);
   ?>
   <div class="row-fluid">
     <div class="span12">
@@ -239,7 +240,7 @@
               </td>
               <td>
                 <?php
-                  echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv'), array('class' => 'btn btn-success', 'escape' => false));
+                  echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv', '?' => $this->request->query), array('class' => 'btn btn-success', 'escape' => false));
                 ?>
               </td>
           </tr>

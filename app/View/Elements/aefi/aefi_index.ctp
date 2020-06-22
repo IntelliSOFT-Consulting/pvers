@@ -75,7 +75,7 @@
                 echo $this->Form->input('name_of_institution',
                     array(
                       'div' => false, 'placeholder' => 'institution',
-                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Institution'))
+                      'class' => 'span12', 'label' => array('class' => 'required', 'text' => 'Institution'))
                 );
               ?>
             </td>
@@ -156,13 +156,14 @@
             </td>
             <td>
               <?php
-                echo $this->Form->input('serious_reason', array('type' => 'select',
+                echo $this->Form->input('serious_yes', array('type' => 'select',
                   'empty' => true, 'class' => 'input',
-                  'options' => array('Missing cost or prolonged hospitalization' => 'Missing cost or prolonged hospitalization',
-                    'Persistent or significant disability' => 'Persistent or significant disability', 
-                    'Congenital anomality' => 'Congenital anomality',
-                    'Life threatening' => 'Life threatening',
-                    'Death' => 'Death'),
+                  'options' => array('Death' => 'Death',
+                    'Life threatening' => 'Life threatening', 
+                    'Persistent or significant disability' => 'Persistent or significant disability',
+                    'Missing cost or prolonged hospitalization' => 'Missing cost or prolonged hospitalization',
+                    'Congenital anomaly' => 'Congenital anomaly',
+                    'Other important medical event' => 'Other important medical event'),
                   'label' => array('class' => 'required', 'text' => 'Seriousness Criteria')
                   ));
               ?>
@@ -171,13 +172,11 @@
               <?php
                 echo $this->Form->input('outcome', array('type' => 'select',
                   'empty' => true, 'class' => 'input-small',
-                  'options' => array('recovered/resolved' => 'Recovered/resolved',
-                    'recovering/resolving' => 'Recovering/resolving', 
-                    'recovered/resolved with sequelae' => 'Recovered/resolved with sequelae',
-                    'not recovered/not resolved' => 'Not recovered/not resolved',
-                    'fatal - unrelated to reaction' => 'Fatal - unrelated to reaction',
-                    'fatal - reaction may be contributory' => 'Fatal - reaction may be contributory',
-                    'fatal - due to reaction' => 'Fatal - due to reaction',
+                  'options' => array('Recovered/Resolved' => 'Recovered/Resolved',
+                    'Recovering/Resolving' => 'Recovering/Resolving', 
+                    'Not recovered/Not resolved/Ongoing' => 'Not recovered/Not resolved/Ongoing',
+                    'Recovered/Resolved with sequelae' => 'Recovered/Resolved with sequelae',
+                    'Fatal' => 'Fatal',
                     'Unknown' => 'Unknown'),
                   'label' => array('class' => 'required', 'text' => 'Outcome')
                   ));
@@ -186,7 +185,7 @@
             <td>
               <?php
                   echo $this->Form->input('reporter',
-                      array('div' => false, 'class' => 'input-small unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Reporter'), 'placeholder' => 'Name/Email'));
+                      array('div' => false, 'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Reporter'), 'placeholder' => 'Name/Email'));
               ?>
             </td>
             <td>
@@ -244,7 +243,7 @@
               </td>
               <td>
                 <?php
-                  echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv'), array('class' => 'btn btn-success', 'escape' => false));
+                  echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv', '?' => $this->request->query), array('class' => 'btn btn-success', 'escape' => false));
                 ?>
               </td>
           </tr>

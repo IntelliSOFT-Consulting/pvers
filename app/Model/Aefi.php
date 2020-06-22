@@ -18,23 +18,25 @@ class Aefi extends AppModel {
         'report_title' => array('type' => 'like', 'encode' => true),
         'name_of_institution' => array('type' => 'like', 'encode' => true),
         'serious' => array('type' => 'like', 'encode' => true),
-        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Sadr.reporter_date BETWEEN ? AND ?'),
+        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Aefi.created BETWEEN ? AND ?'),
         'start_date' => array('type' => 'query', 'method' => 'dummy'),
         'end_date' => array('type' => 'query', 'method' => 'dummy'),
         'county_id' => array('type' => 'value'),
-        'drug_name' => array('type' => 'query', 'method' => 'findByDrugName', 'encode' => true),
-        'medicine_name' => array('type' => 'query', 'method' => 'findByMedicineName', 'encode' => true),
-        'report_sadr' => array('type' => 'value'),
-        'report_therapeutic' => array('type' => 'value'),
-        'medicinal_product' => array('type' => 'value'),
-        'blood_products' => array('type' => 'value'),
-        'herbal_product' => array('type' => 'value'),
-        'cosmeceuticals' => array('type' => 'value'),
-        'product_other' => array('type' => 'value'),
-        'product_specify' => array('type' => 'like', 'encode' => true),
+        'vaccine_name' => array('type' => 'query', 'method' => 'findByVaccineName', 'encode' => true),
+        'bcg' => array('type' => 'value'),
+        'convulsion' => array('type' => 'value'),
+        'urticaria' => array('type' => 'value'),
+        'high_fever' => array('type' => 'value'),
+        'abscess' => array('type' => 'value'),
+        'local_reaction' => array('type' => 'value'),
+        'anaphylaxis' => array('type' => 'value'),
+        'paralysis' => array('type' => 'value'),
+        'toxic_shock' => array('type' => 'value'),
+        'complaint_other' => array('type' => 'value'),
+        'complaint_other_specify' => array('type' => 'like', 'encode' => true),
         'patient_name' => array('type' => 'like', 'encode' => true),
         'report_type' => array('type' => 'value'),
-        'serious_reason' => array('type' => 'value'),
+        'serious_yes' => array('type' => 'value'),
         'outcome' => array('type' => 'value'),
         'reporter' => array('type' => 'query', 'method' => 'reporterFilter', 'encode' => true),
         'designation_id' => array('type' => 'value'),
@@ -46,24 +48,13 @@ class Aefi extends AppModel {
     	return array( '1' => '1');
     }
 
-    public function findByDrugName($data = array()) {
-            $cond = array($this->alias.'.id' => $this->SadrListOfDrug->find('list', array(
+    public function findByVaccineName($data = array()) {
+            $cond = array($this->alias.'.id' => $this->AefiListOfVaccine->find('list', array(
                 'conditions' => array(
                     'OR' => array(
-                        'SadrListOfDrug.drug_name LIKE' => '%' . $data['drug_name'] . '%',
-                        'SadrListOfDrug.brand_name LIKE' => '%' . $data['drug_name'] . '%', )),
-                'fields' => array('sadr_id', 'sadr_id')
-                    )));
-            return $cond;
-    }
-
-    public function findByMedicineName($data = array()) {
-            $cond = array($this->alias.'.id' => $this->SadrListOfMedicine->find('list', array(
-                'conditions' => array(
-                    'OR' => array(
-                        'SadrListOfMedicine.drug_name LIKE' => '%' . $data['medicine_name'] . '%',
-                        'SadrListOfMedicine.brand_name LIKE' => '%' . $data['medicine_name'] . '%', )),
-                'fields' => array('sadr_id', 'sadr_id')
+                        'AefiListOfVaccine.vaccine_name LIKE' => '%' . $data['vaccine_name'] . '%',
+                        'AefiListOfVaccine.vaccine_manufacturer LIKE' => '%' . $data['vaccine_name'] . '%', )),
+                'fields' => array('aefi_id', 'aefi_id')
                     )));
             return $cond;
     }
@@ -74,8 +65,6 @@ class Aefi extends AppModel {
                 'OR' => array(
                     $this->alias . '.reporter_name LIKE' => '%' . $filter . '%',
                     $this->alias . '.reporter_email LIKE' => '%' . $filter . '%',
-                    $this->alias . '.reporter_name_diff LIKE' => '%' . $filter . '%',
-                    $this->alias . '.reporter_email_diff LIKE' => '%' . $filter . '%',
                 ));
             return $cond;
     }
