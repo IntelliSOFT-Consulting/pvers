@@ -11,25 +11,74 @@ class Pqmp extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	public $actsAs = array('Search.Searchable');
 	public $filterArgs = array(
-        array('name' => 'brand_name', 'type' => 'like'),
-        array('name' => 'id', 'type' => 'like'),
-        array('name' => 'submitted', 'type' => 'value'),
-        array('name' => 'submit', 'type' => 'query', 'method' => 'orConditions', 'encode' => true),
-        array('name' => 'device', 'type' => 'value'),
-		array('name' => 'range', 'type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Pqmp.created BETWEEN ? AND ?'),
+        'reference_no' => array('type' => 'like', 'encode' => true),
+        'brand_name' => array('type' => 'like', 'encode' => true),
+        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Pqmp.created BETWEEN ? AND ?'),
+        'start_date' => array('type' => 'query', 'method' => 'dummy'),
+        'end_date' => array('type' => 'query', 'method' => 'dummy'),
+        'facility_name' => array('type' => 'like', 'encode' => true),
+        'supplier_name' => array('type' => 'like', 'encode' => true),
+        'county_id' => array('type' => 'value'),
+        'country_id' => array('type' => 'value'),
+        'generic_name' => array('type' => 'like', 'encode' => true),
+        'name_of_manufacturer' => array('type' => 'like', 'encode' => true),
+        'medicinal_product' => array('type' => 'value'),
+        'blood_products' => array('type' => 'value'),
+        'product_vaccine' => array('type' => 'value'),
+        'herbal_product' => array('type' => 'value'),
+        'cosmeceuticals' => array('type' => 'value'),
+        'product_other' => array('type' => 'value'),
+        'product_specify' => array('type' => 'like', 'encode' => true),
+        'product_formulation' => array('type' => 'value'),
+        'colour_change' => array('type' => 'value'),
+        'separating' => array('type' => 'value'),
+        'powdering' => array('type' => 'value'),
+        'caking' => array('type' => 'value'),
+        'moulding' => array('type' => 'value'),
+        'odour_change' => array('type' => 'value'),
+        'mislabeling' => array('type' => 'value'),
+        'incomplete_pack' => array('type' => 'value'),
+        'complaint_other' => array('type' => 'value'),
+        'packaging' => array('type' => 'value'),
+        'labelling' => array('type' => 'value'),
+        'sampling' => array('type' => 'value'),
+        'mechanism' => array('type' => 'value'),
+        'electrical' => array('type' => 'value'),
+        'device_data' => array('type' => 'value'),
+        'software' => array('type' => 'value'),
+        'environmental' => array('type' => 'value'),
+        'results' => array('type' => 'value'),
+        'readings' => array('type' => 'value'),
+        'reporter' => array('type' => 'query', 'method' => 'reporterFilter', 'encode' => true),
+        'designation_id' => array('type' => 'value'),
+        'submit' => array('type' => 'query', 'method' => 'orConditions', 'encode' => true),
     );
 
-  public function orConditions($data = array()) {
+    public function dummy($data = array()) {
+    	return array( '1' => '1');
+    }
+
+    public function reporterFilter($data = array()) {
+            $filter = $data['reporter'];
+            $cond = array(
+                'OR' => array(
+                    $this->alias . '.reporter_name LIKE' => '%' . $filter . '%',
+                    $this->alias . '.reporter_email LIKE' => '%' . $filter . '%',
+                ));
+            return $cond;
+    }
+
+  	public function orConditions($data = array()) {
             $filter = $data['submit'];
             if ($filter == '0') {
               $cond = array(
-                    $this->alias . '.submitted' => array('0', '1'),
-                    $this->alias . '.active' => '1'
+                    $this->alias . '.submitted' => array('1', '2', '3'),
+                    // $this->alias . '.active' => '1'
                 );
             } else {
               $cond = array(
-                    $this->alias . '.submitted' => array('2', '3', '4', '5', '6'),
-                    $this->alias . '.active' => '1'
+                    $this->alias . '.submitted' => array('0', '1', '2', '3', '4', '5', '6'),
+                    // $this->alias . '.active' => '1'
                 );
             }
             return $cond;

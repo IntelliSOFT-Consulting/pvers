@@ -11,7 +11,7 @@ App::uses('HtmlHelper', 'View/Helper');
  * @property Aefi $Aefi
  */
 class AefisController extends AppController {
-    public $components = array('Search.Prg', 'RequestHandler');
+    public $components = array('Search.Prg');
     public $paginate = array();
     public $presetVars = true;
     public $page_options = array('25' => '25', '50' => '50', '100' => '100');
@@ -88,7 +88,8 @@ class AefisController extends AppController {
             else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
-        $criteria['Aefi.submitted'] = 2;
+        // $criteria['Aefi.submitted'] = 2;
+        if (!isset($this->passedArgs['submit'])) $criteria['Sadr.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
         $this->paginate['contain'] = array('County');
@@ -96,7 +97,7 @@ class AefisController extends AppController {
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
           $this->csv_export($this->Aefi->find('all', 
-                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'], 'limit' => 1000)
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'limit' => 1000)
               ));
         }
         //end pdf export

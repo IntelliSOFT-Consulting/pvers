@@ -40,13 +40,12 @@
                     <h4 style="background-color: beige;">FORM FOR REPORTING SUSPECTED POOR-QUALITY MEDICAL PRODUCTS AND HEALTH TECHNOLOGIES</h4>
                 </div>
             </div>
-            <hr>
 
 			<div class="row-fluid">
 				<div class="span8">
 				</div>
 				<div class="span4">
-				  <h2>Form ID: <?php 	echo $this->data['Pqmp']['reference_no']; ?></h2>
+				  <h5>Form ID: <?php 	echo $this->data['Pqmp']['reference_no']; ?></h5>
 				  <h6><span class="label label-important">Important</span> Unique Form ID</h6>
 				</div><!--/span-->
 			</div><!--/row-->

@@ -52,12 +52,18 @@ class PqmpsController extends AppController {
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
-          $this->csv_export($this->Pqmps->find('all', 
+          $this->csv_export($this->Pqmp->find('all', 
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
         //end pdf export
         $this->set('page_options', $page_options);
+        $counties = $this->Pqmp->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+		$this->set(compact('counties'));
+        $countries = $this->Pqmp->Country->find('list', array('order' => array('Country.name' => 'ASC')));
+		$this->set(compact('countries'));
+        $designations = $this->Pqmp->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+		$this->set(compact('designations'));
         $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
     
@@ -76,12 +82,18 @@ class PqmpsController extends AppController {
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
-          $this->csv_export($this->Pqmps->find('all', 
+          $this->csv_export($this->Pqmp->find('all', 
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
         //end pdf export
         $this->set('page_options', $page_options);
+        $counties = $this->Pqmp->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+		$this->set(compact('counties'));
+        $countries = $this->Pqmp->Country->find('list', array('order' => array('Country.name' => 'ASC')));
+		$this->set(compact('countries'));
+        $designations = $this->Pqmp->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+		$this->set(compact('designations'));
         $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
     
@@ -111,41 +123,12 @@ class PqmpsController extends AppController {
 		$this->set('pqmps', $this->paginate());
     }
 
-    public function pqmpIndex() {
-        $this->Prg->commonProcess();
-		if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-		if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-        else $this->paginate['limit'] = 20;
-		if (isset($this->passedArgs['id']) && $this->Pqmp->Luhn_Verify($this->passedArgs['id'])) $this->passedArgs['id'] = $this->Pqmp->Luhn_Verify($this->passedArgs['id']);
-		$criteria = $this->Pqmp->parseCriteria($this->passedArgs);
-		if($this->Auth->User('group_id') != 4) $criteria['Pqmp.user_id'] = $this->Auth->user('id');
-		else $criteria['Pqmp.facility_code'] = $this->Auth->user('ward');
-        $this->paginate['conditions'] = $criteria;
- 		$this->Pqmp->recursive = -1;
-
-		if (strpos($this->request->url,'xls') !== false){
-			$this->helpers[] = 'PhpExcel';
-			$this->Pqmp->recursive = 1;
-		}
-		if ($this->RequestHandler->isXml()) {
-			$this->Pqmp->recursive = 1;
-			$this->response->download('PQMPS_'.date('Y_m_d_His'));
-		}
-		$this->set('pqmps', $this->paginate());
-    }
-
     private function csv_export($cpqmps = ''){
         //todo: check if data exists in $users
-        $_serialize = 'cpqmps';
-        $_header = array('Id', 'Reference Number', 
-            'Created',
-            );
-        $_extract = array('Pqmp.id', 'Pqmp.reference_no', 
-            'Pqmp.created');
-
-        $this->response->download('PQMPS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
-        $this->viewClass = 'CsvView.Csv';
-        $this->set(compact('cpqmps', '_serialize', '_header', '_extract'));
+        $this->response->download('PQMPs_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->set(compact('cpqmps'));
+        $this->layout = false;
+        $this->render('csv_export');
     }
     
 /**

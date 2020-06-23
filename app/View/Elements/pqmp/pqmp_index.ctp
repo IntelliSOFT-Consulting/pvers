@@ -36,50 +36,229 @@
           'class' => 'ctr-groups', 'style'=>array('padding:9px;', 'background-color: #F5F5F5'),
         ));
       ?>
-      <table class="table table-condensed table-bordered" style="margin-bottom: 2px;">
-        <thead>
+      <table class="table table-condensed" style="margin-bottom: 2px;">
+        <tbody>
           <tr>
-            <th style="width: 15%;">
+            <td>
               <?php
                 echo $this->Form->input('reference_no',
-                    array('div' => false, 'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Reference No.')));
+                    array(
+                      'div' => false,
+                      'placeholder' => 'pqmp/2020',
+                      'class' => 'input', 'label' => array('class' => 'required', 'text' => 'Reference No.'))
+                );
               ?>
-              </th>
-              <th>
+            </td>
+            <td>
               <?php
-                echo $this->Form->input('start_date',
-                  array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
-                      'label' => array('class' => 'required', 'text' => 'PQMP Create Dates'), 'placeHolder' => 'Start Date'));
-                echo $this->Form->input('end_date',
-                  array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index',
-                       'after' => '<a style="font-weight:normal" onclick="$(\'.unauthorized_index\').val(\'\');" >
-                            <em class="accordion-toggle">clear!</em></a>',
-                      'label' => false, 'placeHolder' => 'End Date'));
+                echo $this->Form->input('brand_name',
+                    array(
+                      'div' => false,
+                      'placeholder' => 'rash',
+                      'class' => 'unauthorized_index span10', 'label' => array('class' => 'required', 'text' => 'Brand name'))
+                );
               ?>
-              </th>
-              <th>
+            </td>
+            <td colspan="2">
+                <?php
+                  echo $this->Form->input('start_date',
+                    array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
+                        'label' => array('class' => 'required', 'text' => 'Report Dates'), 'placeHolder' => 'Start Date'));
+                  echo $this->Form->input('end_date',
+                    array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index',
+                         'after' => '<a style="font-weight:normal" onclick="$(\'.unauthorized_index\').val(\'\');" >
+                              <em class="accordion-toggle">clear!</em></a>',
+                        'label' => false, 'placeHolder' => 'End Date'));
+                ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('facility_name',
+                    array(
+                      'div' => false, 'placeholder' => 'facility',
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Faciliy'))
+                );
+              ?>
+            </td>
+            <td>
+                <?php
+                  echo $this->Form->input('supplier_name',
+                      array(
+                        'div' => false,
+                        'placeholder' => 'rash',
+                        'class' => 'unauthorized_index span10', 'label' => array('class' => 'required', 'text' => 'Supplier name'))
+                  );
+                ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('county_id',
+                    array(
+                      'div' => false, 'empty' => true,
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'County'))
+                );
+              ?>
+            </td>
+          </tr>
+          <tr>
+              <td>
+              <?php
+                  echo $this->Form->input('generic_name',
+                      array('div' => false, 'placeholder' => 'Generic name',
+                        'class' => 'input', 'label' => array('class' => 'required', 'text' => 'Generic Name')));
+              ?>
+              </td>
+              <td>
+              <?php
+                  echo $this->Form->input('name_of_manufacturer',
+                      array('div' => false, 'placeholder' => 'Manufacturer', 'class' => 'input-small unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Manufacturer')));
+              ?>
+              </td>
+              <td colspan="2">
+                <h5>Product</h5>
+                <?php
+                    echo $this->Form->input('medicinal_product', array('label' => 'Medicinal', 'hiddenField' => false));
+                    echo $this->Form->input('blood_products', array('label' => 'Blood product', 'hiddenField' => false));
+                    echo $this->Form->input('product_vaccine', array('label' => 'Vaccine', 'hiddenField' => false));
+                ?>
+              </td>
+              <td>                
+                <h5>Category</h5>
+                <?php
+                    echo $this->Form->input('herbal_product', array('label' => 'Herbal product', 'hiddenField' => false));
+                    echo $this->Form->input('cosmeceuticals', array('label' => 'Cosmeceuticals', 'hiddenField' => false));
+                ?>
+              </td>
+              <td>
+                <?php
+                    echo $this->Form->input('product_other', array('label' => 'Other', 'hiddenField' => false));
+                    echo $this->Form->input('product_specify', array('label' => false, 'class' => 'input-small', 'placeholder' => '(specify)'));
+                ?>
+              </td>
+              <td>                
+                <?php
+                  echo $this->Form->input('country_id',
+                      array(
+                        'div' => false, 'empty' => true,
+                        'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Country'))
+                  );
+                ?>
+              </td>              
+          </tr>
+          <tr>
+            <td>                   
+              <?php
+                  echo $this->Form->input('product_formulation', array('type' => 'select',
+                    'empty' => true, 'class' => 'input',
+                    'options' => array('Oral tablets / capsules' => 'Oral tablets / capsules',
+                      'Oral suspension / syrup' => 'Oral suspension / syrup', 
+                      'Injection' => 'Injection',
+                      'Diluent' => 'Diluent',
+                      'Powder for Reconstitution of Suspension' => 'Powder for Reconstitution of Suspension',
+                      'Powder for Reconstitution of Injection' => 'Powder for Reconstitution of Injection',
+                      'Eye drops' => 'Eye drops',
+                      'Ear drops' => 'Ear drops',
+                      'Nebuliser solution' => 'Nebuliser solution',
+                      'Cream / Ointment / Liniment / Paste' => 'Cream / Ointment / Liniment / Paste',
+                      'Other' => 'Other'),
+                    'label' => array('class' => 'required', 'text' => 'Product formulation')
+                  ));
+              ?>          
+            </td>
+            <td>
+              <h5>Complaint</h5> 
+               <?php
+                  echo $this->Form->input('colour_change', array('label' => 'Colour change', 'hiddenField' => false));
+                  echo $this->Form->input('separating', array('label' => 'Separating', 'hiddenField' => false));
+                  echo $this->Form->input('powdering', array('label' => 'Powdering / crumbling', 'hiddenField' => false));
+                  echo $this->Form->input('caking', array('label' => 'Caking', 'hiddenField' => false));
+                ?>
+            </td>
+            <td>
+              <?php
+                  echo $this->Form->input('moulding', array('label' => 'Moulding', 'hiddenField' => false));
+                  echo $this->Form->input('odour_change', array('label' => 'Change of odour', 'hiddenField' => false));
+                  echo $this->Form->input('mislabeling', array('label' => 'Mislabeling', 'hiddenField' => false));
+                  echo $this->Form->input('incomplete_pack', array('label' => 'Incomplete pack', 'hiddenField' => false));
+                  echo $this->Form->input('complaint_other', array('label' => 'Other', 'hiddenField' => false));
+              ?>
+            </td>
+            <td>
+              <h5>Medical Device</h5>
+                <?php
+                  echo $this->Form->input('packaging', array('label' => 'Packaging', 'hiddenField' => false));
+                  echo $this->Form->input('labelling', array('label' => 'Labelling', 'hiddenField' => false));
+                  echo $this->Form->input('sampling', array('label' => 'Sampling', 'hiddenField' => false));
+                  echo $this->Form->input('mechanism', array('label' => 'Mechanism', 'hiddenField' => false));
+                  echo $this->Form->input('electrical', array('label' => 'Electrical', 'hiddenField' => false));
+                ?>
+            </td>
+            <td>
+              <?php
+                  echo $this->Form->input('device_data', array('label' => 'Data', 'hiddenField' => false));
+                  echo $this->Form->input('software', array('label' => 'Software', 'hiddenField' => false));
+                  echo $this->Form->input('environmental', array('label' => 'Environmental', 'hiddenField' => false));
+                  echo $this->Form->input('results', array('label' => 'Results', 'hiddenField' => false));
+                  echo $this->Form->input('readings', array('label' => 'Readings', 'hiddenField' => false));
+              ?>
+            </td>
+            <td>
+              <?php
+                  echo $this->Form->input('reporter',
+                      array('div' => false, 'class' => 'input-small unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Reporter'), 'placeholder' => 'Name/Email'));
+              ?>
+            </td>
+            <td>
+              <?php
+                echo $this->Form->input('designation_id',
+                    array(
+                      'div' => false, 'empty' => true,
+                      'class' => 'input-small', 'label' => array('class' => 'required', 'text' => 'Designation'))
+                );
+              ?>
+            </td>
+          </tr>
+          <tr>
+              <td><label for="PqmpPages" class="required">Pages</label></td>
+              <td>                
                 <?php
                   echo $this->Form->input('pages', array(
-                    'type' => 'select', 'div' => false, 'class' => 'span12', 'selected' => $this->request->params['paging']['Pqmp']['limit'],
+                    'type' => 'select', 'div' => false, 'class' => 'input-small', 'selected' => $this->request->params['paging']['Pqmp']['limit'],
                     'empty' => true,
                     'options' => $page_options,
-                    'label' => array('class' => 'required', 'text' => 'Pages'),
+                    'label' => false,
                   ));
                 ?>
-              </th>
-              <th rowspan="2" style="width: 14%;">
+              </td>
+              <td>
+                <?php
+                  // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
+                  echo $this->Form->input('submit', array('type' => 'checkbox', 'hiddenField' => false, 
+                      'label' => array('class' => '', 'text' => 'Include Unsubmitted?')));
+                ?>                
+              </td>
+              <td></td>
+              <td>
                 <?php
                   echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
-                      'class' => 'btn btn-inverse', 'div' => 'control-group', 'div' => false,
+                      'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
+                      'formnovalidate' => 'formnovalidate',
                       'style' => array('margin-bottom: 5px')
                   ));
-
-                  echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));echo "<br>";
-                  echo $this->Html->link('<i class="icon-file-alt"></i> Excel', array('action' => 'index', 'ext' => 'csv'), array('class' => 'btn btn-success', 'escape' => false));
                 ?>
-              </th>
+              </td>
+              <td>
+                <?php
+                  echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));
+                ?>
+              </td>
+              <td>
+                <?php
+                  echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv', '?' => $this->request->query), array('class' => 'btn btn-success', 'escape' => false));
+                ?>
+              </td>
           </tr>
-        </thead>
+        </tbody>
       </table>
     <p>
       <?php
@@ -96,9 +275,9 @@
     <div class="pagination">
       <ul>
       <?php
-        echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false));
-        echo $this->Paginator->numbers(array('separator' => '', 'tag' => 'li', 'currentClass' => 'active'));
-        echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false ));
+        echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'disabledTag' => 'a', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'currentTag' => 'a', 'escape' => false));
+        echo $this->Paginator->numbers(array('separator' => '','tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active')); 
+        echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'disabledTag' => 'a', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false ));
       ?>
       </ul>
     </div>
