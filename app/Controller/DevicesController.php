@@ -12,9 +12,8 @@ App::uses('HtmlHelper', 'View/Helper');
 class DevicesController extends AppController {
     public $components = array('Search.Prg', 'RequestHandler');
     public $paginate = array();
-    public $presetVars = array();
-
-    public $uses = array('Device', 'Attachment');
+    public $presetVars = true;
+    public $page_options = array('25' => '25', '50' => '50', '100' => '100');
 
     /*public function beforeFilter() {
         parent::beforeFilter();
@@ -54,10 +53,9 @@ class DevicesController extends AppController {
     }*/
     public function reporter_index() {
         $this->Prg->commonProcess();
-        $page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($page_options);
+            else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Device->parseCriteria($this->passedArgs);
         $criteria['Device.user_id'] = $this->Auth->User('id');
@@ -72,19 +70,22 @@ class DevicesController extends AppController {
               ));
         }
         //end pdf export
-        $this->set('page_options', $page_options);
+        $this->set('page_options', $this->page_options);
+        $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Device->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
         $this->set('devices', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
     public function manager_index() {
         $this->Prg->commonProcess();
-        $page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($page_options);
+            else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Device->parseCriteria($this->passedArgs);
-        $criteria['Device.submitted'] = 2;
+        if (!isset($this->passedArgs['submit'])) $criteria['Device.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
         $this->paginate['contain'] = array('County');
@@ -96,74 +97,16 @@ class DevicesController extends AppController {
               ));
         }
         //end pdf export
-        $this->set('page_options', $page_options);
+        $this->set('page_options', $this->page_options);
         $this->set('devices', Sanitize::clean($this->paginate(), array('encode' => false)));
-    }
-
-    public function deviceIndex() {
-        $this->Prg->commonProcess();
-        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-        else $this->paginate['limit'] = 20;
-        if (isset($this->passedArgs['id']) && $this->Device->Luhn_Verify($this->passedArgs['id'])) $this->passedArgs['id'] = $this->Device->Luhn_Verify($this->passedArgs['id']);
-        $criteria = $this->Device->parseCriteria($this->passedArgs);
-        if($this->Auth->User('group_id') != 4) $criteria['Device.user_id'] = $this->Auth->user('id');
-        else $criteria['Device.institution_code'] = $this->Auth->user('ward');
-        $this->paginate['conditions'] = $criteria;
-        $this->paginate['order'] = array('Device.created' => 'desc');
-        $this->Device->recursive = -1;
-
-        if (strpos($this->request->url,'xls') !== false){
-            $this->helpers[] = 'PhpExcel';
-            $this->Device->recursive = 1;
-        }
-        if ($this->RequestHandler->isXml()) {
-            $this->Device->recursive = 1;
-            $this->response->download('DEVICES_'.date('Y_m_d_His'));
-        }
-        $this->set('devices', $this->paginate());
-    }
-
-    public function admin_index() {
-        $this->Prg->commonProcess();
-        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-        else $this->paginate['limit'] = 20;
-        if (isset($this->passedArgs['id']) && $this->Device->Luhn_Verify($this->passedArgs['id'])) $this->passedArgs['id'] = $this->Device->Luhn_Verify($this->passedArgs['id']);
-        $criteria = $this->Device->parseCriteria($this->passedArgs);
-        $this->paginate['conditions'] = $criteria;
-        $this->paginate['order'] = array('Device.created' => 'desc');
-        $this->Device->recursive = -1;
-
-        if (strpos($this->request->url,'xls') !== false){
-            $this->helpers[] = 'PhpExcel';
-            $this->Device->recursive = 1;
-            $routes = $this->Device->DeviceListOfDrug->Route->find('list');
-            $this->set(compact('routes'));
-            $frequency = $this->Device->DeviceListOfDrug->Frequency->find('list');
-            $this->set(compact('frequency'));
-            $dose = $this->Device->DeviceListOfDrug->Dose->find('list');
-            $this->set(compact('dose'));
-        }
-        if ($this->RequestHandler->isXml()) {
-            $this->Device->recursive = 1;
-            $this->response->download('DEVICES_'.date('Y_m_d_His'));
-        }
-        $this->set('devices', $this->paginate());
     }
 
     private function csv_export($cdevices = ''){
         //todo: check if data exists in $users
-        $_serialize = 'cdevices';
-        $_header = array('Id', 'Reference Number', 
-            'Created',
-            );
-        $_extract = array('Device.id', 'Device.reference_no', 
-            'Device.created');
-
         $this->response->download('DEVICES_'.date('Ymd_Hi').'.csv'); // <= setting the file name
-        $this->viewClass = 'CsvView.Csv';
-        $this->set(compact('cdevices', '_serialize', '_header', '_extract'));
+        $this->set(compact('cdevices'));
+        $this->layout = false;
+        $this->render('csv_export');
     }
     
     public function institutionCodes() {

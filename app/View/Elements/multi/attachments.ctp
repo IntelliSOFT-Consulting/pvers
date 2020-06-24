@@ -3,7 +3,7 @@
 ?>
 <div class="row-fluid">
 	<div class="span12">
-		<h5><i class="icon-file"></i> Do you have pictures or documents that you would like to send to PPB? click on the button to add them:
+		<h5><i class="fa fa-picture-o" aria-hidden="true"></i> Do you have pictures or documents that you would like to send to PPB? click on the button to add them:
 			<button type="button" class="btn btn-warning btn-mini" id="addAttachment">&nbsp;<i class="icon-plus"></i>&nbsp;</button>
 		</h5>
 	    	<table id="buildattachmentsform" class="table table-bordered table-condensed table-striped" data-model=<?php echo $model;?> data-group=<?php echo $group;?> >

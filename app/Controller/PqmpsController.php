@@ -12,10 +12,9 @@ App::uses('HtmlHelper', 'View/Helper');
 class PqmpsController extends AppController {
 
 	public $components = array('Search.Prg');
-	// public $components = array('Search.Prg');
 	public $paginate = array();
     public $presetVars = true;
-    public $uses = array('Pqmp', 'Sadr', 'Attachment');
+    public $page_options = array('25' => '25', '50' => '50', '100' => '100');
 
 	/*public function beforeFilter() {
 		parent::beforeFilter();
@@ -39,10 +38,9 @@ class PqmpsController extends AppController {
 	}*/
 	public function reporter_index() {
         $this->Prg->commonProcess();
-        $page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($page_options);
+            else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
         $criteria['Pqmp.user_id'] = $this->Auth->User('id');
@@ -57,7 +55,7 @@ class PqmpsController extends AppController {
               ));
         }
         //end pdf export
-        $this->set('page_options', $page_options);
+        $this->set('page_options', $this->page_options);
         $counties = $this->Pqmp->County->find('list', array('order' => array('County.county_name' => 'ASC')));
 		$this->set(compact('counties'));
         $countries = $this->Pqmp->Country->find('list', array('order' => array('Country.name' => 'ASC')));
@@ -69,13 +67,12 @@ class PqmpsController extends AppController {
     
 	public function manager_index() {
         $this->Prg->commonProcess();
-        $page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($page_options);
+            else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
-        $criteria['Pqmp.submitted'] = 2;
+        if (!isset($this->passedArgs['submit'])) $criteria['Pqmp.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
         $this->paginate['contain'] = array('County');
@@ -87,7 +84,7 @@ class PqmpsController extends AppController {
               ));
         }
         //end pdf export
-        $this->set('page_options', $page_options);
+        $this->set('page_options', $this->page_options);
         $counties = $this->Pqmp->County->find('list', array('order' => array('County.county_name' => 'ASC')));
 		$this->set(compact('counties'));
         $countries = $this->Pqmp->Country->find('list', array('order' => array('Country.name' => 'ASC')));

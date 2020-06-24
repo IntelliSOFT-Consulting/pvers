@@ -638,7 +638,7 @@
             <div class="row-fluid">
                 <div class="span4">
                   <div style="padding-left: 30px;">
-                    <p> Reason for seriousnes: </p>
+                    <p> Reason for seriousness: </p>
                     <?php
                         echo $this->Form->input('serious_yes', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'serious_yes',

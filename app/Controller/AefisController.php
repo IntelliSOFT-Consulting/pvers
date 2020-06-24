@@ -55,7 +55,6 @@ class AefisController extends AppController {
     }*/
     public function reporter_index() {
         $this->Prg->commonProcess();
-        $this->page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
             else $this->paginate['limit'] = reset($this->page_options);
@@ -89,7 +88,7 @@ class AefisController extends AppController {
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
         // $criteria['Aefi.submitted'] = 2;
-        if (!isset($this->passedArgs['submit'])) $criteria['Sadr.submitted'] = array(2, 3);
+        if (!isset($this->passedArgs['submit'])) $criteria['Aefi.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
         $this->paginate['contain'] = array('County');
