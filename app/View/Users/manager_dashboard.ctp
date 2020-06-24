@@ -95,7 +95,7 @@
                       foreach ($transfusions as $transfusion) {
                         if($transfusion['Transfusion']['submitted'] > 1) {
                           echo "<li>";
-                            echo $this->Html->link($transfusion['Transfusion']['report_title'].' <small class="muted">('.$transfusion['Transfusion']['reference_no'].')</small>', array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),
+                            echo $this->Html->link($transfusion['Transfusion']['diagnosis'].' <small class="muted">('.$transfusion['Transfusion']['reference_no'].')</small>', array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),
                               array('escape' => false, 'class' => 'text-success')); 
                           echo "</li>";
                         } 
