@@ -197,6 +197,28 @@ class DevicesController extends AppController {
         }
     }
 
+    public function manager_view($id = null) {
+        $this->Device->id = $id;
+        if (!$this->Device->exists()) {
+            $this->Session->setFlash(__('Could not verify the DEVICE report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            // $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
+        }
+
+        $device = $this->Device->read(null);
+        $this->set('device', $device);
+        // $this->render('pdf/view');
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
+        }
+    }
+
     public function admin_view($id = null) {
         $this->Device->id = $this->Device->Luhn_Verify($id);
         if (!$this->Device->exists()) {

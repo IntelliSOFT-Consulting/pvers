@@ -192,6 +192,28 @@ class PqmpsController extends AppController {
         }
     }
 
+    public function manager_view($id = null) {
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            $this->Session->setFlash(__('Could not verify the PQMP report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'PQMP_' . $id,  'orientation' => 'portrait');
+            // $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
+        }
+
+        $pqmp = $this->Pqmp->read(null);
+        $this->set('pqmp', $pqmp);
+        // $this->render('pdf/view');
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'PQMP_' . $id,  'orientation' => 'portrait');
+            $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
+        }
+    }
+
 	public function admin_view($id = null) {
 		$this->Pqmp->id = $this->Pqmp->Luhn_Verify($id);
 		if (!$this->Pqmp->exists()) {

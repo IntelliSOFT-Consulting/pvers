@@ -186,7 +186,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ee8fa', end
 }
 
 .formbackt {
-  background-color: #FFFFCC;
+  background-color: #fffff2;
   border: 2px solid #3E58A7;
   border-radius: 7px;
 }
@@ -211,6 +211,10 @@ p.error {
 p.tablenums {
   color: #BEBEC5; 
   text-shadow: 0 1px 0 #FFFFFF;
+}
+
+hr.darker {
+  border-top: 2px solid #c8c8be;
 }
 
 .center-pills {

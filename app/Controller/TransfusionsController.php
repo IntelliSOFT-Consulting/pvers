@@ -153,6 +153,28 @@ class TransfusionsController extends AppController {
         }
     }
 
+    public function manager_view($id = null) {
+        $this->Transfusion->id = $id;
+        if (!$this->Transfusion->exists()) {
+            $this->Session->setFlash(__('Could not verify the TRANSFUSION report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id,  'orientation' => 'portrait');
+            // $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
+        }
+
+        $transfusion = $this->Transfusion->read(null);
+        $this->set('transfusion', $transfusion);
+        // $this->render('pdf/view');
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id,  'orientation' => 'portrait');
+            $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
+        }
+    }
+
 /**
  * add method
  *

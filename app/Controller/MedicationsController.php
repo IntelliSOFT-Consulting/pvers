@@ -153,6 +153,28 @@ class MedicationsController extends AppController {
             $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
         }
     }
+
+    public function manager_view($id = null) {
+        $this->Medication->id = $id;
+        if (!$this->Medication->exists()) {
+            $this->Session->setFlash(__('Could not verify the MEDICATION report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id,  'orientation' => 'portrait');
+            // $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
+        }
+
+        $medication = $this->Medication->read(null);
+        $this->set('medication', $medication);
+        // $this->render('pdf/view');
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id,  'orientation' => 'portrait');
+            $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
+        }
+    }
 /**
  * add method
  *

@@ -60,7 +60,7 @@
             <div class="row-fluid">
                 <div class="span6">
                     <div class="control-group">
-                        <label class="control-label required">Report Type: </label>
+                        <label class="control-label required">REPORT TYPE: </label>
                         <div class="controls">
                             <span class="input-xlarge uneditable-input">
                             <?php
@@ -93,9 +93,9 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
-             <hr>
+             <hr class="darker">
 
-            <h5 style="text-align: center; color: #884805;">PATIENT DETAILS</h5>
+            <h4 style="text-align: center;">PATIENT DETAILS</h4>
             <div class="row-fluid">
                 <div class="span6">
                     <?php
@@ -206,9 +206,9 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
-                <hr>
+                <hr class="darker">
 
-            <h5 style="text-align: center; color: #884805;">TYPE OF AEFI</h5>
+            <h4 style="text-align: center;">TYPE OF AEFI</h4>
             <div class="row-fluid">
                 <div class="span4">
                   <div style="padding-left: 30px;">
@@ -325,7 +325,7 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
-             <hr>
+             <hr class="darker">
 
             <div class="row-fluid">
                 <div class="span12">
@@ -406,7 +406,7 @@
                     ?>
                 </div>
             </div>
-            <hr>
+            <hr class="darker">
             <div class="row-fluid">             
                 <div class="span6">
                     <h5 style="text-align: center;">Action Taken:</h5>

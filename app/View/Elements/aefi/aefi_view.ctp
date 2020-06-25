@@ -35,7 +35,7 @@
 				</table>
 				<table style="width: 100%;">
 					<tr>
-						<td style="width: 25%;">Report Type</td>
+						<td style="width: 25%;">REPORT TYPE</td>
 						<td style="width: 25%;"></td>
 						<td style="width: 25%;">COUNTY </td>
 						<td style="width: 25%;"><strong><?php echo $aefi['County']['county_name'] ?>	</strong></td>

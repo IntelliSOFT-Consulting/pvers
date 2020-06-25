@@ -204,6 +204,28 @@ class AefisController extends AppController {
         }
     }
 
+    public function manager_view($id = null) {
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            $this->Session->setFlash(__('Could not verify the medical devices report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+        }
+
+        $aefi = $this->Aefi->read(null);
+        $this->set('aefi', $aefi);
+        // $this->render('pdf/view');
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+        }
+    }
+
     public function admin_view($id = null) {
         $this->Aefi->id = $this->Aefi->Luhn_Verify($id);
         if (!$this->Aefi->exists()) {
