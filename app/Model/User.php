@@ -103,6 +103,11 @@ class User extends AppModel {
 			'foreignKey' => 'user_id',
 			'dependent' => false,
 		),
+		'Padr' => array(
+			'className' => 'Padr',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+		),
 		'Pqmp' => array(
 			'className' => 'Pqmp',
 			'foreignKey' => 'user_id',

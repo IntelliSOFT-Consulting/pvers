@@ -104,6 +104,23 @@
                     ?>
                 </div>
             </div>
+            <hr>
+            <div class="row-fluid">
+                <div class="span4 pformback" style="padding: 4px;">
+                  <h5>Public Reports</h5>
+                  <?php
+                    echo '<ol>';
+                    foreach ($padrs as $padr) {
+                        echo "<li>";
+                          echo $this->Html->link($padr['Padr']['reporter_name'].' <small class="muted">('.$padr['Padr']['reference_no'].')</small>', array('controller' => 'padrs', 'action' => 'view', $padr['Padr']['id']),
+                            array('escape' => false));
+                        echo "</li>";
+                    }
+                    echo '</ol>'; 
+                  ?>
+                </div>
+                <div class="span8"></div>
+              </div>
         </div>
 
         <div class="span4"><!-- Notifications -->          

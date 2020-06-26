@@ -401,15 +401,15 @@ class UsersController extends AppController {
     public function manager_dashboard() {
         $sadrs = $this->User->Sadr->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created', 'Sadr.serious'),
+            'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created', 'Sadr.serious'),
             'order' => array('Sadr.created' => 'desc'),
             'conditions' => array('Sadr.submitted >' => 1),
         ));
-        $this->set('sadrs', $sadrs);        
+        $this->set('sadrs', $sadrs);
 
         $aefis = $this->User->Aefi->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
+            'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
             'order' => array('Aefi.created' => 'desc'),
             'conditions' => array('Aefi.submitted >' => 1),
         ));
@@ -417,7 +417,7 @@ class UsersController extends AppController {
 
         $pqmps = $this->User->Pqmp->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Pqmp.id','Pqmp.user_id', 'Pqmp.created', 'Pqmp.submitted', 'Pqmp.brand_name', 'Pqmp.reference_no', 'Pqmp.created'),
+            'fields' => array('Pqmp.id','Pqmp.user_id', 'Pqmp.submitted', 'Pqmp.brand_name', 'Pqmp.reference_no', 'Pqmp.created'),
             'order' => array('Pqmp.created' => 'desc'),
             'conditions' => array('Pqmp.submitted >' => 1),
         ));
@@ -425,7 +425,7 @@ class UsersController extends AppController {
 
         $devices = $this->User->Device->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created', 'Device.serious'),
+            'fields' => array('Device.id','Device.user_id', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created', 'Device.serious'),
             'order' => array('Device.created' => 'desc'),
             'conditions' => array('Device.submitted >' => 1),
         ));
@@ -433,7 +433,7 @@ class UsersController extends AppController {
 
         $medications = $this->User->Medication->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.created', 'Medication.reference_no', 'Medication.created'),
+            'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.reference_no', 'Medication.created'),
             'order' => array('Medication.created' => 'desc'),
             'conditions' => array('Medication.submitted >' => 1),
         ));
@@ -446,6 +446,13 @@ class UsersController extends AppController {
             'conditions' => array('Transfusion.submitted >' => 1),
         ));
         $this->set('transfusions', $transfusions);        
+
+        $padrs = $this->User->Padr->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Padr.id', 'Padr.reporter_name', 'Padr.patient_name', 'Padr.reference_no', 'Padr.created'),
+            'order' => array('Padr.created' => 'desc'),
+        ));
+        $this->set('padrs', $padrs);
 
         $this->set('notifications', $this->User->Notification->find('all', array(
             'conditions' => array('Notification.user_id' => $this->Auth->User('id')), 'order' => 'Notification.created DESC', 'limit' => 12

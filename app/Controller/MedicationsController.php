@@ -19,7 +19,7 @@ class MedicationsController extends AppController {
  */
 	public $components = array('Search.Prg');
     public $paginate = array();
-    public $presetVars = array();
+    public $presetVars = true;
 
     /*public function beforeFilter() {
         parent::beforeFilter();
@@ -63,6 +63,10 @@ class MedicationsController extends AppController {
         }
         //end pdf export
         $this->set('page_options', $page_options);
+        $counties = $this->Medication->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Medication->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
         $this->set('medications', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
@@ -87,21 +91,19 @@ class MedicationsController extends AppController {
         }
         //end pdf export
         $this->set('page_options', $page_options);
+        $counties = $this->Medication->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Medication->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
         $this->set('medications', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
     private function csv_export($cmedications = ''){
         //todo: check if data exists in $users
-        $_serialize = 'cmedications';
-        $_header = array('Id', 'Reference Number', 
-            'Created',
-            );
-        $_extract = array('Medication.id', 'Medication.reference_no', 
-            'Medication.created');
-
-        $this->response->download('MEDICATIONS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
-        $this->viewClass = 'CsvView.Csv';
-        $this->set(compact('cmedications', '_serialize', '_header', '_extract'));
+        $this->response->download('MEDICATIONs_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->set(compact('cmedications'));
+        $this->layout = false;
+        $this->render('csv_export');
     }
     
 /**
