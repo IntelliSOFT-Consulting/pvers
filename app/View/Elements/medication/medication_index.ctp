@@ -44,7 +44,7 @@
                 echo $this->Form->input('reference_no',
                     array(
                       'div' => false,
-                      'placeholder' => 'medication/2020',
+                      'placeholder' => 'me/2020',
                       'class' => 'span12', 'label' => array('class' => 'required', 'text' => 'Reference No.'))
                 );
               ?>

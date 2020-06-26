@@ -19,7 +19,7 @@ class TransfusionsController extends AppController {
  */
 	public $components = array('Search.Prg', 'RequestHandler');
     public $paginate = array();
-    public $presetVars = array();
+    public $presetVars = true;
 
     /*public function beforeFilter() {
         parent::beforeFilter();
@@ -63,6 +63,8 @@ class TransfusionsController extends AppController {
         }
         //end pdf export
         $this->set('page_options', $page_options);
+        $designations = $this->Transfusion->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
         $this->set('transfusions', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
@@ -87,21 +89,17 @@ class TransfusionsController extends AppController {
         }
         //end pdf export
         $this->set('page_options', $page_options);
+        $designations = $this->Transfusion->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
         $this->set('transfusions', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
     private function csv_export($ctransfusions = ''){
         //todo: check if data exists in $users
-        $_serialize = 'ctransfusions';
-        $_header = array('Id', 'Reference Number', 
-            'Created',
-            );
-        $_extract = array('Transfusion.id', 'Transfusion.reference_no', 
-            'Transfusion.created');
-
-        $this->response->download('TRANSFUSIONS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
-        $this->viewClass = 'CsvView.Csv';
-        $this->set(compact('ctransfusions', '_serialize', '_header', '_extract'));
+        $this->response->download('TRANSFUSIONs_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->set(compact('ctransfusions'));
+        $this->layout = false;
+        $this->render('csv_export');
     }
 /**
  * view method
