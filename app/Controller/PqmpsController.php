@@ -515,6 +515,47 @@ class PqmpsController extends AppController {
 		$countries = $this->Pqmp->Country->find('list');
 		$this->set('countries', $countries);
     }
+
+	public function manager_edit($id = null) { 
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            throw new NotFoundException(__('Invalid PQMP'));
+        }
+        $pqmp = $this->Pqmp->read(null, $id);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = false;
+            if (isset($this->request->data['submitReport'])) {
+                $validate = 'first';                
+            }
+            if ($this->Pqmp->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
+                if (isset($this->request->data['submitReport'])) {
+                    $this->Pqmp->saveField('submitted', 2);
+                    $pqmp = $this->Pqmp->read(null, $id);
+
+                    $this->Session->setFlash(__('The PQMP has been submitted to PPB'), 'alerts/flash_success');
+                    $this->redirect(array('action' => 'view', $this->Pqmp->id));      
+                }
+                // debug($this->request->data);
+                $this->Session->setFlash(__('The PQMP has been saved'), 'alerts/flash_success');
+                $this->redirect($this->referer());
+            } else {
+                $this->Session->setFlash(__('The PQMP could not be saved. Please, try again.'), 'alerts/flash_error');
+            }
+        } else {
+            $this->request->data = $this->Pqmp->read(null, $id);
+        }
+
+        //$pqmp = $this->request->data;
+
+        $counties = $this->Pqmp->County->find('list');
+		$this->set(compact('counties'));
+		$sub_counties = $this->Pqmp->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+		$this->set(compact('sub_counties'));
+		$designations = $this->Pqmp->Designation->find('list');
+		$this->set(compact('designations'));
+		$countries = $this->Pqmp->Country->find('list');
+		$this->set('countries', $countries);
+    }
     
 	public function admin_edit($id = null) {
 		$this->set('title_for_layout', 'Edit Pqmp '.$id);

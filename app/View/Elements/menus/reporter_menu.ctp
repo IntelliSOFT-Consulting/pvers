@@ -1,4 +1,4 @@
-    <div class="menu text-center">
+    <div class="menu ">
 
         <ul class="nav nav-pills center-pills">
             <li class="<?php echo $this->fetch('Dashboard') ?>">
@@ -57,10 +57,23 @@
                     ?>
              </li>
              <li class="dropdown <?php echo $this->fetch('Profile') ?>">
-                <?php
-                    // echo $this->Html->link('<i class="icon-user"></i> My Profile',
-                        // array('controller' => 'users', 'action'=>'profile', 'admin' => false ), array('escape' => false ));
-                ?>
+                 <a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop7" href="#">
+                    <i class="icon-user"></i> My Profile <b class="caret"></b></a>
+                  <ul aria-labelledby="drop7" role="menu" class="dropdown-menu">
+                     <li>
+                     <?php
+                      echo $this->Html->link('<i class="icon-user"></i> '.$this->Session->read('Auth.User.name'),
+                        array('controller' => 'users', 'action'=>'changePassword', 'admin' => false ), array('escape' => false ));
+                      ?>
+                    </li>
+                  <li class="divider"></li>
+                     <li>
+                      <?php
+                      echo $this->Html->link('<i class="fa fa-university" aria-hidden="true"></i> '.$this->Session->read('Auth.User.name_of_institution'),
+                        array('controller' => 'users', 'action'=>'edit', $this->Session->read('Auth.User.id'), 'reporter' => false ), array('escape' => false ));
+                      ?>
+                    </li>
+                </ul>
              </li>
         </ul>
         

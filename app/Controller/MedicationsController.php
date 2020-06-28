@@ -249,7 +249,7 @@ class MedicationsController extends AppController {
 		$this->set(compact('users', 'counties', 'designations'));
 	}
 
-	public function reporter_edit($id = null) { 
+    public function reporter_edit($id = null) { 
         $this->Medication->id = $id;
         if (!$this->Medication->exists()) {
             throw new NotFoundException(__('Invalid MEDICATION'));
@@ -319,6 +319,42 @@ class MedicationsController extends AppController {
                       // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
                     }
                     //**********************************    END   *********************************
+
+                    $this->Session->setFlash(__('The Medication Error Report has been submitted to PPB'), 'alerts/flash_success');
+                    $this->redirect(array('action' => 'view', $this->Medication->id));      
+                }
+                // debug($this->request->data);
+                $this->Session->setFlash(__('The MEDICATION has been saved'), 'alerts/flash_success');
+                $this->redirect($this->referer());
+            } else {
+                $this->Session->setFlash(__('The MEDICATION could not be saved. Please, try again.'), 'alerts/flash_error');
+            }
+        } else {
+            $this->request->data = $this->Medication->read(null, $id);
+        }
+
+        //$medication = $this->request->data;
+
+        $counties = $this->Medication->County->find('list');
+        $designations = $this->Medication->Designation->find('list');
+        $this->set(compact('counties', 'designations'));
+    }
+
+	public function manager_edit($id = null) { 
+        $this->Medication->id = $id;
+        if (!$this->Medication->exists()) {
+            throw new NotFoundException(__('Invalid MEDICATION'));
+        }
+        $medication = $this->Medication->read(null, $id);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = false;
+            if (isset($this->request->data['submitReport'])) {
+                $validate = 'first';                
+            }
+            if ($this->Medication->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
+                if (isset($this->request->data['submitReport'])) {
+                    $this->Medication->saveField('submitted', 2);
+                    $medication = $this->Medication->read(null, $id);
 
                     $this->Session->setFlash(__('The Medication Error Report has been submitted to PPB'), 'alerts/flash_success');
                     $this->redirect(array('action' => 'view', $this->Medication->id));      

@@ -646,49 +646,36 @@ class SadrsController extends AppController {
 		$this->set(compact('dose'));
     }
 
-	public function admin_edit($id = null) {
-        $this->set('title_for_layout', 'Edit Sadr '.$id);
-		$this->Sadr->id = $this->Sadr->Luhn_Verify($id);
-		if (!$this->Sadr->exists()) {
-			// throw new NotFoundException(__('Invalid sadr'));
-			$this->Session->setFlash(__('Could not verify the suspected adverse drug report ID. Please ensure the ID is correct.'), 'flash_error');
-			$this->redirect(array('action' => 'index'));
-		} else {
-			$sadr = $this->Sadr->read(null);
-		}
-		// pr($this->Sadr);
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if (isset($this->request->data['deleteReport'])) {
-				$this->Session->setFlash(__('You have Deleted a report'), 'flash_success');
-				$this->redirect(array('action' => 'index'));
-			}
-			$this->beforeSaving();
-			$validate = 'first';
-			//Set Logged in user
-			if($this->Auth->user('id')) {
-				$this->request->data['Sadr']['user_id'] = $this->Auth->user('id');
-			}
-			// pr($this->data);
-			if ($this->Sadr->saveAssociated($this->request->data, array('validate' => $validate))) {
-				if (!$this->request->is('ajax')) {
-					$this->Session->setFlash(__('You have successfully saved the report'), 'flash_success');
-					$this->redirect(array('action' => 'edit', $this->Sadr->Luhn($this->Sadr->id)));
-				} else {
-					$this->set('message', 'phwesk!! finally some progress'.$id);
-					$this->set('_serialize', 'message');
-				}
-			} else {
-				$this->beforeDisplaying();
-				$this->Session->setFlash(__('The report could not be saved. Please, review the fields marked in red.'), 'flash_error');
-			}
-		} else {
-			// $this->request->data = $this->Sadr->read(null);
-			$this->request->data = $sadr;
-		}
+	public function manager_edit($id = null) { 
+        $this->Sadr->id = $id;
+        if (!$this->Sadr->exists()) {
+            throw new NotFoundException(__('Invalid SADR'));
+        }
+        $sadr = $this->Sadr->read(null, $id);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = false;
+            // $validate = 'first';                
+            if ($this->Sadr->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
+                if (isset($this->request->data['submitReport'])) {
+                    $this->Sadr->saveField('submitted', 2);
+                    $sadr = $this->Sadr->read(null, $id);                    
 
-		// $this->set('attachments', $this->Sadr->Attachment->find('all', array('conditions'=> array('Attachment.sadr_id' => $sadr['Sadr']['id']))));
-		$this->set('attachments', $sadr['Attachment']);
-		$counties = $this->Sadr->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+                    $this->Session->setFlash(__('The SADR has been saved'), 'alerts/flash_success');
+                    $this->redirect(array('action' => 'view', $this->Sadr->id));      
+                }
+                // debug($this->request->data);
+                $this->Session->setFlash(__('The SADR has been saved'), 'alerts/flash_success');
+                $this->redirect($this->referer());
+            } else {
+                $this->Session->setFlash(__('The SADR could not be saved. Please, try again.'), 'alerts/flash_error');
+            }
+        } else {
+            $this->request->data = $this->Sadr->read(null, $id);
+        }
+
+        //$sadr = $this->request->data;
+
+        $counties = $this->Sadr->County->find('list', array('order' => array('County.county_name' => 'ASC')));
 		$this->set(compact('counties'));
 		$sub_counties = $this->Sadr->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
 		$this->set(compact('sub_counties'));
@@ -700,8 +687,8 @@ class SadrsController extends AppController {
 		$this->set(compact('frequency'));
 		$dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
 		$this->set(compact('dose'));
-		$this->set('followups', $this->Sadr->SadrFollowup->find('count', array('conditions' => array('SadrFollowup.sadr_id' => $this->Sadr->id))));
-	}
+    }
+
 /**
  * delete method
  *

@@ -244,7 +244,7 @@ class TransfusionsController extends AppController {
 		$this->set(compact('users', 'counties', 'designations'));
 	}
 
-	public function reporter_edit($id = null) { 
+    public function reporter_edit($id = null) { 
         $this->Transfusion->id = $id;
         if (!$this->Transfusion->exists()) {
             throw new NotFoundException(__('Invalid TRANSFUSION'));
@@ -314,6 +314,41 @@ class TransfusionsController extends AppController {
                       // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
                     }
                     //**********************************    END   *********************************
+
+                    $this->Session->setFlash(__('The blood transfusion reaction report has been submitted to PPB'), 'alerts/flash_success');
+                    $this->redirect(array('action' => 'view', $this->Transfusion->id));      
+                }
+                // debug($this->request->data);
+                $this->Session->setFlash(__('The blood transfusion reaction report has been saved'), 'alerts/flash_success');
+                $this->redirect($this->referer());
+            } else {
+                $this->Session->setFlash(__('The blood transfusion reaction report could not be saved. Please, try again.'), 'alerts/flash_error');
+            }
+        } else {
+            $this->request->data = $this->Transfusion->read(null, $id);
+        }
+
+        //$transfusion = $this->request->data;
+        $counties = $this->Transfusion->County->find('list');
+        $designations = $this->Transfusion->Designation->find('list');
+        $this->set(compact('counties', 'designations'));
+    }
+
+	public function manager_edit($id = null) { 
+        $this->Transfusion->id = $id;
+        if (!$this->Transfusion->exists()) {
+            throw new NotFoundException(__('Invalid TRANSFUSION'));
+        }
+        $transfusion = $this->Transfusion->read(null, $id);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = false;
+            if (isset($this->request->data['submitReport'])) {
+                $validate = 'first';                
+            }
+            if ($this->Transfusion->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
+                if (isset($this->request->data['submitReport'])) {
+                    $this->Transfusion->saveField('submitted', 2);
+                    $transfusion = $this->Transfusion->read(null, $id);
 
                     $this->Session->setFlash(__('The blood transfusion reaction report has been submitted to PPB'), 'alerts/flash_success');
                     $this->redirect(array('action' => 'view', $this->Transfusion->id));      

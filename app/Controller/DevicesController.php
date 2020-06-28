@@ -618,6 +618,42 @@ class DevicesController extends AppController {
         $this->set(compact('designations'));
     }
 
+    public function manager_edit($id = null) { 
+        $this->Device->id = $id;
+        if (!$this->Device->exists()) {
+            throw new NotFoundException(__('Invalid DEVICE'));
+        }
+        $device = $this->Device->read(null, $id);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = false;
+            if (isset($this->request->data['submitReport'])) {
+                $validate = 'first';                
+            }
+            if ($this->Device->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
+                if (isset($this->request->data['submitReport'])) {
+                    $this->Device->saveField('submitted', 2);
+                    $device = $this->Device->read(null, $id);
+
+                    $this->Session->setFlash(__('The DEVICE has been submitted to PPB'), 'alerts/flash_success');
+                    $this->redirect(array('action' => 'view', $this->Device->id));      
+                }
+                // debug($this->request->data);
+                $this->Session->setFlash(__('The DEVICE has been saved'), 'alerts/flash_success');
+                $this->redirect($this->referer());
+            } else {
+                $this->Session->setFlash(__('The DEVICE could not be saved. Please, try again.'), 'alerts/flash_error');
+            }
+        } else {
+            $this->request->data = $this->Device->read(null, $id);
+        }
+
+        //$device = $this->request->data;
+        $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Device->Designation->find('list');
+        $this->set(compact('designations'));
+    }
+
     public function admin_edit($id = null) {
         $this->set('title_for_layout', 'Edit Device '.$id);
         $this->Device->id = $this->Device->Luhn_Verify($id);

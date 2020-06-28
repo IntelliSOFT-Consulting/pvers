@@ -345,6 +345,10 @@
                   array('escape' => false));
                 echo "&nbsp;";
                 if($redir == 'reporter') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> Followup</span>', array('controller' => 'devices' , 'action' => 'followup', $device['Device']['id']), array('escape' => false), __('Add a followup report?'));
+                echo "&nbsp;";
+                if($redir == 'manager') echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>' ,
+                  array('controller' => 'devices', 'action' => 'edit', $device['Device']['id']),
+                  array('escape' => false));
               } else {
                 echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>' ,
                   array('controller' => 'devices', 'action' => 'edit', $device['Device']['id']),

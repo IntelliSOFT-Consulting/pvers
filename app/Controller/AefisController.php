@@ -628,6 +628,46 @@ class AefisController extends AppController {
         $this->set(compact('designations'));
     }
 
+    public function manager_edit($id = null) { 
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            throw new NotFoundException(__('Invalid AEFI'));
+        }
+        $aefi = $this->Aefi->read(null, $id);
+        
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = false;
+            if (isset($this->request->data['submitReport'])) {
+                $validate = 'first';                
+            }
+            if ($this->Aefi->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
+                if (isset($this->request->data['submitReport'])) {
+                    $this->Aefi->saveField('submitted', 2);
+                    $aefi = $this->Aefi->read(null, $id);
+
+                    $this->Session->setFlash(__('The AEFI has been submitted to PPB'), 'alerts/flash_success');
+                    $this->redirect(array('action' => 'view', $this->Aefi->id));      
+                }
+                // debug($this->request->data);
+                $this->Session->setFlash(__('The AEFI has been saved'), 'alerts/flash_success');
+                $this->redirect($this->referer());
+            } else {
+                $this->Session->setFlash(__('The AEFI could not be saved. Please, try again.'), 'alerts/flash_error');
+            }
+        } else {
+            $this->request->data = $this->Aefi->read(null, $id);
+        }
+
+        //$aefi = $this->request->data;
+
+        $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+        $this->set(compact('sub_counties'));
+        $designations = $this->Aefi->Designation->find('list');
+        $this->set(compact('designations'));
+    }
+
     public function admin_edit($id = null) {
         $this->set('title_for_layout', 'Edit Aefi '.$id);
         $this->Aefi->id = $this->Aefi->Luhn_Verify($id);
