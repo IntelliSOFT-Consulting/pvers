@@ -11,7 +11,7 @@ App::uses('AppModel', 'Model');
 class Aefi extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	public $actsAs = array('Search.Searchable');
+	public $actsAs = array('Search.Searchable', 'Containable');
 
 	public $filterArgs = array(
         'reference_no' => array('type' => 'like', 'encode' => true),
@@ -161,7 +161,13 @@ class Aefi extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+        'Reminder' => array(
+            'className' => 'Reminder',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('Reminder.model' => 'Aefi'),
+        )
 	);
 
 	public $validate = array(
