@@ -180,9 +180,9 @@
 							<tr>
 								<td style="width: 22%;"><?php echo $i++;?>  &nbsp; <?php echo $sadrListOfDrug['drug_name'];?></td>
 								<td style="width: 10%;"><?php echo $sadrListOfDrug['brand_name'];?></td>
-								<td style="width: 8%;"><?php echo $sadrListOfDrug['dose'].' - '.$dose[$sadrListOfDrug['dose_id']];?></td>
-								<td style="width: 10%;"><?php echo $routes[$sadrListOfDrug['route_id']];?></td>
-								<td style="width: 10%;"><?php echo $frequency[$sadrListOfDrug['frequency_id']];?></td>
+								<td style="width: 8%;"><?php echo $sadrListOfDrug['dose'].' - '.$sadrListOfDrug['Dose']['name'];?></td>
+								<td style="width: 10%;"><?php echo $sadrListOfDrug['Route']['name'];?></td>
+								<td style="width: 10%;"><?php echo $sadrListOfDrug['Frequency']['name'];?></td>
 								<td style="width: 10%;"><?php echo $sadrListOfDrug['start_date'];?></td>
 								<td style="width: 10%;"><?php echo $sadrListOfDrug['stop_date'];?></td>
 								<td style="width: 10%;"><?php echo $sadrListOfDrug['indication'];?></td>

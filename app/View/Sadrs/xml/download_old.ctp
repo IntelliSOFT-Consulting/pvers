@@ -5,18 +5,16 @@
         <messagetype>ichicsr</messagetype>
         <messageformatversion>2.1</messageformatversion>
         <messageformatrelease>2.0</messageformatrelease>
-        <messagenumb>KE-PPB-<?php
-            echo date('Y').'-'.$sadr['Sadr']['id'];
-        ?></messagenumb>
+        <messagenumb>999999</messagenumb>
         <messagesenderidentifier>PPB</messagesenderidentifier>
-        <messagereceiveridentifier>KE</messagereceiveridentifier>
+        <messagereceiveridentifier/>
         <messagedateformat>204</messagedateformat>
         <messagedate><?php echo date('YmdHis');?></messagedate>
     </ichicsrmessageheader>
     <safetyreport>
         <safetyreportversion>1</safetyreportversion>
         <safetyreportid>KE-PPB-<?php
-            echo $sadr['Sadr']['reference_no'];
+            echo date('Y').'-'.$sadr['Sadr']['id'];
         ?></safetyreportid>
         <primarysourcecountry>KE</primarysourcecountry>
         <occurcountry>KE</occurcountry>
@@ -24,22 +22,22 @@
         <transmissiondate/>
         <reporttype>1</reporttype>
         <serious><?php
-				if ($sadr['Sadr']['serious'] == 'Yes') {
+				if ($sadr['Sadr']['severity'] == 'Severe' || $sadr['Sadr']['severity'] == 'Fatal') {
 					echo 1;
 				} else { echo 2;}
 			?></serious>
-        <seriousnessdeath><?php echo ($sadr['Sadr']['serious_reason'] == 'Death') ? 1 : 2; ?></seriousnessdeath>
-        <seriousnesslifethreatening><?php echo ($sadr['Sadr']['serious_reason'] == 'Life threatening') ? 1 : 2; ?></seriousnesslifethreatening>
-        <seriousnesshospitalization><?php echo ($sadr['Sadr']['serious_reason'] == 'Hospitalization/ Prolonged Hospitalization') ? 1 : 2; ?></seriousnesshospitalization>
-        <seriousnessdisabling><?php echo ($sadr['Sadr']['serious_reason'] == 'Disability') ? 1 : 2; ?></seriousnessdisabling>
-        <seriousnesscongenitalanomali><?php echo ($sadr['Sadr']['serious_reason'] == 'Congenital anomality') ? 1 : 2; ?></seriousnesscongenitalanomali>
-        <seriousnessother><?php echo ($sadr['Sadr']['serious_reason'] == 'Other Medically Important Reason') ? 1 : 2; ?></seriousnessother>
+        <seriousnessdeath/>
+        <seriousnesslifethreatening/>
+        <seriousnesshospitalization/>
+        <seriousnessdisabling/>
+        <seriousnesscongenitalanomali/>
+        <seriousnessother/>
         <receivedateformat>102</receivedateformat>
-        <receivedate><?php echo (!empty($sadr['Sadr']['reporter_date'])) ?  date('Ymd', strtotime($sadr['Sadr']['reporter_date'])) : date('Ymd', strtotime($sadr['Sadr']['created'])); ?></receivedate>
+        <receivedate><?php echo date('Ymd', strtotime($sadr['Sadr']['created'])); ?></receivedate>
         <receiptdateformat>102</receiptdateformat>
-        <receiptdate><?php echo (!empty($sadr['Sadr']['reporter_date'])) ?  date('Ymd', strtotime($sadr['Sadr']['reporter_date'])) : date('Ymd', strtotime($sadr['Sadr']['created'])); ?></receiptdate>
+        <receiptdate><?php echo date('Ymd'); ?></receiptdate>
         <additionaldocument><?php
-			if (isset($sadr['Attachment']) && count($sadr['Attachment']) > 0) {
+			if (count($sadr['Attachment']) > 0) {
 				echo 1;
 			} else {
 				echo 2;
@@ -51,21 +49,21 @@
 			endforeach;
 		?></documentlist>
         <fulfillexpeditecriteria><?php
-			if ($sadr['Sadr']['serious'] == 'Yes') {
+			if ($sadr['Sadr']['severity'] == 'Severe' || $sadr['Sadr']['severity'] == 'Fatal') {
 				echo 1;
 			} else { echo 2;}
 		?></fulfillexpeditecriteria>
         <authoritynumb>KE-PPB-<?php
-            echo $sadr['Sadr']['reference_no'];
+            echo date('Y').'-'.$sadr['Sadr']['id'];
         ?></authoritynumb>
         <companynumb/>
-        <duplicate>0</duplicate>
-        <casenullification>0</casenullification>
+        <duplicate/>
+        <casenullification/>
         <nullificationreason/>
         <medicallyconfirm><?php
-            if (!in_array($sadr['Sadr']['designation_id'], [26, 27])) {
-                echo 1;
-            } else { echo 2;}
+			if ($sadr['Sadr']['designation_id'] == 1 || $sadr['Sadr']['designation_id'] == 2 || $sadr['Sadr']['designation_id'] == 3 ) {
+				echo 1;
+			} else { echo 2;}
 		?></medicallyconfirm>
 		<?php $arr = preg_split("/[\s]+/", $sadr['Sadr']['reporter_name']); ?>
         <primarysource>
@@ -73,12 +71,12 @@
             <reporterfamilyname><?php if (isset($arr[1])) echo $arr[1].' '; if (isset($arr[2])) echo $arr[2];  ?></reporterfamilyname>
             <reporterorganization><?php echo $sadr['Sadr']['name_of_institution']; ?></reporterorganization>
             <reporterdepartment/>
-            <reporterstreet><?php echo $sadr['Sadr']['reporter_phone']; ?></reporterstreet>
+            <reporterstreet><?php echo $sadr['Sadr']['contact']; ?></reporterstreet>
             <reportercity/>
             <reporterstate/>
             <reporterpostcode/>
             <reportercountry>KE</reportercountry>
-            <qualification><?php echo $sadr['Designation']['category']; ?></qualification>
+            <qualification><?php echo $sadr['Sadr']['designation_id']; ?></qualification>
             <literaturereference/>
             <studyname/>
             <sponsorstudynumb/>
@@ -185,8 +183,8 @@
 			?></patientsex>
             <lastmenstrualdateformat/>
             <patientlastmenstrualdate/>
-            <patientmedicalhistorytext><?php echo $sadr['Sadr']['medical_history']; ?></patientmedicalhistorytext>
-            <resultstestsprocedures><?php echo $sadr['Sadr']['lab_investigation']; ?></resultstestsprocedures>
+            <patientmedicalhistorytext><?php echo $sadr['Sadr']['any_other_comment']; ?></patientmedicalhistorytext>
+            <resultstestsprocedures/>
             <patientdeath>
                 <patientdeathdateformat/>
                 <patientdeathdate/>
@@ -194,10 +192,10 @@
             </patientdeath>
             <reaction>
                 <primarysourcereaction><?php echo $sadr['Sadr']['description_of_reaction']; ?></primarysourcereaction>
-                <reactionmeddraversionllt></reactionmeddraversionllt>
-                <reactionmeddrallt></reactionmeddrallt>
-                <reactionmeddraversionpt>23.0</reactionmeddraversionpt>
-                <reactionmeddrapt><?php echo $sadr['Sadr']['report_title']; ?></reactionmeddrapt>
+                <reactionmeddraversionllt>WHO-ART</reactionmeddraversionllt>
+                <reactionmeddrallt><?php echo $sadr['Sadr']['report_title']; ?></reactionmeddrallt>
+                <reactionmeddraversionpt/>
+                <reactionmeddrapt/>
                 <termhighlighted/>
                 <reactionstartdateformat><?php
 					$onsetf = 102;
@@ -251,7 +249,7 @@
                 <drugauthorizationholder/>
                 <drugstructuredosagenumb><?php echo $sadrListOfDrug['dose']; ?></drugstructuredosagenumb>
                 <drugstructuredosageunit><?php
-					echo $sadrListOfDrug['Dose']['icsr_code'];
+					echo $doseUnit[$sadrListOfDrug['dose_id']];
 				?></drugstructuredosageunit>
                 <drugseparatedosagenumb/>
                 <drugintervaldosageunitnumb/>
@@ -261,7 +259,7 @@
                 <drugdosagetext/>
                 <drugdosageform/>
                 <drugadministrationroute><?php
-					echo $sadrListOfDrug['Route']['icsr_code'] ;
+					if(!empty($sadrListOfDrug['route_id'])) echo $routesMatch[$sadrListOfDrug['route_id']] ;
 				?></drugadministrationroute>
                 <drugparadministration/>
                 <reactiongestationperiod/>
@@ -299,19 +297,26 @@
 					<activesubstancename><?php echo $sadrListOfDrug['drug_name']; ?></activesubstancename>
 				</activesubstance>
                 <drugreactionrelatedness>
-                    <drugreactionassesmeddraversion />
-                    <drugreactionasses />
+                    <drugreactionassesmeddraversion>WHO-ART</drugreactionassesmeddraversion>
+                    <drugreactionasses><?php echo $sadr['Sadr']['report_title']; ?></drugreactionasses>
                     <drugassessmentsource/>
-                    <drugassessmentmethod />
-                    <drugresult />
+                    <drugassessmentmethod>WHO causality</drugassessmentmethod>
+                    <drugresult><?php
+                            if(strtolower($sadr['Sadr']['causality']) == 'certain') echo 'certain';
+                            if(strtolower($sadr['Sadr']['causality']) == 'probable / likely') echo 'probable/likely';
+                            if(strtolower($sadr['Sadr']['causality']) == 'possible') echo 'possible';
+                            if(strtolower($sadr['Sadr']['causality']) == 'unlikely') echo 'unlikely';
+                            if(strtolower($sadr['Sadr']['causality']) == 'conditional / unclassified') echo 'conditional/unclassified';
+                            if(strtolower($sadr['Sadr']['causality']) == 'unassessable / unclassifiable') echo 'unassessable/unclassifiable';
+                    ?></drugresult>
                 </drugreactionrelatedness>
             </drug>
 			<?php  endforeach; ?>
             <summary>
                 <narrativeincludeclinical><?php echo $sadr['Sadr']['description_of_reaction']; ?></narrativeincludeclinical>
                 <reportercomment><?php echo $sadr['Sadr']['any_other_comment']; ?></reportercomment>
-                <senderdiagnosismeddraversion />
-                <senderdiagnosis />
+                <senderdiagnosismeddraversion>WHO-ART</senderdiagnosismeddraversion>
+                <senderdiagnosis><?php echo $sadr['Sadr']['diagnosis']; ?></senderdiagnosis>
                 <sendercomment/>
             </summary>
         </patient>

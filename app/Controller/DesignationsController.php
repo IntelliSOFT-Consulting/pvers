@@ -4,93 +4,100 @@ App::uses('AppController', 'Controller');
  * Designations Controller
  *
  * @property Designation $Designation
+ * @property PaginatorComponent $Paginator
  */
 class DesignationsController extends AppController {
 
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
 /**
- * index method
+ * admin_index method
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Designation->recursive = 0;
-		$this->set('designations', $this->paginate());
+		$this->set('designations', $this->Paginator->paginate());
 	}
 
 /**
- * view method
+ * admin_view method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
-		$this->Designation->id = $id;
-		if (!$this->Designation->exists()) {
+	public function admin_view($id = null) {
+		if (!$this->Designation->exists($id)) {
 			throw new NotFoundException(__('Invalid designation'));
 		}
-		$this->set('designation', $this->Designation->read(null, $id));
+		$options = array('conditions' => array('Designation.' . $this->Designation->primaryKey => $id));
+		$this->set('designation', $this->Designation->find('first', $options));
 	}
 
 /**
- * add method
+ * admin_add method
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Designation->create();
 			if ($this->Designation->save($this->request->data)) {
-				$this->Session->setFlash(__('The designation has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->Flash->success(__('The designation has been saved.'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The designation could not be saved. Please, try again.'));
+				$this->Flash->error(__('The designation could not be saved. Please, try again.'));
 			}
 		}
 	}
 
 /**
- * edit method
+ * admin_edit method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
-		$this->Designation->id = $id;
-		if (!$this->Designation->exists()) {
+	public function admin_edit($id = null) {
+		if (!$this->Designation->exists($id)) {
 			throw new NotFoundException(__('Invalid designation'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Designation->save($this->request->data)) {
-				$this->Session->setFlash(__('The designation has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->Flash->success(__('The designation has been saved.'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The designation could not be saved. Please, try again.'));
+				$this->Flash->error(__('The designation could not be saved. Please, try again.'));
 			}
 		} else {
-			$this->request->data = $this->Designation->read(null, $id);
+			$options = array('conditions' => array('Designation.' . $this->Designation->primaryKey => $id));
+			$this->request->data = $this->Designation->find('first', $options);
 		}
 	}
 
 /**
- * delete method
+ * admin_delete method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->Designation->id = $id;
-		if (!$this->Designation->exists()) {
+	public function admin_delete($id = null) {
+		if (!$this->Designation->exists($id)) {
 			throw new NotFoundException(__('Invalid designation'));
 		}
-		if ($this->Designation->delete()) {
-			$this->Session->setFlash(__('Designation deleted'));
-			$this->redirect(array('action' => 'index'));
+		$this->request->allowMethod('post', 'delete');
+		if ($this->Designation->delete($id)) {
+			$this->Flash->success(__('The designation has been deleted.'));
+		} else {
+			$this->Flash->error(__('The designation could not be deleted. Please, try again.'));
 		}
-		$this->Session->setFlash(__('Designation was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 }

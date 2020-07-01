@@ -87,20 +87,8 @@
         </li>
         <li>
         <?php
-        echo $this->Html->link('<i class="icon-question-sign"></i> Site Inspection Questions <small class="muted">(Site inspection questions)</small>',
-          array('controller' => 'site_questions', 'action' => 'index', 'admin' => true), array('escape' => false));
-        ?>
-        </li>
-        <li>
-        <?php
-        echo $this->Html->link('<i class="icon-stethoscope"></i> Reviewer Assessment Questions <small class="muted">(Clinical, Non-clinical and Qauality questions)</small>',
-          array('controller' => 'review_questions', 'action' => 'index', 'admin' => true), array('escape' => false));
-        ?>
-        </li>
-        <li>
-        <?php
-        echo $this->Html->link('<i class="icon-user-md"></i> Ethics Review Committees <small class="muted">(ERCs)</small>',
-          array('controller' => 'ercs', 'action' => 'index', 'admin' => true), array('escape' => false));
+        echo $this->Html->link('<i class="fa fa-user-secret" aria-hidden="true"></i> Designations',
+          array('controller' => 'designations', 'action' => 'index', 'admin' => true), array('escape' => false));
         ?>
         </li>
       </ul>

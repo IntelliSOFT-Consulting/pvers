@@ -58,7 +58,7 @@
              </li>
              <li class="dropdown <?php echo $this->fetch('Profile') ?>">
                  <a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop7" href="#">
-                    <i class="icon-user"></i> My Profile <b class="caret"></b></a>
+                    <i class="fa fa-user-secret" aria-hidden="true"></i> My Profile <b class="caret"></b></a>
                   <ul aria-labelledby="drop7" role="menu" class="dropdown-menu">
                      <li>
                      <?php

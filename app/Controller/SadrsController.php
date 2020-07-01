@@ -4,6 +4,7 @@ App::uses('Sanitize', 'Utility');
 App::uses('CakeText', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
+App::uses('HttpSocket', 'Network/Http');
 
 /**
  * Sadrs Controller
@@ -196,16 +197,11 @@ class SadrsController extends AppController {
             }
         }
 
-        $sadr = $this->Sadr->read(null);
+        $sadr = $this->Sadr->find('first', array(
+				'conditions' => array('Sadr.id' => $id),
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+			));
         $this->set('sadr', $sadr);
-
-		$this->set('sadr', $this->Sadr->read(null));
-		$routes = $this->Sadr->SadrListOfDrug->Route->find('list');
-		$this->set(compact('routes'));
-		$frequency = $this->Sadr->SadrListOfDrug->Frequency->find('list');
-		$this->set(compact('frequency'));
-		$dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
-		$this->set(compact('dose'));
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'SADR_' . $id,  'orientation' => 'portrait');
@@ -225,67 +221,18 @@ class SadrsController extends AppController {
             // $this->response->download('SADR_'.$sadr['Sadr']['id'].'.pdf');
         }
 
-        $sadr = $this->Sadr->read(null);
+        $sadr = $this->Sadr->find('first', array(
+				'conditions' => array('Sadr.id' => $id),
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+			));
         $this->set('sadr', $sadr);
 
-		$this->set('sadr', $this->Sadr->read(null));
-		$routes = $this->Sadr->SadrListOfDrug->Route->find('list');
-		$this->set(compact('routes'));
-		$frequency = $this->Sadr->SadrListOfDrug->Frequency->find('list');
-		$this->set(compact('frequency'));
-		$dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
-		$this->set(compact('dose'));
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'SADR_' . $id,  'orientation' => 'portrait');
             $this->response->download('SADR_'.$sadr['Sadr']['id'].'.pdf');
         }
     }
-
-	public function admin_view($id = null) {
-		$this->Sadr->id = $this->Sadr->Luhn_Verify($id);
-		if (!$this->Sadr->exists()) {
-			$this->Session->setFlash(__('Could not verify the suspected adverse drug report ID. Please ensure the ID is correct.'), 'flash_error');
-			$this->redirect('/');
-		}
-
-		Configure::load('appwide');
-		$this->set('root', Configure::read('Domain.root'));
-		$this->set('sadr', $this->Sadr->read(null));
-		$routes = $this->Sadr->SadrListOfDrug->Route->find('list');
-		$this->set(compact('routes'));
-		$frequency = $this->Sadr->SadrListOfDrug->Frequency->find('list');
-		$this->set(compact('frequency'));
-		$dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
-		$this->set(compact('dose'));
-		$this->set('followups', $this->Sadr->SadrFollowup->find('count', array('conditions' => array('SadrFollowup.sadr_id' => $this->Sadr->id))));
-		if ($this->RequestHandler->isXml()) {
-			$this->response->download('SADR_'.date('Y_m_d_His'));
-		}
-	}
-
-	public function admin_reply($id = null) {
-		$this->Sadr->id = $this->Sadr->Luhn_Verify($id);
-		if (!$this->Sadr->exists()) {
-			$this->Session->setFlash(__('Could not verify the suspected adverse drug report ID. Please ensure the ID is correct.'), 'flash_error');
-			$this->redirect('/');
-		}
-		Configure::load('appwide');
-		$this->set('root', Configure::read('Domain.root'));
-		$this->set('sadr', $this->Sadr->read(null));
-		$this->Sadr->saveField('submitted', 1);
-	}
-
-	public function find() {
-		$this->Sadr->id = $this->Sadr->Luhn_Verify($this->request->data['Sadr']['search']);
-		if (!$this->Sadr->exists()) {
-			$this->Session->setFlash(__('Could not verify the suspected adverse drug report ID. Please ensure the ID is correct.'), 'flash_error');
-			$this->redirect(array('action' => 'add'));
-		} else {
-			$this->redirect(array('action' => 'view', $this->request->data['Sadr']['search']));
-		}
-
-	}
 
 /**
  * download methods
@@ -294,31 +241,87 @@ class SadrsController extends AppController {
 		$this->Sadr->id = $id;
 		if (!$this->Sadr->exists()) {
 			$this->Session->setFlash(__('Could not verify the suspected adverse drug report ID. Please ensure the ID is correct.'), 'flash_error');
-			$this->redirect(array('action' => 'add'));
+			$this->redirect('/');
 		}
-		$sadr = $this->Sadr->read(null);
+
+		$sadr = $this->Sadr->find('first', array(
+				'conditions' => array('Sadr.id' => $id),
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+			));
 		$sadr = Sanitize::clean($sadr, array('escape' => true));
 		$this->set('sadr', $sadr);
-		//if(!$sadr['Sadr']['vigiflow_id']) {
-			$routes = $this->Sadr->SadrListOfDrug->Route->find('list');
-			$this->set(compact('routes'));
-			$frequency = $this->Sadr->SadrListOfDrug->Frequency->find('list');
-			$this->set(compact('frequency'));
-			$dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
-			$this->set(compact('dose'));
-			if ($this->RequestHandler->isXml()) {
-				$doseUnit = $this->Sadr->SadrListOfDrug->Dose->find('list', array('fields' => array('id', 'icsr_code')));
-				$this->set(compact('doseUnit'));
-				$routesMatch = $this->Sadr->SadrListOfDrug->Route->find('list', array('fields' => array('id', 'icsr_code')));
-				$this->set(compact('routesMatch'));
-				$this->Sadr->saveField('submitted', 3);
-			}
-			$this->response->download('SADR_'.$sadr['Sadr']['id']);
-		//} else {
-		//	$this->Session->setFlash(__('The report could not be exported to E2B. It is already linked with a vigiflow ID'), 'flash_error');
-		//	$this->redirect($this->referer());
-		//}
+        $this->response->download('SADR_'.$sadr['Sadr']['id']);
 	}
+
+	public function vigiflow($id = null) {
+        $this->Sadr->id = $id;
+		if (!$this->Sadr->exists()) {
+			$this->Session->setFlash(__('Could not verify the suspected adverse drug report ID. Please ensure the ID is correct.'), 'flash_error');
+			$this->redirect('/');
+		}
+
+		$sadr = $this->Sadr->find('first', array(
+				'conditions' => array('Sadr.id' => $id),
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+			));
+		$sadr = Sanitize::clean($sadr, array('escape' => true));
+
+        $view = new View($this,false);
+        $view->viewPath='Sadrs/xml';  // Directory inside view directory to search for .ctp files
+		$view->layout=false; // if you want to disable layout
+		$view->set('sadr', $sadr); // set your variables for view here
+		$html=$view->render('download'); 
+
+		// debug($html);
+		$HttpSocket = new HttpSocket();
+		// string data
+		$results = $HttpSocket->post(
+		    'https://api.who-umc.org/demo/vigiflow/icsrs',
+		    $html,
+		    array('header' => array('umc-client-key' => '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'))
+		);
+
+		// debug($results->code);
+		// debug($results->body);
+		if ($results->isOk()) {
+			$this->Flash->success('The report has been successfully sent to vigiflow: '.$results->body);
+			$this->redirect($this->referer());
+		} else {
+			$this->Flash->error('Error sending report: '.$results->body);
+			$this->redirect($this->referer());
+		}
+		$this->autoRender = false ;
+    }
+
+    public function e2b($id = null) {
+        $sadr = $this->Sadrs->get($id, [
+            'contain' => ['SadrListOfDrugs', 'SadrOtherDrugs', 'Attachments', 'ReportStages', 'Reactions']
+        ]);        
+        
+        $stage1  = $this->Sadrs->ReportStages->newEntity();
+        $stage1->model = 'Sadrs';
+        $stage1->stage = 'VigiBase';
+        $stage1->description = 'Stage 9';
+        $stage1->stage_date = date("Y-m-d H:i:s");
+        $sadr->report_stages = [$stage1];
+        $sadr->status = 'VigiBase';
+        $this->Sadrs->save($sadr);
+
+        $designations = $this->Sadrs->Designations->find('list', array('order'=>'Designations.name ASC'));
+        $provinces = $this->Sadrs->Provinces->find('list', ['limit' => 200]);
+        $doses = $this->Sadrs->SadrListOfDrugs->Doses->find('list', ['keyField' => 'id', 'valueField' => 'icsr_code']);
+        $routes = $this->Sadrs->SadrListOfDrugs->Routes->find('list', ['keyField' => 'id', 'valueField' => 'icsr_code']);
+        $frequencies = $this->Sadrs->SadrListOfDrugs->Frequencies->find('list', ['limit' => 200]);
+        $this->set('_serialize', false);
+        $this->set(compact('sadr', 'doses', 'routes'));
+        /*$query = $this->Sadrs->query();
+        $query->update()
+                    ->set(['status' => 'E2B'])
+                    ->where(['id' => $sadr->id])
+                    ->execute();*/
+
+        $this->response->download(($sadr->submitted==2) ? str_replace('/', '_', $sadr->reference_number).'.xml' : 'ADR_'.$sadr->created->i18nFormat('dd-MM-yyyy_HHmmss').'.xml');
+    }
 
 /**
  * add method

@@ -11,7 +11,7 @@ App::uses('CakeEmail', 'Network/Email');
 class Sadr extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-    public $actsAs = array('Search.Searchable');
+    public $actsAs = array('Search.Searchable', 'Containable');
 
 	public $filterArgs = array(
         'reference_no' => array('type' => 'like', 'encode' => true),
