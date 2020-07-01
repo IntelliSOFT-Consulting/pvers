@@ -506,6 +506,7 @@ class PqmpsController extends AppController {
 
         //$pqmp = $this->request->data;
 
+		$this->set(compact('pqmp'));
         $counties = $this->Pqmp->County->find('list');
 		$this->set(compact('counties'));
 		$sub_counties = $this->Pqmp->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));

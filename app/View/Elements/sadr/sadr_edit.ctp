@@ -722,7 +722,7 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
-            <h5 style="text-align: center; color: #884805;">If Person Submitting if Different from Reporter</h5> <br/>
+            <h5 style="text-align: center; color: #884805;">If Person Submitting is Different from Reporter</h5> <br/>
             <div class="row-fluid">
                 <div class="span6">
                     <?php

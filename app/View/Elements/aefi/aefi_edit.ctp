@@ -1,4 +1,10 @@
 <?php
+    $this->assign('AEFI', 'active');
+    $this->Html->script('jquery/combobox', array('inline' => false));
+    $this->Html->script('aefi', array('inline' => false));
+?>
+
+<?php
         echo $this->Session->flash();
         echo $this->Form->create('Aefi', array(
             'type' => 'file',
@@ -270,6 +276,7 @@
                             'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="AefiComlaintOther_" name="data[Aefi][complaint_other]">
                                                                     <label class="checkbox">',
+                                // 'onclick' => '$("#AefiComplaintOtherSpecify").removeAttr("disabled")',
                                                     'after' => 'Other   </label>',
                                                     ));
                         echo $this->Form->input('complaint', array('type' => 'hidden', 'value' => ''));

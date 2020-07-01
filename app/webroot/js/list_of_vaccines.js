@@ -19,17 +19,17 @@ $(function() {
         showAnim:'show'
       });
 
-      // var dates4 = $('.date-pick-field').datepicker({
-      //   minDate:"-100Y", maxDate:"-0D", 
-      //   dateFormat:'dd-mm-yy', 
-      //   showButtonPanel:true, 
-      //   changeMonth:true, 
-      //   changeYear:true, 
-      //   showAnim:'show'
-      // });
-      $('.date-pick-field').datetimepicker({
-        format: 'd-m-Y H:i'
+      var dates4 = $('.date-pick-field').datepicker({
+        minDate:"-100Y", maxDate:"-0D", 
+        dateFormat:'dd-mm-yy', 
+        showButtonPanel:true, 
+        changeMonth:true, 
+        changeYear:true, 
+        showAnim:'show'
       });
+      // $('.date-pick-field').datetimepicker({
+      //   format: 'd-m-Y H:i'
+      // });
 
       var availableVax = [
         "BCG",

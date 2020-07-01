@@ -25,7 +25,7 @@ class UsersController extends AppController {
 
 
 	public function login() {
-         if ($this->Session->read('Auth.User')) {
+        if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('You are logged in!', 'alerts/flash_success');
             $this->redirect('/', null, false);
         }
@@ -249,6 +249,10 @@ class UsersController extends AppController {
  */
 
 	public function register() {
+		if ($this->Session->read('Auth.User')) {
+            $this->Session->setFlash('You are logged in!', 'alerts/flash_warning');
+            $this->redirect('/', null, false);
+        }
         if ($this->request->is('post')) {
             $this->User->create();
             $this->request->data['User']['group_id'] = 3;

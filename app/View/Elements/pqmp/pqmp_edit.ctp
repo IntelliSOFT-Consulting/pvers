@@ -1,4 +1,9 @@
 <?php
+	$this->assign('PQMP', 'active');
+	$this->Html->script('jquery/combobox', array('inline' => false));
+	$this->Html->script('pqmp', array('inline' => false));
+ ?>
+<?php
 				//echo $this->element('banner');
 		echo $this->Session->flash();
 
@@ -45,7 +50,7 @@
 				<div class="span8">
 				</div>
 				<div class="span4">
-				  <h5>Form ID: <?php 	echo $this->data['Pqmp']['reference_no']; ?></h5>
+				  <h5>Form ID: <?php 	echo $pqmp['Pqmp']['reference_no']; ?></h5>
 				  <h6><span class="label label-important">Important</span> Unique Form ID</h6>
 				</div><!--/span-->
 			</div><!--/row-->
@@ -149,7 +154,7 @@
 
 						echo $this->Form->input('manufacture_date', array(
 							'type' => 'date',
-							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => true,
+							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => true, 'empty' => array('day' => '(choose day)', 'month' => '(choose month)', 'year' => '(choose year)'),
 							'label' => array('class' => 'control-label required', 'text' => 'Date of Manufacture'),
 							'after'=>'<p class="help-block">	Date, Month & Year or Year of Manufacture </p></div>',
 							'class' => ' autosave-ignore ',
@@ -168,7 +173,7 @@
 
 						echo $this->Form->input('expiry_date', array(
 							'div' => array('class' => 'control-group'),
-							'type' => 'text',
+							'type' => 'text', 'class' => 'date-pick-expire',
 							'label' => array('class' => 'control-label required', 'text' => 'Date of Expiry'.' <span style="color:red;">*</span> '),
 							'after'=>'<p class="help-block">	Date format (dd-mm-yyyy) <br> If day is missing, use last day of the month. </p></div>',
 						));
@@ -601,7 +606,7 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
-            <h5 style="text-align: center; color: #884805;">If Person Submitting if Different from Reporter</h5> <br/>
+            <h5 style="text-align: center; color: #884805;">If Person Submitting is Different from Reporter</h5> <br/>
             <div class="row-fluid">
                 <div class="span6">
                     <?php

@@ -170,6 +170,17 @@ class Medication extends AppModel {
 			$this->data['Medication']['time_of_event'] = '';
 		}
 
+        if (!empty($this->data['Medication']['date_of_event'])) {
+            $this->data['Medication']['date_of_event'] = $this->dateFormatBeforeSave($this->data['Medication']['date_of_event']);
+        }
+
+        if (!empty($this->data['Medication']['reporter_date'])) {
+            $this->data['Medication']['reporter_date'] = $this->dateFormatBeforeSave($this->data['Medication']['reporter_date']);
+        }
+        if (!empty($this->data['Medication']['reporter_date_diff'])) {
+            $this->data['Medication']['reporter_date_diff'] = $this->dateFormatBeforeSave($this->data['Medication']['reporter_date_diff']);
+        }
+
 		return true;
 	}
 
@@ -180,6 +191,17 @@ class Medication extends AppModel {
 				$a = explode(':', $val['Medication']['time_of_event']);
 				$results[$key]['Medication']['time_of_event'] = array('hour'=> $a[0],'min'=> $a[1]);
 			}
+
+            if (isset($val['Medication']['date_of_event'])) {
+                $results[$key]['Medication']['date_of_event'] = $this->dateFormatAfterFind($val['Medication']['date_of_event']);
+            }
+            
+            if (isset($val['Medication']['reporter_date'])) {
+                $results[$key]['Medication']['reporter_date'] = $this->dateFormatAfterFind($val['Medication']['reporter_date']);
+            }
+            if (isset($val['Medication']['reporter_date_diff'])) {
+                $results[$key]['Medication']['reporter_date_diff'] = $this->dateFormatAfterFind($val['Medication']['reporter_date_diff']);
+            }
 		}
 		return $results;
 	}

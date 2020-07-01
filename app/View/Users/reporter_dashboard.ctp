@@ -103,7 +103,7 @@
                       }
                     }
                     echo '</ol>';      
-                    echo $this->Html->link('All Device Incidents >>', array('controller' => 'devices', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));              
+                    echo $this->Html->link('All Incidents >>', array('controller' => 'devices', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));              
                     echo $this->Form->postLink('Report Medical Device', array('controller' => 'devices' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Medical Device?'));
                   ?>
                 </div>
@@ -125,7 +125,7 @@
                         }
                       }
                       echo '</ol>';
-                    echo $this->Html->link('All Medication Errors >>', array('controller' => 'medications', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                    echo $this->Html->link('All Errors >>', array('controller' => 'medications', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
                       echo $this->Form->postLink('Report Medication Error', array('controller' => 'medications' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Medication Error?'));
                     ?>
                 </div>
@@ -147,7 +147,7 @@
                         }
                       }
                       echo '</ol>';
-                    echo $this->Html->link('All Blood Transfusion Reports >>', array('controller' => 'transfusions', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                    echo $this->Html->link('All BT >>', array('controller' => 'transfusions', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
                       echo $this->Form->postLink('Report Transfusion', array('controller' => 'transfusions' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Transfusion Reaction?'));
                     ?>
                 </div>

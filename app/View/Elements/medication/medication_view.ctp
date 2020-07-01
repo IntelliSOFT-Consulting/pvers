@@ -371,7 +371,7 @@
 						<td style="width: 25%;"><strong><?php echo $medication['Medication']['reporter_date'] ?></strong></td>
 					</tr>
 					<tr>
-						<td colspan="6"><h4 style="text-align: center; color: #884805;">If Person Submitting if Different from Reporter</h4> </td>
+						<td colspan="6"><h4 style="text-align: center; color: #884805;">If Person Submitting is Different from Reporter</h4> </td>
 					</tr>
 					<tr>
 						<td style="width: 25%;">Name</td>

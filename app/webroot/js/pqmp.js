@@ -1,21 +1,34 @@
-$(document).ready(function() {
-	count = 0;
-	for(key in myarray.Pqmp) { 
-	  count++; 
-	}
+  $( function() {
+    
+    $( "#PqmpCountyId" ).combobox();
+    $( "#toggle" ).on( "click", function() {
+        $( "#PqmpCountyId" ).toggle();
+    });
 
-    if (count > 0) {
-		alert('The report could not be submitted. Please review the fields marked in red and then resubmit.');
-	}
-	var PqmpExpiryDate =  $('#PqmpExpiryDate').datepicker({
-		minDate:"-100Y", dateFormat:'dd-mm-yy', showButtonPanel:true, changeMonth:true, changeYear:true, 
-		showAnim:'show', buttonImageOnly:true, showOn:'both', buttonImage:'/img/calendar.gif'});
-		
-	var PqmpReceiptDate =  $('#PqmpReceiptDate').datepicker({
-		minDate:"-100Y", maxDate:"-0D", dateFormat:'dd-mm-yy', showButtonPanel:true, changeMonth:true, 
-		changeYear:true, showAnim:'show', buttonImageOnly:true, showOn:'both', buttonImage:'/img/calendar.gif'});
+    var dates2 = $('.date-pick-expire').datepicker({
+        minDate:"-100Y", maxDate:"+5Y", 
+        dateFormat:'dd-mm-yy', 
+        showButtonPanel:true, 
+        changeMonth:true, 
+        changeYear:true, 
+        showAnim:'show'
+      });
 
-	var cache2 = {},	lastXhr;
+	var dates4 = $('.date-pick-field').datepicker({
+		minDate:"-100Y", maxDate:"-0D", 
+		dateFormat:'dd-mm-yy', 
+		showButtonPanel:true, 
+		changeMonth:true, 
+		changeYear:true, 
+		showAnim:'show'
+	});
+	
+    $("#PqmpComplaintOther").click(function(){   
+	    $("#PqmpComplaintOtherSpecify").attr('disabled', !this.checked)
+	});
+	if($("#PqmpComplaintOther").is(':checked')){ $("#PqmpComplaintOtherSpecify").attr('disabled', false); }
+
+    var cache2 = {},	lastXhr;
 	$( "#PqmpFacilityCode" ).autocomplete({
 		source: function( request, response ) {
 			var term = request.term;
@@ -34,18 +47,12 @@ $(document).ready(function() {
 		select: function( event, ui ) {
 			$( "#PqmpFacilityName" ).val( ui.item.label );
 			$( "#PqmpFacilityCode" ).val( ui.item.value );
+			$( "#PqmpFacilityPhone" ).val( ui.item.phone );
 			$( "#PqmpFacilityAddress" ).val( ui.item.addr );
-			$("#PqmpCountyId").combobox('autocomplete', ui.item.desc);  
 			return false;
 		}
-	})
-	.data( "autocomplete" )._renderItem = function( ul, item ) {
-			return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( "<a>" + item.value + " - " + item.label + "</a>" )
-				.appendTo( ul );
-	};
-	
+	});
+
 	var cache3 = {},	lastXhr;
 	$( "#PqmpFacilityName" ).autocomplete({
 		source: function( request, response ) {
@@ -65,16 +72,9 @@ $(document).ready(function() {
 		select: function( event, ui ) {
 			$( "#PqmpFacilityName" ).val( ui.item.label );
 			$( "#PqmpFacilityCode" ).val( ui.item.value );
-			$( "#PqmpFacilityAddress" ).val( ui.item.addr );
-			$("#PqmpCountyId").combobox('autocomplete', ui.item.desc);  
-			
+      		$( "#PqmpFacilityPhone" ).val( ui.item.phone );
+      		$( "#PqmpFacilityAddress" ).val( ui.item.addr );
 			return false;
 		}
-	})
-	.data( "autocomplete" )._renderItem = function( ul, item ) {
-			return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( "<a>" + item.value + " - " + item.label + "</a>" )
-				.appendTo( ul );
-	};
-});
+	});
+  });

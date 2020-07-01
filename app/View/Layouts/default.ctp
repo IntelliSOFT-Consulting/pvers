@@ -110,7 +110,7 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
           <div class="row-fluid">
             <div class="span4">
               <div class="pr-xl-4">
-              <a class="brand" href="/"><img class="brand-logo-light" src="img/doktari.png" ></a>
+              <a class="brand" href="/"><img class="brand-logo-light" src="/img/doktari.png" ></a>
               <p>  Ensuring Safety, Quality and Efficacy of Medicines.</p>
                 <!-- Rights-->
                 <p class="rights"><span>&copy; </span><span class="copyright-year"><?php echo date('Y'); ?></span><span> </span><span>Pharmacy and Poisons Board</span><span>. </span><span>All Rights Reserved.</span></p>

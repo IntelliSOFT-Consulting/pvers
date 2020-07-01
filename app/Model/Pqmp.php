@@ -213,13 +213,6 @@ class Pqmp extends AppModel {
                 'message'  => 'Please provide a name'
             ),
 		),
-		'contact_number' => array(
-			'notBlank' => array(
-                'rule'     => 'notBlank',
-                'required' => true,
-                'message'  => 'Please provide a contact number'
-            ),
-		),
 		'reporter_email' => array(
             'notBlank' => array(
                 'rule'     => 'email',
