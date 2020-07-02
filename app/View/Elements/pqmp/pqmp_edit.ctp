@@ -656,7 +656,7 @@
             <table class="table table-bordered  table-condensed table-pvborderless">
 				<tbody>
   				  <tr>
-					<td width="45%"><h5 class="pull-right text-success">Is the person submitting is different from reporter?&nbsp;</h5></td>
+					<td width="45%"><h5 class="pull-right text-success">Is the person submitting different from reporter?&nbsp;</h5></td>
 					<td>
 						<?php
 								echo $this->Form->input('person_submitting', array(

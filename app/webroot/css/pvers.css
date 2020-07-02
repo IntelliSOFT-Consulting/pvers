@@ -241,3 +241,15 @@ hr.darker {
 hr {
   margin: 5px;
 }
+
+.table-pvborderless {
+  border: 1px solid #85C2FF;
+  border-top: 1px solid #85C2FF;
+}
+  
+.table-pvborderless th,
+.table-pvborderless td {
+  border-top: 1px solid #85C2FF;
+  padding: 4px 5px;
+  border-left: 1px solid #85C2FF;
+}

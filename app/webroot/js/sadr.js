@@ -2,6 +2,18 @@ $(document).ready(function() {
 
 	$( "#SadrCountyId" ).combobox();
 
+	//Person submitting
+	$('.person-submit').on('change',function() {
+        var pilih = $(this).val();
+        if (pilih == 'Yes') {
+        	$('.diff:input').prop('disabled',false);
+        } else {
+        	$('.diff:input').val('');
+        	$('.diff:input').prop('disabled',true);
+        }
+    });
+    if($("#SadrPersonSubmittingNo").is(':checked')){ $('.diff:input').prop('disabled',true); }
+
 	var cache2 = {},	lastXhr;
 	$( "#SadrInstitutionCode" ).autocomplete({
 		source: function( request, response ) {

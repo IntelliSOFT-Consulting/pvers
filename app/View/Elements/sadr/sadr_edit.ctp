@@ -722,17 +722,42 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
-            <h5 style="text-align: center; color: #884805;">If Person Submitting is Different from Reporter</h5> <br/>
+            <table class="table table-bordered  table-condensed table-pvborderless">
+				<tbody>
+  				  <tr>
+					<td width="45%"><h5 class="pull-right text-success">Is the person submitting different from reporter?&nbsp;</h5></td>
+					<td>
+						<?php
+								echo $this->Form->input('person_submitting', array(
+									'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'person-submit',
+									'before' => '<div class="form-inline">
+												<input type="hidden" value="" id="SadrPersonSubmitting_" name="data[Sadr][person_submitting]">
+												<label class="radio">',
+									'after' => '</label>&nbsp;&nbsp;',
+									'options' => array('Yes' => 'Yes'),
+								));
+								echo $this->Form->input('person_submitting', array(
+									'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'person-submit',
+									'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+									'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+									'before' => '<label class="radio">', 'after' => '</label> </div>',
+									'options' => array('No' => 'No'),
+								));
+						?>
+					</td>
+					</tr>
+				</tbody>
+			</table>
             <div class="row-fluid">
                 <div class="span6">
                     <?php
                         echo $this->Form->input('reporter_name_diff', array(
-                            'div' => array('class' => 'control-group required'),
+                            'div' => array('class' => 'control-group required'), 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'Name <span style="color:red;">*</span>'),
                         ));
                         echo $this->Form->input('reporter_email_diff', array(
                             'type' => 'email',
-                            'div' => array('class' => 'control-group required'),
+                            'div' => array('class' => 'control-group required'), 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS <span style="color:red;">*</span>')
                         ));
                     ?>
@@ -740,14 +765,14 @@
                 <div class="span6">
                     <?php
                         echo $this->Form->input('reporter_designation_diff', array(
-                            'type' => 'select', 'options' => $designations, 'empty' => true,
+                            'type' => 'select', 'options' => $designations, 'empty' => true, 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'Designation'.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone_diff', array(
-                            'div' => array('class' => 'control-group'),
+                            'div' => array('class' => 'control-group'), 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
                         ));                        
                         echo $this->Form->input('reporter_date_diff', array(
-                            'type' => 'text', 'class' => 'date-pick-field',
+                            'type' => 'text', 'class' => 'date-pick-field', 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'Date'),
                         ));
                     ?>
@@ -755,53 +780,7 @@
             </div><!--/row-->
 
 			<?php echo $this->element('help/explanatory'); ?>
-			<?php /*?>
-			<div class="form-actions">
-				<div class="row-fluid">
-					<div class="span4">
-						<?php
-
-							echo $this->Form->button('Save Changes', array(
-									'name' => 'saveChanges',
-									'onclick' => '$(\'#SadrEditForm\').validate().cancelSubmit = true;',
-									'class' => 'btn btn-primary mapop',
-									'id' => 'SadrSaveChanges', 'title'=>'Save & continue editing',
-									'data-content' => 'Save changes to form without submitting it.
-																							The form will still be available for further editing.',
-									'div' => false,
-								));
-						?>
-					</div>
-					<div class="span4">
-						<?php
-							echo $this->Form->button('Save and Submit Report', array(
-									'name' => 'submitReport',
-									'onclick'=>"return confirm('Are you sure you wish to submit the form to PPB? You will not be able to edit it later.');",
-									'class' => 'btn btn-success mapop',
-									'id' => 'SadrSubmitReport', 'title'=>'Save and Submit Report',
-									'data-content' => 'Save the report and submit it to the Pharmacy and Poisons Board. You will also get a copy of this report.',
-									'div' => false,
-								));
-
-						?>
-					</div>
-					<div class="span4">
-						<?php
-							echo $this->Form->button('Cancel', array(
-									'name' => 'cancelReport',
-									'class' => 'btn mapop',
-									'id' => 'SadrCancelReport', 'title'=>'Cancel form',
-									'data-content' => 'Cancel form and go back to home page.',
-									'div' => false,
-								));
-
-						?>
-					</div>
-				</div>
-			</div>			
-			<?php
-				echo $this->Form->end(); */
-			?>
+			
 
 		</div> <!-- /span -->
 		<div class="span2">

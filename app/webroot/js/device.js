@@ -1,10 +1,6 @@
 $(document).ready(function() {
-	$('.date-pick-field').datepicker({
-          minDate:"-100Y", maxDate:"0", 
-          dateFormat:'dd-mm-yy'
-    });
 
-    //Person submitting
+	//Person submitting
 	$('.person-submit').on('change',function() {
         var pilih = $(this).val();
         if (pilih == 'Yes') {
@@ -14,5 +10,6 @@ $(document).ready(function() {
         	$('.diff:input').prop('disabled',true);
         }
     });
-    if($("#TransfusionPersonSubmittingNo").is(':checked')){ $('.diff:input').prop('disabled',true); }
+    if($("#DevicePersonSubmittingNo").is(':checked')){ $('.diff:input').prop('disabled',true); }
+
 });

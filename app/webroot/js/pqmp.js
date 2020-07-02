@@ -32,11 +32,11 @@
         if (pilih == 'Yes') {
         	$('.diff:input').prop('disabled',false);
         } else {
+        	$('.diff:input').val('');
         	$('.diff:input').prop('disabled',true);
         }
-        // $('select').not('#'+pilih).prop('disabled',true);
-        // $('#'+pilih).prop('disabled',false);
     });
+    if($("#PqmpPersonSubmittingNo").is(':checked')){ $('.diff:input').prop('disabled',true); }
 
     $("#PqmpComplaintOther").click(function(){   
 	    $("#PqmpComplaintOtherSpecify").attr('disabled', !this.checked)

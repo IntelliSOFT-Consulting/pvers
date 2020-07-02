@@ -328,7 +328,7 @@
                   array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
                   array('escape' => false));
                 echo "&nbsp;";
-                echo $this->Html->link('<span class="label label-info tooltipper" title="View"><i class="fa fa-eye" aria-hidden="true"></i> View </span>',
+                if($redir == 'manager') echo $this->Html->link('<span class="label label-info tooltipper" title="View"><i class="fa fa-eye" aria-hidden="true"></i> View </span>',
                     array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
                     array('escape' => false));
               }
