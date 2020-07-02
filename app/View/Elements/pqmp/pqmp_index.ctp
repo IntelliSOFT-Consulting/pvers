@@ -126,6 +126,7 @@
                 <h5>Category</h5>
                 <?php
                     echo $this->Form->input('herbal_product', array('label' => 'Herbal product', 'hiddenField' => false));
+                    echo $this->Form->input('medical_device', array('label' => 'Herbal product', 'hiddenField' => false));
                     echo $this->Form->input('cosmeceuticals', array('label' => 'Cosmeceuticals', 'hiddenField' => false));
                 ?>
               </td>
@@ -180,6 +181,8 @@
                   echo $this->Form->input('odour_change', array('label' => 'Change of odour', 'hiddenField' => false));
                   echo $this->Form->input('mislabeling', array('label' => 'Mislabeling', 'hiddenField' => false));
                   echo $this->Form->input('incomplete_pack', array('label' => 'Incomplete pack', 'hiddenField' => false));
+                  echo $this->Form->input('therapeutic_ineffectiveness', array('label' => 'Therapeutic ineffectiveness', 'hiddenField' => false));
+                  echo $this->Form->input('particulate_matter', array('label' => 'Particulate matter', 'hiddenField' => false));
                   echo $this->Form->input('complaint_other', array('label' => 'Other', 'hiddenField' => false));
               ?>
             </td>

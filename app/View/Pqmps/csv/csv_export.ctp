@@ -2,6 +2,7 @@
 	
 	$header = array('id' => '#', 'reference_no' => 'Reference No.', 'medicinal_product' => 'Medicinal product', 'blood_products' => 'Blood products',
 		'herbal_product' => 'Herbal product',
+		'medical_device' => 'Medical device',
 		'product_vaccine' => 'Vaccine', 'cosmeceuticals' => 'Cosmeceuticals',
 		'product_other' => 'Others', 'product_specify' => 'Others',
 		'facility_name' => 'Facility Name', 'facility_address' => 'Address',

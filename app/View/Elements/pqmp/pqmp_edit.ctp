@@ -61,20 +61,25 @@
 			 	<div class="span6">
 			 		<?php
                     echo $this->Form->input('medicinal_product', array(
-                            'type' => 'checkbox',  'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                            'type' => 'checkbox',  'label' => false, 'div' => false, 'class' => 'make_radio', 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Pqmp_medicinal_product_" name="data[Pqmp][medicinal_product]">
                                                                     <label class="checkbox">',
                                                     'after' => 'Medicinal product </label>',));
                     echo $this->Form->input('blood_products', array(
-                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => 'make_radio', 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Pqmp_blood_products_" name="data[Pqmp][blood_products]">
                                                                     <label class="checkbox">',
                                                     'after' => 'Blood and blood products </label>',));
                     echo $this->Form->input('herbal_product', array(
-                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => 'make_radio', 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Pqmp_herbal_product_" name="data[Pqmp][herbal_product]">
                                                                     <label class="checkbox">',
                                                     'after' => 'Herbal product </label>',));
+                    echo $this->Form->input('medical_device', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => 'make_radio', 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Pqmp_medical_device_" name="data[Pqmp][medical_device]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Medical device </label>',));
 						
                 ?>
 			 	</div>
@@ -82,22 +87,24 @@
 			 		<?php
 
                     echo $this->Form->input('product_vaccine', array(
-                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => 'make_radio', 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Pqmp_product_vaccine_" name="data[Pqmp][product_vaccine]">
                                                                     <label class="checkbox">',
                                                     'after' => 'Vaccine </label>',));
                     echo $this->Form->input('cosmeceuticals', array(
-                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => 'make_radio', 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Pqmp_cosmeceuticals_" name="data[Pqmp][cosmeceuticals]">
                                                                     <label class="checkbox">',
                                                     'after' => 'Cosmeceuticals </label>',));
                     echo $this->Form->input('product_other', array(
-                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => 'make_radio', 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Pqmp_product_other_" name="data[Pqmp][product_other]">
                                                                     <label class="checkbox">',
                                                     'after' => 'Others </label>',));
 					echo $this->Form->input('product_specify', array(
-							'label' => false, 'placeholder' => '(If others, specify)', 'div' => false, 'between' => false, 'after' => false, 'class' => false,));
+							'label' => false, 'placeholder' => '(If others, specify)', 'div' => false, 'between' => false, 'after' => false, 'class' => false,
+							'disabled' => true
+							));
 			 		?>
 			 	</div>
 			 </div>
@@ -336,6 +343,16 @@
 													'between' => '<input type="hidden" value="0" id="PqmpIncompletePack_" name="data[Pqmp][incomplete_pack]">
 																	<label class="checkbox">',
 													'after' => 'Incomplete pack	</label>',));
+						echo $this->Form->input('therapeutic_ineffectiveness', array(
+													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+													'between' => '<input type="hidden" value="0" id="PqmpTherapeuticIneffectiveness_" name="data[Pqmp][therapeutic_ineffectiveness]">
+																	<label class="checkbox">',
+													'after' => 'Therapeutic ineffectiveness	</label>',));
+						echo $this->Form->input('particulate_matter', array(
+													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+													'between' => '<input type="hidden" value="0" id="PqmpParticulateMatter_" name="data[Pqmp][particulate_matter]">
+																	<label class="checkbox">',
+													'after' => 'Particulate matter in infusions/injectables	</label>',));
 						echo $this->Form->input('complaint_other', array(
 													'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 													'between' => '<input type="hidden" value="0" id="PqmpComlaintOther_" name="data[Pqmp][complaint_other]">
@@ -437,10 +454,39 @@
 																	'after'=>'<p class="help-block">  </p></div>',
 																	));
 
-						echo $this->Form->input('cold_chain', array('class' => 'span8', 'rows' => '2',
-																	'label' => array('class' => 'control-label required', 'text' => 'Was the cold chain maintained for both transportation and storage?'),
-																	'after'=>'<p class="help-block">  </p></div>',
-																	));
+						// echo $this->Form->input('cold_chain', array('class' => 'span8', 'rows' => '2',
+						// 											'label' => array('class' => 'control-label required', 'text' => 'Was the cold chain maintained for both transportation and storage?'),
+						// 											'after'=>'<p class="help-block">  </p></div>',
+						// 											));
+						echo "<h5>Was the cold chain maintained for both transportation and storage?</h5>";
+						echo $this->Form->input('cold_chain', array(
+                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
+                          'class' => 'cold_chain',
+                          'before' => '<div class="control-group ">   <label class="control-label required">
+                              </label>  <div class="controls">
+                            <input type="hidden" value="" id="PqmpColdChain_" name="data[Pqmp][cold_chain]"> <label class="radio inline">',
+                          'after' => '</label>',
+                          'options' => array('Yes' => 'Yes'),
+                        )); 
+                        echo $this->Form->input('cold_chain', array(
+                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
+                          'class' => 'cold_chain',
+                          'before' => '<label class="radio inline">', 'after' => '</label>',
+                          'options' => array('No' => 'No')
+                        )); 
+                        echo $this->Form->input('cold_chain', array(
+                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'cold_chain',
+                          'format' => array('before', 'label', 'between', 'input', 'after', 'error'),
+                          'error' => array('attributes' => array('wrap' => 'p', 'class' => 'controls required error')),
+                          'before' => '<label class="radio inline">',
+                          'after' => '</label>
+                                <span class="help-inline" style="padding-top: 5px;"><a class="tooltipper" data-original-title="Clear selection"
+                                onclick="$(\'.cold_chain\').removeAttr(\'checked disabled\')">
+                                <em class="accordion-toggle">clear!</em></a> </span>
+
+                                </div> </div>',
+                          'options' => array('Not sure' => 'Not sure'),
+                        ));
 
 					?>
 				</div><!--/span-->
@@ -452,7 +498,7 @@
 					<table class="table table-bordered  table-condensed table-pvborderless">
 						<tbody>
 						  <tr>
-							<td><h4>Does the product require refrigeration?</h4>
+							<td><h5>Does the product require refrigeration?</h5>
 							   </td>
 							<td>
 								<?php
@@ -486,7 +532,7 @@
 						  </tr>
 
 						  <tr>
-							<td><h4>Was the product available at the facility?</h4>
+							<td><h5>Was the product available at the facility?</h5>
 							   </td>
 							<td>
 								<?php
@@ -509,7 +555,7 @@
 						  </tr>
 
 						  <tr>
-							<td><h4>Was the product dispensed and returned by client?</h4>
+							<td><h5>Was the product dispensed and returned by client?</h5>
 							   </td>
 							<td>
 								<?php
@@ -532,7 +578,7 @@
 						  </tr>
 
 						  <tr>
-							<td><h4>Was the product stored according to Manufacturer / MOH recommendations?</h4>
+							<td><h5>Was the product stored according to Manufacturer / MOH recommendations?</h5>
 							   </td>
 							<td>
 								<?php
@@ -606,17 +652,44 @@
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
-            <h5 style="text-align: center; color: #884805;">If Person Submitting is Different from Reporter</h5> <br/>
+            <!-- <h5 style="text-align: center; color: #884805;">If Person Submitting is Different from Reporter</h5> <br/> -->
+            <table class="table table-bordered  table-condensed table-pvborderless">
+				<tbody>
+  				  <tr>
+					<td width="45%"><h5 class="pull-right text-success">Is the person submitting is different from reporter?&nbsp;</h5></td>
+					<td>
+						<?php
+								echo $this->Form->input('person_submitting', array(
+									'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'person-submit',
+									'before' => '<div class="form-inline">
+												<input type="hidden" value="" id="PqmpPersonSubmitting_" name="data[Pqmp][person_submitting]">
+												<label class="radio">',
+									'after' => '</label>&nbsp;&nbsp;',
+									'options' => array('Yes' => 'Yes'),
+								));
+								echo $this->Form->input('person_submitting', array(
+									'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'person-submit',
+									'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+									'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+									'before' => '<label class="radio">', 'after' => '</label> </div>',
+									'options' => array('No' => 'No'),
+								));
+						?>
+					</td>
+					</tr>
+				</tbody>
+			</table>
+
             <div class="row-fluid">
                 <div class="span6">
                     <?php
                         echo $this->Form->input('reporter_name_diff', array(
-                            'div' => array('class' => 'control-group required'),
+                            'div' => array('class' => 'control-group required'), 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'Name <span style="color:red;">*</span>'),
                         ));
                         echo $this->Form->input('reporter_email_diff', array(
                             'type' => 'email',
-                            'div' => array('class' => 'control-group required'),
+                            'div' => array('class' => 'control-group required'), 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS <span style="color:red;">*</span>')
                         ));
                     ?>
@@ -624,14 +697,14 @@
                 <div class="span6">
                     <?php
                         echo $this->Form->input('reporter_designation_diff', array(
-                            'type' => 'select', 'options' => $designations, 'empty' => true,
+                            'type' => 'select', 'options' => $designations, 'empty' => true,  'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'Designation'.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone_diff', array(
-                            'div' => array('class' => 'control-group'),
+                            'div' => array('class' => 'control-group'), 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
                         ));                        
                         echo $this->Form->input('reporter_date_diff', array(
-                            'type' => 'text', 'class' => 'date-pick-field',
+                            'type' => 'text', 'class' => 'date-pick-field', 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'Date'),
                         ));
                     ?>

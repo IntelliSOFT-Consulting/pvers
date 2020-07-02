@@ -23,10 +23,30 @@
 		showAnim:'show'
 	});
 	
+	$(".make_radio").click(function(){
+	    $(".make_radio").not(this).attr("checked",false); 
+	});
+
+	$('.person-submit').on('change',function() {
+        var pilih = $(this).val();
+        if (pilih == 'Yes') {
+        	$('.diff:input').prop('disabled',false);
+        } else {
+        	$('.diff:input').prop('disabled',true);
+        }
+        // $('select').not('#'+pilih).prop('disabled',true);
+        // $('#'+pilih).prop('disabled',false);
+    });
+
     $("#PqmpComplaintOther").click(function(){   
 	    $("#PqmpComplaintOtherSpecify").attr('disabled', !this.checked)
 	});
 	if($("#PqmpComplaintOther").is(':checked')){ $("#PqmpComplaintOtherSpecify").attr('disabled', false); }
+
+    $("#PqmpProductOther").click(function(){   
+	    $("#PqmpProductSpecify").attr('disabled', !this.checked)
+	});
+	if($("#PqmpProductOther").is(':checked')){ $("#PqmpProductSpecify").attr('disabled', false); }
 
     var cache2 = {},	lastXhr;
 	$( "#PqmpFacilityCode" ).autocomplete({
