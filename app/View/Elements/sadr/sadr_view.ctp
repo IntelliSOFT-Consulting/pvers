@@ -1,6 +1,5 @@
 <?php
 	$this->assign('SADR', 'active');
-	// $this->Html->script('jqprint.0.3', array('inline' => false));
 	$ichecked = "&#x2611;";
     $nchecked = "&#x2610;";
 ?>
@@ -47,12 +46,12 @@
 				<table class="table" style="width: 100%;">
 					<tr>
 						<td style="width: 50%;">
-							<h4>The report is on:</h4>
+							<h5>The report is on:</h5>
 							<p> <?php echo ($sadr['Sadr']['report_sadr']   ? $ichecked : $nchecked ); ?> Suspected adverse drug reaction  </p>
 							<p> <?php echo ($sadr['Sadr']['report_therapeutic']   ? $ichecked : $nchecked ); ?> Therapeutic ineffectiveness </p>
 						</td>
 						<td style="width: 50%;">
-							<h4>Product category (Tick appropriate box)</h4>
+							<h5>Product category (Tick appropriate box)</h5>
 							<p> <?php echo ($sadr['Sadr']['medicinal_product']   ? $ichecked : $nchecked ); ?> Medicinal product  </p>
 							<p> <?php echo ($sadr['Sadr']['blood_products']   ? $ichecked : $nchecked ); ?> Blood and blood products  </p>
 							<p> <?php echo ($sadr['Sadr']['herbal_product']   ? $ichecked : $nchecked ); ?> Herbal product   </p>
