@@ -1,6 +1,5 @@
 <?php
 	$this->assign('AEFI', 'active');
-	$this->Html->script('jquery/jqprint.0.3', array('inline' => false));
  ?>
 
       <!-- AEFI

@@ -451,7 +451,7 @@ class UsersController extends AppController {
             'order' => array('Transfusion.created' => 'desc'),
             'conditions' => array('Transfusion.submitted >' => 1),
         ));
-        $this->set('transfusions', $transfusions);        
+        $this->set('transfusions', $transfusions);
 
         $padrs = $this->User->Padr->find('all', array(
             'limit' => 7, 'contain' => array(),
@@ -459,6 +459,13 @@ class UsersController extends AppController {
             'order' => array('Padr.created' => 'desc'),
         ));
         $this->set('padrs', $padrs);
+
+        $saes = $this->User->Sae->find('all', array(
+            'limit' => 7, 'contain' => array(),
+            'fields' => array('Sae.id', 'Sae.form_type', 'Sae.reference_no', 'Sae.created'),
+            'order' => array('Sae.created' => 'desc'),
+        ));
+        $this->set('saes', $saes);
 
         $this->set('notifications', $this->User->Notification->find('all', array(
             'conditions' => array('Notification.user_id' => $this->Auth->User('id')), 'order' => 'Notification.created DESC', 'limit' => 12
@@ -649,6 +656,7 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Medications');
 		$this->Acl->allow($group, 'controllers/Transfusions');
 		$this->Acl->allow($group, 'controllers/Padrs');
+		$this->Acl->allow($group, 'controllers/Saes');
 		$this->Acl->allow($group, 'controllers/Attachments');
 		$this->Acl->allow($group, 'controllers/Counties');
 		$this->Acl->allow($group, 'controllers/Countries');

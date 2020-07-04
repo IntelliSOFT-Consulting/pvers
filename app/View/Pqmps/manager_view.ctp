@@ -1,6 +1,5 @@
 <?php
 	$this->assign('PQMP', 'active');
-	$this->Html->script('jquery/jqprint.0.3', array('inline' => false));
  ?>
 
       <!-- PQMP
@@ -24,12 +23,6 @@
 					echo $this->Html->link('Download PDF', array('controller'=>'pqmps','action'=>'view', 'ext'=> 'pdf', $pqmp['Pqmp']['id']),
 												array('class' => 'btn btn-primary btn-block mapop', 'title'=>'Download PDF',
 												'data-content' => 'Download the pdf version of the report',));
-				?>
-				<hr>
-				<?php
-					echo $this->Form->button('Print Report', array('type' => 'button', 'class'=>'btn btn-inverse btn-block btnPrint' ,
-											'onclick' => '$(\'#printAreade\').jqprint(); '
-											));
 				?>
 				<hr>
 				<?php

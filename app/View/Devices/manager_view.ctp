@@ -1,6 +1,5 @@
 <?php
 	$this->assign('DEVICE', 'active');
-	$this->Html->script('jquery/jqprint.0.3', array('inline' => false));
  ?>
 
       <!-- DEVICE
@@ -28,9 +27,7 @@
 					</div>
 					<div class="span4">
 						<?php
-								echo $this->Form->button('Print Report', array('type' => 'button', 'class'=>'btn btn-inverse btnPrint' ,
-														'onclick' => '$(\'#printAreade\').jqprint(); '
-														));
+								
 						?>
 					</div>
 					<div class="span4">

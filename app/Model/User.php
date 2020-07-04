@@ -118,6 +118,11 @@ class User extends AppModel {
 			'foreignKey' => 'user_id',
 			'dependent' => false,
 		),
+		'Sae' => array(
+			'className' => 'Sae',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+		),
 	);
 
 	// public function beforeSave() {

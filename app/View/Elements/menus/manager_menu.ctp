@@ -12,7 +12,13 @@
                     echo $this->Html->link('<i class="fa fa-ambulance" aria-hidden="true"></i> SADRs',
                         array('controller' => 'sadrs', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
-             </li>             
+             </li> 
+             <li class="<?php echo $this->fetch('PADR') ?>">
+                <?php
+                    echo $this->Html->link('<i class="fa fa-users" aria-hidden="true"></i> PADRs',
+                        array('controller' => 'padrs', 'action'=>'index', 'manager' => true ), array('escape' => false ));
+                    ?>
+             </li>            
              <li class="<?php echo $this->fetch('AEFI') ?>">
                 <?php
                     echo $this->Html->link('<i class="fa fa-child" aria-hidden="true"></i> AEFIs',
@@ -33,7 +39,7 @@
              </li>
              <li class="<?php echo $this->fetch('MED') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-chain-broken" aria-hidden="true"></i> Medication Errors',
+                    echo $this->Html->link('<i class="fa fa-chain-broken" aria-hidden="true"></i> Medications',
                         array('controller' => 'medications', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
@@ -43,10 +49,10 @@
                         array('controller' => 'transfusions', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
-             <li class="<?php echo $this->fetch('PADR') ?>">
+             <li class="<?php echo $this->fetch('SAE') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-users" aria-hidden="true"></i> PADRs',
-                        array('controller' => 'padrs', 'action'=>'index', 'manager' => true ), array('escape' => false ));
+                    echo $this->Html->link('<i class="fa fa-thermometer-full" aria-hidden="true"></i> SAEs',
+                        array('controller' => 'saes', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
 

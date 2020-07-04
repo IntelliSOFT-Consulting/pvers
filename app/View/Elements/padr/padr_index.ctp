@@ -16,7 +16,7 @@
                  array('escape' => false, 'class' => 'btn btn-success'));
       }
     ?>
-    <h3>PADR:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small></h3>  <hr class="soften" style="margin: 7px 0px;">
+    <h3>Public ADRs:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small></h3>  <hr class="soften" style="margin: 7px 0px;">
     </div>
   </div>
 

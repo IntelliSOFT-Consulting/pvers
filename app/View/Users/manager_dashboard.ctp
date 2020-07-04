@@ -119,7 +119,24 @@
                     echo '</ol>'; 
                   ?>
                 </div>
-                <div class="span8"></div>
+                <div class="span4 formbacksa">                  
+                  <?php
+                    echo $this->Html->link('<h5> SAE </h5>' ,
+                      array('controller' => 'saes', 'action' => 'index'),
+                      array('escape' => false));
+                    ?>
+                  <?php
+                    echo '<ol>';
+                    foreach ($saes as $sae) {
+                        echo "<li>";
+                          echo $this->Html->link($sae['Sae']['reference_no'].' <small class="muted">('.$sae['Sae']['form_type'].')</small>', array('controller' => 'saes', 'action' => 'view', $sae['Sae']['id']),
+                            array('escape' => false));
+                        echo "</li>";
+                    }
+                    echo '</ol>'; 
+                  ?>
+                </div>
+                <div class="span4"></div>
               </div>
         </div>
 
