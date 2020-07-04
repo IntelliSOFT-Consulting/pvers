@@ -17,7 +17,7 @@ class SaesShell extends AppShell {
         }
         $this->out($id);
         $results = $HttpSocket->get(
-            'http://ppbctrdev/saes/fetch/'.$id.'.json',
+            'https://ctr.pharmacyboardkenya.org/saes/fetch/'.$id.'.json',
             false,
             array('header' => array('umc-client-key' => '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'))
         );
