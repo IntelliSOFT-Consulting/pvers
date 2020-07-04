@@ -648,6 +648,7 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Devices');
 		$this->Acl->allow($group, 'controllers/Medications');
 		$this->Acl->allow($group, 'controllers/Transfusions');
+		$this->Acl->allow($group, 'controllers/Padrs');
 		$this->Acl->allow($group, 'controllers/Attachments');
 		$this->Acl->allow($group, 'controllers/Counties');
 		$this->Acl->allow($group, 'controllers/Countries');

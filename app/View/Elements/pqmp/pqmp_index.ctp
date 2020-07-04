@@ -126,7 +126,7 @@
                 <h5>Category</h5>
                 <?php
                     echo $this->Form->input('herbal_product', array('label' => 'Herbal product', 'hiddenField' => false));
-                    echo $this->Form->input('medical_device', array('label' => 'Herbal product', 'hiddenField' => false));
+                    echo $this->Form->input('medical_device', array('label' => 'Medical device', 'hiddenField' => false));
                     echo $this->Form->input('cosmeceuticals', array('label' => 'Cosmeceuticals', 'hiddenField' => false));
                 ?>
               </td>
@@ -173,11 +173,11 @@
                   echo $this->Form->input('separating', array('label' => 'Separating', 'hiddenField' => false));
                   echo $this->Form->input('powdering', array('label' => 'Powdering / crumbling', 'hiddenField' => false));
                   echo $this->Form->input('caking', array('label' => 'Caking', 'hiddenField' => false));
+                  echo $this->Form->input('moulding', array('label' => 'Moulding', 'hiddenField' => false));
                 ?>
             </td>
             <td>
               <?php
-                  echo $this->Form->input('moulding', array('label' => 'Moulding', 'hiddenField' => false));
                   echo $this->Form->input('odour_change', array('label' => 'Change of odour', 'hiddenField' => false));
                   echo $this->Form->input('mislabeling', array('label' => 'Mislabeling', 'hiddenField' => false));
                   echo $this->Form->input('incomplete_pack', array('label' => 'Incomplete pack', 'hiddenField' => false));

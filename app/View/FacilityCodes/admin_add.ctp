@@ -8,7 +8,7 @@
 		<p>This is from the Ministry of Health List of Health facilities in Kenya.</p>	
 		<hr>
 	<div class="row-fluid" style="margin-bottom: 9px;">	
-		<div class="span2 columns">
+		<div class="span0 columns">
 			<div class="row-fluid">
 				<div class="span12">
 					  <?php echo $this->element('admin/contentmenu')?>				  
@@ -16,7 +16,7 @@
 			</div><!--/row-->	
 		</div> <!-- /span5 -->
 
-		<div class="span10 columns">			
+		<div class="span11 columns">			
 			<div class="row-fluid"> 	
 				<div class="span12"> 	
 					<div class="whmcscontainer">

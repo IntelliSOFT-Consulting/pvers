@@ -11,7 +11,7 @@
 		<div class="span2 columns">
 			<div class="row-fluid">
 				<div class="span12">
-					  <?php echo $this->element('admin/contentmenu')?>				  
+					  <?php //echo $this->element('admin/contentmenu')?>				  
 				</div><!--/span-->
 			</div><!--/row-->	
 		</div> <!-- /span5 -->

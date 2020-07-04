@@ -12,7 +12,59 @@ App::uses('AppModel', 'Model');
  */
 class Padr extends AppModel {
 
+	public $actsAs = array('Search.Searchable', 'Containable');
+	public $filterArgs = array(
+        'reference_no' => array('type' => 'like', 'encode' => true),
+        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Padr.reporter_date BETWEEN ? AND ?'),
+        'start_date' => array('type' => 'query', 'method' => 'dummy'),
+        'end_date' => array('type' => 'query', 'method' => 'dummy'),
+        'county_id' => array('type' => 'value'),
+        'drug_name' => array('type' => 'query', 'method' => 'findByDrugName', 'encode' => true),
+        'product_specify' => array('type' => 'like', 'encode' => true),
+        'patient_name' => array('type' => 'like', 'encode' => true),
+        'report_type' => array('type' => 'value'),
+        'reporter' => array('type' => 'query', 'method' => 'reporterFilter', 'encode' => true),
+        'designation_id' => array('type' => 'value'),
+        'gender' => array('type' => 'value'),
+        'submit' => array('type' => 'query', 'method' => 'orConditions', 'encode' => true),
+    );
 
+    public function dummy($data = array()) {
+    	return array( '1' => '1');
+    }
+
+    public function findByDrugName($data = array()) {
+            $cond = array($this->alias.'.id' => $this->PadrListOfDrug->find('list', array(
+                'conditions' => array(
+                    'OR' => array(
+                        'PadrListOfDrug.drug_name LIKE' => '%' . $data['drug_name'] . '%',
+                        'PadrListOfDrug.brand_name LIKE' => '%' . $data['drug_name'] . '%', )),
+                'fields' => array('padr_id', 'padr_id')
+                    )));
+            return $cond;
+    }
+
+    public function reporterFilter($data = array()) {
+            $filter = $data['reporter'];
+            $cond = array(
+                'OR' => array(
+                    $this->alias . '.reporter_name LIKE' => '%' . $filter . '%',
+                    $this->alias . '.reporter_email LIKE' => '%' . $filter . '%',
+                    $this->alias . '.reporter_name_diff LIKE' => '%' . $filter . '%',
+                    $this->alias . '.reporter_email_diff LIKE' => '%' . $filter . '%',
+                ));
+            return $cond;
+    }
+
+	public function makeRangeCondition($data = array()) {
+		if(!empty($data['start_date'])) $start_date = date('Y-m-d', strtotime($data['start_date']));
+		else $start_date = date('Y-m-d', strtotime('2012-05-01'));
+
+		if(!empty($data['end_date'])) $end_date = date('Y-m-d', strtotime($data['end_date']));
+		else $end_date = date('Y-m-d');
+
+		return array($start_date, $end_date);
+	}
 	// The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**

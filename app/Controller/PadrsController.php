@@ -18,8 +18,16 @@ class PadrsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	// public $components = array('Paginator');
     public $helpers = array('Tools.Captcha' => array('type' => 'active'));
+    public $components = array(
+            // 'Security' => array('csrfExpires' => '+1 hour', 'validatePost' => false), 
+            'Search.Prg', 
+            'Paginator'
+            );
+    public $paginate = array();
+    public $presetVars = true;
+    public $page_options = array('25' => '25', '50' => '50', '100' => '100');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -36,6 +44,32 @@ class PadrsController extends AppController {
 		$this->set('padrs', $this->Paginator->paginate());
 	}
 
+    public function manager_index() {
+        $this->Prg->commonProcess();
+        // debug($this->request->query['pages']);
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (!empty($this->request->query['pages'])) $this->paginate['limit'] = $this->request->query['pages'];
+            else $this->paginate['limit'] = reset($this->page_options);
+
+        $criteria = $this->Padr->parseCriteria($this->passedArgs);
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Padr.created' => 'desc');
+        $this->paginate['contain'] = array('County');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Padr->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'limit' => 1000)
+              ));
+        }
+        //end pdf export
+        $this->set('page_options', $this->page_options);
+        $counties = $this->Padr->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Padr->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $this->set('padrs', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
 /**
  * view method
  *
@@ -43,8 +77,24 @@ class PadrsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($token = null) {
-		$id = $this->Padr->field('id', array('token' => $token));
+    public function view($token = null) {
+        $id = $this->Padr->field('id', array('token' => $token));
+        if (!$this->Padr->exists($id)) {
+            throw new NotFoundException(__('Invalid padr'));
+            $this->Flash->error(__('We could not identify the report. Please refer to the acknowledgement email sent by PPB.'));
+        }
+        $options = array('conditions' => array('Padr.' . $this->Padr->primaryKey => $id));
+        $padr = $this->Padr->find('first', $options);
+        $this->set('padr', $this->Padr->find('first', $options));
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'PADR_' . $id,  'orientation' => 'portrait');
+            $this->response->download('PADR_'.str_replace($padr['Padr']['reference_no'], '/', '_').'.pdf');
+        }
+    }
+
+	public function manager_view($id = null) {
+		$this->Padr->id = $id;
 		if (!$this->Padr->exists($id)) {
 			throw new NotFoundException(__('Invalid padr'));
 			$this->Flash->error(__('We could not identify the report. Please refer to the acknowledgement email sent by PPB.'));

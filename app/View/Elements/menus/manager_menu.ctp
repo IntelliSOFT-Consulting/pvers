@@ -39,8 +39,14 @@
              </li>
              <li class="<?php echo $this->fetch('TRN') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusion Reactions',
+                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusions',
                         array('controller' => 'transfusions', 'action'=>'index', 'manager' => true ), array('escape' => false ));
+                    ?>
+             </li>
+             <li class="<?php echo $this->fetch('PADR') ?>">
+                <?php
+                    echo $this->Html->link('<i class="fa fa-users" aria-hidden="true"></i> PADRs',
+                        array('controller' => 'padrs', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
 

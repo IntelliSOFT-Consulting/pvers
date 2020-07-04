@@ -8,16 +8,16 @@
 		<p>Search for the content that you wish to modify and change accordingly.</p>	
 		<hr>
 	<div class="row-fluid" style="margin-bottom: 9px;">	
-		<div class="span2 columns">
+		<div class="span0 columns">
 			<div class="row-fluid">
 				<div class="span12">
-					  <?php echo $this->element('admin/contentmenu')?>
+					  <?php // echo $this->element('admin/contentmenu')?>
 					  
 				</div><!--/span-->
 			</div><!--/row-->	
 		</div> <!-- /span5 -->
 
-		<div class="span10 columns">
+		<div class="span11 columns">
 				<?php 	
 					echo $this->Form->create('Frequency', array(
 						'url' => array_merge(array('action' => 'admin_index', 'admin' => true), $this->params['pass']),

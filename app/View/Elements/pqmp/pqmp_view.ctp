@@ -13,17 +13,19 @@
 				
 				<p><b>(FOM001/MIP/PMS/SOP/001)</b></p>
 	            <div class="row-fluid">
-	                <div class="span12" style="text-align: center;">
+	                <div class="span12">
 	                    <?php
 	                        echo $this->Html->image('confidence.png', array('alt' => 'in confidence', 'class' => 'pull-right'));
 		                    echo $this->Html->image('coa.png', array('alt' => 'COA', 'style' => 'margin-left: 45%;'));
 	                    ?>
-	                    <h4>MINISTRY OF HEALTH</h4>
-	                    <h5>PHARMACY AND POISONS BOARD</h5>
-	                    <h5>P.O. Box 27663-00506 NAIROBI</h5>
-	                    <h5>Tel: (020)-3562107 Ext 114, 0720 608811, 0733 884411 Fax: (020) 2713431/2713409</h5>
-	                    <h5><b>Email:</b> pv@pharmacyboardkenya.org</h5>
-	                    <h5 style="background-color: #F7A3D8;">FORM FOR REPORTING SUSPECTED POOR-QUALITY MEDICAL PRODUCTS AND HEALTH TECHNOLOGIES</h5>
+	                    <div class="babayao" style="text-align: center;">
+		                    <h4>MINISTRY OF HEALTH</h4>
+		                    <h5>PHARMACY AND POISONS BOARD</h5>
+		                    <h5>P.O. Box 27663-00506 NAIROBI</h5>
+		                    <h5>Tel: (020)-3562107 Ext 114, 0720 608811, 0733 884411 Fax: (020) 2713431/2713409</h5>
+		                    <h5><b>Email:</b> pv@pharmacyboardkenya.org</h5>
+		                    <h5 style="background-color: #F7A3D8;">FORM FOR REPORTING SUSPECTED POOR-QUALITY MEDICAL PRODUCTS AND HEALTH TECHNOLOGIES</h5>
+	                    </div>
 	                </div>
 	            </div>
 

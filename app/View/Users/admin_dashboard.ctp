@@ -91,6 +91,30 @@
           array('controller' => 'designations', 'action' => 'index', 'admin' => true), array('escape' => false));
         ?>
         </li>
+        <li>
+        <?php
+        echo $this->Html->link('<i class="fa fa-fighter-jet" aria-hidden="true"></i> Drug Administration Routes',
+          array('controller' => 'routes', 'action' => 'index', 'admin' => true), array('escape' => false));
+        ?>
+        </li>
+        <li>
+        <?php
+        echo $this->Html->link('<i class="fa fa-clock-o" aria-hidden="true"></i> Drug Administration Frequencies',
+          array('controller' => 'frequencies', 'action' => 'index', 'admin' => true), array('escape' => false));
+        ?>
+        </li>
+        <li>
+        <?php
+        echo $this->Html->link('<i class="fa fa-dot-circle-o" aria-hidden="true"></i> Drug Administration Doses',
+          array('controller' => 'doses', 'action' => 'index', 'admin' => true), array('escape' => false));
+        ?>
+        </li>
+        <li>
+        <?php
+        echo $this->Html->link('<i class="fa fa-university" aria-hidden="true"></i> Institutions',
+          array('controller' => 'facility_codes', 'action' => 'index', 'admin' => true), array('escape' => false));
+        ?>
+        </li>
       </ul>
 
     </div>
