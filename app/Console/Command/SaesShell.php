@@ -8,7 +8,9 @@ class SaesShell extends AppShell {
     public function main() {
         //Get max id in our current table
         $res = $this->Sae->find('first', array('contain' => false, 'fields' => array('Sae.id'), 'order' => array('Sae.id' => 'desc')));
-        $HttpSocket = new HttpSocket();
+        $HttpSocket = new HttpSocket(
+            ['ssl_verify_peer' => false, 'ssl_verify_host' => false, 'ssl_verify_peer_name' => false,]
+        );
         // string data
         if(empty($res)) {
             $id = 1;
