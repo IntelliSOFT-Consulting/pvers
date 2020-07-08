@@ -100,7 +100,7 @@ class Sae extends AppModel {
         )
 	);
 
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
         if (!empty($this->data['Sae']['date_of_birth'])) {
             $this->data['Sae']['date_of_birth'] = $this->dateFormatBeforeSave($this->data['Sae']['date_of_birth']);
         }
@@ -125,7 +125,7 @@ class Sae extends AppModel {
         return true;
     }
 
-    function afterFind($results) {
+    function afterFind($results, $primary = false) {
         foreach ($results as $key => $val) {
             if (isset($val['Sae']['date_of_birth'])) {
                 $results[$key]['Sae']['date_of_birth'] = $this->dateFormatAfterFind($val['Sae']['date_of_birth']);
