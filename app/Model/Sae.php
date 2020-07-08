@@ -100,4 +100,55 @@ class Sae extends AppModel {
         )
 	);
 
+	public function beforeSave() {
+        if (!empty($this->data['Sae']['date_of_birth'])) {
+            $this->data['Sae']['date_of_birth'] = $this->dateFormatBeforeSave($this->data['Sae']['date_of_birth']);
+        }
+        if (!empty($this->data['Sae']['enrollment_date'])) {
+            $this->data['Sae']['enrollment_date'] = $this->dateFormatBeforeSave($this->data['Sae']['enrollment_date']);
+        }
+        if (!empty($this->data['Sae']['administration_date'])) {
+            $this->data['Sae']['administration_date'] = $this->dateFormatBeforeSave($this->data['Sae']['administration_date']);
+        }
+        if (!empty($this->data['Sae']['latest_date'])) {
+            $this->data['Sae']['latest_date'] = $this->dateFormatBeforeSave($this->data['Sae']['latest_date']);
+        }
+        if (!empty($this->data['Sae']['reaction_onset'])) {
+            $this->data['Sae']['reaction_onset'] = $this->dateFormatBeforeSave($this->data['Sae']['reaction_onset']);
+        }
+        if (!empty($this->data['Sae']['reaction_end_date'])) {
+            $this->data['Sae']['reaction_end_date'] = $this->dateFormatBeforeSave($this->data['Sae']['reaction_end_date']);
+        }
+        if (!empty($this->data['Sae']['manufacturer_date'])) {
+            $this->data['Sae']['manufacturer_date'] = $this->dateFormatBeforeSave($this->data['Sae']['manufacturer_date']);
+        }
+        return true;
+    }
+
+    function afterFind($results) {
+        foreach ($results as $key => $val) {
+            if (isset($val['Sae']['date_of_birth'])) {
+                $results[$key]['Sae']['date_of_birth'] = $this->dateFormatAfterFind($val['Sae']['date_of_birth']);
+            }
+            if (isset($val['Sae']['enrollment_date'])) {
+                $results[$key]['Sae']['enrollment_date'] = $this->dateFormatAfterFind($val['Sae']['enrollment_date']);
+            }
+            if (isset($val['Sae']['administration_date'])) {
+                $results[$key]['Sae']['administration_date'] = $this->dateFormatAfterFind($val['Sae']['administration_date']);
+            }
+            if (isset($val['Sae']['latest_date'])) {
+                $results[$key]['Sae']['latest_date'] = $this->dateFormatAfterFind($val['Sae']['latest_date']);
+            }
+            if (isset($val['Sae']['reaction_onset'])) {
+                $results[$key]['Sae']['reaction_onset'] = $this->dateFormatAfterFind($val['Sae']['reaction_onset']);
+            }
+            if (isset($val['Sae']['reaction_end_date'])) {
+                $results[$key]['Sae']['reaction_end_date'] = $this->dateFormatAfterFind($val['Sae']['reaction_end_date']);
+            }
+            if (isset($val['Sae']['manufacturer_date'])) {
+                $results[$key]['Sae']['manufacturer_date'] = $this->dateFormatAfterFind($val['Sae']['manufacturer_date']);
+            }
+        }
+        return $results;
+    }
 }
