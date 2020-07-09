@@ -707,7 +707,7 @@
                             'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
                         ));                        
                         echo $this->Form->input('reporter_date_diff', array(
-                            'type' => 'text', 'class' => 'date-pick-field', 'class' => 'diff',
+                            'type' => 'text', 'class' => 'date-pick-field diff', 
                             'label' => array('class' => 'control-label required', 'text' => 'Date'),
                         ));
                     ?>

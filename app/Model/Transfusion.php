@@ -139,4 +139,26 @@ class Transfusion extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+    public function beforeSave($options = array()) {
+        if (!empty($this->data['Transfusion']['reporter_date'])) {
+            $this->data['Transfusion']['reporter_date'] = $this->dateFormatBeforeSave($this->data['Transfusion']['reporter_date']);
+        }
+        if (!empty($this->data['Transfusion']['reporter_date_diff'])) {
+            $this->data['Transfusion']['reporter_date_diff'] = $this->dateFormatBeforeSave($this->data['Transfusion']['reporter_date_diff']);
+        }
+        return true;
+    }
+
+    public function afterFind($results, $primary = false) {
+        foreach ($results as $key => $val) {
+            if (isset($val['Transfusion']['reporter_date'])) {
+                $results[$key]['Transfusion']['reporter_date'] = $this->dateFormatAfterFind($val['Transfusion']['reporter_date']);
+            }
+            if (isset($val['Transfusion']['reporter_date_diff'])) {
+                $results[$key]['Transfusion']['reporter_date_diff'] = $this->dateFormatAfterFind($val['Transfusion']['reporter_date_diff']);
+            }
+        }
+        return $results;
+    }
 }

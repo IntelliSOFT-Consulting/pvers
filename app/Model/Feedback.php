@@ -57,21 +57,21 @@ class Feedback extends AppModel {
 
 	public $validate = array(
 	'email' => array(
-            'notEmpty' => array(
+            'notBlank' => array(
                 'rule'     => 'email',
                 'required' => true,
                 'message'  => 'Please provide a valid email address'
             ),
         ),
 	'subject' => array(
-	      'notempty' => array(
-	        'rule' => array('notempty'),
+	      'notblank' => array(
+	        'rule' => array('notblank'),
 	        'message' => 'Subject cannot be empty!',
 	      ),
 	    ),
 	'feedback' => array(
-	      'notempty' => array(
-	        'rule' => array('notempty'),
+	      'notblank' => array(
+	        'rule' => array('notblank'),
 	        'message' => 'Message body cannot be empty!',
 	      ),
 	    ),

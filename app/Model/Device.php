@@ -154,4 +154,32 @@ class Device extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+    public function beforeSave($options = array()) {
+        if (!empty($this->data['Device']['expiry_date'])) {
+            $this->data['Device']['expiry_date'] = $this->dateFormatBeforeSave($this->data['Device']['expiry_date']);
+        }
+        if (!empty($this->data['Device']['reporter_date'])) {
+            $this->data['Device']['reporter_date'] = $this->dateFormatBeforeSave($this->data['Device']['reporter_date']);
+        }
+        if (!empty($this->data['Device']['reporter_date_diff'])) {
+            $this->data['Device']['reporter_date_diff'] = $this->dateFormatBeforeSave($this->data['Device']['reporter_date_diff']);
+        }
+        return true;
+    }
+
+    public function afterFind($results, $primary = false) {
+        foreach ($results as $key => $val) {
+            if (isset($val['Device']['expiry_date'])) {
+                $results[$key]['Device']['expiry_date'] = $this->dateFormatAfterFind($val['Device']['expiry_date']);
+            }
+            if (isset($val['Device']['reporter_date'])) {
+                $results[$key]['Device']['reporter_date'] = $this->dateFormatAfterFind($val['Device']['reporter_date']);
+            }
+            if (isset($val['Device']['reporter_date_diff'])) {
+                $results[$key]['Device']['reporter_date_diff'] = $this->dateFormatAfterFind($val['Device']['reporter_date_diff']);
+            }
+        }
+        return $results;
+    }
 }

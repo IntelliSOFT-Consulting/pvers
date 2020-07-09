@@ -19,15 +19,15 @@ class PadrsController extends AppController {
  * @var array
  */
 	// public $components = array('Paginator');
-    public $helpers = array('Tools.Captcha' => array('type' => 'active'));
     public $components = array(
             // 'Security' => array('csrfExpires' => '+1 hour', 'validatePost' => false), 
             'Search.Prg', 
-            'Paginator'
+            // 'Paginator'
             );
     public $paginate = array();
     public $presetVars = true;
     public $page_options = array('25' => '25', '50' => '50', '100' => '100');
+    public $helpers = array('Tools.Captcha' => array('type' => 'active'));
 
 	public function beforeFilter() {
 		parent::beforeFilter();

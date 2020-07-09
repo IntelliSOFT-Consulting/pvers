@@ -21,7 +21,7 @@
 				<div class="row-fluid">
 					<div class="span4">
 						<?php
-							echo $this->Html->link('Download PDF', array('controller'=>'transfusions','action'=>'view', 'ext'=> 'pdf', $transfusion['Transfusion']['reference_no']),
+							echo $this->Html->link('Download PDF', array('controller'=>'transfusions','action'=>'view', 'ext'=> 'pdf', $transfusion['Transfusion']['id']),
 														array('class' => 'btn btn-primary mapop', 'title'=>'Download PDF',
 														'data-content' => 'Download the pdf version of the report',));
 						?>

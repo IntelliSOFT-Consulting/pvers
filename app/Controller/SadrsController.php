@@ -73,7 +73,7 @@ class SadrsController extends AppController {
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
-        //end pdf export
+        //end csv export
         $this->set('page_options', $this->page_options);
         $counties = $this->Sadr->County->find('list', array('order' => array('County.county_name' => 'ASC')));
 		$this->set(compact('counties'));
@@ -102,7 +102,7 @@ class SadrsController extends AppController {
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'limit' => 1000)
               ));
         }
-        //end pdf export
+        //end csv export
         $this->set('page_options', $this->page_options);
         $counties = $this->Sadr->County->find('list', array('order' => array('County.county_name' => 'ASC')));
 		$this->set(compact('counties'));

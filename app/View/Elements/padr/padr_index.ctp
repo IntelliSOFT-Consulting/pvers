@@ -215,11 +215,7 @@
         <td>
           <?php 
             // echo h($padr['Padr']['reference_no']);             
-            if($padr['Padr']['submitted'] > 1) {
               echo $this->Html->link($padr['Padr']['reference_no'], array('action' => 'view', $padr['Padr']['id']), array('escape'=>false));
-            } else {
-              echo $this->Html->link($padr['Padr']['reference_no'], array('action' => 'edit', $padr['Padr']['id']), array('escape'=>false));
-            }
         ?>&nbsp;</td>
         <td><?php 
               echo $this->Text->truncate($padr['Padr']['report_title'], 42); 
