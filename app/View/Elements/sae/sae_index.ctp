@@ -47,10 +47,10 @@
               </th>
               <th>
               <?php
-                echo $this->Form->input('protocol_no', array('div' => false, 'class' => 'span12 unauthorized_index',
-                  'label' => array('class' => 'required', 'text' => 'Protocol No.'),
-                  'type' => 'text',
-                  ));
+                // echo $this->Form->input('protocol_no', array('div' => false, 'class' => 'span12 unauthorized_index',
+                //   'label' => array('class' => 'required', 'text' => 'Protocol No.'),
+                //   'type' => 'text',
+                //   ));
               ?>
               </th>
               <th>
@@ -104,9 +104,9 @@
     <div class="pagination">
       <ul>
       <?php
-        echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false));
-        echo $this->Paginator->numbers(array('separator' => '', 'tag' => 'li', 'currentClass' => 'active'));
-        echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false ));
+        echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'disabledTag' => 'a', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'currentTag' => 'a', 'escape' => false));
+        echo $this->Paginator->numbers(array('separator' => '','tag' => 'li', 'currentTag' => 'a', 'currentClass' => 'active')); 
+        echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'disabledTag' => 'a', 'escape' => false), null, array('class' => 'disabled', 'tag' => 'li', 'escape' => false ));
       ?>
       </ul>
     </div>

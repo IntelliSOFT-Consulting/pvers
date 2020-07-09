@@ -284,10 +284,20 @@ class SadrsController extends AppController {
 		// debug($results->code);
 		// debug($results->body);
 		if ($results->isOk()) {
-			$this->Flash->success('The report has been successfully sent to vigiflow: '.$results->body);
+			$body = $results->body;
+			$this->Sadr->saveField('vigiflow_message', $body);
+			$resp = json_decode($body);
+			if(json_last_error() == JSON_ERROR_NONE) {
+				$this->Sadr->saveField('vigiflow_ref', $resp['MessageId']);
+			}
+			$this->Flash->success('Vigiflow integration success!!');
+			$this->Flash->success($body);
 			$this->redirect($this->referer());
 		} else {
-			$this->Flash->error('Error sending report: '.$results->body);
+			$body = $results->body;
+			$this->Sadr->saveField('vigiflow_message', $body);
+			$this->Flash->error('Error sending report to vigiflow:');
+			$this->Flash->error($body);
 			$this->redirect($this->referer());
 		}
 		$this->autoRender = false ;
