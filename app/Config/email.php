@@ -43,13 +43,23 @@ class EmailConfig {
 		//'headerCharset' => 'utf-8',
 	);
 
-	public $gmail = array(
+	public $gmail2 = array(
 	    'host' => 'ssl://smtp.gmail.com',
 		'from' => array('regulatory@pharmacyboardkenya.org' => 'PvERS: The Pharmacy and Poisons Board'),
         'port' => 465,
 		'timeout' => 30,
         'username' => 'regulatory@pharmacyboardkenya.org',
         'password' => 'qhYjEMKkv=v35c?*',
+        'transport' => 'Smtp'
+    );
+
+	public $gmail = array(
+	    'host' => 'ssl://smtp.gmail.com',
+		'from' => array('apps@intellisoftkenya.com' => 'PvERS: The Pharmacy and Poisons Board'),
+        'port' => 465,
+		'timeout' => 30,
+        'username' => 'apps@intellisoftkenya.com',
+        'password' => 'apps.mcaz.2020',
         'transport' => 'Smtp'
     );
 
