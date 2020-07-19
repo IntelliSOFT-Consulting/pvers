@@ -1,12 +1,6 @@
 <?php
     $this->assign('DEV', 'active');
     $this->Html->script('device', array('inline' => false));
-    $this->Html->css('jquery.datetimepicker', null, array('inline' => false));
-    $this->Html->script('jquery.datetimepicker.full', array('inline' => false));
-    // $this->AssetCompress->addScript(array(
-    //      'jquery.ui.core.js', 'jquery.ui.widget.js', 'jquery.ui.mouse.js', 'jquery.ui.draggable.js', 'jquery.ui.button.js',
-    //      'jquery.ui.position.js', 'jquery.ui.autocomplete.js', 'jquery.ui.dialog.js', 'widgets.js', 'device.js'), 'device-edit.js'
-    // );
  ?>
 
       <!-- AEFI

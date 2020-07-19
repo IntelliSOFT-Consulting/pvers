@@ -48,7 +48,7 @@
 						<td style="width: 50%;">
 							<h5>The report is on:</h5>
 							<p> <?php echo ($sadr['Sadr']['report_sadr']   ? $ichecked : $nchecked ); ?> Suspected adverse drug reaction  </p>
-							<p> <?php echo ($sadr['Sadr']['report_therapeutic']   ? $ichecked : $nchecked ); ?> Therapeutic ineffectiveness </p>
+							<p> <?php echo ($sadr['Sadr']['report_therapeutic']   ? $ichecked : $nchecked ); ?> Suspected Therapeutic ineffectiveness </p>
 						</td>
 						<td style="width: 50%;">
 							<h5>Product category (Tick appropriate box)</h5>

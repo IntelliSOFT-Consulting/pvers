@@ -698,6 +698,11 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Messages');
 		$this->Acl->allow($group, 'controllers/Routes');
 		$this->Acl->allow($group, 'controllers/SadrListOfDrugs');
+		$this->Acl->allow($group, 'controllers/SadrListOfMedicines');
+		$this->Acl->allow($group, 'controllers/AefiListOfVaccines');
+		$this->Acl->allow($group, 'controllers/ListOfDevices');
+		$this->Acl->allow($group, 'controllers/MedicationProducts');
+		$this->Acl->allow($group, 'controllers/Pints');
 		$this->Acl->allow($group, 'controllers/WhoDrugs');
 		$this->Acl->allow($group, 'controllers/Pages');
 		$this->Acl->allow($group, 'controllers/Users/changePassword');
@@ -749,6 +754,12 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Users/changePassword');
         $this->Acl->allow($group, 'controllers/Notifications/reporter_index');
         $this->Acl->allow($group, 'controllers/Notifications/delete');
+        $this->Acl->allow($group, 'controllers/SadrListOfDrugs/delete');
+        $this->Acl->allow($group, 'controllers/SadrListOfMedicines/delete');
+        $this->Acl->allow($group, 'controllers/AefiListOfVaccines/delete');
+        $this->Acl->allow($group, 'controllers/ListOfDevices/delete');
+        $this->Acl->allow($group, 'controllers/MedicationProducts/delete');
+        $this->Acl->allow($group, 'controllers/Pints/delete');
 
 		//Allow institution administrators to some
 		$group->id = 4;

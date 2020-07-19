@@ -60,6 +60,13 @@ class SadrListOfDrug extends AppModel {
 				'message'  => 'Please specify the suspected drug'
 			),
 		),
+		'brand_name' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the brand name of the suspected drug'
+			),
+		),
 		'dose' => array(
 			'numeric' => array(
 				'rule'     => 'numeric',

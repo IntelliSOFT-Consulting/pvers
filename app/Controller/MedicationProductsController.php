@@ -98,10 +98,14 @@ class MedicationProductsController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->MedicationProduct->delete($id)) {
-			$this->Flash->success(__('The medication product has been deleted.'));
+			$message = ['status' => 'Success'];
+			$this->set('_serialize', array('message'));
+			// $this->Flash->success(__('The medication product has been deleted.'));
 		} else {
-			$this->Flash->error(__('The medication product could not be deleted. Please, try again.'));
+			$message = ['status' => 'Success'];
+			$this->set('_serialize', array('message'));
+			// $this->Flash->error(__('The medication product could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+		// return $this->redirect(array('action' => 'index'));
 	}
 }

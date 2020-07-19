@@ -202,7 +202,7 @@ class Sadr extends AppModel {
 	);
 
 	public $validate = array(
-		'list' => array(
+		/*'list' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
@@ -222,14 +222,14 @@ class Sadr extends AppModel {
 				'on'       => 'create',
                 'message'  => 'The Unique form ID provided does not exist.'
             ),
-        ),
-		'report_title' => array(
+        ),*/
+		/*'report_title' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a title for the report'
             ),
-        ),
+        ),*/
 		'patient_name' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
@@ -243,6 +243,20 @@ class Sadr extends AppModel {
                 'required' => true,
 				'on'       => 'create',
                 'message'  => 'Please specify the type of report'
+            ),
+        ),
+		'report_sadr' => array(
+            'reportOn' => array(
+                'rule'     => 'reportOn',
+				'allowEmpty' => true,
+                'message'  => 'Please specify what the report is on'
+            ),
+        ),
+		'medicinal_product' => array(
+            'productCategory' => array(
+                'rule'     => 'productCategory',
+				'allowEmpty' => true,
+                'message'  => 'Please specify at least one product category'
             ),
         ),
 		'date_of_birth' => array(
@@ -314,7 +328,7 @@ class Sadr extends AppModel {
                 'message'  => 'Please specify the action taken'
             ),
         ),
-            'outcome' => array(
+        'outcome' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
@@ -370,6 +384,14 @@ class Sadr extends AppModel {
 
 	public function ageOrDate($field = null) {
 		return !empty($field['date_of_birth']['year']) || !empty($this->data['Sadr']['age_group']);
+	}
+
+	public function reportOn($field = null) {
+		return !empty($this->data['Sadr']['report_sadr']) || !empty($this->data['Sadr']['report_therapeutic']);
+	}
+
+	public function productCategory($field = null) {
+		return !empty($this->data['Sadr']['medicinal_product']) || !empty($this->data['Sadr']['blood_products']) || !empty($this->data['Sadr']['herbal_product']) || !empty($this->data['Sadr']['cosmeceuticals']) || !empty($this->data['Sadr']['product_other']);
 	}
 
 	public function instOrAddress($field = null) {

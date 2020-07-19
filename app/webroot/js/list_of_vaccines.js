@@ -120,8 +120,8 @@ $(function() {
       if ( typeof $(this).val() !== 'undefined' && $(this).val() !== false && $(this).val() !== "") {
         $.ajax({
           async:true, type:'POST', 
-          url:'/aefi-list-of-vaccines/delete.json',
-          data:{'id': $(this).val(), 'aefi_id': $('#aefi_pr_id').text()}, //TODO:Use this to ensure the sadr belongs to the user
+          url:'/aefi_list_of_vaccines/delete/'+$(this).val()+'.json',
+          data:{'id': $(this).val(), 'aefi_id': $('input[name="data[Aefi][id]"]').text()}, //TODO:Use this to ensure the aefi belongs to the user
           success : function(data) {
              console.log(data);
           }
@@ -186,8 +186,8 @@ $(function() {
       if ( typeof $(this).val() !== 'undefined' && $(this).val() !== false && $(this).val() !== "") {
         $.ajax({
           async:true, type:'POST', 
-          url:'/aefi-list-of-diluents/delete.json',
-          data:{'id': $(this).val(), 'aefi_id': $('#aefi_pr_id').text()}, //TODO:Use this to ensure the aefi belongs to the user
+          url:'/aefi_list_of_vaccines/delete/'+$(this).val()+'.json',
+          data:{'id': $(this).val(), 'aefi_id': $('input[name="data[Aefi][id]"]').text()}, //TODO:Use this to ensure the aefi belongs to the user
           success : function(data) {
              console.log(data);
           }

@@ -1,8 +1,6 @@
 <?php
     $this->assign('TRN', 'active');
     $this->Html->script('transfusion', array('inline' => false));
-    $this->Html->css('jquery.datetimepicker', null, array('inline' => false));
-    $this->Html->script('jquery.datetimepicker.full', array('inline' => false));
  ?>
 
       <!-- TRN

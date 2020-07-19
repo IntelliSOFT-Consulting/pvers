@@ -93,9 +93,9 @@ class SadrListOfDrugsController extends AppController {
 			throw new MethodNotAllowedException();
 		}
 		if($id) {
-			$this->SadrListOfDrug->id = $this->SadrListOfDrug->Luhn_Verify($id);
+			$this->SadrListOfDrug->id = $id;
 		} else {
-			$this->SadrListOfDrug->id = $this->SadrListOfDrug->Luhn_Verify($this->data['id']);		
+			$this->SadrListOfDrug->id = $this->data['id'];		
 		}
 		if (!$this->SadrListOfDrug->exists()) {
 			throw new NotFoundException(__('Invalid sadr list of drug'));

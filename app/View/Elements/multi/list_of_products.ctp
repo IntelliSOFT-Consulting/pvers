@@ -61,7 +61,7 @@
                         ?>
                     </td> 
                     <td rowspan="8">
-                        <button  type="button" class="btn btn-danger btn-sm remove-product"  value="<?php if (isset($medication['MedicationProduct'][$i]['id'])) { echo $medication['MedicationProduct'][$i]['id']; } ?>" >
+                        <button  type="button" class="btn btn-danger btn-sm remove-product"  value="<?php if (isset($this->request->data['MedicationProduct'][$i]['id'])) { echo $this->request->data['MedicationProduct'][$i]['id']; } ?>" >
                               <i class="icon-minus"></i>
                         </button>
                     </td>

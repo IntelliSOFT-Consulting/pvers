@@ -19,7 +19,8 @@
 
             <?php
                 echo $this->Form->input('id', array());
-                echo $this->Form->input('Device.report_type', array('type' => 'hidden'));
+                echo $this->Form->input('Device.report_type', array('type' => 'hidden'));                    
+                echo $this->Form->input('Device.reference_no', array('type' => 'hidden'));
             ?>
             <p><b>(FOM019/MIP/PMS/SOP/001)</b></p>
             <div class="row-fluid">
@@ -878,7 +879,7 @@
                     <?php
                       echo $this->Form->button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit', array(
                           'name' => 'submitReport',
-                          'onclick'=>"return confirm('Are you sure you wish to submit the protocol review report?');",
+                          'onclick'=>"return confirm('Are you sure you wish to submit the report?');",
                           'class' => 'btn btn-primary btn-block mapop',
                           'id' => 'SiteInspectionSubmitReport', 'title'=>'Save and Submit Report',
                           'data-content' => 'Submit report for peer review and approval.',

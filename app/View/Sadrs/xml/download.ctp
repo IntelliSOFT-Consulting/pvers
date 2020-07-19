@@ -291,7 +291,7 @@
 						'not applicable' => 6,
 						'unknown' => 5,
 					);
-					if (!empty($sadr['Sadr']['action_taken'])) echo $actions[strtolower($sadr['Sadr']['action_taken'])];
+					if (!empty($sadr['Sadr']['action_taken']) && $sadrListOfDrug['suspected_drug'] == 1) echo $actions[strtolower($sadr['Sadr']['action_taken'])];
 				?></actiondrug>
                 <drugrecurreadministration/>
                 <drugadditional/>

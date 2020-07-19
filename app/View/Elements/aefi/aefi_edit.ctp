@@ -25,13 +25,14 @@
 
             <?php
                 echo $this->Form->input('id', array());
-                echo $this->Form->input('Aefi.report_type', array('type' => 'hidden'));
+                echo $this->Form->input('Aefi.report_type', array('type' => 'hidden'));                    
+                echo $this->Form->input('Aefi.reference_no', array('type' => 'hidden'));
             ?>
 
             <div class="row-fluid">
                 <div class="span2">
                     <?php
-                        echo $this->Html->image('header-object.png', array('alt' => 'AEFI'));
+                        echo $this->Html->image('header-object.png', array('alt' => 'AEFI'));    
                     ?>
                 </div>
                 <div class="span8" style="text-align: center;">
@@ -528,7 +529,7 @@
                     <?php
                       echo $this->Form->button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit', array(
                           'name' => 'submitReport',
-                          'onclick'=>"return confirm('Are you sure you wish to submit the protocol review report?');",
+                          'onclick'=>"return confirm('Are you sure you wish to submit the report?');",
                           'class' => 'btn btn-primary btn-block mapop',
                           'id' => 'SiteInspectionSubmitReport', 'title'=>'Save and Submit Report',
                           'data-content' => 'Submit report for peer review and approval.',

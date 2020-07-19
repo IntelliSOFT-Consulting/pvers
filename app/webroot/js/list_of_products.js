@@ -100,8 +100,8 @@ $(function() {
       if ( typeof $(this).val() !== 'undefined' && $(this).val() !== false && $(this).val() !== "") {
         $.ajax({
           async:true, type:'POST', 
-          url:'/products/delete.json',
-          data:{'id': $(this).val(), 'medication_id': $('#medication_pr_id').text()}, //TODO:Use this to ensure the sadr belongs to the user
+          url:'/medication_products/delete/'+$(this).val()+'.json',
+          data:{'id': $(this).val(), 'medication_id': $('input[name="data[Medication][id]"]').text()}, //TODO:Use this to ensure the aefi belongs to the user
           success : function(data) {
              console.log(data);
           }
@@ -112,7 +112,7 @@ $(function() {
 
     function updateLPRTr(myobj){
       // console.log(myobj.closest('tr').remove);
-      console.log(myobj.closest('td').attr('rowspan'));
+      // console.log(myobj.closest('td').attr('rowspan'));
       rows = parseInt(myobj.closest('td').attr('rowspan'));
       $tr = myobj.closest('tr');
       for (var i = 0; i <= rows-2; i++) {

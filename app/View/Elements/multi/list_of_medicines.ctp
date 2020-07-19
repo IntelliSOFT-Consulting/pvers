@@ -8,9 +8,9 @@
 ?>
     <div class="row-fluid">
       <div class="span12">
-        <h4 style="text-align: center;">Past medication history (List all medicines including OTC, herbals) <button  type="button" class="btn btn-success btn-small" id="addMedicine">
+        <h5 style="text-align: center;">Past medication history (List all medicines including OTC, herbals) <button  type="button" class="btn btn-success btn-small" id="addMedicine">
                           Add     <i class="icon-plus"></i>
-                        </button></h4>
+                        </button></h5>
       </div>
     </div>                  
 
@@ -133,7 +133,7 @@
                     </td> 
 
                     <td>
-                        <button  type="button" class="btn btn-danger btn-sm remove-medicine"  value="<?php if (isset($sadr['SadrListOfMedicine'][$i]['id'])) { echo $sadr['SadrListOfMedicine'][$i]['id']; } ?>" >
+                        <button  type="button" class="btn btn-danger btn-sm remove-medicine"  value="<?php if (isset($this->request->data['SadrListOfMedicine'][$i]['id'])) { echo $this->request->data['SadrListOfMedicine'][$i]['id']; } ?>" >
                               <i class="icon-minus"></i>
                         </button>
                     </td>

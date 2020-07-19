@@ -118,7 +118,7 @@
                       ?>
                     </td>
                     <td>
-                        <button  type="button" class="btn btn-danger btn-sm remove-vaccine"  value="<?php if (isset($aefi['AefiListOfVaccine'][$i]['id'])) { echo $aefi['AefiListOfVaccine'][$i]['id']; } ?>" >
+                        <button  type="button" class="btn btn-danger btn-sm remove-vaccine"  value="<?php if (isset($this->request->data['AefiListOfVaccine'][$i]['id'])) { echo $this->request->data['AefiListOfVaccine'][$i]['id']; } ?>" >
                               <i class="icon-minus"></i>
                         </button>
                     </td>

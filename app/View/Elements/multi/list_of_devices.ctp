@@ -78,7 +78,7 @@
                     </td>
                     
                     <td>
-                        <button  type="button" class="btn btn-danger btn-sm remove-device"  value="<?php if (isset($Device['ListOfDevice'][$i]['id'])) { echo $Device['ListOfDevice'][$i]['id']; } ?>" >
+                        <button  type="button" class="btn btn-danger btn-sm remove-device"  value="<?php if (isset($this->request->data['ListOfDevice'][$i]['id'])) { echo $this->request->data['ListOfDevice'][$i]['id']; } ?>" >
                               <i class="icon-minus"></i>
                         </button>
                     </td>

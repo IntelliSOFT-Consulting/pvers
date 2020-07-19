@@ -76,7 +76,7 @@ $(function() {
               <input class="span11 date-pick-to" name="data[SadrListOfMedicine][{i}][stop_date]" id="SadrListOfMedicine{i}StopDate" type="text">  </td>\
             <td> <input class="span11" name="data[SadrListOfMedicine][{i}][indication]" id="SadrListOfMedicine{i}Indication" type="text"> </td>\
             <td>\
-                <button type="button" class="btn btn-danger btn-small remove-row"><i class="fa fa-minus"></i> </button>\
+                <button type="button" class="btn btn-danger btn-small remove-row" ><i class="fa fa-minus"></i> </button>\
             </td>\
           </tr>\
         ';
@@ -88,8 +88,8 @@ $(function() {
       if ( typeof $(this).val() !== 'undefined' && $(this).val() !== false && $(this).val() !== "") {
         $.ajax({
           async:true, type:'POST', 
-          url:'/list-of-medicines/delete.json',
-          data:{'id': $(this).val(), '_id': $('#_pr_id').text()}, //TODO:Use this to ensure the sadr belongs to the user
+          url:'/sadr_list_of_medicines/delete/'+$(this).val()+'.json',
+          data:{'id': $(this).val(), '_id': $('input[name="data[Sadr][id]"]').val()}, //TODO:Use this to ensure the sadr belongs to the user
           success : function(data) {
              console.log(data);
           }

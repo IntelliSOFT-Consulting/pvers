@@ -63,7 +63,7 @@ class AefisController extends AppController {
         $criteria['Aefi.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'AefiListOfVaccine');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {

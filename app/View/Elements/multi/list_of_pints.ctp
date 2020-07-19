@@ -67,7 +67,7 @@
                         ?>
                     </td>
                     <td>
-                        <button  type="button" class="btn btn-danger btn-sm remove-pint"  value="<?php if (isset($transfusion['Pint'][$i]['id'])) { echo $transfusion['Pint'][$i]['id']; } ?>" >
+                        <button  type="button" class="btn btn-danger btn-sm remove-pint"  value="<?php if (isset($this->request->data['Pint'][$i]['id'])) { echo $this->request->data['Pint'][$i]['id']; } ?>" >
                               <i class="icon-minus"></i>
                         </button>
                     </td>

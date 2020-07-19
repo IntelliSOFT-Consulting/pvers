@@ -71,8 +71,8 @@ $(function() {
       if ( typeof $(this).val() !== 'undefined' && $(this).val() !== false && $(this).val() !== "") {
         $.ajax({
           async:true, type:'POST', 
-          url:'/pints/delete.json',
-          data:{'id': $(this).val(), 'transfusion_id': $('#transfusion_pr_id').text()}, //TODO:Use this to ensure the sadr belongs to the user
+          url:'/pints/delete/'+$(this).val()+'.json',
+          data:{'id': $(this).val(), 'transfusion_id': $('input[name="data[Transfusion][id]"]').text()}, //TODO:Use this to ensure the aefi belongs to the user
           success : function(data) {
              console.log(data);
           }

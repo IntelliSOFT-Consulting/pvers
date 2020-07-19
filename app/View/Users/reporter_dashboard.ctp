@@ -150,6 +150,14 @@
                     echo $this->Html->link('All BT >>', array('controller' => 'transfusions', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
                       echo $this->Form->postLink('Report Transfusion', array('controller' => 'transfusions' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Transfusion Reaction?'));
                     ?>
+                    <!-- <ul id="reviewer_tab" class="nav nav-tabs">
+                        <li class="active"><a href="#formview" data-toggle="tab">Aha</a></li>
+                        <li><a href="#internal_report_comments" data-toggle="tab">Feedback ()</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="formview">bakoloa</div>
+                      <div class="tab-pane" id="internal_report_comments">12600 Letters debat</div>
+                    </div> -->
                 </div>
             </div>
         </div>

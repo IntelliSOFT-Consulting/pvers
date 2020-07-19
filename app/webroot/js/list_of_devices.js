@@ -78,8 +78,8 @@ $(function() {
       if ( typeof $(this).val() !== 'undefined' && $(this).val() !== false && $(this).val() !== "") {
         $.ajax({
           async:true, type:'POST', 
-          url:'/list-of-devices/delete.json',
-          data:{'id': $(this).val(), '_id': $('#_pr_id').text()}, //TODO:Use this to ensure the sadr belongs to the user
+          url:'/list_of_devices/delete/'+$(this).val()+'.json',
+          data:{'id': $(this).val(), 'device_id': $('input[name="data[Device][id]"]').text()}, //TODO:Use this to ensure the aefi belongs to the user
           success : function(data) {
              console.log(data);
           }

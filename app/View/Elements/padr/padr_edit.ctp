@@ -144,7 +144,7 @@
 						<?php
 							
 							echo $this->Form->input('description_of_reaction', array(
-								'class' => 'span11', 'rows' => '2', 'between' => false, 'div' => false,
+								'class' => 'span11', 'rows' => '1', 'between' => false, 'div' => false,
 								'label' => array('class' => 'required', 'text' => 'Describe the reaction <span style="color:red;">*</span>'),
 								'after'=>'<span class="help-block">What were the signs of the side effect?</span>',
 							));

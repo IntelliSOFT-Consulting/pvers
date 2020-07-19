@@ -100,10 +100,14 @@ class AefiListOfVaccinesController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->AefiListOfVaccine->delete($id)) {
-			$this->Flash->success(__('The aefi list of vaccine has been deleted.'));
+			$message = ['status' => 'Success'];
+			$this->set('_serialize', array('message'));
+			// $this->Flash->success(__('The aefi list of vaccine has been deleted.'));
 		} else {
-			$this->Flash->error(__('The aefi list of vaccine could not be deleted. Please, try again.'));
+			$message = ['status' => 'Failure'];
+			$this->set('_serialize', array('message'));
+			// $this->Flash->error(__('The aefi list of vaccine could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+		// return $this->redirect(array('action' => 'index'));
 	}
 }

@@ -50,6 +50,16 @@ class SadrListOfMedicine extends AppModel {
 		)
 	);
 
+	public $validate = array(
+		'brand_name' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the brand name for past medical history'
+			),
+		),
+	);
+
 	public function beforeSave($options = array()) {
 		if (!empty($this->data['SadrListOfMedicine']['start_date'])) {
 			$this->data['SadrListOfMedicine']['start_date'] = $this->dateFormatBeforeSave($this->data['SadrListOfMedicine']['start_date']);

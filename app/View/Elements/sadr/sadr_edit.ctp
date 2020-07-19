@@ -34,6 +34,7 @@
 			<?php
 				echo $this->Form->input('Sadr.id', array());
 				echo $this->Form->input('Sadr.report_type', array('type' => 'hidden'));
+				echo $this->Form->input('Sadr.reference_no', array('type' => 'hidden'));
 			?>
 
             <p><b>(FOM001/MIP/PMS/SOP/001)</b></p>
@@ -60,7 +61,7 @@
 				<p class="controls" id="sadr_edit_tip">	<span class="label label-important">Tip:</span> Fields marked with <span style="color:red;">*</span> are mandatory</p>
 				<?php
 					echo $this->Form->input('report_title', array(
-						'label' => array('class' => 'control-label required', 'text' => 'REPORT TITLE <span style="color:red;">*</span>'),
+						'label' => array('class' => 'control-label required', 'text' => 'REPORT TITLE'),
 						'placeholder' => 'this content title..' , 'title' => 'Report Title',
 						'data-content' => 'Appropriate title for the report e.g Nevirapine related Rash',
 						'after'=>'<p class="help-block"> e.g Nevirapine related rash </p></div>',
@@ -78,8 +79,9 @@
 			<div class="row-fluid">
 				<div class="span6">
 				 <?php
-                    echo "<h4>The report is on:</h4>";
+                    echo "<h4>The report is on  <span style='color:red;'>*</span>:</h4>";
                     echo $this->Form->input('report_sadr', array(
+                    	'format' => array('error', 'before', 'label', 'between', 'input', 'after'),
                             'type' => 'checkbox',  'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Sadr_report_sadr_" name="data[Sadr][report_sadr]">
                                                                     <label class="checkbox">',
@@ -88,13 +90,14 @@
                             'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Sadr_report_therapeutic_" name="data[Sadr][report_therapeutic]">
                                                                     <label class="checkbox">',
-                                                    'after' => 'Therapeutic ineffectiveness </label>',));
+                                                    'after' => 'Suspected Therapeutic ineffectiveness </label>',));
                 ?>
 				</div>
 				<div class="span6">	
 				<?php
                     echo "<h4>Product category (Tick appropriate box)</h4>";
                     echo $this->Form->input('medicinal_product', array(
+                    	'format' => array('error', 'before', 'label', 'between', 'input', 'after'),
                             'type' => 'checkbox',  'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Sadr_medicinal_product_" name="data[Sadr][medicinal_product]">
                                                                     <label class="checkbox">',
@@ -315,7 +318,7 @@
 						echo $this->Form->input('pregnancy_status', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'pregnancy_status',
                             'before' => '<div class="control-group"> <label class="control-label">PREGNANCY STATUS</label>
-                                            <div class="controls" id="pregnancy_stati">  <input type="hidden" value="" id="DevicePregnancyStatus_" name="data[Device][pregnancy_status]"> <label class="radio inline">',
+                                            <div class="controls" id="pregnancy_stati">  <input type="hidden" value="" id="SadrPregnancyStatus_" name="data[Sadr][pregnancy_status]"> <label class="radio inline">',
                             'after' => '</label>',
                             // 'onclick' => '$(\'#pstati\').show();',
                             'options' => array('Not Applicable' => 'Not Applicable'),
@@ -572,7 +575,7 @@
                           'error' => array('attributes' => array('wrap' => 'p', 'class' => 'controls required error')),
                           'before' => '<label class="radio inline">',
                           'after' => '</label>
-                                <span class="help-inline" style="padding-top: 5px;"><a class="tooltipper" data-original-title="Clear selection"
+                                <span class="help-inline" style="padding-top: 5px;"><a class="tooltipper" id="serious_reason_clear" data-original-title="Clear selection"
                                 onclick="$(\'.serious_reason\').removeAttr(\'checked disabled\')">
                                 <em class="accordion-toggle">clear!</em></a> </span>
 
@@ -581,7 +584,7 @@
                         ));
                     ?>
 
-                    <p class="required">Action taken</p>
+                    <p class="required">Action taken <span style="color:red;">*</span></p>
 					<?php
 						echo $this->Form->input('action_taken', array(
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'action_taken',
@@ -623,7 +626,7 @@
 						));
 					?>
 
-					<p class="required">Outcome</p>
+					<p class="required">Outcome <span style="color:red;">*</span></p>
 					<?php
 						echo $this->Form->input('outcome', array(
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
@@ -802,7 +805,7 @@
 	            <?php
 	              echo $this->Form->button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit', array(
 	                  'name' => 'submitReport',
-	                  'onclick'=>"return confirm('Are you sure you wish to submit the protocol review report?');",
+	                  'onclick'=>"return confirm('Are you sure you wish to submit the report?');",
 	                  'class' => 'btn btn-primary btn-block mapop',
 	                  'id' => 'SiteInspectionSubmitReport', 'title'=>'Save and Submit Report',
 	                  'data-content' => 'Submit report for peer review and approval.',

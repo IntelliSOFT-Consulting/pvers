@@ -65,7 +65,7 @@ class SadrsController extends AppController {
         $criteria['Sadr.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -637,7 +637,7 @@ class SadrsController extends AppController {
                 $this->Session->setFlash(__('The SADR has been saved'), 'alerts/flash_success');
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('The SADR could not be saved. Please, try again.'), 'alerts/flash_error');
+                $this->Session->setFlash(__('The SADR could not be saved. Please review the error(s) and resubmit and try again.'), 'alerts/flash_error');
             }
         } else {
             $this->request->data = $this->Sadr->read(null, $id);
