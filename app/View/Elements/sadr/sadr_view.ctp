@@ -230,7 +230,7 @@
 						<tr>
 							<td style="width: 10%;"><?php echo $i++;?></td>
 							<td>
-								<a href="<?php echo $root?>attachments/download/<?php echo $attachment['id']; ?>"><?php echo __($attachment['basename']);?></a>
+								<a href="attachments/download/<?php echo $attachment['id']; ?>"><?php echo __($attachment['basename']);?></a>
 							</td>
 							<td><?php echo $attachment['description'];?></td>
 						</tr>

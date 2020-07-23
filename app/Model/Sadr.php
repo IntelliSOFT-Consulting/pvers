@@ -198,7 +198,19 @@ class Sadr extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+        'Reminder' => array(
+            'className' => 'Reminder',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('Reminder.model' => 'Sadr'),
+        ),
+        'ExternalComment' => array(
+            'className' => 'Comment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('ExternalComment.model' => 'Sadr', 'ExternalComment.category' => 'external' ),
+        )
 	);
 
 	public $validate = array(

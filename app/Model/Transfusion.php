@@ -137,7 +137,13 @@ class Transfusion extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+        'ExternalComment' => array(
+            'className' => 'Comment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('ExternalComment.model' => 'Transfusion', 'ExternalComment.category' => 'external' ),
+        )
 	);
 
     public function beforeSave($options = array()) {

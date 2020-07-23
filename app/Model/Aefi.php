@@ -167,6 +167,12 @@ class Aefi extends AppModel {
             'foreignKey' => 'foreign_key',
             'dependent' => true,
             'conditions' => array('Reminder.model' => 'Aefi'),
+        ),
+        'ExternalComment' => array(
+            'className' => 'Comment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('ExternalComment.model' => 'Aefi', 'ExternalComment.category' => 'external' ),
         )
 	);
 

@@ -199,7 +199,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
 				'conditions' => array('Sadr.id' => $id),
-				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
 			));
         $this->set('sadr', $sadr);
 
@@ -223,7 +223,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
 				'conditions' => array('Sadr.id' => $id),
-				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
 			));
         $this->set('sadr', $sadr);
 

@@ -151,6 +151,12 @@ class Pqmp extends AppModel {
             'dependent' => true,
             'conditions' => array('Attachment.model' => 'Pqmp', 'Attachment.group' => 'attachment'),
       	),
+        'ExternalComment' => array(
+            'className' => 'Comment',
+            'foreignKey' => 'foreign_key',
+            'dependent' => true,
+            'conditions' => array('ExternalComment.model' => 'Pqmp', 'ExternalComment.category' => 'external' ),
+        )
 	);
 
 	public $validate = array(
