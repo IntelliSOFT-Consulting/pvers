@@ -7,7 +7,7 @@ App::uses('AppModel', 'Model');
 App::uses('CakeEmail', 'Network/Email');
 
 class GenericNotificationShell extends Shell {
-    public $uses = array('User','Sae', 'Notification', 'Message');
+    public $uses = array('User', 'Notification');
     
     public function perform() {
       $this->initialize();
@@ -15,13 +15,22 @@ class GenericNotificationShell extends Shell {
     }
 
     public function  sendNotification() {
-        $save_data = array('Notification' => array(
+        /*$save_data = array('Notification' => array(
            'user_id' => $this->args[0]['user_id'],
            'type' => $this->args[0]['type'],
            'model' => $this->args[0]['model'],
            'foreign_key' => $this->args[0]['id'],
            'title' => $this->args[0]['subject'],
            'system_message' => $this->args[0]['message'],
+           ),
+        );*/
+        $save_data = array('Notification' => array(
+           'user_id' => 2,
+           'type' => 'bandeko',
+           'model' => 'takoma',
+           'foreign_key' => 3,
+           'title' => 'mibali',
+           'system_message' => 'na ngai',
            ),
         );
 

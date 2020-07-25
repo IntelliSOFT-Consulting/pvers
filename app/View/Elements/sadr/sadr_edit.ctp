@@ -141,7 +141,7 @@
 						));
 
 						echo $this->Form->input('address', array(
-							'label' => array('class' => 'control-label', 'text' => 'ADDRESS'),
+							'label' => array('class' => 'control-label', 'text' => 'ADDRESS <span style="color:red;">*</span>'),
 						));
 
 					?>
