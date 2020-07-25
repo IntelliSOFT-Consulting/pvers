@@ -112,7 +112,7 @@
                 <div class="span6">
                     <?php
                         echo $this->Form->input('diagnosis', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'Diagnosis'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Diagnosis <span style="color:red;">*</span>'),
                             'after'=>'<p class="help-block">  </p></div>',
                         ));
                         echo $this->Form->input('ward', array(
@@ -800,12 +800,12 @@
                     <?php
                         echo $this->Form->input('reporter_name_diff', array(
                             'div' => array('class' => 'control-group required'), 'class' => 'diff',
-                            'label' => array('class' => 'control-label required', 'text' => 'Name <span style="color:red;">*</span>'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Name'),
                         ));
                         echo $this->Form->input('reporter_email_diff', array(
                             'type' => 'email',
                             'div' => array('class' => 'control-group required'), 'class' => 'diff',
-                            'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS <span style="color:red;">*</span>')
+                            'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS')
                         ));
                     ?>
                 </div><!--/span-->
@@ -813,7 +813,7 @@
                     <?php
                         echo $this->Form->input('reporter_designation_diff', array(
                             'type' => 'select', 'options' => $designations, 'empty' => true, 'class' => 'diff',
-                            'label' => array('class' => 'control-label required', 'text' => 'Cadre/designation '.' <span style="color:red;">*</span>'), 'empty'=>true ));
+                            'label' => array('class' => 'control-label required', 'text' => 'Cadre/designation'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone_diff', array(
                             'div' => array('class' => 'control-group'), 'class' => 'diff',
                             'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')

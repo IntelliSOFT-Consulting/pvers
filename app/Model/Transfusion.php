@@ -146,6 +146,50 @@ class Transfusion extends AppModel {
         )
 	);
 
+    public $validate = array(
+        'patient_name' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide a patient\'s name or initials'
+            ),
+        ),
+        'gender' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the patient\'s gender'
+            ),
+        ),
+        'diagnosis' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the diagnosis'
+            ),
+        ),
+        'designation_id' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please specify your designation',
+            ),
+        ),
+        'reporter_name' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the name of the reporter'
+            ),
+        ),
+        'reporter_email' => array(
+            'notBlank' => array(
+                'rule'     => 'email',
+                'required' => true,
+                'message'  => 'Please provide a valid email address'
+            ),
+        )
+    );
+
     public function beforeSave($options = array()) {
         if (!empty($this->data['Transfusion']['reporter_date'])) {
             $this->data['Transfusion']['reporter_date'] = $this->dateFormatBeforeSave($this->data['Transfusion']['reporter_date']);

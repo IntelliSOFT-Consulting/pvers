@@ -161,7 +161,83 @@ class Device extends AppModel {
         )
 	);
 
+    public $validate = array(
+        'report_title' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide a title for the report'
+            ),
+        ),
+        'patient_name' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide a patient\'s name or initials'
+            ),
+        ),
+        'gender' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the patient\'s gender'
+            ),
+        ),
+        'brand_name' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the brand name'
+            ),
+        ),
+        'county_id' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please select a county',
+            ),
+        ),
+        'designation_id' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please specify your designation',
+            ),
+        ),
+        'serious' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the event classification'
+            ),
+        ),
+        'reporter_name' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the name of the reporter'
+            ),
+        ),
+        'reporter_email' => array(
+            'notBlank' => array(
+                'rule'     => 'email',
+                'required' => true,
+                'message'  => 'Please provide a valid email address'
+            ),
+        )
+    );
+
     public function beforeSave($options = array()) {
+        if (!empty($this->data['Device']['explant_date'])) {
+            $this->data['Device']['explant_date'] = $this->dateFormatBeforeSave($this->data['Device']['explant_date']);
+        }
+        if (!empty($this->data['Device']['implant_date'])) {
+            $this->data['Device']['implant_date'] = $this->dateFormatBeforeSave($this->data['Device']['implant_date']);
+        }
+        if (!empty($this->data['Device']['date_onset_incident'])) {
+            $this->data['Device']['date_onset_incident'] = $this->dateFormatBeforeSave($this->data['Device']['date_onset_incident']);
+        }
+        if (!empty($this->data['Device']['death_date'])) {
+            $this->data['Device']['death_date'] = $this->dateFormatBeforeSave($this->data['Device']['death_date']);
+        }
         if (!empty($this->data['Device']['expiry_date'])) {
             $this->data['Device']['expiry_date'] = $this->dateFormatBeforeSave($this->data['Device']['expiry_date']);
         }
@@ -176,6 +252,18 @@ class Device extends AppModel {
 
     public function afterFind($results, $primary = false) {
         foreach ($results as $key => $val) {
+            if (isset($val['Device']['explant_date'])) {
+                $results[$key]['Device']['explant_date'] = $this->dateFormatAfterFind($val['Device']['explant_date']);
+            }
+            if (isset($val['Device']['implant_date'])) {
+                $results[$key]['Device']['implant_date'] = $this->dateFormatAfterFind($val['Device']['implant_date']);
+            }
+            if (isset($val['Device']['date_onset_incident'])) {
+                $results[$key]['Device']['date_onset_incident'] = $this->dateFormatAfterFind($val['Device']['date_onset_incident']);
+            }
+            if (isset($val['Device']['death_date'])) {
+                $results[$key]['Device']['death_date'] = $this->dateFormatAfterFind($val['Device']['death_date']);
+            }
             if (isset($val['Device']['expiry_date'])) {
                 $results[$key]['Device']['expiry_date'] = $this->dateFormatAfterFind($val['Device']['expiry_date']);
             }

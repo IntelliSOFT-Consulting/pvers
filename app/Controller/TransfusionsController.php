@@ -310,8 +310,6 @@ class TransfusionsController extends AppController {
 
                       $this->QueuedTask->createJob('GenericEmail', $datum);
                       $this->QueuedTask->createJob('GenericNotification', $datum);
-                      // CakeResque::enqueue('default', 'GenericEmailShell', array('sendEmail', $datum));
-                      // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
                     }
                     //**********************************    END   *********************************
 
@@ -322,7 +320,10 @@ class TransfusionsController extends AppController {
                 $this->Session->setFlash(__('The blood transfusion reaction report has been saved'), 'alerts/flash_success');
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('The blood transfusion reaction report could not be saved. Please, try again.'), 'alerts/flash_error');
+                //still attempt to save
+                // $data = $this->request->data;
+                // $this->Transfusion->saveAssociated($data, array('validate' => false, 'deep' => true));
+                $this->Flash->error(__('The blood transfusion reaction could not be submitted to PPB. Please, correct the errors and try again.'));
             }
         } else {
             $this->request->data = $this->Transfusion->read(null, $id);

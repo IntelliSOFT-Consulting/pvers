@@ -168,6 +168,70 @@ class Medication extends AppModel {
         )
 	);
 
+    public $validate = array(
+        'date_of_event' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide a date of the event'
+            ),
+        ),
+        'patient_name' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide a patient\'s name or initials'
+            ),
+        ),
+        'gender' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the patient\'s gender'
+            ),
+        ),
+        'description_of_error' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please describe the error'
+            ),
+        ),
+        'county_id' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please select a county',
+            ),
+        ),
+        'designation_id' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please specify your designation',
+            ),
+        ),
+        'process_occur' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'In which process did the error occur?'
+            ),
+        ),
+        'reporter_name' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the name of the reporter'
+            ),
+        ),
+        'reporter_email' => array(
+            'notBlank' => array(
+                'rule'     => 'email',
+                'required' => true,
+                'message'  => 'Please provide a valid email address'
+            ),
+        )
+    );
+
 	public function beforeSave($options = array()) {
 
 		if (!empty($this->data['Medication']['time_of_event'])) {
