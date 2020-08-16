@@ -13,11 +13,25 @@ $(document).ready(function() {
 
     $('.date-pick-field').datepicker({
         minDate:"-100Y", maxDate:"0", 
-        dateFormat:'dd-mm-yy'
+        dateFormat:'dd-mm-yy', 
+        showButtonPanel:true, 
+        changeMonth:true, 
+        changeYear:true, 
+        showAnim:'show'
     });
 
  	$( "#MedicationCountyId" ).combobox();
 
+ 	//If Male disable
+    $('input[name="data[Medication][gender]"]').click(function(){ 
+        if ($(this).val() == 'Male') {
+            $('input[name="data[Medication][pregnancy_status]"]').attr('disabled', this.checked).attr('checked', !this.checked);
+        } else {
+            $('input[name="data[Medication][pregnancy_status]"]').attr('disabled', false);
+        }
+    });
+    if($('input[name="data[Medication][gender]"][value="Male"]').is(':checked')){ $('input[name="data[Medication][pregnancy_status]"]').attr('disabled', true).attr('checked', false); }
+    
  	//Person submitting
 	$('.person-submit').on('change',function() {
         var pilih = $(this).val();

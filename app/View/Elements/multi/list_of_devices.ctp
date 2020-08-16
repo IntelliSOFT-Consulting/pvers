@@ -19,11 +19,11 @@
                 <thead>
                   <tr>
                     <th colspan="2" style="width: 15%"> <label class="required">Brand Name/Commercial Name</label></th>
-                    <th> <label>Serial/Lot No.</label></th>
-                    <th> <label>Common Name</label></th>
-                    <th> <label>Manufacturer's Name</label></th>
-                    <th> <label>Manufacture Date </label></th>
-                    <th> <label>Expiry date </label></th>
+                    <th> <label class="required">Serial/Lot No.</label></th>
+                    <th> <label class="required">Common Name</label></th>
+                    <th> <label class="required">Manufacturer's Name</label></th>
+                    <th> <label class="required">Manufacture Date </label></th>
+                    <th> <label class="required">Expiry date </label></th>
                     <th> # </th>
                   </tr>
                 </thead>

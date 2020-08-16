@@ -75,7 +75,7 @@
                     <?php
 
                         echo $this->Form->input('name_of_institution', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'NAME OF INSTITUTION/ ORGANZIATION'),
+                            'label' => array('class' => 'control-label required', 'text' => 'NAME OF INSTITUTION/ ORGANZIATION <span style="color:red;">*</span>'),
                             'placeholder' => 'Name of Institution' ,
                         ));
 
@@ -95,7 +95,7 @@
 
                         echo $this->Form->input('county_id', array(
                                     'label' => array('class' => 'control-label required',
-                                    'text' => 'COUNTY'),
+                                    'text' => 'COUNTY <span style="color:red;">*</span>'),
                                     'empty' => true, 'between' => '<div class="controls ui-widget">',
                                 ));
 
@@ -116,7 +116,7 @@
                     <?php
                         echo $this->Form->input('date_of_birth', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH'),));
                     ?>
-                    <h5 class="controls">--OR--</h5>
+                    <h5 class="controls"> <span style="color:red;">*</span>--OR--</h5>
                     <?php
                         echo $this->Form->input('age_years', array('label' => array('class' => 'control-label required', 'text' => 'Age in years'), ));
 
@@ -148,6 +148,41 @@
                             'options' => array('Female' => 'Female'),
                         ));
 
+
+                        echo $this->Form->input('pregnancy_status', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'pregnancy_status',
+                            'before' => '<div class="control-group"> <label class="control-label">PREGNANCY STATUS</label>
+                                            <div class="controls" id="pregnancy_stati">  <input type="hidden" value="" id="DevicePregnancyStatus_" name="data[Device][pregnancy_status]"> <label class="radio inline">',
+                            'after' => '</label>',
+                            // 'onclick' => '$(\'#pstati\').show();',
+                            'options' => array('Not Applicable' => 'Not Applicable'),
+                        ));
+                        echo $this->Form->input('pregnancy_status', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'pregnancy_status',
+                            'before' => '<label class="radio inline">', 'after' => '</label>',
+                            // 'onclick' => '$(\'#pstati\').hide(); $(\'#pstati input:radio\').removeAttr(\'checked\');',
+                            'options' => array('Not pregnant' => 'Not pregnant'),
+                        ));
+                        echo $this->Form->input('pregnancy_status', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'pregnancy_status',
+                            'before' => '<br><div><label class="radio inline">',    'after' => '</label>',
+                            'options' => array('1st Trimester' => '1st Trimester'),
+                        ));
+                        echo $this->Form->input('pregnancy_status', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'pregnancy_status',
+                            'before' => '<label class="radio inline">', 'after' => '</label>',
+                            'options' => array('2nd Trimester' => '2nd Trimester'),
+                        ));
+                        echo $this->Form->input('pregnancy_status', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'pregnancy_status',
+                            'before' => '<label class="radio inline">',
+                            'after' => '</label> <label>
+                            <a class="button"
+                                        onclick="$(\'.pregnancy_status\').removeAttr(\'checked\')" >
+                                        <em class="accordion-toggle">clear!</em></a> </label>
+                            </div> </div> </div>',
+                            'options' => array('3rd Trimester' => '3rd Trimester'),
+                        ));
 
                     ?>
                 </div><!--/span-->
@@ -246,7 +281,7 @@
                 </div>
                 <div class="span4">
                     <?php
-                        echo "<label class='required'>Did the error reach the patient?</label>";
+                        echo "<label class='required'>Did the error reach the patient?  <span style='color:red;'>*</span></label>";
                         echo $this->Form->input('reach_patient', array(
                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'reach_patient',
                          'before' => '<div class="control-group"> 
@@ -267,7 +302,7 @@
                          'options' => array('No' => 'No'),
                         ));
 
-                        echo "<label class='required'>Was the correct medication, dose or dosage form administered to or taken by the patient?</label>";
+                        echo "<label class='required'>Was the correct medication, dose or dosage form administered to or taken by the patient? <span style='color:red;'>*</span></label>";
                         echo $this->Form->input('correct_medication', array(
                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'correct_medication',
                          'before' => '<div class="control-group"> 

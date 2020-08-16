@@ -2,7 +2,8 @@
 // $this->assign('NOT', 'active');
 
 	foreach ($notifications as $notification) {
-      echo '<div class="alert alert-'.$messages[$notification['Notification']['type']].'" id="'.$notification['Notification']['id'].'">';
+      $type = !empty($messages[$notification['Notification']['type']]) ? $messages[$notification['Notification']['type']] : 'info';
+      echo '<div class="alert alert-'.$type.'" id="'.$notification['Notification']['id'].'">';
       echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
       
         // pr($notification);

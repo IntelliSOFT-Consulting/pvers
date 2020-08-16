@@ -53,7 +53,7 @@
                 <div class="span8">
                     <?php
                         echo $this->Form->input('report_title', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'REPORT TITLE <span style="color:red;">*</span>'),
+                            'label' => array('class' => 'control-label required', 'text' => 'REPORT TITLE'),
                             'placeholder' => 'Report Title' , 
                             // 'after'=>'<p class="help-block" </p></div>',
                             'class' => 'span9',
@@ -81,7 +81,7 @@
                     <?php
 
                         echo $this->Form->input('name_of_institution', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'NAME OF INSTITUTION/ ORGANZIATION'),
+                            'label' => array('class' => 'control-label required', 'text' => 'NAME OF INSTITUTION/ ORGANZIATION <span style="color:red;">*</span>'),
                             'placeholder' => 'Name of Institution' ,
                         ));
 
@@ -106,7 +106,7 @@
 
                         echo $this->Form->input('county_id', array(
                                     'label' => array('class' => 'control-label required',
-                                    'text' => 'COUNTY'),
+                                    'text' => 'COUNTY <span style="color:red;">*</span>'),
                                     'empty' => true, 'between' => '<div class="controls ui-widget">',
                                 ));
 
@@ -115,7 +115,7 @@
             </div><!--/row-->
              <hr>
 
-            <h4 style="text-align: center; color: #884805;">PATIENT INFORMATION</h4>
+            <h5 style="text-align: center; color: #884805;">PATIENT INFORMATION</h5>
             <div class="row-fluid">
                 <div class="span6">
                     <?php
@@ -128,7 +128,7 @@
                     <?php
                         echo $this->Form->input('date_of_birth', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH'),));
                     ?>
-                    <h5 class="controls">--OR--</h5>
+                    <h5 class="controls"><span style="color:red;">*</span>--OR--</h5>
                     <?php
                         echo $this->Form->input('age_years', array('label' => array('class' => 'control-label required', 'text' => 'Age in years'), ));
 
@@ -243,7 +243,7 @@
             </div><!--/row-->
                 <hr>
 
-            <h4 style="text-align: center; color: #884805;">Device/In vitro Diagnostic information</h4>
+            <h5 style="text-align: center; color: #884805;">Device/In vitro Diagnostic information</h5>
             <div class="row-fluid">
                 <div class="span3">
                     <div class="required"> <label class="required" style="text-align: right;">1. PROBLEM NOTED PRIOR TO USE <span style="color:red;">*</span></label> </div>
@@ -279,7 +279,7 @@
                     <?php
 
                         echo $this->Form->input('brand_name', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'BRAND NAME/ COMMERCIAL NAME'),
+                            'label' => array('class' => 'control-label required', 'text' => 'BRAND NAME/ COMMERCIAL NAME <span style="color:red;">*</span>'),
                         ));
 
                         echo $this->Form->input('common_name', array(
@@ -290,7 +290,6 @@
 
                         echo $this->Form->input('device_model', array(
                             'label' => array('class' => 'control-label required', 'text' => 'MODEL'),
-                            'after'=>'<p class="help-block">    (self or nearest contact) </p></div>'
                         ));
 
                         echo $this->Form->input('manufacturer_name', array(
@@ -301,7 +300,7 @@
                 <div class="span6">
                     <?php
                         echo $this->Form->input('serial_no', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'SERIAL/ LOT NO.'),
+                            'label' => array('class' => 'control-label required', 'text' => 'SERIAL/ LOT NO. <span style="color:red;">*</span>'),
                         ));
 
                         echo $this->Form->input('catalogue', array(
@@ -313,12 +312,12 @@
                         ));
 
                         echo $this->Form->input('manufacture_date', array(
-                            'type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label required', 'text' => 'DEVICE MANUFACTURE DATE'),
+                            'type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label required', 'text' => 'DEVICE MANUFACTURE DATE <span style="color:red;">*</span>'),
                             'after'=>'<p class="help-block"> (dd-mm-yyyy) </p></div>'
                         ));
 
                         echo $this->Form->input('expiry_date', array(
-                            'type' => 'text', 'class' => 'date-pick-expire', 'label' => array('class' => 'control-label required', 'text' => 'EXPIRY DATE'),
+                            'type' => 'text', 'class' => 'date-pick-expire', 'label' => array('class' => 'control-label required', 'text' => 'EXPIRY DATE <span style="color:red;">*</span>'),
                             'after'=>'<p class="help-block"> (dd-mm-yyyy) </p></div>'
                         ));
                     ?>
@@ -599,7 +598,7 @@
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'serious',
                           'before' => '<div class="control-group ">   <label class="control-label required">
-                            Event classification </label>  <div class="controls">
+                            Event classification <span style="color:red;">*</span></label>  <div class="controls">
                             <input type="hidden" value="" id="DeviceUnavailability_" name="data[Device][serious]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Fatal' => 'Fatal'),
@@ -727,7 +726,7 @@
 
                         echo $this->Form->input('outcome', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-                            'before' => '<div class="control-group"> <label class="control-label required"> Patient Outcome </label> <input type="hidden" value="" id="DeviceOutcome_" name="data[Aefi][outcome]"> 
+                            'before' => '<div class="control-group"> <label class="control-label required"> Patient Outcome <span style="color:red;">*</span></label> <input type="hidden" value="" id="DeviceOutcome_" name="data[Device][outcome]"> 
                                 <div class="controls"> <label class="radio inline">',
                             'after' => '</label>',
                             'options' => array('Recovered' => 'Recovered'),
@@ -791,12 +790,12 @@
                                 array('label' => array('class' => 'control-label required', 'text' => 'DESIGNATION'.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone', array(
                             'div' => array('class' => 'control-group'),
-                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO. <span style="color:red;">*</span>')
                         ));
                         
                         echo $this->Form->input('reporter_date', array(
                             'type' => 'text', 'class' => 'date-pick-field',
-                            'label' => array('class' => 'control-label required', 'text' => 'Date'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Date <span style="color:red;">*</span>'),
                         ));
                     ?>
                 </div><!--/span-->
@@ -833,7 +832,7 @@
                     <?php
                         echo $this->Form->input('reporter_name_diff', array(
                             'div' => array('class' => 'control-group required'), 'class' => 'diff',
-                            'label' => array('class' => 'control-label required', 'text' => 'Name <span style="color:red;">*</span>'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Name of initial reporter<span style="color:red;">*</span>'),
                         ));
                         echo $this->Form->input('reporter_email_diff', array(
                             'type' => 'email',
@@ -853,7 +852,7 @@
                         ));                        
                         echo $this->Form->input('reporter_date_diff', array(
                             'type' => 'text', 'class' => 'date-pick-field diff', 
-                            'label' => array('class' => 'control-label required', 'text' => 'Date'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Date of Initial report'),
                         ));
                     ?>
                 </div><!--/span-->

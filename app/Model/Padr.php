@@ -165,12 +165,12 @@ class Padr extends AppModel {
             'atLeastYear' => array(
                 'rule'     => 'atLeastYear',
                 'allowEmpty' => true,
-                'message'  => 'Please specify date \ Year of onset of the reaction'
+                'message'  => 'Please specify when the side effect started.'
             ),
 			'greaterBirth' => array(
                 'rule'     => 'greaterBirth',
                 'allowEmpty' => true,
-                'message'  => 'The date / year of birth cannot be less than the date of birth of the patient'
+                'message'  => 'The date / year of birth cannot be less than the date the reaction started.'
             ),
         ),
 		'description_of_reaction' => array(

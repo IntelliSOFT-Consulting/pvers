@@ -19,7 +19,11 @@ $(function() {
 
       $('.date-pick-field').datepicker({
           minDate:"-100Y", maxDate:"0", 
-          dateFormat:'dd-mm-yy'
+          dateFormat:'dd-mm-yy', 
+          showButtonPanel:true, 
+          changeMonth:true, 
+          changeYear:true, 
+          showAnim:'show'
       });
 
     }

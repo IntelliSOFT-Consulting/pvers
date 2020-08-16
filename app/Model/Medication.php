@@ -190,11 +190,25 @@ class Medication extends AppModel {
                 'message'  => 'Please specify the patient\'s gender'
             ),
         ),
+        'date_of_birth' => array(
+            'ageOrDate' => array(
+                'rule'     => 'ageOrDate',
+                'allowEmpty' => true,
+                'message'  => 'Please specify the patient\'s date of birth or age in years'
+            ),
+        ),
         'description_of_error' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please describe the error'
+            ),
+        ),
+        'name_of_institution' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the name of the institution'
             ),
         ),
         'county_id' => array(
@@ -209,11 +223,25 @@ class Medication extends AppModel {
                 'message' => 'Please specify your designation',
             ),
         ),
+        'reach_patient' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Did the error reach the patient?'
+            ),
+        ),
         'process_occur' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'In which process did the error occur?'
+            ),
+        ),
+        'correct_medication' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Was the correct medication administered?'
             ),
         ),
         'reporter_name' => array(
@@ -231,6 +259,10 @@ class Medication extends AppModel {
             ),
         )
     );
+
+    public function ageOrDate($field = null) {
+        return !empty($field['date_of_birth']) || !empty($this->data['Medication']['age_years']);
+    }
 
 	public function beforeSave($options = array()) {
 

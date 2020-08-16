@@ -162,18 +162,25 @@ class Device extends AppModel {
 	);
 
     public $validate = array(
-        'report_title' => array(
-            'notBlank' => array(
-                'rule'     => 'notBlank',
-                'required' => true,
-                'message'  => 'Please provide a title for the report'
-            ),
-        ),
+        // 'report_title' => array(
+        //     'notBlank' => array(
+        //         'rule'     => 'notBlank',
+        //         'required' => true,
+        //         'message'  => 'Please provide a title for the report'
+        //     ),
+        // ),
         'patient_name' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a patient\'s name or initials'
+            ),
+        ),
+        'name_of_institution' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the name of the institution'
             ),
         ),
         'gender' => array(
@@ -188,6 +195,62 @@ class Device extends AppModel {
                 'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please specify the brand name'
+            ),
+        ),
+        'manufacturer_name' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the manufacturer'
+            ),
+        ),
+        'serial_no' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the serial/lot no.'
+            ),
+        ),
+        'manufacture_date' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the manufacture date'
+            ),
+        ),
+        'expiry_date' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the expiry date'
+            ),
+        ),
+        'date_onset_incident' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the date of onset of the incident'
+            ),
+        ),
+        'serious' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the event classification'
+            ),
+        ),
+        'outcome' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the patient outcome'
+            ),
+        ),
+        'date_of_birth' => array(
+            'ageOrDate' => array(
+                'rule'     => 'ageOrDate',
+                'allowEmpty' => true,
+                'message'  => 'Please specify the patient\'s date of birth or age in years'
             ),
         ),
         'county_id' => array(
@@ -216,6 +279,20 @@ class Device extends AppModel {
                 'message'  => 'Please provide the name of the reporter'
             ),
         ),
+        'reporter_date' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the date of the report'
+            ),
+        ),
+        'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the phone number of the reporter'
+            ),
+        ),
         'reporter_email' => array(
             'notBlank' => array(
                 'rule'     => 'email',
@@ -224,6 +301,10 @@ class Device extends AppModel {
             ),
         )
     );
+
+    public function ageOrDate($field = null) {
+        return !empty($field['date_of_birth']) || !empty($this->data['Device']['age_years']);
+    }
 
     public function beforeSave($options = array()) {
         if (!empty($this->data['Device']['explant_date'])) {

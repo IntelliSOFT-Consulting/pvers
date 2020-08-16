@@ -8,7 +8,7 @@
   <div class="row-fluid">
     <div class="span4">
       <h4><img alt="" src="/img/report.ico" style="width: 25px;">&nbsp;
-        <?php echo $this->Html->link('Reports', array('controller' => 'applications', 'action' => 'index')); ?></h4>
+        <?php //echo $this->Html->link('Reports', array('controller' => 'applications', 'action' => 'index')); ?></h4>
       <small class="muted">Filter, search and download reports</small>
       <ul class="nav nav-tabs nav-stacked">
 

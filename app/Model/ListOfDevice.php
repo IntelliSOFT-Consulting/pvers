@@ -24,4 +24,49 @@ class ListOfDevice extends AppModel {
 			'order' => ''
 		)
 	);
+
+	public $validate = array(
+		'brand_name' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the brand name'
+			),
+		),
+		'serial_no' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the serial/lot no.'
+			),
+		),
+		'common_name' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the common name'
+			),
+		),
+		'manufacturer' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the manufacturer'
+			),
+		),
+		'manufacture_date' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the date of manufacture'
+			),
+		),
+		'expiry_date' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the expiry date'
+			),
+		)
+	);
 }
