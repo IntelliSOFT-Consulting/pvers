@@ -24,8 +24,8 @@
                   <tr>
                     <th></th>
                     <th style="width: 35%"> <label class="required">Product Description</label></th>
-                    <th> <label>Product No. 1 (intended)</label></th>
-                    <th> Product No. 2 (error)</th>
+                    <th> <label class="required">Product No. 1 (intended) <span style="color:red;">*</span></label></th>
+                    <th> Product No. 2 (error) <span style="color:red;">*</span></th>
                     <th> # </th>
                   </tr>
                 </thead>

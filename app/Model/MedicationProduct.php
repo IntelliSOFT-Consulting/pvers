@@ -25,4 +25,20 @@ class MedicationProduct extends AppModel {
 		)
 	);
 
+	  public $validate = array(
+        'generic_name_i' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide product no. 1 (intended)'
+            ),
+        ),
+        'generic_name_ii' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide product no. 1 (error)'
+            ),
+        ),
+    );
 }

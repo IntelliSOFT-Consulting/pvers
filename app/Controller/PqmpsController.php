@@ -75,7 +75,7 @@ class PqmpsController extends AppController {
         if (!isset($this->passedArgs['submit'])) $criteria['Pqmp.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'Country');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
