@@ -229,9 +229,9 @@
 								'recovering/resolving' => 2,
 								'recovered/resolved with sequelae' => 3,
 								'not recovered/not resolved' => 4,
-								'fatal - unrelated to reaction' => 8,
-								'fatal - reaction may be contributory' => 7,
-								'fatal - due to reaction' => 5,
+								// 'fatal - unrelated to reaction' => 8,
+								// 'fatal - reaction may be contributory' => 7,
+								'fatal' => 5,
 								'unknown' => 6,
 							);
 				if (!empty($sadr['Sadr']['outcome'])) echo $outcomes[strtolower($sadr['Sadr']['outcome'])];

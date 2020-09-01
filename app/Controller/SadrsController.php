@@ -199,7 +199,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
 				'conditions' => array('Sadr.id' => $id),
-				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
 			));
         $this->set('sadr', $sadr);
 
@@ -223,7 +223,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
 				'conditions' => array('Sadr.id' => $id),
-				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
 			));
         $this->set('sadr', $sadr);
 
@@ -286,7 +286,7 @@ class SadrsController extends AppController {
 		if ($results->isOk()) {
 			$body = $results->body;
 			$this->Sadr->saveField('vigiflow_message', $body);
-			$resp = json_decode($body);
+			$resp = json_decode($body, true);
 			if(json_last_error() == JSON_ERROR_NONE) {
 				$this->Sadr->saveField('vigiflow_ref', $resp['MessageId']);
 			}

@@ -95,7 +95,7 @@
 				</div>
 				<div class="span6">	
 				<?php
-                    echo "<h4>Product category (Tick appropriate box)</h4>";
+                    echo "<h4>Product category (Tick appropriate box) <span style='color:red;'>*</span></h4>";
                     echo $this->Form->input('medicinal_product', array(
                     	'format' => array('error', 'before', 'label', 'between', 'input', 'after'),
                             'type' => 'checkbox',  'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
@@ -143,6 +143,8 @@
 						echo $this->Form->input('address', array(
 							'label' => array('class' => 'control-label', 'text' => 'ADDRESS <span style="color:red;">*</span>'),
 						));
+						echo $this->Form->input('institution_code', array('label' => array('class' => 'control-label',
+									'text' => 'INSTITUTION CODE'), ));
 
 					?>
 				</div><!--/span-->
@@ -160,8 +162,6 @@
 									'empty' => true, 'between' => '<div class="controls ui-widget">',
 								));
 						// print_r($sub_counties);
-						echo $this->Form->input('institution_code', array('label' => array('class' => 'control-label',
-									'text' => 'INSTITUTION CODE'), ));
 						echo $this->Form->input('contact', array('label' => array('class' => 'control-label', 'text' => 'INSTITUTION CONTACT'), ));
 					?>
 				</div><!--/span-->
@@ -474,7 +474,49 @@
                         echo $this->Form->input('lab_investigation', array(
                             'rows' => 2, 'label' => array('class' => 'control-label required', 'text' => 'Any lab investigations and results'),
                         ));
+
                     ?>
+                    <p class="required">Outcome <span style="color:red;">*</span></p>
+					<?php
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<div class="control-group"> <input type="hidden" value="" id="SadrOutcome_" name="data[Sadr][outcome]"> <label class="radio inline">',
+							'after' => '</label>',
+							'options' => array('recovered/resolved' => 'Recovered/resolved'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio inline">',	'after' => '</label>',
+							'options' => array('recovering/resolving' => 'Recovering/resolving'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio inline">',	'after' => '</label>',
+							'options' => array('recovered/resolved with sequelae' => 'Recovered/resolved with sequelae'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio inline">',	'after' => '</label>',
+							'options' => array('not recovered/not resolved' => 'Not recovered/not resolved'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
+							'before' => '<label class="radio inline">',	'after' => '</label>',
+							'options' => array('fatal' => 'Fatal'),
+						));
+						echo $this->Form->input('outcome', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'outcome',
+							'format' => array('before', 'label', 'between', 'input','error', 'after'),
+							'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+							'before' => '<label class="radio inline">',
+							'after' => '</label>
+								<a class="button"
+										onclick="$(\'.outcome\').removeAttr(\'checked\');" >
+										<em class="accordion-toggle">clear!</em></a>
+							</div>',
+							'options' => array('Unknown' => 'Unknown'),
+						));
+					?>
             	</div>
             	<div class="span6">            		
             		<h5 style="color: #884805;">Grading of the reaction /event</h5>
@@ -626,57 +668,7 @@
 						));
 					?>
 
-					<p class="required">Outcome <span style="color:red;">*</span></p>
-					<?php
-						echo $this->Form->input('outcome', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<div class="control-group"> <input type="hidden" value="" id="SadrOutcome_" name="data[Sadr][outcome]"> <label class="radio inline">',
-							'after' => '</label>',
-							'options' => array('recovered/resolved' => 'Recovered/resolved'),
-						));
-						echo $this->Form->input('outcome', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<label class="radio inline">',	'after' => '</label>',
-							'options' => array('recovering/resolving' => 'Recovering/resolving'),
-						));
-						echo $this->Form->input('outcome', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<label class="radio inline">',	'after' => '</label>',
-							'options' => array('recovered/resolved with sequelae' => 'Recovered/resolved with sequelae'),
-						));
-						echo $this->Form->input('outcome', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<label class="radio inline">',	'after' => '</label>',
-							'options' => array('not recovered/not resolved' => 'Not recovered/not resolved'),
-						));
-						echo $this->Form->input('outcome', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<label class="radio inline">',	'after' => '</label>',
-							'options' => array('fatal - unrelated to reaction' => 'Fatal - unrelated to reaction'),
-						));
-						echo $this->Form->input('outcome', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<label class="radio inline">',	'after' => '</label>',
-							'options' => array('fatal - reaction may be contributory' => 'Fatal - reaction may be contributory'),
-						));
-						echo $this->Form->input('outcome', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<label class="radio inline">',	'after' => '</label>',
-							'options' => array('fatal - due to reaction' => 'Fatal - due to reaction'),
-						));
-						echo $this->Form->input('outcome', array(
-							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'outcome',
-							'format' => array('before', 'label', 'between', 'input','error', 'after'),
-							'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
-							'before' => '<label class="radio inline">',
-							'after' => '</label>
-								<a class="button"
-										onclick="$(\'.outcome\').removeAttr(\'checked\');" >
-										<em class="accordion-toggle">clear!</em></a>
-							</div>',
-							'options' => array('Unknown' => 'Unknown'),
-						));
-					?>
+					
             	</div>
             </div>
 
