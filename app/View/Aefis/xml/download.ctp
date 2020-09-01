@@ -5,16 +5,18 @@
         <messagetype>ichicsr</messagetype>
         <messageformatversion>2.1</messageformatversion>
         <messageformatrelease>2.0</messageformatrelease>
-        <messagenumb>999999</messagenumb>
+        <messagenumb>KE-PPB-<?php
+            echo date('Y').'-'.$aefi['Aefi']['id'];
+        ?></messagenumb>
         <messagesenderidentifier>PPB</messagesenderidentifier>
-        <messagereceiveridentifier/>
+        <messagereceiveridentifier>KE</messagereceiveridentifier>
         <messagedateformat>204</messagedateformat>
         <messagedate><?php echo date('YmdHis');?></messagedate>
     </ichicsrmessageheader>
      <safetyreport>
         <safetyreportversion>1</safetyreportversion>
         <safetyreportid>KE-PPB-<?php
-            echo $aefi['Aefi']['id'];
+            echo $aefi['Aefi']['reference_no'];
         ?></safetyreportid>
         <primarysourcecountry>KE</primarysourcecountry>
         <occurcountry>KE</occurcountry>
@@ -22,20 +24,20 @@
         <transmissiondate/>
         <reporttype>1</reporttype>
         <serious><?php
-                if ($aefi['Aefi']['outcome'] == 'Died') {
+                if ($aefi['Aefi']['serious'] == 'Yes') {
                     echo 1;
                 } else { echo 2;}
             ?></serious>
-        <seriousnessdeath><?php   echo ($aefi['Aefi']['outcome'] == 'Died') ? 1 : 0; ?></seriousnessdeath>
-        <seriousnesslifethreatening><?php   echo ($aefi['Aefi']['anaphylaxis'] || $aefi['Aefi']['meningitis'] || $aefi['Aefi']['convulsion']) ? 1 : 0; ?></seriousnesslifethreatening>
-        <seriousnesshospitalization><?php   echo ($aefi['Aefi']['bcg'] || $aefi['Aefi']['high_fever'] || $aefi['Aefi']['local_reaction']) ? 1 : 0; ?></seriousnesshospitalization>
-        <seriousnessdisabling><?php   echo ($aefi['Aefi']['toxic_shock'] || $aefi['Aefi']['paralysis']) ? 1 : 0; ?></seriousnessdisabling>
-        <seriousnesscongenitalanomali><?php   echo ($aefi['Aefi']['urticaria']) ? 1 : 0; ?></seriousnesscongenitalanomali>
-        <seriousnessother><?php   echo ($aefi['Aefi']['abscess'] || $aefi['Aefi']['complaint_other']) ? 1 : 0; ?></seriousnessother>
+        <seriousnessdeath><?php   echo ($aefi['Aefi']['serious_yes'] == 'Death') ? 1 : 0; ?></seriousnessdeath>
+        <seriousnesslifethreatening><?php echo ($aefi['Aefi']['serious_yes'] == 'Life threatening') ? 1 : 0; ?></seriousnesslifethreatening>
+        <seriousnesshospitalization><?php echo ($aefi['Aefi']['serious_yes'] == 'Missing cost or prolonged hospitalization') ? 1 : 0; ?></seriousnesshospitalization>
+        <seriousnessdisabling><?php echo ($aefi['Aefi']['serious_yes'] == 'Persistent or significant disability') ? 1 : 0; ?></seriousnessdisabling>
+        <seriousnesscongenitalanomali><?php   echo ($aefi['Aefi']['serious_yes'] == 'Congenital anomaly') ? 1 : 0; ?></seriousnesscongenitalanomali>
+        <seriousnessother><?php   echo ($aefi['Aefi']['serious_yes'] == 'Other important medical event') ? 1 : 0; ?></seriousnessother>
         <receivedateformat>102</receivedateformat>
         <receivedate><?php echo date('Ymd', strtotime($aefi['Aefi']['created'])); ?></receivedate>
         <receiptdateformat>102</receiptdateformat>
-        <receiptdate><?php echo date('Ymd'); ?></receiptdate>
+        <receiptdate><?php echo date('Ymd', strtotime($aefi['Aefi']['created'])); ?></receiptdate>
         <additionaldocument><?php
             if (isset($aefi['Aefi']['attachments']) && count($aefi['Aefi']['attachments']) > 0) {
                 echo 1;
@@ -51,28 +53,22 @@
             }
         ?></documentlist>
         <fulfillexpeditecriteria><?php
-            if ($aefi['Aefi']['outcome'] == 'Died') {
+            if ($aefi['Aefi']['serious_yes'] == 'Death') {
                 echo 1;
             } else { echo 2;}
         ?></fulfillexpeditecriteria>
         <authoritynumb>KE-PPB-<?php
-            echo $aefi['Aefi']['id'];
+            echo $aefi['Aefi']['reference_no'];
         ?></authoritynumb>
         <companynumb/>
         <duplicate/>
         <casenullification/>
         <nullificationreason/>
         <medicallyconfirm><?php
-            if ($aefi['Aefi']['designation_id'] == 1 || $aefi['Aefi']['designation_id'] == 2 || $aefi['Aefi']['designation_id'] == 3  ) {
+            if (!in_array($aefi['Aefi']['designation_id'], [26, 27])) {
                 echo 1;
             } else { echo 2;}
-        ?></medicallyconfirm>        
-        <reportduplicate>
-            <duplicatesource></duplicatesource>
-            <duplicatenumb>KE-PPB-<?php
-                echo $aefi['Aefi']['id'];
-            ?></duplicatenumb>
-        </reportduplicate>
+        ?></medicallyconfirm> 
         <?php $arr = preg_split("/[\s]+/", $aefi['Aefi']['reporter_name']); ?>
         <primarysource>
             <reportergivename><?php if (isset($arr[0])) echo $arr[0]; ?></reportergivename>
@@ -84,15 +80,7 @@
             <reporterstate/>
             <reporterpostcode/>
             <reportercountry>KE</reportercountry>
-            <qualification>
-                <?php 
-                    $desg = [1 => 1, 2 => 1, 3 => 3, 4 => 2, 5 => 3, 6 => 2, 7 => 3, 8 => 1, 9 => 1, 10 => 1, 11 => 1, 12 => 1, 
-                             13 => 1, 14 => 1, 15 => 1, 16 => 1, 17 => 1, 18 => 1, 19 => 3, 20 => 1, 21 => 5, 22 => 5, 23 => 3, 
-                          ];
-                    // echo $desg[($aefi['Aefi']['designation_id']) ?? 3]; 
-                    echo 3;
-                ?>
-            </qualification>
+            <qualification><?php echo $aefi['Designation']['category']; ?></qualification>
             <literaturereference/>
             <studyname/>
             <sponsorstudynumb/>
@@ -223,20 +211,20 @@
                     if($aefi['Aefi']['urticaria']) echo 'Generalized urticaria, '; 
                     ?>                 
                 </primarysourcereaction>
-                <reactionmeddraversionllt>WHO-ART</reactionmeddraversionllt>
-                <reactionmeddrallt><?php echo $aefi['Aefi']['description_of_reaction']; ?></reactionmeddrallt>
+                <reactionmeddraversionllt>23.0</reactionmeddraversionllt>
+                <reactionmeddrallt><?php echo $aefi['Aefi']['aefi_symptoms']; ?></reactionmeddrallt>
                 <reactionmeddraversionpt/>
                 <reactionmeddrapt/>
                 <termhighlighted/>
                 <?php
 
-                    // if (!empty($aefi['Aefi']['aefi_date'])) {
-                    //     echo "<reactionstartdateformat>102</reactionstartdateformat>";
-                    //     echo "<reactionstartdate>".date('Ymd', strtotime($aefi['Aefi']['aefi_date']))."</reactionstartdate>";
-                    // } else {
-                    //     echo "<reactionstartdateformat/>
-                    //           <reactionstartdate/>";
-                    // }
+                    if (!empty($aefi['Aefi']['date_aefi_started'])) {
+                        echo "<reactionstartdateformat>102</reactionstartdateformat>";
+                        echo "<reactionstartdate>".date('Ymd', strtotime($aefi['Aefi']['date_aefi_started']))."</reactionstartdate>";
+                    } else {
+                        echo "<reactionstartdateformat/>
+                              <reactionstartdate/>";
+                    }
 
                 ?>
                 
@@ -249,10 +237,11 @@
                 <reactionlasttime/>
                 <reactionlasttimeunit/>
                 <reactionoutcome><?php
-                $outcomes =  ['Recovered' => 1, 
-                              'Recovering' => 2, 
-                              'Not recovered' => 4, 
-                              'Died' => 5, 
+                $outcomes =  ['Recovered/Resolved' => 1, 
+                              'Recovering/Resolving' => 2, 
+                              'Recovered/Resolved with sequelae' => 3,
+                              'Not recovered/Not resolved/Ongoing' => 4, 
+                              'Fatal' => 5, 
                               'Unknown' => 6];
                 if (!empty($aefi['Aefi']['outcome']) && isset($outcomes[$aefi['Aefi']['outcome']])) echo $outcomes[$aefi['Aefi']['outcome']];
                 ?></reactionoutcome>
@@ -301,8 +290,8 @@
                     <activesubstancename><?php echo $listOfVaccine['vaccine_name']; ?></activesubstancename>
                 </activesubstance>
                 <drugreactionrelatedness>
-                    <drugreactionassesmeddraversion>WHO-ART</drugreactionassesmeddraversion>
-                    <drugreactionasses><?php echo $aefi['Aefi']['description_of_reaction']; ?></drugreactionasses>
+                    <drugreactionassesmeddraversion>23.0</drugreactionassesmeddraversion>
+                    <drugreactionasses><?php echo $aefi['Aefi']['aefi_symptoms']; ?></drugreactionasses>
                     <drugassessmentsource/>
                     <drugassessmentmethod/>
                     <drugresult/>
@@ -312,7 +301,7 @@
             <summary>
                 <narrativeincludeclinical><?php echo $aefi['Aefi']['description_of_reaction']; ?></narrativeincludeclinical>
                 <reportercomment/>
-                <senderdiagnosismeddraversion>WHO-ART</senderdiagnosismeddraversion>
+                <senderdiagnosismeddraversion>23.0</senderdiagnosismeddraversion>
                 <senderdiagnosis><?php echo $aefi['Aefi']['medical_history']; ?></senderdiagnosis>
                 <sendercomment/>
             </summary>

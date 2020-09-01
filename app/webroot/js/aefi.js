@@ -11,6 +11,10 @@
 	});
 	if($("#AefiComplaintOther").is(':checked')){ $("#AefiComplaintOtherSpecify").attr('disabled', false); }
 
+	$("#AefiAefiSymptoms").autocomplete({
+			source: "/meddras/autocomplete.json"
+	});
+	
     var cache2 = {},	lastXhr;
 	$( "#AefiInstitutionCode" ).autocomplete({
 		source: function( request, response ) {

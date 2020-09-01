@@ -16,36 +16,6 @@ class AefisController extends AppController {
     public $presetVars = true;
     public $page_options = array('25' => '25', '50' => '50', '100' => '100');
 
-
-    /*public function beforeFilter() {
-        parent::beforeFilter();
-        // add auth effectively to views
-        $this->Auth->allow('index', 'add', 'edit','view', 'find', 'download');
-        $this->Security->blackHoleCallback = 'blackhole';
-        if ($this->RequestHandler->isXml() || $this->RequestHandler->isAjax() || $this->request->params['action'] == 'edit')  $this->Security->csrfCheck = false;
-    }
-
-    public function blackhole($type) {
-        $this->Session->setFlash(__('Sorry! The page has expired due to a '.$type.' error. Please refresh the page.'), 'flash_error');
-        $this->redirect($this->referer());
-    }*/
-
-    public function vigiflowlink($id = null) {
-        $this->Aefi->id = $this->Aefi->Luhn_Verify($this->request->data['Aefi']['id']);
-        if ($this->Aefi->exists()) {
-            $this->set('message', 'The report '.$id.' does not exist');
-            $this->set('_serialize', 'message');
-        }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Aefi->saveField('vigiflow_id', $this->request->data['Aefi']['vigiflow_id'])) {
-                $this->set('message', $this->request->data['Aefi']['vigiflow_id']);
-                $this->set('_serialize', 'message');
-            } else {
-                $this->set('message', 'Could not save '.$this->request->data['Aefi']['vigiflow_id']);
-                $this->set('_serialize', 'message');
-            }
-        }
-    }
 /**
  * index method
  */
@@ -279,25 +249,70 @@ class AefisController extends AppController {
  * download methods
  */
     public function download($id = null) {
-        $this->Aefi->id = $this->Aefi->Luhn_Verify($id);
+        $this->Aefi->id = $id;
         if (!$this->Aefi->exists()) {
-            $this->Session->setFlash(__('Could not verify the medical devices report ID. Please ensure the ID is correct.'), 'flash_error');
-            $this->redirect(array('action' => 'add'));
+            $this->Session->setFlash(__('Could not verify the AEFI report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
         }
-        $aefi = $this->Aefi->read(null);
+
+        $aefi = $this->Aefi->find('first', array(
+                'conditions' => array('Aefi.id' => $id),
+                'contain' => array('AefiListOfVaccine', 'Attachment', 'Designation')
+            ));
         $aefi = Sanitize::clean($aefi, array('escape' => true));
         $this->set('aefi', $aefi);
-        //if(!$aefi['Aefi']['vigiflow_id']) {
-            if ($this->RequestHandler->isXml()) {
-                $this->Aefi->saveField('submitted', 3);
-            }
-            $this->response->download('AEFI_'.$aefi['Aefi']['id']);
-        //} else {
-        //  $this->Session->setFlash(__('The report could not be exported to E2B. It is already linked with a vigiflow ID'), 'flash_error');
-        //  $this->redirect($this->referer());
-        //}
+        $this->response->download('AEFI_'.$aefi['Aefi']['id']);
     }
 
+    public function vigiflow($id = null) {
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            $this->Session->setFlash(__('Could not verify the AEFI report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        $aefi = $this->Aefi->find('first', array(
+                'conditions' => array('Aefi.id' => $id),
+                'contain' => array('AefiListOfVaccine', 'County', 'Attachment', 'Designation')
+            ));
+        $aefi = Sanitize::clean($aefi, array('escape' => true));
+
+        $view = new View($this,false);
+        $view->viewPath='Aefis/xml';  // Directory inside view directory to search for .ctp files
+        $view->layout=false; // if you want to disable layout
+        $view->set('aefi', $aefi); // set your variables for view here
+        $html=$view->render('download'); 
+
+        // debug($html);
+        $HttpSocket = new HttpSocket();
+        // string data
+        $results = $HttpSocket->post(
+            'https://api.who-umc.org/demo/vigiflow/icsrs',
+            $html,
+            array('header' => array('umc-client-key' => '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'))
+        );
+
+        // debug($results->code);
+        // debug($results->body);
+        if ($results->isOk()) {
+            $body = $results->body;
+            $this->Aefi->saveField('vigiflow_message', $body);
+            $resp = json_decode($body, true);
+            if(json_last_error() == JSON_ERROR_NONE) {
+                $this->Aefi->saveField('vigiflow_ref', $resp['MessageId']);
+            }
+            $this->Flash->success('Vigiflow integration success!!');
+            $this->Flash->success($body);
+            $this->redirect($this->referer());
+        } else {
+            $body = $results->body;
+            $this->Aefi->saveField('vigiflow_message', $body);
+            $this->Flash->error('Error sending report to vigiflow:');
+            $this->Flash->error($body);
+            $this->redirect($this->referer());
+        }
+        $this->autoRender = false ;
+    }
 /**
  * add method
  *

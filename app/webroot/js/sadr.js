@@ -36,6 +36,10 @@ $(document).ready(function() {
 	});
 	if($('input[name="data[Sadr][serious]"][value="No"]').is(':checked')){ $('input[name="data[Sadr][serious_reason]"]').attr('disabled', true).attr('checked', false); }
 
+	$("#SadrReportTitle").autocomplete({
+			source: "/meddras/autocomplete.json"
+	});
+
 	var cache2 = {},	lastXhr;
 	$( "#SadrInstitutionCode" ).autocomplete({
 		source: function( request, response ) {

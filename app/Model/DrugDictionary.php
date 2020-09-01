@@ -17,7 +17,7 @@ class DrugDictionary extends AppModel {
 		if (($suggestions = Cache::read($query.$generic, 'drugs')) === false) {
 			$suggestions = $this->find('all', array(
 				'fields' => array('DISTINCT DrugDictionary.drug_name'),
-				'limit' => 10,
+				'limit' => 20,
 				'conditions' => array('DrugDictionary.drug_name LIKE' => '%'.$query.'%', 'DrugDictionary.generic' => $generic),
 				'recursive' => -1,
 			));

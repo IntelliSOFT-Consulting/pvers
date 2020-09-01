@@ -300,7 +300,7 @@
                                 'label' => array('class' => 'required', 'text' => 'Describe AEFI <span style="color:red;">*</span>'),
                                 'between' => false, 'div' => false,
                                 'after'=>'<p class="help-block">  (Signs & Symptoms) </p>',
-                                'class' => 'span12'
+                                'class' => 'span12', 'rows' => '1'
                             ));
                     ?>
                 </div>
