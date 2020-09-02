@@ -27,7 +27,7 @@
 		</div> <!-- /span5 -->
 
 		<div class="span10 columns">
-				<?php
+				<?php /*
 					echo $this->Form->create('Feedback', array(
 						'url' => array_merge(array('action' => 'admin_index'), $this->params['pass']),
 						'class' => 'well',
@@ -81,7 +81,7 @@
 						?>
 					</div>
 				</div>
-			<?php echo $this->Form->end(); ?>
+			<?php echo $this->Form->end(); */ ?>
 
 				<div class="row-fluid">
 					<?php
@@ -113,8 +113,6 @@
 								<th><?php echo $this->Paginator->sort('id');?></th>
 								<th><?php echo $this->Paginator->sort('email', "Email / Phone No.");?></th>
 								<th><?php echo $this->Paginator->sort('feedback', "Message");?></th>
-								<th><?php echo $this->Paginator->sort('sadr_id');?></th>
-								<th><?php echo $this->Paginator->sort('pqmp_id');?></th>
 								<th><?php echo $this->Paginator->sort('created');?></th>
 								<th><?php echo __('Actions');?></th>
 							</tr>
@@ -128,16 +126,6 @@
 								<td><?php echo h($feedback['Feedback']['id']); ?>&nbsp;</td>
 								<td><?php echo h($feedback['Feedback']['email']); ?>&nbsp;</td>
 								<td><?php echo h($feedback['Feedback']['feedback']); ?>&nbsp;</td>
-								<td><?php
-									if($feedback['Feedback']['sadr_id']) echo $this->Html->link('<span class="label label-info tooltipper" title="View">'.$feedback['Feedback']['sadr_id'].' </span>' ,
-												array('controller' => 'sadrs', 'action' => 'view', $feedback['Feedback']['sadr_id']),
-												array('escape' => false, 'target' => '_blank'));
-									?>&nbsp;</td>
-								<td><?php
-									if($feedback['Feedback']['pqmp_id']) echo $this->Html->link('<span class="label label-info tooltipper" title="View">'.$feedback['Feedback']['pqmp_id'].' </span>' ,
-												array('controller' => 'pqmps', 'action' => 'view', $feedback['Feedback']['pqmp_id']),
-												array('escape' => false, 'target' => '_blank'));
-									?>&nbsp;</td>
 								<td><?php echo h($feedback['Feedback']['created']); ?>&nbsp;</td>
 								<td>
 									<?php echo $this->Html->link('<span class="label label-success tooltipper" title="View"><i class="icon-plus-sign icon-white"></i> </span>',

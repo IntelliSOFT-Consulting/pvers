@@ -504,18 +504,18 @@ class UsersController extends AppController {
     public function partner_dashboard() {
         $sadrs = $this->User->Sadr->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created'),
+            'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created', 'Sadr.serious'),
             'order' => array('Sadr.created' => 'desc'),
-            'conditions' => array('Sadr.submitted >' => 1),
+            'conditions' => array('Sadr.user_id' => $this->Auth->User('id')),
         ));
         $this->set('sadrs', $sadrs);        
 
         $aefis = $this->User->Aefi->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created'),
+            'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
             'contain' => array('AefiListOfVaccine'),
             'order' => array('Aefi.created' => 'desc'),
-            'conditions' => array('Aefi.submitted >' => 1),
+            'conditions' => array('Aefi.user_id' => $this->Auth->User('id')),
         ));
         $this->set('aefis', $aefis);        
 
@@ -523,15 +523,15 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Pqmp.id','Pqmp.user_id', 'Pqmp.created', 'Pqmp.submitted', 'Pqmp.brand_name', 'Pqmp.reference_no', 'Pqmp.created'),
             'order' => array('Pqmp.created' => 'desc'),
-            'conditions' => array('Pqmp.submitted >' => 1),
+            'conditions' => array('Pqmp.user_id' => $this->Auth->User('id')),
         ));
         $this->set('pqmps', $pqmps);        
 
         $devices = $this->User->Device->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created'),
+            'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created', 'Device.serious'),
             'order' => array('Device.created' => 'desc'),
-            'conditions' => array('Device.submitted >' => 1),
+            'conditions' => array('Device.user_id' => $this->Auth->User('id')),
         ));
         $this->set('devices', $devices);        
 
@@ -539,15 +539,15 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.created', 'Medication.reference_no', 'Medication.created'),
             'order' => array('Medication.created' => 'desc'),
-            'conditions' => array('Medication.submitted >' => 1),
+            'conditions' => array('Medication.user_id' => $this->Auth->User('id')),
         ));
         $this->set('medications', $medications);        
 
         $transfusions = $this->User->Transfusion->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Transfusion.id','Transfusion.user_id', 'Transfusion.reference_no', 'Transfusion.submitted', 'Transfusion.created', 'Transfusion.created'),
+            'fields' => array('Transfusion.id','Transfusion.user_id', 'Transfusion.reference_no', 'Transfusion.diagnosis', 'Transfusion.submitted', 'Transfusion.created', 'Transfusion.created'),
             'order' => array('Transfusion.created' => 'desc'),
-            'conditions' => array('Transfusion.submitted >' => 1),
+            'conditions' => array('Transfusion.user_id' => $this->Auth->User('id')),
         ));
         $this->set('transfusions', $transfusions);        
 

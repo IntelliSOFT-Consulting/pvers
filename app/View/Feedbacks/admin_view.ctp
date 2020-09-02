@@ -65,32 +65,6 @@
 					</div>
 				</div><!--/row-->
 				<hr>
-
-				<div class="row-fluid">
-					<div class="span6">
-						<div class="control-group">
-							<label class="control-label required" for="SadrDescriptionOfReaction"><strong>SADR ID:</strong></label>
-							<div class="control-label">
-								<?php  echo $this->Html->link($feedback['Feedback']['sadr_id'] ,
-									array('controller' => 'sadrs', 'action' => 'view', $feedback['Feedback']['sadr_id']),
-											array('escape' => false, 'target' => '_blank')); ?>
-							</div>
-						</div>
-					</div>
-
-					<div class="span6">
-						<div class="control-group">
-							<label class="control-label required" for="SadrDescriptionOfReaction"><strong>PQMP ID:</strong></label>
-							<div class="control-label">
-								<?php  echo $this->Html->link($feedback['Feedback']['pqmp_id'] ,
-									array('controller' => 'pqmps', 'action' => 'view', $feedback['Feedback']['pqmp_id']),
-											array('escape' => false, 'target' => '_blank')); ?>
-							</div>
-						</div>
-					</div>
-
-				</div><!--/row-->
-				<hr>
 			</div>
 		  </div>
 	</div>

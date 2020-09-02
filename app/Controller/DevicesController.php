@@ -134,7 +134,7 @@ class DevicesController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
 
@@ -157,7 +157,7 @@ class DevicesController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
     }
@@ -170,7 +170,7 @@ class DevicesController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
 
@@ -192,7 +192,7 @@ class DevicesController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
     }
@@ -205,7 +205,7 @@ class DevicesController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
 
@@ -214,7 +214,7 @@ class DevicesController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
     }
@@ -232,11 +232,11 @@ class DevicesController extends AppController {
         $this->set('device', $device);
         // $this->render('pdf/view');
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
         }
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'DEVICE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
             $this->render('view');
         }

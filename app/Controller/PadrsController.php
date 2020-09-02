@@ -88,7 +88,7 @@ class PadrsController extends AppController {
         $this->set('padr', $this->Padr->find('first', $options));
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'PADR_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'PADR_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('PADR_'.str_replace($padr['Padr']['reference_no'], '/', '_').'.pdf');
         }
     }
@@ -104,7 +104,7 @@ class PadrsController extends AppController {
 		$this->set('padr', $this->Padr->find('first', $options));
 
 		if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'PADR_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'PADR_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('PADR_'.str_replace($padr['Padr']['reference_no'], '/', '_').'.pdf');
         }
 	}

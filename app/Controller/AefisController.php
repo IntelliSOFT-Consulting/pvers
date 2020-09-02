@@ -111,7 +111,7 @@ class AefisController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
         }
 
@@ -134,7 +134,7 @@ class AefisController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
         }
     }
@@ -169,7 +169,7 @@ class AefisController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
         }
     }
@@ -182,7 +182,7 @@ class AefisController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
         }
 
@@ -191,7 +191,7 @@ class AefisController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
         }
     }
@@ -209,11 +209,11 @@ class AefisController extends AppController {
         $this->set('aefi', $aefi);
         // $this->render('pdf/view');
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
         }
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
             $this->render('view');
         }

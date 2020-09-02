@@ -25,20 +25,6 @@
 									array('escape' => false)); ?>
 					  </li>					 
 					  <li class="divider"></li>
-					  <li class="nav-header">Permissions</li>
-						<li>
-							<?php echo $this->Html->link('<i class="icon-tag"></i> User Roles', array('plugin' => 'acl', 'controller' => 'aros', 'action' => 'users', 'admin' => true ),
-								array('escape' => false)); ?> 
-						</li>
-						<li>
-							<?php echo $this->Html->link('<i class="icon-tag"></i> Roles Permissions', array('plugin' => 'acl', 'controller' => 'aros', 'action' => 'ajax_role_permissions', 'admin' => true ),
-								array('escape' => false)); ?> 
-						</li>
-						<li>
-							<?php echo $this->Html->link('<i class="icon-tag"></i> User Permissions', 
-								array('plugin' => 'acl', 'controller' => 'aros', 'action' => 'user_permissions', 'admin' => true ),
-								array('escape' => false)); ?> 
-						</li>
 					</ul>
 				  </div> <!-- /well -->					  
 			</div><!--/span-->

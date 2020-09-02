@@ -124,7 +124,7 @@ class TransfusionsController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
         }
 
@@ -146,7 +146,7 @@ class TransfusionsController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
         }
     }
@@ -159,7 +159,7 @@ class TransfusionsController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
         }
 
@@ -168,7 +168,7 @@ class TransfusionsController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
         }
     }

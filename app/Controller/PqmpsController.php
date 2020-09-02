@@ -165,7 +165,7 @@ class PqmpsController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'PQMP_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'PQMP_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
         }
 
@@ -187,7 +187,7 @@ class PqmpsController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'PQMP_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'PQMP_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
         }
     }
@@ -200,7 +200,7 @@ class PqmpsController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'PQMP_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'PQMP_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
         }
 
@@ -209,7 +209,7 @@ class PqmpsController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'PQMP_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'PQMP_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
         }
     }

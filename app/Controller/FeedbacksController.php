@@ -64,6 +64,14 @@ class FeedbacksController extends AppController {
 		$this->set('feedback', $this->Feedback->read(null, $id));
 	}
 
+	public function admin_view($id = null) {
+		$this->Feedback->id = $id;
+		if (!$this->Feedback->exists()) {
+			throw new NotFoundException(__('Invalid feedback'));
+		}
+		$this->set('feedback', $this->Feedback->read(null, $id));
+	}
+
 /**
  * add method
  *

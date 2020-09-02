@@ -180,7 +180,7 @@ class SadrsController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'SADR_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'SADR_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('SADR_'.$sadr['Sadr']['id'].'.pdf');
         }
 
@@ -204,7 +204,7 @@ class SadrsController extends AppController {
         $this->set('sadr', $sadr);
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'SADR_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'SADR_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('SADR_'.$sadr['Sadr']['id'].'.pdf');
         }
     }
@@ -217,7 +217,7 @@ class SadrsController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'SADR_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'SADR_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('SADR_'.$sadr['Sadr']['id'].'.pdf');
         }
 
@@ -229,7 +229,7 @@ class SadrsController extends AppController {
 
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'SADR_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'SADR_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('SADR_'.$sadr['Sadr']['id'].'.pdf');
         }
     }

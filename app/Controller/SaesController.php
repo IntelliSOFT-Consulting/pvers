@@ -60,7 +60,7 @@ class SaesController extends AppController {
             )
         ));
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'SAE_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'SAE_' . $id .'.pdf',  'orientation' => 'portrait');
         }
     }
 }

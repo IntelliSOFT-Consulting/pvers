@@ -13,8 +13,8 @@ class Route extends AppModel {
 
 	public $validate = array(
 		'icsr_code' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+			'notBlank' => array(
+				'rule' => array('notBlank'),
 				'message' => 'ICSR CODE Required',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -28,15 +28,15 @@ class Route extends AppModel {
 			),
 		),
 		'value' => array(
-            'notEmpty' => array(
-                'rule'     => 'notEmpty',
+            'notBlank' => array(
+                'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a value'
             ),
         ),
 		'name' => array(
-            'notEmpty' => array(
-                'rule'     => 'notEmpty',
+            'notBlank' => array(
+                'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a name'
             ),

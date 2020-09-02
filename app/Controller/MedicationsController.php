@@ -129,7 +129,7 @@ class MedicationsController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
         }
 
@@ -151,7 +151,7 @@ class MedicationsController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
         }
     }
@@ -164,7 +164,7 @@ class MedicationsController extends AppController {
         }
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id .'.pdf',  'orientation' => 'portrait');
             // $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
         }
 
@@ -173,7 +173,7 @@ class MedicationsController extends AppController {
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id,  'orientation' => 'portrait');
+            $this->pdfConfig = array('filename' => 'MEDICATION_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
         }
     }
