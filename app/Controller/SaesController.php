@@ -37,6 +37,13 @@ class SaesController extends AppController {
         $this->set('saes', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
     
+    private function csv_export($csaes = ''){
+        $this->response->download('SAEs_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->set(compact('csaes'));
+        $this->layout = false;
+        $this->render('csv_export');
+    }
+
     public function manager_view($id = null) {
         $this->Sae->id = $id;
         if (!$this->Sae->exists()) {
@@ -48,7 +55,7 @@ class SaesController extends AppController {
         }
 
         $this->set('sae', $this->Sae->find('first', array(
-            'contain' => array('SuspectedDrug', 'ConcomittantDrug'),
+            'contain' => array('SuspectedDrug', 'SuspectedDrug.Route', 'ConcomittantDrug', 'ConcomittantDrug.Route'),
             'conditions' => array('Sae.id' => $id)
             )
         ));
