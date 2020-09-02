@@ -659,6 +659,38 @@ class SadrsController extends AppController {
 		$this->set(compact('dose'));
     }
 
+    public function manager_copy($id = null) {
+        if ($this->request->is('post')) {
+            $this->Sadr->id = $id;
+            if (!$this->Sadr->exists()) {
+                throw new NotFoundException(__('Invalid SADR'));
+            }
+            $sadr = Hash::remove($this->Sadr->find('first', array(
+                        'contain' => array('SadrListOfDrug', 'SadrListOfMedicine'),
+                        'conditions' => array('Sadr.id' => $id)
+                        )
+                    ), 'Sadr.id');
+
+            $sadr = Hash::remove($sadr, 'SadrListOfDrug.{n}.id');
+            $sadr = Hash::remove($sadr, 'SadrListOfMedicine.{n}.id');
+            $data_save = $sadr['Sadr'];
+            $data_save['SadrListOfDrug'] = $sadr['SadrListOfDrug'];
+            if(isset($sadr['SadrListOfMedicine'])) $data_save['SadrListOfMedicine'] = $sadr['SadrListOfMedicine'];
+            $data_save['sadr_id'] = $id;
+            $this->Sadr->saveField('copied', 1);
+            // $data_save['report_type'] = 'CleanCopy';
+            $data_save['copied'] = 2;
+
+            if ($this->Sadr->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                    $this->Session->setFlash(__('Clean copy of '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
+                    $this->redirect(array('action' => 'edit', $this->Sadr->id));               
+            } else {
+                $this->Session->setFlash(__('The clean copy could not be created. Please, try again.'), 'alerts/flash_error');
+                $this->redirect($this->referer());
+            }
+        }
+    }
+
 	public function manager_edit($id = null) { 
         $this->Sadr->id = $id;
         if (!$this->Sadr->exists()) {
@@ -686,7 +718,18 @@ class SadrsController extends AppController {
             $this->request->data = $this->Sadr->read(null, $id);
         }
 
-        //$sadr = $this->request->data;
+        //Manager will always edit a copied report
+        $sadr = $this->Sadr->find('first', array(
+				'conditions' => array('Sadr.id' => $sadr['Sadr']['sadr_id']),
+				'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
+			));
+        $this->set('sadr', $sadr);
+
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'SADR_' . $id .'.pdf',  'orientation' => 'portrait');
+            $this->response->download('SADR_'.$sadr['Sadr']['id'].'.pdf');
+        }
 
         $counties = $this->Sadr->County->find('list', array('order' => array('County.county_name' => 'ASC')));
 		$this->set(compact('counties'));

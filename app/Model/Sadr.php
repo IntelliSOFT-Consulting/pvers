@@ -140,11 +140,11 @@ class Sadr extends AppModel {
 			'fields' => '',
 			'order' => ''
 		), 
-        'SadrFollowup' => array(
+        'SadrOriginal' => array(
             'className' => 'Sadr',
             'foreignKey' => 'sadr_id',
             'dependent' => true,
-            'conditions' => array('SadrFollowup.report_type' => 'Followup'),
+            'conditions' => array('SadrOriginal.report_type' => 'Original'),
         )
 	);
 
@@ -187,10 +187,10 @@ class Sadr extends AppModel {
 			'counterQuery' => ''
 		),
 		'SadrFollowup' => array(
-			'className' => 'SadrFollowup',
+			'className' => 'Sadr',
 			'foreignKey' => 'sadr_id',
 			'dependent' => false,
-			'conditions' => '',
+			'conditions' => array('SadrFollowup.report_type' => 'Followup'),
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
