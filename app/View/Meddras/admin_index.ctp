@@ -4,13 +4,12 @@
 
       <!-- CMS
     ================================================== -->
-	<h3>Content Management System <small>(DOSES)</small></h3>
-		<p>Search for the content that you wish to modify and change accordingly.</p>	
-		<hr>
+	<h4>MedDRA Dictionary v. 23.0 </h4>
 	<div class="row-fluid" style="margin-bottom: 9px;">	
 		<div class="span0 columns">
 			<div class="row-fluid">
 				<div class="span12">
+					  <?php //echo $this->element('admin/contentmenu')?>
 					  
 				</div><!--/span-->
 			</div><!--/row-->	
@@ -18,7 +17,7 @@
 
 		<div class="span11 columns">
 				<?php 	
-					echo $this->Form->create('Dose', array(
+					echo $this->Form->create('Meddra', array(
 						'url' => array_merge(array('action' => 'admin_index', 'admin' => true), $this->params['pass']),
 						'class' => 'well',
 					));
@@ -26,12 +25,12 @@
 				<div class="row-fluid">
 					<div class="span2 columns">
 					<?php
-						echo $this->Html->link('Add A Dose', array('controller' => 'doses', 'action' => 'add', 'admin' => true ), array('class' => 'btn btn-info'));
+						// echo $this->Html->link('Add A Meddra', array('controller' => 'meddras', 'action' => 'add', 'admin' => true ), array('class' => 'btn btn-info'));
 					?>
 					</div>
 					<div class="span6 columns">
 					<?php
-						echo $this->Form->input('name', array('div' => false, 'class' => 'span10', 'label' => array('class' => 'required', 'text' => 'Name')));
+						echo $this->Form->input('llt_name', array('div' => false, 'class' => 'span10', 'label' => array('class' => 'required', 'text' => 'LLT Name')));
 					?>
 					</div>
 					<div class="span4 columns">
@@ -46,10 +45,10 @@
 					</div>
 				</div>
 				
-				<div class="row-fluid">	
-			
+				<div class="row-fluid">		
+					
 					<?php
-						if(count($doses) >  0) { ?>
+						if(count($meddras) >  0) { ?>
 					<p>
 					<?php
 						echo $this->Paginator->counter(array(
@@ -73,32 +72,28 @@
 						<table  class="table table-striped">		
 						<thead>
 							<tr>
-								<th><?php echo $this->Paginator->sort('id');?></th>
-								<th><?php echo $this->Paginator->sort('value');?></th>
-								<th><?php echo $this->Paginator->sort('name');?></th>
-								<th><?php echo $this->Paginator->sort('icsr_code');?></th>
+								<th><?php echo $this->Paginator->sort('id', 'LLT Code');?></th>
+								<th><?php echo $this->Paginator->sort('pt_code');?></th>
+								<th><?php echo $this->Paginator->sort('llt)name', 'Low Level Term');?></th>
+								<th><?php echo $this->Paginator->sort('llt_currency');?></th>
 								<th><?php echo __('Actions');?></th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php
-						foreach ($doses as $dose): ?>
+						foreach ($meddras as $meddra): ?>
 							<tr>
-								<td><?php echo h($dose['Dose']['id']); ?>&nbsp;</td>
-								<td><?php echo h($dose['Dose']['value']); ?>&nbsp;</td>
-								<td><?php echo h($dose['Dose']['name']); ?>&nbsp;</td>
-								<td><?php echo h($dose['Dose']['icsr_code']); ?>&nbsp;</td>
+								<td><?php echo h($meddra['Meddra']['id']); ?>&nbsp;</td>
+								<td><?php echo h($meddra['Meddra']['pt_code']); ?>&nbsp;</td>
+								<td><?php echo h($meddra['Meddra']['llt_name']); ?>&nbsp;</td>
+								<td><?php echo h($meddra['Meddra']['llt_currency']); ?>&nbsp;</td>
 								<td>
-									<?php echo $this->Html->link('<span class="label label-info"><i class="icon-pencil icon-white"></i> Edit</span>' , 
-											array('controller' => 'doses', 'action' => 'edit', $dose['Dose']['id']), array('escape' => false)); ?>&nbsp;
-									<?php echo $this->Form->postLink(__('<span class="label label-important"><i class="icon-trash icon-white"></i> Delete</span>'), 
-											array('action' => 'delete', $dose['Dose']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $dose['Dose']['id'])); ?>&nbsp;
+									
 								</td>
 							</tr>
 						<?php endforeach; ?>		
 						</tbody>
 						</table>
-						
 						<?php } else { ?>
 							<p>There were no reports that met your search criteria.</p>
 						<?php } ?>	

@@ -115,6 +115,12 @@
           array('controller' => 'facility_codes', 'action' => 'index', 'admin' => true), array('escape' => false));
         ?>
         </li>
+        <li>
+        <?php
+        echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> MedDRA Dictionary',
+          array('controller' => 'meddras', 'action' => 'index', 'admin' => true), array('escape' => false));
+        ?>
+        </li>
       </ul>
 
     </div>

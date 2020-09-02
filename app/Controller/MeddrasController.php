@@ -13,7 +13,12 @@ class MeddrasController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Search.Prg');
+	public $paginate = array();
+	public $presetVars = array(
+        array('field' => 'llt_name', 'type' => 'value'),
+    );
+
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow('autocomplete');
@@ -28,5 +33,16 @@ class MeddrasController extends AppController {
 		}
 		$this->set('groups', array_values($groups));
         $this->set('_serialize', 'groups');
+	}
+
+
+	public function admin_index() {
+		$this->Prg->commonProcess();
+		$criteria = $this->Meddra->parseCriteria($this->passedArgs);
+        $this->paginate['conditions'] = $criteria;
+ 		$this->Meddra->recursive = -1;
+        $this->paginate['limit'] = 20;
+        $this->paginate['order'] = array('Meddra.llt_name' => 'asc');
+		$this->set('meddras', $this->paginate());
 	}
 }

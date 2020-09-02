@@ -13,6 +13,10 @@ class Meddra extends AppModel {
  */
 	public $displayField = 'llt_name';
 
+	public $actsAs = array('Search.Searchable');
+	public $filterArgs = array(
+        array('name' => 'llt_name', 'type' => 'like'),
+    );
 
 	public function finder($query) {
 		if (($suggestions = Cache::read($query, 'reactions')) === false) {
