@@ -20,28 +20,13 @@ class MedicationsController extends AppController {
 	public $components = array('Search.Prg');
     public $paginate = array();
     public $presetVars = true;
+    public $page_options = array('25' => '25', '50' => '50', '100' => '100');
 
-    /*public function beforeFilter() {
-        parent::beforeFilter();
-        // add auth effectively to views
-        $this->Auth->allow('index', 'add', 'edit','view', 'find', 'download');
-        $this->Security->blackHoleCallback = 'blackhole';
-        if ($this->RequestHandler->isXml() || $this->RequestHandler->isAjax() || $this->request->params['action'] == 'edit')  $this->Security->csrfCheck = false;
-    }
-
-    public function blackhole($type) {
-        $this->Session->setFlash(__('Sorry! The page has expired due to a '.$type.' error. Please refresh the page.'), 'flash_error');
-        $this->redirect($this->referer());
-    }*/
 /**
  * index method
  *
  * @return void
  */
-	/*public function index() {
-		$this->Medication->recursive = 0;
-		$this->set('medications', $this->Paginator->paginate());
-	}*/
     public function reporter_index() {
         $this->Prg->commonProcess();
         $page_options = array('25' => '25', '20' => '20');
@@ -78,7 +63,8 @@ class MedicationsController extends AppController {
             else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Medication->parseCriteria($this->passedArgs);
-        $criteria['Medication.submitted'] = 2;
+        // $criteria['Medication.submitted'] = 2;
+        $criteria['Medication.copied !='] = '1';
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Medication.created' => 'desc');
         $this->paginate['contain'] = array('County');
@@ -113,13 +99,6 @@ class MedicationsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
-		if (!$this->Medication->exists($id)) {
-			throw new NotFoundException(__('Invalid medication'));
-		}
-		$options = array('conditions' => array('Medication.' . $this->Medication->primaryKey => $id));
-		$this->set('medication', $this->Medication->find('first', $options));
-	}
 
     public function reporter_view($id = null) {
         $this->Medication->id = $id;
@@ -146,7 +125,10 @@ class MedicationsController extends AppController {
             }
         }
 
-        $medication = $this->Medication->read(null);
+        $medication = $this->Medication->find('first', array(
+                'conditions' => array('Medication.id' => $id),
+                'contain' => array('MedicationProduct', 'County', 'Attachment', 'Designation', 'ExternalComment')
+            ));
         $this->set('medication', $medication);
         // $this->render('pdf/view');
 
@@ -168,7 +150,11 @@ class MedicationsController extends AppController {
             // $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
         }
 
-        $medication = $this->Medication->read(null);
+        $medication = $this->Medication->find('first', array(
+                'conditions' => array('Medication.id' => $id),
+                'contain' => array('MedicationProduct', 'County', 'Attachment', 'Designation', 'ExternalComment',
+                   'MedicationOriginal.MedicationProduct', 'MedicationOriginal.County', 'MedicationOriginal.Attachment', 'MedicationOriginal.Designation', 'MedicationOriginal.ExternalComment' )
+            ));
         $this->set('medication', $medication);
         // $this->render('pdf/view');
 
@@ -182,21 +168,6 @@ class MedicationsController extends AppController {
  *
  * @return void
  */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Medication->create();
-			if ($this->Medication->save($this->request->data)) {
-				$this->Flash->success(__('The medication has been saved.'));
-				return $this->redirect(array('action' => 'edit', $this->Medication->id));
-			} else {
-				$this->Flash->error(__('The medication could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Medication->User->find('list');
-		$counties = $this->Medication->County->find('list');
-		$designations = $this->Medication->Designation->find('list');
-		$this->set(compact('users', 'counties', 'designations'));
-	}
 
 	public function reporter_add() {        
         $count = $this->Medication->find('count',  array('conditions' => array(
@@ -228,26 +199,6 @@ class MedicationsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
-		if (!$this->Medication->exists($id)) {
-			throw new NotFoundException(__('Invalid medication'));
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Medication->saveAssociated($this->request->data)) {
-				$this->Flash->success(__('The medication has been saved.'));
-				return $this->redirect(array('action' => 'view', $this->Medication->id));
-			} else {
-				$this->Flash->error(__('The medication could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('Medication.' . $this->Medication->primaryKey => $id));
-			$this->request->data = $this->Medication->find('first', $options);
-		}
-		$users = $this->Medication->User->find('list');
-		$counties = $this->Medication->County->find('list');
-		$designations = $this->Medication->Designation->find('list');
-		$this->set(compact('users', 'counties', 'designations'));
-	}
 
     public function reporter_edit($id = null) { 
         $this->Medication->id = $id;
@@ -340,6 +291,36 @@ class MedicationsController extends AppController {
         $this->set(compact('counties', 'designations'));
     }
 
+    public function manager_copy($id = null) {
+        if ($this->request->is('post')) {
+            $this->Medication->id = $id;
+            if (!$this->Medication->exists()) {
+                throw new NotFoundException(__('Invalid MEDICATION'));
+            }
+            $medication = Hash::remove($this->Medication->find('first', array(
+                        'contain' => array('MedicationProduct'),
+                        'conditions' => array('Medication.id' => $id)
+                        )
+                    ), 'Medication.id');
+
+            $medication = Hash::remove($medication, 'MedicationProduct.{n}.id');
+            $data_save = $medication['Medication'];
+            $data_save['MedicationProduct'] = $medication['MedicationProduct'];
+            $data_save['medication_id'] = $id;
+            $data_save['user_id'] = $this->Auth->User('id');;
+            $this->Medication->saveField('copied', 1);
+            $data_save['copied'] = 2;
+
+            if ($this->Medication->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                    $this->Session->setFlash(__('Clean copy of '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
+                    $this->redirect(array('action' => 'edit', $this->Medication->id));               
+            } else {
+                $this->Session->setFlash(__('The clean copy could not be created. Please, try again.'), 'alerts/flash_error');
+                $this->redirect($this->referer());
+            }
+        }
+    }
+
 	public function manager_edit($id = null) { 
         $this->Medication->id = $id;
         if (!$this->Medication->exists()) {
@@ -369,7 +350,12 @@ class MedicationsController extends AppController {
             $this->request->data = $this->Medication->read(null, $id);
         }
 
-        //$medication = $this->request->data;
+        //Manager will always edit a copied report
+        $medication = $this->Medication->find('first', array(
+                'conditions' => array('Medication.id' => $medication['Medication']['medication_id']),
+                'contain' => array('MedicationProduct', 'County', 'Attachment', 'Designation', 'ExternalComment')
+            ));
+        $this->set('medication', $medication);
 
    		$counties = $this->Medication->County->find('list');
 		$designations = $this->Medication->Designation->find('list');

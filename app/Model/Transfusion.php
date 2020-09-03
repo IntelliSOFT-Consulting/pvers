@@ -8,7 +8,7 @@ App::uses('AppModel', 'Model');
  * @property Designation $Designation
  */
 class Transfusion extends AppModel {
-	public $actsAs = array('Search.Searchable');
+	public $actsAs = array('Search.Searchable', 'Containable');
 
 	public $filterArgs = array(
         'reference_no' => array('type' => 'like', 'encode' => true),
@@ -115,7 +115,13 @@ class Transfusion extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		), 
+        'TransfusionOriginal' => array(
+            'className' => 'Transfusion',
+            'foreignKey' => 'transfusion_id',
+            'dependent' => true,
+            'conditions' => array('TransfusionOriginal.copied' => '1'),
+        )
 	);
 
 	public $hasMany = array(        

@@ -136,7 +136,13 @@ class Pqmp extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		), 
+        'PqmpOriginal' => array(
+            'className' => 'Pqmp',
+            'foreignKey' => 'pqmp_id',
+            'dependent' => true,
+            'conditions' => array('PqmpOriginal.copied' => '1'),
+        )
 	);
 
 /**

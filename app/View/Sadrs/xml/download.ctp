@@ -194,10 +194,10 @@
             </patientdeath>
             <reaction>
                 <primarysourcereaction><?php echo $sadr['Sadr']['description_of_reaction']; ?></primarysourcereaction>
-                <reactionmeddraversionllt></reactionmeddraversionllt>
-                <reactionmeddrallt></reactionmeddrallt>
-                <reactionmeddraversionpt>23.0</reactionmeddraversionpt>
-                <reactionmeddrapt><?php echo $sadr['Sadr']['report_title']; ?></reactionmeddrapt>
+                <reactionmeddraversionllt>23.0</reactionmeddraversionllt>
+                <reactionmeddrallt><?php echo $sadr['Sadr']['report_title']; ?></reactionmeddrallt>
+                <reactionmeddraversionpt></reactionmeddraversionpt>
+                <reactionmeddrapt></reactionmeddrapt>
                 <termhighlighted/>
                 <reactionstartdateformat><?php
 					$onsetf = 102;

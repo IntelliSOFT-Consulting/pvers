@@ -21,18 +21,6 @@ class TransfusionsController extends AppController {
     public $paginate = array();
     public $presetVars = true;
 
-    /*public function beforeFilter() {
-        parent::beforeFilter();
-        // add auth effectively to views
-        $this->Auth->allow('index', 'add', 'edit','view', 'find', 'download');
-        $this->Security->blackHoleCallback = 'blackhole';
-        if ($this->RequestHandler->isXml() || $this->RequestHandler->isAjax() || $this->request->params['action'] == 'edit')  $this->Security->csrfCheck = false;
-    }
-
-    public function blackhole($type) {
-        $this->Session->setFlash(__('Sorry! The page has expired due to a '.$type.' error. Please refresh the page.'), 'flash_error');
-        $this->redirect($this->referer());
-    }*/
 /**
  * index method
  *
@@ -76,7 +64,8 @@ class TransfusionsController extends AppController {
             else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Transfusion->parseCriteria($this->passedArgs);
-        $criteria['Transfusion.submitted'] = 2;
+        // $criteria['Transfusion.submitted'] = 2;
+        $criteria['Transfusion.copied !='] = '1';
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
         $this->paginate['contain'] = array('County');
@@ -108,13 +97,6 @@ class TransfusionsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
-		if (!$this->Transfusion->exists($id)) {
-			throw new NotFoundException(__('Invalid transfusion'));
-		}
-		$options = array('conditions' => array('Transfusion.' . $this->Transfusion->primaryKey => $id));
-		$this->set('transfusion', $this->Transfusion->find('first', $options));
-	}
 
     public function reporter_view($id = null) {
         $this->Transfusion->id = $id;
@@ -141,7 +123,10 @@ class TransfusionsController extends AppController {
             }
         }
 
-        $transfusion = $this->Transfusion->read(null);
+        $transfusion = $this->Transfusion->find('first', array(
+                'conditions' => array('Transfusion.id' => $id),
+                'contain' => array('Pint', 'County', 'Attachment', 'Designation', 'ExternalComment')
+            ));
         $this->set('transfusion', $transfusion);
         // $this->render('pdf/view');
 
@@ -163,7 +148,11 @@ class TransfusionsController extends AppController {
             // $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
         }
 
-        $transfusion = $this->Transfusion->read(null);
+        $transfusion = $this->Transfusion->find('first', array(
+                'conditions' => array('Transfusion.id' => $id),
+                'contain' => array('Pint', 'County', 'Attachment', 'Designation', 'ExternalComment', 
+                    'TransfusionOriginal.Pint', 'TransfusionOriginal.County', 'TransfusionOriginal.Attachment', 'TransfusionOriginal.Designation', 'TransfusionOriginal.ExternalComment')
+            ));
         $this->set('transfusion', $transfusion);
         // $this->render('pdf/view');
 
@@ -178,21 +167,6 @@ class TransfusionsController extends AppController {
  *
  * @return void
  */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Transfusion->create();
-			if ($this->Transfusion->save($this->request->data)) {
-				$this->Flash->success(__('The transfusion has been saved.'));
-				return $this->redirect(array('action' => 'edit', $this->Transfusion->id));
-			} else {
-				$this->Flash->error(__('The transfusion could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Transfusion->User->find('list');
-		$counties = $this->Transfusion->County->find('list');
-		$designations = $this->Transfusion->Designation->find('list');
-		$this->set(compact('users', 'counties', 'designations'));
-	}
 
 	public function reporter_add() {        
         $count = $this->Transfusion->find('count',  array('conditions' => array(
@@ -223,26 +197,6 @@ class TransfusionsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
-		if (!$this->Transfusion->exists($id)) {
-			throw new NotFoundException(__('Invalid transfusion'));
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Transfusion->saveAssociated($this->request->data)) {
-				$this->Flash->success(__('The transfusion has been saved.'));
-				return $this->redirect(array('action' => 'view', $this->Transfusion->id));
-			} else {
-				$this->Flash->error(__('The transfusion could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('Transfusion.' . $this->Transfusion->primaryKey => $id));
-			$this->request->data = $this->Transfusion->find('first', $options);
-		}
-		$users = $this->Transfusion->User->find('list');
-		$counties = $this->Transfusion->County->find('list');
-		$designations = $this->Transfusion->Designation->find('list');
-		$this->set(compact('users', 'counties', 'designations'));
-	}
 
     public function reporter_edit($id = null) { 
         $this->Transfusion->id = $id;
@@ -335,6 +289,36 @@ class TransfusionsController extends AppController {
         $this->set(compact('counties', 'designations'));
     }
 
+    public function manager_copy($id = null) {
+        if ($this->request->is('post')) {
+            $this->Transfusion->id = $id;
+            if (!$this->Transfusion->exists()) {
+                throw new NotFoundException(__('Invalid TRANSFUSION'));
+            }
+            $transfusion = Hash::remove($this->Transfusion->find('first', array(
+                        'contain' => array('Pint'),
+                        'conditions' => array('Transfusion.id' => $id)
+                        )
+                    ), 'Transfusion.id');
+
+            $transfusion = Hash::remove($transfusion, 'Pint.{n}.id');
+            $data_save = $transfusion['Transfusion'];
+            $data_save['Pint'] = (!empty($transfusion['Pint'])) ? $transfusion['Pint'] : null;
+            $data_save['transfusion_id'] = $id;
+            $data_save['user_id'] = $this->Auth->User('id');;
+            $this->Transfusion->saveField('copied', 1);
+            $data_save['copied'] = 2;
+
+            if ($this->Transfusion->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                    $this->Session->setFlash(__('Clean copy of '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
+                    $this->redirect(array('action' => 'edit', $this->Transfusion->id));               
+            } else {
+                $this->Session->setFlash(__('The clean copy could not be created. Please, try again.'), 'alerts/flash_error');
+                $this->redirect($this->referer());
+            }
+        }
+    }
+
 	public function manager_edit($id = null) { 
         $this->Transfusion->id = $id;
         if (!$this->Transfusion->exists()) {
@@ -364,7 +348,13 @@ class TransfusionsController extends AppController {
             $this->request->data = $this->Transfusion->read(null, $id);
         }
 
-        //$transfusion = $this->request->data;
+        //Manager will always edit a copied report
+        $transfusion = $this->Transfusion->find('first', array(
+                'conditions' => array('Transfusion.id' => $transfusion['Transfusion']['transfusion_id']),
+                'contain' => array('Pint', 'County', 'Attachment', 'Designation', 'ExternalComment')
+            ));
+        $this->set('transfusion', $transfusion);
+
         $counties = $this->Transfusion->County->find('list');
 		$designations = $this->Transfusion->Designation->find('list');
 		$this->set(compact('counties', 'designations'));

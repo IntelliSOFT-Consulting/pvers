@@ -70,13 +70,13 @@
 						<td style="width: 25%;">Facility Address:</td>
 						<td style="width: 25%;"><strong><?php echo $pqmp['Pqmp']['facility_address'] ?></strong></td>
 						<td style="width: 25%;">County:</td>
-						<td style="width: 25%;"><strong><?php echo $pqmp['County']['county_name'] ?></strong></td>
+						<td style="width: 25%;"><strong><?php echo (!empty($pqmp['County']['county_name'])) ? $pqmp['County']['county_name'] : null; ?></strong></td>
 					</tr>
 					<tr>
 						<td style="width: 25%;">Facility Code:</td>
 						<td style="width: 25%;"><strong><?php echo $pqmp['Pqmp']['facility_code'] ?></strong></td>
 						<td style="width: 25%;">Sub County:</td>
-						<td style="width: 25%;"><strong><?php echo $pqmp['SubCounty']['sub_county_name'] ?></strong></td>
+						<td style="width: 25%;"><strong><?php echo (!empty($pqmp['SubCounty']['sub_county_name'])) ? $pqmp['SubCounty']['sub_county_name'] : null; ?></strong></td>
 					</tr>
 				</table>
 				 <hr>
@@ -118,7 +118,7 @@
 						<td style="width: 25%;">Name of Manufacturer:</td>
 						<td style="width: 25%;"><strong><?php echo $pqmp['Pqmp']['name_of_manufacturer'] ?></strong></td>
 						<td style="width: 25%;">Country of Origin:</td>
-						<td style="width: 25%;"><strong><?php echo $pqmp['Country']['name'] ?></strong></td>
+						<td style="width: 25%;"><strong><?php echo (!empty($pqmp['Country']['name'])) ? $pqmp['Country']['name'] : null; ?></strong></td>
 					</tr>
 					<tr>
 						<td style="width: 25%;">Name of Distributor / Supplier:</td>

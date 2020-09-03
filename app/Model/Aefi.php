@@ -128,7 +128,13 @@ class Aefi extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		), 
+        'AefiOriginal' => array(
+            'className' => 'Aefi',
+            'foreignKey' => 'aefi_id',
+            'dependent' => true,
+            'conditions' => array('AefiOriginal.copied' => '1'),
+        )
 	);
 
 	/**

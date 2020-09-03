@@ -119,7 +119,13 @@ class Device extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		), 
+        'DeviceOriginal' => array(
+            'className' => 'Device',
+            'foreignKey' => 'device_id',
+            'dependent' => true,
+            'conditions' => array('DeviceOriginal.copied' => '1'),
+        )
 	);
 
 	/**

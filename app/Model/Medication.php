@@ -9,7 +9,7 @@ App::uses('AppModel', 'Model');
  */
 class Medication extends AppModel {
 
-	public $actsAs = array('Search.Searchable');
+	public $actsAs = array('Search.Searchable', 'Containable');
 
 	public $filterArgs = array(
         'reference_no' => array('type' => 'like', 'encode' => true),
@@ -137,7 +137,13 @@ class Medication extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		), 
+        'MedicationOriginal' => array(
+            'className' => 'Medication',
+            'foreignKey' => 'medication_id',
+            'dependent' => true,
+            'conditions' => array('MedicationOriginal.copied' => '1'),
+        )
 	);
 
 	public $hasMany = array(        

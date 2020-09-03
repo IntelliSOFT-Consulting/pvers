@@ -3,16 +3,13 @@
     echo $this->Session->flash();
 ?>
 
-<?php 
-  // echo $this->element('sadr/sadr_edit'); 
-?>
 
       <!-- SADR
     ================================================== -->
 <section id="sadrsview">
     <ul class="nav nav-tabs">
         <li><a href="#formview" data-toggle="tab">Original</a></li>
-        <li class="active"><a href="#formedit" data-toggle="tab"><?php echo $sadr['Sadr']['reference_no']; ?></a></li>
+        <li class="active"><a href="#formedit" data-toggle="tab"><?php echo (!empty($sadr['Sadr']['reference_no'])) ? $sadr['Sadr']['reference_no'] : $sadr['Sadr']['id'] ; ?></a></li>
         <li><a href="#external_report_comments" data-toggle="tab">Feedback (<?php echo count($sadr['ExternalComment']); ?>)</a></li>
     </ul>
     

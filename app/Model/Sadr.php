@@ -144,7 +144,7 @@ class Sadr extends AppModel {
             'className' => 'Sadr',
             'foreignKey' => 'sadr_id',
             'dependent' => true,
-            'conditions' => array('SadrOriginal.report_type' => 'Original'),
+            'conditions' => array('SadrOriginal.copied' => '1'),
         )
 	);
 
