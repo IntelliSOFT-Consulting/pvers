@@ -408,7 +408,7 @@ class UsersController extends AppController {
         $this->set('devices', $devices);        
 
         $medications = $this->User->Medication->find('all', array(
-            'limit' => 7, 'contain' => array(),
+            'limit' => 7, 'contain' => array('MedicationProduct'),
             'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.created', 'Medication.reference_no', 'Medication.created'),
             'order' => array('Medication.created' => 'desc'),
             'conditions' => array('Medication.user_id' => $this->Auth->User('id')),
@@ -466,7 +466,7 @@ class UsersController extends AppController {
         $this->set('devices', $devices);        
 
         $medications = $this->User->Medication->find('all', array(
-            'limit' => 7, 'contain' => array(),
+            'limit' => 7, 'contain' => array('MedicationProduct'),
             'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.reference_no', 'Medication.created'),
             'order' => array('Medication.created' => 'desc'),
             'conditions' => array('Medication.submitted >' => 1),
