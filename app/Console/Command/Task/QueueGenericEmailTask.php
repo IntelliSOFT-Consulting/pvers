@@ -96,6 +96,7 @@ class QueueGenericEmailTask extends QueueTask {
         $Email->template('default');
         $Email->emailFormat('html');
         $Email->to($data['email']);
+        if(!empty($data['cc'])) $Email->cc($data['cc']);
 
         $Email->subject($data['subject']);
         $Email->viewVars(array('message' => $data['message']));

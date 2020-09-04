@@ -31,8 +31,8 @@ class DrugDictionary extends AppModel {
 	
 	public $validate = array(
 		'id' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+			'notBlank' => array(
+				'rule' => array('notBlank'),
 				'message' => 'Med ID Required',
 				//'allowEmpty' => false,
 				//'required' => false,

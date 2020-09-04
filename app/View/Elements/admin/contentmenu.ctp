@@ -29,49 +29,7 @@
 						<ul class="nav nav-list">
 						  <li class="nav-header"><i class="icon-glass"></i>  Filter Options </li>
 						  <li class="divider"></li>
-						  <li class="nav-header"><i class="icon-book"></i> FRONT PAGES </li>
-						  <li class="<?php echo $lC; ?>">
-							<?php 
-								echo $this->Html->link('<i class="icon-bookmark"></i> HOME', 
-										array('controller' => 'help_infos', 'action' => 'index',  'type'=>'home', 'admin' => true), 
-										array('escape' => false)); 
-									?>
-						  </li>					  								  
-						  <li class="<?php echo $mC; ?>">
-							<?php 
-								echo $this->Html->link('<i class="icon-bookmark"></i> SADR ADD', 
-										array('controller' => 'help_infos', 'action' => 'index', 'type'=>'sadr_add', 'admin' => true), 
-										array('escape' => false)); 
-							?>
-						  </li>					  								  
-						  <li class="<?php echo $nC; ?>">
-							<?php 
-								echo $this->Html->link('<i class="icon-bookmark"></i> PQMP ADD', 
-										array('controller' => 'help_infos', 'action' => 'index', 'type'=>'pqmp_add', 'admin' => true), 
-										array('escape' => false)); 
-							?>
-						  </li>
-						  <li class="divider"></li>
-						  <li class="nav-header"><i class="icon-book"></i> FORMS </li>
-						  <li class="<?php echo $cC; ?>">
-							<?php echo $this->Html->link('<i class="icon-tag"></i> ALL FORMS', 
-									array('controller' => 'help_infos', 'type'=>'', 'action' => 'index', 'admin' => true), array('escape' => false)); ?>
-						  </li>
-						  <li class="<?php echo $aC; ?>">
-							<?php 
-								echo $this->Html->link('<i class="icon-tag"></i> SADR', 
-										array('controller' => 'help_infos', 'action' => 'index',  'type'=>'sadr', 'admin' => true), 
-										array('escape' => false)); 
-									?>
-						  </li>					  								  
-						  <li class="<?php echo $bC; ?>">
-							<?php 
-								echo $this->Html->link('<i class="icon-tag"></i> PQMP', 
-										array('controller' => 'help_infos', 'action' => 'index', 'type'=>'pqmp', 'admin' => true), 
-										array('escape' => false)); 
-							?>
-						  </li>
-						  <li class="divider"></li>						  
+						  
 						  <li class="nav-header"><i class="icon-book"></i> Drug Dictionaries </li>
 							<li class="<?php echo $jC; ?>">
 							<?php 

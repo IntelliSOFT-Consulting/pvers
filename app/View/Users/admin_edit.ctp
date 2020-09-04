@@ -57,8 +57,10 @@
 						'type' => 'password',
 						'label' => array('class' => 'control-label required', 'text' => 'Confirm New Password'.' <span style="color:red;">*</span>'), ));						
 				echo $this->Form->input('is_active', array('label' => array('class' => 'control-label', 'text' => 'Is Active?'), ));		
-				echo $this->Form->input('is_admin', array('label' => array('class' => 'control-label', 'text' => 'Is Admin?'), ));		
-				
+				// echo $this->Form->input('is_admin', array('label' => array('class' => 'control-label', 'text' => 'Is Admin?'), ));		
+				echo $this->Form->input('user_type', array('type' => 'select', 'label' => array('class' => 'control-label', 'text' => 'User Type'),
+						'empty' => true, 'options' => ['Market Authority', 'County Pharmacist', 'Public Health Program']));
+				echo $this->Form->input('sponsor_email', array('type' => 'email', 'label' => array('class' => 'control-label', 'text' => 'Sponsor email'),));
 				?>
 		</div><!--/span-->
 		<div class="span6">

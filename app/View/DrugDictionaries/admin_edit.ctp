@@ -48,9 +48,12 @@
 										'class'=>'input-xlarge'));													
 									echo $this->Form->input('generic', array(
 										'label' => array('class' => 'control-label', 'text' => 'Generic (Y/N)'),
-										'class'=>'input-xlarge'));													
+										'class'=>'input-xlarge'));
 									echo $this->Form->input('drug_name', array(
 										'label' => array('class' => 'control-label', 'text' => 'Drug Name'),
+										'class'=>'input-xlarge'));
+									echo $this->Form->input('health_program', array(
+										'label' => array('class' => 'control-label', 'text' => 'Public Health Program'),
 										'class'=>'input-xlarge'));													
 									echo $this->Form->input('MedId', array(
 										'label' => array('class' => 'control-label', 'text' => 'Med Id'),

@@ -93,6 +93,12 @@
         </li>
         <li>
         <?php
+        echo $this->Html->link('<i class="fa fa-linux" aria-hidden="true"></i> Drug Dictionary',
+          array('controller' => 'drug_dictionaries', 'action' => 'index', 'admin' => true), array('escape' => false));
+        ?>
+        </li>
+        <li>
+        <?php
         echo $this->Html->link('<i class="fa fa-fighter-jet" aria-hidden="true"></i> Drug Administration Routes',
           array('controller' => 'routes', 'action' => 'index', 'admin' => true), array('escape' => false));
         ?>

@@ -117,7 +117,7 @@ class UsersController extends AppController {
                         'password' => date('Ymdhis', strtotime($user['User']['created'])),
                       );
 				$datum = array(
-					'email' => $user['User']['email'],
+					'email' => $user['User']['email'], 'cc' => ((!empty($user['User']['sponsor_email'])) ? $user['User']['sponsor_email'] : null),
 					'id' => $user['User']['id'], 'user_id' => $user['User']['id'], 'type' => 'user_registration', 'model' => 'User',
 					'subject' => CakeText::insert($user_email['Message']['subject'], $variables),
 					'message' => CakeText::insert($user_email['Message']['content'], $variables)

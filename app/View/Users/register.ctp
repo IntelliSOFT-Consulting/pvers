@@ -53,12 +53,22 @@
 				));
 				echo $this->Form->input('phone_no', array('label' => array('class' => 'control-label', 'text' => 'Phone Number'),));
 				echo $this->Form->input('designation_id', array('label' => array('class' => 'control-label', 'text' => 'Designation'),));
+				echo $this->Form->input('user_type', array(
+                            'type' => 'checkbox',  'value' => 'Market Authority', 'label' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<label class="controls checkbox">',
+                                                    'after' => 'Are you reporting for market authority? </label>',));
 
+				echo $this->Form->input('sponsor_email', array(
+					'type' => 'email',
+					'div' => array('class' => 'control-group ribidi'),
+					'label' => array('class' => 'control-label required', 'text' => 'Sponsor\'s Email')
+				));
 				?>
 		</div><!--/span-->
 		<div class="span6">
 			<?php
-				// echo $this->Form->input('group_id', array('label' => array('class' => 'control-label', 'text' => 'Group'), ));
+				// echo $this->Form->input('user_type', array('type' => 'checkbox', 'value' => 'Market Authority', 'label' => array('class' => 'control-label', 'text' => 'Are you reporting for market authority?'), ));
+				
 				echo $this->Form->input('name_of_institution', array(
 					'label' => array('class' => 'control-label', 'text' => 'Name of Institution'),
 					'after'=>'<p class="help-block"> Start typing and suggestions will appear </p></div>',
@@ -69,6 +79,7 @@
 				));
 				echo $this->Form->input('institution_address', array('label' => array('class' => 'control-label', 'text' => 'Institution Address'),));
 				echo $this->Form->input('institution_contact', array('label' => array('class' => 'control-label', 'text' => 'Institution Contacts'),));
+				echo $this->Form->input('institution_email', array('type' => 'email', 'label' => array('class' => 'control-label', 'text' => 'Institution Email'),));
 				echo $this->Form->input('county_id', array(
 									'label' => array('class' => 'control-label required', 'text' => 'County '),
 									'empty' => true, 'between' => '<div class="controls ui-widget">',

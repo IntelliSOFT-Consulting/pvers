@@ -83,6 +83,7 @@
 								<th><?php echo $this->Paginator->sort('generic', 'Generic(Y/N)');?></th>
 								<th><?php echo $this->Paginator->sort('drug_name');?></th>
 								<th><?php echo $this->Paginator->sort('country');?></th>
+								<th><?php echo $this->Paginator->sort('health_program');?></th>
 								<th><?php echo __('Actions');?></th>
 							</tr>
 						</thead>
@@ -94,6 +95,7 @@
 								<td><?php echo h($drugDictionary['DrugDictionary']['generic']); ?>&nbsp;</td>
 								<td><?php echo h($drugDictionary['DrugDictionary']['drug_name']); ?>&nbsp;</td>
 								<td><?php echo h($drugDictionary['DrugDictionary']['country']); ?>&nbsp;</td>
+								<td><?php echo h($drugDictionary['DrugDictionary']['health_program']); ?>&nbsp;</td>
 								<td>
 									<?php echo $this->Html->link('<span class="label label-info"><i class="icon-pencil icon-white"></i> Edit</span>' , 
 											array('controller' => 'drug_dictionaries', 'action' => 'edit', $drugDictionary['DrugDictionary']['id']), array('escape' => false)); ?>&nbsp;
