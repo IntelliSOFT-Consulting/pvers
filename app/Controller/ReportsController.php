@@ -110,6 +110,72 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+    public function sadrs_by_medicine() {
+        $data = $this->Sadr->SadrListOfDrug->find('all', array(
+            'fields' => array('SadrListOfDrug.drug_name as drug_name', 'COUNT(distinct SadrListOfDrug.sadr_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('SadrListOfDrug.created >' => '2020-04-01 08:08:08'),
+            'group' => array('SadrListOfDrug.drug_name'),
+            'having' => array('COUNT(distinct SadrListOfDrug.sadr_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function sadrs_by_gender() {
+        $data = $this->Sadr->find('all', array(
+            'fields' => array('gender', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Sadr.submitted' => array(1, 2)),
+            'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function sadrs_by_outcome() {
+        $data = $this->Sadr->find('all', array(
+            'fields' => array('outcome', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Sadr.submitted' => array(1, 2)),
+            'group' => array('outcome'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function sadrs_by_facility() {
+        $data = $this->Sadr->find('all', array(
+            'fields' => array('name_of_institution', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Sadr.submitted' => array(1, 2)),
+            'group' => array('name_of_institution'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function sadrs_by_county() {
+        $data = $this->Sadr->find('all', array(
+            'fields' => array('County.county_name', 'COUNT(*) as cnt'),
+            'contain' => array('County'),
+            'conditions' => array('Sadr.submitted' => array(1, 2)),
+            'group' => array('County.county_name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * AEFI reports methods
      * 
@@ -180,6 +246,72 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+    public function aefis_by_vaccine() {
+        $data = $this->Aefi->AefiListOfVaccine->find('all', array(
+            'fields' => array('AefiListOfVaccine.vaccine_name as vaccine_name', 'COUNT(distinct AefiListOfVaccine.aefi_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('AefiListOfVaccine.created >' => '2020-04-01 08:08:08'),
+            'group' => array('AefiListOfVaccine.vaccine_name'),
+            'having' => array('COUNT(distinct AefiListOfVaccine.aefi_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function aefis_by_gender() {
+        $data = $this->Aefi->find('all', array(
+            'fields' => array('gender', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Aefi.submitted' => array(1, 2)),
+            'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function aefis_by_outcome() {
+        $data = $this->Aefi->find('all', array(
+            'fields' => array('outcome', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Aefi.submitted' => array(1, 2)),
+            'group' => array('outcome'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function aefis_by_facility() {
+        $data = $this->Aefi->find('all', array(
+            'fields' => array('name_of_institution', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Aefi.submitted' => array(1, 2)),
+            'group' => array('name_of_institution'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function aefis_by_county() {
+        $data = $this->Aefi->find('all', array(
+            'fields' => array('County.county_name', 'COUNT(*) as cnt'),
+            'contain' => array('County'),
+            'conditions' => array('Aefi.submitted' => array(1, 2)),
+            'group' => array('County.county_name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * PQMP reports methods
      * 
@@ -198,6 +330,33 @@ class ReportsController extends AppController {
         $this->render('pqmps_by_designation');
     }
     
+
+    public function pqmps_by_facility() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('facility_name', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('facility_name'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function pqmps_by_county() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('County.county_name', 'COUNT(*) as cnt'),
+            'contain' => array('County'),
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('County.county_name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
 
     /**
      * MEDICAL DEVICES reports methods
@@ -268,6 +427,72 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+    public function devices_by_brand() {
+        $data = $this->Device->ListOfDevice->find('all', array(
+            'fields' => array('ListOfDevice.brand_name as brand_name', 'COUNT(distinct ListOfDevice.device_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('ListOfDevice.created >' => '2020-04-01 08:08:08'),
+            'group' => array('ListOfDevice.brand_name'),
+            'having' => array('COUNT(distinct ListOfDevice.device_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function devices_by_gender() {
+        $data = $this->Device->find('all', array(
+            'fields' => array('gender', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Device.submitted' => array(1, 2)),
+            'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function devices_by_outcome() {
+        $data = $this->Device->find('all', array(
+            'fields' => array('outcome', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Device.submitted' => array(1, 2)),
+            'group' => array('outcome'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function devices_by_facility() {
+        $data = $this->Device->find('all', array(
+            'fields' => array('name_of_institution', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Device.submitted' => array(1, 2)),
+            'group' => array('name_of_institution'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function devices_by_county() {
+        $data = $this->Device->find('all', array(
+            'fields' => array('County.county_name', 'COUNT(*) as cnt'),
+            'contain' => array('County'),
+            'conditions' => array('Device.submitted' => array(1, 2)),
+            'group' => array('County.county_name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * MEDICATION ERROR reports methods
      * 
@@ -311,6 +536,46 @@ class ReportsController extends AppController {
         $this->render('medications_by_age');
     }
     
+
+    public function medications_by_gender() {
+        $data = $this->Medication->find('all', array(
+            'fields' => array('gender', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Medication.submitted' => array(1, 2)),
+            'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function medications_by_facility() {
+        $data = $this->Medication->find('all', array(
+            'fields' => array('name_of_institution', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Medication.submitted' => array(1, 2)),
+            'group' => array('name_of_institution'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function medications_by_county() {
+        $data = $this->Medication->find('all', array(
+            'fields' => array('County.county_name', 'COUNT(*) as cnt'),
+            'contain' => array('County'),
+            'conditions' => array('Medication.submitted' => array(1, 2)),
+            'group' => array('County.county_name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
 
     /**
      * BLOOD TRANSFUSION reports methods
@@ -357,6 +622,31 @@ class ReportsController extends AppController {
     }
 
 
+    public function transfusions_by_gender() {
+        $data = $this->Transfusion->find('all', array(
+            'fields' => array('gender', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Transfusion.submitted' => array(1, 2)),
+            'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function transfusions_by_county() {
+        $data = $this->Transfusion->find('all', array(
+            'fields' => array('County.county_name', 'COUNT(*) as cnt'),
+            'contain' => array('County'),
+            'conditions' => array('Transfusion.submitted' => array(1, 2)),
+            'group' => array('County.county_name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
     /**
      * SAEs reports methods
      * 
