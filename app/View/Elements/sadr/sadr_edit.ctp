@@ -565,7 +565,7 @@
                         echo $this->Form->input('serious', array(
                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'serious',
                          'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">Is the reaction serious <span style="color:red;">*</span></label> </div>
-                                         <div class="controls">  <input type="hidden" value="" id="Serious_" name="data[Aefi][serious]"> <label class="radio inline">',
+                                         <div class="controls">  <input type="hidden" value="" id="Serious_" name="data[Sadr][serious]"> <label class="radio inline">',
                          'after' => '</label>',
                          'options' => array('Yes' => 'Yes'),
                         ));
@@ -588,7 +588,7 @@
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'serious_reason',
                           'before' => '<div>  <div>
-                            <input type="hidden" value="" id="AefiSerious_" name="data[Aefi][serious_reason]"> <label class="radio inline">',
+                            <input type="hidden" value="" id="SadrSerious_" name="data[Sadr][serious_reason]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Hospitalization/ Prolonged Hospitalization' => 'Hospitalization/ Prolonged Hospitalization'),
                         )); 

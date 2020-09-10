@@ -1,25 +1,25 @@
 <?php
   $this->extend('/Reports/reports');
-  $this->assign('sadrs-by-designation', 'active');
+  $this->assign('devices-by-age', 'active');
 ?>
 
 <?php $this->start('report'); ?>
-<div id="sadrs-by-designation"></div>
+<div id="devices-by-age"></div>
 
 <hr>
 <h4>Raw Data</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
-            <th>Designation</th>
-            <th>ADRs</th>
+            <th>Age group</th>
+            <th>DEVICES</th>
         </tr>
     </thead>
     <tbody>
       <?php
           foreach ($data as $key => $value) {
               echo "<tr>";
-                echo "<th>".$value['Designation']['name']."</th>";
+                echo "<th>".$value[0]['ager']."</th>";
                 echo "<td>".$value[0]['cnt']."</td>";
               echo "</tr>";
           }
@@ -28,7 +28,7 @@
 </table>
 
 <script type="text/javascript">
-Highcharts.chart('sadrs-by-designation', {
+Highcharts.chart('devices-by-age', {
     data: {
         table: 'datatable8'
     },
@@ -36,7 +36,7 @@ Highcharts.chart('sadrs-by-designation', {
         type: 'column'
     },
     title: {
-        text: 'SADRs by Designation'
+        text: 'DEVICES by Age group'
     },
     yAxis: {
         allowDecimals: false,

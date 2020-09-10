@@ -91,13 +91,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ee8fa', end
 /*.nav-list li {
     padding-top: 5px;
     padding-bottom: 5px;
-}*/
+}
 
 .nav-list li a:hover:before {
     margin-left: 0;
     opacity: 1;
     visibility: visible;
 }
+
+.nav-list li a:before {
+    content: "\f14f";
+    font: 400 21px/1 "Material Design Icons";
+    color: #4d6de6;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: -28px;
+    margin-right: 7px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .22s ease;
+}*/
 
 .social-inner ul, .social-inner ol {
     list-style: none;
@@ -118,18 +131,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ee8fa', end
 .social-container .col {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.nav-list li a:before {
-    content: "\f14f";
-    font: 400 21px/1 "Material Design Icons";
-    color: #4d6de6;
-    display: inline-block;
-    vertical-align: baseline;
-    margin-left: -28px;
-    margin-right: 7px;
-    opacity: 0;
-    visibility: hidden;
-    transition: .22s ease;
-}
 
 .footer-default {
   background: #37462d;
@@ -144,6 +145,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ee8fa', end
   background: #061e1b;
 }
 .footer-partner {
+  background: #512915;
+}
+
+.sidebar-default {
+  background: #37462d;
+}
+.sidebar-reporter {
+  background: #35354b;
+}
+.sidebar-manager {
+  background: #88bfb83d;
+}
+.sidebar-admin {
+  background: #061e1b;
+}
+.sidebar-partner {
   background: #512915;
 }
 

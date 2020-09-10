@@ -1,10 +1,10 @@
 <?php
   $this->extend('/Reports/reports');
-  $this->assign('sadrs-by-designation', 'active');
+  $this->assign('medications-by-designation', 'active');
 ?>
 
 <?php $this->start('report'); ?>
-<div id="sadrs-by-designation"></div>
+<div id="medications-by-designation"></div>
 
 <hr>
 <h4>Raw Data</h4>
@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Designation</th>
-            <th>ADRs</th>
+            <th>Medication Errors</th>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@
 </table>
 
 <script type="text/javascript">
-Highcharts.chart('sadrs-by-designation', {
+Highcharts.chart('medications-by-designation', {
     data: {
         table: 'datatable8'
     },
@@ -36,7 +36,7 @@ Highcharts.chart('sadrs-by-designation', {
         type: 'column'
     },
     title: {
-        text: 'SADRs by Designation'
+        text: 'Medications by reporter'
     },
     yAxis: {
         allowDecimals: false,

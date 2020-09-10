@@ -1,17 +1,17 @@
 <?php
   $this->extend('/Reports/reports');
-  $this->assign('sadrs-by-designation', 'active');
+  $this->assign('aefis-by-reason', 'active');
 ?>
 
 <?php $this->start('report'); ?>
-<div id="sadrs-by-designation"></div>
+<div id="aefis-by-reason"></div>
 
 <hr>
 <h4>Raw Data</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
-            <th>Designation</th>
+            <th>Reason for Seriousness</th>
             <th>ADRs</th>
         </tr>
     </thead>
@@ -19,7 +19,7 @@
       <?php
           foreach ($data as $key => $value) {
               echo "<tr>";
-                echo "<th>".$value['Designation']['name']."</th>";
+                echo "<th>".$value['Aefi']['serious_yes']."</th>";
                 echo "<td>".$value[0]['cnt']."</td>";
               echo "</tr>";
           }
@@ -28,7 +28,7 @@
 </table>
 
 <script type="text/javascript">
-Highcharts.chart('sadrs-by-designation', {
+Highcharts.chart('aefis-by-reason', {
     data: {
         table: 'datatable8'
     },
@@ -36,7 +36,7 @@ Highcharts.chart('sadrs-by-designation', {
         type: 'column'
     },
     title: {
-        text: 'SADRs by Designation'
+        text: 'Reason for Seriousness'
     },
     yAxis: {
         allowDecimals: false,

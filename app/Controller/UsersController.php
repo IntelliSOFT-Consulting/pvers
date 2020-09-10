@@ -711,7 +711,7 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Users/admin_add');
         $this->Acl->allow($group, 'controllers/Notifications');
         $this->Acl->allow($group, 'controllers/Comments');
-		$this->Acl->deny($group, 'controllers/Acl');
+        $this->Acl->allow($group, 'controllers/Reports');
 
 		//Allow reporters to some
 		$group->id = 3;
@@ -762,6 +762,7 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/MedicationProducts/delete');
         $this->Acl->allow($group, 'controllers/Pints/delete');
         $this->Acl->allow($group, 'controllers/Comments');
+        $this->Acl->allow($group, 'controllers/Reports');
 
 		//Allow institution administrators to some
 		$group->id = 4;
@@ -779,6 +780,7 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/Notifications/partner_index');
         $this->Acl->allow($group, 'controllers/Notifications/delete');
         $this->Acl->allow($group, 'controllers/Comments');
+        $this->Acl->allow($group, 'controllers/Reports');
 
 		echo "all done";
 		exit;

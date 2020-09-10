@@ -1,15 +1,10 @@
 <?php
-  $this->assign('Reports', 'active');        
-  echo $this->Session->flash();
-  // $this->Html->css('comments', null, array('inline' => false));
-  $this->Html->script('highcharts/highcharts', array('inline' => false));
-  $this->Html->script('highcharts/modules/data', array('inline' => false));
-  $this->Html->script('highcharts/modules/exporting', array('inline' => false));
-  $this->Html->script('highcharts/modules/export-data', array('inline' => false));
+  $this->extend('/Reports/reports');
+  $this->assign('pqmps-by-designation', 'active');
 ?>
 
 
-
+<?php $this->start('report'); ?>
 <div id="pqmps-by-designation"></div>
 
 <hr>
@@ -59,4 +54,5 @@ Highcharts.chart('pqmps-by-designation', {
     }
 });
 </script>
+<?php $this->end(); ?>
 

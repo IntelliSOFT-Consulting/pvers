@@ -17,12 +17,12 @@
     </thead>
     <tbody>
       <?php
-          foreach ($data as $key => $value) {
-              echo "<tr>";
-                echo "<th>".$value['Designation']['name']."</th>";
-                echo "<td>".$value[0]['cnt']."</td>";
-              echo "</tr>";
-          }
+          // foreach ($data as $key => $value) {
+          //     echo "<tr>";
+          //       echo "<th>".$value['Designation']['name']."</th>";
+          //       echo "<td>".$value[0]['cnt']."</td>";
+          //     echo "</tr>";
+          // }
       ?>        
     </tbody>
 </table>
