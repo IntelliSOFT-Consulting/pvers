@@ -335,7 +335,7 @@
             if($transfusion['Transfusion']['submitted'] > 1) {
               echo $this->Html->link($transfusion['Transfusion']['reference_no'], array('action' => 'view', $transfusion['Transfusion']['id']), array('escape'=>false));
             } else {
-              echo $this->Html->link($transfusion['Transfusion']['reference_no'], array('action' => 'edit', $transfusion['Transfusion']['id']), array('escape'=>false));
+              echo $this->Html->link($transfusion['Transfusion']['reference_no'], array('action' => (($redir == 'reporter') ? 'edit' : 'view'), $transfusion['Transfusion']['id']), array('escape'=>false));
             }
         ?>&nbsp;
         </td>

@@ -296,7 +296,7 @@
             if($medication['Medication']['submitted'] > 1) {
               echo $this->Html->link($medication['Medication']['reference_no'], array('action' => 'view', $medication['Medication']['id']), array('escape'=>false));
             } else {
-              echo $this->Html->link($medication['Medication']['reference_no'], array('action' => 'edit', $medication['Medication']['id']), array('escape'=>false));
+              echo $this->Html->link($medication['Medication']['reference_no'], array('action' => (($redir == 'reporter') ? 'edit' : 'view'), $medication['Medication']['id']), array('escape'=>false));
             }
         ?>&nbsp;
         </td>

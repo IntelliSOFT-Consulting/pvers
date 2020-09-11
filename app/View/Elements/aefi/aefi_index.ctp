@@ -292,7 +292,7 @@
             if($aefi['Aefi']['submitted'] > 1) {
               echo $this->Html->link($aefi['Aefi']['reference_no'], array('action' => 'view', $aefi['Aefi']['id']), array('escape'=>false, 'class' => 'text-'.((isset($aefi['Aefi']['serious']) && $aefi['Aefi']['serious'] == 'Yes') ? 'error' : 'success')));
             } else {
-              echo $this->Html->link($aefi['Aefi']['reference_no'], array('action' => 'edit', $aefi['Aefi']['id']), array('escape'=>false, 'class' => 'text-'.((isset($aefi['Aefi']['serious']) && $aefi['Aefi']['serious'] == 'Yes') ? 'error' : 'success')));
+              echo $this->Html->link($aefi['Aefi']['reference_no'], array('action' => (($redir == 'reporter') ? 'edit' : 'view'), $aefi['Aefi']['id']), array('escape'=>false, 'class' => 'text-'.((isset($aefi['Aefi']['serious']) && $aefi['Aefi']['serious'] == 'Yes') ? 'error' : 'success')));
             }
         ?>&nbsp;</td>
         <td><?php echo h($aefi['Aefi']['report_type']); 

@@ -306,7 +306,7 @@
             if($pqmp['Pqmp']['submitted'] > 1) {
               echo $this->Html->link($pqmp['Pqmp']['reference_no'], array('action' => 'view', $pqmp['Pqmp']['id']), array('escape'=>false));
             } else {
-              echo $this->Html->link($pqmp['Pqmp']['reference_no'], array('action' => 'edit', $pqmp['Pqmp']['id']), array('escape'=>false));
+              echo $this->Html->link($pqmp['Pqmp']['reference_no'], array('action' => (($redir == 'reporter') ? 'edit' : 'view'), $pqmp['Pqmp']['id']), array('escape'=>false));
             }
         ?>&nbsp;</td>
         <td><?php echo h($pqmp['Pqmp']['brand_name']); 

@@ -322,7 +322,7 @@
             if($device['Device']['submitted'] > 1) {
               echo $this->Html->link($device['Device']['reference_no'], array('action' => 'view', $device['Device']['id']), array('escape'=>false, 'class' => 'text-'.((isset($device['Device']['serious']) && in_array($device['Device']['serious'], ['Fatal', 'Serious'])) ? 'error' : 'success')));
             } else {
-              echo $this->Html->link($device['Device']['reference_no'], array('action' => 'edit', $device['Device']['id']), array('escape'=>false, 'class' => 'text-'.((isset($device['Device']['serious']) && in_array($device['Device']['serious'], ['Fatal', 'Serious'])) ? 'error' : 'success')));
+              echo $this->Html->link($device['Device']['reference_no'], array('action' => (($redir == 'reporter') ? 'edit' : 'view'), $device['Device']['id']), array('escape'=>false, 'class' => 'text-'.((isset($device['Device']['serious']) && in_array($device['Device']['serious'], ['Fatal', 'Serious'])) ? 'error' : 'success')));
             }
         ?>&nbsp;</td>
         <td><?php echo h($device['Device']['report_title']); 
