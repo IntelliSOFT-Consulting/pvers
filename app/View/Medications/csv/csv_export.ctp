@@ -55,33 +55,45 @@
 				}				
 				($dob) ? $row[$key] = $dob : $row[$key] = '""';
 			} elseif ($key == 'generic_name_i') {
-				foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['generic_name_i'] : $row[$key] = $medicationProdUcT['generic_name_i'];
+				if (!empty($cmedication['MedicationProduct'])) {					
+					foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
+						(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['generic_name_i'] : $row[$key] = $medicationProdUcT['generic_name_i'];
+					}
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'generic_name_ii') {
-				foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['generic_name_ii'] : $row[$key] = $medicationProdUcT['generic_name_ii'];
+				if (!empty($cmedication['MedicationProduct'])) {
+					foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
+						(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['generic_name_ii'] : $row[$key] = $medicationProdUcT['generic_name_ii'];
+					}					
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'product_name_i') {
-				foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['product_name_i'] : $row[$key] = $medicationProdUcT['product_name_i'];
+				if (!empty($cmedication['MedicationProduct'])) {
+					foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
+						(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['product_name_i'] : $row[$key] = $medicationProdUcT['product_name_i'];
+					}					
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'product_name_ii') {
-				foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['product_name_ii'] : $row[$key] = $medicationProdUcT['product_name_ii'];
+				if (!empty($cmedication['MedicationProduct'])) {
+					foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
+						(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['product_name_ii'] : $row[$key] = $medicationProdUcT['product_name_ii'];
+					}					
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'manufacturer_i') {
-				foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['manufacturer_i'] : $row[$key] = $medicationProdUcT['manufacturer_i'];
+				if (!empty($cmedication['MedicationProduct'])) {
+					foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
+						(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['manufacturer_i'] : $row[$key] = $medicationProdUcT['manufacturer_i'];
+					}					
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'manufacturer_ii') {
-				foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['manufacturer_ii'] : $row[$key] = $medicationProdUcT['manufacturer_ii'];
+				if (!empty($cmedication['MedicationProduct'])) {					
+					foreach ($cmedication['MedicationProduct'] as $medicationProdUcT) {
+						(isset($row[$key])) ? $row[$key] .= '; '.$medicationProdUcT['manufacturer_ii'] : $row[$key] = $medicationProdUcT['manufacturer_ii'];
+					}
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} 
