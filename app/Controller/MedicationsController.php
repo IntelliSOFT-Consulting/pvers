@@ -65,6 +65,7 @@ class MedicationsController extends AppController {
         $criteria = $this->Medication->parseCriteria($this->passedArgs);
         // $criteria['Medication.submitted'] = 2;
         $criteria['Medication.copied !='] = '1';
+        if (!isset($this->passedArgs['submit'])) $criteria['Medication.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Medication.created' => 'desc');
         $this->paginate['contain'] = array('County');
