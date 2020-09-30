@@ -129,7 +129,7 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
               </dl>
               <dl class="contact-list">
                 <dt>Tel:</dt>
-                <dd>(020)-3562107 Ext 114, 0720 608811, 0733 884411 Fax: (020) 2713431/2713409
+                <dd>+254 709 770 100/+254 709 770 xxx (Replace xxx with extension)
                 </dd>
               </dl>
             </div>

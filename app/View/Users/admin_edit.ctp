@@ -60,7 +60,7 @@
 				// echo $this->Form->input('is_admin', array('label' => array('class' => 'control-label', 'text' => 'Is Admin?'), ));		
 				echo $this->Form->input('user_type', array('type' => 'select', 'label' => array('class' => 'control-label', 'text' => 'User Type'),
 						'empty' => true, 'options' => ['Market Authority', 'County Pharmacist', 'Public Health Program']));
-				echo $this->Form->input('sponsor_email', array('type' => 'email', 'label' => array('class' => 'control-label', 'text' => 'Sponsor email'),));
+				echo $this->Form->input('sponsor_email', array('type' => 'email', 'label' => array('class' => 'control-label', 'text' => 'Company email'),));
 				?>
 		</div><!--/span-->
 		<div class="span6">

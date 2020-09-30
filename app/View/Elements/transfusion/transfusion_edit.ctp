@@ -33,7 +33,7 @@
                     <h5>MINISTRY OF HEALTH</h5>
                     <h5>PHARMACY AND POISONS BOARD</h5>
                     <h5>P.O. Box 27663-00506 NAIROBI</h5>
-                    <h5>Tel: (020)-3562107 Ext 114, 0720 608811, 0733 884411 Fax: (020) 2713431/2713409</h5>
+                    <h5>Tel: +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)</h5>
                     <h5><b>Email:</b> pv@pharmacyboardkenya.org</h5>
                     <h5 style="color: red;">ADVERSE TRANSFUSION REACTION FORM </h5>
                     </div>

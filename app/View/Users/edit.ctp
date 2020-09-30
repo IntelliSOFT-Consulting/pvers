@@ -60,6 +60,7 @@
 					'label' => array('class' => 'control-label', 'text' => 'Institution Code'),
 					'after'=>'<p class="help-block"> Start typing and suggestions will appear </p></div>',
 				));	
+				echo $this->Form->input('sponsor_email', array('type' => 'email', 'label' => array('class' => 'control-label', 'text' => 'Company email'),));
 				?>
 		</div><!--/span-->
 		<div class="span6">

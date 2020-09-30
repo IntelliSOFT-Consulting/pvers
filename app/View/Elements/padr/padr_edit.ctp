@@ -51,7 +51,7 @@
                         echo $this->Form->input('reporter_email', array(
                             'type' => 'email',
                             'div' => array('class' => 'control-group required'),
-                            'label' => array('class' => 'control-label required', 'text' => 'Email Address <span style="color:red;">*</span>')
+                            'label' => array('class' => 'control-label required', 'text' => 'Email Address')
                         ));
                         
                     ?>
@@ -63,16 +63,16 @@
                         	'label' => array('class' => 'control-label required', 'text' => 'Relation'), 
                         	'options' => array('Self' => 'Self', 'Parent' => 'Parent', 'Guardian' => 'Guardian', 'Other' => 'Other')
                         	));
-                        echo $this->Form->input('reporter_phone', array(
-                            'div' => array('class' => 'control-group'),
-                            'label' => array('class' => 'control-label required', 'text' => 'Mobile No.')
-                        ));
-                        
                         echo $this->Form->input('county_id', array(
 									'label' => array('class' => 'control-label required',
 									'text' => 'County <span style="color:red;">*</span>'),
 									'empty' => true, 'between' => '<div class="controls ui-widget">',
 								));
+                        echo $this->Form->input('reporter_phone', array(
+                            'div' => array('class' => 'control-group'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Mobile No.')
+                        ));
+                        
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
@@ -123,7 +123,7 @@
 							'type' => 'date',
 							// 'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => true,
 							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
-							'label' => array('class' => 'control-label required', 'text' => 'Date of Birth <span style="color:red;">*</span>'),
+							'label' => array('class' => 'control-label required', 'text' => 'Date of Birth'),
 							'title'=> 'select beginning of the month if unsure', 'data-content' => 'If selected, year is mandatory.',
 							'after'=>' <a style="font-weight:normal" onclick="$(\'.birthdate\').removeAttr(\'disabled\'); $(\'.birthdate\').val(\'\');
 								$(\'#PadrAgeGroup\').attr(\'disabled\',\'disabled\'); $(\'#PadrAgeGroup\').val(\'\');" >
@@ -133,8 +133,33 @@
 						));
 
 					?>
+				
+				<div class="controls">
+					<h5 class="text-success">--OR--</h5>
 				</div>
-				<div class="span5"></div>
+				
+					<?php
+						echo $this->Form->input('age_group', array(
+							'type' => 'select',
+							'empty' => true,
+							'options' => array(
+												'neonate'=>'neonate',
+												'infant' => 'infant',
+												'child' => 'child',
+												'adolescent' => 'adolescent',
+												'adult' => 'adult',
+												'elderly' => 'elderly',
+												),
+							'label' => array('class' => 'control-label required', 'text' => 'Age Group'),
+							'after' => '<a onclick="$(\'#PadrAgeGroup\').removeAttr(\'disabled\'); $(\'#PadrAgeGroup\').val(\'\');
+									$(\'.birthdate\').attr(\'disabled\',\'disabled\'); $(\'.birthdate\').val(\'\');" >
+								<em class="accordion-toggle">clear!</em></a> </div>',
+						));
+
+					?>
+				</div>
+				<div class="span5">
+				</div>
 			</div>
 
 			<div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">SIDE EFFECT</h5></div>
@@ -156,7 +181,7 @@
 							echo $this->Form->input('date_of_onset_of_reaction', array(
 								'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
 								'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
-								'label' => array('class' => 'required', 'text' => 'When did the reaction start?'),
+								'label' => array('class' => 'required', 'text' => 'When did the reaction start? <span style="color:red;">*</span>'),
 								'class' => 'span4',
 							));
 						?>

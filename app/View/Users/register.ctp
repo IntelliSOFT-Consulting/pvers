@@ -61,7 +61,7 @@
 				echo $this->Form->input('sponsor_email', array(
 					'type' => 'email',
 					'div' => array('class' => 'control-group ribidi'),
-					'label' => array('class' => 'control-label required', 'text' => 'Sponsor\'s Email')
+					'label' => array('class' => 'control-label required', 'text' => 'Company\'s Email')
 				));
 				?>
 		</div><!--/span-->

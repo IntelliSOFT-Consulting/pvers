@@ -147,13 +147,13 @@ class Padr extends AppModel {
 				'message' => 'Please select a county',
 			),
 		),
-		'patient_address' => array(
+		/*'patient_address' => array(
             'instOrAddress' => array(
                 'rule'     => 'instOrAddress',
                 // 'required' => true,
                 'message'  => 'Please provide the patient\'s address or the name of the institution'
             ),
-        ),
+        ),*/
 		'gender' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
@@ -188,9 +188,9 @@ class Padr extends AppModel {
             ),
         ),
 		'reporter_email' => array(
-            'notBlank' => array(
-                'rule'     => 'email',
-                'required' => true,
+            'emailOrMobile' => array(
+                'rule'     => 'emailOrMobile',
+                // 'required' => true,
                 'message'  => 'Please provide a valid email address'
             ),
         )
@@ -209,6 +209,10 @@ class Padr extends AppModel {
 
 	public function ageOrDate($field = null) {
 		return !empty($field['date_of_birth']['year']) || !empty($this->data['Padr']['age_group']);
+	}
+
+	public function emailOrMobile($field = null) {
+		return !empty($this->data['Padr']['reporter_email']) || !empty($this->data['Padr']['reporter_phone']);
 	}
 
 	public function beforeSave($options = array()) {

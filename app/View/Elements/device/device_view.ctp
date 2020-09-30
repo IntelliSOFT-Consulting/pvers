@@ -18,7 +18,7 @@
 		                    <h4>MINISTRY OF HEALTH</h4>
 		                    <h4>PHARMACY AND POISONS BOARD</h4>
 		                    <h4>P.O. Box 27663-00506 NAIROBI</h4>
-		                    <h4>Tel: (020)-3562107 Ext 114, 0720 608811, 0733 884411 Fax: (020) 2713431/2713409</h4>
+		                    <h4>Tel: +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)</h4>
 		                    <h4><b>Email:</b> pv@pharmacyboardkenya.org/medicaldevices@pharmacyboardkenya.org</h4>
 		                    <h4 style="color: red;">MEDICAL DEVICES INCIDENT REPORTING FORM</h4>
 						</td>
