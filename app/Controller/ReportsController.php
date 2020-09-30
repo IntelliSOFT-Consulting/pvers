@@ -176,6 +176,34 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+    public function sadrs_by_month() {
+        $data = $this->Sadr->find('all', array(
+            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Sadr.submitted' => array(1, 2)),
+            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'order' => array('salit'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function sadrs_by_year() {
+        $data = $this->Sadr->find('all', array(
+            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Sadr.submitted' => array(1, 2)),
+            'group' => array('year(ifnull(reporter_date, created))'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * AEFI reports methods
      * 
@@ -312,6 +340,34 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+    public function aefis_by_month() {
+        $data = $this->Aefi->find('all', array(
+            'fields' => array('monthname(created) as month', 'month(created) as salit', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Aefi.submitted' => array(1, 2)),
+            'group' => array('monthname(created)'),
+            'order' => array('salit'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function aefis_by_year() {
+        $data = $this->Aefi->find('all', array(
+            'fields' => array('year(created) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Aefi.submitted' => array(1, 2)),
+            'group' => array('year(created)'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * PQMP reports methods
      * 
@@ -345,12 +401,96 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
     
+
+    public function pqmps_by_formulation() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('product_formulation', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('product_formulation'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function pqmps_by_brand() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('brand_name', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('brand_name'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function pqmps_by_generic() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('generic_name', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('generic_name'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
     public function pqmps_by_county() {
         $data = $this->Pqmp->find('all', array(
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
             'contain' => array('County'),
             'conditions' => array('Pqmp.submitted' => array(1, 2)),
             'group' => array('County.county_name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function pqmps_by_country() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('Country.name', 'COUNT(*) as cnt'),
+            'contain' => array('Country'),
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('Country.name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function pqmps_by_month() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'order' => array('salit'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function pqmps_by_year() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('year(ifnull(reporter_date, created))'),
+            'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -493,6 +633,34 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+    public function devices_by_month() {
+        $data = $this->Device->find('all', array(
+            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Device.submitted' => array(1, 2)),
+            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'order' => array('salit'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function devices_by_year() {
+        $data = $this->Device->find('all', array(
+            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Device.submitted' => array(1, 2)),
+            'group' => array('year(ifnull(reporter_date, created))'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * MEDICATION ERROR reports methods
      * 
@@ -577,6 +745,34 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+    public function medications_by_month() {
+        $data = $this->Medication->find('all', array(
+            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Medication.submitted' => array(1, 2)),
+            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'order' => array('salit'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function medications_by_year() {
+        $data = $this->Medication->find('all', array(
+            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Medication.submitted' => array(1, 2)),
+            'group' => array('year(ifnull(reporter_date, created))'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * BLOOD TRANSFUSION reports methods
      * 
@@ -595,7 +791,6 @@ class ReportsController extends AppController {
         $this->render('transfusions_by_designation');
     }
     
-
     public function transfusions_by_age() {
         $case = "((case 
                 when age_years > 0 and age_years < 1 then 'infant'
@@ -647,6 +842,35 @@ class ReportsController extends AppController {
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
+
+    public function transfusions_by_month() {
+        $data = $this->Transfusion->find('all', array(
+            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Transfusion.submitted' => array(1, 2)),
+            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'order' => array('salit'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function transfusions_by_year() {
+        $data = $this->Transfusion->find('all', array(
+            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Transfusion.submitted' => array(1, 2)),
+            'group' => array('year(ifnull(reporter_date, created))'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * SAEs reports methods
      * 
@@ -674,5 +898,33 @@ class ReportsController extends AppController {
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('saes_by_age');
+    }
+
+    public function saes_by_month() {
+        $data = $this->Sae->find('all', array(
+            'fields' => array('monthname(created) as month', 'month(created) as salit', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            // 'conditions' => array('Sae.submitted' => array(1, 2)),
+            'group' => array('monthname(created)'),
+            'order' => array('salit'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function saes_by_year() {
+        $data = $this->Sae->find('all', array(
+            'fields' => array('year(created) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            // 'conditions' => array('Sae.submitted' => array(1, 2)),
+            'group' => array('year(created)'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
     }
 }
