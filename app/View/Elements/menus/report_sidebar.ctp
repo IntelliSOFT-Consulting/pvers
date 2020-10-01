@@ -323,8 +323,14 @@
         ?>
       </li>
       <li class="<?php echo $this->fetch('medications-by-process'); ?>">
-      	<?php
+        <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Process',  array('controller' => 'reports', 'action'=>'medications_by_process', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('medications-by-reaction'); ?>">
+      	<?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Adverse Reaction',  array('controller' => 'reports', 'action'=>'medications_by_reaction', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>

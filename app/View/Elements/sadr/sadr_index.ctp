@@ -275,6 +275,7 @@
         <th><?php echo $this->Paginator->sort('reference_no'); ?></th>
         <th><?php echo $this->Paginator->sort('report_title'); ?></th>
         <th><?php echo $this->Paginator->sort('patient_name'); ?></th>
+        <?php if($redir == 'manager') { ?><th><?php echo $this->Paginator->sort('vigiflow_ref'); ?></th> <?php } ?>
         <th><?php echo $this->Paginator->sort('created'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
@@ -304,6 +305,7 @@
               ?>&nbsp;
         </td>
         <td><?php echo h($sadr['Sadr']['patient_name']); ?>&nbsp;</td>
+        <?php if($redir == 'manager') { ?><td><?php echo h($sadr['Sadr']['vigiflow_ref']); ?></td> <?php } ?>
         <td><?php echo h($sadr['Sadr']['created']); ?>&nbsp;</td>
         <td class="actions">
             <?php 
