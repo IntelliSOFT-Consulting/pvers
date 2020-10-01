@@ -443,6 +443,35 @@ class ReportsController extends AppController {
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
+
+    public function pqmps_by_manufacturer() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('name_of_manufacturer', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('name_of_manufacturer'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+
+    public function pqmps_by_supplier() {
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array('supplier_name', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array('supplier_name'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
     
     public function pqmps_by_county() {
         $data = $this->Pqmp->find('all', array(
@@ -732,6 +761,58 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
     
+    public function medications_by_producti() {
+        $data = $this->Medication->MedicationProduct->find('all', array(
+            'fields' => array('MedicationProduct.product_name_i as product_name_i', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08'),
+            'group' => array('MedicationProduct.product_name_i'),
+            'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function medications_by_productii() {
+        $data = $this->Medication->MedicationProduct->find('all', array(
+            'fields' => array('MedicationProduct.product_name_ii as product_name_ii', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08'),
+            'group' => array('MedicationProduct.product_name_ii'),
+            'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function medications_by_generici() {
+        $data = $this->Medication->MedicationProduct->find('all', array(
+            'fields' => array('MedicationProduct.generic_name_i as generic_name_i', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08'),
+            'group' => array('MedicationProduct.generic_name_i'),
+            'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+    
+    public function medications_by_genericii() {
+        $data = $this->Medication->MedicationProduct->find('all', array(
+            'fields' => array('MedicationProduct.generic_name_ii as generic_name_ii', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08'),
+            'group' => array('MedicationProduct.generic_name_ii'),
+            'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     public function medications_by_county() {
         $data = $this->Medication->find('all', array(
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
