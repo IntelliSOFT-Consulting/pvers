@@ -760,6 +760,21 @@ class ReportsController extends AppController {
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
+
+    public function medications_by_process() {
+        //TODO: add process_occur_specify
+        $data = $this->Medication->find('all', array(
+            'fields' => array('process_occur', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Medication.submitted' => array(1, 2)),
+            'group' => array('process_occur'),
+            'order' => array('COUNT(*) DESC'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
     
     public function medications_by_producti() {
         $data = $this->Medication->MedicationProduct->find('all', array(
@@ -904,6 +919,19 @@ class ReportsController extends AppController {
             'contain' => array(), 'recursive' => -1,
             'conditions' => array('Transfusion.submitted' => array(1, 2)),
             'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function transfusions_by_reaction() {
+        $data = $this->Transfusion->find('all', array(
+            'fields' => array('adverse_reaction', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Transfusion.submitted' => array(1, 2)),
+            'group' => array('adverse_reaction'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 

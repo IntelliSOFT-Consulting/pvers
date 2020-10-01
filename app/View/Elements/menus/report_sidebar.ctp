@@ -317,8 +317,14 @@
         ?>
       </li>
       <li class="<?php echo $this->fetch('medications-by-facility'); ?>">
-      	<?php
+        <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Facility',  array('controller' => 'reports', 'action'=>'medications_by_facility', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('medications-by-process'); ?>">
+      	<?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Process',  array('controller' => 'reports', 'action'=>'medications_by_process', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>
