@@ -1036,4 +1036,75 @@ class ReportsController extends AppController {
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
+
+    public function saes_by_outcome() {
+        $case = "((case 
+                when patient_died = 1 then 'Patient died'
+                when prolonged_hospitalization = 1 then 'Prolonged hospitalization'
+                when incapacity = 1 then 'Significant disability'
+                when life_threatening = 1 then 'Life threatening'
+                else 'Other'
+               end))";
+
+        $data = $this->Sae->find('all', array(
+            'fields' => array($case.' as outcome', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            // 'conditions' => array('Sae.submitted' => array(1, 2)),
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function saes_by_causality() {
+        $data = $this->Sae->find('all', array(
+            'fields' => array('causality', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'group' => array('causality'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }  
+
+    public function saes_by_gender() {
+        $data = $this->Sae->find('all', array(
+            'fields' => array('gender', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function saes_by_medicine() {
+        $data = $this->Sae->SuspectedDrug->find('all', array(
+            'fields' => array('SuspectedDrug.generic_name as generic_name', 'COUNT(distinct SuspectedDrug.sae_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            // 'conditions' => array('SuspectedDrug.created >' => '2020-04-01 08:08:08'),
+            'group' => array('SuspectedDrug.generic_name'),
+            'having' => array('COUNT(distinct SuspectedDrug.sae_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function saes_by_concomittant() {
+        $data = $this->Sae->ConcomittantDrug->find('all', array(
+            'fields' => array('ConcomittantDrug.generic_name as generic_name', 'COUNT(distinct ConcomittantDrug.sae_id) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            // 'conditions' => array('ConcomittantDrug.created >' => '2020-04-01 08:08:08'),
+            'group' => array('ConcomittantDrug.generic_name'),
+            'having' => array('COUNT(distinct ConcomittantDrug.sae_id) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
 }

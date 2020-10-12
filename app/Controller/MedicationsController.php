@@ -164,6 +164,77 @@ class MedicationsController extends AppController {
             $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
         }
     }
+
+
+/**
+ * download methods
+ */
+    public function download($id = null) {
+        $this->Medication->id = $id;
+        if (!$this->Medication->exists()) {
+            $this->Session->setFlash(__('Could not verify the report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        $medication = $this->Medication->find('first', array(
+                'conditions' => array('Medication.id' => $id),
+                'contain' => array('MedicationProduct', 'County', 'Attachment', 'Designation')
+            ));
+        $medication = Sanitize::clean($medication, array('escape' => true));
+        $this->set('medication', $medication);
+        $this->response->download('MEDICATION_'.$medication['Medication']['id']);
+    }
+
+    public function vigiflow($id = null) {
+        $this->Medication->id = $id;
+        if (!$this->Medication->exists()) {
+            $this->Session->setFlash(__('Could not verify the report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        $medication = $this->Medication->find('first', array(
+                'conditions' => array('Medication.id' => $id),
+                'contain' => array('MedicationProduct', 'County', 'Attachment', 'Designation')
+            ));
+        $medication = Sanitize::clean($medication, array('escape' => true));
+
+        $view = new View($this,false);
+        $view->viewPath='Medications/xml';  // Directory inside view directory to search for .ctp files
+        $view->layout=false; // if you want to disable layout
+        $view->set('medication', $medication); // set your variables for view here
+        $html=$view->render('download'); 
+
+        // debug($html);
+        $HttpSocket = new HttpSocket();
+        // string data
+        $results = $HttpSocket->post(
+            'https://api.who-umc.org/demo/vigiflow/icsrs',
+            $html,
+            array('header' => array('umc-client-key' => '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'))
+        );
+
+        // debug($results->code);
+        // debug($results->body);
+        if ($results->isOk()) {
+            $body = $results->body;
+            $this->Medication->saveField('vigiflow_message', $body);
+            $resp = json_decode($body, true);
+            if(json_last_error() == JSON_ERROR_NONE) {
+                $this->Medication->saveField('vigiflow_ref', $resp['MessageId']);
+            }
+            $this->Flash->success('Vigiflow integration success!!');
+            $this->Flash->success($body);
+            $this->redirect($this->referer());
+        } else {
+            $body = $results->body;
+            $this->Medication->saveField('vigiflow_message', $body);
+            $this->Flash->error('Error sending report to vigiflow:');
+            $this->Flash->error($body);
+            $this->redirect($this->referer());
+        }
+        $this->autoRender = false ;
+    }
+
 /**
  * add method
  *
