@@ -402,7 +402,7 @@
                           'error' => array('attributes' => array('wrap' => 'p', 'class' => 'controls required error')),
                           'before' => '<label class="radio inline">',
                           'after' => '</label>
-                                <span class="help-inline" style="padding-top: 5px;"><a class="tooltipper" data-original-title="Clear selection"
+                                <span class="help-inline" style="padding-top: 5px;"><a id="serious_yes_clear" class="tooltipper" data-original-title="Clear selection"
                                 onclick="$(\'.serious_yes\').removeAttr(\'checked disabled\')">
                                 <em class="accordion-toggle">clear!</em></a> </span>
 

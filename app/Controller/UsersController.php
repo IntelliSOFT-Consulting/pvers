@@ -743,10 +743,12 @@ class UsersController extends AppController {
 		$this->Acl->allow($group, 'controllers/Devices/reporter_view');
 		$this->Acl->allow($group, 'controllers/Medications/reporter_index');
 		$this->Acl->allow($group, 'controllers/Medications/reporter_add');
+		$this->Acl->allow($group, 'controllers/Medications/reporter_followup');
 		$this->Acl->allow($group, 'controllers/Medications/reporter_edit');
 		$this->Acl->allow($group, 'controllers/Medications/reporter_view');
 		$this->Acl->allow($group, 'controllers/Transfusions/reporter_index');
 		$this->Acl->allow($group, 'controllers/Transfusions/reporter_add');
+		$this->Acl->allow($group, 'controllers/Transfusions/reporter_followup');
 		$this->Acl->allow($group, 'controllers/Transfusions/reporter_edit');
 		$this->Acl->allow($group, 'controllers/Transfusions/reporter_view');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/sadrIndex');

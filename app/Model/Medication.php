@@ -146,7 +146,13 @@ class Medication extends AppModel {
         )
 	);
 
-	public $hasMany = array(        
+	public $hasMany = array(
+        'MedicationFollowup' => array(
+            'className' => 'Medication',
+            'foreignKey' => 'medication_id',
+            'dependent' => true,
+            'conditions' => array('MedicationFollowup.report_type' => 'Followup'),
+        ), 
 		'Attachment' => array(
             'className' => 'Attachment',
             'foreignKey' => 'foreign_key',

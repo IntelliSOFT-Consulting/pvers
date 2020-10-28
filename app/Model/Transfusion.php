@@ -124,7 +124,13 @@ class Transfusion extends AppModel {
         )
 	);
 
-	public $hasMany = array(        
+	public $hasMany = array(
+        'TransfusionFollowup' => array(
+            'className' => 'Transfusion',
+            'foreignKey' => 'transfusion_id',
+            'dependent' => true,
+            'conditions' => array('TransfusionFollowup.report_type' => 'Followup'),
+        ), 
 		'Attachment' => array(
             'className' => 'Attachment',
             'foreignKey' => 'foreign_key',

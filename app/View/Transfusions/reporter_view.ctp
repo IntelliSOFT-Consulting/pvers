@@ -22,6 +22,9 @@
                             'data-content' => 'Download the pdf version of the report',));
             ?>
             <hr>
+            <?php
+               echo $this->Form->postLink('<span class="btn btn-warning btn-block tooltipper" data-toggle="tooltip" title="Add follow up report">  <b>Follow-up</b> <i class="fa fa-plus" aria-hidden="true"></i> </span>', array('controller' => 'transfusions' , 'action' => 'followup', $transfusion['Transfusion']['id']), array('escape' => false), __('Add a followup report?'));
+            ?>
 
             <hr>
             <?php

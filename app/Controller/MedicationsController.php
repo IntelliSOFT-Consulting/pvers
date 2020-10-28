@@ -241,6 +241,41 @@ class MedicationsController extends AppController {
  * @return void
  */
 
+    public function reporter_followup($id = null) {
+        if ($this->request->is('post')) {
+            $this->Medication->id = $id;
+            if (!$this->Medication->exists()) {
+                throw new NotFoundException(__('Invalid Medication Error'));
+            }
+            $medication = Hash::remove($this->Medication->find('first', array(
+                        'contain' => array('MedicationProduct'),
+                        'conditions' => array('Medication.id' => $id)
+                        )
+                    ), 'Medication.id');
+
+            $medication = Hash::remove($medication, 'MedicationProduct.{n}.id');
+            $data_save = $medication['Medication'];
+            $data_save['MedicationProduct'] = $medication['MedicationProduct'];
+            $data_save['medication_id'] = $id;
+
+            $count = $this->Medication->find('count',  array('conditions' => array(
+                        'Medication.reference_no LIKE' => $medication['Medication']['reference_no'].'%',
+                        )));
+            $count = ($count < 10) ? "0$count" : $count;
+            $data_save['reference_no'] = $medication['Medication']['reference_no'].'_F'.$count;
+            $data_save['report_type'] = 'Followup';
+            $data_save['submitted'] = 0;
+
+            if ($this->Medication->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                    $this->Session->setFlash(__('Follow up '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
+                    $this->redirect(array('action' => 'edit', $this->Medication->id));               
+            } else {
+                $this->Session->setFlash(__('The followup could not be saved. Please, try again.'), 'alerts/flash_error');
+                $this->redirect($this->referer());
+            }
+        }
+    }
+
 	public function reporter_add() {        
         $count = $this->Medication->find('count',  array('conditions' => array(
             'Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));

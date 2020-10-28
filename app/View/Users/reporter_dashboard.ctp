@@ -116,6 +116,8 @@
                           echo "<li>";
                             echo $this->Html->link($medication['MedicationProduct'][0]['generic_name_i'].' <small class="muted">('.$medication['Medication']['reference_no'].')</small>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
                               array('escape' => false, 'class' => 'text-success'));  
+                          echo "&nbsp;";
+                          echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'medications' , 'action' => 'followup', $medication['Medication']['id']), array('escape' => false), __('Add a followup report?'));
                           echo "</li>";
                         } else {
                           echo "<li>";
@@ -138,6 +140,9 @@
                           echo "<li>";
                             echo $this->Html->link($transfusion['Transfusion']['diagnosis'].' <small class="muted">('.$transfusion['Transfusion']['reference_no'].')</small>', array('controller' => 'transfusions', 'action' => 'view', $transfusion['Transfusion']['id']),
                               array('escape' => false, 'class' => 'text-success')); 
+                          echo "&nbsp;";
+                          echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'transfusions' , 'action' => 'followup', $transfusion['Transfusion']['id']), array('escape' => false), __('Add a followup report?'));
+                          echo "</li>";
                           echo "</li>";
                         } else {
                           echo "<li>";

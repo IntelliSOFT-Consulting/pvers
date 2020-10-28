@@ -308,6 +308,8 @@
                 echo $this->Html->link('<span class="label label-info tooltipper" title="View"><i class="fa fa-eye" aria-hidden="true"></i> View </span>',
                   array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
                   array('escape' => false));
+                echo "&nbsp;";                
+                if($redir == 'reporter') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> Followup </span>', array('controller' => 'medications' , 'action' => 'followup', $medication['Medication']['id']), array('escape' => false), __('Add a followup report?'));
                 echo "&nbsp;";
                 if($redir == 'manager') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'medications' , 'action' => 'download', $medication['Medication']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
                 echo "&nbsp;";

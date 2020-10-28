@@ -22,7 +22,7 @@
 						<label class="help-block required">	(include OTC and herbals)  </label>
 						<span class="label label-info">INN/ Generic Name</span>
 					</th>
-					<th style="width: 9%;">Brand Name <span style="color:red;">*</span></th>
+					<th style="width: 9%;">Brand Name</th>
 					<th style="width: 7%;">Batch/ Lot No.</th>
 					<th style="width: 7%;">Manufacturer</th>
 					<th colspan="2" style="width: 13%;" class="required"

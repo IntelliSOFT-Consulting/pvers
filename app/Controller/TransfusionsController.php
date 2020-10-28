@@ -169,6 +169,42 @@ class TransfusionsController extends AppController {
  * @return void
  */
 
+    public function reporter_followup($id = null) {
+        if ($this->request->is('post')) {
+            $this->Transfusion->id = $id;
+            if (!$this->Transfusion->exists()) {
+                throw new NotFoundException(__('Invalid Transfusion Error'));
+            }
+            $transfusion = Hash::remove($this->Transfusion->find('first', array(
+                        'contain' => array('Pint'),
+                        'conditions' => array('Transfusion.id' => $id)
+                        )
+                    ), 'Transfusion.id');
+
+            $transfusion = Hash::remove($transfusion, 'Pint.{n}.id');
+            $data_save = $transfusion['Transfusion'];
+            // $data_save['Pint'] = $transfusion['Pint'];
+            if(isset($transfusion['Pint'])) $data_save['Pint'] = $transfusion['Pint'];
+            $data_save['transfusion_id'] = $id;
+
+            $count = $this->Transfusion->find('count',  array('conditions' => array(
+                        'Transfusion.reference_no LIKE' => $transfusion['Transfusion']['reference_no'].'%',
+                        )));
+            $count = ($count < 10) ? "0$count" : $count;
+            $data_save['reference_no'] = $transfusion['Transfusion']['reference_no'].'_F'.$count;
+            $data_save['report_type'] = 'Followup';
+            $data_save['submitted'] = 0;
+
+            if ($this->Transfusion->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                    $this->Session->setFlash(__('Follow up '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
+                    $this->redirect(array('action' => 'edit', $this->Transfusion->id));               
+            } else {
+                $this->Session->setFlash(__('The followup could not be saved. Please, try again.'), 'alerts/flash_error');
+                $this->redirect($this->referer());
+            }
+        }
+    }
+
 	public function reporter_add() {        
         $count = $this->Transfusion->find('count',  array('conditions' => array(
             'Transfusion.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));

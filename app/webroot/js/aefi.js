@@ -14,6 +14,18 @@
 	$("#AefiAefiSymptoms").autocomplete({
 			source: "/meddras/autocomplete.json"
 	});
+
+	//If not serious disable criteria
+    $('input[name="data[Aefi][serious]"]').click(function(){ 
+        if ($(this).val() == 'No') {
+            $('input[name="data[Aefi][serious_yes]"]').attr('disabled', this.checked).attr('checked', !this.checked);
+            $('#serious_yes_clear').hide();
+        } else {
+            $('input[name="data[Aefi][serious_yes]"]').attr('disabled', false);
+            $('#serious_yes_clear').show();
+        }
+    });
+    if($('input[name="data[Aefi][serious]"][value="No"]').is(':checked')){ $('input[name="data[Aefi][serious_yes]"]').attr('disabled', true).attr('checked', false); }
 	
     var cache2 = {},	lastXhr;
 	$( "#AefiInstitutionCode" ).autocomplete({
