@@ -526,6 +526,84 @@ class ReportsController extends AppController {
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
+    
+    public function pqmps_by_category() {
+        $case = "((case 
+                when medicinal_product = 1 then 'Medicinal Product'
+                when blood_products = 1 then 'Blood and blood products'
+                when herbal_product = 1 then 'Herbal product'
+                when medical_device = 1 then 'Medical device'
+                when product_vaccine = 1 then 'Vaccine'
+                when cosmeceuticals = 1 then 'Cosmeceuticals'
+                else 'Others'
+               end))";
+
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array($case.' as category', 'COUNT(*) as cnt'),
+            'contain' => array(),
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function pqmps_by_complaint() {
+        $case = "((case 
+                when colour_change = 1 then 'Colour change'
+                when separating = 1 then 'Separating'
+                when powdering = 1 then 'Powdering'
+                when caking = 1 then 'Caking'
+                when moulding = 1 then 'Moulding'
+                when odour_change = 1 then 'Odour change'
+                when mislabeling = 1 then 'Mislabeling'
+                when incomplete_pack = 1 then 'Incomplete pack'
+                when therapeutic_ineffectiveness = 1 then 'Therapeutic ineffectiveness'
+                when particulate_matter = 1 then 'Particulate matter'
+                else 'Others'
+               end))";
+
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array($case.' as complaint', 'COUNT(*) as cnt'),
+            'contain' => array(),
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function pqmps_by_device() {
+        $case = "((case 
+                when packaging = 1 then 'Packaging'
+                when labelling = 1 then 'Labelling'
+                when sampling = 1 then 'Sampling'
+                when mechanism = 1 then 'Mechanism'
+                when electrical = 1 then 'Electrical'
+                when device_data = 1 then 'Data'
+                when software = 1 then 'Software'
+                when environmental = 1 then 'Environmental'
+                when failure_to_calibrate = 1 then 'Failure to calibrate'
+                when results = 1 then 'Results'
+                when readings = 1 then 'Readings'
+                else 'N/A'
+               end))";
+
+        $data = $this->Pqmp->find('all', array(
+            'fields' => array($case.' as device', 'COUNT(*) as cnt'),
+            'contain' => array(),
+            'conditions' => array('Pqmp.submitted' => array(1, 2)),
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
 
     /**
      * MEDICAL DEVICES reports methods

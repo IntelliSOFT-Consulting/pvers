@@ -159,6 +159,24 @@
                       array('escape' => false));
         ?>
       </li>
+      <li class="<?php echo $this->fetch('pqmps-by-category'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Product Category',  array('controller' => 'reports', 'action'=>'pqmps_by_category', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('pqmps-by-complaint'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Product Complaint',  array('controller' => 'reports', 'action'=>'pqmps_by_complaint', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('pqmps-by-device'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Medical Device',  array('controller' => 'reports', 'action'=>'pqmps_by_device', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
       <li class="<?php echo $this->fetch('pqmps-by-brand'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Brand Name',  array('controller' => 'reports', 'action'=>'pqmps_by_brand', 'admin' => false ),

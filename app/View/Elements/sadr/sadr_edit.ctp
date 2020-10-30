@@ -366,6 +366,11 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<?php
+						echo $this->Form->input('diagnosis', array('class' => 'span8', 'rows' => '2',
+																	'label' => array('class' => 'control-label required', 'text' => 'DIAGNOSIS'),
+																	'after'=>'<p class="help-block"> (What was the patient treated for) </p></div>',
+																	));
+						
 						echo $this->Form->input('date_of_onset_of_reaction', array(
 							'type' => 'date',
 							'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => true,
@@ -379,10 +384,6 @@
 							'after'=>'<p class="help-block">	Please describe the reaction in terms of symptoms </p></div>',
 						));
 
-						/*echo $this->Form->input('diagnosis', array('class' => 'span8', 'rows' => '2',
-																	'label' => array('class' => 'control-label required', 'text' => 'DIAGNOSIS'),
-																	'after'=>'<p class="help-block"> (What was the patient treated for) </p></div>',
-																	));*/
 
 						echo $this->Form->input('medical_history', array(
 							'class' => 'span8', 'rows' => '2',
