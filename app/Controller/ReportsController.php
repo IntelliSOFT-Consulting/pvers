@@ -947,6 +947,48 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+    public function medications_by_error() {
+        $case = "((case 
+                when outcome in ('Potential error, circumstances/events have potential to cause incident') then 'NO ERROR'
+                when outcome in ('Treatment /intervention required-caused temporary harm', 'Initial/prolonged hospitalization-caused temporary harm', 'Caused permanent harm', 'Near death event') then 'ERROR, HARM'
+                when outcome in ('Actual error-did not reach patient', 'Actual error-caused no harm', 'Additional monitoring required-caused no harm') then 'ERROR, NO HARM'
+                when outcome in ('Death') then 'ERROR, DEATH'
+                else 'N/A'
+               end))";
+
+        $data = $this->Medication->find('all', array(
+            'fields' => array($case.' as error', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Medication.submitted' => array(1, 2)),
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function medications_by_factors() {
+        $case = "((case 
+                when error_cause_inexperience = 1 or error_cause_knowledge = 1 or error_cause_distraction = 1 then 'Staff factors'
+                when error_cause_medication = 1 or error_cause_packaging = 1 or error_cause_sound = 1 then 'Medication related'
+                when error_cause_workload = 1 or error_cause_peak = 1 or error_cause_stock = 1 then 'Work and environment'
+                when error_cause_procedure = 1 or error_cause_abbreviations = 1 or error_cause_illegible = 1 or error_cause_inaccurate = 1 or error_cause_labelling = 1 or error_cause_computer = 1 or error_cause_other = 1  then 'Task and technology'
+                else 'N/A'
+               end))";
+
+        $data = $this->Medication->find('all', array(
+            'fields' => array($case.' as factor', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Medication.submitted' => array(1, 2)),
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
     /**
      * BLOOD TRANSFUSION reports methods
      * 
@@ -1058,6 +1100,57 @@ class ReportsController extends AppController {
         $this->set('_serialize', 'data');
     }
 
+
+    public function transfusions_by_rtype() {
+        $case = "((case 
+                when reaction_general is not null then 'General'
+                when reaction_dermatological is not null then 'Dermatological'
+                when reaction_cardiac is not null then 'Cardiac'
+                when reaction_renal is not null then 'Renal'
+                when reaction_haematological is not null then 'Haematological'
+                when reaction_other is not null then 'Others'
+                else 'N/A'
+               end))";
+
+        $data = $this->Transfusion->find('all', array(
+            'fields' => array($case.' as rtype', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Transfusion.submitted' => array(1, 2)),
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+
+    public function transfusions_by_ptransfusion() {
+        $data = $this->Transfusion->find('all', array(
+            'fields' => array('previous_transfusion', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Transfusion.submitted' => array(1, 2), 'Transfusion.previous_transfusion !=' => ''),
+            'group' => array('previous_transfusion'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+
+    public function transfusions_by_preaction() {
+        $data = $this->Transfusion->find('all', array(
+            'fields' => array('previous_reactions', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => array('Transfusion.submitted' => array(1, 2), 'Transfusion.previous_reactions !=' => ''),
+            'group' => array('previous_reactions'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
     /**
      * SAEs reports methods
      * 
@@ -1153,6 +1246,30 @@ class ReportsController extends AppController {
             'fields' => array('gender', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function saes_by_manufacturer() {
+        $data = $this->Sae->find('all', array(
+            'fields' => array('manufacturer_name as manufacturer', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'group' => array('manufacturer_name'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function saes_by_application() {
+        $data = $this->Sae->find('all', array(
+            'fields' => array('application_id as application', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'group' => array('application_id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 

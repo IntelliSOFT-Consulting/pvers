@@ -519,7 +519,7 @@
                                                     'after' => 'Incorrect computer entry </label>',));
                         echo $this->Form->input('error_cause_other', array(
                             'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
-                                                    'between' => '<input type="hidden" value="0" id="Medication_error_cause_other_" name="data[Medication][   error_cause_other]">
+                                                    'between' => '<input type="hidden" value="0" id="Medication_error_cause_other_" name="data[Medication][error_cause_other]">
                                                                     <label class="checkbox">',
                                                     'after' => 'Others: </label>',));
                         echo $this->Form->input('error_cause_specify', array(

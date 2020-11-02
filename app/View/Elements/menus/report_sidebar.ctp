@@ -347,8 +347,20 @@
         ?>
       </li>
       <li class="<?php echo $this->fetch('medications-by-reaction'); ?>">
-      	<?php
+        <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Adverse Reaction',  array('controller' => 'reports', 'action'=>'medications_by_reaction', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('medications-by-errors'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Error Outcome',  array('controller' => 'reports', 'action'=>'medications_by_error', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('medications-by-factors'); ?>">
+      	<?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Contributing Factors',  array('controller' => 'reports', 'action'=>'medications_by_factors', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>
@@ -384,8 +396,26 @@
         ?>
       </li>
       <li class="<?php echo $this->fetch('transfusions-by-gender'); ?>">
-      	<?php
+        <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Gender',  array('controller' => 'reports', 'action'=>'transfusions_by_gender', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('transfusions-by-rtype'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Reaction Type',  array('controller' => 'reports', 'action'=>'transfusions_by_rtype', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('transfusions-by-ptransfusion'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Previous Transfusion',  array('controller' => 'reports', 'action'=>'transfusions_by_ptransfusion', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('transfusions-by-preaction'); ?>">
+      	<?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Previous Reaction',  array('controller' => 'reports', 'action'=>'transfusions_by_preaction', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>
@@ -441,6 +471,18 @@
       <li class="<?php echo $this->fetch('saes-by-gender'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Gender',  array('controller' => 'reports', 'action'=>'saes_by_gender', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('saes-by-manufacturer'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Manufacturer',  array('controller' => 'reports', 'action'=>'saes_by_manufacturer', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
+      <li class="<?php echo $this->fetch('saes-by-application'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Source',  array('controller' => 'reports', 'action'=>'saes_by_application', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>
