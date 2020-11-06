@@ -200,7 +200,7 @@ class DevicesController extends AppController {
             $device = Hash::remove($device, 'ListOfDevice.{n}.id');
             $device = Hash::remove($device, 'Attachment.{n}.id');
             $data_save = $device['Device'];
-            $data_save['ListOfDevice'] = $device['ListOfDevice'];
+            // $data_save['ListOfDevice'] = $device['ListOfDevice'];
             if(isset($device['ListOfDevice'])) $data_save['ListOfDevice'] = $device['ListOfDevice'];
             if(isset($device['Attachment'])) $data_save['Attachment'] = $device['Attachment'];
             $data_save['device_id'] = $id;
