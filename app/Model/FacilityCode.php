@@ -16,14 +16,14 @@ class FacilityCode extends AppModel {
 		if (($suggestions = Cache::read($query, 'facs')) === false) {
 			if($type == 'N') {
 				$suggestions = $this->find('all', array(
-					'fields' =>  array('FacilityCode.facility_code', 'FacilityCode.facility_name' , 'FacilityCode.county' , 'FacilityCode.official_address', 'FacilityCode.official_mobile', 'FacilityCode.district' ),
+					'fields' =>  array('FacilityCode.facility_code', 'FacilityCode.facility_name' ,  'FacilityCode.official_address', 'FacilityCode.official_mobile', 'FacilityCode.district' ),
 					'conditions' => array('FacilityCode.facility_code LIKE' => '%'.$query.'%'),
 					'limit' => 10,
 					'recursive' => -1
 				));
 			} else {
 				$suggestions = $this->find('all', array(
-					'fields' =>  array('FacilityCode.facility_code', 'FacilityCode.facility_name' , 'FacilityCode.county' , 'FacilityCode.official_address',  'FacilityCode.official_mobile', 'FacilityCode.district' ),
+					'fields' =>  array('FacilityCode.facility_code', 'FacilityCode.facility_name' ,  'FacilityCode.official_address',  'FacilityCode.official_mobile', 'FacilityCode.district' ),
 					'conditions' => array('FacilityCode.facility_name LIKE' => '%'.$query.'%'),
 					'limit' => 10,
 					'recursive' => -1

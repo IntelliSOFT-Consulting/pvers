@@ -63,4 +63,30 @@
             return false;
         }
     })
+
+    var cache4 = {},    lastXhr;
+    $( "#UserSponsorEmail" ).autocomplete({
+        source: function( request, response ) {
+            var term = request.term;
+            if ( term in cache4 ) {
+                response( cache4[ term ] );
+                return;
+            }
+
+            lastXhr = $.getJSON( "/authorities/autocomplete.json", request, function( data, status, xhr ) {
+                cache4[ term ] = data;
+                if ( xhr === lastXhr ) {
+                    response( data );
+                }
+            });
+        },
+        select: function( event, ui ) {
+            $( "#UserSponsorEmail" ).val( ui.item.value );
+            $( "#UserNameOfInstitution" ).val( ui.item.label );
+            $( "#UserInstitutionAddress" ).val( ui.item.addr );
+            $( "#UserInstitutionCode" ).val( ui.item.code );
+            $( "#UserInstitutionContact" ).val( ui.item.phone );
+            return false;
+        }
+    })
   });
