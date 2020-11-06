@@ -45,7 +45,7 @@
 					<?php	
 						// echo $this->Form->submit(__('Search', true), array('div' => 'control-group', 'class' => 'btn btn-inverse'));
 						echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
-									'class' => 'btn btn-inverse', 'div' => 'control-group', 'div' => false,
+									'class' => 'btn btn-inverse', 'div' => 'control-group', 'div' => false, 'formnovalidate' => 'formnovalidate',
 								));
 						echo $this->Form->end();
 					?>
