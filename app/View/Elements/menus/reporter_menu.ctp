@@ -49,7 +49,7 @@
                         array('controller' => 'notifications', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
-             <?php if($this->Session->read('Auth.User.user_type') == 'County Pharmacist'){ ?>             
+             <?php if($this->Session->read('Auth.User.user_type') == 'County Pharmacist' || $this->Session->read('Auth.User.user_type') == 'Public Health Program') { ?>             
              <li class="<?php echo $this->fetch('Reports') ?>">
                 <?php
                     echo $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> Reports',
