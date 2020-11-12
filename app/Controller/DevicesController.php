@@ -45,6 +45,34 @@ class DevicesController extends AppController {
         $this->set('devices', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    public function partner_index() {
+        $this->Prg->commonProcess();
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($this->page_options);
+
+        $criteria = $this->Device->parseCriteria($this->passedArgs);
+        $criteria['Device.name_of_institution'] = $this->Auth->User('name_of_institution');    
+        $criteria['Device.submitted'] = array(1, 2); 
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Device.created' => 'desc');
+        $this->paginate['contain'] = array('County');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Device->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end pdf export
+        $this->set('page_options', $this->page_options);
+        $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Device->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $this->set('devices', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
+
     public function manager_index() {
         $this->Prg->commonProcess();
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
@@ -131,6 +159,32 @@ class DevicesController extends AppController {
     }
 
     public function manager_view($id = null) {
+        $this->Device->id = $id;
+        if (!$this->Device->exists()) {
+            $this->Session->setFlash(__('Could not verify the DEVICE report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
+            // $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
+        }
+
+        $device = $this->Device->find('first', array(
+                'conditions' => array('Device.id' => $id),
+                'contain' => array('ListOfDevice', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'DeviceOriginal', 'DeviceOriginal.ListOfDevice', 'DeviceOriginal.County', 'DeviceOriginal.SubCounty', 'DeviceOriginal.Attachment', 'DeviceOriginal.Designation', 'DeviceOriginal.ExternalComment')
+            ));
+        $this->set('device', $device);
+        // $this->render('pdf/view');
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'DEVICE_' . $id .'.pdf',  'orientation' => 'portrait');
+            $this->response->download('DEVICE_'.$device['Device']['id'].'.pdf');
+        }
+    }
+
+    public function partner_view($id = null) {
         $this->Device->id = $id;
         if (!$this->Device->exists()) {
             $this->Session->setFlash(__('Could not verify the DEVICE report ID. Please ensure the ID is correct.'), 'flash_error');

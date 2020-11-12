@@ -64,6 +64,36 @@ class PqmpsController extends AppController {
         $this->set(compact('designations'));
         $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
+
+    public function partner_index() {
+        $this->Prg->commonProcess();
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($this->page_options);
+
+        $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
+        $criteria['Pqmp.facility_name'] = $this->Auth->User('name_of_institution');    
+        $criteria['Pqmp.submitted'] = array(1, 2); 
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Pqmp.created' => 'desc');
+        $this->paginate['contain'] = array('County', 'Country');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Pqmp->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end pdf export
+        $this->set('page_options', $this->page_options);
+        $counties = $this->Pqmp->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $countries = $this->Pqmp->Country->find('list', array('order' => array('Country.name' => 'ASC')));
+        $this->set(compact('countries'));
+        $designations = $this->Pqmp->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
     
     public function manager_index() {
         $this->Prg->commonProcess();
@@ -125,7 +155,45 @@ class PqmpsController extends AppController {
             if (isset($this->request->data['continueEditing'])) {
                 $this->Pqmp->saveField('submitted', 0);
                 $this->Session->setFlash(__('You can continue editing the report'), 'flash_success');
-                $this->redirect(array('action' => 'edit', $this->Pqmp->Luhn($this->Pqmp->id)));
+                $this->redirect(array('action' => 'edit', $this->Pqmp->id));
+            }
+            if (isset($this->request->data['sendToPPB'])) {
+                $this->Pqmp->saveField('submitted', 2);
+                $this->Session->setFlash(__('Thank you for submitting your report. You will get an email with a link to the pdf copy of the report.'), 'flash_success');
+                $this->redirect('/');
+            }
+        }
+
+        $pqmp = $this->Pqmp->find('first', array(
+                'conditions' => array('Pqmp.id' => $id),
+                'contain' => array('Country', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'PqmpOriginal', 'PqmpOriginal.Country', 'PqmpOriginal.County', 'PqmpOriginal.SubCounty', 'PqmpOriginal.Attachment', 'PqmpOriginal.Designation', 'PqmpOriginal.ExternalComment')
+            ));
+        $this->set('pqmp', $pqmp);
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'PQMP_' . $id .'.pdf',  'orientation' => 'portrait');
+            $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
+        }
+    }
+
+    public function partner_view($id = null) {
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            $this->Session->setFlash(__('Could not verify the PQMP report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'PQMP_' . $id .'.pdf',  'orientation' => 'portrait');
+            // $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
+        }
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if (isset($this->request->data['continueEditing'])) {
+                $this->Pqmp->saveField('submitted', 0);
+                $this->Session->setFlash(__('You can continue editing the report'), 'flash_success');
+                $this->redirect(array('action' => 'edit', $this->Pqmp->id));
             }
             if (isset($this->request->data['sendToPPB'])) {
                 $this->Pqmp->saveField('submitted', 2);

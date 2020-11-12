@@ -49,13 +49,15 @@
                         array('controller' => 'notifications', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
-             <?php /* ?><?php */ ?>
-             <li class="<?php echo $this->fetch('ContactUs') ?>">
+             <?php if($this->Session->read('Auth.User.user_type') == 'County Pharmacist'){ ?>             
+             <li class="<?php echo $this->fetch('Reports') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-envelope-o" aria-hidden="true"></i> My Messages',
-                        array('controller' => 'feedbacks', 'action'=>'add', 'reporter' => false ), array('escape' => false ));
+                    echo $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> Reports',
+                        array('controller' => 'reports', 'action'=>'index', 'manager' => false ), array('escape' => false ));
                     ?>
              </li>
+             <?php } ?>
+
              <li class="dropdown <?php echo $this->fetch('Profile') ?>">
                  <a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop7" href="#">
                     <i class="fa fa-user-secret" aria-hidden="true"></i> My Profile <b class="caret"></b></a>

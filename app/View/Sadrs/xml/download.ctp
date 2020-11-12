@@ -1,7 +1,7 @@
-<?php echo '<?xml version="1.0" encoding="ISO-8859-1"?>'; echo "\n"; ?>
+<?php echo '<?xml version="1.0" encoding="utf-16"?>'; echo "\n"; ?>
 <!DOCTYPE ichicsr SYSTEM "http://eudravigilance.ema.europa.eu/dtd/icsr21xml.dtd">
 <ichicsr lang="en">
-    <ichicsrmessageheader>
+    <ichicsrmessageheader lang="en">
         <messagetype>ichicsr</messagetype>
         <messageformatversion>2.1</messageformatversion>
         <messageformatrelease>2.0</messageformatrelease>
@@ -13,7 +13,7 @@
         <messagedateformat>204</messagedateformat>
         <messagedate><?php echo date('YmdHis');?></messagedate>
     </ichicsrmessageheader>
-    <safetyreport>
+    <safetyreport lang="en">
         <safetyreportversion>1</safetyreportversion>
         <safetyreportid>KE-PPB-<?php
             echo $sadr['Sadr']['reference_no'];

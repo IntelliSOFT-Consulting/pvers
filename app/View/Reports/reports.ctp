@@ -11,7 +11,16 @@
 
 <div class="row-fluid">
     <div class="span2">
-        <?php echo $this->element('menus/report_sidebar'); ?>
+        <?php 
+          if($this->Session->read('Auth.User.user_type') == 'County Pharmacist'){
+              echo $this->element('menus/report_county_sidebar'); 
+          } elseif ($this->Session->read('Auth.User.user_type') == 'Public Health Program') {
+              echo $this->element('menus/report_program_sidebar'); 
+          }
+          else {
+              echo $this->element('menus/report_sidebar'); 
+          }
+        ?>
     </div>
     <div class="span10">
         <?php

@@ -56,6 +56,33 @@ class TransfusionsController extends AppController {
         $this->set('transfusions', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    public function partner_index() {
+        $this->Prg->commonProcess();
+        $page_options = array('25' => '25', '20' => '20');
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($page_options);
+
+        $criteria = $this->Transfusion->parseCriteria($this->passedArgs);
+        $criteria['Transfusion.user_id'] = $this->Auth->User('id');    
+        $criteria['Transfusion.submitted'] = array(1, 2); 
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Transfusion.created' => 'desc');
+        $this->paginate['contain'] = array('County');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Transfusion->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end pdf export
+        $this->set('page_options', $page_options);
+        $designations = $this->Transfusion->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $this->set('transfusions', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
+
     public function manager_index() {
         $this->Prg->commonProcess();
         $page_options = array('25' => '25', '20' => '20');
@@ -116,6 +143,44 @@ class TransfusionsController extends AppController {
                 $this->Transfusion->saveField('submitted', 0);
                 $this->Session->setFlash(__('You can continue editing the report'), 'flash_success');
                 $this->redirect(array('action' => 'edit', $this->Transfusion->Luhn($this->Transfusion->id)));
+            }
+            if (isset($this->request->data['sendToPPB'])) {
+                $this->Transfusion->saveField('submitted', 2);
+                $this->Session->setFlash(__('Thank you for submitting your report. You will get an email with a link to the pdf copy of the report.'), 'flash_success');
+                $this->redirect('/');
+            }
+        }
+
+        $transfusion = $this->Transfusion->find('first', array(
+                'conditions' => array('Transfusion.id' => $id),
+                'contain' => array('Pint', 'County', 'Attachment', 'Designation', 'ExternalComment')
+            ));
+        $this->set('transfusion', $transfusion);
+        // $this->render('pdf/view');
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id .'.pdf',  'orientation' => 'portrait');
+            $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
+        }
+    }
+
+    public function partner_view($id = null) {
+        $this->Transfusion->id = $id;
+        if (!$this->Transfusion->exists()) {
+            $this->Session->setFlash(__('Could not verify the TRANSFUSION report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'TRANSFUSION_' . $id .'.pdf',  'orientation' => 'portrait');
+            // $this->response->download('TRANSFUSION_'.$transfusion['Transfusion']['id'].'.pdf');
+        }
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if (isset($this->request->data['continueEditing'])) {
+                $this->Transfusion->saveField('submitted', 0);
+                $this->Session->setFlash(__('You can continue editing the report'), 'flash_success');
+                $this->redirect(array('action' => 'edit', $this->Transfusion->id));
             }
             if (isset($this->request->data['sendToPPB'])) {
                 $this->Transfusion->saveField('submitted', 2);

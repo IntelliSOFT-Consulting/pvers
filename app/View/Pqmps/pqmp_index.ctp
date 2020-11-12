@@ -199,7 +199,7 @@
 								<td>
 									<?php
 									if($pqmp['Pqmp']['submitted'] == '0') {
-										echo $this->Html->link('<span class="label label-info tooltipper" title="Edit"><i class="icon-pencil icon-white"></i>Edit </span>' ,
+										if($redir == 'reporter')  echo $this->Html->link('<span class="label label-info tooltipper" title="Edit"><i class="icon-pencil icon-white"></i>Edit </span>' ,
 											array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id']),
 											array('escape' => false, 'target' => '_blank'));
 									} else {

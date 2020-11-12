@@ -211,6 +211,20 @@ class UsersController extends AppController {
 		$this->set('users', $this->paginate());
     }
 
+    public function partner_index() {
+        $this->Prg->commonProcess();
+		if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+		if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+        else $this->paginate['limit'] = 20;
+		$criteria = $this->User->parseCriteria($this->passedArgs);
+        $criteria['User.name_of_institution'] = $this->Auth->User('name_of_institution');       
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('User.created' => 'desc');
+ 		$this->User->recursive = -1;
+
+		$this->set('users', $this->paginate());
+    }
+
 	public function admin_user_activate($id = null) {
 		if ($id) {
 			$this->User->id = $id;
@@ -506,7 +520,7 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created', 'Sadr.serious'),
             'order' => array('Sadr.created' => 'desc'),
-            'conditions' => array('Sadr.user_id' => $this->Auth->User('id')),
+            'conditions' => array('Sadr.name_of_institution' => $this->Auth->User('name_of_institution')),
         ));
         $this->set('sadrs', $sadrs);        
 
@@ -515,7 +529,7 @@ class UsersController extends AppController {
             'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
             'contain' => array('AefiListOfVaccine'),
             'order' => array('Aefi.created' => 'desc'),
-            'conditions' => array('Aefi.user_id' => $this->Auth->User('id')),
+            'conditions' => array('Aefi.name_of_institution' => $this->Auth->User('name_of_institution')),
         ));
         $this->set('aefis', $aefis);        
 
@@ -523,7 +537,7 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Pqmp.id','Pqmp.user_id', 'Pqmp.created', 'Pqmp.submitted', 'Pqmp.brand_name', 'Pqmp.reference_no', 'Pqmp.created'),
             'order' => array('Pqmp.created' => 'desc'),
-            'conditions' => array('Pqmp.user_id' => $this->Auth->User('id')),
+            'conditions' => array('Pqmp.facility_name' => $this->Auth->User('name_of_institution')),
         ));
         $this->set('pqmps', $pqmps);        
 
@@ -531,15 +545,15 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created', 'Device.serious'),
             'order' => array('Device.created' => 'desc'),
-            'conditions' => array('Device.user_id' => $this->Auth->User('id')),
+            'conditions' => array('Device.name_of_institution' => $this->Auth->User('name_of_institution')),
         ));
         $this->set('devices', $devices);        
 
         $medications = $this->User->Medication->find('all', array(
-            'limit' => 7, 'contain' => array(),
+            'limit' => 7, 'contain' => array('MedicationProduct'),
             'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.created', 'Medication.reference_no', 'Medication.created'),
             'order' => array('Medication.created' => 'desc'),
-            'conditions' => array('Medication.user_id' => $this->Auth->User('id')),
+            'conditions' => array('Medication.name_of_institution' => $this->Auth->User('name_of_institution')),
         ));
         $this->set('medications', $medications);        
 
@@ -772,13 +786,27 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/Users/partner_dashboard'); 
 		$this->Acl->allow($group, 'controllers/Sadrs/sadrIndex');
 		$this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
+		$this->Acl->allow($group, 'controllers/Sadrs/partner_index');
+		$this->Acl->allow($group, 'controllers/Sadrs/partner_view');
+		$this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
 		$this->Acl->allow($group, 'controllers/Aefis/aefiIndex');
 		$this->Acl->allow($group, 'controllers/Aefis/institutionCodes');
+		$this->Acl->allow($group, 'controllers/Aefis/partner_index');
+		$this->Acl->allow($group, 'controllers/Aefis/partner_view');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/sadrIndex');
 		$this->Acl->allow($group, 'controllers/SadrFollowups/followupIndex');
 		$this->Acl->allow($group, 'controllers/Pqmps/pqmpIndex');
+		$this->Acl->allow($group, 'controllers/Pqmps/partner_index');
+		$this->Acl->allow($group, 'controllers/Pqmps/partner_view');
+		$this->Acl->allow($group, 'controllers/Devices/partner_index');
+		$this->Acl->allow($group, 'controllers/Devices/partner_view');
+		$this->Acl->allow($group, 'controllers/Medications/partner_index');
+		$this->Acl->allow($group, 'controllers/Medications/partner_view');
+		$this->Acl->allow($group, 'controllers/Transfusions/partner_index');
+		$this->Acl->allow($group, 'controllers/Transfusions/partner_view');
 		$this->Acl->allow($group, 'controllers/Users/changePassword');
 		$this->Acl->allow($group, 'controllers/Users/edit');
+		$this->Acl->allow($group, 'controllers/Users/partner_index');
         $this->Acl->allow($group, 'controllers/Notifications/partner_index');
         $this->Acl->allow($group, 'controllers/Notifications/delete');
         $this->Acl->allow($group, 'controllers/Comments');
