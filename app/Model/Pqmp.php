@@ -283,6 +283,9 @@ class Pqmp extends AppModel {
 		if (!empty($this->data['Pqmp']['reporter_date'])) {
 			$this->data['Pqmp']['reporter_date'] = $this->dateFormatBeforeSave($this->data['Pqmp']['reporter_date']);
 		}
+		if (!empty($this->data['Pqmp']['reporter_date_diff'])) {
+			$this->data['Pqmp']['reporter_date_diff'] = $this->dateFormatBeforeSave($this->data['Pqmp']['reporter_date_diff']);
+		}
 		return true;
 	}
 
@@ -301,6 +304,9 @@ class Pqmp extends AppModel {
 			}
 			if (isset($val['Pqmp']['reporter_date'])) {
 				$results[$key]['Pqmp']['reporter_date'] = $this->dateFormatAfterFind($val['Pqmp']['reporter_date']);
+			}
+			if (isset($val['Pqmp']['reporter_date_diff'])) {
+				$results[$key]['Pqmp']['reporter_date_diff'] = $this->dateFormatAfterFind($val['Pqmp']['reporter_date_diff']);
 			}
 
 		}
