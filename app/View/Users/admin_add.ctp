@@ -65,6 +65,10 @@
 				echo $this->Form->input('user_type', array('type' => 'select', 'label' => array('class' => 'control-label', 'text' => 'User Type'),
 						'empty' => true, 'options' => ['Market Authority' => 'Market Authority', 'County Pharmacist' => 'County Pharmacist', 'Public Health Program' => 'Public Health Program']));
 				echo $this->Form->input('sponsor_email', array('type' => 'email', 'label' => array('class' => 'control-label', 'text' => 'Company email'),));
+				echo $this->Form->input('health_program', array( 'type' => 'select', 'options' => ['Malaria program' => 'Malaria program', 'National Vaccines and immunisation program' => 'National Vaccines and immunisation program', 
+										'Neglected tropical diseases program' => 'Neglected tropical diseases program', 'MNCAH Priority Medicines' => 'MNCAH Priority Medicines', 'TB program' => 'TB program', 
+										'NASCOP program' => 'NASCOP program'], 'empty' => true,
+										'label' => array('class' => 'control-label', 'text' => 'Public Health Program')));
 
 				?>
 		</div><!--/span-->
