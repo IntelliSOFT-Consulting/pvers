@@ -21,7 +21,7 @@
                       } 
                     }
                     echo '</ol>';
-                    echo '<p>'.$this->Html->link('All SADRs >>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link')).'<>';
+                    echo '<p>'.$this->Html->link('All SADRs >>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link')).'</p>';
                     echo $this->Html->link('<p> >> All </p>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false));                     
                   ?>
                 </div>

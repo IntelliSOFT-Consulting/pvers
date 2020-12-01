@@ -1,6 +1,7 @@
     <div class="menu ">
 
         <ul class="nav nav-pills center-pills">
+            <?php if($this->Session->read('Auth.User.user_type') != 'County Pharmacist' && $this->Session->read('Auth.User.user_type') != 'Public Health Program') { ?>
             <li class="<?php echo $this->fetch('Dashboard') ?>">
                 <?php
                     echo $this->Html->link('<i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard',
@@ -49,6 +50,7 @@
                         array('controller' => 'notifications', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
+             <?php } ?>
              <?php if($this->Session->read('Auth.User.user_type') == 'County Pharmacist' || $this->Session->read('Auth.User.user_type') == 'Public Health Program') { ?>             
              <li class="<?php echo $this->fetch('Reports') ?>">
                 <?php
