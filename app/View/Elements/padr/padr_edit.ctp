@@ -73,7 +73,7 @@
                         <?php
                             echo $this->Form->input('reporter_email', array(
                                 'type' => 'email',
-                                'div' => array('class' => 'control-group required'),
+                                'div' => array('class' => 'control-group required'), 'required' => false,
                                 'label' => array('class' => 'control-label required', 'text' => 'Email Address')
                             ));
                             
@@ -83,7 +83,7 @@
                     <div class="span6">
                         <?php
                             echo $this->Form->input('reporter_phone', array(
-                                'div' => array('class' => 'control-group'),
+                                'div' => array('class' => 'control-group'), 'required' => false,
                                 'label' => array('class' => 'control-label required', 'text' => 'Mobile No.')
                             ));                        
                         ?>
@@ -202,12 +202,31 @@
                     </div>
                     <div class="span4">
                         <?php
-                            echo $this->Form->input('date_of_end_of_reaction', array(
+                            /*echo $this->Form->input('date_of_end_of_reaction', array(
                                 'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
                                 'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
                                 'label' => array('class' => 'required', 'text' => 'When did the reaction end? <span class="muted">(if it ended)</span>'),
                                 'class' => 'span4',
-                            ));
+                            ));*/
+                        echo $this->Form->input('reaction_on', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'reaction_on',
+                            'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">Is the reaction still on? </div>
+                                            <div class="controls">  <input type="hidden" value="" id="PadrReactionOn_" name="data[Padr][reaction_on]"> <label class="radio inline">',
+                            'after' => '</label>',
+                            'options' => array('Yes' => 'Yes'),
+                        ));
+                        echo $this->Form->input('reaction_on', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'reaction_on',
+                            'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+                            'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+                            'before' => '<label class="radio inline">',
+                            'after' => '</label>
+                                        <a class="tooltipper" data-original-title="Clears the checked value"
+                                        onclick="$(\'.reaction_on\').removeAttr(\'checked disabled\')">
+                                        <em class="accordion-toggle">clear!</em></a> 
+                                        </div> </div>',
+                            'options' => array('No' => 'No'),
+                        ));
                         ?>
                     </div>
                 </div><!--/row-->

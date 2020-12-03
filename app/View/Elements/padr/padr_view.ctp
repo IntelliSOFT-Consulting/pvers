@@ -91,21 +91,13 @@
                              ?></strong>
                         </td>
                         <td>
-                            When did the reaction end?
-                            <strong>
-                                <?php 
-                                $broker = $padr['Padr']['date_of_end_of_reaction']; $ker = '';
-                                if(isset($broker['day'])) $ker.=$broker['day'].'-';
-                                if(isset($broker['month'])) $ker.=$broker['month'].'-';
-                                if(isset($broker['year'])) $ker.=$broker['year'];
-                                echo $ker;
-                                ?>
-                            </strong>
+                            Is the reaction still on? 
+                            <strong><?php echo $padr['Padr']['reaction_on'] ?></strong>
                         </td>
                     </tr>
                 </table>
 
-                <div style="background-color: #f5f5a4;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE MEDICINE THAT CAUSED THE REACTION</h5></div>
+                <div style="background-color: #f5f5a4;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE MEDICINE THAT CAUSED THE REACTION <br><em>(Include all medications)</em></h5></div>
                 <table  class="table" style="width: 100%;" >
                     <tbody>
                         <?php
@@ -154,8 +146,12 @@
                                       echo  $padrListOfMedicine['expiry_date']; 
                                     ?>
                                 </td>                    
-                                <td>  </td> 
-                                <td>  </td> 
+                                <td>Where did you buy the medicine?  </td> 
+                                <td> 
+                                    <?php
+                                      echo  $padrListOfMedicine['medicine_source']; 
+                                    ?> 
+                                </td> 
                               </tr>
                         <?php endforeach; ?>
                     </tbody>

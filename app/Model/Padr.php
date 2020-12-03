@@ -140,6 +140,12 @@ class Padr extends AppModel {
 				'allowEmpty' => true,
                 'message'  => 'Please specify the patient\'s date / Year of birth or age group'
             ),
+            'dobLessToday' => array(
+                'rule'     => 'dobLessToday',
+                // 'required' => true,
+				'allowEmpty' => true,
+                'message'  => 'Invalid date of birth. Greater than today.'
+            ),
         ),
 		'county_id' => array(
 			'numeric' => array(
@@ -190,8 +196,15 @@ class Padr extends AppModel {
 		'reporter_email' => array(
             'emailOrMobile' => array(
                 'rule'     => 'emailOrMobile',
-                // 'required' => true,
-                'message'  => 'Please provide a valid email address'
+                // 'allowEmpty' => true,
+                'message'  => 'Please provide email or phone number'
+            ),
+        ),
+		'reporter_phone' => array(
+            'emailOrMobile' => array(
+                'rule'     => 'emailOrMobile',
+                // 'allowEmpty' => true,
+                'message'  => 'Please provide email or phone number'
             ),
         )
 	);
@@ -208,6 +221,17 @@ class Padr extends AppModel {
 	}
 
 	public function ageOrDate($field = null) {
+		return !empty($field['date_of_birth']['year']) || !empty($this->data['Padr']['age_group']);
+	}
+
+	public function dobLessToday($field = null) {
+		if(!empty($field['date_of_birth']['day']) && !empty($field['date_of_birth']['month']) && !empty($field['date_of_birth']['year'])) {
+			return strtotime(implode('-', $field['date_of_birth'])) <= strtotime("now");
+		} elseif(!empty($field['date_of_birth']['month']) && !empty($field['date_of_birth']['year'])) {
+			return $field['date_of_birth']['month'] <= date('m', strtotime("now")) && $field['date_of_birth']['year'] <= date('Y', strtotime("now"));
+		} elseif(!empty($field['date_of_birth']['year'])) {
+			return $field['date_of_birth']['year'] <= date('Y', strtotime("now"));
+		}
 		return !empty($field['date_of_birth']['year']) || !empty($this->data['Padr']['age_group']);
 	}
 
@@ -228,11 +252,11 @@ class Padr extends AppModel {
 			$this->data['Padr']['date_of_onset_of_reaction'] = '';
 		}
 
-		if (!empty($this->data['Padr']['date_of_end_of_reaction'])) {
+		/*if (!empty($this->data['Padr']['date_of_end_of_reaction'])) {
 			$this->data['Padr']['date_of_end_of_reaction'] = implode('-', $this->data['Padr']['date_of_end_of_reaction']);
 		} else {
 			$this->data['Padr']['date_of_end_of_reaction'] = '';
-		}
+		}*/
 
 		return true;
 	}
@@ -249,11 +273,11 @@ class Padr extends AppModel {
 				$b = explode('-', $val['Padr']['date_of_onset_of_reaction']);
 				$results[$key]['Padr']['date_of_onset_of_reaction'] = array('day'=> $b[0],'month'=> $b[1],'year'=> $b[2]);
 			}
-			if (!empty($val['Padr']['date_of_end_of_reaction'])) {
+			/*if (!empty($val['Padr']['date_of_end_of_reaction'])) {
 				if(empty($val['Padr']['date_of_end_of_reaction'])) $val['Padr']['date_of_end_of_reaction'] = '--';
 				$b = explode('-', $val['Padr']['date_of_end_of_reaction']);
 				$results[$key]['Padr']['date_of_end_of_reaction'] = array('day'=> $b[0],'month'=> $b[1],'year'=> $b[2]);
-			}
+			}*/
 			
 		}
 		return $results;

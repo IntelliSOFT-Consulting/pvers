@@ -5,7 +5,7 @@
  */
   $this->Html->script('padr_list_of_medicines', array('inline' => false));
 ?>
-  <div style="background-color: #f5f5a4;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE MEDICINE THAT CAUSED THE REACTION</h5></div>
+  <div style="background-color: #f5f5a4;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE MEDICINE THAT CAUSED THE REACTION <br><em>(Include all medications)</em></h5></div>
 
     <div class="row-fluid">
         <div class="span12">
@@ -79,8 +79,13 @@
                             'after' => false));
                         ?>
                     </td>                    
-                    <td>  </td> 
-                    <td>  </td> 
+                    <td>Where did you buy the medicine?  </td> 
+                    <td> <?php
+                        echo $this->Form->input('PadrListOfMedicine.'.$i.'.medicine_source', array(
+                            'type' => 'text', 'label' => false, 'between' => false, 'div' => false,
+                            'after' => false, 'class' => 'span11',));
+                        ?>
+                   </td> 
                   </tr>
 
                 
