@@ -25,6 +25,12 @@ body {
     }
 }
 
+@media (max-width: 767px) {
+    .affix {
+        position: static;
+    }
+}
+
 .navbar-default .navbar-inner {
 /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d6dbbf+0,feffe8+100 */
 background: #d6dbbf; /* Old browsers */
