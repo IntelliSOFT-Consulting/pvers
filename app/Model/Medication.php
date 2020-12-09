@@ -249,13 +249,13 @@ class Medication extends AppModel {
                 'message'  => 'In which process did the error occur?'
             ),
         ),
-        'correct_medication' => array(
-            'notBlank' => array(
-                'rule'     => 'notBlank',
-                'required' => true,
-                'message'  => 'Was the correct medication administered?'
-            ),
-        ),
+        // 'correct_medication' => array(
+        //     'notBlank' => array(
+        //         'rule'     => 'notBlank',
+        //         'required' => true,
+        //         'message'  => 'Was the correct medication administered?'
+        //     ),
+        // ),
         'reporter_name' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',

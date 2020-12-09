@@ -1,4 +1,5 @@
 <div class="designations index">
+	<h4><?php echo $this->Html->link(__('New Designation'), array('action' => 'add')); ?></h4>
 	<h2><?php echo __('Designations'); ?></h2>
 	<table class="table table-stripped" cellpadding="0" cellspacing="0">
 	<thead>

@@ -336,6 +336,11 @@
                     array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
                     array('escape' => false));
               }
+              echo "&nbsp;";
+              echo $this->Html->link('<span class="label label-default tooltipper" title="View"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF </span>',
+                  array('controller' => 'sadrs', 'action' => 'view', 'ext'=> 'pdf', $sadr['Sadr']['id']),
+                  array('escape' => false));
+               
             ?> 
         </td>
     </tr>

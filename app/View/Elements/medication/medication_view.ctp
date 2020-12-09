@@ -89,7 +89,7 @@
 
 				<table style="width: 100%;">
 					<tr>
-						<td colspan="4"><h4 style="text-align: center; color: #884805;">Details on the medication error</h4> </td>
+						<td colspan="4"><h4 style="text-align: center; color: #884805;">Location of event</h4> </td>
 					</tr>
 					<tr>
 						<td style="width: 25%;"> Ward </td>
@@ -136,8 +136,8 @@
 						<td colspan="2"> 
 							Did the error reach the patient? <br>
 							<strong><?php echo $medication['Medication']['reach_patient'] ?>	</strong> <br>
-							Was the correct medication, dose or dosage form administered to or taken by the patient? <br>
-							<strong><?php echo $medication['Medication']['correct_medication'] ?>	</strong>
+							<?php /*?>Was the correct medication, dose or dosage form administered to or taken by the patient? <br>
+							<strong><?php echo $medication['Medication']['correct_medication'] ?>	</strong><?php */?>
 						</td>
 						<td colspan="2"> Describe the direct result on the patient (e.g. death, type of harm, additional patient monitoring e.g. BP, heart rate, glucose level etc) <br>
 							<strong><?php echo $medication['Medication']['direct_result'] ?>	</strong>
@@ -323,7 +323,7 @@
 						<td>Suggest any recommendations, or describe policies or procedures you instituted or plan to institute to prevent future similar errors. If available, kindly attach an investigational report e.g. Root Cause Analysis (RCA)</td>
 					</tr>
 					<tr>
-						<td><strong><?php echo $medication['Medication']['direct_result'] ?>	</strong></td>
+						<td><strong><?php echo $medication['Medication']['recommendations'] ?>	</strong></td>
 					</tr>
 				</table>
 				 <hr>

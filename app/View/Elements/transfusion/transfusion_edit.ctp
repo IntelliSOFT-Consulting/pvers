@@ -196,7 +196,7 @@
                     <div style="padding-left: 15px;">
                     <div class="required"><label class="required"><strong>Type of reaction</strong></label></div> 
                     <?php
-                        echo $this->Form->input('reaction_general', array(
+                        echo $this->Form->input('reaction_fever', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'reaction_general',
                           'before' => '<div class="control-group ">   <label class="control-label required">
@@ -205,19 +205,19 @@
                           'after' => '</label>',
                           'options' => array('Fever' => 'Fever'),
                         )); 
-                        echo $this->Form->input('reaction_general', array(
+                        echo $this->Form->input('reaction_chills', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'reaction_general',
                           'before' => '<label class="radio inline">', 'after' => '</label>',
                           'options' => array('Chills/Rigors' => 'Chills/Rigors')
                         )); 
-                        echo $this->Form->input('reaction_general', array(
+                        echo $this->Form->input('reaction_flushing', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'reaction_general',
                           'before' => '<label class="radio inline">', 'after' => '</label>',
                           'options' => array('Flushing' => 'Flushing')
                         ));
-                        echo $this->Form->input('reaction_general', array(
+                        echo $this->Form->input('reaction_vomiting', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'reaction_general',
                           'format' => array('before', 'label', 'between', 'input', 'after', 'error'),
                           'error' => array('attributes' => array('wrap' => 'p', 'class' => 'controls required error')),
@@ -254,7 +254,7 @@
                           'options' => array('Other skin rash' => 'Other skin rash'),
                         ));
 
-                        echo $this->Form->input('reaction_cardiac', array(
+                        echo $this->Form->input('reaction_chest', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'reaction_cardiac',
                           'before' => '<div class="control-group ">   <label class="control-label required">
@@ -263,19 +263,19 @@
                           'after' => '</label>',
                           'options' => array('Chest pain' => 'Chest pain'),
                         )); 
-                        echo $this->Form->input('reaction_cardiac', array(
+                        echo $this->Form->input('reaction_dyspnoea', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'reaction_cardiac',
                           'before' => '<label class="radio inline">', 'after' => '</label>',
                           'options' => array('Dyspnoea' => 'Dyspnoea')
                         )); 
-                        echo $this->Form->input('reaction_cardiac', array(
+                        echo $this->Form->input('reaction_hypotension', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'reaction_cardiac',
                           'before' => '<label class="radio inline">', 'after' => '</label>',
                           'options' => array('Hypotension' => 'Hypotension')
                         ));
-                        echo $this->Form->input('reaction_cardiac', array(
+                        echo $this->Form->input('reaction_tachycardia', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'reaction_cardiac',
                           'format' => array('before', 'label', 'between', 'input', 'after', 'error'),
                           'error' => array('attributes' => array('wrap' => 'p', 'class' => 'controls required error')),
@@ -293,7 +293,7 @@
                 </div>
                 <div class="span6">
                     <?php
-                        echo $this->Form->input('reaction_renal', array(
+                        echo $this->Form->input('reaction_dark', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'reaction_renal',
                           'before' => '<div class="control-group ">   <label class="control-label required">
@@ -302,13 +302,13 @@
                           'after' => '</label>',
                           'options' => array('Haemoglobinuria- Dark urine' => 'Haemoglobinuria- Dark urine'),
                         )); 
-                        echo $this->Form->input('reaction_renal', array(
+                        echo $this->Form->input('reaction_oliguria', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
                           'class' => 'reaction_renal',
                           'before' => '<label class="radio inline">', 'after' => '</label>',
                           'options' => array('Oliguria' => 'Oliguria')
                         ));
-                        echo $this->Form->input('reaction_renal', array(
+                        echo $this->Form->input('reaction_anuria', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'reaction_renal',
                           'format' => array('before', 'label', 'between', 'input', 'after', 'error'),
                           'error' => array('attributes' => array('wrap' => 'p', 'class' => 'controls required error')),
@@ -783,6 +783,7 @@
                                     'after' => '</label>&nbsp;&nbsp;',
                                     'options' => array('Yes' => 'Yes'),
                                 ));
+
                                 echo $this->Form->input('person_submitting', array(
                                     'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'person-submit',
                                     'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
@@ -853,6 +854,13 @@
                           'div' => false,
                         ));
 
+                    ?>
+                    <br>
+                    <hr>
+                    <?php
+                        echo $this->Html->link('<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Download PDF', array('action'=>'view', 'ext'=> 'pdf', $this->request->data['Transfusion']['id']),
+                            array('escape' => false, 'class' => 'btn btn-info btn-block mapop', 'title'=>'Download PDF',
+                            'data-content' => 'Download the pdf version of the report',));
                     ?>
                     <br>
                     <hr>

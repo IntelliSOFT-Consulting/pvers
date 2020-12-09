@@ -98,11 +98,23 @@
 						<td style="width: 25%;"><label class="required"><strong>Type of reaction</label> </td>
 						<td style="width: 25%;">	</td>
 						<td style="width: 25%;">Renal</td>
-						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['reaction_renal'] ?>	</strong></td>
+						<td style="width: 25%;"><strong><?php 
+								echo $transfusion['Transfusion']['reaction_dark']."</br>" ;
+								echo $transfusion['Transfusion']['reaction_oliguria']."</br>" ;
+								echo $transfusion['Transfusion']['reaction_anuria'];
+						 ?>	</strong></td>
 					</tr>
 					<tr>
 						<td style="width: 25%;"> General </td>
-						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['reaction_general'] ?>	</strong></td>
+						<td style="width: 25%;"><strong>
+							<?php 
+								echo $transfusion['Transfusion']['reaction_fever']."</br>" ;
+								echo $transfusion['Transfusion']['reaction_chills']."</br>" ;
+								echo $transfusion['Transfusion']['reaction_flushing']."</br>" ;
+								echo $transfusion['Transfusion']['reaction_vomiting']."</br>" ;
+
+							?>	
+							</strong></td>
 						<td style="width: 25%;"> Haematological </td>
 						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['reaction_haematological'] ?>	</strong></td>
 					</tr>
@@ -111,6 +123,21 @@
 						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['reaction_dermatological'] ?>	</strong></td>
 						<td style="width: 25%;"> Others (Specify) </td>
 						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['reaction_other'] ?>	</strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;"> Cardiac/Respiratory </td>
+						<td style="width: 25%;">
+							<strong>
+								<?php 
+									echo $transfusion['Transfusion']['reaction_chest']."</br>" ;
+									echo $transfusion['Transfusion']['reaction_dyspnoea']."</br>" ;
+									echo $transfusion['Transfusion']['reaction_hypotension']."</br>" ;
+									echo $transfusion['Transfusion']['reaction_tachycardia']."</br>" ;
+							 	?>
+						 	</strong>
+						</td>
+						<td style="width: 25%;">  </td>
+						<td style="width: 25%;"></td>
 					</tr>
 				</table>
 				 <hr>

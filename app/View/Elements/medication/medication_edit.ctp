@@ -188,7 +188,7 @@
                 </div><!--/span-->
             </div><!--/row-->
             <hr>
-             <h4 style="text-align: center; color: #884805;">Details on the medication error</h4>
+             <h4 style="text-align: center; color: #884805;">Location of event</h4>
             <div class="row-fluid">
                 <div class="span6">
                     <?php
@@ -261,6 +261,11 @@
                             'options' => array('Administration' => 'Administration'),
                         ));
                         echo $this->Form->input('process_occur', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'process_occur',
+                            'before' => '<label class="radio">',    'after' => '</label>',
+                            'options' => array('Transcribing' => 'Transcribing'),
+                        ));
+                        echo $this->Form->input('process_occur', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'process_occur',
                             'format' => array('before', 'label', 'between', 'input','error', 'after'),
                             'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
@@ -302,7 +307,7 @@
                          'options' => array('No' => 'No'),
                         ));
 
-                        echo "<label class='required'>Was the correct medication, dose or dosage form administered to or taken by the patient? <span style='color:red;'>*</span></label>";
+                        /*echo "<label class='required'>Was the correct medication, dose or dosage form administered to or taken by the patient? <span style='color:red;'>*</span></label>";
                         echo $this->Form->input('correct_medication', array(
                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'correct_medication',
                          'before' => '<div class="control-group"> 
@@ -321,7 +326,7 @@
                                      <em class="accordion-toggle">clear!</em></a> </span>
                                      </div> </div>',
                          'options' => array('No' => 'No'),
-                        ));
+                        ));*/
                     ?>
                 </div>
                 <div class="span4">
@@ -540,7 +545,7 @@
                 <div class="span12">
                     <div style="padding-left: 15px;">
                     <?php
-                       echo $this->Form->input('direct_result', array(
+                       echo $this->Form->input('recommendations', array(
                                 'rows' => '2',
                                 'label' => array('class' => 'required', 'text' => 'Suggest any recommendations, or describe policies or procedures you instituted or plan to institute to prevent future similar errors. If available, kindly attach an investigational report e.g. Root Cause Analysis (RCA)'),
                                 'between' => false, 'div' => false,
@@ -674,6 +679,13 @@
                           'div' => false,
                         ));
 
+                    ?>
+                    <br>
+                    <hr>
+                    <?php
+                        echo $this->Html->link('<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Download PDF', array('action'=>'view', 'ext'=> 'pdf', $this->request->data['Medication']['id']),
+                            array('escape' => false, 'class' => 'btn btn-info btn-block mapop', 'title'=>'Download PDF',
+                            'data-content' => 'Download the pdf version of the report',));
                     ?>
                     <br>
                     <hr>

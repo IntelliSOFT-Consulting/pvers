@@ -540,6 +540,13 @@
                     <br>
                     <hr>
                     <?php
+                        echo $this->Html->link('<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Download PDF', array('action'=>'view', 'ext'=> 'pdf', $this->request->data['Aefi']['id']),
+                            array('escape' => false, 'class' => 'btn btn-info btn-block mapop', 'title'=>'Download PDF',
+                            'data-content' => 'Download the pdf version of the report',));
+                    ?>
+                    <br>
+                    <hr>
+                    <?php
                         echo $this->Html->link('<i class="fa fa-times" aria-hidden="true"></i> Cancel', array('controller' => 'users', 'action' => 'dashboard'),
                               array('escape' => false, 'class' => 'btn btn-danger btn-block'));  
 

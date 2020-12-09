@@ -368,7 +368,7 @@
 					<?php
 						echo $this->Form->input('diagnosis', array('class' => 'span8', 'rows' => '2',
 																	'label' => array('class' => 'control-label required', 'text' => 'DIAGNOSIS'),
-																	'after'=>'<p class="help-block"> (What was the patient treated for) </p></div>',
+																	'after'=>'<p class="help-block"> (What was the patient being treated for before getting the reaction) </p></div>',
 																	));
 						
 						echo $this->Form->input('date_of_onset_of_reaction', array(
@@ -806,6 +806,13 @@
 	                ));
 
 	            ?>
+                <br>
+                <hr>
+                <?php
+                    echo $this->Html->link('<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Download PDF', array('action'=>'view', 'ext'=> 'pdf', $this->request->data['Sadr']['id']),
+                        array('escape' => false, 'class' => 'btn btn-info btn-block mapop', 'title'=>'Download PDF',
+                        'data-content' => 'Download the pdf version of the report',));
+                ?>
 	            <br>
 	            <hr>
 	            <?php

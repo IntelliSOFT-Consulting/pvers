@@ -295,13 +295,13 @@ class Sadr extends AppModel {
 				'message' => 'Please specify your designation',
 			),
 		),
-		'patient_address' => array(
-            'instOrAddress' => array(
-                'rule'     => 'instOrAddress',
-                // 'required' => true,
-                'message'  => 'Please provide the patient\'s address or the name of the institution'
-            ),
-        ),
+		// 'patient_address' => array(
+  //           'instOrAddress' => array(
+  //               'rule'     => 'instOrAddress',
+  //               // 'required' => true,
+  //               'message'  => 'Please provide the patient\'s address or the name of the institution'
+  //           ),
+  //       ),
 		'gender' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
