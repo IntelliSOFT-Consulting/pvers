@@ -80,6 +80,13 @@
         </li>
         <li>
         <?php
+        echo $this->Html->link('<i class="icon-hand-right"></i> Sub Counties',
+          array('controller' => 'sub_counties', 'action' => 'index',  'admin' => true),
+          array('escape' => false));
+        ?>
+        </li>
+        <li>
+        <?php
         echo $this->Html->link('<i class="icon-globe"></i> Countries',
           array('controller' => 'countries', 'action' => 'index', 'admin' => true),
           array('escape' => false));

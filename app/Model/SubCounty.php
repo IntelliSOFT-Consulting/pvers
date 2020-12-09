@@ -1,18 +1,33 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * County Model
+ * SubCounty Model
  *
+ * @property County $County
+ * @property Aefi $Aefi
+ * @property Padr $Padr
+ * @property Pqmp $Pqmp
  * @property Sadr $Sadr
  */
 class SubCounty extends AppModel {
-	
-	public $displayField = 'sub_county_name';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	public $actsAs = array('Search.Searchable');
-	public $filterArgs = array(
-        array('name' => 'sub_county_name', 'type' => 'like')
-    );
+
+
+	// The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'County' => array(
+			'className' => 'County',
+			'foreignKey' => 'county_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 
 /**
  * hasMany associations
@@ -20,8 +35,21 @@ class SubCounty extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Sadr' => array(
-			'className' => 'Sadr',
+		'Aefi' => array(
+			'className' => 'Aefi',
+			'foreignKey' => 'sub_county_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Padr' => array(
+			'className' => 'Padr',
 			'foreignKey' => 'sub_county_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -45,21 +73,20 @@ class SubCounty extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'Sadr' => array(
+			'className' => 'Sadr',
+			'foreignKey' => 'sub_county_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 
-	/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'County' => array(
-			'className' => 'County',
-			'foreignKey' => 'county_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
 }

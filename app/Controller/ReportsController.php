@@ -6,7 +6,7 @@ App::uses('AppController', 'Controller');
  * @property PreviousDate $PreviousDate
  */
 class ReportsController extends AppController {
-    public $uses = array('Sadr', 'Aefi', 'Pqmp', 'Device', 'Medication', 'Transfusion', 'Sae');
+    public $uses = array('Sadr', 'Aefi', 'Pqmp', 'Device', 'Medication', 'Transfusion', 'Sae', 'DrugDictionary');
     public $components = array(
             // 'Security' => array('csrfExpires' => '+1 hour', 'validatePost' => false), 
             'Search.Prg', 
@@ -132,7 +132,32 @@ class ReportsController extends AppController {
         $criteria['SadrListOfDrug.created >'] = '2020-04-01 08:08:08';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['SadrListOfDrug.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
-            if($this->Auth->User('user_type') == 'Public Health Program') $criteria['SadrListOfDrug.drug_name'] = $this->Auth->User('health_program');
+        // if($this->Auth->User('user_type') == 'Public Health Program') $criteria['SadrListOfDrug.drug_name'] = $this->Auth->User('health_program');
+        if($this->Auth->User('user_type') == 'Public Health Program') {
+            $conditionsSubQuery['DrugDictionary.health_program'] = $this->Auth->User('health_program');
+
+            $db = $this->DrugDictionary->getDataSource();
+            $subQuery = $db->buildStatement(
+                array(
+                    'fields'     => array('DrugDictionary.drug_name'),
+                    'table'      => $db->fullTableName($this->DrugDictionary),
+                    'alias'      => 'DrugDictionary',
+                    'limit'      => null,
+                    'offset'     => null,
+                    'joins'      => array(),
+                    'conditions' => $conditionsSubQuery,
+                    'order'      => null,
+                    'group'      => null
+                ),
+                $this->DrugDictionary
+            );
+            $subQuery = 'SadrListOfDrug.drug_name IN (' . $subQuery . ') ';
+            $subQueryExpression = $db->expression($subQuery);
+
+            $criteria[] = $subQueryExpression;
+            // $conditions[] = $subQueryExpression;
+            // $this->User->find('all', compact('conditions'));
+        }
         $data = $this->Sadr->SadrListOfDrug->find('all', array(
             'fields' => array('SadrListOfDrug.drug_name as drug_name', 'COUNT(distinct SadrListOfDrug.sadr_id) as cnt'),
             'contain' => array(), 'recursive' => -1,
@@ -542,6 +567,31 @@ class ReportsController extends AppController {
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
+        if($this->Auth->User('user_type') == 'Public Health Program') {
+            $conditionsSubQuery['DrugDictionary.health_program'] = $this->Auth->User('health_program');
+
+            $db = $this->DrugDictionary->getDataSource();
+            $subQuery = $db->buildStatement(
+                array(
+                    'fields'     => array('DrugDictionary.drug_name'),
+                    'table'      => $db->fullTableName($this->DrugDictionary),
+                    'alias'      => 'DrugDictionary',
+                    'limit'      => null,
+                    'offset'     => null,
+                    'joins'      => array(),
+                    'conditions' => $conditionsSubQuery,
+                    'order'      => null,
+                    'group'      => null
+                ),
+                $this->DrugDictionary
+            );
+            $subQuery = 'Pqmp.generic_name IN (' . $subQuery . ') ';
+            $subQueryExpression = $db->expression($subQuery);
+
+            $criteria[] = $subQueryExpression;
+            // $conditions[] = $subQueryExpression;
+            // $this->User->find('all', compact('conditions'));
+        }
         $data = $this->Pqmp->find('all', array(
             'fields' => array('generic_name', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
@@ -1066,6 +1116,8 @@ class ReportsController extends AppController {
     }
     
     public function medications_by_producti() {
+
+        $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
         $criteria['Medication.submitted'] = array(1, 2);
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
@@ -1073,7 +1125,7 @@ class ReportsController extends AppController {
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.product_name_i as product_name_i', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
             'contain' => array(), 'recursive' => -1,
-            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08'),
+            'conditions' => $criteria,
             'group' => array('MedicationProduct.product_name_i'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         )); 
@@ -1096,10 +1148,35 @@ class ReportsController extends AppController {
     }
     
     public function medications_by_generici() {
+        $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
+        if($this->Auth->User('user_type') == 'Public Health Program') {
+            $conditionsSubQuery['DrugDictionary.health_program'] = $this->Auth->User('health_program');
+
+            $db = $this->DrugDictionary->getDataSource();
+            $subQuery = $db->buildStatement(
+                array(
+                    'fields'     => array('DrugDictionary.drug_name'),
+                    'table'      => $db->fullTableName($this->DrugDictionary),
+                    'alias'      => 'DrugDictionary',
+                    'limit'      => null,
+                    'offset'     => null,
+                    'joins'      => array(),
+                    'conditions' => $conditionsSubQuery,
+                    'order'      => null,
+                    'group'      => null
+                ),
+                $this->DrugDictionary
+            );
+            $subQuery = 'MedicationProduct.generic_name_i IN (' . $subQuery . ') ';
+            $subQueryExpression = $db->expression($subQuery);
+
+            $criteria[] = $subQueryExpression;
+        }
+
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.generic_name_i as generic_name_i', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
             'contain' => array(), 'recursive' => -1,
-            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08'),
+            'conditions' => $criteria,
             'group' => array('MedicationProduct.generic_name_i'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         )); 
@@ -1109,10 +1186,34 @@ class ReportsController extends AppController {
     }
     
     public function medications_by_genericii() {
+        $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
+        if($this->Auth->User('user_type') == 'Public Health Program') {
+            $conditionsSubQuery['DrugDictionary.health_program'] = $this->Auth->User('health_program');
+
+            $db = $this->DrugDictionary->getDataSource();
+            $subQuery = $db->buildStatement(
+                array(
+                    'fields'     => array('DrugDictionary.drug_name'),
+                    'table'      => $db->fullTableName($this->DrugDictionary),
+                    'alias'      => 'DrugDictionary',
+                    'limit'      => null,
+                    'offset'     => null,
+                    'joins'      => array(),
+                    'conditions' => $conditionsSubQuery,
+                    'order'      => null,
+                    'group'      => null
+                ),
+                $this->DrugDictionary
+            );
+            $subQuery = 'MedicationProduct.generic_name_ii IN (' . $subQuery . ') ';
+            $subQueryExpression = $db->expression($subQuery);
+
+            $criteria[] = $subQueryExpression;
+        }
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.generic_name_ii as generic_name_ii', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
             'contain' => array(), 'recursive' => -1,
-            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08'),
+            'conditions' => $criteria,
             'group' => array('MedicationProduct.generic_name_ii'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         )); 

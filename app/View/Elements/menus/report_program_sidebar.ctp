@@ -82,18 +82,5 @@
                       array('escape' => false));
         ?>
       </li>
-      <li class="nav-header"><i class="fa fa-thermometer-full" aria-hidden="true"></i> SAEs</li>
-      <li class="<?php echo $this->fetch('saes-by-medicine'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Suspected Medicine',  array('controller' => 'reports', 'action'=>'saes_by_medicine', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('saes-by-concomittant'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Concomittant Drug',  array('controller' => 'reports', 'action'=>'saes_by_concomittant', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
       <li class="divider"></li>
     </ul>
