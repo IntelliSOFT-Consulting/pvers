@@ -1,4 +1,4 @@
-<?php echo '<?xml version="1.0" encoding="utf-16"?>'; echo "\n"; ?>
+<?php echo '<?xml version="1.0" encoding="ISO-8859-1"?>'; echo "\n"; ?>
 <!DOCTYPE ichicsr SYSTEM "http://eudravigilance.ema.europa.eu/dtd/icsr21xml.dtd">
 <ichicsr lang="en">
     <ichicsrmessageheader lang="en">
