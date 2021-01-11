@@ -288,6 +288,10 @@ class Medication extends AppModel {
             $this->data['Medication']['date_of_event'] = $this->dateFormatBeforeSave($this->data['Medication']['date_of_event']);
         }
 
+        if (!empty($this->data['Medication']['date_of_birth'])) {
+            $this->data['Medication']['date_of_birth'] = $this->dateFormatBeforeSave($this->data['Medication']['date_of_birth']);
+        }
+
         if (!empty($this->data['Medication']['reporter_date'])) {
             $this->data['Medication']['reporter_date'] = $this->dateFormatBeforeSave($this->data['Medication']['reporter_date']);
         }
@@ -300,6 +304,7 @@ class Medication extends AppModel {
 
 	function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
+
 			if (!empty($val['Medication']['time_of_event'])) {
 				if(empty($val['Medication']['time_of_event'])) $val['Medication']['time_of_event'] = ':';
 				$a = explode(':', $val['Medication']['time_of_event']);
@@ -308,6 +313,10 @@ class Medication extends AppModel {
 
             if (isset($val['Medication']['date_of_event'])) {
                 $results[$key]['Medication']['date_of_event'] = $this->dateFormatAfterFind($val['Medication']['date_of_event']);
+            }
+
+            if (isset($val['Medication']['date_of_birth'])) {
+                $results[$key]['Medication']['date_of_birth'] = $this->dateFormatAfterFind($val['Medication']['date_of_birth']);
             }
             
             if (isset($val['Medication']['reporter_date'])) {

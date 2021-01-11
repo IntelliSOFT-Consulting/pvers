@@ -315,6 +315,11 @@ class Sadr extends AppModel {
                 'allowEmpty' => true,
                 'message'  => 'Please specify date \ Year of onset of the reaction'
             ),
+            'notInFuture' => array(
+                'rule'     => 'notInFuture',
+                'allowEmpty' => true,
+                'message'  => 'Date of onset of reaction greater than today'
+            ),
 			'dateAfterStartDates' => array(
                 'rule'     => 'dateAfterStartDates',
                 'allowEmpty' => true,
@@ -392,6 +397,14 @@ class Sadr extends AppModel {
 
 	public function atLeastYear($field = null) {
 		return !empty($field['date_of_onset_of_reaction']['year']);
+	}
+
+	public function notInFuture($field = null) {
+		if(!empty($field['date_of_onset_of_reaction']['day']) && !empty($field['date_of_onset_of_reaction']['month']) && !empty($field['date_of_onset_of_reaction']['year'])) {
+			return strtotime(implode('-', $field['date_of_onset_of_reaction'])) <= strtotime("+4 hours");
+		} else {
+			return $field['date_of_onset_of_reaction']['year'] <= date('Y');
+		}
 	}
 
 	public function ageOrDate($field = null) {
