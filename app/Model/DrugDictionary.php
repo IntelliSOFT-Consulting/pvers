@@ -18,7 +18,7 @@ class DrugDictionary extends AppModel {
 			$suggestions = $this->find('all', array(
 				'fields' => array('DISTINCT DrugDictionary.drug_name'),
 				'limit' => 20,
-				'conditions' => array('DrugDictionary.drug_name LIKE' => '%'.$query.'%', 'DrugDictionary.generic' => $generic),
+				'conditions' => array('DrugDictionary.drug_name LIKE' => '%'.$query.'%'), //, 'DrugDictionary.generic' => $generic
 				'recursive' => -1,
 			));
             // $suggestions[]['DrugDictionary']['drug_name'] = 'kweli'; 
