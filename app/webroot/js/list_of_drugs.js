@@ -24,6 +24,7 @@ $(document).ready(function() {
 		
 	reloadStuff();
 	function reloadStuff(){
+
 		var dates2 = $('.date-pick-from, .date-pick-to').datepicker({
 			minDate:"-100Y", maxDate:"-0D", 
 			dateFormat:'dd-mm-yy', 
@@ -39,6 +40,7 @@ $(document).ready(function() {
 		$(".autoComblete2").autocomplete({
 			source: "/drug_dictionaries/autocomblete.json"
 		});
+		console.log("original disco man");
 	}
 	
 	$(".removeTr").click(function() {

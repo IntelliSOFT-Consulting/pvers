@@ -1,13 +1,13 @@
     <div class="menu ">
 
         <ul class="nav nav-pills center-pills">
-            <?php if($this->Session->read('Auth.User.user_type') != 'County Pharmacist' && $this->Session->read('Auth.User.user_type') != 'Public Health Program') { ?>
             <li class="<?php echo $this->fetch('Dashboard') ?>">
                 <?php
                     echo $this->Html->link('<i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard',
                     array('controller' => 'users', 'action'=>'dashboard', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
+            <?php if($this->Session->read('Auth.User.user_type') != 'County Pharmacist' && $this->Session->read('Auth.User.user_type') != 'Public Health Program') { ?>
              <li class="<?php echo $this->fetch('SADR') ?>">
                 <?php
                     echo $this->Html->link('<i class="fa fa-ambulance" aria-hidden="true"></i> SADRs',
