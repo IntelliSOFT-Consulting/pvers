@@ -1098,7 +1098,7 @@ class ReportsController extends AppController {
 
     public function medications_by_process() {
         //TODO: add process_occur_specify
-        $criteria['Medication.submitted'] = array(1, 2);
+        // $criteria['Medication.submitted'] = array(1, 2);
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1118,7 +1118,6 @@ class ReportsController extends AppController {
     public function medications_by_producti() {
 
         $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
-        $criteria['Medication.submitted'] = array(1, 2);
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
