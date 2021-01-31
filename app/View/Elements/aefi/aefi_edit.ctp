@@ -302,6 +302,7 @@
                                 'after'=>'<p class="help-block">  (Signs & Symptoms) </p>',
                                 'class' => 'span12', 'rows' => '1'
                             ));
+                        echo $this->element('multi/aefi_descriptions');
                     ?>
                 </div>
                 <div class="span4">
@@ -509,6 +510,63 @@
                 </div><!--/span-->
             </div><!--/row-->
 
+            <table class="table table-bordered  table-condensed table-pvborderless">
+                <tbody>
+                  <tr>
+                    <td width="45%"><h5 class="pull-right text-success">Is the person submitting different from reporter?&nbsp;</h5></td>
+                    <td>
+                        <?php
+                                echo $this->Form->input('person_submitting', array(
+                                    'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'person-submit',
+                                    'before' => '<div class="form-inline">
+                                                <input type="hidden" value="" id="SadrPersonSubmitting_" name="data[Sadr][person_submitting]">
+                                                <label class="radio">',
+                                    'after' => '</label>&nbsp;&nbsp;',
+                                    'options' => array('Yes' => 'Yes'),
+                                ));
+                                echo $this->Form->input('person_submitting', array(
+                                    'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'person-submit',
+                                    'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+                                    'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+                                    'before' => '<label class="radio">', 'after' => '</label> </div>',
+                                    'options' => array('No' => 'No'),
+                                ));
+                        ?>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row-fluid">
+                <div class="span6">
+                    <?php
+                        echo $this->Form->input('reporter_name_diff', array(
+                            'div' => array('class' => 'control-group required'), 'class' => 'diff',
+                            'label' => array('class' => 'control-label required', 'text' => 'Name <span style="color:red;">*</span>'),
+                        ));
+                        echo $this->Form->input('reporter_email_diff', array(
+                            'type' => 'email',
+                            'div' => array('class' => 'control-group required'), 'class' => 'diff',
+                            'label' => array('class' => 'control-label required', 'text' => 'E-MAIL ADDRESS <span style="color:red;">*</span>')
+                        ));
+                    ?>
+                </div><!--/span-->
+                <div class="span6">
+                    <?php
+                        echo $this->Form->input('reporter_designation_diff', array(
+                            'type' => 'select', 'options' => $designations, 'empty' => true, 'class' => 'diff',
+                            'label' => array('class' => 'control-label required', 'text' => 'Designation'.' <span style="color:red;">*</span>'), 'empty'=>true ));
+                        echo $this->Form->input('reporter_phone_diff', array(
+                            'div' => array('class' => 'control-group'), 'class' => 'diff',
+                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                        ));                        
+                        echo $this->Form->input('reporter_date_diff', array(
+                            'type' => 'text', 'class' => 'date-pick-field diff', 
+                            'label' => array('class' => 'control-label required', 'text' => 'Date'),
+                        ));
+                    ?>
+                </div><!--/span-->
+            </div><!--/row-->
+            
         </div>
             <div class="span2">
             <div class="my-sidebar" data-spy="affix" >

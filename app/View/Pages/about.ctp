@@ -48,7 +48,7 @@
               <p><a class="btn" href="#">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="span4">
-              <h4>POOR QUALITY MEDICINAL PRODUCTS</h4>
+              <h4>POOR-QUALITY MEDICAL PRODUCTS AND HEALTH TECHNOLOGIES</h4>
               <p>All healthcare professionals (clinicians, dentists, nurses, pharmacists, physiotherapists, community health workers etc) are encouraged to report. Patients (or their next of kin) may also report. </p>
               <p><a class="btn" href="#">View details &raquo;</a></p>
             </div><!--/span-->

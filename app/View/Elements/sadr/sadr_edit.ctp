@@ -102,11 +102,11 @@
                                                     'between' => '<input type="hidden" value="0" id="Sadr_medicinal_product_" name="data[Sadr][medicinal_product]">
                                                                     <label class="checkbox">',
                                                     'after' => 'Medicinal product </label>',));
-                    echo $this->Form->input('blood_products', array(
-                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
-                                                    'between' => '<input type="hidden" value="0" id="Sadr_blood_products_" name="data[Sadr][blood_products]">
-                                                                    <label class="checkbox">',
-                                                    'after' => 'Blood and blood products </label>',));
+                    // echo $this->Form->input('blood_products', array(
+                    //         'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                    //                                 'between' => '<input type="hidden" value="0" id="Sadr_blood_products_" name="data[Sadr][blood_products]">
+                    //                                                 <label class="checkbox">',
+                    //                                 'after' => 'Blood and blood products </label>',));
                     echo $this->Form->input('herbal_product', array(
                             'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
                                                     'between' => '<input type="hidden" value="0" id="Sadr_herbal_product_" name="data[Sadr][herbal_product]">

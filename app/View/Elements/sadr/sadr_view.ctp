@@ -53,7 +53,6 @@
 						<td style="width: 50%;">
 							<h5>Product category (Tick appropriate box)</h5>
 							<p> <?php echo ($sadr['Sadr']['medicinal_product']   ? $ichecked : $nchecked ); ?> Medicinal product  </p>
-							<p> <?php echo ($sadr['Sadr']['blood_products']   ? $ichecked : $nchecked ); ?> Blood and blood products  </p>
 							<p> <?php echo ($sadr['Sadr']['herbal_product']   ? $ichecked : $nchecked ); ?> Herbal product   </p>
 							<p> <?php echo ($sadr['Sadr']['cosmeceuticals']   ? $ichecked : $nchecked ); ?> Cosmeceuticals   </p>
 							<p> <?php echo ($sadr['Sadr']['product_other']   ? $ichecked : $nchecked ); ?> Others  </p>
@@ -166,7 +165,7 @@
 					  </tr>
 					  <tr>
 						<th style="width: 10%;">INN/GENERIC NAME</th>
-						<th style="width: 10%;">BRAND NAME</th>
+						<th style="width: 10%;">BRAND NAME <span style="color:red;">*</span></th>
 						<th style="width: 7%;">BATCH/ LOT NO.</th>
 						<th style="width: 7%;">MANUFACTURER</th>
 						<th class="required" style="width: 8%;"><label class="required">DOSE</label></th>

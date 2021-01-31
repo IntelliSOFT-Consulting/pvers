@@ -16,6 +16,8 @@
               echo $this->element('menus/report_county_sidebar'); 
           } elseif ($this->Session->read('Auth.User.user_type') == 'Public Health Program') {
               echo $this->element('menus/report_program_sidebar'); 
+          } elseif (!$this->Session->read('Auth.User')) {
+              echo $this->element('menus/report_public_sidebar'); 
           }
           else {
               echo $this->element('menus/report_sidebar'); 

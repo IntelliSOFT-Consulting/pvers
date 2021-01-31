@@ -17,7 +17,47 @@ class ReportsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        // $this->Auth->allow();
+        $this->Auth->allow('index', 'sadrs_by_age',
+'sadrs_by_medicine',
+'sadrs_by_gender',
+'sadrs_by_county', 'sadrs_by_month',
+'sadrs_by_year', 'aefis_by_age',
+'aefis_by_vaccine',
+'aefis_by_gender',
+'aefis_by_county',
+'aefis_by_month',
+'aefis_by_year',
+'pqmps_by_brand',
+'pqmps_by_generic',
+'pqmps_by_county',
+'pqmps_by_country',
+'pqmps_by_month',
+'pqmps_by_year',
+'devices_by_age',
+'devices_by_brand',
+'devices_by_gender',
+'devices_by_county', 'devices_by_month',
+'devices_by_year',
+'medications_by_age',
+'medications_by_gender',
+'medications_by_producti',
+'medications_by_productii',
+'medications_by_generici',
+'medications_by_genericii',
+'medications_by_county',
+'medications_by_month',
+'medications_by_year',
+'transfusions_by_age',
+'transfusions_by_gender',
+'transfusions_by_county',
+'transfusions_by_month',
+'transfusions_by_year',
+'saes_by_age',
+'saes_by_month',
+'saes_by_year',
+'saes_by_gender',
+'saes_by_medicine',
+'saes_by_concomittant');
     }
 
     /**

@@ -33,7 +33,7 @@ class AefisController extends AppController {
         $criteria['Aefi.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'AefiListOfVaccine');
+        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -61,7 +61,7 @@ class AefisController extends AppController {
         $criteria['Aefi.submitted'] = array(1, 2); 
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'AefiListOfVaccine');
+        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -216,7 +216,7 @@ class AefisController extends AppController {
 
         $aefi = $this->Aefi->find('first', array(
                 'conditions' => array('Aefi.id' => $id),
-                'contain' => array('AefiListOfVaccine', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'contain' => array('AefiListOfVaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
                 'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
             ));
         $this->set('aefi', $aefi);
@@ -240,7 +240,7 @@ class AefisController extends AppController {
 
         $aefi = $this->Aefi->find('first', array(
                 'conditions' => array('Aefi.id' => $id),
-                'contain' => array('AefiListOfVaccine', 'Attachment', 'Designation')
+                'contain' => array('AefiListOfVaccine', 'AefiDescription', 'Attachment', 'Designation')
             ));
         $aefi = Sanitize::clean($aefi, array('escape' => true));
         $this->set('aefi', $aefi);
@@ -256,7 +256,7 @@ class AefisController extends AppController {
 
         $aefi = $this->Aefi->find('first', array(
                 'conditions' => array('Aefi.id' => $id),
-                'contain' => array('AefiListOfVaccine', 'County', 'Attachment', 'Designation')
+                'contain' => array('AefiListOfVaccine', 'AefiDescription', 'County', 'Attachment', 'Designation')
             ));
         $aefi = Sanitize::clean($aefi, array('escape' => true));
 
@@ -332,7 +332,7 @@ class AefisController extends AppController {
                 throw new NotFoundException(__('Invalid AEFI'));
             }
             $aefi = Hash::remove($this->Aefi->find('first', array(
-                        'contain' => array('AefiListOfVaccine'),
+                        'contain' => array('AefiListOfVaccine', 'AefiDescription'),
                         'conditions' => array('Aefi.id' => $id)
                         )
                     ), 'Aefi.id');
@@ -525,7 +525,7 @@ class AefisController extends AppController {
         //Manager will always edit a copied report
         $aefi = $this->Aefi->find('first', array(
                 'conditions' => array('Aefi.id' => $aefi['Aefi']['aefi_id']),
-                'contain' => array('AefiListOfVaccine', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
+                'contain' => array('AefiListOfVaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
             ));
         $this->set('aefi', $aefi);
 

@@ -149,6 +149,12 @@ class Aefi extends AppModel {
             'dependent' => true,
             'conditions' => array('AefiFollowup.report_type' => 'Followup'),
         ),
+        'AefiDescription' => array(
+            'className' => 'AefiDescription',
+            'foreignKey' => 'aefi_id',
+            'dependent' => true,
+            'conditions' => '',
+        ),
 		'Attachment' => array(
             'className' => 'Attachment',
             'foreignKey' => 'foreign_key',
