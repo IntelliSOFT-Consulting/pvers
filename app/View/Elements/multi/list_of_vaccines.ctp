@@ -15,13 +15,18 @@
     </div>
     <div class="row-fluid">
         <div class="span12">
+        <?php
+          echo $this->Form->input('liboso', 
+                          array('type' => 'select', 'options' => $vaccines, 'empty' => true, 'label' => false, 'style' => 'display: none;'));
+        ?>
             <table id="listOfVaccinesTable"  class="table table-bordered table-condensed table-pvborder">
                 <thead>
                   <tr>
                     <th colspan="8" style="width: 70%"><label class="required">Details of Vaccines</label>
                       <?php
                         echo $this->Form->input('list', array('type' => 'hidden', 'value' => ''));
-                        echo $this->Form->error('Aefi.list', array('wrap' => 'span', 'class' => 'control-group required error'));
+                        echo $this->Form->error('Aefi.list', array('wrap' => 'span', 'class' => 'control-group required error'));                       
+          
                       ?>
                     </th>
                     <th colspan="4"><label class="required">Details of Diluents</label></th>
@@ -50,9 +55,15 @@
                     <td><?= $i+1; ?></td>
                     <td><?php
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.id');
-                          echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccine_name', array(
-                            'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span11 autosave-ignore vaxname',));
+                          // echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccine_name', array(
+                          //   'label' => false, 'between' => false,
+                          //   'after' => false, 'class' => 'span11 autosave-ignore vaxname',));
+                          echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccine_id', array(
+                              'empty' => true, 'label' => false, 'between' => false, 'after' => false, 'class' => 'span12 autosave-ignore',
+                              'type' => 'select',
+                              'error' => array('attributes' => array( 'class' => 'help-block')),
+                              'options' => $vaccines,
+                          ));
                         ?>
                     </td>
                     <td>

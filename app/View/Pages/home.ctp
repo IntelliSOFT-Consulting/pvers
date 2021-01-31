@@ -17,7 +17,7 @@
               
               
               <p>You can report any cases of:
-              	  <br>&nbsp;1. <strong>adverse drug reactions</strong> (side effects)
+              	  <br>&nbsp;1. SADR/Adverse drug reactions (side effects)
               	  <br>&nbsp;2. Poor-quality Medical Products And Health Technologies
               	  <br>&nbsp;3. Incidents and errors during medication, vaccination or blood transfusion.</p>
               <p>The Board will investigate the cases and where possible, provide feedback on the status/outcome of the review.</p>

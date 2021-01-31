@@ -457,7 +457,9 @@ class AefisController extends AppController {
         $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
         $designations = $this->Aefi->Designation->find('list');
-        $this->set(compact('designations'));
+        $this->set(compact('designations'));        
+        $vaccines = $this->Aefi->AefiListOfVaccine->Vaccine->find('list');
+        $this->set(compact('vaccines'));
     }
 
     public function manager_copy($id = null) {

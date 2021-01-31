@@ -22,6 +22,13 @@ class AefiListOfVaccine extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Vaccine' => array(
+			'className' => 'Vaccine',
+			'foreignKey' => 'vaccine_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

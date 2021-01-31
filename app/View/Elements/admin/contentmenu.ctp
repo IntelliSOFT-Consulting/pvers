@@ -1,5 +1,5 @@
 <?php 
-	$aC = $bC = $cC = $dC = $eC = $fC =  $gC =  $hC =  $iC =  $jC = $kC = $lC = $mC = $nC = '';
+	$aC = $bC = $cC = $dC = $eC = $fC =  $gC =  $hC =  $iC =  $jC = $kC = $lC = $mC = $nC = $oC = '';
 	if ($this->request->params['controller'] == 'help_infos') {
 		if(isset($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'sadr')  $aC = 'active';
 		else if(isset($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'pqmp')  $bC = 'active';
@@ -23,6 +23,8 @@
 		$jC = 'active';
 	} else if($this->request->params['controller'] == 'who_drugs'){
 		$kC = 'active';
+	} else if($this->request->params['controller'] == 'vaccines'){
+		$oC = 'active';
 	}
 ?> 
 <div class="well" style="padding: 8px 0;">
@@ -79,6 +81,12 @@
 							<?php 
 							echo $this->Html->link('<i class="icon-tag"></i> ROUTES', 
 								array('controller' => 'routes', 'action' => 'index', 'admin' => true), array('escape' => false)); 
+							?>
+							</li>
+							<li class="<?php echo $oC; ?>">
+							<?php 
+							echo $this->Html->link('<i class="icon-tag"></i> VACCINES', 
+								array('controller' => 'vaccines', 'action' => 'index', 'admin' => true), array('escape' => false)); 
 							?>
 							</li>				  
 						  <li class="divider"></li>						  

@@ -31,7 +31,7 @@ $(function() {
       //   format: 'd-m-Y H:i'
       // });
 
-      var availableVax = [
+      /*var availableVax = [
         "BCG",
         "bOPV (Bivalent Oral Polio Vaccine)",
         "Pentavalent (DTP-HepB-Hib)",
@@ -50,7 +50,7 @@ $(function() {
       ];
       $('.vaxname').autocomplete({
         source: availableVax
-      });
+      });*/
 
       var dates3 = 0;     //TODO:search for date time fields and use
       // $('.datetime-field').datetimepicker({
@@ -86,11 +86,11 @@ $(function() {
         // <div class="col-xs-6"> <input class="form-control date-pick-field" name="aefi_list_of_vaccines[{i}][vaccination_date]" id="aefi-list-of-vaccines-{i}-vaccination-date" type="text"></div>\
                 // <div class="col-xs-6"> <input class="form-control " name="aefi_list_of_vaccines[{i}][vaccination_time]" id="aefi-list-of-vaccines-{i}-vaccination-time" placeholder="14:00" type="text" ></div> </td>\
             
-        var trWrapper = '\
+        var trWrapper = $('\
           <tr>\
             <td>{i2}</td>\
             <td><input type="hidden" name="data[AefiListOfVaccine][{i}][id]" id="AefiListOfVaccine{i}Id">\
-                <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccine_name]" class="span11 vaxname" required="required" maxlength="200" type="text" id="AefiListOfVaccine{i}VaccineName"></div></td>\
+                <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccine_id]" class="span12 autosave-ignore" id="AefiListOfVaccine{i}VaccineId"></select></div></td>\
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][dosage]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine{i}Dosage"></div> </td>\
             <td>\
@@ -111,9 +111,10 @@ $(function() {
               <button type="button" class="btn btn-danger btn-sm remove-vaccine" value=""> <i class="icon-minus"></i> </button>\
             </td>\
           </tr>\
-        ';
+        '.replace(/{i}/g, intId).replace(/{i2}/g, intId2));
 
-        return trWrapper.replace(/{i}/g, intId).replace(/{i2}/g, intId2);
+        $(trWrapper).find('[name*="vaccine_id"]').append($("#AefiLiboso > option").clone()).val('');
+        return trWrapper;
     }
 
     function remove_vaccine() {

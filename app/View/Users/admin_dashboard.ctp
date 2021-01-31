@@ -106,6 +106,12 @@
         </li>
         <li>
         <?php
+        echo $this->Html->link('<i class="fa fa-plus-square" aria-hidden="true"></i> Vaccines',
+          array('controller' => 'vaccines', 'action' => 'index', 'admin' => true), array('escape' => false));
+        ?>
+        </li>
+        <li>
+        <?php
         echo $this->Html->link('<i class="fa fa-fighter-jet" aria-hidden="true"></i> Drug Administration Routes',
           array('controller' => 'routes', 'action' => 'index', 'admin' => true), array('escape' => false));
         ?>
