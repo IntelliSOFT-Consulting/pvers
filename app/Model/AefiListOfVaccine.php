@@ -33,13 +33,13 @@ class AefiListOfVaccine extends AppModel {
 	);
 
 	public $validate = array(
-		'vaccine_name' => array(
+		/*'vaccine_name' => array(
 			'notBlank' => array(
 				'rule'     => 'notBlank',
 				'required' => true,
 				'message'  => 'Please specify the name of the vaccine'
 			),
-		),
+		),*/
 		'vaccination_date' => array(
 			'notBlank' => array(
 				'rule'     => 'notBlank',
