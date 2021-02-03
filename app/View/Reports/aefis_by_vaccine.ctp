@@ -19,7 +19,7 @@
       <?php
           foreach ($data as $key => $value) {
               echo "<tr>";
-                echo "<th>".$value['AefiListOfVaccine']['vaccine_name']."</th>";
+                echo "<th>".$value['Vaccine']['vaccine_name']."</th>";
                 echo "<td>".$value[0]['cnt']."</td>";
               echo "</tr>";
           }

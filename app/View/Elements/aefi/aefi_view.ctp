@@ -147,6 +147,10 @@
 									<td colspan="2">
 									  Describe AEFI (Signs & Symptoms) <br>
 									  <strong><?php echo $aefi['Aefi']['aefi_symptoms'] ?>	</strong>
+									  <?php
+					                     foreach ($aefi['AefiDescription'] as $aefiDescription): 
+					                  		echo $aefiDescription['description'];
+					                     endforeach; ?>
 									</td>
 								</tr>
 								</tbody>

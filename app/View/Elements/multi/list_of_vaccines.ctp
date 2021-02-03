@@ -16,8 +16,9 @@
     <div class="row-fluid">
         <div class="span12">
         <?php
-          echo $this->Form->input('liboso', 
-                          array('type' => 'select', 'options' => $vaccines, 'empty' => true, 'label' => false, 'style' => 'display: none;'));
+          $routes = ['Intramuscular' => 'Intramuscular', 'Subcutaneous' => 'Subcutaneous', 'Intradermal' => 'Intradermal'];
+          echo $this->Form->input('liboso', array('type' => 'select', 'options' => $vaccines, 'empty' => true, 'label' => false, 'style' => 'display: none;'));
+          echo $this->Form->input('mlishi', array('type' => 'select', 'options' => $routes, 'empty' => true, 'label' => false, 'style' => 'display: none;'));
         ?>
             <table id="listOfVaccinesTable"  class="table table-bordered table-condensed table-pvborder">
                 <thead>
@@ -82,9 +83,15 @@
                     </td> 
                     <td>
                         <?php
+                          // echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_route', array(
+                          //   'label' => false, 'between' => false,
+                          //   'after' => false, 'class' => 'span11 autosave-ignore',));
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_route', array(
-                            'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span11 autosave-ignore',));
+                              'empty' => true, 'label' => false, 'between' => false, 'after' => false, 'class' => 'span12 autosave-ignore',
+                              'type' => 'select',
+                              'error' => array('attributes' => array( 'class' => 'help-block')),
+                              'options' => $routes,
+                          ));
                         ?>
                     </td>
                     <td><?php 

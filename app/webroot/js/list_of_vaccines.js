@@ -96,7 +96,7 @@ $(function() {
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_date]" class="span11 date-pick-field" type="text" required="required" id="AefiListOfVaccine{i}VaccinationDate"></div> </td>\
             <td>\
-              <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_route]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine0VaccinationRoute"></div> </td>\
+              <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccination_route]" class="span12 autosave-ignore" id="AefiListOfVaccine{i}VaccinationRoute"></select></div> </td>\
             <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][batch_number]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}BatchNumber"></div> </td>\
             <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccine_manufacturer]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}VaccineManufacturer"></div> </td>\
             <td>\
@@ -114,6 +114,7 @@ $(function() {
         '.replace(/{i}/g, intId).replace(/{i2}/g, intId2));
 
         $(trWrapper).find('[name*="vaccine_id"]').append($("#AefiLiboso > option").clone()).val('');
+        $(trWrapper).find('[name*="vaccination_route"]').append($("#AefiMlishi > option").clone()).val('');
         return trWrapper;
     }
 

@@ -405,13 +405,13 @@ class ReportsController extends AppController {
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['AefiListOfVaccine.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         else 
-            $criteria['AefiListOfVaccine.created'] = '2020-04-01 08:00:00';
+            $criteria['AefiListOfVaccine.created >'] = '2020-04-01 08:00:00';
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
         $data = $this->Aefi->AefiListOfVaccine->find('all', array(
-            'fields' => array('AefiListOfVaccine.vaccine_name as vaccine_name', 'COUNT(distinct AefiListOfVaccine.aefi_id) as cnt'),
-            'contain' => array(), 'recursive' => -1,
+            'fields' => array('Vaccine.vaccine_name as vaccine_name', 'COUNT(distinct AefiListOfVaccine.aefi_id) as cnt'),
+            'contain' => array('Vaccine'), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('AefiListOfVaccine.vaccine_name'),
+            'group' => array('Vaccine.vaccine_name'),
             'having' => array('COUNT(distinct AefiListOfVaccine.aefi_id) >' => 0),
         )); 
 
