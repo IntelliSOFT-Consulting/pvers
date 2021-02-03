@@ -147,7 +147,7 @@
 
 			<div class="row-fluid">
 				<div class="span12">
-					<h5 class="pqmpbanner" style="text-align:center;">PRODUCT IDENTITY</h5>
+					<h5 class="pqmpbanner" style="text-align:left;">PRODUCT IDENTITY</h5>
 				</div><!--/span-->
 			</div><!--/row-->
 
@@ -287,6 +287,12 @@
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
 							'before' => '<label class="radio">',	'after' => '</label>',
 							'options' => array('Cream / Ointment / Liniment / Paste' => 'Cream / Ointment / Liniment / Paste'),
+							'onclick' => '$("#PqmpProductFormulationSpecify").attr("disabled","disabled")',
+						));
+						echo $this->Form->input('product_formulation', array(
+							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
+							'before' => '<label class="radio">',	'after' => '</label>',
+							'options' => array('Anticoagulant' => 'Anticoagulant'),
 							'onclick' => '$("#PqmpProductFormulationSpecify").attr("disabled","disabled")',
 						));
 						echo $this->Form->input('product_formulation', array(

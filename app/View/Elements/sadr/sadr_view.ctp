@@ -147,7 +147,12 @@
 					</tr>
 					<tr>
 						<td style="width: 30%;">BRIEF DESCRIPTION OF REACTION: </td>
-						<td style="width: 70%;"><strong><?php echo $sadr['Sadr']['description_of_reaction'] ?></strong></td>
+						<td style="width: 70%;"><strong><?php echo $sadr['Sadr']['description_of_reaction'] ?></strong>
+								<?php
+					                     foreach ($sadr['SadrDescription'] as $sadrDescription): 
+					                  		echo $sadrDescription['description'];
+					                     endforeach; ?>
+						</td>
 					</tr>
 					<tr>
 						<td style="width: 30%;">MEDICAL HISTORY:</td>

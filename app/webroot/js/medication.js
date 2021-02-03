@@ -17,6 +17,7 @@ $(document).ready(function() {
         showButtonPanel:true, 
         changeMonth:true, 
         changeYear:true, 
+        yearRange:'-100:+0',
         showAnim:'show'
     });
 

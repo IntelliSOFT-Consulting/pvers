@@ -38,7 +38,7 @@
 					<tr>
 						<td style="width: 25%;">NAME OF INSTITUTION/ ORGANZIATION</td>
 						<td style="width: 25%;"><strong><?php echo $device['Device']['name_of_institution'] ?>	</strong></td>
-						<td style="width: 25%;">ADDRESS </td>
+						<td style="width: 25%;">PHYSICAL ADDRESS </td>
 						<td style="width: 25%;"><strong><?php echo $device['Device']['institution_address'] ?>	</strong></td>
 					</tr>
 					<tr>
@@ -119,7 +119,7 @@
 					<tr>
 						<td style="width: 25%;"> COMMON NAME </td>
 						<td style="width: 25%;"><strong><?php echo $device['Device']['common_name'] ?>	</strong></td>
-						<td style="width: 25%;">CATALOGUE</td>
+						<td style="width: 25%;">CATALOGUE NUMBER</td>
 						<td style="width: 25%;"><strong><?php echo $device['Device']['catalogue'] ?>	</strong></td>
 					</tr>
 					<tr>

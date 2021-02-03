@@ -84,7 +84,7 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 100%;">
-							<h5 style="text-align:center;" class="pqmpbanner">PRODUCT IDENTITY</h5>
+							<h5 style="text-align:left;" class="pqmpbanner">PRODUCT IDENTITY</h5>
 						</td>
 					</tr>
 				</table>

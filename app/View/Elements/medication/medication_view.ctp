@@ -243,7 +243,7 @@
 	                    </td> 
 	                  </tr>
 	                  <tr>
-	                    <td>Dosage form</td>
+	                    <td>Dosage formulation</td>
 	                    <td>
 	                        <?php
 	                          echo $medicaTionProduct['dosage_form_i'];
@@ -269,7 +269,7 @@
 	                    </td> 
 	                  </tr>
 	                  <tr>
-	                    <td colspan="3"><p><i>Please fill below if error involved look alike (similar) product packaging</i></p></td>
+	                    <td colspan="3"><!-- <p><i>Please fill below if error involved look alike (similar) product packaging</i></p> --></td>
 	                  </tr>
 	                  <tr>
 	                    <td>Manufacturer</td>

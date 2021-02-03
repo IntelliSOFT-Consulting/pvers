@@ -40,7 +40,7 @@ $(document).ready(function() {
 		$(".autoComblete2").autocomplete({
 			source: "/drug_dictionaries/autocomblete.json"
 		});
-		console.log("original disco man");
+		// console.log("original disco man");
 	}
 	
 	$(".removeTr").click(function() {

@@ -384,6 +384,7 @@
 							'after'=>'<p class="help-block">	Please describe the reaction in terms of symptoms </p></div>',
 						));
 
+						echo $this->element('multi/sadr_descriptions');
 
 						echo $this->Form->input('medical_history', array(
 							'class' => 'span8', 'rows' => '2',
@@ -481,7 +482,7 @@
 					<?php
 						echo $this->Form->input('outcome', array(
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-							'before' => '<div class="control-group"> <input type="hidden" value="" id="SadrOutcome_" name="data[Sadr][outcome]"> <label class="radio inline">',
+							'before' => '<div class="control-group editable"> <input type="hidden" value="" id="SadrOutcome_" name="data[Sadr][outcome]"> <label class="radio inline">',
 							'after' => '</label>',
 							'options' => array('recovered/resolved' => 'Recovered/resolved'),
 						));
@@ -519,7 +520,7 @@
 						));
 					?>
             	</div>
-            	<div class="span6">            		
+            	<div class="span6 editable">            		
             		<h5 style="color: #884805;">Grading of the reaction /event</h5>
             		<p class="required">Severity of reaction</p>
             		<?php

@@ -10,7 +10,7 @@ App::uses('AppModel', 'Model');
  * @property Sadr $Sadr
  */
 class SubCounty extends AppModel {
-
+	public $displayField = 'sub_county_name';
 
 	// The Associations below have been created with all possible keys, those that are not needed can be removed
 

@@ -84,7 +84,7 @@
                     </td> 
                   </tr>
                   <tr>
-                    <td>Dosage form</td>
+                    <td>Dosage formulation</td>
                     <td>
                         <?php
                           echo $this->Form->input('MedicationProduct.'.$i.'.dosage_form_i', array(
@@ -118,7 +118,7 @@
                     </td> 
                   </tr>
                   <tr>
-                    <td colspan="3"><p><i>Please fill below if error involved look alike (similar) product packaging</i></p></td>
+                    <td colspan="3"><!-- <p><i>Please fill below if error involved look alike (similar) product packaging</i></p> --></td>
                   </tr>
                   <tr>
                     <td>Manufacturer</td>

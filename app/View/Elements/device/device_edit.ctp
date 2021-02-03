@@ -86,7 +86,7 @@
                         ));
 
                         echo $this->Form->input('institution_address', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'ADDRESS'),
+                            'label' => array('class' => 'control-label required', 'text' => 'PHYSICAL ADDRESS'),
                             'placeholder' => 'Address' ,
                         ));
                     ?>
@@ -304,7 +304,7 @@
                         ));
 
                         echo $this->Form->input('catalogue', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'CATALOGUE'),
+                            'label' => array('class' => 'control-label required', 'text' => 'CATALOGUE NUMBER'),
                         ));
 
                         echo $this->Form->input('manufacturer_address', array(

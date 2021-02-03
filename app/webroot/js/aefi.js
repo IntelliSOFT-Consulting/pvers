@@ -6,6 +6,10 @@
       $( "#AefiCountyId" ).toggle();
     });
 
+    if($('#AefiReportType').val() == 'Followup') {
+        $('#AefiReporterEditForm :input').attr('readonly', 'readonly');
+        $('.editable :input').prop('disabled', false).attr('readonly', false);
+    }
 
     //Person submitting
     $('.person-submit').on('change',function() {

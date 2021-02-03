@@ -35,7 +35,7 @@ class SadrsController extends AppController {
         $criteria['Sadr.user_id'] = $this->Auth->User('id');        
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'SadrListOfDrug');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -63,7 +63,7 @@ class SadrsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);        
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'SadrListOfDrug');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -168,7 +168,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
                 'conditions' => array('Sadr.id' => $id),
-                'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
+                'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
             ));
         $this->set('sadr', $sadr);
 
@@ -192,7 +192,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
                 'conditions' => array('Sadr.id' => $id),
-                'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
                 'SadrOriginal', 'SadrOriginal.SadrListOfDrug', 'SadrOriginal.SadrListOfDrug.Route', 'SadrOriginal.SadrListOfDrug.Frequency', 'SadrOriginal.SadrListOfDrug.Dose', 'SadrOriginal.SadrListOfMedicine', 'SadrOriginal.SadrListOfMedicine.Route', 'SadrOriginal.SadrListOfMedicine.Frequency', 'SadrOriginal.SadrListOfMedicine.Dose', 'SadrOriginal.County', 'SadrOriginal.SubCounty', 'SadrOriginal.Attachment', 'SadrOriginal.Designation', 'SadrOriginal.ExternalComment')
             ));
         $this->set('sadr', $sadr);
@@ -218,7 +218,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
                 'conditions' => array('Sadr.id' => $id),
-                'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
                 'SadrOriginal', 'SadrOriginal.SadrListOfDrug', 'SadrOriginal.SadrListOfDrug.Route', 'SadrOriginal.SadrListOfDrug.Frequency', 'SadrOriginal.SadrListOfDrug.Dose', 'SadrOriginal.SadrListOfMedicine', 'SadrOriginal.SadrListOfMedicine.Route', 'SadrOriginal.SadrListOfMedicine.Frequency', 'SadrOriginal.SadrListOfMedicine.Dose', 'SadrOriginal.County', 'SadrOriginal.SubCounty', 'SadrOriginal.Attachment', 'SadrOriginal.Designation', 'SadrOriginal.ExternalComment')
             ));
         $this->set('sadr', $sadr);
@@ -242,7 +242,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
                 'conditions' => array('Sadr.id' => $id),
-                'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+                'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
             ));
         $sadr = Sanitize::clean($sadr, array('escape' => true));
         $this->set('sadr', $sadr);
@@ -258,7 +258,7 @@ class SadrsController extends AppController {
 
         $sadr = $this->Sadr->find('first', array(
                 'conditions' => array('Sadr.id' => $id),
-                'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+                'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
             ));
         $sadr = Sanitize::clean($sadr, array('escape' => true));
 
@@ -301,7 +301,7 @@ class SadrsController extends AppController {
 
     public function e2b($id = null) {
         $sadr = $this->Sadrs->get($id, [
-            'contain' => ['SadrListOfDrugs', 'SadrOtherDrugs', 'Attachments', 'ReportStages', 'Reactions']
+            'contain' => ['SadrListOfDrugs', 'SadrDescription', 'SadrOtherDrugs', 'Attachments', 'ReportStages', 'Reactions']
         ]);        
         
         $stage1  = $this->Sadrs->ReportStages->newEntity();
@@ -342,7 +342,7 @@ class SadrsController extends AppController {
                 throw new NotFoundException(__('Invalid SADR'));
             }
             $sadr = Hash::remove($this->Sadr->find('first', array(
-                        'contain' => array('SadrListOfDrug', 'SadrListOfMedicine'),
+                        'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfMedicine'),
                         'conditions' => array('Sadr.id' => $id)
                         )
                     ), 'Sadr.id');
@@ -507,7 +507,7 @@ class SadrsController extends AppController {
                 throw new NotFoundException(__('Invalid SADR'));
             }
             $sadr = Hash::remove($this->Sadr->find('first', array(
-                        'contain' => array('SadrListOfDrug', 'SadrListOfMedicine'),
+                        'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfMedicine'),
                         'conditions' => array('Sadr.id' => $id)
                         )
                     ), 'Sadr.id');
@@ -562,7 +562,7 @@ class SadrsController extends AppController {
         //Manager will always edit a copied report
         $sadr = $this->Sadr->find('first', array(
                 'conditions' => array('Sadr.id' => $sadr['Sadr']['sadr_id']),
-                'contain' => array('SadrListOfDrug', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
+                'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'SadrListOfMedicine', 'SadrListOfMedicine.Route', 'SadrListOfMedicine.Frequency', 'SadrListOfMedicine.Dose', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
             ));
         $this->set('sadr', $sadr);
 

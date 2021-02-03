@@ -337,7 +337,7 @@
              <hr class="darker">
 
             <div class="row-fluid">
-                <div class="span12">
+                <div class="span12 editable">
                     <?php
                         echo $this->Form->input('serious', array(
                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'serious',
@@ -362,7 +362,7 @@
                 </div>
             </div>
             <div class="row-fluid">
-                <div class="span12">
+                <div class="span12 editable">
                     <?php
                         echo $this->Form->input('serious_yes', array(
                           'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
@@ -440,7 +440,7 @@
                         //Recovered/Resolved, Recovering/Resolving, Not recovered/Not resolved/Ongoing, Recovered/Resolved with sequelae, Fatal, unknown
                         echo $this->Form->input('outcome', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'outcome',
-                            'before' => '<div class="control-group"> <input type="hidden" value="" id="AefiOutcome_" name="data[Aefi][outcome]"> <label class="radio">',
+                            'before' => '<div class="control-group editable"> <input type="hidden" value="" id="AefiOutcome_" name="data[Aefi][outcome]"> <label class="radio">',
                             'after' => '</label>',
                             'options' => array('Recovered/Resolved' => 'Recovered/Resolved'),
                         ));

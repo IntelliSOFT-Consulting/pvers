@@ -167,6 +167,12 @@ class Sadr extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+        'SadrDescription' => array(
+            'className' => 'SadrDescription',
+            'foreignKey' => 'sadr_id',
+            'dependent' => true,
+            'conditions' => '',
+        ),
 		'Attachment' => array(
             'className' => 'Attachment',
             'foreignKey' => 'foreign_key',

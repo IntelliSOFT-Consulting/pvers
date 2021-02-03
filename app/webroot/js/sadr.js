@@ -2,6 +2,14 @@ $(document).ready(function() {
 
     $( "#SadrCountyId" ).combobox();
 
+    if($('#SadrReportType').val() == 'Followup') {
+        $('#SadrReporterEditForm :input').attr('readonly', 'readonly');
+        // $('#SadrReporterEditForm select').prop('disabled', true);
+        // $('#SadrReporterEditForm input:checkbox').prop('disabled', true);
+
+        $('.editable :input').prop('disabled', false).attr('readonly', false);
+    }
+
     //Person submitting
     $('.person-submit').on('change',function() {
         var pilih = $(this).val();
