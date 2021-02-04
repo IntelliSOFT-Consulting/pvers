@@ -61,11 +61,11 @@ $(function() {
                         <div class="control-group"><input name="data[MedicationProduct][{i}][dosage_form_ii]" class="span11 autosave-ignore" maxlength="255" type="text" id="MedicationProduct{i}DosageFormIi"></div></td>\
                   </tr>\
                   <tr>\
-                    <td>Dose, frequency, duration, route</td>\
+                    <td>Dose, frequency, duration, route <span style="color:red;">*</span></td>\
                     <td>\
-                        <div class="control-group"><input name="data[MedicationProduct][{i}][dosage_i]" class="span11 autosave-ignore" maxlength="255" type="text" id="MedicationProduct{i}DosageI"></div> </td>\
+                        <div class="control-group"><input name="data[MedicationProduct][{i}][dosage_i]" class="span11 autosave-ignore" maxlength="255" type="text" placeholder="5mg, BD, 5 days, IM" id="MedicationProduct{i}DosageI"></div> </td>\
                     <td>\
-                        <div class="control-group"><input name="data[MedicationProduct][{i}][dosage_ii]" class="span11 autosave-ignore" maxlength="255" type="text" id="MedicationProduct{i}DosageIi"></div> </td>\
+                        <div class="control-group"><input name="data[MedicationProduct][{i}][dosage_ii]" class="span11 autosave-ignore" maxlength="255" type="text" placeholder="5mg, BD, 5 days, IM" id="MedicationProduct{i}DosageIi"></div> </td>\
                   </tr>\
                   <tr>\
                     <td colspan="3"><p><i>Please fill below if error involved look alike (similar) product packaging</i></p></td>\

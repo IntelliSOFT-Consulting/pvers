@@ -187,6 +187,11 @@ class Medication extends AppModel {
                 'required' => true,
                 'message'  => 'Please provide a date of the event'
             ),
+            'notInFuture' => array(
+                'rule'     => 'notInFuture',
+                'allowEmpty' => true,
+                'message'  => 'Date of event greater than reporting date'
+            ),
         ),
         'patient_name' => array(
             'notBlank' => array(
@@ -274,6 +279,19 @@ class Medication extends AppModel {
 
     public function ageOrDate($field = null) {
         return !empty($field['date_of_birth']) || !empty($this->data['Medication']['age_years']);
+    }
+
+
+    public function notInFuture($field = null) {
+        $ans = true;
+        if (!empty($this->data['Medication']['date_of_event']) && !empty($this->data['Medication']['reporter_date'])) {
+            if (strtotime($this->data['Medication']['date_of_event']) > strtotime($this->data['Medication']['reporter_date'])) $ans = false;
+        }
+        if (!empty($this->data['Medication']['date_of_event']) && !empty($this->data['Medication']['reporter_date_diff'])) {
+            if (strtotime($this->data['Medication']['date_of_event']) > strtotime($this->data['Medication']['reporter_date_diff'])) $ans = false;
+        }
+        
+        return $ans;
     }
 
 	public function beforeSave($options = array()) {

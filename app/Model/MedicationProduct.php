@@ -37,7 +37,21 @@ class MedicationProduct extends AppModel {
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
-                'message'  => 'Please provide product no. 1 (error)'
+                'message'  => 'Please provide product no. 2 (error)'
+            ),
+        ),
+        'dosage_i' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide dose, frequence... 1 (error)'
+            ),
+        ),
+        'dosage_ii' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide dose, frequency... 2 (intended)'
             ),
         ),
     );

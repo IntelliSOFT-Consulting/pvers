@@ -101,18 +101,18 @@
                     </td> 
                   </tr>
                   <tr>
-                    <td>Dose, frequency, duration, route</td>
+                    <td>Dose, frequency, duration, route <span style="color:red;">*</span></td>
                     <td>
                         <?php
                           echo $this->Form->input('MedicationProduct.'.$i.'.dosage_i', array(
-                            'label' => false, 'between' => false,
+                            'label' => false, 'between' => false, 'placeholder' => '5mg, BD, 5 days, IM',
                             'after' => false, 'class' => 'span11 autosave-ignore',));
                         ?>
                     </td>                    
                     <td>
                         <?php
                         echo $this->Form->input('MedicationProduct.'.$i.'.dosage_ii', array(
-                            'type' => 'text', 'label' => false, 'between' => false,
+                            'type' => 'text', 'label' => false, 'between' => false, 'placeholder' => '5mg, BD, 5 days, IM',
                             'after' => false, 'class' => 'span11 autosave-ignore',));
                         ?>
                     </td> 
