@@ -70,7 +70,20 @@
                     ?>
                     <h5 class="controls">--OR--</h5>
                     <?php
-                        echo $this->Form->input('age_years', array('label' => array('class' => 'control-label required', 'text' => 'Age in years'), ));
+                        // echo $this->Form->input('age_years', array('label' => array('class' => 'control-label required', 'text' => 'Age in years'), ));
+                        echo $this->Form->input('age_years', array(
+                            'type' => 'select',
+                            'empty' => true,
+                            'options' => array(
+                                                'neonate'=>'neonate',
+                                                'infant' => 'infant',
+                                                'child' => 'child',
+                                                'adolescent' => 'adolescent',
+                                                'adult' => 'adult',
+                                                'elderly' => 'elderly',
+                                                ),
+                            'label' => array('class' => 'control-label required', 'text' => 'Age group'),
+                        ));
 
                     ?>
                     </div>

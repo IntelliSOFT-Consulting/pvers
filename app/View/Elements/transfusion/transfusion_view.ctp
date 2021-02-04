@@ -47,7 +47,7 @@
 						<td style="width: 25%;"><strong>
 							<?php 
 								echo $transfusion['Transfusion']['date_of_birth'];
-								if(!empty($transfusion['Transfusion']['age_years'])) echo '<br>'.$transfusion['Transfusion']['age_years'].' years';
+								if(!empty($transfusion['Transfusion']['age_years'])) echo '<br>'.$transfusion['Transfusion']['age_years'].' age group';
 							?></strong>
 						</td>
 						<td style="width: 25%;">Patient No. </td>

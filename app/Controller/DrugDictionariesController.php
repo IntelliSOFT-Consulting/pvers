@@ -33,10 +33,10 @@ class DrugDictionariesController extends AppController {
 	
 	public function autocomblete($query = null) {
 		$this->RequestHandler->setContent('json', 'application/json' ); 
-		$groupers = $this->DrugDictionary->finder($this->request->query['term'], 'N');			
+		$groupers = $this->DrugDictionary->findero($this->request->query['term'], 'N');			
                 $groups = array();
 		foreach ($groupers as $key => $value) {
-			$groups[] = $value['DrugDictionary']['drug_name'];
+			$groups[] = $value['DrugDictionary']['trade_name'];
 		}
 		$this->set('groups', array_values($groups));
         $this->set('_serialize', 'groups');

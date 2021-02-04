@@ -50,7 +50,8 @@
                         if($pqmp['Pqmp']['submitted'] > 1) {
                           echo "<li>";
                             echo $this->Html->link($pqmp['Pqmp']['brand_name'].' <small class="muted">('.$pqmp['Pqmp']['reference_no'].')</small>', array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id']),
-                              array('escape' => false, 'class' => 'text-success')); 
+                              array('escape' => false, 'class' => 'text-'.((in_array($pqmp['Pqmp']['product_formulation'], ['Injection', 'Powder for Reconstitution of Injection', 'Eye drops', 'Nebuliser solution']) 
+                                || $pqmp['Pqmp']['therapeutic_ineffectiveness'] || $pqmp['Pqmp']['particulate_matter']) ? 'error' : 'success'))); 
                           echo "</li>"; 
                         } 
                       }

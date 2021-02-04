@@ -339,9 +339,14 @@ class PqmpsController extends AppController {
                       // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
                     }
                     //**********************************    END   *********************************
-
-                    $this->Session->setFlash(__('The PQMP has been submitted to PPB'), 'alerts/flash_success');
-                    $this->redirect(array('action' => 'view', $this->Pqmp->id));      
+                    if($pqmp['Pqmp']['therapeutic_ineffectiveness']) {
+                        $this->Session->setFlash(__('The PQMP has been submitted to PPB. Please create a new SADR for the PQMP.'), 'alerts/flash_success');
+                        $this->redirect(array('controller' => 'sadrs', 'action' => 'add', 'reporter' => true)); 
+                    } else {
+                        $this->Session->setFlash(__('The PQMP has been submitted to PPB'), 'alerts/flash_success');
+                        $this->redirect(array('action' => 'view', $this->Pqmp->id));          
+                    }
+                    
                 }
                 // debug($this->request->data);
                 $this->Session->setFlash(__('The PQMP has been saved'), 'alerts/flash_success');

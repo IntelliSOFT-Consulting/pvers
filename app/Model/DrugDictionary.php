@@ -29,6 +29,22 @@ class DrugDictionary extends AppModel {
 		return $suggestions;
     }
 	
+	public function findero($query, $generic = null) {
+		if (($suggestions = Cache::read($query.$generic, 'brands')) === false) {
+			$suggestions = $this->find('all', array(
+				'fields' => array('DISTINCT DrugDictionary.trade_name'),
+				'limit' => 20,
+				'conditions' => array('DrugDictionary.trade_name LIKE' => '%'.$query.'%'), //, 'DrugDictionary.generic' => $generic
+				'recursive' => -1,
+			));
+            // $suggestions[]['DrugDictionary']['trade_name'] = 'kweli'; 
+			Cache::write($query.$generic, $suggestions, 'brands');
+		} else {
+            // $suggestions[]['DrugDictionary']['trade_name'] = 'urongo'; 
+        }
+		return $suggestions;
+    }
+	
 	public $validate = array(
 		'id' => array(
 			'notBlank' => array(

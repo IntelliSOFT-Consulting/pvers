@@ -79,7 +79,7 @@
 						<td style="width: 25%;"><strong><?php echo $medication['Medication']['patient_phone'] ?></strong></td>
 					</tr>
 					<tr>
-						<td style="width: 25%;">Age in years </td>
+						<td style="width: 25%;">Age group </td>
 						<td style="width: 25%;"><strong><?php echo $medication['Medication']['age_years'] ?>	</strong></td>
 						<td style="width: 25%;"></td>
 						<td style="width: 25%;"></td>

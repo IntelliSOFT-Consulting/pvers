@@ -246,7 +246,7 @@ class SadrsController extends AppController {
             ));
         $sadr = Sanitize::clean($sadr, array('escape' => true));
         $this->set('sadr', $sadr);
-        $this->response->download('SADR_'.$sadr['Sadr']['id']);
+        $this->response->download('SADR_'.$sadr['Sadr']['id'].'.xml');
     }
 
     public function vigiflow($id = null) {

@@ -244,7 +244,7 @@ class AefisController extends AppController {
             ));
         $aefi = Sanitize::clean($aefi, array('escape' => true));
         $this->set('aefi', $aefi);
-        $this->response->download('AEFI_'.$aefi['Aefi']['id']);
+        $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.xml');
     }
 
     public function vigiflow($id = null) {
