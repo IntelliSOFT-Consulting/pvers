@@ -177,24 +177,6 @@
                       array('escape' => false));
         ?>
       </li>
-      <li class="<?php echo $this->fetch('pqmps-by-brand'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Brand Name',  array('controller' => 'reports', 'action'=>'pqmps_by_brand', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('pqmps-by-manufacturer'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Manufacturer',  array('controller' => 'reports', 'action'=>'pqmps_by_manufacturer', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('pqmps-by-supplier'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Supplier',  array('controller' => 'reports', 'action'=>'pqmps_by_supplier', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
       <li class="<?php echo $this->fetch('pqmps-by-generic'); ?>">
       	<?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Generic Name',  array('controller' => 'reports', 'action'=>'pqmps_by_generic', 'admin' => false ),
