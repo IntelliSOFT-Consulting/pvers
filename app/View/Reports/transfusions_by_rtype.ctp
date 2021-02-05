@@ -36,7 +36,7 @@ Highcharts.chart('transfusions-by-rtype', {
         type: 'column'
     },
     title: {
-        text: 'TRANSFUSIONS by Rtype group'
+        text: 'TRANSFUSIONS by Reaction types'
     },
     yAxis: {
         allowDecimals: false,

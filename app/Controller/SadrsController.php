@@ -282,6 +282,7 @@ class SadrsController extends AppController {
         if ($results->isOk()) {
             $body = $results->body;
             $this->Sadr->saveField('vigiflow_message', $body);
+            $this->Sadr->saveField('vigiflow_date', date('Y-m-d H:i:s'));
             $resp = json_decode($body, true);
             if(json_last_error() == JSON_ERROR_NONE) {
                 $this->Sadr->saveField('vigiflow_ref', $resp['MessageId']);

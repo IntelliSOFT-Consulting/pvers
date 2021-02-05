@@ -280,6 +280,7 @@ class AefisController extends AppController {
         if ($results->isOk()) {
             $body = $results->body;
             $this->Aefi->saveField('vigiflow_message', $body);
+            $this->Aefi->saveField('vigiflow_date', date('Y-m-d H:i:s'));
             $resp = json_decode($body, true);
             if(json_last_error() == JSON_ERROR_NONE) {
                 $this->Aefi->saveField('vigiflow_ref', $resp['MessageId']);

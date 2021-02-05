@@ -305,7 +305,7 @@
               ?>&nbsp;
         </td>
         <td><?php echo h($sadr['Sadr']['patient_name']); ?>&nbsp;</td>
-        <?php if($redir == 'manager') { ?><td><?php echo h($sadr['Sadr']['vigiflow_ref']); ?></td> <?php } ?>
+        <?php if($redir == 'manager') { ?><td><?php echo h($sadr['Sadr']['vigiflow_ref']); echo "\n".$sadr['Sadr']['vigiflow_date']; ?></td> <?php } ?>
         <td><?php echo h($sadr['Sadr']['created']); ?>&nbsp;</td>
         <td class="actions">
             <?php 

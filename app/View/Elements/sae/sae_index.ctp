@@ -51,6 +51,10 @@
                 //   'label' => array('class' => 'required', 'text' => 'Protocol No.'),
                 //   'type' => 'text',
                 //   ));
+              
+                  echo $this->Form->input('drug_name',
+                      array('div' => false, 'placeholder' => 'drug name',
+                        'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Drug Name')));
               ?>
               </th>
               <th>
@@ -155,7 +159,7 @@
 
 <script type="text/javascript">
 $(function() {
-  $(".morecontent").expander();
+  // $(".morecontent").expander();
   var adates = $('#SaeStartDate, #SaeEndDate').datepicker({
           minDate:"-100Y",
           maxDate:"-0D",

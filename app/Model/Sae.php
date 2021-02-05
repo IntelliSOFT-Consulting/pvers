@@ -18,6 +18,9 @@ class Sae extends AppModel {
             'reference_no' => array('type' => 'like', 'encode' => true),
             'protocol_no' => array('type' => 'like', 'encode' => true),
             'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Sae.created BETWEEN ? AND ?'),
+            'start_date' => array('type' => 'query', 'method' => 'dummy'),
+            'end_date' => array('type' => 'query', 'method' => 'dummy'),
+            'drug_name' => array('type' => 'query', 'method' => 'findByDrugName', 'encode' => true),
         );
     public function makeRangeCondition($data = array()) {
             if(!empty($data['start_date'])) $start_date = date('Y-m-d', strtotime($data['start_date']));
@@ -27,6 +30,21 @@ class Sae extends AppModel {
             else $end_date = date('Y-m-d');
 
             return array($start_date, $end_date);
+    }
+
+    public function dummy($data = array()) {
+        return array( '1' => '1');
+    }
+
+    public function findByDrugName($data = array()) {
+            $cond = array($this->alias.'.id' => $this->SuspectedDrug->find('list', array(
+                'conditions' => array(
+                    'OR' => array(
+                        'SuspectedDrug.generic_name LIKE' => '%' . $data['drug_name'] . '%',
+                        'SuspectedDrug.generic_name LIKE' => '%' . $data['drug_name'] . '%', )),
+                'fields' => array('sae_id', 'sae_id')
+                    )));
+            return $cond;
     }
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 /**
