@@ -80,7 +80,7 @@
 						<td style="width: 25%;"><strong><?php echo $device['Device']['gender'] ?>		</strong></td>
 					</tr>
 					<tr>
-						<td style="width: 25%;">Age in years </td>
+						<td style="width: 25%;">Age group </td>
 						<td style="width: 25%;"><strong><?php echo $device['Device']['age_years'] ?>	</strong></td>
 						<td style="width: 25%;">PREGNANCY STATUS</td>
 						<td style="width: 25%;"><strong><?php echo $device['Device']['pregnancy_status'] ?>	</strong></td>

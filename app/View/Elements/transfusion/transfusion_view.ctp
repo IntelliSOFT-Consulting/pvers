@@ -53,6 +53,36 @@
 						<td style="width: 25%;">Patient No. </td>
 						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['patient_phone'] ?>		</strong></td>
 					</tr>
+					<tr>
+						<td style="width: 25%;">Clinic Venue</td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['clinic_venue'] ?>	</strong></td>
+						<td style="width: 25%;">County </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['County']['county_name'] ?>	</strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">Clinic Code</td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['clinic_code'] ?>	</strong></td>
+						<td style="width: 25%;">Donor Number </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['donor_number'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">Student/National ID Number</td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['national_number'] ?>	</strong></td>
+						<td style="width: 25%;">Home Phone No. </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['home_phone'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">Cell Phone No.</td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['cell_phone'] ?>	</strong></td>
+						<td style="width: 25%;">Email </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['email_address'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;"> </td>
+						<td style="width: 25%;"> </td>
+						<td style="width: 25%;">Residence </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['residence'] ?></strong></td>
+					</tr>
 				</table>
 				 <hr>
 
@@ -224,10 +254,24 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 25%;"> Name of Nurse/Doctor </td>
-						<td><strong><?php echo $transfusion['Transfusion']['nurse_name'] ?>	</strong></td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['nurse_name'] ?>	</strong></td>
+						<td style="width: 25%;"> Date </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['nurse_date'] ?>	</strong></td>
 					</tr>
 					<tr>
-						<td> 
+						<td style="width: 25%;"> Low Volume </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['low_volume'] ?>	</strong></td>
+						<td style="width: 25%;"> Hematoma </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['hematoma'] ?>	</strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;"> Venepuncture </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['venepuncture'] ?>	</strong></td>
+						<td style="width: 25%;"> Faint </td>
+						<td style="width: 25%;"><strong><?php echo $transfusion['Transfusion']['faint'] ?>	</strong></td>
+					</tr>
+					<tr>
+						<td colspan="4"> 
 							<h5>Specimens required by the laboratory </h5>
 		                    <ol>
 		                        <li>10mls post-transfusion whole blood from patient from plain bottle </li>

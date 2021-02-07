@@ -1510,11 +1510,19 @@ class ReportsController extends AppController {
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
-                when reaction_general is not null then 'General'
-                when reaction_dermatological is not null then 'Dermatological'
-                when reaction_cardiac is not null then 'Cardiac'
-                when reaction_renal is not null then 'Renal'
-                when reaction_haematological is not null then 'Haematological'
+                when reaction_fever is not null then 'Fever'
+                when reaction_chills is not null then 'Chills/Rigors'
+                when reaction_flushing is not null then 'Flushing'
+                when reaction_vomiting is not null then 'Nausea/Vomiting'
+                when reaction_dermatological is not null then reaction_dermatological
+                when reaction_chest is not null then 'Chest pain'
+                when reaction_dyspnoea is not null then 'Dyspnoea'
+                when reaction_hypotension is not null then 'Hypotension'
+                when reaction_tachycardia is not null then 'Tachycardia'
+                when reaction_dark is not null then 'Haemoglobinuria- Dark urine'
+                when reaction_oliguria is not null then 'Oliguria'
+                when reaction_anuria is not null then 'Anuria'
+                when reaction_haematological is not null then 'Unexplained bleeding'
                 when reaction_other is not null then 'Others'
                 else 'N/A'
                end))";

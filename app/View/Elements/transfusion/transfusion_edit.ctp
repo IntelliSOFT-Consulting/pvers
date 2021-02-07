@@ -87,7 +87,12 @@
 
                     ?>
                     </div>
-                   
+                   <?php
+                        echo $this->Form->input('donor_number', array('label' => array('class' => 'control-label', 'text' =>  'Donor Number'), ));
+                        echo $this->Form->input('national_number', array('label' => array('class' => 'control-label', 'text' =>  'Student/National ID Number'), ));
+                        echo $this->Form->input('home_phone', array('label' => array('class' => 'control-label', 'text' =>  'Home Phone No.'), ));
+                        echo $this->Form->input('cell_phone', array('label' => array('class' => 'control-label', 'text' =>  'Cell Phone No.'), ));
+                    ?>
                 </div><!--/span-->
                 <div class="span6">
                     <?php                    
@@ -116,6 +121,16 @@
                             'label' => array('class' => 'control-label required', 'text' =>  'Patient No.'),                          
                         ));
 
+
+                        echo $this->Form->input('county_id', array(
+                                    'label' => array('class' => 'control-label required',
+                                    'text' => 'County'),
+                                    'empty' => true, 'between' => '<div class="controls ui-widget">',
+                                ));
+                        echo $this->Form->input('residence', array('label' => array('class' => 'control-label', 'text' =>  'Residence'), 'after'=>'<p class="help-block"> (county) </p></div>'));
+                        echo $this->Form->input('clinic_venue', array('label' => array('class' => 'control-label', 'text' =>  'Clinic Venue'), ));
+                        echo $this->Form->input('clinic_code', array('label' => array('class' => 'control-label', 'text' =>  'Clinic Code'), ));
+                        echo $this->Form->input('email_address', array('label' => array('class' => 'control-label', 'text' =>  'Email'), ));
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
@@ -272,7 +287,7 @@
                           'class' => 'reaction_cardiac',
                           'before' => '<div class="control-group ">   <label class="control-label required">
                             Cardiac/Respiratory</label>  <div class="controls">
-                            <input type="hidden" value="" id="TransfusionReactionGeneral_" name="data[Transfusion][reaction_cardiac]"> <label class="radio inline">',
+                            <input type="hidden" value="" id="TransfusionReactionChest_" name="data[Transfusion][reaction_cardiac]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Chest pain' => 'Chest pain'),
                         )); 
@@ -311,7 +326,7 @@
                           'class' => 'reaction_renal',
                           'before' => '<div class="control-group ">   <label class="control-label required">
                             Renal </label>  <div class="controls">
-                            <input type="hidden" value="" id="TransfusionReactionGeneral_" name="data[Transfusion][reaction_renal]"> <label class="radio inline">',
+                            <input type="hidden" value="" id="TransfusionReactionDark_" name="data[Transfusion][reaction_renal]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Haemoglobinuria- Dark urine' => 'Haemoglobinuria- Dark urine'),
                         )); 
@@ -340,7 +355,7 @@
                           'class' => 'reaction_haematological',
                           'before' => '<div class="control-group ">   <label class="control-label required">
                             Haematological </label>  <div class="controls">
-                            <input type="hidden" value="" id="TransfusionReactionGeneral_" name="data[Transfusion][reaction_haematological]"> <label class="radio inline">',
+                            <input type="hidden" value="" id="TransfusionReactionHematological_" name="data[Transfusion][reaction_haematological]"> <label class="radio inline">',
                           'after' => '</label>
                             <span class="help-inline" style="padding-top: 5px;"><a  onclick="$(\'.reaction_haematological\').removeAttr(\'checked disabled\')">
                                 <em class="accordion-toggle">clear!</em></a> </span></div> </div>',
@@ -415,12 +430,57 @@
             <?php echo $this->element('multi/list_of_pints');?>
 
             <div class="row-fluid">
-                <div class="span12">
-                    <?php                        
+                <div class="span6">
+                    <?php
                         echo $this->Form->input('nurse_name', array(
                             'label' => array('class' => 'control-label required', 'text' => 'Name of Nurse/Doctor'),
                         ));
+                        echo $this->Form->input('low_volume', array(
+                            'label' => array('class' => 'control-label', 'text' => 'Low Volume'),
+                        ));
+                        echo $this->Form->input('venepuncture', array(
+                            'label' => array('class' => 'control-label', 'text' => '> 1 Venepuncture'),
+                        ));
                     ?>
+                </div>
+                <div class="span6">
+                    <?php                        
+                        echo $this->Form->input('nurse_date', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label', 'text' => 'Date'),));
+                        echo $this->Form->input('hematoma', array(
+                            'label' => array('class' => 'control-label', 'text' => 'Hematoma'),
+                        ));
+                        echo $this->Form->input('faint', array(
+                          'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
+                          'class' => 'faint',
+                          'before' => '<div class="control-group ">   <label class="control-label">
+                            Faint </label>  <div class="controls">
+                            <input type="hidden" value="" id="TransfusionFaint_" name="data[Transfusion][faint]"> <label class="radio inline">',
+                          'after' => '</label>',
+                          'options' => array('Mild' => 'Mild'),
+                        )); 
+                        echo $this->Form->input('faint', array(
+                              'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
+                              'class' => 'faint',
+                              'before' => '<label class="radio inline">', 'after' => '</label>',
+                              'options' => array('Moderate' => 'Moderate')
+                            ));
+                        echo $this->Form->input('faint', array(
+                              'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'faint',
+                              'format' => array('before', 'label', 'between', 'input', 'after', 'error'),
+                              'error' => array('attributes' => array('wrap' => 'p', 'class' => 'controls required error')),
+                              'before' => '<label class="radio inline">',
+                              'after' => '</label>
+                                    <span class="help-inline" style="padding-top: 5px;"><a class="tooltipper" data-original-title="Clear selection"
+                                    onclick="$(\'.faint\').removeAttr(\'checked disabled\')">
+                                    <em class="accordion-toggle">clear!</em></a> </span>
+                                    </div> </div>',
+                              'options' => array('Severe' => 'Severe'),
+                            ));
+                    ?>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
                     <h5>Specimens required by the laboratory </h5>
                     <ol>
                         <li>10mls post-transfusion whole blood from patient from plain bottle </li>
@@ -449,7 +509,7 @@
                           'class' => 'lab_hemolysis',
                           'before' => '<div class="control-group ">   <label class="control-label required">
                             Hemolysis </label>  <div class="controls">
-                            <input type="hidden" value="" id="TransfusionReactionGeneral_" name="data[Transfusion][lab_hemolysis]"> <label class="radio inline">',
+                            <input type="hidden" value="" id="TransfusionLabHemolysis_" name="data[Transfusion][lab_hemolysis]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Present' => 'Present'),
                         )); 
@@ -477,7 +537,7 @@
                           'class' => 'lab_hemolysis_present',
                           'before' => '<div class="control-group ">   <label class="control-label required">
                             If present </label>  <div class="controls">
-                            <input type="hidden" value="" id="TransfusionReactionGeneral_" name="data[Transfusion][lab_hemolysis_present]"> <label class="radio inline">',
+                            <input type="hidden" value="" id="TransfusionLabHemolysis_" name="data[Transfusion][lab_hemolysis_present]"> <label class="radio inline">',
                           'after' => '</label>',
                           'options' => array('Mild' => 'Mild'),
                         )); 

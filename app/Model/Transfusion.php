@@ -209,6 +209,9 @@ class Transfusion extends AppModel {
         if (!empty($this->data['Transfusion']['reporter_date'])) {
             $this->data['Transfusion']['reporter_date'] = $this->dateFormatBeforeSave($this->data['Transfusion']['reporter_date']);
         }
+        if (!empty($this->data['Transfusion']['nurse_date'])) {
+            $this->data['Transfusion']['nurse_date'] = $this->dateFormatBeforeSave($this->data['Transfusion']['nurse_date']);
+        }
         if (!empty($this->data['Transfusion']['reporter_date_diff'])) {
             $this->data['Transfusion']['reporter_date_diff'] = $this->dateFormatBeforeSave($this->data['Transfusion']['reporter_date_diff']);
         }
@@ -219,6 +222,9 @@ class Transfusion extends AppModel {
         foreach ($results as $key => $val) {
             if (isset($val['Transfusion']['reporter_date'])) {
                 $results[$key]['Transfusion']['reporter_date'] = $this->dateFormatAfterFind($val['Transfusion']['reporter_date']);
+            }
+            if (isset($val['Transfusion']['nurse_date'])) {
+                $results[$key]['Transfusion']['nurse_date'] = $this->dateFormatAfterFind($val['Transfusion']['nurse_date']);
             }
             if (isset($val['Transfusion']['reporter_date_diff'])) {
                 $results[$key]['Transfusion']['reporter_date_diff'] = $this->dateFormatAfterFind($val['Transfusion']['reporter_date_diff']);
