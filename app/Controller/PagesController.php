@@ -68,6 +68,10 @@ class PagesController extends AppController {
 		}
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 
+		// if ($page == 'home') {
+		// 	$this->layout = 'home';
+		// }
+
 		try {
 			$this->render(implode('/', $path));
 		} catch (MissingViewException $e) {

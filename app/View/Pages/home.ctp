@@ -2,83 +2,148 @@
 	$this->assign('Home', 'active');
 	$this->Html->script('bootstrap/bootstrap-carousel', array('inline' => false));
 	$this->Html->script('home', array('inline' => false));
-	$this->Html->css('home', false, array('inline' => false));
+	$this->Html->script('holder/holder', array('inline' => false));
+	$this->Html->css('landing', false, array('inline' => false));
  ?>
 
- 	<h3 class="text-success text-center">Pharmacy and Poisons Board: <span class="text-info">Pharmacovigilance reporting system</span> <small class="muted">(PvERS)</small> </h3>
- 	<hr class="soften">
-	<div class="row-fluid">
-        
-        <div class="span9">
-			
 
-          <div class="row-fluid">
-            <div class="span12">
-              
-              
-              <p>You can report any cases of:
-              	  <br>&nbsp;1. SADR/Adverse drug reactions (side effects)
-              	  <br>&nbsp;2. Poor-quality Medical Products And Health Technologies
-              	  <br>&nbsp;3. Incidents and errors during medication, vaccination or blood transfusion.</p>
-              <p>The Board will investigate the cases and where possible, provide feedback on the status/outcome of the review.</p>
-              <p><span class="label label-important"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> NOTE:</span> Patient's identity is held in strict confidence and programme staff is not expected to and will not disclose the reporter's identity in response to any public request. Information submitted by you will contribute to the improvement of drug safety and therapy in Kenya. 
-                <a class="btn btn-link" href="/pages/about">View details &raquo;</a></p>
-            </div><!--/span-->
-          </div><!--/row-->
 
-          <div class="row-fluid">
-          	<div class="span8">          		
-		          <h3 class="text-success text-center" style="text-decoration: underline;">Who can report?</h3>
-		          <div class="row-fluid">
-		            <div class="span6">
-		              <h5><i class="fa fa-user-md" aria-hidden="true"></i> Health care workers and professionals</h5>
-		           		
-		              <p><img src="/img/health2.png" style="width: 140px; margin-right: 10px;" class="pull-left"> All health care workers are required to <a href="/users/register">register</a> first before they can submit reports. The registration details will be used for communication and follow up.</p>
-		              <p><a class="btn btn-success " href="/users/register">Register &raquo;</a></p>
-		            </div><!--/span-->
-		            <div class="span6">
-		              <h5><i class="fa fa-users" aria-hidden="true"></i> Any member of the public or patient </h5>
-		           		
-		              <p><img src="/img/public2.png" style="width: 140px; margin-right: 10px;" class="pull-left"> Any member of the public is able to report any cases of adverse drug reactions or incidents involving medical devices. For minors, parents/gaurdians can report on their behalf.</p>
-		              <p><a class="btn btn-primary " href="/padrs/add">Report &raquo;</a></p>
-		            </div><!--/span-->
-		          </div><!--/row-->
-	        </div><!--/span-->
-          	<div class="span4">
-          		<h4 class="text-warning">What happens when you report..</h4>
-          		<p>The information collected will be used to improve patient safety. All the information is received <span class="text-danger">in confidence</span> and will only be accesssed by PPB staff. The details of the reporter will always remain <strong>anonymous</strong>.</p>
-          	</div>
-          </div>
-
-    	</div><!--/row-->
-
-        <?php if($this->Session->read('Auth.User')) { ?>
-	        <div class="span3">  
-	        	<ul class="nav nav-tabs nav-stacked">
-	              <li class="active"><a href="#">Home</a></li>
-	              <li><a href="#">Profile</a></li>
-	              <li><a href="#">Messages</a></li>
-            	</ul>
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="/img/home/home1.png" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>3rd annual PROFORMA</h1>
+              <p class="lead">Consortium meeting held in Nairobi on 10th February 2020.</p>
             </div>
-        <?php } else { ?>
-        <div class="span3 well">        	
-            <legend style="text-align: center;" class="text-success"> <i class="fa fa-key"></i> Sign in</legend>
-			<form method="POST" action="/users/login" accept-charset="UTF-8">
-				<div class="input-prepend">
-				  <span class="add-on"><i class="fa fa-user"></i> </span>
-				  <input  name="data[User][username]" id="prependedInput" type="text" placeholder="Username/Email">
-				</div>
-				<div class="input-prepend">
-				  <span class="add-on"><i class="fa fa-lock"></i> </span>
-				  <input name="data[User][password]" id="prependedInput" type="password" placeholder="Password">
-				</div>
-	            <button type="submit" name="submit" class="btn btn-info btn-block">Sign in!</button><br/>
-	            <label class="checkbox">
-	                <input type="checkbox" name="remember" value="1"> Remember me
-	            </label><br/>
-	            <small><a href="/users/register">Sign up!</a>
-	            <a href="/users/forgotPassword" class="pull-right">Forgot password?</a></small>
-			</form> 
-		</div>
-		<?php } ?>
-    </div><!--/row-->
+          </div>
+        </div>
+        <div class="item">
+          <img src="/img/home/home2.png" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>RCORE</h1>
+              <p class="lead">Regional Centre for Regulatory Excellence in Pharmacovigilance</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="/img/home/home4.png" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>PV</h1>
+              <p class="lead">Training of healthcare workers on Pharmacovigilance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div><!-- /.carousel -->
+
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row-fluid">
+        <div class="span2">
+        	<a href="/users/login"><img src="/img/home/login.jpg" alt="" style="width: 140px; height: 140px;"></a>          
+        </div><!-- /.span2 -->
+        <div class="span2">
+          <a href="/padrs/add"><img src="/img/home/report.jpg" alt="" style="width: 140px; height: 140px;"></a> 
+          <h5>Report</h5>
+          <p>For non-health workers.</p>
+        </div><!-- /.span2 -->
+        <div class="span2">
+          <img src="/img/home/rules.jpeg" alt="" style="width: 140px; height: 140px;">
+        </div><!-- /.span2 -->
+        <div class="span2">
+          <img src="/img/home/faq.png" alt="" style="width: 140px; height: 140px;">
+        </div><!-- /.span2 -->
+        <div class="span2">
+          <img class="img-circle" data-src="holder.js/140x140?theme=sky&text=Who can report?">
+                    
+        </div><!-- /.span2 -->
+        <div class="span2">
+          <img class="img-circle" data-src="holder.js/140x140?theme=lava&text=What can you report on?">
+        </div><!-- /.span2 -->
+      </div><!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+      	<hr><br>
+      	<div>
+        <h2 style="text-align: center;">Who can report?</h2><br>
+	      	<div class="row-fluid">
+	      		<div class="span6">
+	      			<h5><i class="fa fa-user-md" aria-hidden="true"></i> Health care workers and professionals</h5>
+	                <p><img src="/img/health2.png" style="width: 140px; margin-right: 10px;" class="pull-left"> All health care workers are required to <a href="/users/register">register</a> first before they can submit reports. The registration details will be used for communication and follow up.</p>
+			              <p><a class="btn btn-success " href="/users/register">Register &raquo;</a></p>
+	      		</div>
+	      		<div class="span6">
+	      			<h5><i class="fa fa-users" aria-hidden="true"></i> Any member of the public or patient </h5>
+			         <p><img src="/img/public2.png" style="width: 140px; margin-right: 10px;" class="pull-left"> Any member of the public is able to report any cases of adverse drug reactions or incidents involving medical devices. For minors, parents/gaurdians can report on their behalf.</p>
+			              <p><a class="btn btn-primary " href="/padrs/add">Report &raquo;</a></p>
+	      		</div>
+	      	</div>
+      	</div>
+      
+      <hr> <br>
+      	<div>
+	      	<div class="row-fluid">
+	      		<div class="span4">
+	      			<h4 style="text-align: left;">What can you report on?</h4>
+	                <p style="text-align: left;"><b>Adverse reactions caused by Drugs</b></p>
+	                <p style="text-align: left;"><b>Public Adverse reactions caused by Drugs</b></p>
+	                <p style="text-align: left;"><b>Poor Quality Medical Products</b></p>
+	                <p style="text-align: left;"><b>Medication Errors</b></p>
+	                <p style="text-align: left;"><b>Reactions caused by Transfusion</b></p>
+	                <p style="text-align: left;"><b>Medical Devices Incidences</b></p>
+	                <p style="text-align: left;"><b>Adverse Reactions caused by Immunization</b></p>
+	      		</div>
+	      		<div class="span8">
+	      			<h4>What happens when you report?</h4>
+			         <p> All the information is received in confidence and will only be accessed by designated PPB
+						staff. The Board will investigate the cases and where possible, provide feedback on the
+						status/outcome of the review. The details of the reporter will always remain anonymous.
+						The information collected will be used to improve patient safety. <br>
+						 <b>NOTE:</b> Patient’s identity is held in strict confidence and the designated PPB staff shall not
+						disclose the reporter’s identity in response to any public request. Information submitted by
+						you will contribute to the improvement of drug safety and therapy in Kenya.</p>
+	      		</div>
+	      	</div>
+      	</div>
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
