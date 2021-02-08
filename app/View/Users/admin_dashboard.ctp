@@ -71,6 +71,10 @@
         echo $this->Html->link('<i class="icon-envelope"></i> Site Messages <small class="muted">(Emails &amp; Notifications)</small>',
             array('controller' => 'messages', 'action' => 'index', 'admin' => true), array('escape' => false)); ?>
         </li>
+        <li><?php
+        echo $this->Html->link('<i class="fa fa-code" aria-hidden="true"></i> Front end pages <small class="muted">(public text)</small>',
+            array('controller' => 'sites', 'action' => 'index', 'admin' => true), array('escape' => false)); ?>
+        </li>
         <li>
         <?php
         echo $this->Html->link('<i class="icon-hand-right"></i> Counties',
