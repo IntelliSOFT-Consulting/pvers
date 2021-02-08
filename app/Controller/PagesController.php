@@ -71,6 +71,12 @@ class PagesController extends AppController {
 		// if ($page == 'home') {
 		// 	$this->layout = 'home';
 		// }
+		$content = '';
+		if(!empty($page)) {
+			$this->loadModel('Site');
+			$content = $this->Site->find('first', array('conditions' => array('description' => $page)));
+			$this->set(compact('content'));
+		}
 
 		try {
 			$this->render(implode('/', $path));
