@@ -77,6 +77,7 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
               <li class="<?php echo $this->fetch('About'); ?>"><a href="/pages/about"><i class="fa fa-book"></i> About</a></li>
               <li class="<?php echo $this->fetch('PADR'); ?>"><a href="/padrs/add"><i class="fa fa-pencil" aria-hidden="true"></i> Report</a></li>
               <li class="<?php echo $this->fetch('Summaries'); ?>"><a href="/reports/index"><i class="fa fa-bar-chart" aria-hidden="true"></i> Summaries</a></li>
+              <li class="<?php echo $this->fetch('Faqs'); ?>"><a href="/pages/faqs"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Faqs</a></li>
               <li class="<?php echo $this->fetch('ContactUs'); ?>"><a href="/feedbacks/add"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Contact us</a></li>
             </ul>
           </div><!--/.nav-collapse -->

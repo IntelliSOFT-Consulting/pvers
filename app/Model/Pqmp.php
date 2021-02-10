@@ -240,7 +240,7 @@ class Pqmp extends AppModel {
 	public function atLeastOne($field = null) {
 		return $this->data['Pqmp']['colour_change'] + $this->data['Pqmp']['separating'] + $this->data['Pqmp']['caking'] + $this->data['Pqmp']['powdering'] +
 				$this->data['Pqmp']['moulding'] +  $this->data['Pqmp']['odour_change'] + $this->data['Pqmp']['mislabeling'] +
-				$this->data['Pqmp']['incomplete_pack'] + $this->data['Pqmp']['complaint_other'] > 0;
+				$this->data['Pqmp']['incomplete_pack'] + $this->data['Pqmp']['complaint_other'] + $this->data['Pqmp']['therapeutic_ineffectiveness'] + $this->data['Pqmp']['particulate_matter'] > 0;
 	}
 
 	public function yearMust($field = null) {

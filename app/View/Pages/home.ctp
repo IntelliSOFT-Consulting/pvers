@@ -63,17 +63,17 @@
           <p>For non-health workers.</p>
         </div><!-- /.span2 -->
         <div class="span2">
-          <img src="/img/home/rules.jpeg" alt="" style="width: 140px; height: 140px;">
+          <a href="https://www.pharmacyboardkenya.org/downloads" target="_blank"><img src="/img/home/rules.jpeg" alt="" style="width: 140px; height: 140px;"></a>
         </div><!-- /.span2 -->
         <div class="span2">
-          <img src="/img/home/faq.png" alt="" style="width: 140px; height: 140px;">
+          <a href="/pages/faqs"><img src="/img/home/faq.png" alt="" style="width: 140px; height: 140px;"></a>
         </div><!-- /.span2 -->
         <div class="span2">
-          <img class="img-circle" data-src="holder.js/140x140?theme=sky&text=Who can report?">
+          <a href="#whocanreport"><img class="img-circle" data-src="holder.js/140x140?theme=sky&text=Who can report?"></a>
                     
         </div><!-- /.span2 -->
         <div class="span2">
-          <img class="img-circle" data-src="holder.js/140x140?theme=lava&text=What can you report on?">
+          <a href="#whatyoureport"><img class="img-circle" data-src="holder.js/140x140?theme=lava&text=What can you report on?"></a>
         </div><!-- /.span2 -->
       </div><!-- /.row -->
 
@@ -81,7 +81,7 @@
       <!-- START THE FEATURETTES -->
 
       	<hr><br>
-      	<div>
+      	<div id="whocanreport">
         <h2 style="text-align: center;">Who can report?</h2><br>
 	      	<div class="row-fluid">
 	      		<div class="span6">
@@ -98,7 +98,7 @@
       	</div>
       
       <hr> <br>
-      	<div>
+      	<div id="whatyoureport">
 	      	<div class="row-fluid">
 	      		<div class="span4">
 	      			<h4 style="text-align: left;">What can you report on?</h4>
