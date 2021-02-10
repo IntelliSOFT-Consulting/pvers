@@ -55,25 +55,23 @@
       <!-- Three columns of text below the carousel -->
       <div class="row-fluid">
         <div class="span2">
-        	<a href="/users/login"><img src="/img/home/login.jpg" alt="" style="width: 140px; height: 140px;"></a>          
+        	<a href="/users/login"><img src="/img/home/login6.jpg" alt="" style="width: 140px; height: 140px;"></a>          
         </div><!-- /.span2 -->
         <div class="span2">
-          <a href="/padrs/add"><img src="/img/home/report.jpg" alt="" style="width: 140px; height: 140px;"></a> 
-          <h5>Report</h5>
-          <p>For non-health workers.</p>
+          <a href="/padrs/add"><img src="/img/home/report5.png" alt="" style="width: 140px; height: 140px;"></a> 
         </div><!-- /.span2 -->
         <div class="span2">
-          <a href="https://www.pharmacyboardkenya.org/downloads" target="_blank"><img src="/img/home/rules.jpeg" alt="" style="width: 140px; height: 140px;"></a>
+          <a href="https://www.pharmacyboardkenya.org/downloads" target="_blank"><img src="/img/home/rules3.jpg" alt="" style="width: 140px; height: 140px;"></a>
         </div><!-- /.span2 -->
         <div class="span2">
-          <a href="/pages/faqs"><img src="/img/home/faq.png" alt="" style="width: 140px; height: 140px;"></a>
+          <a href="/pages/faqs"><img src="/img/home/faq2.jpg" alt="" style="width: 140px; height: 140px;"></a>
         </div><!-- /.span2 -->
         <div class="span2">
-          <a href="#whocanreport"><img class="img-circle" data-src="holder.js/140x140?theme=sky&text=Who can report?"></a>
+          <a href="#whocanreport"><img class="img-circle" data-src="holder.js/130x130?theme=sky&text=Who can report?"></a>
                     
         </div><!-- /.span2 -->
         <div class="span2">
-          <a href="#whatyoureport"><img class="img-circle" data-src="holder.js/140x140?theme=lava&text=What can you report on?"></a>
+          <a href="#whatyoureport"><img class="img-circle" data-src="holder.js/130x130?theme=lava&text=What can you report on?"></a>
         </div><!-- /.span2 -->
       </div><!-- /.row -->
 
