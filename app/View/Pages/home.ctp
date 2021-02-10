@@ -13,6 +13,60 @@
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
+          <img src="/img/home/sadr3.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>SADR</h1>
+              <p class="lead">Suspected Adverse Drug Reaction Reporting Form.</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="/img/home/aefi5.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>AEFI</h1>
+              <p class="lead">Adverse Event Following Immunization.</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="/img/home/devices1.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>MEDICAL DEVICES</h1>
+              <p class="lead">Medical Devices Incident Reporting Form.</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="/img/home/medication2.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>MEDICAL ERROR</h1>
+              <p class="lead">Medication Error Reporting Form.</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="/img/home/pqmp.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>PQMP</h1>
+              <p class="lead">Poor-Quality Medical Products and Health Technologies.</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="/img/home/transfusion2.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>TRANSFUSION REACTION</h1>
+              <p class="lead">Adverse Transfusion Reaction Form.</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
           <img src="/img/home/home1.png" alt="">
           <div class="container">
             <div class="carousel-caption">
@@ -52,27 +106,33 @@
 
     <div class="container marketing">
 
-      <!-- Three columns of text below the carousel -->
       <div class="row-fluid">
         <div class="span2">
         	<a href="/users/login"><img src="/img/home/login6.jpg" alt="" style="width: 140px; height: 140px;"></a>          
         </div><!-- /.span2 -->
-        <div class="span2">
-          <a href="/padrs/add"><img src="/img/home/report5.png" alt="" style="width: 140px; height: 140px;"></a> 
-        </div><!-- /.span2 -->
-        <div class="span2">
+        <div class="span10">
+          <div class="row-fluid">
+            <div class="span2"><a href="/padrs/add"><img src="/img/home/report5.png" alt="" style="width: 140px; height: 140px;"></a></div>
+            <div class="span2"><a href="https://www.pharmacyboardkenya.org/downloads" target="_blank"><img class="img-circle" data-src="holder.js/130x130?theme=social&text=Guidelines on safety reporting"></a></div>
+            <div class="span2"><a href="/pages/faqs"><img src="/img/home/faq2.jpg" alt="" style="width: 140px; height: 140px;"></a></div>
+            <div class="span2"><a href="https://www.pharmacyboardkenya.org/pharmacovigilance" target="_blank"><img class="img-circle" data-src="holder.js/130x130?theme=industrial&text=Safety alerts"></a></div>
+            <div class="span2"><a href="#whocanreport"><img class="img-circle" data-src="holder.js/130x130?theme=sky&text=Who can report?"></a></div>
+            <div class="span2"><a href="#whatyoureport"><img class="img-circle" data-src="holder.js/130x130?theme=lava&text=What can you report on?"></a></div>
+          </div>
+        </div>
+        <!-- <div class="span2">
           <a href="https://www.pharmacyboardkenya.org/downloads" target="_blank"><img src="/img/home/rules3.jpg" alt="" style="width: 140px; height: 140px;"></a>
-        </div><!-- /.span2 -->
+          <a href="https://www.pharmacyboardkenya.org/downloads" target="_blank"><img class="img-circle" data-src="holder.js/130x130?theme=social&text=Guidelines on safety reporting"></a>
+        </div>
         <div class="span2">
           <a href="/pages/faqs"><img src="/img/home/faq2.jpg" alt="" style="width: 140px; height: 140px;"></a>
-        </div><!-- /.span2 -->
+        </div>
         <div class="span2">
-          <a href="#whocanreport"><img class="img-circle" data-src="holder.js/130x130?theme=sky&text=Who can report?"></a>
-                    
-        </div><!-- /.span2 -->
+          <a href="#whocanreport"><img class="img-circle" data-src="holder.js/130x130?theme=sky&text=Who can report?"></a>                    
+        </div>
         <div class="span2">
           <a href="#whatyoureport"><img class="img-circle" data-src="holder.js/130x130?theme=lava&text=What can you report on?"></a>
-        </div><!-- /.span2 -->
+        </div> -->
       </div><!-- /.row -->
 
 

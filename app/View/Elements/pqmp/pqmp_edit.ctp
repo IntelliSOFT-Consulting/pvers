@@ -292,7 +292,7 @@
 						echo $this->Form->input('product_formulation', array(
 							'type' => 'radio',	'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false,
 							'before' => '<label class="radio">',	'after' => '</label>',
-							'options' => array('Anticoagulant' => 'Anticoagulant'),
+							'options' => array('Anticoagulant' => 'Anticoagulant (for blood and blood products)'),
 							'onclick' => '$("#PqmpProductFormulationSpecify").attr("disabled","disabled")',
 						));
 						echo $this->Form->input('product_formulation', array(

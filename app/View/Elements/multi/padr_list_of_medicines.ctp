@@ -25,7 +25,7 @@
                     <td><?php
                           echo $this->Form->input('PadrListOfMedicine.'.$i.'.id', array('type' => 'hidden'));                          
                         ?>
-                        Name of Medicine <span style="color:red;">*</span>
+                        Name of Medicine 
                     </td>
                     <td>
                         <?php
@@ -51,7 +51,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>When did you start taking the medicine? <span style="color:red;">*</span></td>
+                    <td>When did you start taking the medicine? </td>
                     <td>
                         <?php
                           echo $this->Form->input('PadrListOfMedicine.'.$i.'.start_date', array(

@@ -1,6 +1,7 @@
 <?php
   $this->extend('/Reports/reports');
   $this->assign('reports-home', 'active');
+	$this->assign('Summaries', 'active');
 ?>
 
 <?php $this->start('report'); ?>

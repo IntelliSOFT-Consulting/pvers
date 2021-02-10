@@ -107,7 +107,7 @@
                         
                         echo $this->Form->input('gender', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'gender',
-                            'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">Gender <span style="color:red;">*</span></label> </div>
+                            'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">Gender </label> </div>
                                             <div class="controls">  <input type="hidden" value="" id="PadrGender_" name="data[Padr][gender]"> <label class="radio inline">',
                             'after' => '</label>',
                             'options' => array('Male' => 'Male'),
@@ -175,28 +175,107 @@
                 <div class="span5">
                 </div>
             </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <table class="table table-bordered table-condensed">
+                        <tbody>
+                        <tr class="warning">
+                        <td><label class="required" style="text-align: right;">Select type of report:</label> </td>
+                        <td>
+                    <?php
+                        echo $this->Form->input('report_sadr', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'person-submit',
+                            'before' => '<div class="form-inline">
+                                        <input type="hidden" value="" id="SadrPersonSubmitting_" name="data[Padr][report_sadr]">
+                                        <label class="radio">',
+                            'after' => '</label>&nbsp;&nbsp;',
+                            'options' => array('Drug Reaction' => 'Drug Reaction'),
+                        ));
+                        echo $this->Form->input('report_sadr', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'person-submit',
+                            'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+                            'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+                            'before' => '<label class="radio">', 'after' => '</label> </div>',
+                            'options' => array('Poor Quality Medicine' => 'Poor Quality Medicine'),
+                        ));
+                    ?> 
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+            <div id="sadr">
             <div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">SIDE EFFECT</h5></div>
             <div style="padding: 10px;">
                 <div class="row-fluid">
                     <div class="span4">
                         <?php
                             
-                            echo $this->Form->input('description_of_reaction', array(
-                                'class' => 'span11', 'rows' => '1', 'between' => false, 'div' => false,
-                                'label' => array('class' => 'required', 'text' => 'Describe the reaction <span style="color:red;">*</span>'),
-                                'after'=>'<span class="help-block">What were the signs of the side effect?</span>',
-                            ));
+                        echo "<h6>Select all side effects experienced</h6>"; 
+                        echo $this->Form->input('sadr_vomiting', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_vomiting_" name="data[Padr][sadr_vomiting]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Vomiting or diarrhoea </label>',));
+                        echo $this->Form->input('sadr_dizziness', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_dizziness_" name="data[Padr][sadr_dizziness]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Dizziness or drowsiness </label>',));
+                        echo $this->Form->input('sadr_headache', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_headache_" name="data[Padr][sadr_headache]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Headache </label>',));
+                        echo $this->Form->input('sadr_joints', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_joints_" name="data[Padr][sadr_joints]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Joints and muscle pain </label>',));
+                        echo $this->Form->input('sadr_rash', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_rash_" name="data[Padr][sadr_rash]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Rash, itching, swelling on skin </label>',));
+                        echo $this->Form->input('sadr_mouth', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_mouth_" name="data[Padr][sadr_mouth]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Pain or bleeding in the mouth </label>',));
+                        echo $this->Form->input('sadr_stomach', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_stomach_" name="data[Padr][sadr_stomach]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Pain in the stomach </label>',));
+                        echo $this->Form->input('sadr_urination', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_urination_" name="data[Padr][sadr_urination]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Abnormal changes with urination </label>',));
+                        echo $this->Form->input('sadr_eyes', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_eyes_" name="data[Padr][sadr_eyes]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Red, painful eyes </label>',));
+                        echo $this->Form->input('sadr_died', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_sadr_died_" name="data[Padr][sadr_died]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Patient died </label>',));
 
+                            
+
+                            // echo $this->Form->input('User.reactors', array('multiple' => 'checkbox', 'options' => ['red yes' => 'red eyes', 'vomitting' => 'vomitting']));
                         ?>
                     </div><!--/span-->
                     <div class="span4">
                         <?php
-                            echo $this->Form->input('date_of_onset_of_reaction', array(
-                                'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
-                                'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
-                                'label' => array('class' => 'required', 'text' => 'When did the reaction start? <span style="color:red;">*</span>'),
-                                'class' => 'span4',
+                            echo $this->Form->input('description_of_reaction', array(
+                                'class' => 'span11', 'rows' => '1', 'between' => false, 'div' => false,
+                                'label' => array('class' => 'required', 'text' => 'Other side effects experienced'),
+                                'after'=>'<span class="help-block">What were the signs of the side effect?</span>',
                             ));
                         ?>
                     </div>
@@ -208,6 +287,12 @@
                                 'label' => array('class' => 'required', 'text' => 'When did the reaction end? <span class="muted">(if it ended)</span>'),
                                 'class' => 'span4',
                             ));*/
+                        echo $this->Form->input('date_of_onset_of_reaction', array(
+                            'type' => 'date', 'between' => false, 'div' => false, 'after' => false,
+                            'dateFormat' => 'DMY',   'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => array('day' => '(day)', 'month' => '(month)', 'year' => '(year)'),
+                            'label' => array('class' => 'required', 'text' => 'When did the reaction start? '),
+                            'class' => 'span4',
+                        ));
                         echo $this->Form->input('reaction_on', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'reaction_on',
                             'before' => '<div class="control-group"> <div class="required"> <label class="control-label required">Is the reaction still on? </div>
@@ -233,6 +318,62 @@
             </div>
                       
             <?php echo $this->element('multi/padr_list_of_medicines');?>
+            </div>
+
+            <div id="pqmp" style="padding: 10px;">
+                <div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">POOR QUALITY ISSUE</h5></div>
+                 <div class="row-fluid">
+                    <div class="span6">
+                        <?php
+                            
+                        echo "<h6>Select all issues with the medicine/device</h6>"; 
+                        echo $this->Form->input('pqmp_label', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_pqmp_label_" name="data[Padr][pqmp_label]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'The label looks wrong </label>',));
+                        echo $this->Form->input('pqmp_material', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_pqmp_material_" name="data[Padr][pqmp_material]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'Has unusual material in it </label>',));
+                        echo $this->Form->input('pqmp_color', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_pqmp_color_" name="data[Padr][pqmp_color]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'The color is changing </label>',));
+                        echo $this->Form->input('pqmp_smell', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_pqmp_smell_" name="data[Padr][pqmp_smell]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'The smell is unusual </label>',));
+                        echo $this->Form->input('pqmp_working', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_pqmp_working_" name="data[Padr][pqmp_working]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'The medicine/device is not working </label>',));
+                        echo $this->Form->input('pqmp_bottle', array(
+                            'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
+                                                    'between' => '<input type="hidden" value="0" id="Medication_pqmp_bottle_" name="data[Padr][pqmp_bottle]">
+                                                                    <label class="checkbox">',
+                                                    'after' => 'The packet or bottle does not seem to be usual or complete </label>',));
+
+                            
+
+                            // echo $this->Form->input('User.reactors', array('multiple' => 'checkbox', 'options' => ['red yes' => 'red eyes', 'vomitting' => 'vomitting']));
+                        ?>
+                    </div><!--/span-->
+                    <div class="span6">
+                        <?php
+                            echo $this->Form->input('any_other_comment', array(
+                                'class' => 'span11', 'rows' => '2', 'between' => false, 'div' => false,
+                                'label' => array('class' => 'required', 'text' => 'Other wrong things'),
+                                'after'=>'<span class="help-block">Additional wrong things?</span>',
+                            ));
+                        ?>
+                    </div>
+                </div><!--/row-->
+            </div>
             <?php echo $this->element('multi/attachments', ['model' => 'Padr', 'group' => 'attachment']); ?>
 
             <div class="row-fluid">

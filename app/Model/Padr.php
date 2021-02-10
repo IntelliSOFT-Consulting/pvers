@@ -160,7 +160,7 @@ class Padr extends AppModel {
                 'message'  => 'Please provide the patient\'s address or the name of the institution'
             ),
         ),*/
-		'gender' => array(
+		/*'gender' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
@@ -185,7 +185,7 @@ class Padr extends AppModel {
                 'required' => true,
                 'message'  => 'Please provide a brief description of the reaction'
             ),
-        ),
+        ),*/
 		'reporter_name' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',

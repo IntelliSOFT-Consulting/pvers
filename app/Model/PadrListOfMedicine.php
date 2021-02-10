@@ -26,13 +26,13 @@ class PadrListOfMedicine extends AppModel {
 	);
 
 	public $validate = array(
-		'product_name' => array(
-			'notBlank' => array(
-				'rule'     => 'notBlank',
-				'required' => true,
-				'message'  => 'Please specify the name of the medicine'
-			),
-		),
+		// 'product_name' => array(
+		// 	'notBlank' => array(
+		// 		'rule'     => 'notBlank',
+		// 		'required' => true,
+		// 		'message'  => 'Please specify the name of the medicine'
+		// 	),
+		// ),
 	);
 
 	public function beforeSave($options = array()) {

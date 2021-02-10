@@ -60,14 +60,14 @@
 					<div class="span3 columns">
 					<?php
 						echo $this->Form->input('username', 
-								array('div' => false, 'id' => 'adminTitleId',
+								array('div' => false, 'id' => 'adminTitleId', 'required' => false,
 									'class' => 'span9', 'label' => array('class' => 'required', 'text' => 'Username')));
 					?>
 					</div>
 					<div class="span3 columns">
 					<?php	
 						echo $this->Form->input('email', 
-							array('div' => false, 'id' => 'adminSearchId',
+							array('div' => false, 'id' => 'adminSearchId', 'required' => false,
 									'type' => 'text', 'class' => 'span9', 'label' => array('class' => 'required', 'text' => 'Email Address')));
 					?>
 					</div>

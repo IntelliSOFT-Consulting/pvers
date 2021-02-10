@@ -97,6 +97,7 @@ $(function() {
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_date]" class="span11 date-pick-field" type="text" required="required" id="AefiListOfVaccine{i}VaccinationDate"></div> </td>\
             <td>\
               <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccination_route]" class="span12 autosave-ignore" id="AefiListOfVaccine{i}VaccinationRoute"></select></div> </td>\
+            <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_site]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}VaccinationSite"></div> </td>\
             <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][batch_number]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}BatchNumber"></div> </td>\
             <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccine_manufacturer]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}VaccineManufacturer"></div> </td>\
             <td>\

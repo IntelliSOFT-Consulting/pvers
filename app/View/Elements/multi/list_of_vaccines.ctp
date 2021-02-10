@@ -35,13 +35,14 @@
                   <tr>
                     <th colspan="2" style="width: 20%"> <label class="required">Name of Vaccine <span style="color:red;">*</span></label><small class="help-block">(e.g. BCG, DPT-Hib-HeB)</small></th>
                     <th style="width: 7%"> <label>Dose No.</label></th>
-                    <th style="width: 13%"> <label class="required"> Date & Time vaccinated <span style="color:red;">*</span><br><small class="help-block">(dd-mm-yyyy 24Hr:Min)</small></label></th>
-                    <th> Route,site of vaccination <br><small class="help-block">(i.m.,s.c., i.d.)</small></th>
+                    <th style="width: 10%"> <label class="required"> Date & Time vaccinated <span style="color:red;">*</span><br><small class="help-block">(dd-mm-yyyy 24Hr:Min)</small></label></th>
+                    <th> Route of vaccination <br><small class="help-block">(i.m.,s.c., i.d.)</small></th>
+                    <th style="width: 5%"> <label>Site of vaccination </label></th>
                     <th style="width: 5%"> <label>Batch/Lot number </label></th>
                     <th> <label>Manufacturer's Name </label></th>
                     <th> <label>Expiry date </label></th>
                     <th style="width: 7%"> <label>Batch/ Lot Number </label></th>
-                    <th style="width: 10%">Manufacturer's Name</th>
+                    <th style="width: 8%">Manufacturer's Name</th>
                     <th> Expiry date </th>
                     <th> # </th>
                   </tr>
@@ -92,6 +93,13 @@
                               'error' => array('attributes' => array( 'class' => 'help-block')),
                               'options' => $routes,
                           ));
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                          echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_site', array(
+                            'label' => false, 'between' => false,
+                            'after' => false, 'class' => 'span11 autosave-ignore',));
                         ?>
                     </td>
                     <td><?php 
