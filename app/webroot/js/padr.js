@@ -27,5 +27,10 @@ $(document).ready(function() {
             $('#sadr').hide();
         }
     });
-    if($('input[name="data[Padr][report_sadr]"][value="Drug Reaction"]').is(':checked')){ $('#pqmp').hide(); $('#sadr').show("slow"); }
+    if($('input[name="data[Padr][report_sadr]"][value="Drug Reaction"]').is(':checked')) { 
+    	$('#pqmp').hide(); $('#sadr').show("slow"); 
+    } 
+    if($('input[name="data[Padr][report_sadr]"][value="Poor Quality Medicine"]').is(':checked')) {
+    	$('#sadr').hide(); $('#pqmp').show("slow");
+    }
 });
