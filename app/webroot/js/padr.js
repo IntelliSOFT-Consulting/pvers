@@ -16,6 +16,8 @@ $(document).ready(function() {
       });
       
 	//If SADR disable PQMP and vice versa
+	$('#pqmp').hide();
+	$('#sadr').hide();
     $('input[name="data[Padr][report_sadr]"]').click(function(){ 
         if ($(this).val() == 'Drug Reaction') {
             $('#pqmp').hide();

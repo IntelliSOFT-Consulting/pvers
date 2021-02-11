@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div style="background-color: lightseagreen;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE PERSON REPORTING</h5></div>
+            <div style="background-color: #aad7d4;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE PERSON REPORTING</h5></div>
             <div class="row-fluid">
                 <div class="span6">
                     <?php
@@ -179,7 +179,7 @@
                 <div class="span12">
                     <table class="table table-bordered table-condensed">
                         <tbody>
-                        <tr class="warning">
+                        <tr class="success">
                         <td><label class="required" style="text-align: right;">Select type of report:</label> </td>
                         <td>
                     <?php
