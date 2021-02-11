@@ -43,7 +43,7 @@
           <img src="/img/home/medication2.jpg" alt="">
           <div class="container">
             <div class="carousel-caption">
-              <h1>MEDICAL ERROR</h1>
+              <h1>MEDICATION ERROR</h1>
               <p class="lead">Medication Error Reporting Form.</p>
             </div>
           </div>
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="/img/home/home1.png" alt="">
+          <img src="/img/home/home1.jpg" alt="">
           <div class="container">
             <div class="carousel-caption">
               <h1>3rd annual PROFORMA</h1>
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="/img/home/home2.png" alt="">
+          <img src="/img/home/home2.jpg" alt="">
           <div class="container">
             <div class="carousel-caption">
               <h1>RCORE</h1>
@@ -85,7 +85,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="/img/home/home4.png" alt="">
+          <img src="/img/home/home3.jpg" alt="">
           <div class="container">
             <div class="carousel-caption">
               <h1>PV</h1>
