@@ -176,13 +176,13 @@ class Transfusion extends AppModel {
                 'message'  => 'Please specify the patient\'s gender'
             ),
         ),
-        'diagnosis' => array(
-            'notBlank' => array(
-                'rule'     => 'notBlank',
-                'required' => true,
-                'message'  => 'Please provide the diagnosis'
-            ),
-        ),
+        // 'diagnosis' => array(
+        //     'notBlank' => array(
+        //         'rule'     => 'notBlank',
+        //         'required' => true,
+        //         'message'  => 'Please provide the diagnosis'
+        //     ),
+        // ),
         'designation_id' => array(
             'numeric' => array(
                 'rule' => array('numeric'),

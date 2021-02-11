@@ -4,14 +4,36 @@ $(document).ready(function() {
           dateFormat:'dd-mm-yy'
     });
 
+
+    //If Donor disable Patient specific fields and vice versa
+    $('input[name="data[Transfusion][form_type]"]').click(function(){ 
+        if ($(this).val() == 'Patient') {
+            $('.donor :input').prop('disabled', true);
+            $('.uliwahifadhi :input').prop('disabled', false);
+
+        } else {
+            $('.donor :input').prop('disabled', false);
+            $('.uliwahifadhi :input').prop('disabled', true);
+            // console.log('Damu ya thamani');
+        }
+    });
+    if($('input[name="data[Transfusion][form_type]"][value="Patient"]').is(':checked')) { 
+        $('.donor :input').prop('disabled', true);
+        $('.uliwahifadhi :input').prop('disabled', false);
+    } 
+    if($('input[name="data[Transfusion][form_type]"][value="Donor"]').is(':checked')) {
+        $('.donor :input').prop('disabled', false);
+        $('.uliwahifadhi :input').prop('disabled', true);
+    }
+
     //Person submitting
 	$('.person-submit').on('change',function() {
         var pilih = $(this).val();
         if (pilih == 'Yes') {
-        	$('.diff:input').prop('disabled',false);
+        	$('.diff :input').prop('disabled',false);
         } else {
-        	$('.diff:input').val('');
-        	$('.diff:input').prop('disabled',true);
+        	$('.diff :input').val('');
+        	$('.diff :input').prop('disabled',true);
         }
     });
     if($("#TransfusionPersonSubmittingNo").is(':checked')){ $('.diff:input').prop('disabled',true); }

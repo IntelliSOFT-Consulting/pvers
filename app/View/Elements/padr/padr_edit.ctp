@@ -321,7 +321,7 @@
             </div>
 
             <div id="pqmp" style="padding: 10px;">
-                <div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">POOR QUALITY ISSUE</h5></div>
+                <div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">POOR QUALITY MEDICINE</h5></div>
                  <div class="row-fluid">
                     <div class="span6">
                         <?php

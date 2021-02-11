@@ -40,19 +40,19 @@ class MedicationProduct extends AppModel {
                 'message'  => 'Please provide product no. 2 (error)'
             ),
         ),
-        'dosage_i' => array(
-            'notBlank' => array(
-                'rule'     => 'notBlank',
-                'required' => true,
-                'message'  => 'Please provide dose, frequence... 1 (error)'
-            ),
-        ),
-        'dosage_ii' => array(
-            'notBlank' => array(
-                'rule'     => 'notBlank',
-                'required' => true,
-                'message'  => 'Please provide dose, frequency... 2 (intended)'
-            ),
-        ),
+        // 'dosage_i' => array(
+        //     'notBlank' => array(
+        //         'rule'     => 'notBlank',
+        //         'required' => true,
+        //         'message'  => 'Please provide dose, frequence... 1 (error)'
+        //     ),
+        // ),
+        // 'dosage_ii' => array(
+        //     'notBlank' => array(
+        //         'rule'     => 'notBlank',
+        //         'required' => true,
+        //         'message'  => 'Please provide dose, frequency... 2 (intended)'
+        //     ),
+        // ),
     );
 }

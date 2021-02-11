@@ -56,6 +56,37 @@
             </div>
             <hr>
 
+            <div class="row-fluid">
+                <div class="span12">
+                    <table class="table table-bordered table-condensed">
+                        <tbody>
+                        <tr class="success">
+                        <td width="45%"><label class="required" style="text-align: right;">Select type of report:</label> </td>
+                        <td>
+                    <?php
+                        echo $this->Form->input('form_type', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'form-type',
+                            'before' => '<div class="form-inline">
+                                        <input type="hidden" value="" id="TransfusionFormType_" name="data[Transfusion][form_type]">
+                                        <label class="radio">',
+                            'after' => '</label>&nbsp;&nbsp;',
+                            'options' => array('Patient' => 'Patient'),
+                        ));
+                        echo $this->Form->input('form_type', array(
+                            'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'person-submit',
+                            'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+                            'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
+                            'before' => '<label class="radio">', 'after' => '</label> </div>',
+                            'options' => array('Donor' => 'Donor'),
+                        ));
+                    ?> 
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <h4 style="text-align: center; color: #884805;">PATIENT INFORMATION</h4>
             <div class="row-fluid">
                 <div class="span6">
@@ -87,12 +118,6 @@
 
                     ?>
                     </div>
-                   <?php
-                        echo $this->Form->input('donor_number', array('label' => array('class' => 'control-label', 'text' =>  'Donor Number'), ));
-                        echo $this->Form->input('national_number', array('label' => array('class' => 'control-label', 'text' =>  'Student/National ID Number'), ));
-                        echo $this->Form->input('home_phone', array('label' => array('class' => 'control-label', 'text' =>  'Home Phone No.'), ));
-                        echo $this->Form->input('cell_phone', array('label' => array('class' => 'control-label', 'text' =>  'Cell Phone No.'), ));
-                    ?>
                 </div><!--/span-->
                 <div class="span6">
                     <?php                    
@@ -127,6 +152,20 @@
                                     'text' => 'County'),
                                     'empty' => true, 'between' => '<div class="controls ui-widget">',
                                 ));
+                    ?>
+                </div><!--/span-->
+            </div><!--/row-->
+            <div class="row-fluid donor">
+                <div class="span6">
+                   <?php
+                        echo $this->Form->input('donor_number', array('label' => array('class' => 'control-label', 'text' =>  'Donor Number'), ));
+                        echo $this->Form->input('national_number', array('label' => array('class' => 'control-label', 'text' =>  'Student/National ID Number'), ));
+                        echo $this->Form->input('home_phone', array('label' => array('class' => 'control-label', 'text' =>  'Home Phone No.'), ));
+                        echo $this->Form->input('cell_phone', array('label' => array('class' => 'control-label', 'text' =>  'Cell Phone No.'), ));
+                    ?>
+                </div><!--/span-->
+                <div class="span6">
+                    <?php 
                         echo $this->Form->input('residence', array('label' => array('class' => 'control-label', 'text' =>  'Residence'), 'after'=>'<p class="help-block"> (county) </p></div>'));
                         echo $this->Form->input('clinic_venue', array('label' => array('class' => 'control-label', 'text' =>  'Clinic Venue'), ));
                         echo $this->Form->input('clinic_code', array('label' => array('class' => 'control-label', 'text' =>  'Clinic Code'), ));
@@ -136,11 +175,11 @@
             </div><!--/row-->
                 <hr>
 
-            <div class="row-fluid">
+            <div class="row-fluid uliwahifadhi">
                 <div class="span6">
                     <?php
                         echo $this->Form->input('diagnosis', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'Diagnosis <span style="color:red;">*</span>'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Diagnosis'),
                             'after'=>'<p class="help-block">  </p></div>',
                         ));
                         echo $this->Form->input('ward', array(
@@ -428,13 +467,23 @@
 
             <!-- <h4 style="text-align: center;  color: #884805;">COMPONENT INFORMATION</h4> -->
             <?php echo $this->element('multi/list_of_pints');?>
-
             <div class="row-fluid">
                 <div class="span6">
                     <?php
                         echo $this->Form->input('nurse_name', array(
                             'label' => array('class' => 'control-label required', 'text' => 'Name of Nurse/Doctor'),
                         ));
+                    ?>
+                </div>
+                <div class="span6">  
+                    <?php
+                        echo $this->Form->input('nurse_date', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label', 'text' => 'Date'),));
+                    ?>
+                </div>
+            </div>
+            <div class="row-fluid donor">
+                <div class="span6">
+                    <?php                        
                         echo $this->Form->input('low_volume', array(
                             'label' => array('class' => 'control-label', 'text' => 'Low Volume'),
                         ));
@@ -445,7 +494,7 @@
                 </div>
                 <div class="span6">
                     <?php                        
-                        echo $this->Form->input('nurse_date', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label', 'text' => 'Date'),));
+                        
                         echo $this->Form->input('hematoma', array(
                             'label' => array('class' => 'control-label', 'text' => 'Hematoma'),
                         ));
@@ -500,7 +549,7 @@
                 </div>
             </div>
 
-            <div class="row-fluid">
+            <div class="row-fluid uliwahifadhi">
                 <div class="span6">
                 <?php
                     echo "<h4 class='controls'>Recipient’s blood supernatant:</h4>";
@@ -669,7 +718,7 @@
             <hr>
 
             <p style="padding-left: 15px;">8. Compatibility testing recipient serum (pretransfusion sample) and donor cells (pack) </p>
-            <div class="row-fluid">
+            <div class="row-fluid uliwahifadhi">
                 <div class="span4">
                     <h4 class="required controls">Compatible</h4>
                     <?php
@@ -747,7 +796,7 @@
             </div>
             <hr>
 
-            <div class="row-fluid">
+            <div class="row-fluid uliwahifadhi">
                 <div class="span6">
                     <?php 
                         echo '<label class="required" style="padding-left: 15px;">If negative (inconclusive results in 8) set up compatibility with enzyme treated cells </label>';          
