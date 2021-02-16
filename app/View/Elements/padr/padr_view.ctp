@@ -93,16 +93,16 @@
                         <td style="width: 35%;">
 
                             <h6>Select all side effects experienced</h6>
-                            <p> <?php echo ($sadr['Sadr']['sadr_vomiting']   ? $ichecked : $nchecked ); ?> Vomiting or diarrhoea  </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_dizziness']   ? $ichecked : $nchecked ); ?> Dizziness or drowsiness   </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_headache']   ? $ichecked : $nchecked ); ?> Headache   </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_joints']   ? $ichecked : $nchecked ); ?> Joints and muscle pain  </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_rash']   ? $ichecked : $nchecked ); ?> Rash, itching, swelling on skin  </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_mouth']   ? $ichecked : $nchecked ); ?> Pain or bleeding in the mouth  </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_stomach']   ? $ichecked : $nchecked ); ?> Pain in the stomach  </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_urination']   ? $ichecked : $nchecked ); ?> Abnormal changes with urination  </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_eyes']   ? $ichecked : $nchecked ); ?> Red, painful eyes  </p>
-                            <p> <?php echo ($sadr['Sadr']['sadr_died']   ? $ichecked : $nchecked ); ?> Patient died  </p>
+                            <p> <?php echo ($padr['Padr']['sadr_vomiting']   ? $ichecked : $nchecked ); ?> Vomiting or diarrhoea  </p>
+                            <p> <?php echo ($padr['Padr']['sadr_dizziness']   ? $ichecked : $nchecked ); ?> Dizziness or drowsiness   </p>
+                            <p> <?php echo ($padr['Padr']['sadr_headache']   ? $ichecked : $nchecked ); ?> Headache   </p>
+                            <p> <?php echo ($padr['Padr']['sadr_joints']   ? $ichecked : $nchecked ); ?> Joints and muscle pain  </p>
+                            <p> <?php echo ($padr['Padr']['sadr_rash']   ? $ichecked : $nchecked ); ?> Rash, itching, swelling on skin  </p>
+                            <p> <?php echo ($padr['Padr']['sadr_mouth']   ? $ichecked : $nchecked ); ?> Pain or bleeding in the mouth  </p>
+                            <p> <?php echo ($padr['Padr']['sadr_stomach']   ? $ichecked : $nchecked ); ?> Pain in the stomach  </p>
+                            <p> <?php echo ($padr['Padr']['sadr_urination']   ? $ichecked : $nchecked ); ?> Abnormal changes with urination  </p>
+                            <p> <?php echo ($padr['Padr']['sadr_eyes']   ? $ichecked : $nchecked ); ?> Red, painful eyes  </p>
+                            <p> <?php echo ($padr['Padr']['sadr_died']   ? $ichecked : $nchecked ); ?> Patient died  </p>
                             
                         </td>
                         <td style="width: 30%;">
