@@ -191,7 +191,7 @@
 	                  ?>
 	                  <tr>
 	                    <td><?= $i+1; ?></td>
-	                    <td><?php echo $aefiListOfVaccine['vaccine_name'];?></td>
+	                    <td><?php echo $aefiListOfVaccine['Vaccine']['vaccine_name'];?></td>
 	                    <td><?php echo $aefiListOfVaccine['dosage'];?></td>
 	                    <td><?php echo $aefiListOfVaccine['vaccination_date'];?></td>
 	                    <td><?php echo $aefiListOfVaccine['vaccination_route'];?></td>

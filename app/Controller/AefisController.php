@@ -157,7 +157,12 @@ class AefisController extends AppController {
             }
         }
 
-        $aefi = $this->Aefi->read(null);
+        // $aefi = $this->Aefi->read(null);
+        $aefi = $this->Aefi->find('first', array(
+                'conditions' => array('Aefi.id' => $id),
+                'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.AefiDescription', 'AefiOriginal.AefiListOfVaccine.Vaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
+            ));
         $this->set('aefi', $aefi);
         // $this->render('pdf/view');
 
@@ -192,7 +197,12 @@ class AefisController extends AppController {
             }
         }
 
-        $aefi = $this->Aefi->read(null);
+        // $aefi = $this->Aefi->read(null);
+        $aefi = $this->Aefi->find('first', array(
+                'conditions' => array('Aefi.id' => $id),
+                'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.AefiDescription', 'AefiOriginal.AefiListOfVaccine.Vaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
+            ));
         $this->set('aefi', $aefi);
         // $this->render('pdf/view');
 
@@ -216,8 +226,8 @@ class AefisController extends AppController {
 
         $aefi = $this->Aefi->find('first', array(
                 'conditions' => array('Aefi.id' => $id),
-                'contain' => array('AefiListOfVaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
-                'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
+                'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.AefiDescription', 'AefiOriginal.AefiListOfVaccine.Vaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
             ));
         $this->set('aefi', $aefi);
         // $this->render('pdf/view');
