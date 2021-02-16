@@ -70,6 +70,13 @@ class PadrsController extends AppController {
         $this->set(compact('designations'));
         $this->set('padrs', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
+
+    private function csv_export($cpadrs = ''){
+        $this->response->download('PADRs_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        $this->set(compact('cpadrs'));
+        $this->layout = false;
+        $this->render('csv_export');
+    }
 /**
  * view method
  *

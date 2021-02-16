@@ -536,6 +536,8 @@ class AefisController extends AppController {
         $this->set(compact('sub_counties'));
         $designations = $this->Aefi->Designation->find('list');
         $this->set(compact('designations'));
+        $vaccines = $this->Aefi->AefiListOfVaccine->Vaccine->find('list');
+        $this->set(compact('vaccines'));
     }
 
 

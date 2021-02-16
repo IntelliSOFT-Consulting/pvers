@@ -1,5 +1,7 @@
 <?php
     $this->assign('PADR', 'active');
+    $ichecked = "&#x2611;";
+    $nchecked = "&#x2610;";
 ?>
 
       <!-- PADR
@@ -68,19 +70,46 @@
                             if(isset($bod['day'])) $dob.=$bod['day'].'-';
                             if(isset($bod['month'])) $dob.=$bod['month'].'-';
                             if(isset($bod['year'])) $dob.=$bod['year'];
-                            echo $dob; ?></strong>
+                            echo $dob; 
+                            echo $padr['Padr']['age_group'];
+                            ?></strong>
                         </td>
                     </tr>
+                </table>
+
+                <table class="table table-bordered table-condensed">
+                    <tbody>
+                    <tr class="success">
+                    <td style="width: 35%;"><label class="required" style="text-align: right;">Select type of report:</label> </td>
+                    <td><strong><?php echo $padr['Padr']['report_sadr']; ?></strong>
+                    </td>
+                    </tr>
+                    </tbody>
                 </table>
 
                 <div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">SIDE EFFECT</h5></div>
                 <table style="width: 100%;">
                     <tr>
                         <td style="width: 35%;">
-                            Describe the reaction:
-                            <br><strong><?php echo $padr['Padr']['description_of_reaction'] ?></strong>
+
+                            <h6>Select all side effects experienced</h6>
+                            <p> <?php echo ($sadr['Sadr']['sadr_vomiting']   ? $ichecked : $nchecked ); ?> Vomiting or diarrhoea  </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_dizziness']   ? $ichecked : $nchecked ); ?> Dizziness or drowsiness   </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_headache']   ? $ichecked : $nchecked ); ?> Headache   </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_joints']   ? $ichecked : $nchecked ); ?> Joints and muscle pain  </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_rash']   ? $ichecked : $nchecked ); ?> Rash, itching, swelling on skin  </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_mouth']   ? $ichecked : $nchecked ); ?> Pain or bleeding in the mouth  </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_stomach']   ? $ichecked : $nchecked ); ?> Pain in the stomach  </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_urination']   ? $ichecked : $nchecked ); ?> Abnormal changes with urination  </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_eyes']   ? $ichecked : $nchecked ); ?> Red, painful eyes  </p>
+                            <p> <?php echo ($sadr['Sadr']['sadr_died']   ? $ichecked : $nchecked ); ?> Patient died  </p>
+                            
                         </td>
                         <td style="width: 30%;">
+                            Other side effects experienced:
+                            <br><strong><?php echo $padr['Padr']['description_of_reaction'] ?></strong>
+                        </td>
+                        <td>
                             When did the reaction start? 
                             <strong><?php 
                                 $rod = $padr['Padr']['date_of_onset_of_reaction']; $dor = '';
@@ -89,8 +118,6 @@
                                 if(isset($rod['year'])) $dor.=$rod['year'];
                                 echo $dor;
                              ?></strong>
-                        </td>
-                        <td>
                             Is the reaction still on? 
                             <strong><?php echo $padr['Padr']['reaction_on'] ?></strong>
                         </td>
