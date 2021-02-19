@@ -17,7 +17,7 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>AEFI</h1>
-              <p class="lead">Adverse Event Following Immunization.</p>
+              <p class="lead" style="background-color: #c14a4a;">Adverse Event Following Immunization.</p>
             </div>
           </div>
         </div>
