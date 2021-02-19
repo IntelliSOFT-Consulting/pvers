@@ -56,10 +56,10 @@ $(function() {
                     </td>\
                   </tr>\
                   <tr>\
-                    <td>When did you start taking the medicine/vaccine/device?</td>\
+                    <td>When did you start taking/using the medicine/vaccine/device?</td>\
                     <td>\
                         <input name="data[PadrListOfMedicine][{i}][start_date]" class="span11 date-pick-from" type="text" id="PadrListOfMedicine{i}StartDate"> </td>\
-                    <td>When did you stop taking the medicine/vaccine?</td>\
+                    <td>When did you stop taking/using the medicine/vaccine/device?</td>\
                     <td>\
                         <input name="data[PadrListOfMedicine][{i}][end_date]" class="span11 date-pick-to" type="text" id="PadrListOfMedicine{i}EndDate"> </td>\
                   </tr>\

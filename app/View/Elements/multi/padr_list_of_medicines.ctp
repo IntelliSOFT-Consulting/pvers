@@ -51,7 +51,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>When did you start taking the medicine/vaccine/device? </td>
+                    <td>When did you start taking/using the medicine/vaccine/device? </td>
                     <td>
                         <?php
                           echo $this->Form->input('PadrListOfMedicine.'.$i.'.start_date', array(
@@ -60,7 +60,7 @@
                             'after' => false));
                         ?>
                     </td>
-                    <td>When did you stop taking the medicine/vaccine? <span class="help-block">(dd-mm-yyyy)</span> </td>
+                    <td>When did you stop taking/using the medicine/vaccine/device? <span class="help-block">(dd-mm-yyyy)</span> </td>
                     <td>
                         <?php
                         echo $this->Form->input('PadrListOfMedicine.'.$i.'.end_date', array(
