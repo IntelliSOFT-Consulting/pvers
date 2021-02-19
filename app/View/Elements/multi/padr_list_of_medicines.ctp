@@ -71,7 +71,7 @@
                     </td> 
                   </tr>
                   <tr>
-                    <td>Expiry date of the medicin/vaccine</td>
+                    <td>Expiry date of the medicine/vaccine/device</td>
                     <td>
                         <?php
                           echo $this->Form->input('PadrListOfMedicine.'.$i.'.expiry_date', array(
@@ -79,7 +79,7 @@
                             'after' => false));
                         ?>
                     </td>                    
-                    <td>Where did you buy the medicine/vaccine?  </td> 
+                    <td>Where did you buy the medicine/vaccine/device?  </td> 
                     <td> <?php
                         echo $this->Form->input('PadrListOfMedicine.'.$i.'.medicine_source', array(
                             'type' => 'text', 'label' => false, 'between' => false, 'div' => false,
@@ -90,7 +90,7 @@
 
                 
                 <?php } ?>
-                <tr><td colspan="6"><label class="required"> For additional medicines, click <button  type="button" class="btn btn-success btn-mini" id="addPadrListOfMedicine"> Add <i class="fa fa-plus-square" aria-hidden="true"></i>  </button> </label>  </td></tr>
+                <tr><td colspan="6"><label class="required"> For additional medicines/vaccines/devices, click <button  type="button" class="btn btn-success btn-mini" id="addPadrListOfMedicine"> Add <i class="fa fa-plus-square" aria-hidden="true"></i>  </button> </label>  </td></tr>
                 </tbody>
           </table>
         </div><!--/span-->

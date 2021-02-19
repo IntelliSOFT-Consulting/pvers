@@ -45,7 +45,7 @@ $(function() {
         var trWrapper = '\
                   <tr>\
                     <td rowspan="3" class="sailor">{i2}</td>\
-                    <td><input type="hidden" name="data[PadrListOfMedicine][{i}][id]" class="" id="PadrListOfMedicine{i}Id"> Name of Medicine </td>\
+                    <td><input type="hidden" name="data[PadrListOfMedicine][{i}][id]" class="" id="PadrListOfMedicine{i}Id"> Name of Medicine/Vaccine/Device </td>\
                     <td>\
                         <input name="data[PadrListOfMedicine][{i}][product_name]" class="span11" type="text" id="PadrListOfMedicine{i}ProductName"> </td>\
                     <td>Manufacturer </td>\
@@ -56,15 +56,15 @@ $(function() {
                     </td>\
                   </tr>\
                   <tr>\
-                    <td>When did you start taking the medicine?</td>\
+                    <td>When did you start taking the medicine/vaccine/device?</td>\
                     <td>\
                         <input name="data[PadrListOfMedicine][{i}][start_date]" class="span11 date-pick-from" type="text" id="PadrListOfMedicine{i}StartDate"> </td>\
-                    <td>When did you stop taking the medicine?</td>\
+                    <td>When did you stop taking the medicine/vaccine?</td>\
                     <td>\
                         <input name="data[PadrListOfMedicine][{i}][end_date]" class="span11 date-pick-to" type="text" id="PadrListOfMedicine{i}EndDate"> </td>\
                   </tr>\
                   <tr>\
-                    <td>Expiry date of the medicine</td>\
+                    <td>Expiry date of the medicine/vaccine/device</td>\
                     <td><input name="data[PadrListOfMedicine][{i}][expiry_date]" class="span11 date-pick-field" type="text" id="PadrListOfMedicine{i}ExpiryDate"> </td>\
                     <td>  </td>\
                     <td>  </td>\
