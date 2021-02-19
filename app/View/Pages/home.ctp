@@ -11,22 +11,22 @@
     <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide">
-      <div class="carousel-inner">
+      <div class="carousel-inner">      
         <div class="item active">
-          <img src="/img/home/sadr3.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>SADR</h1>
-              <p class="lead">Suspected Adverse Drug Reaction Reporting Form.</p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
           <img src="/img/home/aefi5.jpg" alt="">
           <div class="container">
             <div class="carousel-caption">
               <h1>AEFI</h1>
               <p class="lead">Adverse Event Following Immunization.</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="/img/home/sadr3.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>SADR</h1>
+              <p class="lead">Suspected Adverse Drug Reaction Reporting Form.</p>
             </div>
           </div>
         </div>
@@ -112,7 +112,8 @@
         </div><!-- /.span2 -->
         <div class="span10">
           <div class="row-fluid">
-            <div class="span2"><a href="/padrs/add"><img src="/img/home/report5.png" alt="" style="width: 140px; height: 140px;"></a></div>
+            <div class="span2"><a href="/padrs/add"><img src="/img/home/report5.png" alt="" style="width: 140px; height: 140px;"></a>
+            <p style="text-align: center;"><b>Reporting by public or patient</b></p></div>
             <div class="span2"><a href="https://www.pharmacyboardkenya.org/downloads" target="_blank"><img class="img-circle" data-src="holder.js/130x130?theme=social&text=Guidelines on safety reporting"></a></div>
             <div class="span2"><a href="/pages/faqs"><img src="/img/home/faq2.jpg" alt="" style="width: 140px; height: 140px;"></a></div>
             <div class="span2"><a href="https://www.pharmacyboardkenya.org/pharmacovigilance" target="_blank"><img class="img-circle" data-src="holder.js/130x130?theme=industrial&text=Safety alerts"></a></div>
@@ -161,12 +162,11 @@
 	      		<div class="span4">
 	      			<h4 style="text-align: left;">What can you report on?</h4>
 	                <p style="text-align: left;"><b>Adverse reactions caused by Drugs</b></p>
-	                <p style="text-align: left;"><b>Public Adverse reactions caused by Drugs</b></p>
+                  <p style="text-align: left;"><b>Adverse Events Following Immunization</b></p>
 	                <p style="text-align: left;"><b>Poor Quality Medical Products</b></p>
 	                <p style="text-align: left;"><b>Medication Errors</b></p>
 	                <p style="text-align: left;"><b>Reactions caused by Transfusion</b></p>
 	                <p style="text-align: left;"><b>Medical Devices Incidences</b></p>
-	                <p style="text-align: left;"><b>Adverse Reactions caused by Immunization</b></p>
 	      		</div>
 	      		<div class="span8">
 	      			<h4>What happens when you report?</h4>

@@ -189,7 +189,7 @@
                                         <input type="hidden" value="" id="SadrPersonSubmitting_" name="data[Padr][report_sadr]">
                                         <label class="radio">',
                             'after' => '</label>&nbsp;&nbsp;',
-                            'options' => array('Drug Reaction' => 'Drug Reaction'),
+                            'options' => array('Adverse Reaction' => 'Adverse Reaction'),
                         ));
                         echo $this->Form->input('report_sadr', array(
                             'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'class' => 'person-submit',

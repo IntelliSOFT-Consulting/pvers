@@ -19,7 +19,7 @@ $(document).ready(function() {
 	$('#pqmp').hide();
 	$('#sadr').hide();
     $('input[name="data[Padr][report_sadr]"]').click(function(){ 
-        if ($(this).val() == 'Drug Reaction') {
+        if ($(this).val() == 'Adverse Reaction') {
             $('#pqmp').hide();
             $('#sadr').show("slow");
         } else {
@@ -27,7 +27,7 @@ $(document).ready(function() {
             $('#sadr').hide();
         }
     });
-    if($('input[name="data[Padr][report_sadr]"][value="Drug Reaction"]').is(':checked')) { 
+    if($('input[name="data[Padr][report_sadr]"][value="Adverse Reaction"]').is(':checked')) { 
     	$('#pqmp').hide(); $('#sadr').show("slow"); 
     } 
     if($('input[name="data[Padr][report_sadr]"][value="Poor Quality Medicine"]').is(':checked')) {
