@@ -5,7 +5,7 @@
  */
   $this->Html->script('padr_list_of_medicines', array('inline' => false));
 ?>
-  <div style="background-color: #f5f5a4;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE MEDICINE THAT CAUSED THE REACTION <br><em>(Include all medications)</em></h5></div>
+  <div style="background-color: #f5f5a4;"><h5 style="text-align: center; text-decoration: underline;">DETAILS OF THE MEDICINE/VACCINE/DEVICE THAT CAUSED THE REACTION <br><em>(Include all medications)</em></h5></div>
 
     <div class="row-fluid">
         <div class="span12">
@@ -60,7 +60,7 @@
                             'after' => false));
                         ?>
                     </td>
-                    <td>When did you stop taking the medicine? <span class="help-block">(dd-mm-yyyy)</span> </td>
+                    <td>When did you stop taking the medicine/vaccine? <span class="help-block">(dd-mm-yyyy)</span> </td>
                     <td>
                         <?php
                         echo $this->Form->input('PadrListOfMedicine.'.$i.'.end_date', array(
@@ -71,7 +71,7 @@
                     </td> 
                   </tr>
                   <tr>
-                    <td>Expiry date of the medicine</td>
+                    <td>Expiry date of the medicin/vaccine</td>
                     <td>
                         <?php
                           echo $this->Form->input('PadrListOfMedicine.'.$i.'.expiry_date', array(
@@ -79,7 +79,7 @@
                             'after' => false));
                         ?>
                     </td>                    
-                    <td>Where did you buy the medicine?  </td> 
+                    <td>Where did you buy the medicine/vaccine?  </td> 
                     <td> <?php
                         echo $this->Form->input('PadrListOfMedicine.'.$i.'.medicine_source', array(
                             'type' => 'text', 'label' => false, 'between' => false, 'div' => false,
