@@ -388,7 +388,8 @@ class DevicesController extends AppController {
 
             $device = Hash::remove($device, 'ListOfDevice.{n}.id');
             $data_save = $device['Device'];
-            $data_save['ListOfDevice'] = $device['ListOfDevice'];
+            // $data_save['ListOfDevice'] = $device['ListOfDevice'];
+            if(isset($device['ListOfDevice'])) $data_save['ListOfDevice'] = $device['ListOfDevice'];
             $data_save['device_id'] = $id;
             $data_save['user_id'] = $this->Auth->User('id');;
             $this->Device->saveField('copied', 1);

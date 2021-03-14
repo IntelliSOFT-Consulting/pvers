@@ -161,12 +161,12 @@
 	      	<div class="row-fluid">
 	      		<div class="span4">
 	      			<h4 style="text-align: left;">What can you report on?</h4>
-	                <p style="text-align: left;"><b>Adverse reactions caused by Drugs</b></p>
-                  <p style="text-align: left;"><b>Adverse Events Following Immunization</b></p>
-	                <p style="text-align: left;"><b>Poor Quality Medical Products</b></p>
-	                <p style="text-align: left;"><b>Medication Errors</b></p>
-	                <p style="text-align: left;"><b>Reactions caused by Transfusion</b></p>
-	                <p style="text-align: left;"><b>Medical Devices Incidences</b></p>
+	                <p style="text-align: left;"><b><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </b>Adverse reactions caused by Drugs</p>
+                  <p style="text-align: left;"><b><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Adverse Events Following Immunization</b></p>
+	                <p style="text-align: left;"><b><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Poor Quality Medical Products</b></p>
+	                <p style="text-align: left;"><b><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Medication Errors</b></p>
+	                <p style="text-align: left;"><b><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Reactions caused by Transfusion</b></p>
+	                <p style="text-align: left;"><b><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Medical Devices Incidences</b></p>
 	      		</div>
 	      		<div class="span8">
 	      			<h4>What happens when you report?</h4>

@@ -225,9 +225,7 @@
                 <drugcumulativedosageunit/>
                 <drugdosagetext/>
                 <drugdosageform/>
-                <drugadministrationroute><?php
-					echo $medicationProduct['dosage_ii'] ;
-				?></drugadministrationroute>
+                <drugadministrationroute/>
                 <drugparadministration/>
                 <reactiongestationperiod/>
                 <reactiongestationperiodunit/>

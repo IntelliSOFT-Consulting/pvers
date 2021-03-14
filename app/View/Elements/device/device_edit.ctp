@@ -305,7 +305,7 @@
                         ));
 
                         echo $this->Form->input('manufacturer_name', array(
-                            'label' => array('class' => 'control-label required', 'text' => 'NAME OF MANUFACTURER'),
+                            'label' => array('class' => 'control-label required', 'text' => 'NAME OF MANUFACTURER <span style="color:red;">*</span>'),
                         ));
                     ?>
                 </div><!--/span-->
@@ -602,7 +602,7 @@
                     <?php
                         echo $this->Form->input('date_onset_incident', array(
                             'type' => 'text', 'class' => 'date-pick-field',
-                            'label' => array('class' => 'control-label required', 'text' => 'Date of onset of the incident'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Date of onset of the incident <span style="color:red;">*</span>'),
                             // 'after'=>'<p class="help-block"> (e.g. blood, saliva, etc): </p></div>'
                         ));
 
