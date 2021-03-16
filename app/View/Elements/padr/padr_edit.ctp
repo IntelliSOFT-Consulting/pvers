@@ -316,9 +316,8 @@
                     </div>
                 </div><!--/row-->
             </div>
-                      
-            <?php echo $this->element('multi/padr_list_of_medicines');?>
-            </div>
+            </div>    
+
 
             <div id="pqmp" style="padding: 10px;">
                 <div style="background-color: lightpink;"><h5 style="text-align: center; text-decoration: underline;">POOR QUALITY MEDICINE</h5></div>
@@ -374,6 +373,8 @@
                     </div>
                 </div><!--/row-->
             </div>
+            
+            <?php echo $this->element('multi/padr_list_of_medicines');?>
             <?php echo $this->element('multi/attachments', ['model' => 'Padr', 'group' => 'attachment']); ?>
 
             <div class="row-fluid">

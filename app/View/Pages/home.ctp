@@ -26,7 +26,7 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>SADR</h1>
-              <p class="lead">Suspected Adverse Drug Reaction Reporting Form.</p>
+              <p class="lead" style="background-color: #c14a4a;">Suspected Adverse Drug Reaction Reporting Form.</p>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>MEDICAL DEVICES</h1>
-              <p class="lead">Medical Devices Incident Reporting Form.</p>
+              <p class="lead" style="background-color: #c14a4a;">Medical Devices Incident Reporting Form.</p>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>MEDICATION ERROR</h1>
-              <p class="lead">Medication Error Reporting Form.</p>
+              <p class="lead" style="background-color: #c14a4a;">Medication Error Reporting Form.</p>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>PQMP</h1>
-              <p class="lead">Poor-Quality Medical Products and Health Technologies.</p>
+              <p class="lead" style="background-color: #c14a4a;">Poor-Quality Medical Products and Health Technologies.</p>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>TRANSFUSION REACTION</h1>
-              <p class="lead">Adverse Transfusion Reaction Form.</p>
+              <p class="lead" style="background-color: #c14a4a;">Adverse Transfusion Reaction Form.</p>
             </div>
           </div>
         </div>
