@@ -81,7 +81,7 @@ class UsersController extends AppController {
 			$this->request->data['User']['id'] = $this->Session->read('Auth.User.id');
 			unset($this->User->validate['email']);
 			$this->User->create();
-			if ($this->User->save($this->request->data, array('fieldlist' => array('old_password', 'password', 'confirm_password')))) {
+			if ($this->User->save($this->request->data, array('fieldList' => array('old_password', 'password', 'confirm_password')))) {
 				$this->Session->setFlash(__('The password has been changed'), 'flash_success');
 				$this->redirect(array('action' => 'changePassword'));
 			} else {
