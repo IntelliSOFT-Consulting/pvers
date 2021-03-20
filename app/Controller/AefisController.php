@@ -28,9 +28,14 @@ class AefisController extends AppController {
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
             else $this->paginate['limit'] = reset($this->page_options);
+        //Health program fiasco
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') {
+            $this->passedArgs['health_program'] = $this->Session->read('Auth.User.health_program');
+        }
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
-        $criteria['Aefi.user_id'] = $this->Auth->User('id');
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Aefi.submitted'] = array(2);  
+        if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Aefi.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
         $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription');
@@ -320,7 +325,7 @@ class AefisController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Aefi->create();
         $this->Aefi->save(['Aefi' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'AEFI/'.date('Y').'/'.$count,
+            'reference_no' => 'new',//'AEFI/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
@@ -399,6 +404,16 @@ class AefisController extends AppController {
             if ($this->Aefi->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Aefi->saveField('submitted', 2);
+                    //lucian
+                    $count = $this->Aefi->find('count',  array(
+                        'fields' => 'DISTINCT Aefi.reference_no',
+                        'conditions' => array('Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        )
+                        ));
+                    $count++;
+                    $count = ($count < 10) ? "0$count" : $count; 
+                    $this->Aefi->saveField('reference_no', 'AEFI/'.date('Y').'/'.$count);
+                    //bokelo
                     $aefi = $this->Aefi->read(null, $id);
 
                     //******************       Send Email and Notifications to Applicant and Managers          *****************************

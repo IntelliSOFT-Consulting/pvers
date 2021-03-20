@@ -277,7 +277,7 @@ class TransfusionsController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Transfusion->create();
         $this->Transfusion->save(['Transfusion' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'BT/'.date('Y').'/'.$count,
+            'reference_no' => 'new',//'BT/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
@@ -322,6 +322,16 @@ class TransfusionsController extends AppController {
             if ($this->Transfusion->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Transfusion->saveField('submitted', 2);
+                    //lucian
+                    $count = $this->Transfusion->find('count',  array(
+                        'fields' => 'DISTINCT Transfusion.reference_no',
+                        'conditions' => array('Transfusion.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        )
+                        ));
+                    $count++;
+                    $count = ($count < 10) ? "0$count" : $count; 
+                    $this->Transfusion->saveField('reference_no', 'BT/'.date('Y').'/'.$count);
+                    //bokelo
                     $transfusion = $this->Transfusion->read(null, $id);
 
                     //******************       Send Email and Notifications to Applicant and Managers          *****************************

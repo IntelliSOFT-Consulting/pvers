@@ -14,6 +14,7 @@ class Medication extends AppModel {
 	public $filterArgs = array(
         'reference_no' => array('type' => 'like', 'encode' => true),
         'generic_name_i' => array('type' => 'query', 'method' => 'findByGenericName', 'encode' => true),
+        'health_program' => array('type' => 'query', 'method' => 'findByHealthProgram', 'encode' => true),
         'name_of_institution' => array('type' => 'like', 'encode' => true),
         'reach_patient' => array('type' => 'like', 'encode' => true),
         'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Medication.created BETWEEN ? AND ?'),
@@ -59,6 +60,18 @@ class Medication extends AppModel {
                 'fields' => array('medication_id', 'medication_id')
                     )));
             return $cond;
+    }
+    
+    public function findByHealthProgram($data = array()) {
+        $vdrugs = ClassRegistry::init('DrugDictionary')->find('list', array('conditions' => array('health_program' => $data['health_program']), 'fields' => array('drug_name', 'drug_name')));
+        $cond = array($this->alias.'.id' => $this->MedicationProduct->find('list', array(
+            'conditions' => array(
+                'OR' => array(
+                    'MedicationProduct.generic_name_i' => $vdrugs,
+                    'MedicationProduct.product_name_i' => $vdrugs, )),
+            'fields' => array('medication_id', 'medication_id')
+                )));
+        return $cond;
     }
 
     public function findByGenericNameII($data = array()) {

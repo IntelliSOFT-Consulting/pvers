@@ -33,9 +33,9 @@
                     <th colspan="4"><label class="required">Details of Diluents</label></th>
                   </tr>
                   <tr>
-                    <th colspan="2" style="width: 20%"> <label class="required">Name of Vaccine <span style="color:red;">*</span></label><small class="help-block">(e.g. BCG, DPT-Hib-HeB)</small></th>
+                    <th colspan="2" style="width: 17%"> <label class="required">Name of Vaccine <span style="color:red;">*</span></label><small class="help-block">(e.g. BCG, DPT-Hib-HeB)</small></th>
                     <th style="width: 7%"> <label>Dose No.</label></th>
-                    <th style="width: 10%"> <label class="required"> Date & Time vaccinated <span style="color:red;">*</span><br><small class="help-block">(dd-mm-yyyy 24Hr:Min)</small></label></th>
+                    <th style="width: 13%"> <label class="required"> Date & Time vaccinated <span style="color:red;">*</span><br><small class="help-block">(dd-mm-yyyy 24Hr:Min)</small></label></th>
                     <th> Route of vaccination <br><small class="help-block">(i.m.,s.c., i.d.)</small></th>
                     <th style="width: 5%"> <label>Site of vaccination </label></th>
                     <th style="width: 5%"> <label>Batch/Lot number </label></th>
@@ -79,7 +79,7 @@
                         <?php                            
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_date', array(
                             'type' => 'text', 'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span11 autosave-ignore date-pick-field',));
+                            'after' => false, 'class' => 'span11 autosave-ignore datetime-pick-field',));
                         ?>
                     </td> 
                     <td>

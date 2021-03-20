@@ -23,6 +23,7 @@ class Aefi extends AppModel {
         'end_date' => array('type' => 'query', 'method' => 'dummy'),
         'county_id' => array('type' => 'value'),
         'vaccine_name' => array('type' => 'query', 'method' => 'findByVaccineName', 'encode' => true),
+        'health_program' => array('type' => 'query', 'method' => 'findByHealthProgram', 'encode' => true),
         'bcg' => array('type' => 'value'),
         'convulsion' => array('type' => 'value'),
         'urticaria' => array('type' => 'value'),
@@ -57,6 +58,18 @@ class Aefi extends AppModel {
                 'fields' => array('aefi_id', 'aefi_id')
                     )));
             return $cond;
+    }
+
+    public function findByHealthProgram($data = array()) {
+        $vdrugs = ClassRegistry::init('DrugDictionary')->find('list', array('conditions' => array('health_program' => $data['health_program']), 'fields' => array('drug_name', 'drug_name')));
+        $cond = array($this->alias.'.id' => $this->AefiListOfVaccine->find('list', array(
+            'conditions' => array(
+                'OR' => array(
+                    'AefiListOfVaccine.vaccine_name' => $vdrugs,
+                    'AefiListOfVaccine.vaccine_manufacturer' => $vdrugs, )),
+            'fields' => array('aefi_id', 'aefi_id')
+                )));
+        return $cond;
     }
 
     public function reporterFilter($data = array()) {

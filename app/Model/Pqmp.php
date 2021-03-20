@@ -21,6 +21,7 @@ class Pqmp extends AppModel {
         'county_id' => array('type' => 'value'),
         'country_id' => array('type' => 'value'),
         'generic_name' => array('type' => 'like', 'encode' => true),
+        'health_program' => array('type' => 'query', 'method' => 'findByHealthProgram', 'encode' => true),
         'name_of_manufacturer' => array('type' => 'like', 'encode' => true),
         'medicinal_product' => array('type' => 'value'),
         'blood_products' => array('type' => 'value'),
@@ -59,6 +60,16 @@ class Pqmp extends AppModel {
 
     public function dummy($data = array()) {
     	return array( '1' => '1');
+    }
+
+    public function findByHealthProgram($data = array()) {
+        $vdrugs = ClassRegistry::init('DrugDictionary')->find('list', array('conditions' => array('health_program' => $data['health_program']), 'fields' => array('drug_name', 'drug_name')));
+        $cond = array(
+                'OR' => array(
+                    $this->alias . '.brand_name' => $vdrugs,
+                    $this->alias . '.generic_name' => $vdrugs,
+                ));
+        return $cond;
     }
 
     public function reporterFilter($data = array()) {

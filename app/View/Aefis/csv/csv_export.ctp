@@ -2,7 +2,8 @@
 	
 	$header = array('id' => '#', 'reference_no' => 'Reference No.', 'report_type' => 'Type', 'name_of_institution' => 'Institution',
 		'counties' => 'County',
-		'patient_name' => 'Patient name', 'date_born' => 'Date of birth',
+		//'patient_name' => 'Patient name', 
+		'date_born' => 'Date of birth',
 		'age_months' => 'Age in months', 'gender' => 'Gender',
 		'patient_county' => 'Patient county', 'vaccination_center' => 'Vaccination center',
 		'vaccination_type' => 'Vaccination service', 'vaccination_county' => 'Vaccination county',
@@ -17,11 +18,17 @@
 		'manufacturers' => 'Manufacturers',
 		'serious' => 'Reaction serious', 'serious_yes' => 'Reason for seriousness',
 		'outcome' => 'Outcome',
-		'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
-		'reporter_phone' => 'Reporter phone', 
+		//'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
+		//'reporter_phone' => 'Reporter phone', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 		);
 	
+	if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+		$header['reporter_name'] = 'Reporter';
+		$header['reporter_email'] = 'Reporter email';
+		$header['reporter_phone'] = 'Reporter phone';
+		$header['patient_name'] = 'Patient name';
+	}
 	echo implode(',', $header)."\n";
 	foreach ($caefis as $caefi):
 		$content = '';

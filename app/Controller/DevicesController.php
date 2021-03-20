@@ -223,7 +223,7 @@ class DevicesController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Device->create();
         $this->Device->save(['Device' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'MD/'.date('Y').'/'.$count,
+            'reference_no' => 'new',//'MD/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
@@ -305,6 +305,16 @@ class DevicesController extends AppController {
             if ($this->Device->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Device->saveField('submitted', 2);
+                    //lucian
+                    $count = $this->Device->find('count',  array(
+                        'fields' => 'DISTINCT Device.reference_no',
+                        'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        )
+                        ));
+                    $count++;
+                    $count = ($count < 10) ? "0$count" : $count; 
+                    $this->Device->saveField('reference_no', 'MD/'.date('Y').'/'.$count);
+                    //bokelo
                     $device = $this->Device->read(null, $id);
 
                     //******************       Send Email and Notifications to Applicant and Managers          *****************************

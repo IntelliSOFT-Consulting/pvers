@@ -12,6 +12,7 @@ class Sadr extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
     public $actsAs = array('Search.Searchable', 'Containable');
+    // public $drug_dictionary = ClassRegistry::init('DrugDictionary');
 
 	public $filterArgs = array(
         'reference_no' => array('type' => 'like', 'encode' => true),
@@ -23,6 +24,7 @@ class Sadr extends AppModel {
         'end_date' => array('type' => 'query', 'method' => 'dummy'),
         'county_id' => array('type' => 'value'),
         'drug_name' => array('type' => 'query', 'method' => 'findByDrugName', 'encode' => true),
+        'health_program' => array('type' => 'query', 'method' => 'findByHealthProgram', 'encode' => true),
         'medicine_name' => array('type' => 'query', 'method' => 'findByMedicineName', 'encode' => true),
         'report_sadr' => array('type' => 'value'),
         'report_therapeutic' => array('type' => 'value'),
@@ -44,6 +46,18 @@ class Sadr extends AppModel {
 
     public function dummy($data = array()) {
     	return array( '1' => '1');
+    }
+
+    public function findByHealthProgram($data = array()) {
+        $vdrugs = ClassRegistry::init('DrugDictionary')->find('list', array('conditions' => array('health_program' => $data['health_program']), 'fields' => array('drug_name', 'drug_name')));
+        $cond = array($this->alias.'.id' => $this->SadrListOfDrug->find('list', array(
+            'conditions' => array(
+                'OR' => array(
+                    'SadrListOfDrug.drug_name' => $vdrugs,
+                    'SadrListOfDrug.brand_name' => $vdrugs, )),
+            'fields' => array('sadr_id', 'sadr_id')
+                )));
+        return $cond;
     }
 
     public function findByDrugName($data = array()) {

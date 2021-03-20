@@ -41,9 +41,15 @@ class PqmpsController extends AppController {
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
             else $this->paginate['limit'] = reset($this->page_options);
+        //Health program fiasco
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') {
+            $this->passedArgs['health_program'] = $this->Session->read('Auth.User.health_program');
+        }
 
         $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
-        $criteria['Pqmp.user_id'] = $this->Auth->User('id');
+        if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Pqmp.user_id'] = $this->Auth->User('id');        
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Pqmp.submitted'] = array(2);  
+        // $criteria['Pqmp.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Country');
@@ -253,7 +259,7 @@ class PqmpsController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Pqmp->create();
         $this->Pqmp->save(['Pqmp' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'PQMP/'.date('Y').'/'.$count,
+            'reference_no' => 'new',//'PQMP/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
@@ -291,6 +297,16 @@ class PqmpsController extends AppController {
             if ($this->Pqmp->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Pqmp->saveField('submitted', 2);
+                    //lucian
+                    $count = $this->Pqmp->find('count',  array(
+                        'fields' => 'DISTINCT Pqmp.reference_no',
+                        'conditions' => array('Pqmp.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        )
+                        ));
+                    $count++;
+                    $count = ($count < 10) ? "0$count" : $count; 
+                    $this->Pqmp->saveField('reference_no', 'PQMP/'.date('Y').'/'.$count);
+                    //bokelo
                     $pqmp = $this->Pqmp->read(null, $id);
 
                     //******************       Send Email and Notifications to Applicant and Managers          *****************************

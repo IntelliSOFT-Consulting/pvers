@@ -7,7 +7,7 @@
                     array('controller' => 'users', 'action'=>'dashboard', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
-            <?php if($this->Session->read('Auth.User.user_type') != 'County Pharmacist' && $this->Session->read('Auth.User.user_type') != 'Public Health Program') { ?>
+            <?php if($this->Session->read('Auth.User.user_type') != 'County Pharmacist') { ?>
              <li class="<?php echo $this->fetch('SADR') ?>">
                 <?php
                     echo $this->Html->link('<i class="fa fa-ambulance" aria-hidden="true"></i> SADRs',
@@ -28,7 +28,7 @@
              </li>
              <li class="<?php echo $this->fetch('DEV') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-stethoscope" aria-hidden="true"></i> Devices',
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Html->link('<i class="fa fa-stethoscope" aria-hidden="true"></i> Devices',
                         array('controller' => 'devices', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>
@@ -40,7 +40,7 @@
              </li>
              <li class="<?php echo $this->fetch('TRN') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusion Reactions',
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusion Reactions',
                         array('controller' => 'transfusions', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
                     ?>
              </li>

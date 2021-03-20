@@ -6,7 +6,8 @@
 		'herbal_product' => 'Herbal product', 'cosmeceuticals' => 'Cosmeceuticals',
 		'product_other' => 'Others', 'product_specify' => 'Specify product',
 		'name_of_institution' => 'Institution', 'counties' => 'County',
-		'patient_name' => 'Patient name', 'date_born' => 'Date of birth',
+		//'patient_name' => 'Patient name', 
+		'date_born' => 'Date of birth',
 		'gender' => 'Gender',
 		'age_group' => 'Age Group', 'pregnancy_status' => 'Pregnancy Status',
 		'known_allergy' => 'Known allergy', 'known_allergy_specify' => 'Allergy',
@@ -16,11 +17,16 @@
 		'reaction_reappear' => 'Reaction reappear', 'severity' => 'Severity',
 		'serious' => 'Reaction serious', 'serious_reason' => 'Reason for seriousness',
 		'action_taken' => 'Action taken', 'outcome' => 'Outcome',
-		'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
-		'reporter_phone' => 'Reporter phone', 
+		//'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
+		// 'reporter_phone' => 'Reporter phone', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 		);
-	
+	if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+		$header['reporter_name'] = 'Reporter';
+		$header['reporter_email'] = 'Reporter email';
+		$header['reporter_phone'] = 'Reporter phone';
+		$header['patient_name'] = 'Patient name';
+	}
 	echo implode(',', $header)."\n";
 	foreach ($csadrs as $csadr):
 		$content = '';

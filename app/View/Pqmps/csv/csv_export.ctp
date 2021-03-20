@@ -38,11 +38,16 @@
 		'product_at_facility' => 'Paralysis', 
 		'returned_by_client' => 'Returned by client',
 		'stored_to_recommendations' => 'Recommendations',
-		'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
-		'reporter_phone' => 'Reporter phone', 
+		// 'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
+		// 'reporter_phone' => 'Reporter phone', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 	);
-	
+	if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+		$header['reporter_name'] = 'Reporter';
+		$header['reporter_email'] = 'Reporter email';
+		$header['reporter_phone'] = 'Reporter phone';
+		// $header['patient_name'] = 'Patient name';
+	}
 	echo implode(',', $header)."\n";
 	foreach ($cpqmps as $cpqmp):
 		$content = '';

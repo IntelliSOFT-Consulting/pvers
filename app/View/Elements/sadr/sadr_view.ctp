@@ -87,14 +87,14 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 25%;">PATIENT'S INITIALS:</td>
-						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['patient_name'] ?>	</strong></td>
+						<td style="width: 25%;"><strong><?php if($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $sadr['Sadr']['patient_name'] ?>	</strong></td>
 						<td style="width: 25%;">WARD / CLINIC: </td>
 						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['ward'] ?>	</strong></td></tr>
 					<tr>
 						<td style="width: 25%;">IP/OP. NO.: </td>
 						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['ip_no'] ?>	</strong></td>
 						<td style="width: 25%;">PATIENT'S ADDRESS:</td>
-						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['patient_address'] ?>	</strong></td>
+						<td style="width: 25%;"><strong><?php if($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $sadr['Sadr']['patient_address'] ?>	</strong></td>
 					</tr>
 					<tr>
 						<td style="width: 25%;">DATE OF BIRTH:</td>
@@ -306,6 +306,9 @@
 				</table>
 				<?php } ;?>
 
+				<?php
+					if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+				?>
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 25%;">NAME OF PERSON REPORTING:</td>
@@ -355,7 +358,7 @@
 					</tr>
 				</table>
 				 <hr>
-
+				<?php } ?>
 
 				</div> <!-- /art-sheet -->
 			</div> <!-- /art-sheet -->

@@ -4,7 +4,9 @@ $(function() {
     $(document).on('click', '#addAefiVaccine', reloadVaccines);
     $(document).on('click', '#addAefiDiluent', reloadVaccines);
 
-    //$('#aefi-list-of-vaccines-0-vaccination-date').datetimepicker();
+    /*$('#AefiListOfVaccine0VaccinationDate').datetimepicker({
+        format: 'd-m-Y H:i'
+    });*/
 
     //Hapa Kazi tu    
     reloadVaccines();
@@ -27,9 +29,9 @@ $(function() {
         changeYear:true, 
         showAnim:'show'
       });
-      // $('.date-pick-field').datetimepicker({
-      //   format: 'd-m-Y H:i'
-      // });
+      $('.datetime-pick-field').datetimepicker({
+        format: 'd-m-Y H:i'
+      });
 
       /*var availableVax = [
         "BCG",
@@ -94,7 +96,7 @@ $(function() {
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][dosage]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine{i}Dosage"></div> </td>\
             <td>\
-              <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_date]" class="span11 date-pick-field" type="text" required="required" id="AefiListOfVaccine{i}VaccinationDate"></div> </td>\
+              <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_date]" class="span11 datetime-pick-field" type="text" required="required" id="AefiListOfVaccine{i}VaccinationDate"></div> </td>\
             <td>\
               <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccination_route]" class="span12 autosave-ignore" id="AefiListOfVaccine{i}VaccinationRoute"></select></div> </td>\
             <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_site]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}VaccinationSite"></div> </td>\

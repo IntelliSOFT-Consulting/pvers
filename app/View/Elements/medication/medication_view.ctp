@@ -351,6 +351,10 @@
 				</table>
 				<?php } ;?>
 
+				
+				<?php
+					if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+				?>
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 25%;">Name of Person Reporting</td>
@@ -393,6 +397,7 @@
 					</tr>
 				</table>
 				 <hr>
+				<?php } ?>
 
 				</div> <!-- /art-sheet -->
 			</div> <!-- /art-sheet -->

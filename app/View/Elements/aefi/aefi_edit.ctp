@@ -1,7 +1,10 @@
 <?php
     $this->assign('AEFI', 'active');
     $this->Html->script('jquery/combobox', array('inline' => false));
+    // $this->Html->script('jquery/jquery.datetimepicker.full', array('inline' => false));
     $this->Html->script('aefi', array('inline' => false));
+    $this->Html->css('jquery.datetimepicker', false, array('inline' => false));
+    $this->Html->script('jquery/jquery.datetimepicker.full', array('inline' => false));
 ?>
 
 <?php

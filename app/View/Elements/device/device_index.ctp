@@ -12,7 +12,7 @@
   <div class="row-fluid">
     <div class="span12">
     <?php
-      echo $this->Html->link('<i class="fa fa-file-o" aria-hidden="true"></i> New Medical Device Incident',
+      if($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Html->link('<i class="fa fa-file-o" aria-hidden="true"></i> New Medical Device Incident',
                array('controller' => 'devices', 'action' => 'add'),
                array('escape' => false, 'class' => 'btn btn-success'));
     ?>

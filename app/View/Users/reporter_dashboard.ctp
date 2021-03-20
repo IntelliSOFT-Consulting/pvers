@@ -29,7 +29,7 @@
                     }
                     echo '</ol>';
                     echo $this->Html->link('All SADRs >>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
-                    echo $this->Form->postLink('Report SADR', array('controller' => 'sadrs' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini pull-right'), __('Report New ADR?'));
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Form->postLink('Report SADR', array('controller' => 'sadrs' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini pull-right'), __('Report New ADR?'));
 
                     
                   ?>
@@ -55,7 +55,7 @@
                       }
                       echo '</ol>';
                     echo $this->Html->link('All AEFIs >>', array('controller' => 'aefis', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
-                      echo $this->Form->postLink('Report AEFI', array('controller' => 'aefis' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New AEFI?'));
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report AEFI', array('controller' => 'aefis' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New AEFI?'));
                     ?>
                 </div>
                 <div class="span4 formbackp" style="padding: 4px;">
@@ -78,7 +78,7 @@
                       }
                       echo '</ol>';
                     echo $this->Html->link('All PQMPs >>', array('controller' => 'pqmps', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
-                      echo $this->Form->postLink('Report PQMP', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New PQMP?'));
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report PQMP', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New PQMP?'));
                     ?>
                 </div>
             </div>
@@ -87,6 +87,7 @@
                 <div class="span4 formbackd" style="padding: 4px;">
                   <h5>Medical Devices</h5>
                   <?php
+                  if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
                     echo '<ol>';
                     foreach ($devices as $device) {
                       if($device['Device']['submitted'] > 1) {
@@ -106,6 +107,7 @@
                     echo '</ol>';      
                     echo $this->Html->link('All Incidents >>', array('controller' => 'devices', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));              
                     echo $this->Form->postLink('Report Medical Device', array('controller' => 'devices' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Medical Device?'));
+                  }
                   ?>
                 </div>
                 <div class="span4 formbackm" style="padding: 4px;">  
@@ -129,12 +131,13 @@
                       }
                       echo '</ol>';
                     echo $this->Html->link('All Errors >>', array('controller' => 'medications', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
-                      echo $this->Form->postLink('Report Medication Error', array('controller' => 'medications' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Medication Error?'));
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report Medication Error', array('controller' => 'medications' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Medication Error?'));
                     ?>
                 </div>
                 <div class="span4 formbackt" style="padding: 4px;">
                   <h5>Transfusions Reactions</h5>
                     <?php
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
                       echo '<ol>';
                       foreach ($transfusions as $transfusion) {
                         if($transfusion['Transfusion']['submitted'] > 1) {
@@ -155,6 +158,7 @@
                       echo '</ol>';
                     echo $this->Html->link('All BT >>', array('controller' => 'transfusions', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
                       echo $this->Form->postLink('Report Transfusion', array('controller' => 'transfusions' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Transfusion Reaction?'));
+                    }
                     ?>
                     <!-- <ul id="reviewer_tab" class="nav nav-tabs">
                         <li class="active"><a href="#formview" data-toggle="tab">Aha</a></li>

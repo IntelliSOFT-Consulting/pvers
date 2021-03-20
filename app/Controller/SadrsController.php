@@ -30,9 +30,14 @@ class SadrsController extends AppController {
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
             else $this->paginate['limit'] = reset($this->page_options);
+        //Health program fiasco
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') {
+            $this->passedArgs['health_program'] = $this->Session->read('Auth.User.health_program');
+        }
 
         $criteria = $this->Sadr->parseCriteria($this->passedArgs);
-        $criteria['Sadr.user_id'] = $this->Auth->User('id');        
+        if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Sadr.user_id'] = $this->Auth->User('id');        
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Sadr.submitted'] = array(2);     
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
         $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription');
@@ -380,7 +385,7 @@ class SadrsController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Sadr->create();
         $this->Sadr->save(['Sadr' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'SADR/'.date('Y').'/'.$count,
+            'reference_no' => 'new',//'SADR/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
@@ -425,6 +430,16 @@ class SadrsController extends AppController {
             if ($this->Sadr->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Sadr->saveField('submitted', 2);
+                    //lucian
+                    $count = $this->Sadr->find('count',  array(
+                        'fields' => 'DISTINCT Sadr.reference_no',
+                        'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        )
+                        ));
+                    $count++;
+                    $count = ($count < 10) ? "0$count" : $count; 
+                    $this->Sadr->saveField('reference_no', 'SADR/'.date('Y').'/'.$count);
+                    //bokelo
                     $sadr = $this->Sadr->read(null, $id);
 
                     //******************       Send Email and Notifications to Reporter and Managers          *****************************

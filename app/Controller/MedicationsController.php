@@ -33,9 +33,15 @@ class MedicationsController extends AppController {
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
             else $this->paginate['limit'] = reset($page_options);
+        //Health program fiasco
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') {
+            $this->passedArgs['health_program'] = $this->Session->read('Auth.User.health_program');
+        }
 
-        $criteria = $this->Medication->parseCriteria($this->passedArgs);
-        $criteria['Medication.user_id'] = $this->Auth->User('id');
+        $criteria = $this->Medication->parseCriteria($this->passedArgs);        
+        if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Medication.user_id'] = $this->Auth->User('id');        
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Medication.submitted'] = array(2);  
+        // $criteria['Medication.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Medication.created' => 'desc');
         $this->paginate['contain'] = array('County');
@@ -350,7 +356,7 @@ class MedicationsController extends AppController {
         $count = ($count < 10) ? "0$count" : $count;
         $this->Medication->create();
         $this->Medication->save(['Medication' => ['user_id' => $this->Auth->User('id'),  
-            'reference_no' => 'ME/'.date('Y').'/'.$count,
+            'reference_no' => 'new',//'ME/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
@@ -396,6 +402,16 @@ class MedicationsController extends AppController {
             if ($this->Medication->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Medication->saveField('submitted', 2);
+                    //lucian
+                    $count = $this->Medication->find('count',  array(
+                        'fields' => 'DISTINCT Medication.reference_no',
+                        'conditions' => array('Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        )
+                        ));
+                    $count++;
+                    $count = ($count < 10) ? "0$count" : $count; 
+                    $this->Medication->saveField('reference_no', 'ME/'.date('Y').'/'.$count);
+                    //bokelo
                     $medication = $this->Medication->read(null, $id);
 
                     //******************       Send Email and Notifications to Applicant and Managers          *****************************
