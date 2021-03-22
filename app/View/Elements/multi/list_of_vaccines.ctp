@@ -23,14 +23,14 @@
             <table id="listOfVaccinesTable"  class="table table-bordered table-condensed table-pvborder">
                 <thead>
                   <tr>
-                    <th colspan="8" style="width: 70%"><label class="required">Details of Vaccines</label>
+                    <th colspan="9" style="width: 70%"><label class="required">Details of Vaccines</label>
                       <?php
                         echo $this->Form->input('list', array('type' => 'hidden', 'value' => ''));
                         echo $this->Form->error('Aefi.list', array('wrap' => 'span', 'class' => 'control-group required error'));                       
           
                       ?>
                     </th>
-                    <th colspan="4"><label class="required">Details of Diluents</label></th>
+                    <th colspan="3"><label class="required">Details of Diluents</label></th>
                   </tr>
                   <tr>
                     <th colspan="2" style="width: 17%"> <label class="required">Name of Vaccine <span style="color:red;">*</span></label><small class="help-block">(e.g. BCG, DPT-Hib-HeB)</small></th>

@@ -286,6 +286,40 @@
 						<td style="width: 25%;">PHONE NO.</td>
 						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['reporter_phone'] ?></strong></td>
 					</tr>
+					<tr>
+						<td style="width: 25%;">Date:</td>
+						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['reporter_date'] ?></strong></td>
+						<td style="width: 25%;"></td>
+						<td style="width: 25%;"></td>
+					</tr>
+				</table>
+				 <hr>
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 50%;">Is the person submitting different from reporter?</td>
+						<td><strong><?php echo $aefi['Aefi']['person_submitting'] ?></strong></td>
+					</tr>
+				</table>
+				 <hr>
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;">NAME OF PERSON REPORTING:</td>
+						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['reporter_name_diff'] ?></strong></td>
+						<td style="width: 25%;">E-MAIL ADDRESS: </td>
+						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['reporter_email_diff'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">DESIGNATION:</td>
+						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['reporter_designation_diff'] ?></strong></td>
+						<td style="width: 25%;">PHONE NO.</td>
+						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['reporter_phone_diff'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">Date:</td>
+						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['reporter_date_diff'] ?></strong></td>
+						<td style="width: 25%;"></td>
+						<td style="width: 25%;"></td>
+					</tr>
 				</table>
 				 <hr>
 				 <?php

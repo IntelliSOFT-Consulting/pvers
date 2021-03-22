@@ -508,7 +508,12 @@
                             'div' => array('class' => 'control-group'),
                             'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
                         ));
-
+                        
+                        
+                        echo $this->Form->input('reporter_date', array(
+                            'type' => 'text', 'class' => 'date-pick-field',
+                            'label' => array('class' => 'control-label required', 'text' => 'Date'),
+                        ));
                     ?>
                 </div><!--/span-->
             </div><!--/row-->
