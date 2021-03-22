@@ -324,7 +324,7 @@ class TransfusionsController extends AppController {
                     $this->Transfusion->saveField('submitted', 2);
                     //lucian
                     $count = $this->Transfusion->find('count',  array(
-                        'fields' => 'DISTINCT Transfusion.reference_no',
+                        'fields' => 'Transfusion.reference_no',
                         'conditions' => array('Transfusion.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
                         )
                         ));

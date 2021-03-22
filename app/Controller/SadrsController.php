@@ -432,7 +432,7 @@ class SadrsController extends AppController {
                     $this->Sadr->saveField('submitted', 2);
                     //lucian
                     $count = $this->Sadr->find('count',  array(
-                        'fields' => 'DISTINCT Sadr.reference_no',
+                        'fields' => 'Sadr.reference_no',
                         'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
                         )
                         ));

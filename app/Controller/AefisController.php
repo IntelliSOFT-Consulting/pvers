@@ -406,7 +406,7 @@ class AefisController extends AppController {
                     $this->Aefi->saveField('submitted', 2);
                     //lucian
                     $count = $this->Aefi->find('count',  array(
-                        'fields' => 'DISTINCT Aefi.reference_no',
+                        'fields' => 'Aefi.reference_no',
                         'conditions' => array('Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
                         )
                         ));

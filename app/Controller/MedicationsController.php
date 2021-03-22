@@ -404,7 +404,7 @@ class MedicationsController extends AppController {
                     $this->Medication->saveField('submitted', 2);
                     //lucian
                     $count = $this->Medication->find('count',  array(
-                        'fields' => 'DISTINCT Medication.reference_no',
+                        'fields' => 'Medication.reference_no',
                         'conditions' => array('Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
                         )
                         ));

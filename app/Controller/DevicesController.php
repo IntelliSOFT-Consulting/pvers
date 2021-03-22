@@ -307,7 +307,7 @@ class DevicesController extends AppController {
                     $this->Device->saveField('submitted', 2);
                     //lucian
                     $count = $this->Device->find('count',  array(
-                        'fields' => 'DISTINCT Device.reference_no',
+                        'fields' => 'Device.reference_no',
                         'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
                         )
                         ));
