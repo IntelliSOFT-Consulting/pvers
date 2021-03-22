@@ -57,7 +57,7 @@
 				($dob) ? $row[$key] = $dob : $row[$key] = '""';
 			} elseif ($key == 'vaccines') {
 				foreach ($caefi['AefiListOfVaccine'] as $aefiListOfVaccine) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$aefiListOfVaccine['vaccine_name'] : $row[$key] = $aefiListOfVaccine['vaccine_name'];
+					(isset($row[$key])) ? $row[$key] .= '; '.$aefiListOfVaccine['Vaccine']['vaccine_name'] : $row[$key] = $aefiListOfVaccine['Vaccine']['vaccine_name'];
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'vaccination_doses') {

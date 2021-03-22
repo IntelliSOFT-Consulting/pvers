@@ -61,11 +61,11 @@ class Aefi extends AppModel {
     }
 
     public function findByHealthProgram($data = array()) {
-        $vdrugs = ClassRegistry::init('Vaccine')->find('list', array('conditions' => array('health_program' => $data['health_program']), 'fields' => array('vaccine_name', 'vaccine_name')));
+        $vdrugs = ClassRegistry::init('Vaccine')->find('list', array('conditions' => array('health_program' => $data['health_program']), 'fields' => array('vaccine_id', 'vaccine_id')));
         $cond = array($this->alias.'.id' => $this->AefiListOfVaccine->find('list', array(
             'conditions' => array(
                 'OR' => array(
-                    'AefiListOfVaccine.vaccine_name' => $vdrugs,
+                    'AefiListOfVaccine.vaccine_id' => $vdrugs,
                     'AefiListOfVaccine.vaccine_manufacturer' => $vdrugs, )),
             'fields' => array('aefi_id', 'aefi_id')
                 )));
