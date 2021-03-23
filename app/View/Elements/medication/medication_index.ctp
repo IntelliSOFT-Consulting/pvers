@@ -169,7 +169,7 @@
           <tr>
             <td>                   
               <?php
-                  echo $this->Form->input('patient_name',
+                if(($this->Session->read('Auth.User.user_type') != 'Public Health Program'))  echo $this->Form->input('patient_name',
                       array('div' => false, 'placeholder' => 'Patient name',
                         'class' => 'span12 unauthorized_index', 'label' => array('class' => 'required', 'text' => 'Patient Name')));
               ?>          
@@ -281,7 +281,7 @@
             <tr>
         <th><?php echo $this->Paginator->sort('id'); ?></th>
         <th><?php echo $this->Paginator->sort('reference_no'); ?></th>
-        <th><?php echo $this->Paginator->sort('patient_name'); ?></th>
+        <th><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? $this->Paginator->sort('patient_name') : $this->Paginator->sort('gender'); ?></th>
         <th><?php echo $this->Paginator->sort('created'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
@@ -300,7 +300,7 @@
             }
         ?>&nbsp;
         </td>
-        <td><?php echo h($medication['Medication']['patient_name']); ?>&nbsp;</td>
+        <td><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? h($medication['Medication']['patient_name']) : h($medication['Medication']['gender']); ?>&nbsp;</td>
         <td><?php echo h($medication['Medication']['created']); ?>&nbsp;</td>
         <td class="actions">
             <?php 

@@ -52,7 +52,7 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 25%;">PATIENT'S NAME</td>
-						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['patient_name'] ?>	</strong></td>
+						<td style="width: 25%;"><strong><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ?  $aefi['Aefi']['patient_name'] : 'private'; ?>	</strong></td>
 						<td style="width: 25%;">NAME OF GUARDIAN </td>
 						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['guardian_name'] ?></strong></td>
 					</tr>
@@ -60,7 +60,7 @@
 						<td style="width: 25%;">IP/OP NO.</td>
 						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['ip_no'] ?></td>
 						<td style="width: 25%;">ADDRESS </td>
-						<td style="width: 25%;"><strong><?php echo $aefi['Aefi']['patient_address'] ?>	</strong></td>
+						<td style="width: 25%;"><strong><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? $aefi['Aefi']['patient_address'] : 'private'; ?>	</strong></td>
 					</tr>
 					<tr>
 						<td style="width: 25%;">DATE OF BIRTH</td>
