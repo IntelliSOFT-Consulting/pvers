@@ -17,6 +17,7 @@
 		'vaccines' => 'Vaccines',
 		'vaccination_doses' => 'Vaccination doses',
 		'vaccination_dates' => 'Vaccination dates',
+		'vaccination_times' => 'Vaccination times',
 		'vaccination_routes' => 'Vaccination routes',
 		'vaccination_sites' => 'Vaccination sites',
 		'vaccination_batch' => 'Batch/Lot No.',
@@ -68,6 +69,11 @@
 			} elseif ($key == 'vaccination_dates') {
 				foreach ($caefi['AefiListOfVaccine'] as $aefiListOfVaccine) {
 					(isset($row[$key])) ? $row[$key] .= '; '.$aefiListOfVaccine['vaccination_date'] : $row[$key] = $aefiListOfVaccine['vaccination_date'];
+				}
+				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
+			} elseif ($key == 'vaccination_times') {
+				foreach ($caefi['AefiListOfVaccine'] as $aefiListOfVaccine) {
+					(isset($row[$key])) ? $row[$key] .= '; '.substr($aefiListOfVaccine['vaccination_date'], -5) : $row[$key] = substr($aefiListOfVaccine['vaccination_date'], -5);
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'vaccination_routes') {
