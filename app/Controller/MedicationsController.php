@@ -350,10 +350,10 @@ class MedicationsController extends AppController {
     }
 
 	public function reporter_add() {        
-        $count = $this->Medication->find('count',  array('conditions' => array(
-            'Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
-        $count++;
-        $count = ($count < 10) ? "0$count" : $count;
+        // $count = $this->Medication->find('count',  array('conditions' => array(
+        //     'Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
+        // $count++;
+        // $count = ($count < 10) ? "0$count" : $count;
         $this->Medication->create();
         $this->Medication->save(['Medication' => ['user_id' => $this->Auth->User('id'),  
             'reference_no' => 'new',//'ME/'.date('Y').'/'.$count,

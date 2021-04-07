@@ -217,10 +217,10 @@ class DevicesController extends AppController {
  */
 
     public function reporter_add() {        
-        $count = $this->Device->find('count',  array('conditions' => array(
-            'Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
-        $count++;
-        $count = ($count < 10) ? "0$count" : $count;
+        // $count = $this->Device->find('count',  array('conditions' => array(
+        //     'Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
+        // $count++;
+        // $count = ($count < 10) ? "0$count" : $count;
         $this->Device->create();
         $this->Device->save(['Device' => ['user_id' => $this->Auth->User('id'),  
             'reference_no' => 'new',//'MD/'.date('Y').'/'.$count,
@@ -308,7 +308,7 @@ class DevicesController extends AppController {
                     //lucian
                     $count = $this->Device->find('count',  array(
                         'fields' => 'Device.reference_no',
-                        'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Device.reference_no !=' => 'new'
                         )
                         ));
                     $count++;

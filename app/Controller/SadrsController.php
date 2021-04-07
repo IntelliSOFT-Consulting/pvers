@@ -379,10 +379,10 @@ class SadrsController extends AppController {
     }
 
     public function reporter_add() {        
-        $count = $this->Sadr->find('count',  array('conditions' => array(
-            'Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
-        $count++;
-        $count = ($count < 10) ? "0$count" : $count;
+        // $count = $this->Sadr->find('count',  array('conditions' => array(
+        //     'Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
+        // $count++;
+        // $count = ($count < 10) ? "0$count" : $count;
         $this->Sadr->create();
         $this->Sadr->save(['Sadr' => ['user_id' => $this->Auth->User('id'),  
             'reference_no' => 'new',//'SADR/'.date('Y').'/'.$count,
@@ -433,7 +433,7 @@ class SadrsController extends AppController {
                     //lucian
                     $count = $this->Sadr->find('count',  array(
                         'fields' => 'Sadr.reference_no',
-                        'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Sadr.reference_no !=' => 'new'
                         )
                         ));
                     $count++;
