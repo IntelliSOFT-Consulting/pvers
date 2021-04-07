@@ -90,6 +90,7 @@ class ReportsController extends AppController {
         // $criteria['Sadr.start_date'] = $this->request->data['Report']['start_date'];
         // $criteria['Sadr.end_date'] = $this->request->data['Report']['end_date'];
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -108,6 +109,7 @@ class ReportsController extends AppController {
     
     public function sadrs_by_age() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -136,6 +138,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_seriousness() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -153,6 +156,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_reason() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -170,6 +174,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_medicine() {
         $criteria['SadrListOfDrug.created >'] = '2020-04-01 08:08:08';
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['SadrListOfDrug.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         // if($this->Auth->User('user_type') == 'Public Health Program') $criteria['SadrListOfDrug.drug_name'] = $this->Auth->User('health_program');
@@ -212,6 +217,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_gender() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -229,6 +235,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_outcome() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -246,6 +253,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_facility() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -264,6 +272,7 @@ class ReportsController extends AppController {
     
     public function sadrs_by_county() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -281,6 +290,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_month() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -299,6 +309,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_year() {
         $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -321,6 +332,7 @@ class ReportsController extends AppController {
     */
     public function aefis_by_designation() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -339,6 +351,7 @@ class ReportsController extends AppController {
 
     public function aefis_by_age() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -369,6 +382,7 @@ class ReportsController extends AppController {
 
     public function aefis_by_seriousness() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -386,6 +400,7 @@ class ReportsController extends AppController {
 
     public function aefis_by_reason() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -421,6 +436,7 @@ class ReportsController extends AppController {
 
     public function aefis_by_gender() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -438,6 +454,7 @@ class ReportsController extends AppController {
 
     public function aefis_by_outcome() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -455,6 +472,7 @@ class ReportsController extends AppController {
 
     public function aefis_by_facility() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -473,6 +491,7 @@ class ReportsController extends AppController {
     
     public function aefis_by_county() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -490,6 +509,7 @@ class ReportsController extends AppController {
 
     public function aefis_by_month() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -508,6 +528,7 @@ class ReportsController extends AppController {
 
     public function aefis_by_year() {
         $criteria['Aefi.submitted'] = array(1, 2);
+        $criteria['Aefi.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
@@ -530,6 +551,7 @@ class ReportsController extends AppController {
     */
     public function pqmps_by_designation() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -549,6 +571,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_facility() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -568,6 +591,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_formulation() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -586,6 +610,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_brand() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -604,6 +629,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_generic() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -647,6 +673,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_manufacturer() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -666,6 +693,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_supplier() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -684,6 +712,7 @@ class ReportsController extends AppController {
     
     public function pqmps_by_county() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -701,6 +730,7 @@ class ReportsController extends AppController {
     
     public function pqmps_by_country() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -718,6 +748,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_month() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -736,6 +767,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_year() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -754,6 +786,7 @@ class ReportsController extends AppController {
     
     public function pqmps_by_category() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -781,6 +814,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_complaint() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -812,6 +846,7 @@ class ReportsController extends AppController {
 
     public function pqmps_by_device() {
         $criteria['Pqmp.submitted'] = array(1, 2);
+        $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
@@ -848,6 +883,7 @@ class ReportsController extends AppController {
     */
     public function devices_by_designation() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -866,6 +902,7 @@ class ReportsController extends AppController {
 
     public function devices_by_age() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -895,6 +932,7 @@ class ReportsController extends AppController {
 
     public function devices_by_seriousness() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -912,6 +950,7 @@ class ReportsController extends AppController {
 
     public function devices_by_reason() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -929,6 +968,7 @@ class ReportsController extends AppController {
 
     public function devices_by_brand() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -946,6 +986,7 @@ class ReportsController extends AppController {
 
     public function devices_by_gender() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -963,6 +1004,7 @@ class ReportsController extends AppController {
 
     public function devices_by_outcome() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -980,6 +1022,7 @@ class ReportsController extends AppController {
 
     public function devices_by_facility() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -998,6 +1041,7 @@ class ReportsController extends AppController {
     
     public function devices_by_county() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -1015,6 +1059,7 @@ class ReportsController extends AppController {
 
     public function devices_by_month() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -1033,6 +1078,7 @@ class ReportsController extends AppController {
 
     public function devices_by_year() {
         $criteria['Device.submitted'] = array(1, 2);
+        $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
@@ -1055,6 +1101,7 @@ class ReportsController extends AppController {
     */
     public function medications_by_designation() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1073,6 +1120,7 @@ class ReportsController extends AppController {
 
     public function medications_by_age() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1103,6 +1151,7 @@ class ReportsController extends AppController {
 
     public function medications_by_gender() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1120,6 +1169,7 @@ class ReportsController extends AppController {
 
     public function medications_by_facility() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1263,6 +1313,7 @@ class ReportsController extends AppController {
 
     public function medications_by_county() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1280,6 +1331,7 @@ class ReportsController extends AppController {
 
     public function medications_by_month() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1298,6 +1350,7 @@ class ReportsController extends AppController {
 
     public function medications_by_year() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1316,6 +1369,7 @@ class ReportsController extends AppController {
 
     public function medications_by_error() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1341,6 +1395,7 @@ class ReportsController extends AppController {
 
     public function medications_by_factors() {
         $criteria['Medication.submitted'] = array(1, 2);
+        $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1370,6 +1425,7 @@ class ReportsController extends AppController {
     */
     public function transfusions_by_designation() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1388,6 +1444,7 @@ class ReportsController extends AppController {
     
     public function transfusions_by_age() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1418,6 +1475,7 @@ class ReportsController extends AppController {
 
     public function transfusions_by_gender() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1435,6 +1493,7 @@ class ReportsController extends AppController {
 
     public function transfusions_by_reaction() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1452,6 +1511,7 @@ class ReportsController extends AppController {
     
     public function transfusions_by_county() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1469,6 +1529,7 @@ class ReportsController extends AppController {
 
     public function transfusions_by_month() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1487,6 +1548,7 @@ class ReportsController extends AppController {
 
     public function transfusions_by_year() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1506,6 +1568,7 @@ class ReportsController extends AppController {
 
     public function transfusions_by_rtype() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1542,6 +1605,7 @@ class ReportsController extends AppController {
 
     public function transfusions_by_ptransfusion() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
@@ -1560,6 +1624,7 @@ class ReportsController extends AppController {
 
     public function transfusions_by_preaction() {
         $criteria['Transfusion.submitted'] = array(1, 2);
+        $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');

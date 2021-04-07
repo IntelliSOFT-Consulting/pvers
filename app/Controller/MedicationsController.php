@@ -405,7 +405,7 @@ class MedicationsController extends AppController {
                     //lucian
                     $count = $this->Medication->find('count',  array(
                         'fields' => 'Medication.reference_no',
-                        'conditions' => array('Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s"))
+                        'conditions' => array('Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Medication.reference_no !=' => 'new'
                         )
                         ));
                     $count++;
