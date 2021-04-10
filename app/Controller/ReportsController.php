@@ -157,7 +157,7 @@ class ReportsController extends AppController {
     public function sadrs_by_reason() {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
-        $criteria['Sadr.serious_reason !='] = null;
+        $criteria['Sadr.serious_reason !='] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
@@ -402,7 +402,7 @@ class ReportsController extends AppController {
     public function aefis_by_reason() {
         $criteria['Aefi.submitted'] = array(1, 2);
         $criteria['Aefi.copied !='] = '1';
-        $criteria['Aefi.serious_yes !='] = null;
+        $criteria['Aefi.serious_yes !='] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
