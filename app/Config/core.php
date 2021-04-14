@@ -136,7 +136,7 @@
  * useful when generating links from the CLI (e.g. sending emails).
  * If the application runs in a subfolder, you should also set App.base.
  */
-	Configure::write('App.fullBaseUrl', 'https://pv.pharmacyboardkenya.org');
+	// Configure::write('App.fullBaseUrl', 'https://pv.pharmacyboardkenya.org');
 
 /**
  * The base directory the app resides in. Should be used if the

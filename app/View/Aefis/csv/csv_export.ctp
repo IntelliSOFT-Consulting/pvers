@@ -39,6 +39,14 @@
 		$header['reporter_phone'] = 'Reporter phone';
 		$header['patient_name'] = 'Patient name';
 	}
+	
+	//Additional free text columns
+	$header['aefi_symptoms'] = 'Describe AEFI';
+	$header['description_of_reaction'] = 'Brief details on the event';
+	$header['medical_history'] = 'Past medical history';
+	$header['treatment_given'] = 'Treatment given';
+
+
 	echo implode(',', $header)."\n";
 	foreach ($caefis as $caefi):
 		$content = '';
