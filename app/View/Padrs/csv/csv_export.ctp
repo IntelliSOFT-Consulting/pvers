@@ -11,6 +11,10 @@
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 		);
 	
+	//Additional free text columns
+	$header['description_of_reaction'] = 'Other side effects experienced';
+	$header['any_other_comment'] = 'Other wrong things';
+
 	echo implode(',', $header)."\n";
 	foreach ($cpadrs as $cpadr):
 		$content = '';

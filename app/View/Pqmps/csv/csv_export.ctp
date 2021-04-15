@@ -48,6 +48,11 @@
 		$header['reporter_phone'] = 'Reporter phone';
 		// $header['patient_name'] = 'Patient name';
 	}
+
+	//Additional free text columns
+	$header['other_details'] = 'Other details';
+	$header['comments'] = 'Comments';
+
 	echo implode(',', $header)."\n";
 	foreach ($cpqmps as $cpqmp):
 		$content = '';

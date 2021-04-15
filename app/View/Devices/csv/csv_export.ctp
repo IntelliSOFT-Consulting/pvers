@@ -42,6 +42,11 @@
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 	);
 	
+	//Additional free text columns
+	$header['description_of_reaction'] = 'Description of event';
+	$header['remedial_action'] = 'Remedial action';
+	$header['operator_specify'] = 'Other operator';
+
 	echo implode(',', $header)."\n";
 	foreach ($cdevices as $cdevice):
 		$content = '';

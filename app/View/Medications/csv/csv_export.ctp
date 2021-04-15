@@ -37,6 +37,11 @@
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 		);
 	
+	//Additional free text columns
+	$header['description_of_error'] = 'Description of error';
+	$header['direct_result'] = 'Direct result';
+	$header['recommendations'] = 'Recommendations';
+	
 	echo implode(',', $header)."\n";
 	foreach ($cmedications as $cmedication):
 		$content = '';

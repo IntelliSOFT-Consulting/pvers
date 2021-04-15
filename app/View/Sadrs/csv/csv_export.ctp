@@ -5,7 +5,9 @@
 		'medicinal_product' => 'Medicinal product', 'blood_products' => 'Blood products',
 		'herbal_product' => 'Herbal product', 'cosmeceuticals' => 'Cosmeceuticals',
 		'product_other' => 'Others', 'product_specify' => 'Specify product',
-		'name_of_institution' => 'Institution', 'counties' => 'County',
+		'name_of_institution' => 'Institution', 
+		'institution_code' => 'Institution code', 
+		'counties' => 'County',
 		//'patient_name' => 'Patient name', 
 		'date_born' => 'Date of birth',
 		'gender' => 'Gender',
@@ -27,6 +29,14 @@
 		$header['reporter_phone'] = 'Reporter phone';
 		$header['patient_name'] = 'Patient name';
 	}
+
+	//Additional free text columns
+	$header['diagnosis'] = 'Diagnosis';
+	$header['description_of_reaction'] = 'Brief description of reaction';
+	$header['medical_history'] = 'Medical history';
+	$header['lab_investigation'] = 'Lab investigations';
+	$header['any_other_comment'] = 'Any other comment';
+
 	echo implode(',', $header)."\n";
 	foreach ($csadrs as $csadr):
 		$content = '';
