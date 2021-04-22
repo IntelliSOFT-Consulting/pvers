@@ -165,7 +165,7 @@
 					<tbody>
 					  <tr>
 						<th class="required" colspan="11">
-							List all medicines used in the last 3 months including OTC, herbals, if pregnant indicate medicines used in the 1st trimester)-tick the suspected medicine 
+							List all medicines being currently used by the patient including OTC, and herbal products (* Tick the suspected medicine) 
 						</th>
 					  </tr>
 					  <tr>
@@ -208,7 +208,7 @@
 					<tbody>
 					  <tr>
 						<th class="required" colspan="10">
-							Past medication history (List all medicines including OTC, herbals)
+							Past medication history (List all medicines used in the last 3 months including OTC, herbals, if pregnant indicate medicines used in the 1st trimester)
 						</th>
 					  </tr>
 					  <tr>
