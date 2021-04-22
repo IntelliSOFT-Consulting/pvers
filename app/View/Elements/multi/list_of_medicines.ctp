@@ -8,7 +8,7 @@
 ?>
     <div class="row-fluid">
       <div class="span12">
-        <h5 style="text-align: center;">Past medication history (List all medicines including OTC, herbals) <button  type="button" class="btn btn-success btn-small" id="addMedicine">
+        <h5 style="text-align: center;">Past medication history (List all medicines used in the last 3 months including OTC, herbals, if pregnant indicate medicines used in the 1st trimester) <button  type="button" class="btn btn-success btn-small" id="addMedicine">
                           Add     <i class="icon-plus"></i>
                         </button></h5>
       </div>

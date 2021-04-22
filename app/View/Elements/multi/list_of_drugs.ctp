@@ -6,7 +6,7 @@
 ?>
     <div class="row-fluid">
       <div class="span12">
-        <h5 style="text-align: center;">List all medicines used in the last 3 months including OTC, herbals, if pregnant indicate medicines used in the 1st trimester)-tick the suspected medicine <button type="button" class="btn btn-small" id="addListOfDrug" title="click to add row"><i class="icon-plus"></i></button>
+        <h5 style="text-align: center;">List all medicines being currently used by the patient including OTC, and herbal products (* Tick the suspected medicine) <button type="button" class="btn btn-small" id="addListOfDrug" title="click to add row"><i class="icon-plus"></i></button>
                         </h5>
       </div>
     </div>
