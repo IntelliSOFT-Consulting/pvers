@@ -7,7 +7,7 @@
 <div id="transfusions-by-preaction"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>Transfusion by Previous Reaction</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>

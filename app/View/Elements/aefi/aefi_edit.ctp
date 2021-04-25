@@ -45,7 +45,9 @@
                 </div>
                 <div class="span2">
                     <?php
-                        echo $this->Html->image('vaccinate.png', array('alt' => 'AEFI', 'style' => 'max-width: 40%;'));
+                        echo $this->Html->image('vaccinate2.png', array('alt' => 'AEFI'));
+                        echo "<br>";
+                        echo $this->Html->image('confidence.png', array('alt' => 'AEFI'));
                     ?>
                 </div>
             </div><br>

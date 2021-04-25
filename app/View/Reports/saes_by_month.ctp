@@ -7,7 +7,7 @@
 <div id="saes-by-month"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>SAEs by Month</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>

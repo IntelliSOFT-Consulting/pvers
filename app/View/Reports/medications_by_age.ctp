@@ -7,7 +7,7 @@
 <div id="medications-by-age"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>MEDICATIONS by Age group</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>

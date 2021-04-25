@@ -7,7 +7,7 @@
 <div id="pqmps-by-country"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>PQMPs by country of origin</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('pqmps-by-country', {
         type: 'bar'
     },
     title: {
-        text: 'Country'
+        text: 'PQMPs by country of origin'
     },
     yAxis: {
         allowDecimals: false,

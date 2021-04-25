@@ -7,7 +7,7 @@
 <div id="medications-by-reaction"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>Was the adverse reaction related?</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>

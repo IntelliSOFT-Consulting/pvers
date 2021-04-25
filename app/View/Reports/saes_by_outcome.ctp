@@ -7,7 +7,7 @@
 <div id="saes-by-outcome"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>SAES by outcome</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>

@@ -7,7 +7,7 @@
 <div id="sadrs-by-outcome"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>SADRs by outcome</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('sadrs-by-outcome', {
         type: 'column'
     },
     title: {
-        text: 'Outcome'
+        text: 'SADRs by outcome'
     },
     yAxis: {
         allowDecimals: false,

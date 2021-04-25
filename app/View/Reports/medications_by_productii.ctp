@@ -7,7 +7,7 @@
 <div id="medications-by-productii"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>Product (error)</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>

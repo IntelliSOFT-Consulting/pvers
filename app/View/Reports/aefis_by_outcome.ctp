@@ -7,7 +7,7 @@
 <div id="aefis-by-outcome"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>AEFIs by Outcome</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('aefis-by-outcome', {
         type: 'column'
     },
     title: {
-        text: 'Outcome'
+        text: 'AEFIs by Outcome'
     },
     yAxis: {
         allowDecimals: false,

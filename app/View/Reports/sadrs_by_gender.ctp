@@ -7,7 +7,7 @@
 <div id="sadrs-by-gender"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>SADRs by Sex</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('sadrs-by-gender', {
         type: 'bar'
     },
     title: {
-        text: 'ADR by Sex'
+        text: 'SADRs by Sex'
     },
     yAxis: {
         allowDecimals: false,

@@ -7,7 +7,7 @@
 <div id="transfusions-by-facility"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>Transfusions by Facility</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('transfusions-by-facility', {
         type: 'column'
     },
     title: {
-        text: 'Facility'
+        text: 'Transfusions by Facility'
     },
     yAxis: {
         allowDecimals: false,

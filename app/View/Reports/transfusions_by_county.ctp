@@ -7,7 +7,7 @@
 <div id="transfusions-by-county"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>Transfusions by County</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('transfusions-by-county', {
         type: 'bar'
     },
     title: {
-        text: 'County'
+        text: 'Transfusions by County'
     },
     yAxis: {
         allowDecimals: false,

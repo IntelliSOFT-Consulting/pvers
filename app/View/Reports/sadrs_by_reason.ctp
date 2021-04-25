@@ -7,7 +7,7 @@
 <div id="sadrs-by-reason"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>Reason for seriousness</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('sadrs-by-reason', {
         type: 'column'
     },
     title: {
-        text: 'Reason Seriousness'
+        text: 'Reason for seriousness'
     },
     yAxis: {
         allowDecimals: false,

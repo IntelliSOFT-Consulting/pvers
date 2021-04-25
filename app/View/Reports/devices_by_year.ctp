@@ -7,7 +7,7 @@
 <div id="devices-by-year"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>DEVICEs by Year</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>

@@ -76,7 +76,7 @@ $(function() {
               <input class="span11 date-pick-to" name="data[SadrListOfMedicine][{i}][stop_date]" id="SadrListOfMedicine{i}StopDate" type="text">  </td>\
             <td> <input class="span11" name="data[SadrListOfMedicine][{i}][indication]" id="SadrListOfMedicine{i}Indication" type="text"> </td>\
             <td>\
-                <button type="button" class="btn btn-danger btn-small remove-row" ><i class="fa fa-minus"></i> </button>\
+                <button type="button" class="btn btn-danger btn-small remove-medicine" ><i class="fa fa-minus"></i> </button>\
             </td>\
           </tr>\
         ';

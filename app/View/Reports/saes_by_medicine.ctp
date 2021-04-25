@@ -7,7 +7,7 @@
 <div id="saes-by-medicine"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>SAEs by Suspected Medicines</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('saes-by-medicine', {
         type: 'column'
     },
     title: {
-        text: 'SUSPECTED MEDICINES'
+        text: 'SAEs by Suspected Medicines'
     },
     yAxis: {
         allowDecimals: false,

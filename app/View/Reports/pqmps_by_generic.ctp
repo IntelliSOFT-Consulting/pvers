@@ -7,7 +7,7 @@
 <div id="pqmps-by-generic"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>Generic</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>

@@ -7,7 +7,7 @@
 <div id="saes-by-concomittant"></div>
 
 <hr>
-<h4>Raw Data</h4>
+<h4>Concomittant Drugs</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('saes-by-concomittant', {
         type: 'column'
     },
     title: {
-        text: 'CONCOMITTANT DRUGS'
+        text: 'Concomittant Drugs'
     },
     yAxis: {
         allowDecimals: false,

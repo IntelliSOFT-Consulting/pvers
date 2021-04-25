@@ -175,7 +175,6 @@ class ReportsController extends AppController {
 
     public function sadrs_by_medicine() {
         $criteria['SadrListOfDrug.created >'] = '2020-04-01 08:08:08';
-        $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['SadrListOfDrug.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         // if($this->Auth->User('user_type') == 'Public Health Program') $criteria['SadrListOfDrug.drug_name'] = $this->Auth->User('health_program');
