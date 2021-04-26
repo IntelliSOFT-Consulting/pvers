@@ -87,5 +87,6 @@ class AppController extends Controller {
 		              <h4>Invalid e-mail / password combination.  Please try again.</h4>
 		             </div>', true);
 		$this->set('redir', $redir);
+		$this->set('root', '/');
     }
 }
