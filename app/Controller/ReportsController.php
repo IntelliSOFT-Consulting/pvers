@@ -143,10 +143,10 @@ class ReportsController extends AppController {
                 $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
-            'fields' => array('ifnull(Sadr.serious, "No") as serious', 'COUNT(*) as cnt'),
+            'fields' => array('IF(Sadr.serious IS NULL or Sadr.serious = "", "No", Sadr.serious) as serious', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('ifnull(Sadr.serious, "No")'),
+            'group' => array('IF(Sadr.serious IS NULL or Sadr.serious = "", "No", Sadr.serious)'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -175,6 +175,7 @@ class ReportsController extends AppController {
 
     public function sadrs_by_medicine() {
         $criteria['SadrListOfDrug.created >'] = '2020-04-01 08:08:08';
+        $criteria['SadrListOfDrug.drug_name >'] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['SadrListOfDrug.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         // if($this->Auth->User('user_type') == 'Public Health Program') $criteria['SadrListOfDrug.drug_name'] = $this->Auth->User('health_program');
@@ -387,10 +388,10 @@ class ReportsController extends AppController {
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
         $data = $this->Aefi->find('all', array(
-            'fields' => array('ifnull(Aefi.serious, "No") as serious', 'COUNT(*) as cnt'),
+            'fields' => array('IF(Aefi.serious IS NULL or Aefi.serious = "", "No", Aefi.serious) as serious', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('ifnull(Aefi.serious, "No")'),
+            'group' => array('IF(Aefi.serious IS NULL or Aefi.serious = "", "No", Aefi.serious)'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -418,6 +419,7 @@ class ReportsController extends AppController {
     }
 
     public function aefis_by_vaccine() {
+        $criteria['Vaccine.id >'] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['AefiListOfVaccine.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         else 
@@ -1209,6 +1211,7 @@ class ReportsController extends AppController {
     public function medications_by_producti() {
 
         $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
+        $criteria['MedicationProduct.product_name_i >'] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
@@ -1228,7 +1231,7 @@ class ReportsController extends AppController {
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.product_name_ii as product_name_ii', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
             'contain' => array(), 'recursive' => -1,
-            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08'),
+            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08', 'MedicationProduct.product_name_ii >' => ''),
             'group' => array('MedicationProduct.product_name_ii'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         )); 
@@ -1239,6 +1242,7 @@ class ReportsController extends AppController {
     
     public function medications_by_generici() {
         $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
+        $criteria['MedicationProduct.generic_name_i >'] = '';
         if($this->Auth->User('user_type') == 'Public Health Program') {
             $conditionsSubQuery['DrugDictionary.health_program'] = $this->Auth->User('health_program');
 
@@ -1277,6 +1281,7 @@ class ReportsController extends AppController {
     
     public function medications_by_genericii() {
         $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
+        $criteria['MedicationProduct.generic_name_ii >'] = '';
         if($this->Auth->User('user_type') == 'Public Health Program') {
             $conditionsSubQuery['DrugDictionary.health_program'] = $this->Auth->User('health_program');
 

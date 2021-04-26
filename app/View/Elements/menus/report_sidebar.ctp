@@ -88,7 +88,7 @@
       </li>
       <li class="<?php echo $this->fetch('aefis-by-seriousness'); ?>">
       	<?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Seriousness of ADRs',  array('controller' => 'reports', 'action'=>'aefis_by_seriousness', 'admin' => false ),
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Seriousness of AEFIs',  array('controller' => 'reports', 'action'=>'aefis_by_seriousness', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>
@@ -240,7 +240,7 @@
       </li>
       <li class="<?php echo $this->fetch('devices-by-seriousness'); ?>">
       	<?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Seriousness of ADRs',  array('controller' => 'reports', 'action'=>'devices_by_seriousness', 'admin' => false ),
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Seriousness of the incidence',  array('controller' => 'reports', 'action'=>'devices_by_seriousness', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>

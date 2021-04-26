@@ -23,6 +23,13 @@
 		showAnim:'show'
 	});
 	
+	//Disable all md until md checkbox is active
+	$("#mdactivate :input").attr("disabled", true);
+	$("#PqmpMedicalDevice").click(function(){   
+	    $("#mdactivate :input").attr('disabled', !this.checked)
+	});
+	if($("#PqmpMedicalDevice").is(':checked')){ $("#mdactivate :input").attr('disabled', false); }
+
 	$(".make_radio").click(function(){
 	    $(".make_radio").not(this).attr("checked",false); 
 	});

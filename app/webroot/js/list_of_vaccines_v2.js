@@ -97,9 +97,10 @@ $(function() {
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][dosage]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine{i}Dosage"></div> </td>\
             <td>\
-              <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_date]" class="span11 date-pick-field" type="text" required="required" id="AefiListOfVaccine{i}VaccinationDate"></div> </td>\
-              <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccination_time][hour]" class="span4" style="display: inline;" id="AefiListOfVaccine{i}VaccinationTimeHour"></select>:\
-                <select name="data[AefiListOfVaccine][{i}][vaccination_time][min]" class="span4" style="display: inline;" id="AefiListOfVaccine{i}VaccinationTimeMin"></select></div>\
+              <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_date]" class="span11 date-pick-field" type="text" required="required" id="AefiListOfVaccine{i}VaccinationDate"></div>\
+              <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccination_time][hour]" class="span5" style="display: inline;" id="AefiListOfVaccine{i}VaccinationTimeHour"></select>:\
+                <select name="data[AefiListOfVaccine][{i}][vaccination_time][min]" class="span6" style="display: inline;" id="AefiListOfVaccine{i}VaccinationTimeMin"></select></div>\
+            </td>\
             <td>\
               <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccination_route]" class="span12 autosave-ignore" id="AefiListOfVaccine{i}VaccinationRoute"></select></div> </td>\
             <td><div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_site]" class="span11"   maxlength="255" type="text" id="AefiListOfVaccine{i}VaccinationSite"></div> </td>\

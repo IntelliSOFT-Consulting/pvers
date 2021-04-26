@@ -82,6 +82,11 @@ class AefiListOfVaccine extends AppModel {
 		if (!empty($this->data['AefiListOfVaccine']['vaccination_date'])) {
 			$this->data['AefiListOfVaccine']['vaccination_date'] = $this->dateTimeFormatBeforeSave($this->data['AefiListOfVaccine']['vaccination_date']);
 		}
+		if (!empty($this->data['AefiListOfVaccine']['vaccination_time'])) {
+			$this->data['AefiListOfVaccine']['vaccination_time'] = implode(':', $this->data['AefiListOfVaccine']['vaccination_time']);
+		} else {
+			$this->data['AefiListOfVaccine']['vaccination_time'] = '';
+		}
 		if (!empty($this->data['AefiListOfVaccine']['expiry_date'])) {
 			$this->data['AefiListOfVaccine']['expiry_date'] = $this->dateFormatBeforeSave($this->data['AefiListOfVaccine']['expiry_date']);
 		}
@@ -94,7 +99,12 @@ class AefiListOfVaccine extends AppModel {
 	function afterFind($results, $primary = false) {
 		foreach ($results as $key => $val) {
 			if (isset($val['AefiListOfVaccine']['vaccination_date'])) {
-				$results[$key]['AefiListOfVaccine']['vaccination_date'] = $this->dateTimeFormatAfterFind($val['AefiListOfVaccine']['vaccination_date']);
+				$results[$key]['AefiListOfVaccine']['vaccination_date'] = $this->dateFormatAfterFind($val['AefiListOfVaccine']['vaccination_date']);
+			}
+			if (!empty($val['AefiListOfVaccine']['vaccination_time'])) {
+				if(empty($val['AefiListOfVaccine']['vaccination_time'])) $val['AefiListOfVaccine']['vaccination_time'] = ':';
+				$a = explode(':', $val['AefiListOfVaccine']['vaccination_time']);
+				$results[$key]['AefiListOfVaccine']['vaccination_time'] = array('hour'=> $a[0],'min'=> $a[1]);
 			}
 			if (isset($val['AefiListOfVaccine']['expiry_date'])) {
 				$results[$key]['AefiListOfVaccine']['expiry_date'] = $this->dateFormatAfterFind($val['AefiListOfVaccine']['expiry_date']);

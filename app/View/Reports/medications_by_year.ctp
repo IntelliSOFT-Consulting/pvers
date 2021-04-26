@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Year</th>
-            <th>MEDICATIONs</th>
+            <th>Medication Errors</th>
         </tr>
     </thead>
     <tbody>

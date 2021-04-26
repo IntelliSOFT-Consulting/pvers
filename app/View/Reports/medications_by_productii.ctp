@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Product (error)</th>
-            <th>ADRs</th>
+            <th>Medication Errors</th>
         </tr>
     </thead>
     <tbody>

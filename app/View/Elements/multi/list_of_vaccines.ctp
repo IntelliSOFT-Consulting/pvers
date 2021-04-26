@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\Aefi $aefi
  */
     // $this->Html->script('multi/list_of_aefis', array('inline' => false));
-  $this->Html->script('list_of_vaccines', array('inline' => false));
+  $this->Html->script('list_of_vaccines_v2', array('inline' => false));
 ?>
     <div class="row-fluid">
       <div class="span12">
@@ -79,7 +79,9 @@
                         <?php                            
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_date', array(
                             'type' => 'text', 'label' => false, 'between' => false,
-                            'after' => false, 'class' => 'span11 autosave-ignore datetime-pick-field',));
+                            'after' => false, 'class' => 'span11 autosave-ignore date-pick-field',));
+                          echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_time', array('type' => 'time', 'timeFormat' => 24, 'interval' => 5, 'class' => 'span5', 'style' => 'display: inline;', 
+                            'label' => false, 'between' => false, 'after' => false,));
                         ?>
                     </td> 
                     <td>

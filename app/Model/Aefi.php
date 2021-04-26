@@ -296,6 +296,20 @@ class Aefi extends AppModel {
                 'message'  => 'Please specify the AEFI outcome'
             ),
         ),
+        'serious' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify the seriousness of the event!!'
+            ),
+        ),
+        'serious_yes' => array(
+            'seriousYes' => array(
+                'rule'     => 'seriousYes',
+                'required' => false,
+                'message'  => 'Please specify the reason for seriousness!!'
+            ),
+        ),  
 		// 'treatment_given' => array(
   //           'treatOrSpecimen' => array(
   //               'rule'     => 'treatOrSpecimen',
@@ -337,8 +351,13 @@ class Aefi extends AppModel {
 		return !empty($this->data['Aefi']['date_of_birth']['year']) || !empty($this->data['Aefi']['age_months']);
 	}
 
-	public function treatOrSpecimen($field = null) {
-		return !empty($this->data['Aefi']['treatment_given']) || !empty($this->data['Aefi']['specimen_collected']);
+    public function treatOrSpecimen($field = null) {
+        return !empty($this->data['Aefi']['treatment_given']) || !empty($this->data['Aefi']['specimen_collected']);
+    }
+
+	public function seriousYes($field = null) {
+		if($this->data['Aefi']['serious'] == 'Yes') return !empty($this->data['Aefi']['serious_yes']);
+        else return true;
 	}
 
     public function beforeSave($options = array()) {

@@ -23,6 +23,7 @@ class Padr extends AppModel {
         'product_specify' => array('type' => 'like', 'encode' => true),
         'patient_name' => array('type' => 'like', 'encode' => true),
         'report_type' => array('type' => 'value'),
+        'reaction_on' => array('type' => 'value'),
         'reporter' => array('type' => 'query', 'method' => 'reporterFilter', 'encode' => true),
         'designation_id' => array('type' => 'value'),
         'gender' => array('type' => 'value'),

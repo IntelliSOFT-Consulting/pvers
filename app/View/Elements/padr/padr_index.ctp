@@ -98,9 +98,13 @@
                 ?>
             </td>
             <td>
-              <?php
-                
-              ?>
+              <h5>Is the reaction still on?</h5> 
+               <?php
+                  echo $this->Form->input('reaction_on', array(
+                      'options' => array('Yes' => 'Yes', 'No' => 'No'), 'legend' => false,
+                      'type' => 'radio'
+                  ));
+                ?>
             </td>
             <td>
               <?php

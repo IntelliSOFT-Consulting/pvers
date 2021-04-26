@@ -1,7 +1,7 @@
 <?php
 	$this->assign('PQMP', 'active');
 	$this->Html->script('jquery/combobox', array('inline' => false));
-	$this->Html->script('pqmp', array('inline' => false));
+	$this->Html->script('pqmp?v=2', array('inline' => false));
  ?>
 <?php
 				//echo $this->element('banner');
@@ -389,7 +389,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row-fluid">
+			<div class="row-fluid" id="mdactivate">
 				<div class="span6">
 					<?php
 						echo $this->Form->input('packaging', array(
