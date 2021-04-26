@@ -419,7 +419,7 @@ class ReportsController extends AppController {
     }
 
     public function aefis_by_vaccine() {
-        $criteria['Vaccine.id >'] = '';
+        $criteria['Vaccine.id >'] = 0;
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['AefiListOfVaccine.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         else 
