@@ -850,6 +850,7 @@ class ReportsController extends AppController {
     public function pqmps_by_device() {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
+        $criteria['(Pqmp.packaging + Pqmp.labelling + Pqmp.sampling + Pqmp.mechanism + Pqmp.electrical + Pqmp.device_data + Pqmp.software + Pqmp.environmental + Pqmp.failure_to_calibrate + Pqmp.results + Pqmp.readings) > '] = 0;
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');

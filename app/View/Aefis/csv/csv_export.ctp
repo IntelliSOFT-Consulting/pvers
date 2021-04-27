@@ -82,7 +82,7 @@
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'vaccination_times') {
 				foreach ($caefi['AefiListOfVaccine'] as $aefiListOfVaccine) {
-					(isset($row[$key])) ? $row[$key] .= '; '.substr($aefiListOfVaccine['vaccination_date'], -5) : $row[$key] = substr($aefiListOfVaccine['vaccination_date'], -5);
+					(isset($row[$key])) ? $row[$key] .= '; '.$aefiListOfVaccine['vaccination_time']['hour'].':'.$aefiListOfVaccine['vaccination_time']['hour'] : $row[$key] = $aefiListOfVaccine['vaccination_time']['hour'].':'.$aefiListOfVaccine['vaccination_time']['hour'];
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'vaccination_routes') {
