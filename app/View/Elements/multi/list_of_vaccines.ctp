@@ -76,10 +76,12 @@
                         ?>
                     </td>
                     <td>
-                        <?php                            
+                        <?php 
+                          echo '<small class="help-block">Date</small>';                         
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_date', array(
                             'type' => 'text', 'label' => false, 'between' => false,
                             'after' => false, 'class' => 'span11 autosave-ignore date-pick-field',));
+                          echo '<small class="help-block">Time</small>'; 
                           echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccination_time', array('type' => 'time', 'timeFormat' => 24, 'interval' => 5, 'class' => 'span5', 'style' => 'display: inline;', 
                             'label' => false, 'between' => false, 'after' => false,));
                         ?>

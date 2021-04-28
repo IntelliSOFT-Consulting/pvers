@@ -97,7 +97,9 @@ $(function() {
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][dosage]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine{i}Dosage"></div> </td>\
             <td>\
+              <small class="help-block">Date</small>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccination_date]" class="span11 date-pick-field" type="text" required="required" id="AefiListOfVaccine{i}VaccinationDate"></div>\
+              <small class="help-block">Time</small>\
               <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccination_time][hour]" class="span5" style="display: inline;" id="AefiListOfVaccine{i}VaccinationTimeHour"></select>:\
                 <select name="data[AefiListOfVaccine][{i}][vaccination_time][min]" class="span6" style="display: inline;" id="AefiListOfVaccine{i}VaccinationTimeMin"></select></div>\
             </td>\
