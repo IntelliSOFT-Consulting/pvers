@@ -14,6 +14,7 @@
 		'paralysis' => 'Paralysis', 'toxic_shock' => 'Toxic shock',
 		'complaint_other' => 'Other', 'complaint_other_specify' => 'Specify',
 		'date_aefi_started' => 'Date AEFI started', 
+		'times_aefi_started' => 'Time AEFI started', 
 		'vaccines' => 'Vaccines',
 		'vaccination_doses' => 'Vaccination doses',
 		'vaccination_dates' => 'Vaccination dates',
@@ -64,6 +65,13 @@
 					(!empty($bod['year'])) ? $dob.=$bod['year'] : $dob.='1970';
 				}				
 				($dob) ? $row[$key] = $dob : $row[$key] = '""';
+			} elseif ($key == 'times_aefi_started') {
+				$tas = ''; $sat = $caefi['Aefi']['time_aefi_started'];
+				if (isset($sat['hour'])) {
+					$tas.=$sat['hour'].':';
+					$tas.=$sat['min'];
+				}				
+				($tas) ? $row[$key] = $tas : $row[$key] = '""';
 			} elseif ($key == 'vaccines') {
 				foreach ($caefi['AefiListOfVaccine'] as $aefiListOfVaccine) {
 					$val = (!empty($aefiListOfVaccine['Vaccine']['vaccine_name'])) ? $aefiListOfVaccine['Vaccine']['vaccine_name'] : '';
