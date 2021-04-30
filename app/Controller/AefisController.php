@@ -307,12 +307,10 @@ class AefisController extends AppController {
             $this->redirect($this->referer());
         } else {
             $body = $results->body;
-            debug($body);
-            debug($results);
             $this->Aefi->saveField('vigiflow_message', $body);
             $this->Flash->error('Error sending report to vigiflow:');
             $this->Flash->error($body);
-            // $this->redirect($this->referer());
+            $this->redirect($this->referer());
         }
         $this->autoRender = false ;
     }
