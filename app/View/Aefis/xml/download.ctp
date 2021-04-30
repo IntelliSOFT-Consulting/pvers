@@ -252,7 +252,7 @@
                     if ($num == 0) echo 1 ;
                     else echo 2;
                 ?></drugcharacterization>
-                <medicinalproduct><?php echo $listOfVaccine['vaccine_name']; ?></medicinalproduct>
+                <medicinalproduct><?php echo (!empty($listOfVaccine['Vaccine']['vaccine_name'])) ? $listOfVaccine['Vaccine']['vaccine_name'] : '' ; ?></medicinalproduct>
                 <obtaindrugcountry/>
                 <drugbatchnumb><?php echo $listOfVaccine['batch_number']; ?></drugbatchnumb>
                 <drugauthorizationnumb/>

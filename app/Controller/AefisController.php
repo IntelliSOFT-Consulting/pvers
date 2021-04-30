@@ -255,7 +255,8 @@ class AefisController extends AppController {
 
         $aefi = $this->Aefi->find('first', array(
                 'conditions' => array('Aefi.id' => $id),
-                'contain' => array('AefiListOfVaccine', 'AefiDescription', 'Attachment', 'Designation')
+                'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.AefiDescription', 'AefiOriginal.AefiListOfVaccine.Vaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
             ));
         $aefi = Sanitize::clean($aefi, array('escape' => true));
         $this->set('aefi', $aefi);
@@ -285,8 +286,8 @@ class AefisController extends AppController {
         $HttpSocket = new HttpSocket();
         // string data
         $results = $HttpSocket->post(
-            //'https://api.who-umc.org/vigiflow/icsrs',
-            'https://api.who-umc.org/demo/vigiflow/icsrs',
+            'https://api.who-umc.org/vigiflow/icsrs',
+            // 'https://api.who-umc.org/demo/vigiflow/icsrs',
             $html,
             array('header' => array('umc-client-key' => '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'))
         );
@@ -500,7 +501,10 @@ class AefisController extends AppController {
                         'conditions' => array('Aefi.id' => $id)
                         )
                     ), 'Aefi.id');
-
+            if($aefi['Aefi']['copied']) {
+                $this->Session->setFlash(__('A clean copy already exists. Click on edit to update changes.'), 'alerts/flash_error');
+                return $this->redirect(array('action' => 'index'));   
+            }
             $aefi = Hash::remove($aefi, 'AefiListOfVaccine.{n}.id');
             $data_save = $aefi['Aefi'];
             $data_save['AefiListOfVaccine'] = $aefi['AefiListOfVaccine'];
@@ -511,10 +515,10 @@ class AefisController extends AppController {
 
             if ($this->Aefi->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
                     $this->Session->setFlash(__('Clean copy of '.$data_save['reference_no'].' has been created'), 'alerts/flash_info');
-                    $this->redirect(array('action' => 'edit', $this->Aefi->id));               
+                    return $this->redirect(array('action' => 'edit', $this->Aefi->id));               
             } else {
                 $this->Session->setFlash(__('The clean copy could not be created. Please, try again.'), 'alerts/flash_error');
-                $this->redirect($this->referer());
+                return $this->redirect($this->referer());
             }
         }
     }

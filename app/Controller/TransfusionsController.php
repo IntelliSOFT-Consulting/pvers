@@ -413,6 +413,10 @@ class TransfusionsController extends AppController {
                         )
                     ), 'Transfusion.id');
 
+            if($transfusion['Transfusion']['copied']) {
+                $this->Session->setFlash(__('A clean copy already exists. Click on edit to update changes.'), 'alerts/flash_error');
+                return $this->redirect(array('action' => 'index'));   
+            }
             $transfusion = Hash::remove($transfusion, 'Pint.{n}.id');
             $data_save = $transfusion['Transfusion'];
             $data_save['Pint'] = (!empty($transfusion['Pint'])) ? $transfusion['Pint'] : null;

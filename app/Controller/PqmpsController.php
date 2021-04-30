@@ -398,6 +398,10 @@ class PqmpsController extends AppController {
                         )
                     ), 'Pqmp.id');
 
+            if($pqmp['Pqmp']['copied']) {
+                $this->Session->setFlash(__('A clean copy already exists. Click on edit to update changes.'), 'alerts/flash_error');
+                return $this->redirect(array('action' => 'index'));   
+            }
             $data_save = $pqmp['Pqmp'];
             $data_save['pqmp_id'] = $id;
             $data_save['user_id'] = $this->Auth->User('id');;

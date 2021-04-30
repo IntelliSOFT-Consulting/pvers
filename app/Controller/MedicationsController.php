@@ -493,6 +493,10 @@ class MedicationsController extends AppController {
                         )
                     ), 'Medication.id');
 
+            if($medication['Medication']['copied']) {
+                $this->Session->setFlash(__('A clean copy already exists. Click on edit to update changes.'), 'alerts/flash_error');
+                return $this->redirect(array('action' => 'index'));   
+            }
             $medication = Hash::remove($medication, 'MedicationProduct.{n}.id');
             $data_save = $medication['Medication'];
             $data_save['MedicationProduct'] = $medication['MedicationProduct'];
