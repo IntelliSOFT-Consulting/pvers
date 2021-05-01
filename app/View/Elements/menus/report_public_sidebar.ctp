@@ -6,16 +6,10 @@
         ?>
       </li>      
       <li class="divider"></li>
-      <li class="nav-header"><i class="fa fa-ambulance" aria-hidden="true"></i> SADRs</li>
+      <li class="nav-header"><i class="fa fa-ambulance" aria-hidden="true"></i> SUSPECTED ADVERSE DRUG REACTIONS</li>
       <li class="<?php echo $this->fetch('sadrs-by-age'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Age groups',  array('controller' => 'reports', 'action'=>'sadrs_by_age', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('sadrs-by-medicine'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Suspected Medicine',  array('controller' => 'reports', 'action'=>'sadrs_by_medicine', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>
@@ -43,7 +37,7 @@
                       array('escape' => false));
         ?>
       </li>
-      <li class="nav-header"><i class="fa fa-child" aria-hidden="true"></i> AEFIs</li>
+      <li class="nav-header"><i class="fa fa-child" aria-hidden="true"></i> ADVERSE EVENT FOLLOWING IMMUNIZATION</li>
       <li class="<?php echo $this->fetch('aefis-by-age'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Age groups',  array('controller' => 'reports', 'action'=>'aefis_by_age', 'admin' => false ),
@@ -80,7 +74,7 @@
                       array('escape' => false));
         ?>
       </li>
-      <li class="nav-header"><i class="fa fa-medkit" aria-hidden="true"></i> PQMPs</li>
+      <li class="nav-header"><i class="fa fa-medkit" aria-hidden="true"></i> POOR QUALITY MEDICINAL PRODUCTS</li>
       <li class="<?php echo $this->fetch('pqmps-by-brand'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Brand Name',  array('controller' => 'reports', 'action'=>'pqmps_by_brand', 'admin' => false ),
@@ -96,12 +90,6 @@
       <li class="<?php echo $this->fetch('pqmps-by-county'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> County',  array('controller' => 'reports', 'action'=>'pqmps_by_county', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('pqmps-by-country'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Country',  array('controller' => 'reports', 'action'=>'pqmps_by_country', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>
@@ -236,43 +224,6 @@
       <li class="<?php echo $this->fetch('transfusions-by-year'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Year',  array('controller' => 'reports', 'action'=>'transfusions_by_year', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="nav-header"><i class="fa fa-thermometer-full" aria-hidden="true"></i> SAEs</li>
-      <li class="<?php echo $this->fetch('saes-by-age'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Age group',  array('controller' => 'reports', 'action'=>'saes_by_age', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('saes-by-month'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Month',  array('controller' => 'reports', 'action'=>'saes_by_month', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('saes-by-year'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Year',  array('controller' => 'reports', 'action'=>'saes_by_year', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('saes-by-gender'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Gender',  array('controller' => 'reports', 'action'=>'saes_by_gender', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('saes-by-medicine'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Suspected Medicine',  array('controller' => 'reports', 'action'=>'saes_by_medicine', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
-      <li class="<?php echo $this->fetch('saes-by-concomittant'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Concomittant Drug',  array('controller' => 'reports', 'action'=>'saes_by_concomittant', 'admin' => false ),
                       array('escape' => false));
         ?>
       </li>

@@ -29,6 +29,7 @@
 		'diluent_expiry' => 'Diluent expiry',
 		'serious' => 'Reaction serious', 'serious_yes' => 'Reason for seriousness',
 		'outcome' => 'Outcome',
+		'designations' => 'Reporter designation',
 		//'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
 		//'reporter_phone' => 'Reporter phone', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
@@ -57,6 +58,8 @@
 				$row[$key] = '"' . preg_replace('/"/','""',$caefi['Aefi'][$key]) . '"';
 			} elseif ($key == 'counties') {
 				$row[$key] = '"' . preg_replace('/"/','""',$caefi['County']['county_name']) . '"';
+			} elseif ($key == 'designations') {
+				$row[$key] = '"' . preg_replace('/"/','""',$caefi['Designation']['name']) . '"';
 			} elseif ($key == 'date_born') {
 				$dob = ''; $bod = $caefi['Aefi']['date_of_birth'];
 				if (!empty($bod['year'])) {
@@ -90,7 +93,7 @@
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'vaccination_times') {
 				foreach ($caefi['AefiListOfVaccine'] as $aefiListOfVaccine) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$aefiListOfVaccine['vaccination_time']['hour'].':'.$aefiListOfVaccine['vaccination_time']['hour'] : $row[$key] = $aefiListOfVaccine['vaccination_time']['hour'].':'.$aefiListOfVaccine['vaccination_time']['hour'];
+					if(isset($aefiListOfVaccine['vaccination_time']['hour'])) (isset($row[$key])) ? $row[$key] .= '; '.$aefiListOfVaccine['vaccination_time']['hour'].':'.$aefiListOfVaccine['vaccination_time']['hour'] : $row[$key] = $aefiListOfVaccine['vaccination_time']['hour'].':'.$aefiListOfVaccine['vaccination_time']['hour'];
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'vaccination_routes') {

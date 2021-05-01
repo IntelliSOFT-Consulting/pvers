@@ -230,11 +230,18 @@ class Aefi extends AppModel {
                 'message'  => 'Please provide the name of the institution'
             ),
         ),
-		'patient_name' => array(
+        'patient_name' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a patient\'s name'
+            ),
+        ),
+		'aefi_symptoms' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please describe the AEFI'
             ),
         ),
 		'date_of_birth' => array(

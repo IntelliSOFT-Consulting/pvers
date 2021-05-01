@@ -38,6 +38,7 @@
 		'product_at_facility' => 'Paralysis', 
 		'returned_by_client' => 'Returned by client',
 		'stored_to_recommendations' => 'Recommendations',
+		'designations' => 'Reporter designation',
 		// 'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
 		// 'reporter_phone' => 'Reporter phone', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
@@ -62,6 +63,8 @@
 				$row[$key] = '"' . preg_replace('/"/','""',$cpqmp['Pqmp'][$key]) . '"';
 			} elseif ($key == 'counties') {
 				$row[$key] = '"' . preg_replace('/"/','""',$cpqmp['County']['county_name']) . '"';
+			} elseif ($key == 'designations') {
+				$row[$key] = '"' . preg_replace('/"/','""',$cpqmp['Designation']['name']) . '"';
 			} elseif ($key == 'country') {
 				$row[$key] = '"' . preg_replace('/"/','""',$cpqmp['Country']['name']) . '"';
 			}

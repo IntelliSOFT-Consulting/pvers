@@ -4,8 +4,8 @@
   // $this->Html->css('comments', null, array('inline' => false));
   $this->Html->script('highcharts/highcharts', array('inline' => false));
   $this->Html->script('highcharts/modules/data', array('inline' => false));
-  $this->Html->script('highcharts/modules/exporting', array('inline' => false));
-  $this->Html->script('highcharts/modules/export-data', array('inline' => false));
+  if($this->Session->read('Auth.User.group_id') === '2') $this->Html->script('highcharts/modules/exporting', array('inline' => false));
+  if($this->Session->read('Auth.User.group_id') === '2') $this->Html->script('highcharts/modules/export-data', array('inline' => false));
 ?>
 
 

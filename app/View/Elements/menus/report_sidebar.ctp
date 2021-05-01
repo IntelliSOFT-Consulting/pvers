@@ -6,7 +6,7 @@
         ?>
       </li>      
       <li class="divider"></li>
-      <li class="nav-header"><i class="fa fa-ambulance" aria-hidden="true"></i> SADRs</li>
+      <li class="nav-header"><i class="fa fa-ambulance" aria-hidden="true"></i> SUSPECTED ADVERSE DRUG REACTIONS</li>
       <li class="<?php echo $this->fetch('sadrs-by-designation'); ?>">
       	<?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Reporter Qualification',  array('controller' => 'reports', 'action'=>'sadrs_by_designation', 'admin' => false ),
@@ -73,7 +73,7 @@
                       array('escape' => false));
         ?>
       </li>
-      <li class="nav-header"><i class="fa fa-child" aria-hidden="true"></i> AEFIs</li>
+      <li class="nav-header"><i class="fa fa-child" aria-hidden="true"></i> ADVERSE EVENTS FOLLOWING IMMUNIZATION</li>
       <li class="<?php echo $this->fetch('aefis-by-designation'); ?>">
       	<?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Reporter Qualification',  array('controller' => 'reports', 'action'=>'aefis_by_designation', 'admin' => false ),
@@ -140,7 +140,7 @@
                       array('escape' => false));
         ?>
       </li>
-      <li class="nav-header"><i class="fa fa-medkit" aria-hidden="true"></i> PQMPs</li>
+      <li class="nav-header"><i class="fa fa-medkit" aria-hidden="true"></i> POOR QUALITY MEDICINAL PRODUCTS</li>
       <li class="<?php echo $this->fetch('pqmps-by-designation'); ?>">
       	<?php
 	        echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Reporter Qualification',  array('controller' => 'reports', 'action'=>'pqmps_by_designation', 'admin' => false ),
@@ -437,7 +437,7 @@
                       array('escape' => false));
         ?>
       </li>
-      <li class="nav-header"><i class="fa fa-thermometer-full" aria-hidden="true"></i> SAEs</li>
+      <li class="nav-header"><i class="fa fa-thermometer-full" aria-hidden="true"></i> SERIOUS ADVERSE EVENTS</li>
       <li class="<?php echo $this->fetch('saes-by-age'); ?>">
       	<?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Age group',  array('controller' => 'reports', 'action'=>'saes_by_age', 'admin' => false ),

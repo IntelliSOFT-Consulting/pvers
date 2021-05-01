@@ -2,7 +2,7 @@
 	
 	$header = array('id' => '#', 'reference_no' => 'Reference No.', 'report_title' => 'Report Title', 'name_of_institution' => 'Name of Institution',
 		'counties' => 'County',
-		'patient_name' => 'Patient name', 'date_born' => 'Date of birth',
+		// 'patient_name' => 'Patient name', 'date_born' => 'Date of birth',
 		'gender' => 'Gender',
 		'problem_noted' => 'Problem noted prior', 
 		'brand_name' => 'Brand Name', 
@@ -37,10 +37,19 @@
 		'serious' => 'Event classification',
 		'serious_yes' => 'Reason for seriousness', 
 		'outcome' => 'Patient outcome',
-		'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
-		'reporter_phone' => 'Reporter phone', 
+		'designations' => 'Reporter designation',
+		// 'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
+		// 'reporter_phone' => 'Reporter phone', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 	);
+	
+
+	if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+		$header['reporter_name'] = 'Reporter';
+		$header['reporter_email'] = 'Reporter email';
+		$header['reporter_phone'] = 'Reporter phone';
+		$header['patient_name'] = 'Patient name';
+	}
 	
 	//Additional free text columns
 	$header['description_of_reaction'] = 'Description of event';
@@ -56,6 +65,8 @@
 				$row[$key] = '"' . preg_replace('/"/','""',$cdevice['Device'][$key]) . '"';
 			} elseif ($key == 'counties') {
 				$row[$key] = '"' . preg_replace('/"/','""',$cdevice['County']['county_name']) . '"';
+			} elseif ($key == 'designations') {
+				$row[$key] = '"' . preg_replace('/"/','""',$cdevice['Designation']['name']) . '"';
 			} elseif ($key == 'date_born') {
 				$dob = ''; $bod = $cdevice['Device']['date_of_birth'];
 				if (!empty($bod['year'])) {

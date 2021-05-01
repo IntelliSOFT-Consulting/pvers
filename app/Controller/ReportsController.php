@@ -92,7 +92,7 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
@@ -111,7 +111,7 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when trim(age_group) in ('neonate', 'infant', 'child', 'adolescent', 'adult', 'elderly') then age_group
@@ -140,7 +140,7 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
             'fields' => array('IF(Sadr.serious IS NULL or Sadr.serious = "", "No", Sadr.serious) as serious', 'COUNT(*) as cnt'),
@@ -159,7 +159,7 @@ class ReportsController extends AppController {
         $criteria['Sadr.copied !='] = '1';
         $criteria['Sadr.serious_reason !='] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
             'fields' => array('serious_reason', 'COUNT(*) as cnt'),
@@ -220,7 +220,7 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
             'fields' => array('gender', 'COUNT(*) as cnt'),
@@ -238,7 +238,7 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
             'fields' => array('outcome', 'COUNT(*) as cnt'),
@@ -256,7 +256,7 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
             'fields' => array('name_of_institution', 'COUNT(*) as cnt'),
@@ -275,7 +275,7 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
@@ -293,13 +293,13 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
-            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'fields' => array('DATE_FORMAT(created, "%b %Y")  as month', 'month(ifnull(created, created)) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'group' => array('DATE_FORMAT(created, "%b %Y") '),
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -312,13 +312,13 @@ class ReportsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Sadr.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
         $data = $this->Sadr->find('all', array(
-            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'fields' => array('year(ifnull(created, created)) as year', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('year(ifnull(reporter_date, created))'),
+            'group' => array('year(ifnull(created, created))'),
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -517,7 +517,7 @@ class ReportsController extends AppController {
                 $criteria['Aefi.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
         $data = $this->Aefi->find('all', array(
-            'fields' => array('monthname(created) as month', 'month(created) as salit', 'COUNT(*) as cnt'),
+            'fields' => array('DATE_FORMAT(created, "%b %Y") as month', 'month(created) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
             'group' => array('monthname(created)'),
@@ -556,7 +556,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
@@ -576,7 +576,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
             'fields' => array('facility_name', 'COUNT(*) as cnt'),
@@ -596,7 +596,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
             'fields' => array('product_formulation', 'COUNT(*) as cnt'),
@@ -615,7 +615,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
             'fields' => array('brand_name', 'COUNT(*) as cnt'),
@@ -634,7 +634,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         if($this->Auth->User('user_type') == 'Public Health Program') {
             $conditionsSubQuery['DrugDictionary.health_program'] = $this->Auth->User('health_program');
@@ -678,7 +678,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
             'fields' => array('name_of_manufacturer', 'COUNT(*) as cnt'),
@@ -698,7 +698,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
             'fields' => array('supplier_name', 'COUNT(*) as cnt'),
@@ -717,7 +717,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
@@ -735,7 +735,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
             'fields' => array('Country.name', 'COUNT(*) as cnt'),
@@ -753,13 +753,13 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
-            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'fields' => array('DATE_FORMAT(created, "%b %Y")  as month', 'month(ifnull(created, created)) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'group' => array('DATE_FORMAT(created, "%b %Y") '),
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -772,13 +772,13 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $data = $this->Pqmp->find('all', array(
-            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'fields' => array('year(ifnull(created, created)) as year', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('year(ifnull(reporter_date, created))'),
+            'group' => array('year(ifnull(created, created))'),
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -791,7 +791,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when medicinal_product = 1 then 'Medicinal Product'
@@ -819,7 +819,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.submitted'] = array(1, 2);
         $criteria['Pqmp.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when colour_change = 1 then 'Colour change'
@@ -852,7 +852,7 @@ class ReportsController extends AppController {
         $criteria['Pqmp.copied !='] = '1';
         $criteria['(Pqmp.packaging + Pqmp.labelling + Pqmp.sampling + Pqmp.mechanism + Pqmp.electrical + Pqmp.device_data + Pqmp.software + Pqmp.environmental + Pqmp.failure_to_calibrate + Pqmp.results + Pqmp.readings) > '] = 0;
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Pqmp.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Pqmp.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Pqmp.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when packaging = 1 then 'Packaging'
@@ -889,7 +889,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
@@ -908,7 +908,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when age_years > 0 and age_years < 1 then 'infant'
@@ -938,7 +938,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
             'fields' => array('Device.serious', 'COUNT(*) as cnt'),
@@ -956,7 +956,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
             'fields' => array('serious_yes', 'COUNT(*) as cnt'),
@@ -974,7 +974,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->ListOfDevice->find('all', array(
             'fields' => array('ListOfDevice.brand_name as brand_name', 'COUNT(distinct ListOfDevice.device_id) as cnt'),
@@ -992,7 +992,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
             'fields' => array('gender', 'COUNT(*) as cnt'),
@@ -1010,7 +1010,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
             'fields' => array('outcome', 'COUNT(*) as cnt'),
@@ -1028,7 +1028,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
             'fields' => array('name_of_institution', 'COUNT(*) as cnt'),
@@ -1047,7 +1047,7 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
@@ -1065,13 +1065,13 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
-            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'fields' => array('DATE_FORMAT(created, "%b %Y")  as month', 'month(ifnull(created, created)) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'group' => array('DATE_FORMAT(created, "%b %Y") '),
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -1084,13 +1084,13 @@ class ReportsController extends AppController {
         $criteria['Device.submitted'] = array(1, 2);
         $criteria['Device.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Device.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Device.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Device.county_id'] = $this->Auth->User('county_id');
         $data = $this->Device->find('all', array(
-            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'fields' => array('year(ifnull(created, created)) as year', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('year(ifnull(reporter_date, created))'),
+            'group' => array('year(ifnull(created, created))'),
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -1107,7 +1107,7 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $data = $this->Medication->find('all', array(
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
@@ -1126,7 +1126,7 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when age_years > 0 and age_years < 1 then 'infant'
@@ -1157,7 +1157,7 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $data = $this->Medication->find('all', array(
             'fields' => array('gender', 'COUNT(*) as cnt'),
@@ -1175,7 +1175,7 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $data = $this->Medication->find('all', array(
             'fields' => array('name_of_institution', 'COUNT(*) as cnt'),
@@ -1194,7 +1194,7 @@ class ReportsController extends AppController {
         //TODO: add process_occur_specify
         // $criteria['Medication.submitted'] = array(1, 2);
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $data = $this->Medication->find('all', array(
             'fields' => array('process_occur', 'COUNT(*) as cnt'),
@@ -1214,7 +1214,7 @@ class ReportsController extends AppController {
         $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
         $criteria['MedicationProduct.product_name_i >'] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.product_name_i as product_name_i', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
@@ -1322,7 +1322,7 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $data = $this->Medication->find('all', array(
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
@@ -1340,13 +1340,13 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $data = $this->Medication->find('all', array(
-            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'fields' => array('DATE_FORMAT(created, "%b %Y")  as month', 'month(ifnull(created, created)) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'group' => array('DATE_FORMAT(created, "%b %Y") '),
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -1359,13 +1359,13 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $data = $this->Medication->find('all', array(
-            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'fields' => array('year(ifnull(created, created)) as year', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('year(ifnull(reporter_date, created))'),
+            'group' => array('year(ifnull(created, created))'),
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -1378,7 +1378,7 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when outcome in ('Potential error, circumstances/events have potential to cause incident') then 'NO ERROR'
@@ -1404,7 +1404,7 @@ class ReportsController extends AppController {
         $criteria['Medication.submitted'] = array(1, 2);
         $criteria['Medication.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Medication.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when error_cause_inexperience = 1 or error_cause_knowledge = 1 or error_cause_distraction = 1 then 'Staff factors'
@@ -1434,7 +1434,7 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $data = $this->Transfusion->find('all', array(
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
@@ -1453,7 +1453,7 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when age_years > 0 and age_years < 1 then 'infant'
@@ -1484,7 +1484,7 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $data = $this->Transfusion->find('all', array(
             'fields' => array('gender', 'COUNT(*) as cnt'),
@@ -1502,7 +1502,7 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $data = $this->Transfusion->find('all', array(
             'fields' => array('adverse_reaction', 'COUNT(*) as cnt'),
@@ -1520,7 +1520,7 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $data = $this->Transfusion->find('all', array(
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
@@ -1538,13 +1538,13 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $data = $this->Transfusion->find('all', array(
-            'fields' => array('monthname(ifnull(reporter_date, created)) as month', 'month(ifnull(reporter_date, created)) as salit', 'COUNT(*) as cnt'),
+            'fields' => array('DATE_FORMAT(created, "%b %Y")  as month', 'month(ifnull(created, created)) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('monthname(ifnull(reporter_date, created))'),
+            'group' => array('DATE_FORMAT(created, "%b %Y") '),
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -1557,13 +1557,13 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $data = $this->Transfusion->find('all', array(
-            'fields' => array('year(ifnull(reporter_date, created)) as year', 'COUNT(*) as cnt'),
+            'fields' => array('year(ifnull(created, created)) as year', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('year(ifnull(reporter_date, created))'),
+            'group' => array('year(ifnull(created, created))'),
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -1577,7 +1577,7 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $case = "((case 
                 when reaction_fever is not null then 'Fever'
@@ -1614,7 +1614,7 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $data = $this->Transfusion->find('all', array(
             'fields' => array('previous_transfusion', 'COUNT(*) as cnt'),
@@ -1633,7 +1633,7 @@ class ReportsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2);
         $criteria['Transfusion.copied !='] = '1';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['Transfusion.reporter_date between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+                $criteria['Transfusion.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Transfusion.county_id'] = $this->Auth->User('county_id');
         $data = $this->Transfusion->find('all', array(
             'fields' => array('previous_reactions', 'COUNT(*) as cnt'),

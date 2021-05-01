@@ -28,7 +28,7 @@ class DevicesController extends AppController {
         $criteria['Device.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -56,7 +56,7 @@ class DevicesController extends AppController {
         $criteria['Device.submitted'] = array(1, 2); 
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -84,7 +84,7 @@ class DevicesController extends AppController {
         if (!isset($this->passedArgs['submit'])) $criteria['Device.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -263,7 +263,7 @@ class DevicesController extends AppController {
                         'Device.reference_no LIKE' => $device['Device']['reference_no'].'%',
                         )));
             $count = ($count < 10) ? "0$count" : $count;
-            $data_save['reference_no'] = $device['Device']['reference_no'].'_F'.$count;
+            $data_save['reference_no'] = $device['Device']['reference_no'];//.'_F'.$count;
             $data_save['report_type'] = 'Followup';
             $data_save['submitted'] = 0;
 
@@ -306,14 +306,16 @@ class DevicesController extends AppController {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Device->saveField('submitted', 2);
                     //lucian
-                    $count = $this->Device->find('count',  array(
-                        'fields' => 'Device.reference_no',
-                        'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Device.reference_no !=' => 'new'
-                        )
-                        ));
-                    $count++;
-                    $count = ($count < 10) ? "0$count" : $count; 
-                    $this->Device->saveField('reference_no', 'MD/'.date('Y').'/'.$count);
+                    if(empty($device->reference_no)) {
+                        $count = $this->Device->find('count',  array(
+                            'fields' => 'Device.reference_no',
+                            'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Device.reference_no !=' => 'new'
+                            )
+                            ));
+                        $count++;
+                        $count = ($count < 10) ? "0$count" : $count; 
+                        $this->Device->saveField('reference_no', 'MD/'.date('Y').'/'.$count);
+                    }
                     //bokelo
                     $device = $this->Device->read(null, $id);
 

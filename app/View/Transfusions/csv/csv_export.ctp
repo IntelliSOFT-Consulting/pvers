@@ -1,7 +1,7 @@
 <?php
 	
 	$header = array('id' => '#', 'reference_no' => 'Reference No.', 
-		'patient_name' => 'Patient name',
+		// 'patient_name' => 'Patient name',
 		'date_born' => 'Date of birth',
 		'age_years' => 'Age in years',
 		'gender' => 'Gender',
@@ -21,10 +21,19 @@
 		'lab_hemolysis_present' => 'Hemolysis present',
 		'recipient_blood' => 'Recipient Agglutination',
 		'donor_hemolysis' => 'Donor Agglutination',
-		'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
-		'reporter_phone' => 'Reporter phone',
+		// 'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
+		// 'reporter_phone' => 'Reporter phone',
+		'designations' => 'Reporter designation',
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 		);
+	
+
+	if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+		$header['reporter_name'] = 'Reporter';
+		$header['reporter_email'] = 'Reporter email';
+		$header['reporter_phone'] = 'Reporter phone';
+		$header['patient_name'] = 'Patient name';
+	}
 	
 	echo implode(',', $header)."\n";
 	foreach ($ctransfusions as $ctransfusion):
@@ -41,6 +50,8 @@
 					(!empty($bod['year'])) ? $dob.=$bod['year'] : $dob.='1970';
 				}				
 				($dob) ? $row[$key] = $dob : $row[$key] = '""';
+			} elseif ($key == 'designations') {
+				$row[$key] = '"' . preg_replace('/"/','""',$ctransfusion['Designation']['name']) . '"';
 			} elseif ($key == 'component_types') {
 				foreach ($ctransfusion['Pint'] as $transfusionProdUcT) {
 					(isset($row[$key])) ? $row[$key] .= '; '.$transfusionProdUcT['component_type'] : $row[$key] = $transfusionProdUcT['component_type'];

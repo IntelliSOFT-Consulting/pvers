@@ -35,11 +35,11 @@ class Padr extends AppModel {
     }
 
     public function findByDrugName($data = array()) {
-            $cond = array($this->alias.'.id' => $this->PadrListOfDrug->find('list', array(
+            $cond = array($this->alias.'.id' => $this->PadrListOfMedicine->find('list', array(
                 'conditions' => array(
                     'OR' => array(
-                        'PadrListOfDrug.drug_name LIKE' => '%' . $data['drug_name'] . '%',
-                        'PadrListOfDrug.brand_name LIKE' => '%' . $data['drug_name'] . '%', )),
+                        'PadrListOfMedicine.product_name LIKE' => '%' . $data['drug_name'] . '%',
+                        'PadrListOfMedicine.manufacturer LIKE' => '%' . $data['drug_name'] . '%', )),
                 'fields' => array('padr_id', 'padr_id')
                     )));
             return $cond;

@@ -19,6 +19,7 @@
 		'reaction_reappear' => 'Reaction reappear', 'severity' => 'Severity',
 		'serious' => 'Reaction serious', 'serious_reason' => 'Reason for seriousness',
 		'action_taken' => 'Action taken', 'outcome' => 'Outcome',
+		'designations' => 'Reporter designation',
 		//'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
 		// 'reporter_phone' => 'Reporter phone', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
@@ -46,6 +47,8 @@
 				$row[$key] = '"' . preg_replace('/"/','""',$csadr['Sadr'][$key]) . '"';
 			} elseif ($key == 'counties') {
 				$row[$key] = '"' . preg_replace('/"/','""',$csadr['County']['county_name']) . '"';
+			} elseif ($key == 'designations') {
+				$row[$key] = '"' . preg_replace('/"/','""',$csadr['Designation']['name']) . '"';
 			} elseif ($key == 'date_born') {
 				$dob = ''; $bod = $csadr['Sadr']['date_of_birth'];
 				if (!empty($bod['year'])) {

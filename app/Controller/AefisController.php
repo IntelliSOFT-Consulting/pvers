@@ -38,7 +38,7 @@ class AefisController extends AppController {
         if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Aefi.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine');
+        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -66,7 +66,7 @@ class AefisController extends AppController {
         $criteria['Aefi.submitted'] = array(1, 2); 
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine');
+        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -95,7 +95,7 @@ class AefisController extends AppController {
         if (!isset($this->passedArgs['submit'])) $criteria['Aefi.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine');
+        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -364,7 +364,7 @@ class AefisController extends AppController {
                         'Aefi.reference_no LIKE' => $aefi['Aefi']['reference_no'].'%',
                         )));
             $count = ($count < 10) ? "0$count" : $count;
-            $data_save['reference_no'] = $aefi['Aefi']['reference_no'].'_F'.$count;
+            $data_save['reference_no'] = $aefi['Aefi']['reference_no'];//.'_F'.$count;
             $data_save['report_type'] = 'Followup';
             $data_save['submitted'] = 0;
 
@@ -407,14 +407,16 @@ class AefisController extends AppController {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Aefi->saveField('submitted', 2);
                     //lucian
-                    $count = $this->Aefi->find('count',  array(
-                        'fields' => 'Aefi.reference_no',
-                        'conditions' => array('Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Aefi.reference_no !=' => 'new'
-                        )
-                        ));
-                    $count++;
-                    $count = ($count < 10) ? "0$count" : $count; 
-                    $this->Aefi->saveField('reference_no', 'AEFI/'.date('Y').'/'.$count);
+                    if(empty($aefi->reference_no)) {                        
+                        $count = $this->Aefi->find('count',  array(
+                            'fields' => 'Aefi.reference_no',
+                            'conditions' => array('Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Aefi.reference_no !=' => 'new'
+                            )
+                            ));
+                        $count++;
+                        $count = ($count < 10) ? "0$count" : $count; 
+                        $this->Aefi->saveField('reference_no', 'AEFI/'.date('Y').'/'.$count);
+                    }
                     //bokelo
                     $aefi = $this->Aefi->read(null, $id);
 

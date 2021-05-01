@@ -41,7 +41,7 @@ class TransfusionsController extends AppController {
         $criteria['Transfusion.user_id'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'Designation', 'Pint');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -68,7 +68,7 @@ class TransfusionsController extends AppController {
         $criteria['Transfusion.submitted'] = array(1, 2); 
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'Designation', 'Pint');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -96,7 +96,7 @@ class TransfusionsController extends AppController {
         if (!isset($this->passedArgs['submit'])) $criteria['Transfusion.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'Designation', 'Pint');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -256,7 +256,7 @@ class TransfusionsController extends AppController {
                         'Transfusion.reference_no LIKE' => $transfusion['Transfusion']['reference_no'].'%',
                         )));
             $count = ($count < 10) ? "0$count" : $count;
-            $data_save['reference_no'] = $transfusion['Transfusion']['reference_no'].'_F'.$count;
+            $data_save['reference_no'] = $transfusion['Transfusion']['reference_no'];//.'_F'.$count;
             $data_save['report_type'] = 'Followup';
             $data_save['submitted'] = 0;
 
@@ -323,14 +323,16 @@ class TransfusionsController extends AppController {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Transfusion->saveField('submitted', 2);
                     //lucian
-                    $count = $this->Transfusion->find('count',  array(
-                        'fields' => 'Transfusion.reference_no',
-                        'conditions' => array('Transfusion.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Transfusion.reference_no !=' => 'new'
-                        )
-                        ));
-                    $count++;
-                    $count = ($count < 10) ? "0$count" : $count; 
-                    $this->Transfusion->saveField('reference_no', 'BT/'.date('Y').'/'.$count);
+                    if(empty($transfusion->reference_no)) {
+                        $count = $this->Transfusion->find('count',  array(
+                            'fields' => 'Transfusion.reference_no',
+                            'conditions' => array('Transfusion.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Transfusion.reference_no !=' => 'new'
+                            )
+                            ));
+                        $count++;
+                        $count = ($count < 10) ? "0$count" : $count; 
+                        $this->Transfusion->saveField('reference_no', 'BT/'.date('Y').'/'.$count);
+                    }
                     //bokelo
                     $transfusion = $this->Transfusion->read(null, $id);
 

@@ -40,7 +40,7 @@ class SadrsController extends AppController {
         if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Sadr.submitted'] = array(2);     
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -68,7 +68,7 @@ class SadrsController extends AppController {
         $criteria['Sadr.submitted'] = array(1, 2);        
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -98,7 +98,7 @@ class SadrsController extends AppController {
         if (!isset($this->passedArgs['submit'])) $criteria['Sadr.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -365,7 +365,7 @@ class SadrsController extends AppController {
                         'Sadr.reference_no LIKE' => $sadr['Sadr']['reference_no'].'%',
                         )));
             $count = ($count < 10) ? "0$count" : $count;
-            $data_save['reference_no'] = $sadr['Sadr']['reference_no'].'_F'.$count;
+            $data_save['reference_no'] = $sadr['Sadr']['reference_no'];//.'_F'.$count;
             $data_save['report_type'] = 'Followup';
             $data_save['submitted'] = 0;
 
@@ -432,14 +432,16 @@ class SadrsController extends AppController {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Sadr->saveField('submitted', 2);
                     //lucian
-                    $count = $this->Sadr->find('count',  array(
-                        'fields' => 'Sadr.reference_no',
-                        'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Sadr.reference_no !=' => 'new'
-                        )
-                        ));
-                    $count++;
-                    $count = ($count < 10) ? "0$count" : $count; 
-                    $this->Sadr->saveField('reference_no', 'SADR/'.date('Y').'/'.$count);
+                    if(empty($sadr->reference_no)) {
+                        $count = $this->Sadr->find('count',  array(
+                            'fields' => 'Sadr.reference_no',
+                            'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Sadr.reference_no !=' => 'new'
+                            )
+                            ));
+                        $count++;
+                        $count = ($count < 10) ? "0$count" : $count; 
+                        $this->Sadr->saveField('reference_no', 'SADR/'.date('Y').'/'.$count);
+                    }
                     //bokelo
                     $sadr = $this->Sadr->read(null, $id);
 
