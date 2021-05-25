@@ -124,3 +124,6 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+Configure::write('vigiflow_api', 'https://api.who-umc.org/demo/vigiflow/icsrs'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
+Configure::write('vigiflow_key', '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'); //'https://api.who-umc.org/demo/vigiflow/icsrs'

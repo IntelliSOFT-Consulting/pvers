@@ -277,10 +277,9 @@ class SadrsController extends AppController {
         $HttpSocket = new HttpSocket();
         // string data
         $results = $HttpSocket->post(
-            // 'https://api.who-umc.org/vigiflow/icsrs', 
-            'https://api.who-umc.org/demo/vigiflow/icsrs',
+            Configure::read('vigiflow_api'),
             $html,
-            array('header' => array('umc-client-key' => '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'))
+            array('header' => array('umc-client-key' => Configure::read('vigiflow_key')))
         );
 
         // debug($results->code);
