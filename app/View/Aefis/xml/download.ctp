@@ -9,7 +9,6 @@
             echo date('Y').'-'.$aefi['Aefi']['id'];
         ?></messagenumb>
         <messagesenderidentifier>PPB</messagesenderidentifier>
-        <messagesenderdescription>PvERS</messagesenderdescription>
         <messagereceiveridentifier>KE</messagereceiveridentifier>
         <messagedateformat>204</messagedateformat>
         <messagedate><?php echo date('YmdHis');?></messagedate>
