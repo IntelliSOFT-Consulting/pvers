@@ -313,7 +313,7 @@
                 echo "&nbsp;";
                 if($redir == 'manager') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'medications' , 'action' => 'download', $medication['Medication']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
                 echo "&nbsp;";
-                if($redir == 'manager' && empty($medication['Medication']['vigiflow_ref'])) echo $this->Html->link('<span class="label label-warning tooltipper" title="Send to vigiflow"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Vigiflow </span>' ,
+                if($redir == 'manager' && empty($medication['Medication']['vigiflow_ref'])  && $medication['Medication']['copied'] == 2) echo $this->Html->link('<span class="label label-warning tooltipper" title="Send to vigiflow"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Vigiflow </span>' ,
                   array('controller' => 'medications', 'action' => 'vigiflow', $medication['Medication']['id'], 'manager' => false),
                   array('escape' => false));
                 echo "&nbsp;";

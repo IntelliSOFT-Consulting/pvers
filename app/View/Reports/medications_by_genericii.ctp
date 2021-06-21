@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Generic (error)</th>
-            <th>ADRs</th>
+            <th>Medication Errors</th>
         </tr>
     </thead>
     <tbody>

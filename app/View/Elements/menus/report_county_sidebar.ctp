@@ -328,12 +328,6 @@
                       array('escape' => false));
         ?>
       </li>
-      <li class="<?php echo $this->fetch('medications-by-reaction'); ?>">
-        <?php
-            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Adverse Reaction',  array('controller' => 'reports', 'action'=>'medications_by_reaction', 'admin' => false ),
-                      array('escape' => false));
-        ?>
-      </li>
       <li class="<?php echo $this->fetch('medications-by-errors'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Error Outcome',  array('controller' => 'reports', 'action'=>'medications_by_error', 'admin' => false ),

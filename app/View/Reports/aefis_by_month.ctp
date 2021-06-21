@@ -4,7 +4,7 @@
 ?>
 
 <?php $this->start('report'); ?>
-<div id="sadrs-by-month"></div>
+<div id="aefis-by-month"></div>
 
 <hr>
 <h4>AEFIs by Month</h4>
@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Month</th>
-            <th>ADRs</th>
+            <th>AEFIs</th>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@
 </table>
 
 <script type="text/javascript">
-Highcharts.chart('sadrs-by-month', {
+Highcharts.chart('aefis-by-month', {
     data: {
         table: 'datatable8'
     },

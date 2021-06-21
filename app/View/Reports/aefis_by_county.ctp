@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>County</th>
-            <th>ADRs</th>
+            <th>AEFIs</th>
         </tr>
     </thead>
     <tbody>

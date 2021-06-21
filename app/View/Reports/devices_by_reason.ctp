@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Reason for Seriousness</th>
-            <th>ADRs</th>
+            <th>Medical Device Incidents</th>
         </tr>
     </thead>
     <tbody>

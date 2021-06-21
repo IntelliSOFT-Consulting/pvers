@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Sex</th>
-            <th>ADRs</th>
+            <th>SAEs</th>
         </tr>
     </thead>
     <tbody>
