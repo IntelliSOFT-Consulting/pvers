@@ -279,7 +279,8 @@
         <th><?php echo $this->Paginator->sort('report_type'); ?></th>
         <th><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? $this->Paginator->sort('patient_name') : $this->Paginator->sort('gender'); ?></th>
         <?php if($redir == 'manager') { ?><th><?php echo $this->Paginator->sort('vigiflow_ref'); ?></th> <?php } ?>
-        <th><?php echo $this->Paginator->sort('created'); ?></th>
+        <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
+        <th><?php echo $this->Paginator->sort('modified', 'Date modified'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
        </thead>
@@ -307,7 +308,8 @@
         </td>
         <td><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? h($aefi['Aefi']['patient_name']) : $aefi['Aefi']['gender']; ?>&nbsp;</td>
         <?php if($redir == 'manager') { ?><td><?php echo h($aefi['Aefi']['vigiflow_ref']); echo "\n".$aefi['Aefi']['vigiflow_date']; ?></td> <?php } ?>
-        <td><?php echo h($aefi['Aefi']['created']); ?>&nbsp;</td>
+        <td><?php echo h($aefi['Aefi']['reporter_date']); ?>&nbsp;</td>
+        <td><?php echo h($aefi['Aefi']['modified']); ?>&nbsp;</td>
         <td class="actions">
             <?php 
               if($aefi['Aefi']['submitted'] > 1) {

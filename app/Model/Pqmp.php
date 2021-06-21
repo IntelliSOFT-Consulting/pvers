@@ -13,7 +13,7 @@ class Pqmp extends AppModel {
 	public $filterArgs = array(
         'reference_no' => array('type' => 'like', 'encode' => true),
         'brand_name' => array('type' => 'like', 'encode' => true),
-        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Pqmp.created BETWEEN ? AND ?'),
+        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Pqmp.reporter_date BETWEEN ? AND ?'),
         'start_date' => array('type' => 'query', 'method' => 'dummy'),
         'end_date' => array('type' => 'query', 'method' => 'dummy'),
         'facility_name' => array('type' => 'like', 'encode' => true),

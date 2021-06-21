@@ -17,7 +17,7 @@ class Medication extends AppModel {
         'health_program' => array('type' => 'query', 'method' => 'findByHealthProgram', 'encode' => true),
         'name_of_institution' => array('type' => 'like', 'encode' => true),
         'reach_patient' => array('type' => 'like', 'encode' => true),
-        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Medication.created BETWEEN ? AND ?'),
+        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Medication.reporter_date BETWEEN ? AND ?'),
         'start_date' => array('type' => 'query', 'method' => 'dummy'),
         'end_date' => array('type' => 'query', 'method' => 'dummy'),
         'county_id' => array('type' => 'value'),

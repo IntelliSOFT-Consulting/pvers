@@ -181,7 +181,8 @@
 							<tr>
 								<th><?php echo $this->Paginator->sort('id');?></th>
 								<th><?php echo $this->Paginator->sort('brand_name');?></th>
-								<th><?php echo $this->Paginator->sort('created');?></th>
+						        <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
+						        <th><?php echo $this->Paginator->sort('modified', 'Date modified'); ?></th>
 								<th><?php echo __('Actions');?></th>
 							</tr>
 						</thead>
@@ -195,7 +196,8 @@
 									?>&nbsp;
 								</td>
 								<td><?php echo h($pqmp['Pqmp']['brand_name']); ?>&nbsp;</td>
-								<td><?php echo h($pqmp['Pqmp']['created']); ?>&nbsp;</td>
+								<td><?php echo h($pqmp['Pqmp']['reporter_date']); ?>&nbsp;</td>
+								<td><?php echo h($pqmp['Pqmp']['modified']); ?>&nbsp;</td>
 								<td>
 									<?php
 									if($pqmp['Pqmp']['submitted'] == '0') {

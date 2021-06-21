@@ -13,7 +13,7 @@ class Transfusion extends AppModel {
 	public $filterArgs = array(
         'reference_no' => array('type' => 'like', 'encode' => true),
         'diagnosis' => array('type' => 'like', 'encode' => true),
-        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Transfusion.created BETWEEN ? AND ?'),
+        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Transfusion.reporter_date BETWEEN ? AND ?'),
         'start_date' => array('type' => 'query', 'method' => 'dummy'),
         'end_date' => array('type' => 'query', 'method' => 'dummy'),
         'previous_transfusion' => array('type' => 'value'),
