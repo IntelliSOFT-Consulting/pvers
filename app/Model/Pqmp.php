@@ -239,6 +239,13 @@ class Pqmp extends AppModel {
                 'message'  => 'Please provide a name'
             ),
 		),
+		'reporter_date' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the date of submission of the report'
+            ),
+        ),
 		'reporter_email' => array(
             'notBlank' => array(
                 'rule'     => 'email',

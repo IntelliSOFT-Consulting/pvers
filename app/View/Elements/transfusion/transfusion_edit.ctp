@@ -886,7 +886,7 @@
                         
                         echo $this->Form->input('reporter_date', array(
                             'type' => 'text', 'class' => 'date-pick-field',
-                            'label' => array('class' => 'control-label required', 'text' => 'Date of report'),
+                            'label' => array('class' => 'control-label required', 'text' => 'Date of report <span style="color:red;">*</span>'),
                         ));
                     ?>
                 </div><!--/span-->

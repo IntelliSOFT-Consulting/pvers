@@ -34,7 +34,7 @@
                   </tr>
                   <tr>
                     <th colspan="2" style="width: 17%"> <label class="required">Name of Vaccine <span style="color:red;">*</span></label><small class="help-block">(e.g. BCG, DPT-Hib-HeB)</small></th>
-                    <th style="width: 7%"> <label>Dose No.</label></th>
+                    <th style="width: 7%"> <label>Dose No.</label><small class="help-block">(e.g. Dose 1, 2)</small></th>
                     <th style="width: 13%"> <label class="required"> Date & Time vaccinated <span style="color:red;">*</span><br><small class="help-block">(dd-mm-yyyy 24Hr:Min)</small></label></th>
                     <th> Route of vaccination <br><small class="help-block">(i.m.,s.c., i.d.)</small></th>
                     <th style="width: 5%"> <label>Site of vaccination </label></th>

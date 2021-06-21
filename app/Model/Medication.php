@@ -281,6 +281,13 @@ class Medication extends AppModel {
                 'message'  => 'Please provide the name of the reporter'
             ),
         ),
+        'reporter_date' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the date of the report'
+            ),
+        ),
         'reporter_email' => array(
             'notBlank' => array(
                 'rule'     => 'email',
