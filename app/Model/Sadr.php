@@ -19,7 +19,7 @@ class Sadr extends AppModel {
         'report_title' => array('type' => 'like', 'encode' => true),
         'name_of_institution' => array('type' => 'like', 'encode' => true),
         'serious' => array('type' => 'like', 'encode' => true),
-        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Sadr.reporter_date BETWEEN ? AND ?'),
+        'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'CAST(Sadr.reporter_date as DATE) BETWEEN ? AND ?'),
         'start_date' => array('type' => 'query', 'method' => 'dummy'),
         'end_date' => array('type' => 'query', 'method' => 'dummy'),
         'county_id' => array('type' => 'value'),

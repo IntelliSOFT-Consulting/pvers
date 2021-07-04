@@ -359,10 +359,10 @@ class AefisController extends AppController {
             $data_save['AefiListOfVaccine'] = $aefi['AefiListOfVaccine'];
             $data_save['aefi_id'] = $id;
 
-            $count = $this->Aefi->find('count',  array('conditions' => array(
-                        'Aefi.reference_no LIKE' => $aefi['Aefi']['reference_no'].'%',
-                        )));
-            $count = ($count < 10) ? "0$count" : $count;
+            // $count = $this->Aefi->find('count',  array('conditions' => array(
+            //             'Aefi.reference_no LIKE' => $aefi['Aefi']['reference_no'].'%',
+            //             )));
+            // $count = ($count < 10) ? "0$count" : $count;
             $data_save['reference_no'] = $aefi['Aefi']['reference_no'];//.'_F'.$count;
             $data_save['report_type'] = 'Followup';
             $data_save['submitted'] = 0;
