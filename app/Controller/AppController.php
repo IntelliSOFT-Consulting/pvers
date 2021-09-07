@@ -27,66 +27,110 @@ App::uses('Controller', 'Controller');
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
  *
- * @package		app.Controller
- * @link		https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
+ * @package     app.Controller
+ * @link        https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array(
+    public $components = array(
         'Acl',
-        'Auth' => array(
-            'authorize' => array(
-                'Actions' => array('actionPath' => 'controllers')
-            )
-        ),
+        // 'Auth' => array(
+        //     'authorize' => array(
+        //         'Actions' => array('actionPath' => 'controllers')
+        //     )
+        // ),
+        // 'Auth' => array('Jwtoken'),
+        // 'Auth',
         'RequestHandler' => array('viewClassMap' => array('csv' => 'CsvView.Csv')), 
-		'Session',
-		'Flash',
-		'DebugKit.Toolbar'
-	);
+        'Session',
+        'Flash',
+        'DebugKit.Toolbar'
+    );
 
     public $helpers = array('Html', 'Form', 'Session');
 
-    public function beforeFilter() {
-		$this->Auth->allow('display');
-        //Configure AuthComponent
-        // $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-        // $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-        // $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home', 'admin' => false);
-		/*$this->Auth->authenticate = array(
-			'all' => array (
-				'scope' => array('User.is_active' => 1)   
-			),  
-			'Form' 
-		);*/
-		
-		$this->Auth->authError = __('<div class="alert alert-error">
-										<button data-dismiss="alert" class="close">&times;</button>
-										<h4><strong>Sorry!</strong> You don\'t have sufficient permissions to access the location.</h4>
-									 </div>', true);
-		// $this->Auth->loginError = __('Invalid e-mail / password combination.  Please try again', true);
-		$this->Auth->loginError = __('<div class="alert alert-error">
-										<button data-dismiss="alert" class="close">&times;</button>
-										<h4>Invalid e-mail / password combination.  Please try again.</h4>
-									 </div>', true);
-		$redir = 'default';
-		if($this->Auth->User('group_id') == '1')  $redir = 'admin';
-		if($this->Auth->User('group_id') == '2')  $redir = 'manager';
-		if($this->Auth->User('group_id') == '3')  $redir = 'reporter';
-		if($this->Auth->User('group_id') == '4')  $redir = 'partner';
-
-		  $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
-		  $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'admin' => false);
-		  $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'dashboard', $redir => true);
-
-		$this->Auth->authError = __('<div class="alert alert-error">
-		              <button data-dismiss="alert" class="close">&times;</button>
-		              <h4><strong>Sorry!</strong> You don\'t have sufficient permissions to access the location.</h4>
-		             </div>', true);
-		$this->Auth->loginError = __('<div class="alert alert-error">
-		              <button data-dismiss="alert" class="close">&times;</button>
-		              <h4>Invalid e-mail / password combination.  Please try again.</h4>
-		             </div>', true);
-		$this->set('redir', $redir);
-		$this->set('root', '/');
+    public function isAuthorized($user = null) {
+        // Any registered user can access public functions
+            return true;        
     }
+    public function beforeFilter() {
+        $redir = 'default';
+        if (isset($this->request->prefix) && $this->request->prefix == 'api') {
+            // $this->Auth->authenticate['JwtAuth.JwtToken'] = array(
+            //     'fields' => array(
+            //         'username' => 'username',
+            //         'password' => 'password',
+            //         'token' => 'public_key',
+            //     ),
+            //     'parameter' => '_token',
+            //     'userModel' => 'User',
+            //     // 'scope' => array('User.is_active' => 1),
+            //     'pepper' => Configure::read('API.token.pepper'),
+            // );
+            $this->Auth = $this->Components->load('Auth');
+            $this->Auth->authenticate = array('Jwtoken');
+            $this->Auth->authorize = array('Controller');
+            $this->Auth->initialize($this);
+            /*$this->Auth = $this->Components->load(
+                'Auth',
+                array('authenticate' => 'Jwtoken', 'authorize' => array('Controller'))
+            );*/
+            // $this->Auth->authenticate = array(
+            //     'Form' => array('userModel' => 'Member')
+            // );
+            
+            // debug($this->request->prefix);
+            // $this->Auth->authorize = array('Controller');
+            
+            // $this->Auth->allow('api_token');
+            // $this->Auth->allow();
+        } else {
+            $this->Auth = $this->Components->load('Auth');
+            $this->Auth->authorize = array(
+                'Actions' => array('actionPath' => 'controllers')
+            );
+            $this->Auth->initialize($this);
+            $this->Auth->allow('display');
+            //Configure AuthComponent
+            // $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+            // $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
+            // $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home', 'admin' => false);
+            // $this->Auth->authenticate = array(
+            //     'all' => array (
+            //         'scope' => array('User.is_active' => 1)   
+            //     ),  
+            //     'Form' 
+            // );
+            
+            $this->Auth->authError = __('<div class="alert alert-error">
+                                            <button data-dismiss="alert" class="close">&times;</button>
+                                            <h4><strong>Sorry!</strong> You don\'t have sufficient permissions to access the location.</h4>
+                                         </div>', true);
+            // $this->Auth->loginError = __('Invalid e-mail / password combination.  Please try again', true);
+            $this->Auth->loginError = __('<div class="alert alert-error">
+                                            <button data-dismiss="alert" class="close">&times;</button>
+                                            <h4>Invalid e-mail / password combination.  Please try again.</h4>
+                                         </div>', true);
+            
+            if($this->Auth->User('group_id') == '1')  $redir = 'admin';
+            if($this->Auth->User('group_id') == '2')  $redir = 'manager';
+            if($this->Auth->User('group_id') == '3')  $redir = 'reporter';
+            if($this->Auth->User('group_id') == '4')  $redir = 'partner';
+
+              $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
+              $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'admin' => false);
+              $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'dashboard', $redir => true);
+
+            $this->Auth->authError = __('<div class="alert alert-error">
+                          <button data-dismiss="alert" class="close">&times;</button>
+                          <h4><strong>Sorry!</strong> You don\'t have sufficient permissions to access the location.</h4>
+                         </div>', true);
+            $this->Auth->loginError = __('<div class="alert alert-error">
+                          <button data-dismiss="alert" class="close">&times;</button>
+                          <h4>Invalid e-mail / password combination.  Please try again.</h4>
+                         </div>', true);
+            $this->set('redir', $redir);
+            $this->set('root', '/');
+        }
+    }
+
 }

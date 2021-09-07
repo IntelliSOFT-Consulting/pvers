@@ -1,0 +1,32 @@
+{
+    "name": "t73biz/cakephp2-jwt-auth",
+    "type": "cakephp-plugin",
+    "description": "Cakephp 2 JWT Authentication",
+    "keywords":[
+        "cakephp",
+        "authenticate",
+        "authentication",
+        "jwt"
+    ],
+    "homepage": "http://github.com/t73biz/cakephp2-jwt-auth",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ronald Chaplin",
+            "email": "rchaplin@t73biz.com"
+        },
+        {
+            "name": "Florian Krämer"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "~2.0",
+        "composer/installers": "*"
+    },
+    "extra": {
+        "installer-name": "JwtAuth"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.*"
+    }
+}

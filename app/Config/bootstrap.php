@@ -79,6 +79,7 @@ CakePlugin::load('CsvView');
 CakePlugin::load('Shim', ['bootstrap' => true]);
 CakePlugin::load('Tools', ['bootstrap' => true]);
 CakePlugin::load('Queue');
+// CakePlugin::load('JwtAuth');
 
 /**
 
@@ -127,3 +128,14 @@ CakeLog::config('error', array(
 
 Configure::write('vigiflow_api', 'https://api.who-umc.org/demo/vigiflow/icsrs'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
 Configure::write('vigiflow_key', '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
+Configure::write('API.token.pepper', 'touch2d34asdfpad'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
+
+spl_autoload_register(function ($class) {
+    foreach (App::path('Vendor') as $base) {
+        $path = $base . str_replace('\\', DS, $class) . '.php';
+        if (file_exists($path)) {
+            include $path;
+            return;
+        }
+    }
+});

@@ -40,6 +40,8 @@
 	Router::connect('/manager', array('controller' => 'users', 'action' => 'dashboard', 'manager' => true));		
 	//ADMIN ROUTING: DASHBOARD PAGE
 	Router::connect('/admin', array('controller' => 'users', 'action' => 'dashboard', 'admin' => true));	
+	//API ROUTING: DASHBOARD PAGE
+	Router::connect('/api', array('controller' => 'users', 'action' => 'dashboard', 'api' => true));	
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

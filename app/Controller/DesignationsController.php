@@ -14,12 +14,23 @@ class DesignationsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('api_index');
+	}
 
 /**
  * admin_index method
  *
  * @return void
  */
+
+	public function api_index() {
+		$this->Designation->recursive = -1;
+		$this->set('designations', $this->Designation->find('list'));
+		$this->set('_serialize', array('designations'));
+	}
+
 	public function admin_index() {
 		$this->Designation->recursive = 0;
 		$this->set('designations', $this->Paginator->paginate());
