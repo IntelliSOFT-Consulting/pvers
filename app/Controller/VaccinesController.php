@@ -15,6 +15,11 @@ class VaccinesController extends AppController {
  */
 	public $components = array('Paginator');
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('api_index');
+	}
+
 /**
  * index method
  *
@@ -23,6 +28,12 @@ class VaccinesController extends AppController {
 	public function admin_index() {
 		$this->Vaccine->recursive = 0;
 		$this->set('vaccines', $this->Paginator->paginate());
+	}
+
+	public function api_index() {
+		$this->Vaccine->recursive = -1;
+		$this->set('vaccines', $this->Vaccine->find('list', array('order' => array('Vaccine.vaccine_name' => 'asc'))));
+		$this->set('_serialize', array('vaccines'));
 	}
 
 /**

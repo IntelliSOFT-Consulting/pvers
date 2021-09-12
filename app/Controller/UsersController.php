@@ -30,7 +30,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // remove initDb
-        $this->Auth->allow('register', 'login', 'api_register', 'activate_account', 'forgotPassword', 'resetPassword', 'logout', 'initDB');
+        $this->Auth->allow('register', 'login', 'api_register', 'api_token', 'activate_account', 'forgotPassword', 'resetPassword', 'logout', 'initDB');
     }
 
 
@@ -77,6 +77,15 @@ class UsersController extends AppController {
 
     }
 
+    public function api_restricted() {
+        $user = $this->Auth->User('User.id');
+        $this->set([
+                'success' => false,
+                'data' => $user,
+                '_serialize' => ['success', 'data']
+            ]);
+    }
+
     public function api_login() {
         // if (!class_exists('JWT')) {
         //     throw new RuntimeException('Your desired vendor library cannot be found');
@@ -108,7 +117,7 @@ class UsersController extends AppController {
         // Find user using username and hashed password
         // return user object for now
         //$user = $this->User->find('first', array('conditions' => array('User.username' => $this->request->data['User']['username'])));
-        $user = ($this->Auth->login());
+        /*$user = ($this->Auth->login());
         $token = 'Token';
         if($user) {
             $this->set('user', $this->Auth->User());
@@ -120,7 +129,11 @@ class UsersController extends AppController {
                     'data' => $this->request->data,
                     '_serialize' => ['success', 'data']
                 ]);
-        }
+        }*/
+        $this->set([
+                'aefi' => $this->User->Aefi->find('first', array('conditions' => array('Aefi.id' => 619))), 
+                // 'aefi' => $this->User->find('first', array('conditions' => array('User.id' => 2397), 'recursive' => -1, 'contian' => null)), 
+                '_serialize' => ['aefi']]);
     }
 
     public function apis_login() {
@@ -528,13 +541,13 @@ class UsersController extends AppController {
                 }
                 $this->set([
                     'success' => true,
-                    'user' => $this->request->data(),
+                    'user' => $this->request->data,
                     '_serialize' => ['success', 'user']
                 ]);
             } else {                
                 $this->set([
                     'success' => false,
-                    'user' => $this->request->data(),
+                    'user' => $this->request->data,
                     '_serialize' => ['success', 'user']
                 ]);
             }

@@ -15,6 +15,10 @@ class SubCountiesController extends AppController {
  */
 	public $components = array('Paginator');
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('api_index');
+	}
 /**
  * index method
  *
@@ -25,6 +29,11 @@ class SubCountiesController extends AppController {
 		$this->set('subCounties', $this->Paginator->paginate());
 	}
 
+	public function api_index() {
+		$this->SubCounty->recursive = -1;
+		$this->set('subCounties', $this->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'asc'))));
+		$this->set('_serialize', array('subCounties'));
+	}
 /**
  * view method
  *

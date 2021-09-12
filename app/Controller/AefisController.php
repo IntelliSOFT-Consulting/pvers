@@ -491,6 +491,116 @@ class AefisController extends AppController {
         $this->set(compact('vaccines'));
     }
 
+
+    public function api_add() {
+        
+        // $this->Aefi->create();
+        // $this->Aefi->save(['Aefi' => ['user_id' => $this->Auth->User('id'),  
+        //     'reference_no' => 'new',//'AEFI/'.date('Y').'/'.$count,
+        //     'report_type' => 'Initial', 
+        //     'designation_id' => $this->Auth->User('designation_id'), 
+        //     'county_id' => $this->Auth->User('county_id'), 
+        //     'institution_code' => $this->Auth->User('institution_code'), 
+        //     'address' => $this->Auth->User('institution_address'),
+        //     'reporter_name' => $this->Auth->User('name'),
+        //     'reporter_email' => $this->Auth->User('email'),
+        //     'reporter_phone' => $this->Auth->User('phone_no'),
+        //     'contact' => $this->Auth->User('institution_contact'),
+        //     'name_of_institution' => $this->Auth->User('name_of_institution')
+        //     ]], false);
+        $this->Aefi->create();
+
+        $save_data = $this->request->data;
+        $save_data['Aefi']['user_id'] = $this->Auth->user('User.id');
+        $save_data['Aefi']['submitted'] = 2;
+        //lucian
+            $count = $this->Aefi->find('count',  array(
+                'fields' => 'Aefi.reference_no',
+                'conditions' => array('Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Aefi.reference_no !=' => 'new'
+                )
+                ));
+            $count++;
+            $count = ($count < 10) ? "0$count" : $count; 
+        $save_data['Aefi']['reference_no'] = 'AEFI/'.date('Y').'/'.$count;
+        $save_data['Aefi']['report_type'] = 'Initial';
+        //bokelo
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = 'first';                
+            if ($this->Aefi->saveAssociated($save_data, array('validate' => $validate, 'deep' => true))) {
+
+                    
+                    $aefi = $this->Aefi->read(null, $this->Aefi->id);
+                    $id = $this->Aefi->id;
+
+                    //******************       Send Email and Notifications to Applicant and Managers          *****************************
+                    $this->loadModel('Message');
+                    $html = new HtmlHelper(new ThemeView());
+                    $message = $this->Message->find('first', array('conditions' => array('name' => 'reporter_aefi_submit')));
+                    $variables = array(
+                      'name' => $this->Auth->User('name'), 'reference_no' => $aefi['Aefi']['reference_no'],
+                      'reference_link' => $html->link($aefi['Aefi']['reference_no'], array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id'], 'reporter' => true, 'full_base' => true), 
+                        array('escape' => false)),
+                      'modified' => $aefi['Aefi']['modified']
+                      );
+                    $datum = array(
+                        'email' => $aefi['Aefi']['reporter_email'],
+                        'id' => $id, 'user_id' => $this->Auth->User('id'), 'type' => 'reporter_aefi_submit', 'model' => 'Aefi',
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
+                      );
+
+                    $this->loadModel('Queue.QueuedTask');
+                    $this->QueuedTask->createJob('GenericEmail', $datum);
+                    $this->QueuedTask->createJob('GenericNotification', $datum);
+                    
+                    //Notify managers
+                    $users = $this->Aefi->User->find('all', array(
+                        'contain' => array(),
+                        'conditions' => array('User.group_id' => 2)
+                    ));
+                    foreach ($users as $user) {
+                      $variables = array(
+                        'name' => $user['User']['name'], 'reference_no' => $aefi['Aefi']['reference_no'], 
+                        'reference_link' => $html->link($aefi['Aefi']['reference_no'], array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id'], 'manager' => true, 'full_base' => true), 
+                          array('escape' => false)),
+                        'modified' => $aefi['Aefi']['modified']
+                      );
+                      $datum = array(
+                        'email' => $user['User']['email'],
+                        'id' => $id, 'user_id' => $user['User']['id'], 'type' => 'reporter_aefi_submit', 'model' => 'Aefi',
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
+                      );
+
+                      $this->QueuedTask->createJob('GenericEmail', $datum);
+                      $this->QueuedTask->createJob('GenericNotification', $datum);
+                      // CakeResque::enqueue('default', 'GenericEmailShell', array('sendEmail', $datum));
+                      // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
+                    }
+                    //**********************************    END   *********************************
+
+                    $this->set([
+                        'success' => true,
+                        'message' => 'The AEFI has been submitted to PPB',
+                        'aefi' => $aefi,
+                        '_serialize' => ['success', 'message', 'aefi']
+                    ]);     
+
+            } else {
+                $this->set([
+                        'success' => false,
+                        'message' => 'The AEFI could not be saved',
+                        'validationErrors' => $this->Aefi->validationErrors,
+                        'aefi' => $this->request->data,
+                        '_serialize' => ['success', 'message', 'validationErrors', 'aefi']
+                    ]);  
+            }
+        } else {
+            throw new MethodNotAllowedException();
+        }
+    }
+
     public function manager_copy($id = null) {
         if ($this->request->is('post')) {
             $this->Aefi->id = $id;

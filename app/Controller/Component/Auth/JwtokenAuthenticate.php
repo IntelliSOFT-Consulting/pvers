@@ -25,7 +25,8 @@ class JwtokenAuthenticate extends BaseAuthenticate {
 		        
 	            $payload = JWT::decode(
 	                $token,
-	                Configure::read('Security.salt')
+	                Configure::read('Security.salt'), 
+                    array_keys(JWT::$supported_algs)
 	            );
 
 	            $result = ClassRegistry::init('User')->find('first', array(
