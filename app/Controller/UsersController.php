@@ -548,13 +548,13 @@ class UsersController extends AppController {
                 $this->set([
                     'status' => 'success',
                     'user' => $this->request->data,
-                    '_serialize' => ['success', 'user']
+                    '_serialize' => ['status', 'user']
                 ]);
             } else {                
                 $this->set([
                     'status' => 'failed',
                     'user' => $this->request->data,
-                    '_serialize' => ['success', 'user']
+                    '_serialize' => ['status', 'user']
                 ]);
             }
         }
