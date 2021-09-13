@@ -581,19 +581,19 @@ class AefisController extends AppController {
                     //**********************************    END   *********************************
 
                     $this->set([
-                        'success' => true,
+                        'status' => 'success',
                         'message' => 'The AEFI has been submitted to PPB',
                         'aefi' => $aefi,
-                        '_serialize' => ['success', 'message', 'aefi']
+                        '_serialize' => ['status', 'message', 'aefi']
                     ]);     
 
             } else {
                 $this->set([
-                        'success' => false,
+                        'status' => 'failed',
                         'message' => 'The AEFI could not be saved',
-                        'validationErrors' => $this->Aefi->validationErrors,
+                        'validation' => $this->Aefi->validationErrors,
                         'aefi' => $this->request->data,
-                        '_serialize' => ['success', 'message', 'validationErrors', 'aefi']
+                        '_serialize' => ['status', 'message', 'validation', 'aefi']
                     ]);  
             }
         } else {

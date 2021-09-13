@@ -160,7 +160,7 @@ class UsersController extends AppController {
                 // }
 
                 $this->set([
-                    'success' => true,
+                    'status' => 'success',
                     'user' => $this->Auth->User('username'),
                     'data' => [
                         'token' => JWT::encode(
@@ -171,11 +171,17 @@ class UsersController extends AppController {
                             Security::salt()
                         )
                     ],
-                    '_serialize' => ['success', 'user', 'data']
+                    '_serialize' => ['status', 'user', 'data']
                 ]);
 
             } else {
-                $this->Session->setFlash('Your username or password is incorrect.', 'alerts/flash_error');
+                // $this->Session->setFlash('Your username or password is incorrect.', 'alerts/flash_error');
+                $this->set([
+                    'status' => 'failed',
+                    'message' => 'Failed to register user',
+                    'validation' => $this->User->validationErrors,
+                    '_serialize' => ['status', 'message', 'validation']
+                ]);
             }
         }
         /*if ($this->Auth->login()) {
