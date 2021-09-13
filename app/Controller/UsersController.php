@@ -546,13 +546,13 @@ class UsersController extends AppController {
                     // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
                 }
                 $this->set([
-                    'success' => true,
+                    'status' => 'success',
                     'user' => $this->request->data,
                     '_serialize' => ['success', 'user']
                 ]);
             } else {                
                 $this->set([
-                    'success' => false,
+                    'status' => 'failed',
                     'user' => $this->request->data,
                     '_serialize' => ['success', 'user']
                 ]);
