@@ -55,6 +55,31 @@ class AefisController extends AppController {
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    public function api_index() {
+        $this->Prg->commonProcess();
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($this->page_options);
+
+        $criteria = $this->Aefi->parseCriteria($this->passedArgs);
+        $criteria['Aefi.user_id'] = $this->Auth->User('id');
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Aefi.created' => 'desc');
+        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Aefi->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end pdf export
+        $this->set([
+            'page_options', $this->page_options,
+            'aefis' => Sanitize::clean($this->paginate(), array('encode' => false)),
+            '_serialize' => ['aefis', 'page_options']]);
+    }
+
     public function partner_index() {
         $this->Prg->commonProcess();
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
@@ -140,7 +165,7 @@ class AefisController extends AppController {
     public function reporter_view($id = null) {
         $this->Aefi->id = $id;
         if (!$this->Aefi->exists()) {
-            $this->Session->setFlash(__('Could not verify the medical devices report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->Session->setFlash(__('Could not verify the AEFI report ID. Please ensure the ID is correct.'), 'flash_error');
             $this->redirect('/');
         }
 
@@ -175,6 +200,33 @@ class AefisController extends AppController {
             $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
         }
+    }
+
+    public function api_view($id = null) {
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            $this->set([
+                    'status' => 'failed',
+                    'message' => 'Could not verify the AEFI report ID. Please ensure the ID is correct.',
+                    '_serialize' => ['status', 'message']
+                ]);
+        }
+
+        if (strpos($this->request->url, 'pdf') !== false) {
+            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+            // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+        }
+
+        // $aefi = $this->Aefi->read(null);
+        $aefi = $this->Aefi->find('first', array(
+                'conditions' => array('Aefi.id' => $id),
+                'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.AefiDescription', 'AefiOriginal.AefiListOfVaccine.Vaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
+            ));
+        $this->set([
+            'status' => 'success', 
+            'aefi' => $aefi, 
+            '_serialize' => ['status', 'aefi']]);
     }
 
     public function partner_view($id = null) {
