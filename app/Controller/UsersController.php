@@ -78,9 +78,9 @@ class UsersController extends AppController {
     }
 
     public function api_restricted() {
-        $user = $this->Auth->User('User.id');
+        $user = $this->Auth->User();
         $this->set([
-                'success' => false,
+                'success' => true,
                 'data' => $user,
                 '_serialize' => ['success', 'data']
             ]);
