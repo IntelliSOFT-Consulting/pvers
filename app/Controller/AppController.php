@@ -50,8 +50,8 @@ class AppController extends Controller {
 
     public function isAuthorized($user = null) {
         // Any registered user can access public functions
-        if ($user['User']['group_id'] == 3) {
-            return true;
+        if (!empty($user)) {
+            return (bool) ($user['User']['group_id'] == '3');
         }
         return false;        
     }
