@@ -35,7 +35,7 @@ class JwtokenAuthenticate extends BaseAuthenticate {
 					'contain' => null,
 				));
 
-	            return $result;
+	            return $result['User'];
             } else {
             	return false;
             }
