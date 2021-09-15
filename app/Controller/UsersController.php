@@ -554,7 +554,8 @@ class UsersController extends AppController {
                 $this->set([
                     'status' => 'failed',
                     'user' => $this->request->data,
-                    '_serialize' => ['status', 'user']
+                    'validation' => $this->Aefi->validationErrors,
+                    '_serialize' => ['status', 'user', 'validation']
                 ]);
             }
         }
