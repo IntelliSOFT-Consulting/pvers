@@ -51,7 +51,7 @@ class AppController extends Controller {
     public function isAuthorized($user = null) {
         // Any registered user can access public functions
         if (!empty($user)) {
-            return (bool) ($user['User']['group_id'] == '3');
+            return (bool) ($user['group_id'] == '3');
         }
         // return true;
         return false;        
@@ -73,7 +73,8 @@ class AppController extends Controller {
             $this->Auth = $this->Components->load('Auth');
             $this->Auth->authenticate = array('Jwtoken');
             $this->Auth->authorize = array('Controller');
-            $this->Auth->sessionKey = false;
+            // $this->Auth->sessionKey = false;
+            AuthComponent::$sessionKey = false;
             $this->Auth->initialize($this);
             /*$this->Auth = $this->Components->load(
                 'Auth',
