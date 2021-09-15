@@ -548,7 +548,7 @@ class AefisController extends AppController {
         $this->Aefi->create();
 
         $save_data = $this->request->data;
-        $save_data['Aefi']['user_id'] = $this->Auth->user('User.id');
+        $save_data['Aefi']['user_id'] = $this->Auth->user('id');
         $save_data['Aefi']['submitted'] = 2;
         //lucian
             $count = $this->Aefi->find('count',  array(
