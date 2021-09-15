@@ -508,7 +508,7 @@ class UsersController extends AppController {
                 $variables = array(
                         'name' => $user['User']['name'], 'username' => $user['User']['username'], 
                         'email' => $user['User']['email'], 
-                        'reference_link' => $html->link('Activate', array('controller' => 'users', 'action' => 'activate_account', 'prefix' => false, $id, $this->Auth->password($user['User']['email']), 'full_base' => true), 
+                        'reference_link' => $html->link('Activate', array('controller' => 'users', 'action' => 'activate_account', 'admin' => false, $id, $this->Auth->password($user['User']['email']), 'full_base' => true), 
                           array('escape' => false)),
                       );
                 $datum = array(
