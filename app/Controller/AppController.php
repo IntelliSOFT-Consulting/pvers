@@ -50,7 +50,10 @@ class AppController extends Controller {
 
     public function isAuthorized($user = null) {
         // Any registered user can access public functions
-            return true;        
+        if ($user['User']['group_id'] == 3) {
+            return true;
+        }
+        return false;        
     }
     public function beforeFilter() {
         $redir = 'default';

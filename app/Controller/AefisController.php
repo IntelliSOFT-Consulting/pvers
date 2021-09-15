@@ -545,21 +545,6 @@ class AefisController extends AppController {
 
 
     public function api_add() {
-        
-        // $this->Aefi->create();
-        // $this->Aefi->save(['Aefi' => ['user_id' => $this->Auth->User('id'),  
-        //     'reference_no' => 'new',//'AEFI/'.date('Y').'/'.$count,
-        //     'report_type' => 'Initial', 
-        //     'designation_id' => $this->Auth->User('designation_id'), 
-        //     'county_id' => $this->Auth->User('county_id'), 
-        //     'institution_code' => $this->Auth->User('institution_code'), 
-        //     'address' => $this->Auth->User('institution_address'),
-        //     'reporter_name' => $this->Auth->User('name'),
-        //     'reporter_email' => $this->Auth->User('email'),
-        //     'reporter_phone' => $this->Auth->User('phone_no'),
-        //     'contact' => $this->Auth->User('institution_contact'),
-        //     'name_of_institution' => $this->Auth->User('name_of_institution')
-        //     ]], false);
         $this->Aefi->create();
 
         $save_data = $this->request->data;
