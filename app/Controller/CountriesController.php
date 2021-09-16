@@ -16,7 +16,7 @@ class CountriesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index');
+		$this->Auth->allow('index', 'api_index');
 	}
 /**
  * index method
@@ -26,6 +26,12 @@ class CountriesController extends AppController {
 	public function index() {
 		$this->Country->recursive = -1;
 		$this->set('countries', $this->Country->find('list'));
+	}
+
+	public function api_index() {
+		$this->Country->recursive = -1;
+		$this->set('countries', $this->Country->find('list', array('order' => array('Country.name' => 'asc'))));
+		$this->set('_serialize', array('countries'));
 	}
 
 	public function admin_index() {

@@ -71,6 +71,34 @@ class PqmpsController extends AppController {
         $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    public function api_index() {
+        $this->Prg->commonProcess();
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($this->page_options);
+
+
+        $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
+        $criteria['Pqmp.user_id'] = $this->Auth->User('id');        
+
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Pqmp.created' => 'desc');
+        $this->paginate['contain'] = array('County', 'Country', 'Designation');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Pqmp->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end csv export
+        
+        $this->set([
+            'page_options', $this->page_options,
+            'pqmps' => Sanitize::clean($this->paginate(), array('encode' => false)),
+            '_serialize' => ['pqmps', 'page_options']]);
+    }
+
     public function partner_index() {
         $this->Prg->commonProcess();
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
@@ -181,6 +209,33 @@ class PqmpsController extends AppController {
             $this->pdfConfig = array('filename' => 'PQMP_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
         }
+    }
+
+    public function api_view($id = null) {
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            $this->set([
+                    'status' => 'failed',
+                    'message' => 'Could not verify the PQMP report ID. Please ensure the ID is correct.',
+                    '_serialize' => ['status', 'message']
+                ]);
+        } else {
+            if (strpos($this->request->url, 'pdf') !== false) {
+                $this->pdfConfig = array('filename' => 'PQMP_' . $id .'.pdf',  'orientation' => 'portrait');
+                // $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
+            }
+
+            $pqmp = $this->Pqmp->find('first', array(
+                    'conditions' => array('Pqmp.id' => $id),
+                    'contain' => array('Country', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                    'PqmpOriginal', 'PqmpOriginal.Country', 'PqmpOriginal.County', 'PqmpOriginal.SubCounty', 'PqmpOriginal.Attachment', 'PqmpOriginal.Designation', 'PqmpOriginal.ExternalComment')
+                ));
+            
+            $this->set([
+                'status' => 'success', 
+                'pqmp' => $pqmp, 
+                '_serialize' => ['status', 'pqmp']]);
+        }        
     }
 
     public function partner_view($id = null) {
@@ -385,6 +440,101 @@ class PqmpsController extends AppController {
         $this->set(compact('designations'));
         $countries = $this->Pqmp->Country->find('list');
         $this->set('countries', $countries);
+    }
+
+
+    public function api_add() { 
+        
+        $this->Pqmp->create();
+
+        $save_data = $this->request->data;
+        $save_data['Pqmp']['user_id'] = $this->Auth->user('id');
+        $save_data['Pqmp']['submitted'] = 2;
+        //lucian
+            $count = $this->Pqmp->find('count',  array(
+                'fields' => 'Pqmp.reference_no',
+                'conditions' => array('Pqmp.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Pqmp.reference_no !=' => 'new'
+                )
+                ));
+            $count++;
+            $count = ($count < 10) ? "0$count" : $count; 
+        $save_data['Pqmp']['reference_no'] = 'PQMP/'.date('Y').'/'.$count;
+        $save_data['Pqmp']['report_type'] = 'Initial';
+        //bokelo
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = 'first';
+            if ($this->Pqmp->saveAssociated($save_data, array('validate' => $validate, 'deep' => true))) {
+                    
+                    $pqmp = $this->Pqmp->read(null, $this->Pqmp->id);
+                    $id = $this->Pqmp->id;
+
+                    //******************       Send Email and Notifications to Applicant and Managers          *****************************
+                    $this->loadModel('Message');
+                    $html = new HtmlHelper(new ThemeView());
+                    $message = $this->Message->find('first', array('conditions' => array('name' => 'reporter_pqmp_submit')));
+                    $variables = array(
+                      'name' => $this->Auth->User('name'), 'reference_no' => $pqmp['Pqmp']['reference_no'],
+                      'reference_link' => $html->link($pqmp['Pqmp']['reference_no'], array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id'], 'reporter' => true, 'full_base' => true), 
+                        array('escape' => false)),
+                      'modified' => $pqmp['Pqmp']['modified']
+                      );
+                    $datum = array(
+                        'email' => $pqmp['Pqmp']['reporter_email'],
+                        'id' => $id, 'user_id' => $this->Auth->User('id'), 'type' => 'reporter_pqmp_submit', 'model' => 'Pqmp',
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
+                      );
+
+                    $this->loadModel('Queue.QueuedTask');
+                    $this->QueuedTask->createJob('GenericEmail', $datum);
+                    $this->QueuedTask->createJob('GenericNotification', $datum);
+                    
+                    //Notify managers
+                    $users = $this->Pqmp->User->find('all', array(
+                        'contain' => array(),
+                        'conditions' => array('User.group_id' => 2)
+                    ));
+                    foreach ($users as $user) {
+                      $variables = array(
+                        'name' => $user['User']['name'], 'reference_no' => $pqmp['Pqmp']['reference_no'], 
+                        'reference_link' => $html->link($pqmp['Pqmp']['reference_no'], array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id'], 'manager' => true, 'full_base' => true), 
+                          array('escape' => false)),
+                        'modified' => $pqmp['Pqmp']['modified']
+                      );
+                      $datum = array(
+                        'email' => $user['User']['email'],
+                        'id' => $id, 'user_id' => $user['User']['id'], 'type' => 'reporter_pqmp_submit', 'model' => 'Pqmp',
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
+                      );
+
+                      $this->QueuedTask->createJob('GenericEmail', $datum);
+                      $this->QueuedTask->createJob('GenericNotification', $datum);
+                      // CakeResque::enqueue('default', 'GenericEmailShell', array('sendEmail', $datum));
+                      // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
+                    }
+                    //**********************************    END   *********************************
+                   
+                   $this->set([
+                        'status' => 'success',
+                        'message' => 'The PQMP has been submitted to PPB',
+                        'pqmp' => $pqmp,
+                        '_serialize' => ['status', 'message', 'pqmp']
+                    ]);                      
+
+            } else {
+                $this->set([
+                        'status' => 'failed',
+                        'message' => 'The PQMP could not be saved. Please review the error(s) and resubmit and try again.',
+                        'validation' => $this->Pqmp->validationErrors,
+                        'pqmp' => $this->request->data,
+                        '_serialize' => ['status', 'message', 'validation', 'pqmp']
+                    ]);             }
+        } else {
+            throw new MethodNotAllowedException();
+        }
+
     }
 
     public function manager_copy($id = null) {

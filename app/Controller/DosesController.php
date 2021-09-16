@@ -16,7 +16,7 @@ class DosesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index');
+		$this->Auth->allow('index', 'api_index');
 	}
 /**
  * index method
@@ -26,6 +26,12 @@ class DosesController extends AppController {
 	public function index() {
 		$this->Dose->recursive = -1;
 		$this->set('doses', $this->Dose->find('list'));
+	}
+
+	public function api_index() {
+		$this->Dose->recursive = -1;
+		$this->set('doses', $this->Dose->find('list', array('order' => array('Dose.name' => 'asc'))));
+		$this->set('_serialize', array('doses'));
 	}
 
 	public function admin_index() {

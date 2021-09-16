@@ -46,7 +46,7 @@ class AefisController extends AppController {
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
-        //end pdf export
+        //end csv export
         $this->set('page_options', $this->page_options);
         $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
@@ -73,7 +73,7 @@ class AefisController extends AppController {
                   array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
               ));
         }
-        //end pdf export
+        //end csv export
         $this->set([
             'page_options', $this->page_options,
             'aefis' => Sanitize::clean($this->paginate(), array('encode' => false)),
@@ -210,23 +210,25 @@ class AefisController extends AppController {
                     'message' => 'Could not verify the AEFI report ID. Please ensure the ID is correct.',
                     '_serialize' => ['status', 'message']
                 ]);
+        } else {
+            
+            if (strpos($this->request->url, 'pdf') !== false) {
+                $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
+                // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+            }
+
+            // $aefi = $this->Aefi->read(null);
+            $aefi = $this->Aefi->find('first', array(
+                    'conditions' => array('Aefi.id' => $id),
+                    'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
+                    'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.AefiDescription', 'AefiOriginal.AefiListOfVaccine.Vaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
+                ));
+            $this->set([
+                'status' => 'success', 
+                'aefi' => $aefi, 
+                '_serialize' => ['status', 'aefi']]);
         }
 
-        if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'AEFI_' . $id,  'orientation' => 'portrait');
-            // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
-        }
-
-        // $aefi = $this->Aefi->read(null);
-        $aefi = $this->Aefi->find('first', array(
-                'conditions' => array('Aefi.id' => $id),
-                'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
-                'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.AefiDescription', 'AefiOriginal.AefiListOfVaccine.Vaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment')
-            ));
-        $this->set([
-            'status' => 'success', 
-            'aefi' => $aefi, 
-            '_serialize' => ['status', 'aefi']]);
     }
 
     public function partner_view($id = null) {
@@ -622,7 +624,7 @@ class AefisController extends AppController {
                         'message' => 'The AEFI has been submitted to PPB',
                         'aefi' => $aefi,
                         '_serialize' => ['status', 'message', 'aefi']
-                    ]);     
+                    ]);
 
             } else {
                 $this->set([

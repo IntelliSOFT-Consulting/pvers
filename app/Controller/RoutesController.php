@@ -17,7 +17,7 @@ class RoutesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index');
+		$this->Auth->allow('index', 'api_index');
 	}
 /**
  * index method
@@ -27,6 +27,12 @@ class RoutesController extends AppController {
 	public function index() {
 		$this->Route->recursive = -1;
 		$this->set('routes', $this->Route->find('list'));
+	}
+
+	public function api_index() {
+		$this->Route->recursive = -1;
+		$this->set('routes', $this->Route->find('list', array('order' => array('Route.name' => 'asc'))));
+		$this->set('_serialize', array('routes'));
 	}
 
 	public function admin_index() {

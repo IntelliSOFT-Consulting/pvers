@@ -17,7 +17,7 @@ class FrequenciesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index');
+		$this->Auth->allow('index', 'api_index');
 	}
 /**
  * index method
@@ -27,6 +27,12 @@ class FrequenciesController extends AppController {
 	public function index() {
 		$this->Frequency->recursive = -1;
 		$this->set('frequencies', $this->Frequency->find('list'));
+	}
+
+	public function api_index() {
+		$this->Frequency->recursive = -1;
+		$this->set('frequencies', $this->Frequency->find('list', array('order' => array('Frequency.name' => 'asc'))));
+		$this->set('_serialize', array('frequencies'));
 	}
 
 	public function admin_index() {
