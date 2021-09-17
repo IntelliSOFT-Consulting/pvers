@@ -31,7 +31,7 @@ class SubCountiesController extends AppController {
 
 	public function api_index() {
 		$this->SubCounty->recursive = -1;
-		$this->set('subCounties', $this->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'asc'))));
+		$this->set('subCounties', $this->SubCounty->find('all', array('fields' => array('id', 'county_id', 'sub_county_name'), 'order' => array('SubCounty.sub_county_name' => 'asc'))));
 		$this->set('_serialize', array('subCounties'));
 	}
 /**

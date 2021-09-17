@@ -530,7 +530,8 @@ class PqmpsController extends AppController {
                         'validation' => $this->Pqmp->validationErrors,
                         'pqmp' => $this->request->data,
                         '_serialize' => ['status', 'message', 'validation', 'pqmp']
-                    ]);             }
+                    ]);             
+            }
         } else {
             throw new MethodNotAllowedException();
         }

@@ -61,6 +61,34 @@ class MedicationsController extends AppController {
         $this->set('medications', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    public function api_index() {
+        $this->Prg->commonProcess();
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($this->page_options);
+
+
+        $criteria = $this->Medication->parseCriteria($this->passedArgs);
+        $criteria['Medication.user_id'] = $this->Auth->User('id');        
+
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Medication.created' => 'desc');
+        $this->paginate['contain'] = array('County', 'Designation');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Medication->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end csv export
+        
+        $this->set([
+            'page_options', $this->page_options,
+            'medications' => Sanitize::clean($this->paginate(), array('encode' => false)),
+            '_serialize' => ['medications', 'page_options']]);
+    }
+
     public function partner_index() {
         $this->Prg->commonProcess();
         $page_options = array('25' => '25', '20' => '20');
@@ -172,6 +200,32 @@ class MedicationsController extends AppController {
             $this->pdfConfig = array('filename' => 'MEDICATION_' . $id .'.pdf',  'orientation' => 'portrait');
             $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
         }
+    }
+
+    public function api_view($id = null) {
+        $this->Medication->id = $id;
+        if (!$this->Medication->exists()) {
+            $this->set([
+                    'status' => 'failed',
+                    'message' => 'Could not verify the MEDICATION report ID. Please ensure the ID is correct.',
+                    '_serialize' => ['status', 'message']
+                ]);
+        } else {
+            if (strpos($this->request->url, 'pdf') !== false) {
+                $this->pdfConfig = array('filename' => 'MEDICATION_' . $id .'.pdf',  'orientation' => 'portrait');
+                // $this->response->download('MEDICATION_'.$medication['Medication']['id'].'.pdf');
+            }
+
+            $medication = $this->Medication->find('first', array(
+                    'conditions' => array('Medication.id' => $id),
+                    'contain' => array('MedicationProduct', 'County', 'Attachment', 'Designation', 'ExternalComment')
+                ));
+            
+            $this->set([
+                'status' => 'success', 
+                'medication' => $medication, 
+                '_serialize' => ['status', 'medication']]);
+        }        
     }
 
     public function partner_view($id = null) {
@@ -481,6 +535,102 @@ class MedicationsController extends AppController {
         $counties = $this->Medication->County->find('list');
         $designations = $this->Medication->Designation->find('list');
         $this->set(compact('counties', 'designations'));
+    }
+
+    public function api_add($id = null) {
+        
+        $this->Medication->create();
+
+        $save_data = $this->request->data;
+        $save_data['Medication']['user_id'] = $this->Auth->user('id');
+        $save_data['Medication']['submitted'] = 2;
+        //lucian
+            $count = $this->Medication->find('count',  array(
+                'fields' => 'Medication.reference_no',
+                'conditions' => array('Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Medication.reference_no !=' => 'new'
+                )
+                ));
+            $count++;
+            $count = ($count < 10) ? "0$count" : $count; 
+        $save_data['Medication']['reference_no'] = 'ME/'.date('Y').'/'.$count;
+        $save_data['Medication']['report_type'] = 'Initial';
+        //bokelo
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            
+            $validate = 'first';                
+
+            if ($this->Medication->saveAssociated($save_data, array('validate' => $validate, 'deep' => true))) {
+
+                    $medication = $this->Medication->read(null, $this->Medication->id);
+                    $id = $this->Medication->id;
+
+                    //******************       Send Email and Notifications to Applicant and Managers          *****************************
+                    $this->loadModel('Message');
+                    $html = new HtmlHelper(new ThemeView());
+                    $message = $this->Message->find('first', array('conditions' => array('name' => 'reporter_medication_submit')));
+                    $variables = array(
+                      'name' => $this->Auth->User('name'), 'reference_no' => $medication['Medication']['reference_no'],
+                      'reference_link' => $html->link($medication['Medication']['reference_no'], array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id'], 'reporter' => true, 'full_base' => true), 
+                        array('escape' => false)),
+                      'modified' => $medication['Medication']['modified']
+                      );
+                    $datum = array(
+                        'email' => $medication['Medication']['reporter_email'],
+                        'id' => $id, 'user_id' => $this->Auth->User('id'), 'type' => 'reporter_medication_submit', 'model' => 'Medication',
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
+                      );
+
+                    $this->loadModel('Queue.QueuedTask');
+                    $this->QueuedTask->createJob('GenericEmail', $datum);
+                    $this->QueuedTask->createJob('GenericNotification', $datum);
+                    
+                    //Notify managers
+                    $users = $this->Medication->User->find('all', array(
+                        'contain' => array(),
+                        'conditions' => array('User.group_id' => 2)
+                    ));
+                    foreach ($users as $user) {
+                      $variables = array(
+                        'name' => $user['User']['name'], 'reference_no' => $medication['Medication']['reference_no'], 
+                        'reference_link' => $html->link($medication['Medication']['reference_no'], array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id'], 'manager' => true, 'full_base' => true), 
+                          array('escape' => false)),
+                        'modified' => $medication['Medication']['modified']
+                      );
+                      $datum = array(
+                        'email' => $user['User']['email'],
+                        'id' => $id, 'user_id' => $user['User']['id'], 'type' => 'reporter_medication_submit', 'model' => 'Medication',
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
+                      );
+
+                      $this->QueuedTask->createJob('GenericEmail', $datum);
+                      $this->QueuedTask->createJob('GenericNotification', $datum);
+                      // CakeResque::enqueue('default', 'GenericEmailShell', array('sendEmail', $datum));
+                      // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
+                    }
+                    //**********************************    END   *********************************
+
+                    $this->set([
+                        'status' => 'success',
+                        'message' => 'The MEDICATION has been submitted to PPB',
+                        'medication' => $medication,
+                        '_serialize' => ['status', 'message', 'medication']
+                    ]);  
+
+            } else {
+                $this->set([
+                        'status' => 'failed',
+                        'message' => 'The MEDICATION could not be saved. Please review the error(s) and resubmit and try again.',
+                        'validation' => $this->Medication->validationErrors,
+                        'medication' => $this->request->data,
+                        '_serialize' => ['status', 'message', 'validation', 'medication']
+                    ]);
+            }
+        } else {
+            throw new MethodNotAllowedException();
+        }
     }
 
     public function manager_copy($id = null) {

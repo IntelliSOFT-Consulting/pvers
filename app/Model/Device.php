@@ -8,7 +8,7 @@ App::uses('AppModel', 'Model');
  * @property Designation $Designation
  */
 class Device extends AppModel {
-	public $actsAs = array('Search.Searchable');
+	public $actsAs = array('Search.Searchable', 'Containable');
 
 	
 	public $filterArgs = array(
