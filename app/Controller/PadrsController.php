@@ -71,6 +71,33 @@ class PadrsController extends AppController {
         $this->set('padrs', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    /*public function api_index() {
+        $this->Prg->commonProcess();
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($this->page_options);
+
+
+        $criteria = $this->Padr->parseCriteria($this->passedArgs);
+
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Padr.created' => 'desc');
+        $this->paginate['contain'] = array('County');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Padr->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end csv export
+        
+        $this->set([
+            'page_options', $this->page_options,
+            'padrs' => Sanitize::clean($this->paginate(), array('encode' => false)),
+            '_serialize' => ['padrs', 'page_options']]);
+    }*/
+
     private function csv_export($cpadrs = ''){
         $this->response->download('PADRs_'.date('Ymd_Hi').'.csv'); // <= setting the file name
         $this->set(compact('cpadrs'));
@@ -116,6 +143,21 @@ class PadrsController extends AppController {
         }
 	}
 
+    public function api_view($token = null) {
+        $id = $this->Padr->field('id', array('token' => $token));
+        if (!$this->Padr->exists($id)) {
+            throw new NotFoundException(__('Invalid padr'));
+            $this->Flash->error(__('We could not identify the report. Please refer to the acknowledgement email sent by PPB.'));
+        }
+        $options = array('conditions' => array('Padr.' . $this->Padr->primaryKey => $id));
+        $padr = $this->Padr->find('first', $options);
+
+        $this->set([
+                'status' => 'success', 
+                'padr' => $padr, 
+                '_serialize' => ['status', 'padr']]);
+    }
+
 	public function followup($token = null) {
         if ($this->request->is('post')) {
         	$id = $this->Padr->field('id', array('token' => $token));
@@ -159,10 +201,80 @@ class PadrsController extends AppController {
  *
  * @return void
  */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Padr->create();
+    public function add() {
+        if ($this->request->is('post')) {
+            $this->Padr->create();
             $this->Padr->Behaviors->attach('Tools.Captcha');
+            // debug($this->request->data);
+            if ($this->Padr->saveAssociated($this->request->data)) {
+                $count = $this->Padr->find('count',  array('conditions' => array(
+                    'Padr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
+                $count++;
+                $count = ($count < 10) ? "0$count" : $count;
+                $this->Padr->saveField('reference_no', 'PADR/'.date('Y').'/'.$count);
+                $this->Padr->saveField('token', Security::hash($this->Padr->id));
+
+                //******************       Send Emails to Reporter and Managers          *****************************
+                    $this->loadModel('Message');
+                    $html = new HtmlHelper(new ThemeView());
+                    $message = $this->Message->find('first', array('conditions' => array('name' => 'reporter_padr_submit')));
+                    $padr = $this->Padr->read();
+                    $variables = array(
+                      'name' => $padr['Padr']['reporter_name'], 'reference_no' => $padr['Padr']['reference_no'],
+                      'reference_link' => $html->link($padr['Padr']['reference_no'], array('controller' => 'padrs', 'action' => 'view', $padr['Padr']['token'], 'full_base' => true), 
+                        array('escape' => false)),
+                      'modified' => $padr['Padr']['modified']
+                      );
+                    $datum = array(
+                        'email' => $padr['Padr']['reporter_email'],
+                        'id' => $this->Padr->id,  'type' => 'reporter_padr_submit', 'model' => 'Padr',
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
+                      );
+
+                    $this->loadModel('Queue.QueuedTask');
+                    $this->QueuedTask->createJob('GenericEmail', $datum);
+                    
+                    //Notify managers
+                    $users = $this->Padr->User->find('all', array(
+                        'contain' => array(),
+                        'conditions' => array('User.group_id' => 2)
+                    ));
+                    foreach ($users as $user) {
+                      $variables = array(
+                        'name' => $user['User']['name'], 'reference_no' => $padr['Padr']['reference_no'], 
+                        'reference_link' => $html->link($padr['Padr']['reference_no'], array('controller' => 'padrs', 'action' => 'view', $padr['Padr']['token'], 'manager' => true, 'full_base' => true), 
+                          array('escape' => false)),
+                        'modified' => $padr['Padr']['modified']
+                      );
+                      $datum = array(
+                        'email' => $user['User']['email'],
+                        'id' => $this->Padr->id, 'user_id' => $user['User']['id'], 'type' => 'reporter_padr_submit', 'model' => 'Padr',
+                        'subject' => CakeText::insert($message['Message']['subject'], $variables),
+                        'message' => CakeText::insert($message['Message']['content'], $variables)
+                      );
+
+                      $this->QueuedTask->createJob('GenericEmail', $datum);
+                      $this->QueuedTask->createJob('GenericNotification', $datum);
+                    }
+                //**********************************    END   *********************************
+
+                $this->Flash->success(__('Your report has been successfully submitted to PPB. Please check your email for the acknowldgement.'));
+                return $this->redirect(array('action' => 'view', $padr['Padr']['token']));
+            } else {
+                $this->Flash->error(__('The report could not be created. Please, try again.'));
+            }
+        }
+        
+        $counties = $this->Padr->County->find('list', array('order' => array('County.county_name')));
+        $this->set(compact('counties'));
+    }
+
+	public function api_add() {
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->Padr->create();
+
             // debug($this->request->data);
 			if ($this->Padr->saveAssociated($this->request->data)) {
 				$count = $this->Padr->find('count',  array('conditions' => array(
@@ -217,15 +329,17 @@ class PadrsController extends AppController {
                     }
                 //**********************************    END   *********************************
 
-				$this->Flash->success(__('Your report has been successfully submitted to PPB. Please check your email for the acknowldgement.'));
-				return $this->redirect(array('action' => 'view', $padr['Padr']['token']));
+				
+                $this->set([
+                    'status' => 'success',
+                    'message' => 'The PADR has been submitted to PPB',
+                    'padr' => $padr,
+                    '_serialize' => ['status', 'message', 'padr']
+                ]); 
 			} else {
-				$this->Flash->error(__('The report could not be created. Please, try again.'));
+				throw new MethodNotAllowedException();
 			}
-		}
-		
-		$counties = $this->Padr->County->find('list', array('order' => array('County.county_name')));
-		$this->set(compact('counties'));
+		}		
 	}
 
 /**

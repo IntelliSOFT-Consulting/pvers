@@ -204,7 +204,7 @@ class AefisController extends AppController {
 
     public function api_view($id = null) {
         $this->Aefi->id = $id;
-        if (!$this->Aefi->exists()) {
+        if (!$this->Aefi->exists()) {  //TODO: Confirm if the user_id is allowed to access
             $this->set([
                     'status' => 'failed',
                     'message' => 'Could not verify the AEFI report ID. Please ensure the ID is correct.',

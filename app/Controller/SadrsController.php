@@ -213,7 +213,7 @@ class SadrsController extends AppController {
 
     public function api_view($id = null) {
         $this->Sadr->id = $id;
-        if (!$this->Sadr->exists()) {
+        if (!$this->Sadr->exists()) { //TODO: Also confirm if the user is the same user_id
             $this->set([
                     'status' => 'failed',
                     'message' => 'Could not verify the SADR report ID. Please ensure the ID is correct.',
