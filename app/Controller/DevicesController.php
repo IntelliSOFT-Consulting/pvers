@@ -202,7 +202,7 @@ class DevicesController extends AppController {
 
             $device = $this->Device->find('first', array(
                     'conditions' => array('Device.id' => $id),
-                    'contain' => array('County', 'Attachment', 'Designation')
+                    'contain' => array('ListOfDevice', 'County',  'Attachment', 'Designation', 'ExternalComment')
                 ));
             
             $this->set([
@@ -226,8 +226,8 @@ class DevicesController extends AppController {
 
         $device = $this->Device->find('first', array(
                 'conditions' => array('Device.id' => $id),
-                'contain' => array('ListOfDevice', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
-                'DeviceOriginal', 'DeviceOriginal.ListOfDevice', 'DeviceOriginal.County', 'DeviceOriginal.SubCounty', 'DeviceOriginal.Attachment', 'DeviceOriginal.Designation', 'DeviceOriginal.ExternalComment')
+                'contain' => array('ListOfDevice', 'County', 'Attachment', 'Designation', 'ExternalComment', 
+                'DeviceOriginal', 'DeviceOriginal.ListOfDevice', 'DeviceOriginal.County',  'DeviceOriginal.Attachment', 'DeviceOriginal.Designation', 'DeviceOriginal.ExternalComment')
             ));
         $this->set('device', $device);
         // $this->render('pdf/view');
@@ -252,8 +252,8 @@ class DevicesController extends AppController {
 
         $device = $this->Device->find('first', array(
                 'conditions' => array('Device.id' => $id),
-                'contain' => array('ListOfDevice', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment', 
-                'DeviceOriginal', 'DeviceOriginal.ListOfDevice', 'DeviceOriginal.County', 'DeviceOriginal.SubCounty', 'DeviceOriginal.Attachment', 'DeviceOriginal.Designation', 'DeviceOriginal.ExternalComment')
+                'contain' => array('ListOfDevice', 'County', 'Attachment', 'Designation', 'ExternalComment', 
+                'DeviceOriginal', 'DeviceOriginal.ListOfDevice', 'DeviceOriginal.County',  'DeviceOriginal.Attachment', 'DeviceOriginal.Designation', 'DeviceOriginal.ExternalComment')
             ));
         $this->set('device', $device);
         // $this->render('pdf/view');
@@ -651,8 +651,6 @@ class DevicesController extends AppController {
         $this->set('attachments', $device['Attachment']);
         $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
-        $sub_counties = $this->Device->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
-        $this->set(compact('sub_counties'));
         $designations = $this->Device->Designation->find('list');
         $this->set(compact('designations'));
     }
