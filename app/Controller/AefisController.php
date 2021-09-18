@@ -227,6 +227,11 @@ class AefisController extends AppController {
                 'status' => 'success', 
                 'aefi' => $aefi, 
                 '_serialize' => ['status', 'aefi']]);
+            
+            if (strpos($this->request->url, 'pdf') !== false) {
+                $this->pdfConfig = array('filename' => 'AEFI_' . $id .'.pdf',  'orientation' => 'portrait');
+                $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
+            }
         }
 
     }

@@ -84,11 +84,8 @@ class AppController extends Controller {
             //     'Form' => array('userModel' => 'Member')
             // );
             
-            // debug($this->request->prefix);
-            // $this->Auth->authorize = array('Controller');
-            
-            // $this->Auth->allow('api_token');
-            // $this->Auth->allow();
+            $this->set('redir', 'api');
+            $this->set('root', '/');
         } else {
             $this->Auth = $this->Components->load('Auth');
             $this->Auth->authorize = array(

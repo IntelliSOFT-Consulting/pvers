@@ -147,15 +147,28 @@ class PadrsController extends AppController {
         $id = $this->Padr->field('id', array('token' => $token));
         if (!$this->Padr->exists($id)) {
             throw new NotFoundException(__('Invalid padr'));
-            $this->Flash->error(__('We could not identify the report. Please refer to the acknowledgement email sent by PPB.'));
         }
         $options = array('conditions' => array('Padr.' . $this->Padr->primaryKey => $id));
         $padr = $this->Padr->find('first', $options);
+        if (empty($padr)) {  //TODO: Confirm if the user_id is allowed to access
+            $this->set([
+                    'status' => 'failed',
+                    'message' => 'Could not verify the PADR report ID. Please ensure the ID is correct.',
+                    '_serialize' => ['status', 'message']
+                ]);
+        } else {
 
-        $this->set([
+            $this->set([
                 'status' => 'success', 
                 'padr' => $padr, 
                 '_serialize' => ['status', 'padr']]);
+            
+            if (strpos($this->request->url, 'pdf') !== false) {
+                $this->pdfConfig = array('filename' => 'PADR_' . $id .'.pdf',  'orientation' => 'portrait');
+                $this->response->download('PADR_'.str_replace($padr['Padr']['reference_no'], '/', '_').'.pdf');
+            }
+        }
+        
     }
 
 	public function followup($token = null) {

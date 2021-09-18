@@ -30,7 +30,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // remove initDb
-        $this->Auth->allow('register', 'login', 'api_register', 'api_token', 'activate_account', 'forgotPassword', 'resetPassword', 'logout', 'initDB');
+        $this->Auth->allow('register', 'login', 'api_register', 'api_token', 'api_forgotPassword', 'activate_account', 'forgotPassword', 'resetPassword', 'logout', 'initDB');
     }
 
 
@@ -260,6 +260,57 @@ class UsersController extends AppController {
             } else {
                 $this->Session->setFlash(__('Could not verify your email address.'), 'flash_error');
             }
+        }
+    }
+
+    public function api_forgotPassword() {
+        if ($this->Auth->user('id')) {
+            $this->set([
+                    'status' => 'failed',
+                    'message' => 'You alre logged in! Please logout to request password change.',
+                    '_serialize' => ['status', 'message']
+                ]);
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $user = $this->User->find('first', array('conditions' => array('User.email' => $this->request->data['User']['email'])));
+            if ($user) {
+                $this->User->id = $user['User']['id'];
+                $this->User->saveField('forgot_password', 1);
+                //******************       Send Email and Notifications to Reporter and Managers          *****************************
+                $this->loadModel('Message');
+                $html = new HtmlHelper(new ThemeView());
+                $user_email = $this->Message->find('first', array('conditions' => array('name' => 'forgot_password')));
+                $variables = array(
+                        'name' => $user['User']['name'], 'username' => $user['User']['username'], 
+                        'email' => $user['User']['email'], 
+                        'reset_link' => $html->link('RESET', array('controller' => 'users', 'action' => 'resetPassword', $user['User']['id'], 'full_base' => true), 
+                          array('escape' => false)),
+                        'password' => date('Ymdhis', strtotime($user['User']['created'])),
+                      );
+                $datum = array(
+                    'email' => $user['User']['email'], 'cc' => ((!empty($user['User']['sponsor_email'])) ? $user['User']['sponsor_email'] : null),
+                    'id' => $user['User']['id'], 'user_id' => $user['User']['id'], 'type' => 'user_registration', 'model' => 'User',
+                    'subject' => CakeText::insert($user_email['Message']['subject'], $variables),
+                    'message' => CakeText::insert($user_email['Message']['content'], $variables)
+                );
+                // In your controller
+                $this->loadModel('Queue.QueuedTask');
+                $this->QueuedTask->createJob('GenericEmail', $datum);
+                //
+                $this->set([
+                    'status' => 'success',
+                    'message' => 'A new password has been sent to the requested email address.',
+                    '_serialize' => ['status', 'message']
+                ]);
+            } else {
+                $this->set([
+                    'status' => 'failed',
+                    'message' => 'Could not verify your email address.',
+                    '_serialize' => ['status', 'message']
+                ]);
+            }
+        } else {
+            throw new MethodNotAllowedException();
         }
     }
 
