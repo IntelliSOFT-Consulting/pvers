@@ -93,7 +93,10 @@ $(function() {
           <tr>\
             <td>{i2}</td>\
             <td><input type="hidden" name="data[AefiListOfVaccine][{i}][id]" id="AefiListOfVaccine{i}Id">\
-                <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccine_id]" class="span12 autosave-ignore" id="AefiListOfVaccine{i}VaccineId"></select></div></td>\
+                <div class="control-group"><select name="data[AefiListOfVaccine][{i}][vaccine_id]" class="span12 autosave-ignore" id="AefiListOfVaccine{i}VaccineId"></select></div>\
+              <small class="help-block">If not in list above</small>\
+              <div class="control-group"><input name="data[AefiListOfVaccine][{i}][vaccine_name]" class="span11 autosave-ignore vaxname" placeholder="vaccine name" maxlength="200" type="text" id="AefiListOfVaccine{i}VaccineName"></div>\
+            </td>\
             <td>\
               <div class="control-group"><input name="data[AefiListOfVaccine][{i}][dosage]" class="span11" maxlength="255" type="text" id="AefiListOfVaccine{i}Dosage"></div> </td>\
             <td>\

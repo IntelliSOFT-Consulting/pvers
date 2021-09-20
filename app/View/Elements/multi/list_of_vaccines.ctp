@@ -66,6 +66,10 @@
                               'error' => array('attributes' => array( 'class' => 'help-block')),
                               'options' => $vaccines,
                           ));
+                          echo '<small class="help-block">If not in list above</small>';    
+                          echo $this->Form->input('AefiListOfVaccine.'.$i.'.vaccine_name', array(
+                            'label' => false, 'between' => false, 'placeholder' => 'vaccine name',
+                            'after' => false, 'class' => 'span11 autosave-ignore vaxname',));
                         ?>
                     </td>
                     <td>

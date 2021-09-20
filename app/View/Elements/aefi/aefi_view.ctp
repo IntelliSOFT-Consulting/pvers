@@ -191,7 +191,10 @@
 	                  ?>
 	                  <tr>
 	                    <td><?= $i+1; ?></td>
-	                    <td><?php echo (!empty($aefiListOfVaccine['Vaccine']['vaccine_name'])) ? $aefiListOfVaccine['Vaccine']['vaccine_name'] : '' ;?></td>
+	                    <td><?php 
+	                    	echo (!empty($aefiListOfVaccine['Vaccine']['vaccine_name'])) ? $aefiListOfVaccine['Vaccine']['vaccine_name'] : '' ;
+	                    	echo (!empty($aefiListOfVaccine['vaccine_name'])) ? $aefiListOfVaccine['vaccine_name'] : '' ;
+	                    	?></td>
 	                    <td><?php echo $aefiListOfVaccine['dosage'];?></td>
 	                    <td><?php echo $aefiListOfVaccine['vaccination_date'].' ';
 	                    			if(isset($aefiListOfVaccine['vaccination_time']['hour'])) echo $aefiListOfVaccine['vaccination_time']['hour'].':';
