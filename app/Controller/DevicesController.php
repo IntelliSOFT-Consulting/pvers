@@ -70,7 +70,8 @@ class DevicesController extends AppController {
         $this->set([
             'page_options', $this->page_options,
             'devices' => Sanitize::clean($this->paginate(), array('encode' => false)),
-            '_serialize' => ['devices', 'page_options']]);
+            'paging' => $this->request->params['paging'],
+            '_serialize' => ['devices', 'page_options', 'paging']]);
     }
 
     public function partner_index() {

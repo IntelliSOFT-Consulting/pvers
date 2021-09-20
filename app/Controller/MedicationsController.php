@@ -86,7 +86,8 @@ class MedicationsController extends AppController {
         $this->set([
             'page_options', $this->page_options,
             'medications' => Sanitize::clean($this->paginate(), array('encode' => false)),
-            '_serialize' => ['medications', 'page_options']]);
+            'paging' => $this->request->params['paging'],
+            '_serialize' => ['medications', 'page_options', 'paging']]);
     }
 
     public function partner_index() {

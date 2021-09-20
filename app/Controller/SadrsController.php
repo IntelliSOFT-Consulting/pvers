@@ -82,7 +82,8 @@ class SadrsController extends AppController {
         $this->set([
             'page_options', $this->page_options,
             'sadrs' => Sanitize::clean($this->paginate(), array('encode' => false)),
-            '_serialize' => ['sadrs', 'page_options']]);
+            'paging' => $this->request->params['paging'],
+            '_serialize' => ['sadrs', 'page_options', 'paging']]);
     }
 
     public function partner_index() {

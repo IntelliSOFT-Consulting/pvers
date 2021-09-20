@@ -77,7 +77,8 @@ class AefisController extends AppController {
         $this->set([
             'page_options', $this->page_options,
             'aefis' => Sanitize::clean($this->paginate(), array('encode' => false)),
-            '_serialize' => ['aefis', 'page_options']]);
+            'paging' => $this->request->params['paging'],
+            '_serialize' => ['aefis', 'page_options', 'paging']]);
     }
 
     public function partner_index() {

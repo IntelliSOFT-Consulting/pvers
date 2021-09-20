@@ -96,7 +96,8 @@ class PqmpsController extends AppController {
         $this->set([
             'page_options', $this->page_options,
             'pqmps' => Sanitize::clean($this->paginate(), array('encode' => false)),
-            '_serialize' => ['pqmps', 'page_options']]);
+            'paging' => $this->request->params['paging'],
+            '_serialize' => ['pqmps', 'page_options', 'paging']]);
     }
 
     public function partner_index() {

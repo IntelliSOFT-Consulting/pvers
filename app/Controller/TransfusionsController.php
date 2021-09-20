@@ -82,7 +82,8 @@ class TransfusionsController extends AppController {
         $this->set([
             'page_options', $page_options,
             'transfusions' => Sanitize::clean($this->paginate(), array('encode' => false)),
-            '_serialize' => ['transfusions', 'page_options']]);
+            'paging' => $this->request->params['paging'],
+            '_serialize' => ['transfusions', 'page_options', 'paging']]);
     }
 
     public function partner_index() {
