@@ -40,8 +40,10 @@
                       echo '<ol>';
                       foreach ($aefis as $aefi) {
                         if($aefi['Aefi']['submitted'] > 1) {
+                          // debug($aefi['AefiListOfVaccine']);
                             echo "<li>";
-                              echo $this->Html->link($aefi['AefiListOfVaccine'][0]['vaccine_name'].' <small class="muted">('.$aefi['Aefi']['reference_no'].')</small>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
+                            $vname = (!empty($aefi['AefiListOfVaccine'][0]['Vaccine']['vaccine_name'])) ? $aefi['AefiListOfVaccine'][0]['Vaccine']['vaccine_name'] : $aefi['Aefi']['created'];
+                              echo $this->Html->link($vname.' <small class="muted">('.$aefi['Aefi']['reference_no'].')</small>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
                                 array('escape' => false, 'class' => 'text-'.((isset($aefi['Aefi']['serious']) && $aefi['Aefi']['serious'] == 'Yes') ? 'error' : 'success')));
                               echo "&nbsp;";
                               echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'aefis' , 'action' => 'followup', $aefi['Aefi']['id']), array('escape' => false), __('Add a followup report?'));

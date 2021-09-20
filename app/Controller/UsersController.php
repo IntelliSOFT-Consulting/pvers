@@ -653,7 +653,7 @@ class UsersController extends AppController {
         $aefis = $this->User->Aefi->find('all', array(
             'limit' => 7, 'contain' => array(),
             'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
-            'contain' => array('AefiListOfVaccine'),
+            'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine'),
             'order' => array('Aefi.created' => 'desc'),
             'conditions' => array('Aefi.user_id' => $this->Auth->User('id')),
         ));

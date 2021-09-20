@@ -17,7 +17,7 @@ class FacilityCodesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'autocomplete');
+		$this->Auth->allow('index', 'autocomplete', 'api_index');
 	}
 	
 	public function autocomplete($query = null) {
@@ -56,6 +56,12 @@ class FacilityCodesController extends AppController {
         $this->paginate['limit'] = 20;
         $this->paginate['order'] = array('FacilityCode.facility_name' => 'asc');
 		$this->set('facility_Codes', $this->paginate());
+	}
+
+	public function api_index() {
+		$this->FacilityCode->recursive = -1;
+		$this->set('facilityCodes', $this->FacilityCode->find('all', array('order' => array('FacilityCode.facility_name' => 'asc'))));
+		$this->set('_serialize', array('facilityCodes'));
 	}
 
 /**
