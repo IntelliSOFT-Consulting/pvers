@@ -17,10 +17,26 @@ class FacilityCodesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'autocomplete', 'api_index');
+		$this->Auth->allow('index', 'autocomplete', 'api_autocomplete', 'api_index');
 	}
 	
 	public function autocomplete($query = null) {
+		$this->RequestHandler->setContent('json', 'application/json' ); 
+		if (is_numeric($this->request->query['term'])) { 
+			$coders = $this->FacilityCode->finder($this->request->query['term'], 'N');
+		} else {
+			$coders = $this->FacilityCode->finder($this->request->query['term'], 'A');
+		}
+                $codes = array();
+		foreach ($coders as $key => $value) {
+			$codes[] = array('value' => $value['FacilityCode']['facility_code'], 'label' => $value['FacilityCode']['facility_name'],  'sub_county' => $value['FacilityCode']['district'], 
+							 'desc' => $value['FacilityCode']['county'], 'addr' => $value['FacilityCode']['official_address'], 'phone' => $value['FacilityCode']['official_mobile']);
+		}
+		$this->set('codes', $codes);
+        $this->set('_serialize', 'codes');
+	}
+	
+	public function api_autocomplete($query = null) {
 		$this->RequestHandler->setContent('json', 'application/json' ); 
 		if (is_numeric($this->request->query['term'])) { 
 			$coders = $this->FacilityCode->finder($this->request->query['term'], 'N');
@@ -60,7 +76,9 @@ class FacilityCodesController extends AppController {
 
 	public function api_index() {
 		$this->FacilityCode->recursive = -1;
-		$this->set('facilityCodes', $this->FacilityCode->find('all', array('order' => array('FacilityCode.facility_name' => 'asc'))));
+		$this->set('facilityCodes', $this->FacilityCode->find('all', array(
+			'fields' =>  array('FacilityCode.facility_code', 'FacilityCode.facility_name' ,  'FacilityCode.official_address', 'FacilityCode.official_mobile', 'FacilityCode.district', 'FacilityCode.county' ), 
+			'order' => array('FacilityCode.facility_name' => 'asc'))));
 		$this->set('_serialize', array('facilityCodes'));
 	}
 
