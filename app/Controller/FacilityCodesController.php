@@ -81,7 +81,7 @@ class FacilityCodesController extends AppController {
 			'order' => array('FacilityCode.facility_name' => 'asc')));
 		$facilityCodes = array();
 		foreach ($result as $key => $value) {
-			$facilityCodes[] = $value;
+			$facilityCodes[] = $value['FacilityCode'];
 			// print_r($value);
 		}
 		$this->set('facilityCodes', $facilityCodes);
