@@ -444,6 +444,7 @@ class DevicesController extends AppController {
     public function api_add() { 
         
         $this->Device->create();
+        $this->_attachments('Device');
 
         $save_data = $this->request->data;
         $save_data['Device']['user_id'] = $this->Auth->user('id');

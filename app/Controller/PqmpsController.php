@@ -447,6 +447,7 @@ class PqmpsController extends AppController {
     public function api_add() { 
         
         $this->Pqmp->create();
+        $this->_attachments('Pqmp');
 
         $save_data = $this->request->data;
         $save_data['Pqmp']['user_id'] = $this->Auth->user('id');

@@ -17,10 +17,21 @@ class DrugDictionariesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('autocomplete', 'autocomblete');
+		$this->Auth->allow('autocomplete', 'autocomblete', 'api_autocomplete');
 	}
 
 	public function autocomplete($query = null) {
+		$this->RequestHandler->setContent('json', 'application/json' ); 
+		$groupers = $this->DrugDictionary->finder($this->request->query['term'], 'Y');			
+                $groups = array();
+		foreach ($groupers as $key => $value) {
+			$groups[] = $value['DrugDictionary']['drug_name'];
+		}
+		$this->set('groups', array_values($groups));
+        $this->set('_serialize', 'groups');
+	}
+
+	public function api_autocomplete($query = null) {
 		$this->RequestHandler->setContent('json', 'application/json' ); 
 		$groupers = $this->DrugDictionary->finder($this->request->query['term'], 'Y');			
                 $groups = array();

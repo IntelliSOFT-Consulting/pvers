@@ -379,7 +379,7 @@ class AefisController extends AppController {
  * @return void
  */
 
-    public function reporter_add() {        
+    public function reporter_add() {      
         // $count = $this->Aefi->find('count',  array('conditions' => array(
         //     'Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
         // $count++;
@@ -444,6 +444,7 @@ class AefisController extends AppController {
  */
 
     public function reporter_edit($id = null) { 
+
         $this->Aefi->id = $id;
         if (!$this->Aefi->exists()) {
             throw new NotFoundException(__('Invalid AEFI'));
@@ -458,6 +459,8 @@ class AefisController extends AppController {
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+            // debug($this->request->data);
+            // return;
             $validate = false;
             if (isset($this->request->data['submitReport'])) {
                 $validate = 'first';                
@@ -555,6 +558,7 @@ class AefisController extends AppController {
     public function api_add() {
         $this->Aefi->create();
 
+        $this->_attachments('Aefi');
         $save_data = $this->request->data;
         $save_data['Aefi']['user_id'] = $this->Auth->user('id');
         $save_data['Aefi']['submitted'] = 2;
@@ -569,8 +573,9 @@ class AefisController extends AppController {
         $save_data['Aefi']['reference_no'] = 'AEFI/'.date('Y').'/'.$count;
         $save_data['Aefi']['report_type'] = 'Initial';
         //bokelo
-
-        if ($this->request->is('post') || $this->request->is('put')) {
+        // debug($save_data);
+        // return;
+        if ($this->request->is('post') || $this->request->is('put')) {            
             $validate = 'first';                
             if ($this->Aefi->saveAssociated($save_data, array('validate' => $validate, 'deep' => true))) {
 

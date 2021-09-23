@@ -578,6 +578,7 @@ class SadrsController extends AppController {
     public function api_add() { 
         
         $this->Sadr->create();
+        $this->_attachments('Sadr');
 
         // $this->redirect(array('action' => 'edit', $this->Sadr->id));
         $save_data = $this->request->data;

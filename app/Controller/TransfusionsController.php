@@ -462,6 +462,7 @@ class TransfusionsController extends AppController {
     public function api_add($id = null) { 
         
         $this->Transfusion->create();
+        $this->_attachments('Transfusion');
 
         $save_data = $this->request->data;
         $save_data['Transfusion']['user_id'] = $this->Auth->user('id');

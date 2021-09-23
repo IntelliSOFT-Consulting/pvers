@@ -541,6 +541,7 @@ class MedicationsController extends AppController {
     public function api_add($id = null) {
         
         $this->Medication->create();
+        $this->_attachments('Medication');
 
         $save_data = $this->request->data;
         $save_data['Medication']['user_id'] = $this->Auth->user('id');

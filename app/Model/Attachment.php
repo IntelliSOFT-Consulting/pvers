@@ -59,7 +59,7 @@ class Attachment extends AppModel {
 			),
 			'access'     => array('rule' => 'checkAccess'),
 			// 'location'   => array('rule' => array('checkLocation', array(
-				// MEDIA_TRANSFER, '/tmp/'
+			// 	MEDIA_TRANSFER, '/tmp/'
 			// ))),
 			'permission' => array('rule' => array('checkPermission', '*')),
 			'size'       => array('rule' => array('checkSize', '5M')),

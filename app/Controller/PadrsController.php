@@ -287,6 +287,7 @@ class PadrsController extends AppController {
 
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->Padr->create();
+            $this->_attachments('Padr');
 
             // debug($this->request->data);
 			if ($this->Padr->saveAssociated($this->request->data)) {

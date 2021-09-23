@@ -136,4 +136,46 @@ class AppController extends Controller {
         }
     }
 
+
+
+    protected function _attachments($model = null){
+        if (!empty($this->request->data['Attachment'])) {
+            for ($i = 0; $i <= count($this->request->data['Attachment'])-1; $i++) { 
+                $this->request->data['Attachment'][$i]['model'] = $model;
+
+                $file = explode(',', $this->request->data['Attachment'][$i]['file']);
+                //data:image/jpeg;base64
+                $mystring = $file[0];
+                $end = strpos($mystring, ';');
+                $start2 = strpos($mystring, '/');
+                $start3 = strpos($mystring, ':');
+                $fileExt = substr($mystring, $start2+1, $end - $start2-1); //jpeg
+                $fileType = substr($mystring, $start3+1, $end - $start3-1); //image/jpeg
+
+                //decode it
+                $data = base64_decode($file[1]);
+
+                $filename =  (isset($this->request->data['Attachment'][$i]['filename'])) ? uniqid().'-'. $this->request->data['Attachment'][$i]['filename'] :  uniqid().'.' . $fileExt;
+                $file_dir = WWW_ROOT . 'files' .DS. 'Attachments' .DS. 'file' .DS. $filename;
+                // $file_dir = MEDIA_TRANSFER .DS. $filename;
+                //file create
+                file_put_contents($file_dir, $data);
+                chmod($file_dir, 0777);
+
+                //not necessarily. I write it for use delete function this plugin
+                $filesize = filesize($file_dir);
+
+                //after base64 decode ,file delete
+                $this->request->data['Attachment'][$i]['file'] = null;
+
+                $this->request->data['Attachment'][$i]['file']['name'] = $filename;
+                $this->request->data['Attachment'][$i]['file']['type'] = $fileType;
+                $this->request->data['Attachment'][$i]['file']['tmp_name'] = $file_dir;
+                $this->request->data['Attachment'][$i]['file']['error'] = 0;
+                $this->request->data['Attachment'][$i]['file']['size'] = $filesize;
+                $this->request->data['Attachment'][$i]['group'] = 'attachment';
+           }
+        }        
+    }
+
 }

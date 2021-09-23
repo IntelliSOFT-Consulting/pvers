@@ -21,10 +21,21 @@ class MeddrasController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('autocomplete');
+		$this->Auth->allow('autocomplete', 'api_autocomplete');
 	}
 
 	public function autocomplete($query = null) {
+		$this->RequestHandler->setContent('json', 'application/json' ); 
+		$groupers = $this->Meddra->finder($this->request->query['term']);			
+                $groups = array();
+		foreach ($groupers as $key => $value) {
+			$groups[] = $value['Meddra']['llt_name'];
+		}
+		$this->set('groups', array_values($groups));
+        $this->set('_serialize', 'groups');
+	}
+
+	public function api_autocomplete($query = null) {
 		$this->RequestHandler->setContent('json', 'application/json' ); 
 		$groupers = $this->Meddra->finder($this->request->query['term']);			
                 $groups = array();
