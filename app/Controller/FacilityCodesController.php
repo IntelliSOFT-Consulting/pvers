@@ -76,9 +76,15 @@ class FacilityCodesController extends AppController {
 
 	public function api_index() {
 		$this->FacilityCode->recursive = -1;
-		$this->set('facilityCodes', $this->FacilityCode->find('all', array(
+		$result =  $this->FacilityCode->find('all', array(
 			'fields' =>  array('FacilityCode.facility_code', 'FacilityCode.facility_name' ,  'FacilityCode.official_address', 'FacilityCode.official_mobile', 'FacilityCode.district', 'FacilityCode.county' ), 
-			'order' => array('FacilityCode.facility_name' => 'asc'))));
+			'order' => array('FacilityCode.facility_name' => 'asc')));
+		$facilityCodes = array();
+		foreach ($result as $key => $value) {
+			$facilityCodes[] = $value;
+			// print_r($value);
+		}
+		$this->set('facilityCodes', $facilityCodes);
 		$this->set('_serialize', array('facilityCodes'));
 	}
 

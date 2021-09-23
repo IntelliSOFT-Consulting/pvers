@@ -36,7 +36,6 @@ class SubCountiesController extends AppController {
 		foreach ($result as $key => $value) {
 			$subCounties[] = array('id' => $value['SubCounty']['id'], 'county_id' => $value['SubCounty']['county_id'], 'sub_county_name' => $value['SubCounty']['sub_county_name']);
 			// print_r($value);
-			
 		}
 		$this->set('subCounties', $subCounties);
 		$this->set('_serialize', array('subCounties'));
