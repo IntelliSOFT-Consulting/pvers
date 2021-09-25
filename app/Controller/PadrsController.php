@@ -284,7 +284,6 @@ class PadrsController extends AppController {
     }
 
 	public function api_add() {
-
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->Padr->create();
             $this->_attachments('Padr');
@@ -351,9 +350,17 @@ class PadrsController extends AppController {
                     '_serialize' => ['status', 'message', 'padr']
                 ]); 
 			} else {
-				throw new MethodNotAllowedException();
+				$this->set([
+                        'status' => 'failed',
+                        'message' => 'The PADR could not be saved',
+                        'validation' => $this->Padr->validationErrors,
+                        'padr' => $this->request->data,
+                        '_serialize' => ['status', 'message', 'validation', 'padr']
+                    ]);  
 			}
-		}		
+		} else {
+            throw new MethodNotAllowedException();
+        }	
 	}
 
 /**

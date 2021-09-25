@@ -76,6 +76,8 @@ class AppController extends Controller {
             // $this->Auth->sessionKey = false;
             AuthComponent::$sessionKey = false;
             $this->Auth->initialize($this);
+            $this->Auth->authError = 'Kwenda huko!!';
+            $this->Auth->authError = 'Kwenda huko!!';
             /*$this->Auth = $this->Components->load(
                 'Auth',
                 array('authenticate' => 'Jwtoken', 'authorize' => array('Controller'))

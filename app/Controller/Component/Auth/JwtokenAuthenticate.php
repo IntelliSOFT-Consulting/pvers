@@ -23,19 +23,27 @@ class JwtokenAuthenticate extends BaseAuthenticate {
 	        if ($header && stripos($header, 'bearer') === 0) {
 		        $token = str_ireplace('bearer' . ' ', '', $header);
 		        
-	            $payload = JWT::decode(
-	                $token,
-	                Configure::read('Security.salt'), 
-                    array_keys(JWT::$supported_algs)
-	            );
+	            try {
+                    $payload = JWT::decode(
+                        $token,
+                        Configure::read('Security.salt'), 
+                        array_keys(JWT::$supported_algs)
+                    );
+                } catch (Exception $e) {                    
+                    throw new Exception("Unable to authenticate token");
+                }
 
 	            $result = ClassRegistry::init('User')->find('first', array(
 					'conditions' => array('User.id' => $payload),
 					'recursive' => -1,
 					'contain' => null,
 				));
-
-	            return $result['User'];
+                
+                if(!empty($result['User']['id'])) {
+                    return  $result['User'];
+                } else {
+                    return false;
+                }
             } else {
             	return false;
             }
