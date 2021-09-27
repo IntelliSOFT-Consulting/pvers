@@ -69,7 +69,7 @@ class SadrsController extends AppController {
 
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription', 'Designation');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrListOfMedicine', 'SadrDescription', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
