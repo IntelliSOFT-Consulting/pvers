@@ -58,10 +58,10 @@ class TransfusionsController extends AppController {
 
     public function api_index() {
         $this->Prg->commonProcess();
-        $page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($page_options);
+        
+        $page_options = array('5' => '5', '10' => '10', '25' => '25');
+        (!empty($this->request->query('pages'))) ? $this->paginate['limit'] = $this->request->query('pages') :  $this->paginate['limit'] = reset($page_options);
 
 
         $criteria = $this->Transfusion->parseCriteria($this->passedArgs);

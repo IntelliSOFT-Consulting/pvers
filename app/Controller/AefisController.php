@@ -58,8 +58,8 @@ class AefisController extends AppController {
     public function api_index() {
         $this->Prg->commonProcess();
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($this->page_options);
+        $page_options = array('5' => '5', '10' => '10', '25' => '25');
+        (!empty($this->request->query('pages'))) ? $this->paginate['limit'] = $this->request->query('pages') :  $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
         $criteria['Aefi.user_id'] = $this->Auth->User('id');
@@ -75,7 +75,7 @@ class AefisController extends AppController {
         }
         //end csv export
         $this->set([
-            'page_options', $this->page_options,
+            'page_options', $page_options,
             'aefis' => Sanitize::clean($this->paginate(), array('encode' => false)),
             'paging' => $this->request->params['paging'],
             '_serialize' => ['aefis', 'page_options', 'paging']]);
