@@ -556,7 +556,7 @@ class MedicationsController extends AppController {
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
         $save_data['Medication']['reference_no'] = 'ME/'.date('Y').'/'.$count;
-        $save_data['Medication']['report_type'] = 'Initial';
+        // $save_data['Medication']['report_type'] = 'Initial';
         //bokelo
 
         if ($this->request->is('post') || $this->request->is('put')) {

@@ -594,7 +594,7 @@ class SadrsController extends AppController {
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
         $save_data['Sadr']['reference_no'] = 'SADR/'.date('Y').'/'.$count;
-        $save_data['Sadr']['report_type'] = 'Initial';
+        // $save_data['Sadr']['report_type'] = 'Initial';
         //bokelo
 
         if ($this->request->is('post') || $this->request->is('put')) {

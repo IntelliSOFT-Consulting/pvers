@@ -571,7 +571,7 @@ class AefisController extends AppController {
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
         $save_data['Aefi']['reference_no'] = 'AEFI/'.date('Y').'/'.$count;
-        $save_data['Aefi']['report_type'] = 'Initial';
+        // $save_data['Aefi']['report_type'] = 'Initial';
         //bokelo
         // debug($save_data);
         // return;

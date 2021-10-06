@@ -459,7 +459,7 @@ class DevicesController extends AppController {
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
         $save_data['Device']['reference_no'] = 'MD/'.date('Y').'/'.$count;
-        $save_data['Device']['report_type'] = 'Initial';
+        // $save_data['Device']['report_type'] = 'Initial';
         //bokelo
 
         if ($this->request->is('post') || $this->request->is('put')) {
