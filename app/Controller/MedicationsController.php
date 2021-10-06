@@ -74,7 +74,7 @@ class MedicationsController extends AppController {
 
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Medication.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'Designation');
+        $this->paginate['contain'] = array('County', 'Designation', 'MedicationProduct');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {

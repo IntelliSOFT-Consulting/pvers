@@ -224,6 +224,38 @@ class UsersController extends AppController {
         $this->set('county', $this->User->County->findById($this->Auth->user('county_id'), array('county_name')));
     }
 
+    public function api_changePassword() {
+        if (!$this->Auth->User('id')) {
+            $this->set([
+                    'status' => 'failed',
+                    'message' => 'You are not logged in!!',
+                    '_serialize' => ['status', 'message']
+                ]);
+            return;
+        }
+        if ($this->request->is('post')  || $this->request->is('put')) {
+            $this->request->data['User']['id'] = $this->Auth->User('id');
+            unset($this->User->validate['email']);
+            $this->User->create();
+            if ($this->User->save($this->request->data, array('fieldList' => array('old_password', 'password', 'confirm_password')))) {
+                $this->set([
+                    'status' => 'success',
+                    'message' => 'The password has been changed',
+                    '_serialize' => ['status', 'message']
+                ]);
+            } else {
+                $this->set([
+                    'status' => 'failed',
+                    'message' => 'Could not update the password',
+                    'validation' => $this->User->validationErrors,
+                    '_serialize' => ['status', 'message', 'validation']
+                ]);
+            }
+        } else {
+            throw new MethodNotAllowedException();
+        }
+    }
+
     public function forgotPassword() {
         if ($this->Auth->user('id')) {
             $this->Session->setFlash(__('You are logged in! Please logout to request password change'), 'flash_info');
@@ -864,6 +896,51 @@ class UsersController extends AppController {
         $this->set(compact('designations'));
         $counties = $this->User->County->find('list');
         $this->set(compact('counties'));
+    }
+
+    public function api_profile($id = null) {
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+        if ($this->Auth->User('id') != $id) {
+            $this->set([
+                    'status' => 'failed',
+                    'message' => 'You do not have permission to edit this user!',
+                    '_serialize' => ['status', 'message']
+                ]);
+            return;
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            // $this->request->data['User']['group_id'] = 2;
+            unset($this->User->validate['username']);
+            unset($this->User->validate['password']);
+            unset($this->User->validate['confirm_password']);
+            if ($this->User->save($this->request->data)) {
+                $this->set([
+                    'status' => 'success',
+                    'message' => 'Your details have been updated!',
+                    'user' => $this->request->data,
+                    '_serialize' => ['status', 'message', 'user']
+                ]);
+            } else {
+                $this->set([
+                    'status' => 'failed',
+                    'message' => 'Your details could not be updated!',
+                    'validation' => $this->Users->validationErrors,
+                    '_serialize' => ['status', 'validation', 'message']
+                ]);
+            }
+        } else {
+            $this->set([
+                        'status' => 'success',
+                        'message' => 'User profile details!',
+                        'user' => $this->User->find('first', ['conditions' => ['User.id' => $id], 'contain' => ['Designation', 'County'],
+                            //'fields' => ['User.id', 'User.designation_id', 'User.county_id', 'User.username', 'User.name', 'User.email', 'User.group_id', 'User.name_of_institution', 'User.institution_address', 'User.institution_code', 'User.institution_contact', 'User.institution_email', 'User.ward', 'User.user_type', 'User.sponsor_email', 'User.phone_no', 'User.forgot_password', 'User.initial_email', 'User.is_active',  'User.created', 'User.modified', 'User.health_program']
+                            ]),
+                        '_serialize' => ['status', 'message', 'user']
+                    ]);
+        }
     }
 
     public function admin_edit($id = null) {
