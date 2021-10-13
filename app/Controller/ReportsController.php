@@ -60,6 +60,14 @@ class ReportsController extends AppController {
 'saes_by_concomittant');
     }
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        // remove initDb
+        if ($this->RequestHandler->isMobile()) {
+            $this->layout = 'Emails/html/default';
+        }
+    }
+
     /**
      * site inspections per month method
      *
