@@ -14,6 +14,7 @@ class ReportsController extends AppController {
             );
     public $paginate = array();
     public $presetVars = true;
+    public $is_mobile = false;
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -59,8 +60,10 @@ class ReportsController extends AppController {
                 'saes_by_medicine',
                 'saes_by_concomittant');
         if ($this->RequestHandler->isMobile()) {
-            $this->layout = 'Emails/html/default';
+            // $this->layout = 'Emails/html/default';
+            $this->is_mobile = true;
         }
+        $this->set('is_mobile', $this->is_mobile);
     }
 
 

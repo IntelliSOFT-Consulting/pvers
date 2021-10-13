@@ -14,7 +14,7 @@ class NotificationsController extends AppController {
     public $paginate = array();
     public $components = array('Search.Prg');
     public $presetVars = true; // using the model configuration
-    
+
 /**
  * index method
  *
@@ -59,7 +59,7 @@ class NotificationsController extends AppController {
 
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Notification.created' => 'desc');
-        $this->paginate['contain'] = array('User');
+        $this->paginate['contain'] = array();
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
