@@ -489,7 +489,8 @@ class SadrsController extends AppController {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Sadr->saveField('submitted', 2);
                     //lucian
-                    if(empty($sadr->reference_no)) {
+                    // if(empty($sadr->reference_no)) {
+                    if(!empty($sadr['Sadr']['reference_no']) && $sadr['Sadr']['reference_no'] == 'new') {
                         $count = $this->Sadr->find('count',  array(
                             'fields' => 'Sadr.reference_no',
                             'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Sadr.reference_no !=' => 'new'

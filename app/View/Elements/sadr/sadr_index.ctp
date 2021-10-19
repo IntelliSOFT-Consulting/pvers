@@ -300,7 +300,7 @@
                 if($sadr['Sadr']['report_type'] == 'Followup') {
                   echo "<br> Initial: ";
                   echo $this->Html->link(
-                    '<label class="label label-info">'.substr($sadr['Sadr']['reference_no'], 0, strpos($sadr['Sadr']['reference_no'], '_')).'</label>', 
+                    '<label class="label label-info">'.$sadr['Sadr']['reference_no'].'</label>', 
                     array('action' => 'view', $sadr['Sadr']['sadr_id']), array('escape' => false));
                 }
               ?>&nbsp;

@@ -82,6 +82,7 @@
                       echo '<ol>';
                       foreach ($medications as $medication) {
                         if($medication['Medication']['submitted'] > 1) {
+                          $generic_name_i = (!empty($medication['MedicationProduct'][0]['generic_name_i'])) ? $medication['MedicationProduct'][0]['generic_name_i'] : $medication['Medication']['reference_no'];
                           echo "<li>";
                             echo $this->Html->link($medication['MedicationProduct'][0]['generic_name_i'].' <small class="muted">('.$medication['Medication']['reference_no'].')</small>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
                               array('escape' => false, 'class' => 'text-success')); 

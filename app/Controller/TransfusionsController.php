@@ -379,7 +379,7 @@ class TransfusionsController extends AppController {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Transfusion->saveField('submitted', 2);
                     //lucian
-                    if(empty($transfusion->reference_no)) {
+                    if(!empty($transfusion['Transfusion']['reference_no']) && $transfusion['Transfusion']['reference_no'] == 'new') {
                         $count = $this->Transfusion->find('count',  array(
                             'fields' => 'Transfusion.reference_no',
                             'conditions' => array('Transfusion.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Transfusion.reference_no !=' => 'new'

@@ -3,6 +3,8 @@
 	$header = array('id' => '#', 'reference_no' => 'Reference No.', 'counties' => 'County',
 		'patient_name' => 'Patient name', 'date_born' => 'Date of birth',
 		'gender' => 'Gender',
+		'relation' => 'Relation',
+		'report_type' => 'Report Type',
 		'age_group' => 'Age Group', 
 		'onset_date' => 'Date of onset', 
 		'sadr_vomiting' => 'Vomiting or diarrhoea',

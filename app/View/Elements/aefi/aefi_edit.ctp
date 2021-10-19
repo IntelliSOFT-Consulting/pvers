@@ -529,7 +529,7 @@
                                 echo $this->Form->input('person_submitting', array(
                                     'type' => 'radio',  'label' => false, 'legend' => false, 'div' => false, 'hiddenField' => false, 'error' => false, 'class' => 'person-submit',
                                     'before' => '<div class="form-inline">
-                                                <input type="hidden" value="" id="SadrPersonSubmitting_" name="data[Sadr][person_submitting]">
+                                                <input type="hidden" value="" id="AefiPersonSubmitting_" name="data[Aefi][person_submitting]">
                                                 <label class="radio">',
                                     'after' => '</label>&nbsp;&nbsp;',
                                     'options' => array('Yes' => 'Yes'),
@@ -586,7 +586,7 @@
                           'name' => 'saveChanges',
                           'class' => 'btn btn-success mapop',
                           'formnovalidate' => 'formnovalidate',
-                          'id' => 'SadrSaveChanges', 'title'=>'Save & continue editing',
+                          'id' => 'AefiSaveChanges', 'title'=>'Save & continue editing',
                           'data-content' => 'Save changes to form without submitting it.
                                                       The form will still be available for further editing.',
                           'div' => false,

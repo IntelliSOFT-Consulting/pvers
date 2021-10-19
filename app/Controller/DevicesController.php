@@ -362,7 +362,7 @@ class DevicesController extends AppController {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Device->saveField('submitted', 2);
                     //lucian
-                    if(empty($device->reference_no)) {
+                    if(!empty($device['Device']['reference_no']) && $device['Device']['reference_no'] == 'new') {
                         $count = $this->Device->find('count',  array(
                             'fields' => 'Device.reference_no',
                             'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Device.reference_no !=' => 'new'

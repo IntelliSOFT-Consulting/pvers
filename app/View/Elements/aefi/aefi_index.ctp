@@ -301,7 +301,7 @@
                   if($aefi['Aefi']['report_type'] == 'Followup') {
                     echo "<br> Initial: ";
                     echo $this->Html->link(
-                      '<label class="label label-info">'.substr($aefi['Aefi']['reference_no'], 0, strpos($aefi['Aefi']['reference_no'], '_')).'</label>', 
+                      '<label class="label label-info">'.$aefi['Aefi']['reference_no'].'</label>', 
                       array('action' => 'view', $aefi['Aefi']['aefi_id']), array('escape' => false));
                   }
               ?>&nbsp;

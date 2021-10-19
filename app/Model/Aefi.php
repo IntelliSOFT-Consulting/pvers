@@ -50,14 +50,16 @@ class Aefi extends AppModel {
     }
 
     public function findByVaccineName($data = array()) {
-            $cond = array($this->alias.'.id' => $this->AefiListOfVaccine->find('list', array(
-                'conditions' => array(
-                    'OR' => array(
-                        'AefiListOfVaccine.vaccine_name LIKE' => '%' . $data['vaccine_name'] . '%',
-                        'AefiListOfVaccine.vaccine_manufacturer LIKE' => '%' . $data['vaccine_name'] . '%', )),
-                'fields' => array('aefi_id', 'aefi_id')
-                    )));
-            return $cond;
+        $vaxs = ClassRegistry::init('Vaccine')->find('list', array('conditions' => array('vaccine_name LIKE' => '%' . $data['vaccine_name'] . '%'), 'fields' => array('id', 'id')));
+        $cond = array($this->alias.'.id' => $this->AefiListOfVaccine->find('list', array(
+            'conditions' => array(
+                'OR' => array(
+                    'AefiListOfVaccine.vaccine_name LIKE' => '%' . $data['vaccine_name'] . '%',
+                    'AefiListOfVaccine.vaccine_id' => $vaxs,
+                    'AefiListOfVaccine.vaccine_manufacturer LIKE' => '%' . $data['vaccine_name'] . '%', )),
+            'fields' => array('aefi_id', 'aefi_id')
+                )));
+        return $cond;
     }
 
     public function findByHealthProgram($data = array()) {

@@ -469,7 +469,11 @@ class AefisController extends AppController {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Aefi->saveField('submitted', 2);
                     //lucian
-                    if(empty($aefi->reference_no)) {                        
+                    if(!empty($aefi['Aefi']['reference_no']) && $aefi['Aefi']['reference_no'] == 'new') {
+
+                        // debug($aefi->id);
+                        // debug($this->request->data);
+                        // exit;                   
                         $count = $this->Aefi->find('count',  array(
                             'fields' => 'Aefi.reference_no',
                             'conditions' => array('Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Aefi.reference_no !=' => 'new'

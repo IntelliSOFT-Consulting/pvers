@@ -33,6 +33,7 @@
 	});
 
 	//If not serious disable criteria
+    if(!$('input[name="data[Aefi][serious]"][value="Yes"]').is(':checked')){ $('input[name="data[Aefi][serious_yes]"]').attr('disabled', true).attr('checked', false); }
     $('input[name="data[Aefi][serious]"]').click(function(){ 
         if ($(this).val() == 'No') {
             $('input[name="data[Aefi][serious_yes]"]').attr('disabled', this.checked).attr('checked', !this.checked);

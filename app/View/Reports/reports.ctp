@@ -10,9 +10,10 @@
 
 
 <div class="row-fluid">
+    <?php if (!$is_mobile) { ?>
     <div class="span2">
         <?php 
-        if (!$is_mobile) {
+        
           if($this->Session->read('Auth.User.user_type') == 'County Pharmacist'){
               echo $this->element('menus/report_county_sidebar'); 
           } elseif ($this->Session->read('Auth.User.user_type') == 'Public Health Program') {
@@ -24,11 +25,12 @@
           }
           else {
               echo $this->element('menus/report_sidebar'); 
-          }
-        }
+          }        
           
         ?>
     </div>
+    <?php } ?>
+
     <div class="span10">
         <?php
             echo $this->Form->create('Report', array(
@@ -68,6 +70,28 @@
         
         <?php echo $this->fetch('report'); ?>
     </div>
+
+
+    <?php if ($is_mobile) { ?>
+    <div class="span2">
+        <?php 
+        
+          if($this->Session->read('Auth.User.user_type') == 'County Pharmacist'){
+              echo $this->element('menus/report_county_sidebar'); 
+          } elseif ($this->Session->read('Auth.User.user_type') == 'Public Health Program') {
+              echo $this->element('menus/report_program_sidebar'); 
+          } elseif ($this->Session->read('Auth.User.group_id') == 3) {
+              echo $this->element('menus/report_public_sidebar'); 
+          } elseif (!$this->Session->read('Auth.User')) {
+              echo $this->element('menus/report_public_sidebar'); 
+          }
+          else {
+              echo $this->element('menus/report_sidebar'); 
+          }        
+          
+        ?>
+    </div>
+    <?php } ?>
 </div>
 
 <script type="text/javascript">
