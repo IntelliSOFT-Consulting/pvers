@@ -14,7 +14,7 @@ App::uses('HttpSocket', 'Network/Http');
  * A Simple QueueTask example.
  *
  */
-class QueueGenericEmailTask extends QueueTask {
+class QueueGenericSmsTask extends QueueTask {
 
 /**
  * ZendStudio Codecomplete Hint
