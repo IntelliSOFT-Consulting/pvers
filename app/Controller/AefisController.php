@@ -497,7 +497,7 @@ class AefisController extends AppController {
                       'modified' => $aefi['Aefi']['modified']
                       );
                     $datum = array(
-                        'email' => $aefi['Aefi']['reporter_email'],
+                        'email' => $aefi['Aefi']['reporter_email'], 
                         'id' => $id, 'user_id' => $this->Auth->User('id'), 'type' => 'reporter_aefi_submit', 'model' => 'Aefi',
                         'subject' => CakeText::insert($message['Message']['subject'], $variables),
                         'message' => CakeText::insert($message['Message']['content'], $variables)
@@ -506,6 +506,14 @@ class AefisController extends AppController {
                     $this->loadModel('Queue.QueuedTask');
                     $this->QueuedTask->createJob('GenericEmail', $datum);
                     $this->QueuedTask->createJob('GenericNotification', $datum);
+                    
+                    //Send SMS
+                    if (!empty($aefi['Aefi']['reporter_phone']) && strlen(substr($aefi['Aefi']['reporter_phone'], -9)) == 9 && is_numeric(substr($aefi['Aefi']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($aefi['Aefi']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
+                    
                     
                     //Notify managers
                     $users = $this->Aefi->User->find('all', array(
@@ -607,6 +615,14 @@ class AefisController extends AppController {
                     $this->loadModel('Queue.QueuedTask');
                     $this->QueuedTask->createJob('GenericEmail', $datum);
                     $this->QueuedTask->createJob('GenericNotification', $datum);
+
+                    
+                    //Send SMS
+                    if (!empty($aefi['Aefi']['reporter_phone']) && strlen(substr($aefi['Aefi']['reporter_phone'], -9)) == 9 && is_numeric(substr($aefi['Aefi']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($aefi['Aefi']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
                     
                     //Notify managers
                     $users = $this->Aefi->User->find('all', array(

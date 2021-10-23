@@ -247,6 +247,13 @@ class PadrsController extends AppController {
 
                     $this->loadModel('Queue.QueuedTask');
                     $this->QueuedTask->createJob('GenericEmail', $datum);
+
+                    //Send SMS
+                    if (!empty($padr['Padr']['reporter_phone']) && strlen(substr($padr['Padr']['reporter_phone'], -9)) == 9 && is_numeric(substr($padr['Padr']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($padr['Padr']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
                     
                     //Notify managers
                     $users = $this->Padr->User->find('all', array(
@@ -317,6 +324,13 @@ class PadrsController extends AppController {
 
                     $this->loadModel('Queue.QueuedTask');
 					$this->QueuedTask->createJob('GenericEmail', $datum);
+
+                    //Send SMS
+                    if (!empty($padr['Padr']['reporter_phone']) && strlen(substr($padr['Padr']['reporter_phone'], -9)) == 9 && is_numeric(substr($padr['Padr']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($padr['Padr']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
                     
                     //Notify managers
                     $users = $this->Padr->User->find('all', array(

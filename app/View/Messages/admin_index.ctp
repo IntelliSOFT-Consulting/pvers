@@ -38,6 +38,14 @@
               ?>
               </th>
               <th>
+              <?php
+                echo $this->Form->input('sms', array('div' => false, 'class' => 'span12 unauthorized_index',
+                  'label' => array('class' => 'required', 'text' => 'SMS'),
+                  'type' => 'text',
+                  ));
+              ?>
+              </th>
+              <th>
                 <?php
                   echo $this->Form->input('pages', array(
                     'type' => 'select', 'div' => false, 'class' => 'span12', 'selected' => $this->request->params['paging']['Message']['limit'],
@@ -65,7 +73,7 @@
       <?php
         echo $this->Paginator->counter(array(
         'format' => __('Page <span class="badge">{:page}</span> of <span class="badge">{:pages}</span>,
-                showing <span class="badge">{:current}</span> SAEs out of
+                showing <span class="badge">{:current}</span> Messages out of
                 <span class="badge badge-inverse">{:count}</span> total, starting on record <span class="badge">{:start}</span>,
                 ending on <span class="badge">{:end}</span>')
         ));
@@ -92,8 +100,9 @@
         <th><?php echo $this->Paginator->sort('name'); ?></th>
   	    <th><?php echo $this->Paginator->sort('subject'); ?></th>
          <th><?php echo $this->Paginator->sort('content'); ?></th>
+         <th><?php echo $this->Paginator->sort('description'); ?></th>
+  	     <th><?php echo $this->Paginator->sort('sms'); ?></th>
          <th><?php echo $this->Paginator->sort('type'); ?></th>
-  	     <th><?php echo $this->Paginator->sort('description'); ?></th>
   	     <th class="actions"><?php echo __('Actions'); ?></th>
   	</tr>
   	<?php
@@ -102,9 +111,10 @@
   		<td><?php echo h($message['Message']['id']); ?>&nbsp;</td>
       <td><?php echo h($message['Message']['name']); ?>&nbsp;</td>
   		<td><?php echo h($message['Message']['subject']); ?>&nbsp;</td>
-                <td><?php echo $message['Message']['content']; ?>&nbsp;</td>
-                <td><?php echo $message['Message']['type']; ?>&nbsp;</td>
-  		<td><?php echo $message['Message']['description']; ?>&nbsp;</td>
+      <td><?php echo $message['Message']['content']; ?>&nbsp;</td>
+      <td><?php echo $message['Message']['description']; ?>&nbsp;</td>
+  		<td><?php echo $message['Message']['sms']; ?>&nbsp;</td>
+      <td><?php echo $message['Message']['type']; ?>&nbsp;</td>
   		<td class="actions">
   			<?php echo $this->Html->link(__('Edit'), array('controller' => 'messages', 'action' => 'edit', $message['Message']['id'], 'admin' => true), array('class' => 'btn btn-success')); ?>
   		</td>

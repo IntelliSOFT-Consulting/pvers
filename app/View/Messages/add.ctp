@@ -5,6 +5,7 @@
 	<?php
 		echo $this->Form->input('name');
 		echo $this->Form->input('content');
+		echo $this->Form->input('sms', array('type' => 'text'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

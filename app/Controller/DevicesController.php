@@ -396,6 +396,13 @@ class DevicesController extends AppController {
                     $this->QueuedTask->createJob('GenericEmail', $datum);
                     $this->QueuedTask->createJob('GenericNotification', $datum);
                     
+                    //Send SMS
+                    if (!empty($device['Device']['reporter_phone']) && strlen(substr($device['Device']['reporter_phone'], -9)) == 9 && is_numeric(substr($device['Device']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($device['Device']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
+
                     //Notify managers
                     $users = $this->Device->User->find('all', array(
                         'contain' => array(),
@@ -489,6 +496,13 @@ class DevicesController extends AppController {
                     $this->loadModel('Queue.QueuedTask');
                     $this->QueuedTask->createJob('GenericEmail', $datum);
                     $this->QueuedTask->createJob('GenericNotification', $datum);
+
+                    //Send SMS
+                    if (!empty($device['Device']['reporter_phone']) && strlen(substr($device['Device']['reporter_phone'], -9)) == 9 && is_numeric(substr($device['Device']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($device['Device']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
                     
                     //Notify managers
                     $users = $this->Device->User->find('all', array(

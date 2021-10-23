@@ -130,6 +130,13 @@ Configure::write('vigiflow_api', 'https://api.who-umc.org/demo/vigiflow/icsrs');
 Configure::write('vigiflow_key', '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
 Configure::write('API.token.pepper', 'touch2d34asdfpad'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
 
+// usernameAT=afyamoja
+// apiKey=6347d9066545048e3d0ec2cc11034186861dc47c96c4bc268f9bac61899a357c
+Configure::write('africastalking_api', 'https://api.africastalking.com/version1/messaging'); 
+Configure::write('africastalking_username', 'afyamoja'); 
+Configure::write('africastalking_from', 'INTELLISOFT'); 
+Configure::write('africastalking_key', '6347d9066545048e3d0ec2cc11034186861dc47c96c4bc268f9bac61899a357c'); 
+
 spl_autoload_register(function ($class) {
     foreach (App::path('Vendor') as $base) {
         $path = $base . str_replace('\\', DS, $class) . '.php';

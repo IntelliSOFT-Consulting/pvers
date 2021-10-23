@@ -32,6 +32,11 @@
               'label' => array('class' => 'control-label required', 'text' => 'Content <span class="sterix">*</span>'),
               'between'=>'<div class="controls">', 'placeholder' => 'study title' , 'class' => 'input-large',
             ));
+    echo $this->Form->input('sms', array(
+              'type' => 'textarea', 'rows' => 3,
+              'label' => array('class' => 'control-label required', 'text' => 'SMS <span class="sterix">*</span>'),
+              'between'=>'<div class="controls">', 'placeholder' => 'sms' , 'class' => 'input-xxlarge',
+            ));
 		echo $this->Form->input('type');
 		echo $this->Form->input('description', array('class' => 'input-xlarge'));
 	?>

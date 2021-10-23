@@ -388,6 +388,13 @@ class PqmpsController extends AppController {
                     $this->loadModel('Queue.QueuedTask');
                     $this->QueuedTask->createJob('GenericEmail', $datum);
                     $this->QueuedTask->createJob('GenericNotification', $datum);
+
+                    //Send SMS
+                    if (!empty($pqmp['Pqmp']['reporter_phone']) && strlen(substr($pqmp['Pqmp']['reporter_phone'], -9)) == 9 && is_numeric(substr($pqmp['Pqmp']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($pqmp['Pqmp']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
                     
                     //Notify managers
                     $users = $this->Pqmp->User->find('all', array(
@@ -494,6 +501,13 @@ class PqmpsController extends AppController {
                     $this->loadModel('Queue.QueuedTask');
                     $this->QueuedTask->createJob('GenericEmail', $datum);
                     $this->QueuedTask->createJob('GenericNotification', $datum);
+
+                    //Send SMS
+                    if (!empty($pqmp['Pqmp']['reporter_phone']) && strlen(substr($pqmp['Pqmp']['reporter_phone'], -9)) == 9 && is_numeric(substr($pqmp['Pqmp']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($pqmp['Pqmp']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
                     
                     //Notify managers
                     $users = $this->Pqmp->User->find('all', array(

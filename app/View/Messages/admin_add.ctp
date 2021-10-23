@@ -28,9 +28,14 @@
             array('type' => 'select', 'empty' => true,
               'options' =>  array('info' => 'Blue', 'success' => 'Green', 'error' => 'Red', 'warning' => 'Orange'), 
               'label' => array('class' => 'control-label', 'text' => 'Notification Style')));
-		echo $this->Form->input('content', array(
+    echo $this->Form->input('content', array(
               'label' => array('class' => 'control-label required', 'text' => 'Content <span class="sterix">*</span>'),
-              'between'=>'<div class="controls">', 'placeholder' => 'study title' , 'class' => 'input-large',
+              'between'=>'<div class="controls">', 'placeholder' => 'content' , 'class' => 'input-large',
+            ));
+    echo $this->Form->input('sms', array(
+              'type' => 'textarea', 'rows' => 3,
+              'label' => array('class' => 'control-label required', 'text' => 'SMS <span class="sterix">*</span>'),
+              'between'=>'<div class="controls">', 'placeholder' => 'sms' , 'class' => 'input-xxlarge',
             ));
 		echo $this->Form->input('type', array('type' => 'select', 'empty' => true, 'options' => array('notification' => 'notification', 'email' => 'email', 'notification email' => 'notification email')));
 		echo $this->Form->input('description', array('class' => 'input-xlarge'));

@@ -492,6 +492,13 @@ class MedicationsController extends AppController {
                     $this->loadModel('Queue.QueuedTask');
                     $this->QueuedTask->createJob('GenericEmail', $datum);
                     $this->QueuedTask->createJob('GenericNotification', $datum);
+
+                    //Send SMS
+                    if (!empty($medication['Medication']['reporter_phone']) && strlen(substr($medication['Medication']['reporter_phone'], -9)) == 9 && is_numeric(substr($medication['Medication']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($medication['Medication']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
                     
                     //Notify managers
                     $users = $this->Medication->User->find('all', array(
@@ -588,6 +595,13 @@ class MedicationsController extends AppController {
                     $this->loadModel('Queue.QueuedTask');
                     $this->QueuedTask->createJob('GenericEmail', $datum);
                     $this->QueuedTask->createJob('GenericNotification', $datum);
+
+                    //Send SMS
+                    if (!empty($medication['Medication']['reporter_phone']) && strlen(substr($medication['Medication']['reporter_phone'], -9)) == 9 && is_numeric(substr($medication['Medication']['reporter_phone'], -9))) {
+                        $datum['phone'] = '254'.substr($medication['Medication']['reporter_phone'], -9);
+                        $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
+                        $this->QueuedTask->createJob('GenericSms', $datum);
+                    }
                     
                     //Notify managers
                     $users = $this->Medication->User->find('all', array(
