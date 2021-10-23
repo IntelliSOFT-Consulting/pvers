@@ -17,10 +17,10 @@ class GenericSmsShell extends Shell {
     public function  sendSms() {
         $HttpSocket = new HttpSocket();
         // string data
-        $data = 'username='.Configure::read('africastalking_username').'&to=%2B'.$this->args[0]['phone'].'&message='.$this->args[0]['sms'].'&from='.Configure::read('africastalking_from');
+        $payload = 'username='.Configure::read('africastalking_username').'&to=%2B254729932475&message=Uwinguni&from='.Configure::read('africastalking_from');
         $results = $HttpSocket->post(
             Configure::read('africastalking_api'),
-            $data,
+            $payload,
             array('header' => array('Accept' => 'application/json' ,'Content-Type' => 'application/x-www-form-urlencoded', 'apiKey' => Configure::read('africastalking_key')))
         );
         if (!$results->isOk()) {

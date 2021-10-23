@@ -86,7 +86,7 @@ class QueueGenericSmsTask extends QueueTask {
 		
 		$HttpSocket = new HttpSocket();
         // string data
-        $payload = 'username='.Configure::read('africastalking_username').'&to=%2B'.$data['phone'].'&message='.$data['sms'].'&from='.Configure::read('africastalking_from');
+        $payload = 'username='.Configure::read('africastalking_username').'&to=%2B'.$data['phone'].'&message='.urlencode($data['sms']).'&from='.Configure::read('africastalking_from');
         $results = $HttpSocket->post(
             Configure::read('africastalking_api'),
             $payload,
