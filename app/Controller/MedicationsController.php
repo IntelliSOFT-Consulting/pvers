@@ -4,6 +4,7 @@ App::uses('Sanitize', 'Utility');
 App::uses('CakeText', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
+App::uses('Router', 'Routing');
 /**
  * Medications Controller
  *
@@ -496,6 +497,7 @@ class MedicationsController extends AppController {
                     //Send SMS
                     if (!empty($medication['Medication']['reporter_phone']) && strlen(substr($medication['Medication']['reporter_phone'], -9)) == 9 && is_numeric(substr($medication['Medication']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($medication['Medication']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'medications', 'action' => 'view', $medication['Medication']['id'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }
@@ -599,6 +601,7 @@ class MedicationsController extends AppController {
                     //Send SMS
                     if (!empty($medication['Medication']['reporter_phone']) && strlen(substr($medication['Medication']['reporter_phone'], -9)) == 9 && is_numeric(substr($medication['Medication']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($medication['Medication']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'medications', 'action' => 'view', $medication['Medication']['id'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }

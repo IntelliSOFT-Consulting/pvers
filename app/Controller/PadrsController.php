@@ -5,6 +5,7 @@ App::uses('CakeText', 'Utility');
 App::uses('Security', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
+App::uses('Router', 'Routing');
 /**
  * Padrs Controller
  *
@@ -251,6 +252,7 @@ class PadrsController extends AppController {
                     //Send SMS
                     if (!empty($padr['Padr']['reporter_phone']) && strlen(substr($padr['Padr']['reporter_phone'], -9)) == 9 && is_numeric(substr($padr['Padr']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($padr['Padr']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'padrs', 'action' => 'view', $padr['Padr']['token'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }
@@ -328,6 +330,7 @@ class PadrsController extends AppController {
                     //Send SMS
                     if (!empty($padr['Padr']['reporter_phone']) && strlen(substr($padr['Padr']['reporter_phone'], -9)) == 9 && is_numeric(substr($padr['Padr']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($padr['Padr']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'padrs', 'action' => 'view', $padr['Padr']['token'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }

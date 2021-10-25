@@ -4,6 +4,7 @@ App::uses('Sanitize', 'Utility');
 App::uses('CakeText', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
+App::uses('Router', 'Routing');
 
 /**
  * Aefis Controller
@@ -510,6 +511,7 @@ class AefisController extends AppController {
                     //Send SMS
                     if (!empty($aefi['Aefi']['reporter_phone']) && strlen(substr($aefi['Aefi']['reporter_phone'], -9)) == 9 && is_numeric(substr($aefi['Aefi']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($aefi['Aefi']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }
@@ -620,6 +622,7 @@ class AefisController extends AppController {
                     //Send SMS
                     if (!empty($aefi['Aefi']['reporter_phone']) && strlen(substr($aefi['Aefi']['reporter_phone'], -9)) == 9 && is_numeric(substr($aefi['Aefi']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($aefi['Aefi']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }

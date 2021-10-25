@@ -5,6 +5,7 @@ App::uses('CakeText', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
 App::uses('HttpSocket', 'Network/Http');
+App::uses('Router', 'Routing');
 
 /**
  * Sadrs Controller
@@ -150,7 +151,7 @@ class SadrsController extends AppController {
         $_header = array('Id');
         $_extract = array('Sadr.id');
 
-        // $this->response->download('AEFIS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
+        // $this->response->download('SADRS_'.date('Ymd_Hi').'.csv'); // <= setting the file name
         $this->viewClass = 'CsvView.Csv';
         $this->set(compact('csadrs', '_serialize', '_header', '_extract'));*/
         $this->response->download('SADRs_'.date('Ymd_Hi').'.csv'); // <= setting the file name
@@ -528,6 +529,7 @@ class SadrsController extends AppController {
                     //Send SMS
                     if (!empty($sadr['Sadr']['reporter_phone']) && strlen(substr($sadr['Sadr']['reporter_phone'], -9)) == 9 && is_numeric(substr($sadr['Sadr']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($sadr['Sadr']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }
@@ -637,6 +639,7 @@ class SadrsController extends AppController {
                     //Send SMS
                     if (!empty($sadr['Sadr']['reporter_phone']) && strlen(substr($sadr['Sadr']['reporter_phone'], -9)) == 9 && is_numeric(substr($sadr['Sadr']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($sadr['Sadr']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }
@@ -677,8 +680,8 @@ class SadrsController extends AppController {
                         'status' => 'failed',
                         'message' => 'The SADR could not be saved. Please review the error(s) and resubmit and try again.',
                         'validation' => $this->Sadr->validationErrors,
-                        'aefi' => $this->request->data,
-                        '_serialize' => ['status', 'message', 'validation', 'aefi']
+                        'sadr' => $this->request->data,
+                        '_serialize' => ['status', 'message', 'validation', 'sadr']
                     ]); 
             }
         } else {

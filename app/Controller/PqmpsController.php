@@ -4,6 +4,7 @@ App::uses('Sanitize', 'Utility');
 App::uses('CakeText', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
+App::uses('Router', 'Routing');
 /**
  * Pqmps Controller
  *
@@ -392,6 +393,7 @@ class PqmpsController extends AppController {
                     //Send SMS
                     if (!empty($pqmp['Pqmp']['reporter_phone']) && strlen(substr($pqmp['Pqmp']['reporter_phone'], -9)) == 9 && is_numeric(substr($pqmp['Pqmp']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($pqmp['Pqmp']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }
@@ -505,6 +507,7 @@ class PqmpsController extends AppController {
                     //Send SMS
                     if (!empty($pqmp['Pqmp']['reporter_phone']) && strlen(substr($pqmp['Pqmp']['reporter_phone'], -9)) == 9 && is_numeric(substr($pqmp['Pqmp']['reporter_phone'], -9))) {
                         $datum['phone'] = '254'.substr($pqmp['Pqmp']['reporter_phone'], -9);
+                        $variables['reference_url'] = Router::url(['controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id'], 'reporter' => true, 'full_base' => true]);
                         $datum['sms'] = CakeText::insert($message['Message']['sms'], $variables);
                         $this->QueuedTask->createJob('GenericSms', $datum);
                     }
