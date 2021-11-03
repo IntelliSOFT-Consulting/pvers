@@ -42,7 +42,7 @@
                         if($aefi['Aefi']['submitted'] > 1) {
                           // debug($aefi['AefiListOfVaccine']);
                             echo "<li>";
-                            $vname = (!empty($aefi['AefiListOfVaccine'][0]['Vaccine']['vaccine_name'])) ? $aefi['AefiListOfVaccine'][0]['Vaccine']['vaccine_name'] : $aefi['Aefi']['created'];
+                            $vname = (!empty($aefi['AefiListOfVaccine'][0]['Vaccine']['vaccine_name'])) ? $aefi['AefiListOfVaccine'][0]['Vaccine']['vaccine_name'] : $aefi['Aefi']['reference_no'];
                               echo $this->Html->link($vname.' <small class="muted">('.$aefi['Aefi']['reference_no'].')</small>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
                                 array('escape' => false, 'class' => 'text-'.((isset($aefi['Aefi']['serious']) && $aefi['Aefi']['serious'] == 'Yes') ? 'error' : 'success')));
                               echo "&nbsp;";

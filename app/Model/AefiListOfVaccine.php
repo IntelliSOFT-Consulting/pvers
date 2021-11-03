@@ -104,6 +104,7 @@ class AefiListOfVaccine extends AppModel {
 			if (!empty($val['AefiListOfVaccine']['vaccination_time'])) {
 				if(empty($val['AefiListOfVaccine']['vaccination_time'])) $val['AefiListOfVaccine']['vaccination_time'] = ':';
 				$a = explode(':', $val['AefiListOfVaccine']['vaccination_time']);
+				$a[1] = (isset($a[1])) ? $a[1] : '00';
 				$results[$key]['AefiListOfVaccine']['vaccination_time'] = array('hour'=> $a[0],'min'=> $a[1]);
 			}
 			if (isset($val['AefiListOfVaccine']['expiry_date'])) {

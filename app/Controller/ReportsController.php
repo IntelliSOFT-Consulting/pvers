@@ -186,7 +186,12 @@ class ReportsController extends AppController {
         $criteria['SadrListOfDrug.drug_name >'] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['SadrListOfDrug.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
-        // if($this->Auth->User('user_type') == 'Public Health Program') $criteria['SadrListOfDrug.drug_name'] = $this->Auth->User('health_program');
+        if($this->Auth->User('user_type') == 'County Pharmacist') {
+            $criteria['SadrListOfDrug.sadr_id'] = $this->Sadr->find('list', array('conditions' => array('Sadr.submitted' => '2', 'Sadr.county_id' => $this->Auth->User('county_id')), 'fields' => array('id', 'id')));
+        } else {
+            $criteria['SadrListOfDrug.sadr_id'] = $this->Sadr->find('list', array('conditions' => array('Sadr.submitted' => '2'), 'fields' => array('id', 'id')));
+        }
+        
         if($this->Auth->User('user_type') == 'Public Health Program') {
             $conditionsSubQuery['DrugDictionary.health_program'] = $this->Auth->User('health_program');
 
@@ -429,10 +434,16 @@ class ReportsController extends AppController {
     public function aefis_by_vaccine() {
         $criteria['Vaccine.id >'] = 0;
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
-                $criteria['AefiListOfVaccine.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+            $criteria['AefiListOfVaccine.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
         else 
             $criteria['AefiListOfVaccine.created >'] = '2020-04-01 08:00:00';
-        if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
+        
+        // if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
+        if($this->Auth->User('user_type') == 'County Pharmacist') {
+            $criteria['AefiListOfVaccine.aefi_id'] = $this->Aefi->find('list', array('conditions' => array('Aefi.submitted' => '2', 'Aefi.county_id' => $this->Auth->User('county_id')), 'fields' => array('id', 'id')));
+        } else {
+            $criteria['AefiListOfVaccine.aefi_id'] = $this->Aefi->find('list', array('conditions' => array('Aefi.submitted' => '2'), 'fields' => array('id', 'id')));
+        }
         $data = $this->Aefi->AefiListOfVaccine->find('all', array(
             'fields' => array('Vaccine.vaccine_name as vaccine_name', 'COUNT(distinct AefiListOfVaccine.aefi_id) as cnt'),
             'contain' => array('Vaccine'), 'recursive' => -1,
@@ -1223,7 +1234,12 @@ class ReportsController extends AppController {
         $criteria['MedicationProduct.product_name_i >'] = '';
         if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
                 $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
-        if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
+        // if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Medication.county_id'] = $this->Auth->User('county_id');
+        if($this->Auth->User('user_type') == 'County Pharmacist') {
+            $criteria['MedicationProduct.medication_id'] = $this->Medication->find('list', array('conditions' => array('Medication.submitted' => '2', 'Medication.county_id' => $this->Auth->User('county_id')), 'fields' => array('id', 'id')));
+        } else {
+            $criteria['MedicationProduct.medication_id'] = $this->Medication->find('list', array('conditions' => array('Medication.submitted' => '2'), 'fields' => array('id', 'id')));
+        }
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.product_name_i as product_name_i', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
             'contain' => array(), 'recursive' => -1,
@@ -1237,10 +1253,20 @@ class ReportsController extends AppController {
     }
     
     public function medications_by_productii() {
+        $criteria['MedicationProduct.created >'] = '2020-04-01 08:08:08';
+        $criteria['MedicationProduct.product_name_ii >'] = '';
+        if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
+                $criteria['Medication.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+
+        if($this->Auth->User('user_type') == 'County Pharmacist') {
+            $criteria['MedicationProduct.medication_id'] = $this->Medication->find('list', array('conditions' => array('Medication.submitted' => '2', 'Medication.county_id' => $this->Auth->User('county_id')), 'fields' => array('id', 'id')));
+        } else {
+            $criteria['MedicationProduct.medication_id'] = $this->Medication->find('list', array('conditions' => array('Medication.submitted' => '2'), 'fields' => array('id', 'id')));
+        }
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.product_name_ii as product_name_ii', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
             'contain' => array(), 'recursive' => -1,
-            'conditions' => array('MedicationProduct.created >' => '2020-04-01 08:08:08', 'MedicationProduct.product_name_ii >' => ''),
+            'conditions' => $criteria,
             'group' => array('MedicationProduct.product_name_ii'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         )); 
@@ -1276,6 +1302,11 @@ class ReportsController extends AppController {
             $criteria[] = $subQueryExpression;
         }
 
+        if($this->Auth->User('user_type') == 'County Pharmacist') {
+            $criteria['MedicationProduct.medication_id'] = $this->Medication->find('list', array('conditions' => array('Medication.submitted' => '2', 'Medication.county_id' => $this->Auth->User('county_id')), 'fields' => array('id', 'id')));
+        } else {
+            $criteria['MedicationProduct.medication_id'] = $this->Medication->find('list', array('conditions' => array('Medication.submitted' => '2'), 'fields' => array('id', 'id')));
+        }
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.generic_name_i as generic_name_i', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),
             'contain' => array(), 'recursive' => -1,
@@ -1313,6 +1344,12 @@ class ReportsController extends AppController {
             $subQueryExpression = $db->expression($subQuery);
 
             $criteria[] = $subQueryExpression;
+        }
+        
+        if($this->Auth->User('user_type') == 'County Pharmacist') {
+            $criteria['MedicationProduct.medication_id'] = $this->Medication->find('list', array('conditions' => array('Medication.submitted' => '2', 'Medication.county_id' => $this->Auth->User('county_id')), 'fields' => array('id', 'id')));
+        } else {
+            $criteria['MedicationProduct.medication_id'] = $this->Medication->find('list', array('conditions' => array('Medication.submitted' => '2'), 'fields' => array('id', 'id')));
         }
         $data = $this->Medication->MedicationProduct->find('all', array(
             'fields' => array('MedicationProduct.generic_name_ii as generic_name_ii', 'COUNT(distinct MedicationProduct.medication_id) as cnt'),

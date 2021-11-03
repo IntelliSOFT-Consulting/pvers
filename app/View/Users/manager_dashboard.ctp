@@ -32,7 +32,9 @@
                       foreach ($aefis as $aefi) {
                         if($aefi['Aefi']['submitted'] > 1) {
                             echo "<li>";
-                              echo $this->Html->link($aefi['AefiListOfVaccine'][0]['vaccine_name'].' <small class="muted">('.$aefi['Aefi']['reference_no'].')</small>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
+                            $vaccine_name = (!empty($aefi['AefiListOfVaccine'][0]['vaccine_name'])) ? $aefi['AefiListOfVaccine'][0]['vaccine_name'] : $aefi['Aefi']['reference_no'];
+                            $vaccine_name = (!empty($aefi['AefiListOfVaccine'][0]['Vaccine']['vaccine_name'])) ? $aefi['AefiListOfVaccine'][0]['Vaccine']['vaccine_name'] : $aefi['Aefi']['reference_no'];
+                              echo $this->Html->link($vaccine_name.' <small class="muted">('.$aefi['Aefi']['reference_no'].')</small>', array('controller' => 'aefis', 'action' => 'view', $aefi['Aefi']['id']),
                                 array('escape' => false, 'class' => 'text-'.((isset($aefi['Aefi']['serious']) && $aefi['Aefi']['serious'] == 'Yes') ? 'error' : 'success')));
                               echo "&nbsp;";
                               echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'aefis' , 'action' => 'followup', $aefi['Aefi']['id']), array('escape' => false), __('Add a followup report?'));
