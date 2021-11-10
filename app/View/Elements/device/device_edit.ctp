@@ -135,12 +135,12 @@
                             'type' => 'select',
                             'empty' => true,
                             'options' => array(
-                                                'neonate'=>'neonate',
-                                                'infant' => 'infant',
-                                                'child' => 'child',
-                                                'adolescent' => 'adolescent',
-                                                'adult' => 'adult',
-                                                'elderly' => 'elderly',
+                                                'neonate'=>'neonate [0-1 month]',
+                                                'infant' => 'infant [1 month-1 year]',
+                                                'child' => 'child [1 year - 11 years]',
+                                                'adolescent' => 'adolescent [12-17 years]',
+                                                'adult' => 'adult [18-64 years]',
+                                                'elderly' => 'elderly [>65 years]',
                                                 ),
                             'label' => array('class' => 'control-label required', 'text' => 'Age group'),
                         ));
