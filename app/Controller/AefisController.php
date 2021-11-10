@@ -577,6 +577,7 @@ class AefisController extends AppController {
         $save_data['Aefi']['user_id'] = $this->Auth->user('id');
         $save_data['Aefi']['submitted'] = 2;
         //lucian
+        if (empty($save_data['Aefi']['reference_no'])) { 
             $count = $this->Aefi->find('count',  array(
                 'fields' => 'Aefi.reference_no',
                 'conditions' => array('Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Aefi.reference_no !=' => 'new'
@@ -584,7 +585,8 @@ class AefisController extends AppController {
                 ));
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
-        $save_data['Aefi']['reference_no'] = 'AEFI/'.date('Y').'/'.$count;
+            $save_data['Aefi']['reference_no'] = 'AEFI/'.date('Y').'/'.$count;
+        }
         // $save_data['Aefi']['report_type'] = 'Initial';
         //bokelo
         // debug($save_data);

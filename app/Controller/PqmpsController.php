@@ -465,6 +465,7 @@ class PqmpsController extends AppController {
         $save_data['Pqmp']['user_id'] = $this->Auth->user('id');
         $save_data['Pqmp']['submitted'] = 2;
         //lucian
+        if (empty($save_data['Pqmp']['reference_no'])) { 
             $count = $this->Pqmp->find('count',  array(
                 'fields' => 'Pqmp.reference_no',
                 'conditions' => array('Pqmp.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Pqmp.reference_no !=' => 'new'
@@ -472,7 +473,8 @@ class PqmpsController extends AppController {
                 ));
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
-        $save_data['Pqmp']['reference_no'] = 'PQMP/'.date('Y').'/'.$count;
+            $save_data['Pqmp']['reference_no'] = 'PQMP/'.date('Y').'/'.$count;
+        }
         // $save_data['Pqmp']['report_type'] = 'Initial';
         //bokelo
 

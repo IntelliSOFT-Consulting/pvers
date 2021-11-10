@@ -557,6 +557,7 @@ class MedicationsController extends AppController {
         $save_data['Medication']['user_id'] = $this->Auth->user('id');
         $save_data['Medication']['submitted'] = 2;
         //lucian
+        if (empty($save_data['Medication']['reference_no'])) { 
             $count = $this->Medication->find('count',  array(
                 'fields' => 'Medication.reference_no',
                 'conditions' => array('Medication.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Medication.reference_no !=' => 'new'
@@ -564,7 +565,8 @@ class MedicationsController extends AppController {
                 ));
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
-        $save_data['Medication']['reference_no'] = 'ME/'.date('Y').'/'.$count;
+            $save_data['Medication']['reference_no'] = 'ME/'.date('Y').'/'.$count;
+        }
         // $save_data['Medication']['report_type'] = 'Initial';
         //bokelo
 

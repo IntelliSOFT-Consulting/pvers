@@ -597,6 +597,7 @@ class SadrsController extends AppController {
         $save_data['Sadr']['user_id'] = $this->Auth->user('id');
         $save_data['Sadr']['submitted'] = 2;
         //lucian
+        if (empty($save_data['Sadr']['reference_no'])) {            
             $count = $this->Sadr->find('count',  array(
                 'fields' => 'Sadr.reference_no',
                 'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Sadr.reference_no !=' => 'new'
@@ -604,7 +605,8 @@ class SadrsController extends AppController {
                 ));
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
-        $save_data['Sadr']['reference_no'] = 'SADR/'.date('Y').'/'.$count;
+            $save_data['Sadr']['reference_no'] = 'SADR/'.date('Y').'/'.$count;
+        }
         // $save_data['Sadr']['report_type'] = 'Initial';
         //bokelo
 

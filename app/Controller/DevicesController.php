@@ -460,6 +460,7 @@ class DevicesController extends AppController {
         $save_data['Device']['user_id'] = $this->Auth->user('id');
         $save_data['Device']['submitted'] = 2;
         //lucian
+        if (empty($save_data['Device']['reference_no'])) { 
             $count = $this->Device->find('count',  array(
                 'fields' => 'Device.reference_no',
                 'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Device.reference_no !=' => 'new'
@@ -467,7 +468,8 @@ class DevicesController extends AppController {
                 ));
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
-        $save_data['Device']['reference_no'] = 'MD/'.date('Y').'/'.$count;
+            $save_data['Device']['reference_no'] = 'MD/'.date('Y').'/'.$count;
+        }
         // $save_data['Device']['report_type'] = 'Initial';
         //bokelo
 

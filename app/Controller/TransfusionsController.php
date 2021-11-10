@@ -477,6 +477,8 @@ class TransfusionsController extends AppController {
         $save_data['Transfusion']['user_id'] = $this->Auth->user('id');
         $save_data['Transfusion']['submitted'] = 2;
         //lucian
+
+        if (empty($save_data['Transfusion']['reference_no'])) { 
             $count = $this->Transfusion->find('count',  array(
                 'fields' => 'Transfusion.reference_no',
                 'conditions' => array('Transfusion.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Transfusion.reference_no !=' => 'new'
@@ -484,7 +486,8 @@ class TransfusionsController extends AppController {
                 ));
             $count++;
             $count = ($count < 10) ? "0$count" : $count; 
-        $save_data['Transfusion']['reference_no'] = 'BT/'.date('Y').'/'.$count;
+            $save_data['Transfusion']['reference_no'] = 'BT/'.date('Y').'/'.$count;
+        }
         // $save_data['Transfusion']['report_type'] = 'Initial';
         //bokelo
 
