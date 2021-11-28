@@ -17,7 +17,35 @@ class DrugDictionariesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('autocomplete', 'autocomblete', 'api_autocomplete');
+		$this->Auth->allow('autocomplete', 'autocomblete', 'api_autocomplete', 'api_index');
+	}
+
+
+	public function api_index() {
+		// $this->DrugDictionary->recursive = -1;
+		// $this->set('DrugDictionary', $this->DrugDictionary->find('list', array('order' => array('DrugDictionary.drug_name' => 'asc'))));
+		// $this->set('_serialize', array('drugDictionaries'));
+
+        $this->paginate['limit'] = 25;
+
+        $criteria = $this->Aefi->parseCriteria($this->passedArgs);
+        $criteria['Aefi.user_id'] = $this->Auth->User('id');
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Aefi.created' => 'desc');
+        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Aefi->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end csv export
+        $this->set([
+            'page_options', $page_options,
+            'aefis' => Sanitize::clean($this->paginate(), array('encode' => false)),
+            'paging' => $this->request->params['paging'],
+            '_serialize' => ['aefis', 'page_options', 'paging']]);
 	}
 
 	public function autocomplete($query = null) {
