@@ -440,9 +440,9 @@ class ReportsController extends AppController {
         
         // if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Aefi.county_id'] = $this->Auth->User('county_id');
         if($this->Auth->User('user_type') == 'County Pharmacist') {
-            $criteria['AefiListOfVaccine.aefi_id'] = $this->Aefi->find('list', array('conditions' => array('Aefi.submitted' => '2', 'Aefi.copied !=' => '1', 'Aefi.aefi_id' => null, 'Aefi.county_id' => $this->Auth->User('county_id')), 'fields' => array('id', 'id')));
+            $criteria['AefiListOfVaccine.aefi_id'] = $this->Aefi->find('list', array('conditions' => array('Aefi.submitted' => '2', 'Aefi.copied !=' => '1', 'Aefi.county_id' => $this->Auth->User('county_id')), 'fields' => array('id', 'id')));
         } else {
-            $criteria['AefiListOfVaccine.aefi_id'] = $this->Aefi->find('list', array('conditions' => array('Aefi.submitted' => '2', 'Aefi.copied !=' => '1', 'Aefi.aefi_id' => null), 'fields' => array('id', 'id')));
+            $criteria['AefiListOfVaccine.aefi_id'] = $this->Aefi->find('list', array('conditions' => array('Aefi.submitted' => '2', 'Aefi.copied !=' => '1'), 'fields' => array('id', 'id')));
         }
         $data = $this->Aefi->AefiListOfVaccine->find('all', array(
             'fields' => array('Vaccine.vaccine_name as vaccine_name', 'COUNT(distinct AefiListOfVaccine.aefi_id) as cnt'),
