@@ -22,7 +22,9 @@
 		'designations' => 'Reporter designation',
 		//'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
 		// 'reporter_phone' => 'Reporter phone', 
-		'created' => 'Date Created', 'reporter_date' => 'Report Date'
+		'device' => 'Sending Device', 
+		'created' => 'Date Created', 
+		'reporter_date' => 'Report Date'
 		);
 	if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
 		$header['reporter_name'] = 'Reporter';

@@ -32,6 +32,7 @@
 		'designations' => 'Reporter designation',
 		//'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
 		//'reporter_phone' => 'Reporter phone', 
+		'device' => 'Sending Device', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 		);
 	
