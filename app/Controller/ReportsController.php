@@ -106,7 +106,7 @@ class ReportsController extends AppController {
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
             'contain' => array('Designation'),
             'conditions' => $criteria,
-            'group' => array('Designation.name'),
+            'group' => array('Designation.name','Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -354,7 +354,7 @@ class ReportsController extends AppController {
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
             'contain' => array('Designation'),
             'conditions' => $criteria,
-            'group' => array('Designation.name'),
+            'group' => array('Designation.name','Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));        
 
@@ -581,7 +581,7 @@ class ReportsController extends AppController {
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
             'contain' => array('Designation'),
             'conditions' => $criteria,
-            'group' => array('Designation.name'),
+            'group' => array('Designation.name','Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));        
 
@@ -914,7 +914,7 @@ class ReportsController extends AppController {
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
             'contain' => array('Designation'),
             'conditions' => $criteria,
-            'group' => array('Designation.name'),
+            'group' => array('Designation.name','Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));        
 
@@ -1132,7 +1132,7 @@ class ReportsController extends AppController {
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
             'contain' => array('Designation'),
             'conditions' => $criteria,
-            'group' => array('Designation.name'),
+            'group' => array('Designation.name','Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));        
 
@@ -1485,7 +1485,7 @@ class ReportsController extends AppController {
             'fields' => array('Designation.name', 'COUNT(*) as cnt'),
             'contain' => array('Designation'),
             'conditions' => $criteria,
-            'group' => array('Designation.name'),
+            'group' => array('Designation.name','Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));        
 
