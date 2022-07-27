@@ -323,6 +323,7 @@
         <th><?php echo $this->Paginator->sort('patient_name'); ?></th>
         <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
         <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>
+        <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
        </thead>
@@ -341,7 +342,8 @@
         ?>&nbsp;
         </td>
         <td><?php echo h($transfusion['Transfusion']['patient_name']); ?>&nbsp;</td>
-        <td><?php echo h($transfusion['Transfusion']['reporter_date']); ?>&nbsp;</td>
+        <td><?php echo h($transfusion['Transfusion']['reporter_date']); ?>&nbsp;</td>     
+        <td><?php echo h($transfusion['Transfusion']['submitted_date']); ?>&nbsp;</td>
         <td><?php echo h($transfusion['Transfusion']['created']); ?>&nbsp;</td>
         <td class="actions">
             <?php 

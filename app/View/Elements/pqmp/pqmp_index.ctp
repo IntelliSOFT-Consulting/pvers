@@ -292,6 +292,7 @@
         <th><?php echo $this->Paginator->sort('reference_no'); ?></th>
         <th><?php echo $this->Paginator->sort('brand_name'); ?></th>
         <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
+        <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
         <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
@@ -316,7 +317,8 @@
         <td><?php echo h($pqmp['Pqmp']['brand_name']); 
               ?>&nbsp;
         </td>
-        <td><?php echo h($pqmp['Pqmp']['reporter_date']); ?>&nbsp;</td>
+        <td><?php echo h($pqmp['Pqmp']['reporter_date']); ?>&nbsp;</td>        
+        <td><?php echo h($pqmp['Pqmp']['submitted_date']); ?>&nbsp;</td>
         <td><?php echo h($pqmp['Pqmp']['created']); ?>&nbsp;</td>
         <td class="actions">
           <?php 

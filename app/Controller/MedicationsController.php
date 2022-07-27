@@ -459,6 +459,7 @@ class MedicationsController extends AppController {
             if ($this->Medication->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Medication->saveField('submitted', 2);
+                    $this->Medication->saveField('submitted_date', date("Y-m-d H:i:s"));
                     //lucian
                     if(!empty($medication['Medication']['reference_no']) && $medication['Medication']['reference_no'] == 'new') {
                         $count = $this->Medication->find('count',  array(
@@ -672,8 +673,8 @@ class MedicationsController extends AppController {
                 return $this->redirect(array('action' => 'index'));   
             }
             $medication = Hash::remove($medication, 'MedicationProduct.{n}.id');
-            $data_save = $medication['Medication'];
-            $data_save['MedicationProduct'] = $medication['MedicationProduct'];
+            $data_save = $medication['Medication'];  
+            if(isset($medication['MedicationProduct']))  $data_save['MedicationProduct'] = $medication['MedicationProduct'];
             $data_save['medication_id'] = $id;
             $data_save['user_id'] = $this->Auth->User('id');;
             $this->Medication->saveField('copied', 1);
@@ -703,6 +704,7 @@ class MedicationsController extends AppController {
             if ($this->Medication->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Medication->saveField('submitted', 2);
+                    $this->Medication->saveField('submitted_date', date("Y-m-d H:i:s"));
                     $medication = $this->Medication->read(null, $id);
 
                     $this->Session->setFlash(__('The Medication Error Report has been submitted to PPB'), 'alerts/flash_success');

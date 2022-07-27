@@ -20,7 +20,100 @@ class SadrsController extends AppController {
             );
     public $paginate = array();
     public $presetVars = true;
-    public $page_options = array('25' => '25', '50' => '50', '100' => '100');
+    public $page_options = array('25' => '25', '50' => '50', '100' => '100'); 
+
+       // Short Term Goal 
+       public function beforeFilter()
+       {
+           parent::beforeFilter();
+           $this->Auth->allow('yellowcard');
+       }
+
+       public function yellowcard($id = null) {
+        $this->Sadr->id = $id;
+        if (!$this->Sadr->exists()) {
+            $this->Session->setFlash(__('Could not verify the suspected adverse drug report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        $sadr = $this->Sadr->find('first', array(
+                'conditions' => array('Sadr.id' => $id),
+                'contain' => array('SadrListOfDrug', 'SadrDescription', 'SadrListOfDrug.Route', 'SadrListOfDrug.Frequency', 'SadrListOfDrug.Dose', 'County', 'SubCounty', 'Attachment', 'Designation')
+            ));
+        $sadr = Sanitize::clean($sadr, array('escape' => true));
+
+        $view = new View($this,false);
+        $view->viewPath='Sadrs/xml';  // Directory inside view directory to search for .ctp files
+        $view->layout=false; // if you want to disable layout
+        $view->set('sadr', $sadr); // set your variables for view here
+        $html=$view->render('json'); 
+        $xml = simplexml_load_string($html);
+        $json = json_encode($xml);
+        $report = json_decode($json,TRUE);  
+     
+        
+        // debug($report);
+        // exit;
+
+        $HttpSocket = new HttpSocket();
+
+        //Request Access Token
+        $initiate = $HttpSocket->post(Configure::read('mhra_auth_api'),
+            array(
+                'email'=>Configure::read('mhra_username'),
+                'password'=>Configure::read('mhra_password'),
+                'platformId'=>Configure::read('mhra_platform')              
+            ),
+            array('header' => array('umc-client-key' => '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'))
+        );
+        if ($initiate->isOk()) {
+           
+            $body = $initiate->body;
+            $resp = json_decode($body, true);
+            $userId=$resp['id'];
+            $token=$resp['token'];
+            $organisationId=$resp['organisationId'];
+
+            $payload= array(
+                'userId'=>$userId,
+                'organisationId'=>$organisationId,
+                'report'=>$report
+                         
+            );
+            
+            $results = $HttpSocket->post(Configure::read('mhra_api'),
+                       $payload,
+            array('header' => array('Authorization' => 'Bearer '.$token))
+        );
+
+         if ($results->isOk()) {
+            $body = $results->body;
+            $resp = json_decode($body, true);
+            $this->Sadr->saveField('webradr_message', $body);
+            $this->Sadr->saveField('webradr_date', date('Y-m-d H:i:s'));
+            $this->Sadr->saveField('webradr_ref', $resp['report']['id']);
+            $this->Flash->success('Yello Card Scheme integration success!!');
+            $this->Flash->success($body);
+            $this->redirect($this->referer());
+
+         }else{
+            $body = $results->body;
+                $this->Sadr->saveField('webradr_message', $body);
+                $this->Flash->error('Error sending report to Yello Card Scheme:');
+                $this->Flash->error($body);
+                $this->redirect($this->referer());
+         }
+        }else{
+            $body = $initiate->body;
+            $this->Sadr->saveField('webradr_message', $body);
+            $this->Flash->error('Error sending report to Yello Card Scheme:');
+            $this->Flash->error($body);
+            $this->redirect($this->referer());
+        }
+ 
+       
+        $this->autoRender = false ;
+    }
 
 /**
  * index method
@@ -134,7 +227,7 @@ class SadrsController extends AppController {
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
           $this->csv_export($this->Sadr->find('all', 
-                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'limit' => 10000)
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'limit' => 1000)
               ));
         }
         //end csv export
@@ -488,7 +581,8 @@ class SadrsController extends AppController {
             }
             if ($this->Sadr->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
-                    $this->Sadr->saveField('submitted', 2);
+                    $this->Sadr->saveField('submitted', 2);                    
+                    $this->Sadr->saveField('submitted_date', date("Y-m-d H:i:s"));
                     //lucian
                     // if(empty($sadr->reference_no)) {
                     if(!empty($sadr['Sadr']['reference_no']) && $sadr['Sadr']['reference_no'] == 'new') {
@@ -739,6 +833,7 @@ class SadrsController extends AppController {
             if ($this->Sadr->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Sadr->saveField('submitted', 2);
+                    $this->Sadr->saveField('submitted_date', date("Y-m-d H:i:s"));
                     $sadr = $this->Sadr->read(null, $id);                    
 
                     $this->Session->setFlash(__('The SADR has been saved'), 'alerts/flash_success');

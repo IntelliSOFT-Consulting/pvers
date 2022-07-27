@@ -278,8 +278,14 @@
         <th><?php echo $this->Paginator->sort('reference_no'); ?></th>
         <th><?php echo $this->Paginator->sort('report_type'); ?></th>
         <th><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? $this->Paginator->sort('patient_name') : $this->Paginator->sort('gender'); ?></th>
-        <?php if($redir == 'manager') { ?><th><?php echo $this->Paginator->sort('vigiflow_ref'); ?></th> <?php } ?>
+        <?php if($redir == 'manager') { ?>
+          
+          <th><?php echo $this->Paginator->sort('vigiflow_ref'); ?></th>          
+          <th><?php echo $this->Paginator->sort('webradr_ref'); ?></th>
+          
+          <?php } ?>
         <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
+        <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
         <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
@@ -307,8 +313,12 @@
               ?>&nbsp;
         </td>
         <td><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? h($aefi['Aefi']['patient_name']) : $aefi['Aefi']['gender']; ?>&nbsp;</td>
-        <?php if($redir == 'manager') { ?><td><?php echo h($aefi['Aefi']['vigiflow_ref']); echo "\n".$aefi['Aefi']['vigiflow_date']; ?></td> <?php } ?>
+        <?php if($redir == 'manager') { ?>
+          <td><?php echo h($aefi['Aefi']['vigiflow_ref']); echo "\n".$aefi['Aefi']['vigiflow_date']; ?></td>
+          <td> <?php echo h($aefi['Aefi']['webradr_ref']); echo "\n" . $aefi['Aefi']['webradr_date']; ?></td>
+           <?php } ?>
         <td><?php echo h($aefi['Aefi']['reporter_date']); ?>&nbsp;</td>
+        <td><?php echo h($aefi['Aefi']['submitted_date']); ?>&nbsp;</td>
         <td><?php echo h($aefi['Aefi']['created']); ?>&nbsp;</td>
         <td class="actions">
             <?php 
@@ -322,6 +332,12 @@
                 if($redir == 'manager' && empty($aefi['Aefi']['vigiflow_ref']) && $aefi['Aefi']['copied'] == 2) echo $this->Html->link('<span class="label label-warning tooltipper" title="Send to vigiflow"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Vigiflow </span>' ,
                   array('controller' => 'aefis', 'action' => 'vigiflow', $aefi['Aefi']['id'], 'manager' => false),
                   array('escape' => false));
+                echo "&nbsp;";
+                if ($redir == 'manager' && empty($aefi['Aefi']['webradr_ref']) && $aefi['Aefi']['copied'] == 2) echo $this->Html->link(
+                  '<span class="label label-info tooltipper" title="Send to yello card"><i class="fa fa-upload" aria-hidden="true"></i> Yellow Card </span>',
+                  array('controller' => 'aefis', 'action' => 'yellowcard', $aefi['Aefi']['id'], 'manager' => false),
+                  array('escape' => false)
+                );
                 echo "&nbsp;";
                 if($redir == 'reporter' and $this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> Followup</span>', array('controller' => 'aefis' , 'action' => 'followup', $aefi['Aefi']['id']), array('escape' => false), __('Add a followup report?'));
                 echo "&nbsp;";
