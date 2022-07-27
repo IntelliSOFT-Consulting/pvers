@@ -362,6 +362,7 @@ class DevicesController extends AppController {
             if ($this->Device->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Device->saveField('submitted', 2);
+                    $this->Device->saveField('submitted_date', date("Y-m-d H:i:s"));
                     //lucian
                     if(!empty($device['Device']['reference_no']) && $device['Device']['reference_no'] == 'new') {
                         $count = $this->Device->find('count',  array(
@@ -601,6 +602,7 @@ class DevicesController extends AppController {
             if ($this->Device->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Device->saveField('submitted', 2);
+                    $this->Device->saveField('submitted_date', date("Y-m-d H:i:s"));
                     $device = $this->Device->read(null, $id);
 
                     $this->Session->setFlash(__('The DEVICE has been submitted to PPB'), 'alerts/flash_success');

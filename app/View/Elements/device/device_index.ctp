@@ -309,6 +309,7 @@
         <th><?php echo $this->Paginator->sort('brand_name'); ?></th>
         <th><?php echo $this->Paginator->sort('patient_name'); ?></th>
         <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
+        <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
         <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
@@ -338,6 +339,7 @@
         <td><?php echo h($device['Device']['brand_name']); ?>&nbsp;</td>
         <td><?php echo h($device['Device']['patient_name']); ?>&nbsp;</td>
         <td><?php echo h($device['Device']['reporter_date']); ?>&nbsp;</td>
+        <td><?php echo h($device['Device']['submitted_date']); ?>&nbsp;</td>
         <td><?php echo h($device['Device']['created']); ?>&nbsp;</td>
         <td class="actions">
             <?php 

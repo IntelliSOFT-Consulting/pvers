@@ -379,6 +379,7 @@ class TransfusionsController extends AppController {
             if ($this->Transfusion->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Transfusion->saveField('submitted', 2);
+                    $this->Transfusion->saveField('submitted_date', date("Y-m-d H:i:s"));
                     //lucian
                     if(!empty($transfusion['Transfusion']['reference_no']) && $transfusion['Transfusion']['reference_no'] == 'new') {
                         $count = $this->Transfusion->find('count',  array(
@@ -619,6 +620,7 @@ class TransfusionsController extends AppController {
             if ($this->Transfusion->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Transfusion->saveField('submitted', 2);
+                    $this->Transfusion->saveField('submitted_date', date("Y-m-d H:i:s"));
                     $transfusion = $this->Transfusion->read(null, $id);
 
                     $this->Session->setFlash(__('The blood transfusion reaction report has been submitted to PPB'), 'alerts/flash_success');
