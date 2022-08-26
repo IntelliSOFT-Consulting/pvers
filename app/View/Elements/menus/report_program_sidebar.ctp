@@ -142,7 +142,9 @@
                       array('escape' => false));
         ?>
       </li>
-      <?php } ?>
+      <?php } 
+
+      if($this->Session->read('Auth.User.health_program')!="Cancer/Oncology program"){?>
       <li class="nav-header"><i class="fa fa-medkit" aria-hidden="true"></i> POOR QUALITY MEDICINAL PRODUCTS</li>
       <li class="<?php echo $this->fetch('pqmps-by-designation'); ?>">
         <?php
@@ -210,6 +212,7 @@
                       array('escape' => false));
         ?>
       </li>
+      <?php } ?>
     <?php  if($this->Session->read('Auth.User.health_program')!="Cancer/Oncology program"){?>
       <li class="nav-header"><i class="fa fa-stethoscope" aria-hidden="true"></i> Medical Devices</li>
       <li class="<?php echo $this->fetch('devices-by-designation'); ?>">

@@ -37,29 +37,7 @@
                 
               ?>
             </div>
-            <div class="span4 formbackp" style="padding: 4px;">
-                  <h5>PQMP</h5>
-                    <?php
-                      echo '<ol>';
-                      foreach ($pqmps as $pqmp) {
-                        if($pqmp['Pqmp']['submitted'] > 1) {
-                          echo "<li>";
-                            echo $this->Html->link($pqmp['Pqmp']['brand_name'].' <small class="muted">('.$pqmp['Pqmp']['reference_no'].')</small>', array('controller' => 'pqmps', 'action' => 'view', $pqmp['Pqmp']['id']),
-                              array('escape' => false, 'class' => 'text-'.((in_array($pqmp['Pqmp']['product_formulation'], ['Injection', 'Powder for Reconstitution of Injection', 'Eye drops', 'Nebuliser solution']) 
-                                || $pqmp['Pqmp']['therapeutic_ineffectiveness'] || $pqmp['Pqmp']['particulate_matter']) ? 'error' : 'success'))); 
-                          echo "</li>";
-                        } else {
-                          echo "<li>";
-                            echo $this->Html->link($pqmp['Pqmp']['reference_no'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id']),
-                              array('escape' => false)); 
-                          echo "</li>";
-                        }
-                      }
-                      echo '</ol>';
-                    echo $this->Html->link('All PQMPs >>', array('controller' => 'pqmps', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
-                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report PQMP', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New PQMP?'));
-                    ?>
-                </div>
+           
                 <div class="span4 formbackm" style="padding: 4px;">  
                   <h5>Medication Errors</h5>                  
                     <?php
