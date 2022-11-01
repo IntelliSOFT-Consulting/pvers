@@ -5,7 +5,7 @@ This project is meant to allow the members of the public and patients to report 
 Please check the official cakephp installation guide for server requirements before you start. [Official Documentation](https://book.cakephp.org/2/en/installation.html).
 
 At a glance, you'll need:
-- **PHP** [https://www.postman.com/](url)
+- **PHP**
 - **Apache**
 - **Mysql**
 
@@ -32,6 +32,7 @@ The project comprises of the following reports
 - Transfussion 
 
 ## Deployment
+
 
 ## License
 [![License](http://img.shields.io/:license-gnu-blue.svg?style=flat-square)](http://badges.gnu-license.org) 
