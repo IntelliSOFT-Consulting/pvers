@@ -7,7 +7,7 @@
 
 				<table style="width: 100%;">
 					<tr>
-						<td><p><b>(FOM20/MIP/PMS/SOP/001)</b></p></td>
+						<td><p><b>(FOM20/HPT/VMS/SOP/001)</b></p></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">
@@ -32,7 +32,7 @@
 				<hr>
 
 
-				<table style="width: 100%;">
+				<table style='width: 100%;'>
 					<tr>
 						<td colspan="4"><h4 style="text-align: center; color: #884805;">PATIENT INFORMATION</h4> </td>
 					</tr>

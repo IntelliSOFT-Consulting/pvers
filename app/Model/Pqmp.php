@@ -191,6 +191,13 @@ class Pqmp extends AppModel {
                 'message'  => 'Please provide the brand name of the product'
             ),
 		),
+		'batch_number' => array(
+			'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide the batch number of the product'
+            ),
+		),
 		'name_of_manufacturer' => array(
 			'notBlank' => array(
                 'rule'     => 'notBlank',
@@ -251,6 +258,13 @@ class Pqmp extends AppModel {
                 'rule'     => 'email',
                 'required' => true,
                 'message'  => 'Please provide a valid email address'
+            ),
+        ),
+		'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide phone number'
             ),
         ),
 	);

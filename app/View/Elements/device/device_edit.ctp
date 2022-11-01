@@ -22,7 +22,7 @@
                 echo $this->Form->input('Device.report_type', array('type' => 'hidden'));                    
                 echo $this->Form->input('Device.reference_no', array('type' => 'hidden'));
             ?>
-            <p><b>(FOM019/MIP/PMS/SOP/001)</b></p>
+            <p><b>(FOM019/HPT/VMS/SOP/001)</b></p>
             <div class="row-fluid">
                 <div class="span12">
                     <?php

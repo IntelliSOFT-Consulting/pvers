@@ -22,7 +22,7 @@
                 echo $this->Form->input('Transfusion.report_type', array('type' => 'hidden'));                    
                 echo $this->Form->input('Transfusion.reference_no', array('type' => 'hidden'));
             ?>
-            <p><b>(FOM20/MIP/PMS/SOP/001)</b></p>
+            <p><b>(FOM20/HPT/VMS/SOP/001)</b></p>
             <div class="row-fluid">
                 <div class="span12">
                     <?php

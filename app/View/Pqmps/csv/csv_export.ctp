@@ -8,7 +8,9 @@
 		'facility_name' => 'Facility Name', 'facility_address' => 'Address',
 		'facility_code' => 'Facility Code', 
 		'counties' => 'County',
-		'brand_name' => 'Brand Name', 'name_of_manufacturer' => 'Manufacturer',
+		'brand_name' => 'Brand Name',
+		'batch_number' => 'Batch Number',
+		'name_of_manufacturer' => 'Manufacturer',
 		'generic_name' => 'Generic Name', 
 		'country' => 'Country',
 		'supplier_name' => 'Supplier', 
@@ -71,4 +73,3 @@
 		}
 		echo implode(',', $row) . "\n";
 	endforeach;
-?>

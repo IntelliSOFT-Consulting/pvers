@@ -8,7 +8,7 @@
 
 				<table style="width: 100%;">
 					<tr>
-						<td><p><b>(FOM019/MIP/PMS/SOP/001)</b></p></td>
+						<td><p><b>(FOM019/HPT/VMS/SOP/001)</b></p></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">

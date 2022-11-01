@@ -21,7 +21,7 @@
                 echo $this->Form->input('Medication.report_type', array('type' => 'hidden'));                    
                 echo $this->Form->input('Medication.reference_no', array('type' => 'hidden'));
             ?>
-            <p><b>(FOM21/MIP/PMS/SOP/001)</b></p>
+            <p><b>(FOM21/HPT/VMS/SOP/001)</b></p>
             <div class="row-fluid">
                 <div class="span12">
                     <?php

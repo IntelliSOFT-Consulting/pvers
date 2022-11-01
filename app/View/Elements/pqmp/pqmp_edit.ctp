@@ -34,7 +34,7 @@
 				echo $this->Form->input('Pqmp.reference_no', array('type' => 'hidden'));
 			?>
 
-			<p><b>(FOM001/MIP/PMS/SOP/001)</b></p>
+			<p><b>(FOM001/HPT/VMS/SOP/001)</b></p>
             <div class="row-fluid">
                 <div class="span12">
                     <?php
@@ -157,7 +157,8 @@
 						echo $this->Form->input('brand_name', array(
 							'label' => array('class' => 'control-label required', 'text' => 'Brand Name'.' <span style="color:red;">*</span> '),
 							'class' => 'autoComblete2'));
-						echo $this->Form->input('batch_number', array('label' => array('class' => 'control-label required', 'text' => 'Batch/Lot Number'), ));
+						echo $this->Form->input('batch_number', array(
+							'label' => array('class' => 'control-label required', 'text' => 'Batch/Lot Number'.' <span style="color:red;">*</span>'), ));
 						// echo $this->Form->input('manufacture_date', array(
 							// 'div' => array('class' => 'control-group'),
 							// 'type' => 'text',
@@ -654,7 +655,7 @@
                                 array('label' => array('class' => 'control-label required', 'text' => 'DESIGNATION'.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone', array(
                             'div' => array('class' => 'control-group'),
-                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.'.' <span style="color:red;">*</span>')
                         ));
                         
                         echo $this->Form->input('reporter_date', array(
@@ -713,7 +714,7 @@
                             'label' => array('class' => 'control-label required', 'text' => 'Designation'.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone_diff', array(
                             'div' => array('class' => 'control-group'), 'class' => 'diff',
-                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.'.' <span style="color:red;">*</span>')
                         ));                        
                         echo $this->Form->input('reporter_date_diff', array(
                             'type' => 'text', 'class' => 'date-pick-field diff', 

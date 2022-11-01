@@ -37,7 +37,7 @@
 				echo $this->Form->input('Sadr.reference_no', array('type' => 'hidden'));
 			?>
 
-            <p><b>(FOM001/MIP/PMS/SOP/001)</b></p>
+            <p><b>(FOM001/HPT/VMS/SOP/001)</b></p>
             <div class="row-fluid">
                 <div class="span12">
                     <?php
