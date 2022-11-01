@@ -41,7 +41,7 @@ Licensed under the GNU General Public License, Version 3.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    https://github.com/IntelliSOFT-Consulting/pvers/blob/master/Licence.md
+    https://github.com/IntelliSOFT-Consulting/pvers/blob/master/LICENSE.md
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
