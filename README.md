@@ -1,6 +1,35 @@
 # PVERS
+This project is meant to allow the members of the public and patients to report adverse drug reactions, adverse events following vaccination, incidents involving medical devices or poor quality medicinal products.
 
 ## Getting Started 
+Please check the official cakephp installation guide for server requirements before you start. [Official Documentation](https://book.cakephp.org/2/en/installation.html).
+
+At a glance, you'll need:
+- **PHP** [https://www.postman.com/](url)
+- **Apache**
+- **Mysql**
+
+Clone the repository
+
+    git clone https://github.com/IntelliSOFT-Consulting/pvers.git
+
+Switch to the repo folder
+
+    cd pvers
+
+Install all the dependencies using composer
+
+    composer install
+
+## Report Components
+
+The project comprises of the following reports
+- SADRs-
+- AEFI 
+- PQMPs
+- Medical Devices
+- Medical Errors
+- Transfussion 
 
 ## Deployment
 
