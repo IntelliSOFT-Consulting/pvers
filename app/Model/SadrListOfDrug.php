@@ -67,6 +67,20 @@ class SadrListOfDrug extends AppModel {
 				'message'  => 'Please specify the brand name of the suspected drug'
 			),
 		),
+		'batch_no' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the batch no of the suspected drug'
+			),
+		),
+		'manufacturer' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the manufacturer of the suspected drug'
+			),
+		),
 		'dose' => array(
 			'numeric' => array(
 				'rule'     => 'numeric',

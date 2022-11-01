@@ -291,14 +291,41 @@ class Sadr extends AppModel {
                 'message'  => 'Please specify at least one product category'
             ),
         ),
-		'date_of_birth' => array(
-            'ageOrDate' => array(
-                'rule'     => 'ageOrDate',
-                // 'required' => true,
+
+		// check if age_group is not blank if date_of_birth is blank and vice versa
+		'age_group' => array(
+			'ageOrDate' => array(
+				'rule'     => 'ageOrDate',
 				'allowEmpty' => true,
-                'message'  => 'Please specify the patient\'s date / Year of birth or age group'
-            ),
-        ),
+				'message'  => 'Please specify the age group'
+			),
+		),
+
+		// check if date_of_birth is not blank if age_group is blank and vice versa
+		'date_of_birth' => array(
+			'ageOrDate' => array(
+				'rule'     => 'ageOrDate',
+				'allowEmpty' => true,
+				'message'  => 'Please specify the date of birth'
+			),
+		),
+
+		// 'date_of_birth' => array(
+        //     'ageOrDate' => array(
+        //         'rule'     => 'ageOrDate',
+        //         // 'required' => true,
+		// 		// 'allowEmpty' => true,
+        //         'message'  => 'Please specify the patient\'s date / Year of birth or age group'
+        //     ),
+        // ),
+		// 'age_group' => array(
+        //     'ageOrDate' => array(
+        //         'rule'     => 'ageOrDate',
+        //         // 'required' => true,
+		// 		// 'allowEmpty' => true,
+        //         'message'  => 'Please specify the patient\'s date / Year of birth or age group'
+        //     ),
+        // ),
 		'county_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -365,6 +392,14 @@ class Sadr extends AppModel {
                 'message'  => 'Please specify the action taken'
             ),
         ),
+
+        'serious' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please specify if the reaction was serious'
+            ),
+        ),
         'outcome' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
@@ -393,6 +428,13 @@ class Sadr extends AppModel {
                 'message'  => 'Please provide a valid email address'
             ),
         ),
+		'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide a valid phone number'
+            ),
+        ),
 		'weight' => array(
 			'rule'    => 'numeric',
 			'allowEmpty' => true,
@@ -418,6 +460,16 @@ class Sadr extends AppModel {
 		return true;
 	}
 
+	// create a function  check if date_of_birth is not blank if age_group is blank and vice versa
+	public function ageOrDate($field = null) {
+		if (!empty($field['date_of_birth']['day']) && !empty($field['date_of_birth']['month']) && !empty($field['date_of_birth']['year'])) {
+			return true;
+		} else if (!empty($field['age_group'])) {
+			return true;
+		}
+		return false;
+	}
+
 	public function formIdExists($field = null) {
 		return $this->find('count', array('conditions' => array('Sadr.id' => $field['form_id']))) > 0;
 	}
@@ -434,9 +486,9 @@ class Sadr extends AppModel {
 		}
 	}
 
-	public function ageOrDate($field = null) {
-		return !empty($field['date_of_birth']['year']) || !empty($this->data['Sadr']['age_group']);
-	}
+	// public function ageOrDate($field = null) {
+	// 	return !empty($field['date_of_birth']['year']) || !empty($this->data['Sadr']['age_group']);
+	// }
 
 	public function reportOn($field = null) {
 		return !empty($this->data['Sadr']['report_sadr']) || !empty($this->data['Sadr']['report_therapeutic']);

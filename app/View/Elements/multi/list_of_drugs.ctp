@@ -23,8 +23,8 @@
 						<span class="label label-info">INN/ Generic Name</span>
 					</th>
 					<th style="width: 9%;">Brand Name <span style="color:red;">*</span></th>
-					<th style="width: 7%;">Batch/ Lot No.</th>
-					<th style="width: 7%;">Manufacturer</th>
+					<th style="width: 7%;">Batch/ Lot No.<span style="color:red;">*</span></th>
+					<th style="width: 7%;">Manufacturer<span style="color:red;">*</span></th>
 					<th colspan="2" style="width: 13%;" class="required"
 						title="Dosage"
 						data-content="">

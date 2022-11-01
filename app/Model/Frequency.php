@@ -37,8 +37,8 @@ class Frequency extends AppModel {
 
 	public $validate = array(
 		'value' => array(
-            'notEmpty' => array(
-                'rule'     => 'notEmpty',
+            'notBlank' => array(
+                'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a value'
             ),
@@ -49,8 +49,8 @@ class Frequency extends AppModel {
 			),
         ),
 		'name' => array(
-            'notEmpty' => array(
-                'rule'     => 'notEmpty',
+            'notBlank' => array(
+                'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a name'
             ),
