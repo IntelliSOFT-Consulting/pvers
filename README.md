@@ -21,19 +21,19 @@ Install all the dependencies using composer
 
     composer install
 
+
 ## Report Components
 
 The project comprises of the following reports
-- SADRs-
+- SADRs
 - AEFI 
 - PQMPs
 - Medical Devices
 - Medical Errors
 - Transfussion 
 
-## Deployment
-
-
+More details can be found [here](https://pv.pharmacyboardkenya.org/pages/about)
+ 
 ## License
 [![License](http://img.shields.io/:license-gnu-blue.svg?style=flat-square)](http://badges.gnu-license.org) 
 
