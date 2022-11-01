@@ -21,6 +21,16 @@ Install all the dependencies using composer
 
     composer install
 
+Copy the database.php.default and email.php.default files under app/Config and make the required configuration changes
+
+    cp database.php.default database.php & cp email.php.default email.php
+
+Run the application using the comand below
+
+    app/Console/cake server
+
+This will expose the application on port 8765
+
 
 ## Report Components
 
