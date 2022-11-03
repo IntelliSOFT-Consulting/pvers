@@ -14,7 +14,7 @@
 		'age_group' => 'Age Group', 'pregnancy_status' => 'Pregnancy Status',
 		'known_allergy' => 'Known allergy', 'known_allergy_specify' => 'Allergy',
 		'onset_date' => 'Date of onset', 'drugs' => 'Generic names',
-		'brands' => 'Brand names', 'manufacturers' => 'Manufacturers',
+		'brands' => 'Brand names','batch_no' => 'Batch Number', 'manufacturers' => 'Manufacturers',
 		'start_date' => 'Start Date', 'end_date' => 'End Date',
 		'indications' => 'Indications', 'reaction_resolve' => 'Rechallenge',
 		'reaction_reappear' => 'Reaction reappear', 'severity' => 'Severity',
@@ -78,9 +78,14 @@
 					(isset($row[$key])) ? $row[$key] .= '; '.$sadrListOfDrug['brand_name'] : $row[$key] = $sadrListOfDrug['brand_name'];
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
+			}  elseif ($key == 'batch_no') {
+				foreach ($csadr['SadrListOfDrug'] as $sadrListOfDrug) {
+					(isset($row[$key])) ? $row[$key] .= '; '.$sadrListOfDrug['batch_no'] : $row[$key] = $sadrListOfDrug['batch_no'];
+				}
+				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'manufacturers') {
 				foreach ($csadr['SadrListOfDrug'] as $sadrListOfDrug) {
-					(isset($row[$key])) ? $row[$key] .= '; '.$sadrListOfDrug['manufacturer'] : $row[$key] = $sadrListOfDrug['manufacturer'];
+								(isset($row[$key])) ? $row[$key] .= '; '.$sadrListOfDrug['manufacturer'] : $row[$key] = $sadrListOfDrug['manufacturer'];
 				}
 				(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/','""',$row[$key]) . '"' : $row[$key] = '""';
 			} elseif ($key == 'start_date') {
@@ -105,4 +110,3 @@
 		}
 		echo implode(',', $row) . "\n";
 	endforeach;
-?>

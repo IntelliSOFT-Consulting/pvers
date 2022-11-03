@@ -48,13 +48,13 @@ class AefiListOfVaccine extends AppModel {
 				'message'  => 'Please specify the date of vaccination'
 			),
 		),
-		// 'vaccine_manufacturer' => array(
-		// 	'notBlank' => array(
-		// 		'rule'     => 'notBlank',
-		// 		'required' => true,
-		// 		'message'  => 'Please specify the name of the vaccine\'s manufacturer'
-		// 	),
-		// ),
+		'vaccine_manufacturer' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the name of the vaccine\'s manufacturer'
+			),
+		),
 		// 'expiry_date' => array(
 		// 	'notBlank' => array(
 		// 		'rule'     => 'notBlank',
@@ -62,20 +62,29 @@ class AefiListOfVaccine extends AppModel {
 		// 		'message'  => 'Please specify the expiry date of the vaccine'
 		// 	),
 		// ),
-		// 'batch_number' => array(
-		// 	'notBlank' => array(
-		// 		'rule'     => 'notBlank',
-		// 		'required' => true,
-		// 		'message'  => 'Please specify the vaccine batch/lot number'
-		// 	),
-		// ),
-		// 'diluent_batch_number' => array(
-		// 	'notBlank' => array(
-		// 		'rule'     => 'notBlank',
-		// 		'required' => true,
-		// 		'message'  => 'Please specify the diluent batch/lot number'
-		// 	),
-		// ),
+		'batch_number' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the vaccine batch/lot number'
+			),
+		),
+		'diluent_batch_number' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the diluent batch/lot number'
+			),
+		),
+
+		'diluent_manufacturer' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the name of the diluent\'s manufacturer'
+			),
+		),
+		
 	);
 
 	public function beforeSave($options = array()) {

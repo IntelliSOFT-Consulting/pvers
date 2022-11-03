@@ -15,20 +15,20 @@ class GenericSmsShell extends Shell {
     }
 
     public function  sendSms() {
-        $HttpSocket = new HttpSocket();
-        // string data
-        $payload = 'username='.Configure::read('africastalking_username').'&to=%2B254729932475&message=Uwinguni&from='.Configure::read('africastalking_from');
-        $this->log($payload, 'debug');
-        $results = $HttpSocket->post(
-            Configure::read('africastalking_api'),
-            $payload,
-            array('header' => array('Accept' => 'application/json' ,'Content-Type' => 'application/x-www-form-urlencoded', 'apiKey' => Configure::read('africastalking_key')))
-        );
-        $this->log($results->body, 'debug');
-        if (!$results->isOk()) {
-            $body = $results->body;
-            $this->log($body, 'debug');
-        }     
+        // $HttpSocket = new HttpSocket();
+        // // string data
+        // $payload = 'username='.Configure::read('africastalking_username').'&to=%2B254729932475&message=Uwinguni&from='.Configure::read('africastalking_from');
+        // $this->log($payload, 'debug');
+        // $results = $HttpSocket->post(
+        //     Configure::read('africastalking_api'),
+        //     $payload,
+        //     array('header' => array('Accept' => 'application/json' ,'Content-Type' => 'application/x-www-form-urlencoded', 'apiKey' => Configure::read('africastalking_key')))
+        // );
+        // $this->log($results->body, 'debug');
+        // if (!$results->isOk()) {
+        //     $body = $results->body;
+        //     $this->log($body, 'debug');
+        // }     
     }
 }
 

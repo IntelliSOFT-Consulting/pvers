@@ -43,7 +43,7 @@ class EmailConfig {
 		//'headerCharset' => 'utf-8',
 	);
 
-	public $gmail = array(
+	public $gmail2 = array(
 	    'host' => 'ssl://smtp.gmail.com',
 		'from' => array('regulatory@pharmacyboardkenya.org' => 'PvERS: The Pharmacy and Poisons Board'),
         'port' => 465,
@@ -53,7 +53,7 @@ class EmailConfig {
         'transport' => 'Smtp'
     );
 
-	public $gmail2 = array(
+	public $gmail = array(
 	    'host' => 'ssl://smtp.gmail.com',
 		'from' => array('apps@intellisoftkenya.com' => 'PvERS: The Pharmacy and Poisons Board'),
         'port' => 465,

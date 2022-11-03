@@ -442,7 +442,7 @@ class SadrsController extends AppController {
             $this->Sadr->saveField('vigiflow_date', date('Y-m-d H:i:s'));
             $resp = json_decode($body, true);
             if(json_last_error() == JSON_ERROR_NONE) {
-                $this->Sadr->saveField('vigiflow_ref', $resp['MessageId']);
+                $this->Sadr->saveField('vigiflow_ref', $resp);
             }
             $this->Flash->success('Vigiflow integration success!!');
             $this->Flash->success($body);
@@ -559,6 +559,27 @@ class SadrsController extends AppController {
  * @param string $id
  * @return void
  */
+public function generateReferenceNumber() {
+    $count = $this->Sadr->find('count',  array(
+        'fields' => 'Sadr.reference_no',
+        'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Sadr.reference_no !=' => 'new'
+        )
+        ));
+    $count++;
+    $count = ($count < 10) ? "0$count" : $count; 
+    $reference= 'SADR/'.date('Y').'/'.$count;
+    //ensure that the reference number is unique
+    $exists = $this->Sadr->find('count',  array(
+        'fields' => 'Sadr.reference_no',
+        'conditions' => array('Sadr.reference_no' => $reference)
+        ));
+    if($exists > 0) {
+        $reference = $this->generateReferenceNumber();
+    }
+
+    return $reference;
+
+}
 
     public function reporter_edit($id = null) { 
         $this->Sadr->id = $id;
@@ -586,14 +607,8 @@ class SadrsController extends AppController {
                     //lucian
                     // if(empty($sadr->reference_no)) {
                     if(!empty($sadr['Sadr']['reference_no']) && $sadr['Sadr']['reference_no'] == 'new') {
-                        $count = $this->Sadr->find('count',  array(
-                            'fields' => 'Sadr.reference_no',
-                            'conditions' => array('Sadr.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Sadr.reference_no !=' => 'new'
-                            )
-                            ));
-                        $count++;
-                        $count = ($count < 10) ? "0$count" : $count; 
-                        $this->Sadr->saveField('reference_no', 'SADR/'.date('Y').'/'.$count);
+                        $reference = $this->generateReferenceNumber(); 
+                        $this->Sadr->saveField('reference_no', $reference);
                     }
                     //bokelo
                     $sadr = $this->Sadr->read(null, $id);

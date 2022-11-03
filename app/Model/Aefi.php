@@ -347,6 +347,13 @@ class Aefi extends AppModel {
                 'message'  => 'Please provide a valid email address'
             ),
         ),
+        'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide a valid phone number'
+            ),
+        ),
     );
 
 	public function atLeastOne($field = null) {

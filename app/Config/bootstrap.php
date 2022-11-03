@@ -126,16 +126,16 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
-Configure::write('vigiflow_api', 'https://api.who-umc.org/vigiflow/icsrs'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
+Configure::write('vigiflow_api', 'https://api.who-umc.org/demo/vigiflow/icsrs'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
 Configure::write('vigiflow_key', '5ab835c4-3179-4590-bcd2-ff3c27d6b8ff'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
 Configure::write('API.token.pepper', 'touch2d34asdfpad'); //'https://api.who-umc.org/demo/vigiflow/icsrs'
 
 // usernameAT=afyamoja
 // apiKey=6347d9066545048e3d0ec2cc11034186861dc47c96c4bc268f9bac61899a357c
-Configure::write('africastalking_api', 'https://api.africastalking.com/version1/messaging'); 
-Configure::write('africastalking_username', 'ppb'); 
-Configure::write('africastalking_from', 'PPB'); 
-Configure::write('africastalking_key', 'f5b353d8c1b7aff4ddc0a3bab96c5dc184b5c711e8ce529531083538507dbbc8'); 
+// Configure::write('africastalking_api', 'https://api.africastalking.com/version1/messaging'); 
+// Configure::write('africastalking_username', 'ppb'); 
+// Configure::write('africastalking_from', 'PPB'); 
+// Configure::write('africastalking_key', 'f5b353d8c1b7aff4ddc0a3bab96c5dc184b5c711e8ce529531083538507dbbc8'); 
 
 spl_autoload_register(function ($class) {
     foreach (App::path('Vendor') as $base) {

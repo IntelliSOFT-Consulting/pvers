@@ -4,6 +4,7 @@ App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
 
 class RemindersShell extends AppShell {
+  
     public $uses = array('Aefi', 'Sadr', 'Pqmp', 'Device', 'Medication', 'Transfusion', 'Message', 'Reminder');
 
     public function main() {

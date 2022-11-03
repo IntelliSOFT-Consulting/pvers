@@ -176,6 +176,17 @@ class Transfusion extends AppModel {
                 'message'  => 'Please specify the patient\'s gender'
             ),
         ),
+
+        //check if either date_of_birth or age_years is empty return error using a function
+        
+
+        'date_of_birth' => array(
+            'ageOrDate' => array(
+                'rule'     => 'ageOrDate',
+                'allowEmpty' => true, 
+                'message'  => 'Please specify the patient\'s date / Year of birth or age in months'
+            ),
+        ),
         // 'diagnosis' => array(
         //     'notBlank' => array(
         //         'rule'     => 'notBlank',
@@ -209,9 +220,18 @@ class Transfusion extends AppModel {
                 'required' => true,
                 'message'  => 'Please provide a valid email address'
             ),
-        )
+        ),
+        'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide reporter\'s phone number'
+            ),
+        ),
     );
-
+	public function ageOrDate($field = null) {
+		return !empty($field['date_of_birth']) || !empty($field['age_years']);
+	}
     public function beforeSave($options = array()) {
         if (!empty($this->data['Transfusion']['reporter_date'])) {
             $this->data['Transfusion']['reporter_date'] = $this->dateFormatBeforeSave($this->data['Transfusion']['reporter_date']);

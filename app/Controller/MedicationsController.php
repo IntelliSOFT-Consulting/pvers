@@ -350,7 +350,7 @@ class MedicationsController extends AppController {
             $this->Medication->saveField('vigiflow_message', $body);
             $resp = json_decode($body, true);
             if(json_last_error() == JSON_ERROR_NONE) {
-                $this->Medication->saveField('vigiflow_ref', $resp['MessageId']);
+                $this->Medication->saveField('vigiflow_ref', $resp);
             }
             $this->Flash->success('Vigiflow integration success!!');
             $this->Flash->success($body);

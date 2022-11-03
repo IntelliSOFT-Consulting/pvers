@@ -97,7 +97,7 @@
                     ?>
                     <div class="well-mine" style="background-color: #f0f099;">
                     <?php
-                        echo $this->Form->input('date_of_birth', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH'),));
+                        echo $this->Form->input('date_of_birth', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH'.'<span style="color:red;">*</span>'),));
                     ?>
                     <h5 class="controls">--OR--</h5>
                     <?php
@@ -881,7 +881,7 @@
                                 array('label' => array('class' => 'control-label required', 'text' => 'Cadre/designation '.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone', array(
                             'div' => array('class' => 'control-group'),
-                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.'.'<span style="color:red;">*</span>')
                         ));
                         
                         echo $this->Form->input('reporter_date', array(

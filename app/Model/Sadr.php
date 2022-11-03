@@ -460,15 +460,7 @@ class Sadr extends AppModel {
 		return true;
 	}
 
-	// create a function  check if date_of_birth is not blank if age_group is blank and vice versa
-	public function ageOrDate($field = null) {
-		if (!empty($field['date_of_birth']['day']) && !empty($field['date_of_birth']['month']) && !empty($field['date_of_birth']['year'])) {
-			return true;
-		} else if (!empty($field['age_group'])) {
-			return true;
-		}
-		return false;
-	}
+	
 
 	public function formIdExists($field = null) {
 		return $this->find('count', array('conditions' => array('Sadr.id' => $field['form_id']))) > 0;
@@ -486,9 +478,9 @@ class Sadr extends AppModel {
 		}
 	}
 
-	// public function ageOrDate($field = null) {
-	// 	return !empty($field['date_of_birth']['year']) || !empty($this->data['Sadr']['age_group']);
-	// }
+	public function ageOrDate($field = null) {
+		return !empty($field['date_of_birth']['year']) || !empty($this->data['Sadr']['age_group']);
+	}
 
 	public function reportOn($field = null) {
 		return !empty($this->data['Sadr']['report_sadr']) || !empty($this->data['Sadr']['report_therapeutic']);

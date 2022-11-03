@@ -340,6 +340,28 @@ class DevicesController extends AppController {
  * @return void
  */
 
+ public function generateReferenceNumber()
+ {
+    $count = $this->Device->find('count',  array(
+        'fields' => 'Device.reference_no',
+        'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Device.reference_no !=' => 'new'
+        )
+        ));
+    $count++;
+    $count = ($count < 10) ? "0$count" : $count; 
+
+    $reference_no = 'MD/'.date('Y').'/'.$count;
+
+    //ensure the reference number is unique
+    $exists = $this->Device->find('count',  array(
+        'fields' => 'Device.reference_no',
+        'conditions' => array('Device.reference_no' => $reference_no)
+        ));
+    if($exists > 0) $reference_no = $this->generateReferenceNumber();
+   
+    return $reference_no;
+ }
+
     public function reporter_edit($id = null) { 
         $this->Device->id = $id;
         if (!$this->Device->exists()) {
@@ -359,20 +381,19 @@ class DevicesController extends AppController {
             if (isset($this->request->data['submitReport'])) {
                 $validate = 'first';                
             }
+ 
+            
             if ($this->Device->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
                     $this->Device->saveField('submitted', 2);
                     $this->Device->saveField('submitted_date', date("Y-m-d H:i:s"));
                     //lucian
+                    // debug($device);
+                    // exit;
                     if(!empty($device['Device']['reference_no']) && $device['Device']['reference_no'] == 'new') {
-                        $count = $this->Device->find('count',  array(
-                            'fields' => 'Device.reference_no',
-                            'conditions' => array('Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")), 'Device.reference_no !=' => 'new'
-                            )
-                            ));
-                        $count++;
-                        $count = ($count < 10) ? "0$count" : $count; 
-                        $this->Device->saveField('reference_no', 'MD/'.date('Y').'/'.$count);
+                       $reference=$this->generateReferenceNumber();
+
+                        $this->Device->saveField('reference_no', $reference);
                     }
                     //bokelo
                     $device = $this->Device->read(null, $id);

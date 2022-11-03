@@ -294,7 +294,14 @@ class Medication extends AppModel {
                 'required' => true,
                 'message'  => 'Please provide a valid email address'
             ),
-        )
+        ),
+        'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide valid phone number'
+            ),
+        ),
     );
 
     public function ageOrDate($field = null) {
