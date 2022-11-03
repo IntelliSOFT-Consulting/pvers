@@ -31,6 +31,12 @@ Run the application using the comand below
 
 This will expose the application on port 8765
 
+## Alerts and Notifications
+
+Email/SMS notifications are sent on every submission/review. To ensure this is achieved, please create a background service that will handle this command.
+
+    app/Console/cake queue runworker
+
 
 ## Report Components
 
