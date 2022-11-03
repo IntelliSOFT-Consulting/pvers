@@ -30,10 +30,8 @@
 		'generic_name_ii' => 'Generic product II',
 		'product_name_i' => 'Brand product I',
 		'product_name_ii' => 'Brand product II',
-		'manufacturer_i' => 'Manfuacturer I',
-		'manufacturer_ii' => 'Manufacturer II',
-		// 'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
-		// 'reporter_phone' => 'Reporter phone', 
+		'manufacturer_i' => 'Manufacturer I',
+		'manufacturer_ii' => 'Manufacturer II', 
 		'designations' => 'Reporter designation',
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 		);
