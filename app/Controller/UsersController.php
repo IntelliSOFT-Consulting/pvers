@@ -30,6 +30,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // remove initDb
+        // $this->initDB();
         $this->Auth->allow('register', 'login', 'api_register', 'api_token', 'api_forgotPassword', 'activate_account', 'forgotPassword', 'resetPassword', 'logout', 'initDB');
     }
 
@@ -1077,6 +1078,8 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/Aefis/reporter_followup');
         $this->Acl->allow($group, 'controllers/Aefis/reporter_edit');
         $this->Acl->allow($group, 'controllers/Aefis/reporter_view');
+        $this->Acl->allow($group, 'controllers/Aefis/reporter_delete');
+
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_index');
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_add');
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_edit');

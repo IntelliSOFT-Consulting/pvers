@@ -146,6 +146,10 @@ class AefisController extends AppController
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
         if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Aefi.submitted'] = array(2);
         if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Aefi.user_id'] = $this->Auth->User('id');
+
+        // Added criteria for reporter
+        $criteria['Aefi.deleted'] = false;
+
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
         $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
@@ -594,7 +598,7 @@ class AefisController extends AppController
         ));
         $count++;
         $count = ($count < 10) ? "0$count" : $count;
-        $reference= 'AEFI/' . date('Y') . '/' . $count;
+        $reference = 'AEFI/' . date('Y') . '/' . $count;
 
         //ensure that the reference number is unique
         $exists = $this->Aefi->find('count',  array(
@@ -930,5 +934,33 @@ class AefisController extends AppController
         $this->set(compact('designations'));
         $vaccines = $this->Aefi->AefiListOfVaccine->Vaccine->find('list');
         $this->set(compact('vaccines'));
+    }
+
+
+    // DELETE SECTION
+    public function reporter_delete($id = null)
+    {
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            throw new NotFoundException(__('Invalid AEFI'));
+        }
+        //return flash message with the reference number
+        $aefi = $this->Aefi->read(null, $id);
+        $this->request->allowMethod('post', 'delete');
+        //update the column deleted to 1 and deleted_date to current date and save
+        $aefi['Aefi']['deleted'] = true;
+        $aefi['Aefi']['deleted_date'] = date("Y-m-d H:i:s");
+        //update the database
+        if ($this->Aefi->save($aefi, array('validate' => false, 'deep' => true))) {
+            $this->Session->setFlash(__('The AEFI with reference number ' . $aefi['Aefi']['reference_no'] . ' has been deleted'), 'alerts/flash_success');
+        } else {
+            // get the error message
+            $errors = $this->Aefi->validationErrors;
+            debug($errors);
+            exit;
+            $this->Session->setFlash(__('The AEFI could not be deleted. Please, try again.' . $errors), 'alerts/flash_error');
+        }
+
+        $this->redirect($this->referer());
     }
 }
