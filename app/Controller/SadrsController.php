@@ -138,7 +138,7 @@ class SadrsController extends AppController
         if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Sadr.submitted'] = array(2);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription', 'Designation','SadrListOfMedicine');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription', 'Designation', 'SadrListOfMedicine');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -201,7 +201,7 @@ class SadrsController extends AppController
         $criteria['Sadr.submitted'] = array(1, 2);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'SadrListOfDrug','SadrListOfMedicine', 'SadrDescription', 'Designation');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrListOfMedicine', 'SadrDescription', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -233,7 +233,7 @@ class SadrsController extends AppController
         if (!isset($this->passedArgs['submit'])) $criteria['Sadr.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'SadrListOfDrug','SadrListOfMedicine', 'SadrDescription', 'Designation', 'User');
+        $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrListOfMedicine', 'SadrDescription', 'Designation', 'User');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -938,5 +938,27 @@ class SadrsController extends AppController
         $this->set(compact('frequency'));
         $dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
         $this->set(compact('dose'));
+    }
+    public function reporter_delete($id = null)
+    {
+        $this->Sadr->id = $id;
+        if (!$this->Sadr->exists()) {
+            throw new NotFoundException(__('Invalid SADR'));
+        }
+        $sadr = $this->Sadr->read(null, $id);
+        if ($sadr['Sadr']['submitted'] == 2) {
+            $this->Session->setFlash(__('You cannot delete a submitted SADR Report'), 'alerts/flash_error');
+            $this->redirect($this->referer());
+        }
+        //update the field deleted to true and deleted_date to current date without validation 
+        $sadr['Sadr']['deleted'] = true;
+        $sadr['Sadr']['deleted_date'] = date("Y-m-d H:i:s");
+        if ($this->Sadr->save($sadr, array('validate' => false))) {
+            //displat message with reference number 
+            $this->Session->setFlash(__('SADR Report ' . $sadr['Sadr']['reference_no'] . ' has been deleted'), 'alerts/flash_info'); 
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('SADR was not deleted'), 'alerts/flash_error');
+        $this->redirect(array('action' => 'index'));
     }
 }

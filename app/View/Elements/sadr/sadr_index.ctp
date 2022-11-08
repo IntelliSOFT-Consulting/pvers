@@ -351,6 +351,13 @@
               echo $this->Html->link('<span class="label label-default tooltipper" title="View"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF </span>',
                   array('controller' => 'sadrs', 'action' => 'view', 'ext'=> 'pdf', $sadr['Sadr']['id']),
                   array('escape' => false));
+                   // Check if the user is a reporter and the report is not submitted
+              if($redir == 'reporter' && $sadr['Sadr']['submitted'] == 0) {
+                echo "&nbsp;";
+                echo $this->Form->postLink('<span class="label label-warning tooltipper" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete </span>', array('controller' => 'sadrs' , 'action' => 'delete', $sadr['Sadr']['id']), array('escape' => false), __('Are you sure you want to delete this report?
+                Note: This action cannot be undone.'));
+              }
+
                
             ?> 
         </td>

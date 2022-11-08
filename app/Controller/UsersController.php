@@ -679,7 +679,11 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Sadr.id','Sadr.user_id', 'Sadr.created', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created', 'Sadr.serious'),
             'order' => array('Sadr.created' => 'desc'),
-            'conditions' => array('Sadr.user_id' => $this->Auth->User('id')),
+            'conditions' => array(
+                // only show SADRs that have been not been deleted 
+                'Sadr.deleted' => false,
+                'Sadr.user_id' => $this->Auth->User('id'
+            )),
         ));
         $this->set('sadrs', $sadrs);        
 
@@ -688,7 +692,11 @@ class UsersController extends AppController {
             'fields' => array('Aefi.id','Aefi.user_id', 'Aefi.created', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
             'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine'),
             'order' => array('Aefi.created' => 'desc'),
-            'conditions' => array('Aefi.user_id' => $this->Auth->User('id')),
+            'conditions' => array(
+                // only show Reports that have been not been deleted
+                'Aefi.deleted' => false,
+                'Aefi.user_id' => $this->Auth->User('id'
+            )),
         ));
         $this->set('aefis', $aefis);        
 
@@ -696,7 +704,11 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Pqmp.id','Pqmp.user_id', 'Pqmp.created', 'Pqmp.submitted', 'Pqmp.brand_name', 'Pqmp.reference_no', 'Pqmp.created', 'Pqmp.product_formulation', 'Pqmp.therapeutic_ineffectiveness', 'Pqmp.particulate_matter'),
             'order' => array('Pqmp.created' => 'desc'),
-            'conditions' => array('Pqmp.user_id' => $this->Auth->User('id')),
+            'conditions' => array(
+                // only show Reports that have been not been deleted
+                'Pqmp.deleted' => false,
+                'Pqmp.user_id' => $this->Auth->User('id'
+            )),
         ));
         $this->set('pqmps', $pqmps);        
 
@@ -704,7 +716,11 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Device.id','Device.user_id', 'Device.created', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created', 'Device.serious'),
             'order' => array('Device.created' => 'desc'),
-            'conditions' => array('Device.user_id' => $this->Auth->User('id')),
+            'conditions' => array(
+                // only show Reports that have been not been deleted
+                'Device.deleted' => false,
+                'Device.user_id' => $this->Auth->User('id'
+            )),
         ));
         $this->set('devices', $devices);        
 
@@ -712,7 +728,11 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array('MedicationProduct'),
             'fields' => array('Medication.id','Medication.user_id', 'Medication.submitted', 'Medication.created', 'Medication.reference_no', 'Medication.created'),
             'order' => array('Medication.created' => 'desc'),
-            'conditions' => array('Medication.user_id' => $this->Auth->User('id')),
+            'conditions' => array(
+                // only show Reports that have been not been deleted
+                'Medication.deleted' => false,
+                'Medication.user_id' => $this->Auth->User('id'
+            )),
         ));
         $this->set('medications', $medications);        
 
@@ -720,7 +740,11 @@ class UsersController extends AppController {
             'limit' => 7, 'contain' => array(),
             'fields' => array('Transfusion.id','Transfusion.user_id', 'Transfusion.reference_no', 'Transfusion.diagnosis', 'Transfusion.submitted', 'Transfusion.created', 'Transfusion.created'),
             'order' => array('Transfusion.created' => 'desc'),
-            'conditions' => array('Transfusion.user_id' => $this->Auth->User('id')),
+            'conditions' => array(
+                // only show Reports that have been not been deleted
+                'Transfusion.deleted' => false,
+                'Transfusion.user_id' => $this->Auth->User('id'
+            )),
         ));
         $this->set('transfusions', $transfusions);        
 
@@ -1064,6 +1088,7 @@ class UsersController extends AppController {
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/Users/reporter_dashboard'); 
         $this->Acl->allow($group, 'controllers/Users/edit');
+        
         $this->Acl->allow($group, 'controllers/Sadrs/sadrIndex');
         $this->Acl->allow($group, 'controllers/Sadrs/reporter_index');
         $this->Acl->allow($group, 'controllers/Sadrs/reporter_add');
@@ -1071,6 +1096,8 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/Sadrs/reporter_edit');
         $this->Acl->allow($group, 'controllers/Sadrs/reporter_view');
         $this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
+        $this->Acl->allow($group, 'controllers/Sadrs/reporter_delete');
+
         $this->Acl->allow($group, 'controllers/Aefis/aefiIndex');
         $this->Acl->allow($group, 'controllers/Aefis/institutionCodes');
         $this->Acl->allow($group, 'controllers/Aefis/reporter_index');
@@ -1084,29 +1111,37 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_add');
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_edit');
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_view');
+
         $this->Acl->allow($group, 'controllers/Devices/reporter_index');
         $this->Acl->allow($group, 'controllers/Devices/reporter_add');
         $this->Acl->allow($group, 'controllers/Devices/reporter_followup');
         $this->Acl->allow($group, 'controllers/Devices/reporter_edit');
         $this->Acl->allow($group, 'controllers/Devices/reporter_view');
+
         $this->Acl->allow($group, 'controllers/Medications/reporter_index');
         $this->Acl->allow($group, 'controllers/Medications/reporter_add');
         $this->Acl->allow($group, 'controllers/Medications/reporter_followup');
         $this->Acl->allow($group, 'controllers/Medications/reporter_edit');
         $this->Acl->allow($group, 'controllers/Medications/reporter_view');
+
         $this->Acl->allow($group, 'controllers/Transfusions/reporter_index');
         $this->Acl->allow($group, 'controllers/Transfusions/reporter_add');
         $this->Acl->allow($group, 'controllers/Transfusions/reporter_followup');
         $this->Acl->allow($group, 'controllers/Transfusions/reporter_edit');
         $this->Acl->allow($group, 'controllers/Transfusions/reporter_view');
+
         $this->Acl->allow($group, 'controllers/SadrFollowups/sadrIndex');
         $this->Acl->allow($group, 'controllers/SadrFollowups/followupIndex');
+
         $this->Acl->allow($group, 'controllers/Pqmps/pqmpIndex');
         $this->Acl->allow($group, 'controllers/Users/changePassword');
+
         $this->Acl->allow($group, 'controllers/Notifications/reporter_index');
         $this->Acl->allow($group, 'controllers/Notifications/delete');
+
         $this->Acl->allow($group, 'controllers/SadrListOfDrugs/delete');
         $this->Acl->allow($group, 'controllers/SadrListOfMedicines/delete');
+
         $this->Acl->allow($group, 'controllers/AefiListOfVaccines/delete');
         $this->Acl->allow($group, 'controllers/ListOfDevices/delete');
         $this->Acl->allow($group, 'controllers/MedicationProducts/delete');

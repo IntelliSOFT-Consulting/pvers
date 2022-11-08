@@ -294,7 +294,7 @@ class ReportsController extends AppController {
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
             'contain' => array('County'),
             'conditions' => $criteria,
-            'group' => array('County.county_name'),
+            'group' => array('County.county_name','County.id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -312,7 +312,7 @@ class ReportsController extends AppController {
             'fields' => array('DATE_FORMAT(created, "%b %Y")  as month', 'month(ifnull(created, created)) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('DATE_FORMAT(created, "%b %Y") '),
+            'group' => array('DATE_FORMAT(created, "%b %Y") ','Sadr.id'),
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -448,7 +448,7 @@ class ReportsController extends AppController {
             'fields' => array('Vaccine.vaccine_name as vaccine_name', 'COUNT(distinct AefiListOfVaccine.aefi_id) as cnt'),
             'contain' => array('Vaccine'), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('Vaccine.vaccine_name'),
+            'group' => array('Vaccine.vaccine_name','Vaccine.id'),
             'having' => array('COUNT(distinct AefiListOfVaccine.aefi_id) >' => 0),
         )); 
 
@@ -521,7 +521,7 @@ class ReportsController extends AppController {
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
             'contain' => array('County'),
             'conditions' => $criteria,
-            'group' => array('County.county_name'),
+            'group' => array('County.county_name','County.id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -539,7 +539,7 @@ class ReportsController extends AppController {
             'fields' => array('DATE_FORMAT(created, "%b %Y") as month', 'month(created) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('monthname(created)'),
+            'group' => array('monthname(created)','Aefi.id'),
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         )); 
@@ -742,7 +742,7 @@ class ReportsController extends AppController {
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
             'contain' => array('County'),
             'conditions' => $criteria,
-            'group' => array('County.county_name'),
+            'group' => array('County.county_name','County.id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -760,7 +760,7 @@ class ReportsController extends AppController {
             'fields' => array('Country.name', 'COUNT(*) as cnt'),
             'contain' => array('Country'),
             'conditions' => $criteria,
-            'group' => array('Country.name'),
+            'group' => array('Country.name','Country.id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -778,7 +778,7 @@ class ReportsController extends AppController {
             'fields' => array('DATE_FORMAT(created, "%b %Y")  as month', 'month(ifnull(created, created)) as salit', 'COUNT(*) as cnt'),
             'contain' => array(), 'recursive' => -1,
             'conditions' => $criteria,
-            'group' => array('DATE_FORMAT(created, "%b %Y") '),
+            'group' => array('DATE_FORMAT(created, "%b %Y") ','Pqmp.id'),
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         )); 
