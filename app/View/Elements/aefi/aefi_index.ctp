@@ -319,8 +319,8 @@ $this->assign('AEFI', 'active');
 
           <?php } ?>
           <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
-          <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
           <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>
+          <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
           <th class="actions"><?php echo __('Actions'); ?></th>
         </tr>
       </thead>
@@ -356,8 +356,8 @@ $this->assign('AEFI', 'active');
                         echo "\n" . $aefi['Aefi']['webradr_date']; ?></td> -->
             <?php } ?>
             <td><?php echo h($aefi['Aefi']['reporter_date']); ?>&nbsp;</td>
-            <td><?php echo h($aefi['Aefi']['submitted_date']); ?>&nbsp;</td>
             <td><?php echo h($aefi['Aefi']['created']); ?>&nbsp;</td>
+            <td><?php echo h($aefi['Aefi']['submitted_date']); ?>&nbsp;</td>
             <td class="actions">
               <?php
               if ($aefi['Aefi']['submitted'] > 1) {
@@ -409,7 +409,7 @@ $this->assign('AEFI', 'active');
                 array('escape' => false)
               );
               // Check if the user is a reporter and the report is not submitted
-              if ($redir == 'reporter' && $aefi['Aefi']['submitted'] == 0) {
+              if ($redir == 'reporter' && $aefi['Aefi']['submitted'] == 0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
                 echo "&nbsp;";
                 echo $this->Form->postLink('<span class="label label-warning tooltipper" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" aria-hidden="true"></i> Delete </span>', array('controller' => 'aefis', 'action' => 'delete', $aefi['Aefi']['id']), array('escape' => false), __('Are you sure you want to delete this report? 
                 Note: This action cannot be undone.'));

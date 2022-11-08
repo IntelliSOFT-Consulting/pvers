@@ -40,6 +40,9 @@ class TransfusionsController extends AppController {
 
         $criteria = $this->Transfusion->parseCriteria($this->passedArgs);
         $criteria['Transfusion.user_id'] = $this->Auth->User('id');
+
+        // add deleted=false to criteria
+        $criteria['Transfusion.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation', 'Pint');
@@ -667,4 +670,27 @@ class TransfusionsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+      // function to delete a report
+      public function reporter_delete($id = null)
+      {
+          $this->Transfusion->id = $id;
+          if (!$this->Transfusion->exists()) {
+              throw new NotFoundException(__('Invalid report'));
+          }
+          $this->request->onlyAllow('post', 'delete');
+          //read the report
+          $report = $this->Transfusion->read(null, $id);
+          //update the report status to deleted
+          $report['Transfusion']['deleted'] = true;
+          $report['Transfusion']['deleted_date'] = date('Y-m-d H:i:s');
+          //save the report withouth validation
+          if ($this->Transfusion->save($report, array('validate' => false, 'deep' => true))) {
+              $this->Session->setFlash(__('The report has been deleted'), 'flash_success');
+              $this->redirect(array('action' => 'index'));
+          } else {
+              $this->Session->setFlash(__('The report could not be deleted. Please, try again.'), 'flash_error');
+              $this->redirect(array('action' => 'index'));
+          }
+      }
 }

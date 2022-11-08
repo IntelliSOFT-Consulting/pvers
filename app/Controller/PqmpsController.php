@@ -53,6 +53,8 @@ class PqmpsController extends AppController
         if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Pqmp.user_id'] = $this->Auth->User('id');
         if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Pqmp.submitted'] = array(2);
         // $criteria['Pqmp.user_id'] = $this->Auth->User('id');
+        // add deleted to criteria
+        $criteria['Pqmp.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Country', 'Designation');
@@ -359,7 +361,8 @@ class PqmpsController extends AppController
         $this->redirect(array('action' => 'edit', $this->Pqmp->id));
     }
 
-    public function generateReferenceNumber(){
+    public function generateReferenceNumber()
+    {
 
         $count = $this->Pqmp->find('count',  array(
             'fields' => 'Pqmp.reference_no',
@@ -369,13 +372,13 @@ class PqmpsController extends AppController
         ));
         $count++;
         $count = ($count < 10) ? "0$count" : $count;
-        $reference = 'PQMP/'.date('Y').'/'.$count;
+        $reference = 'PQMP/' . date('Y') . '/' . $count;
 
         //ensure this reference number is unique
         $exists = $this->Pqmp->find('count', array('conditions' => array('Pqmp.reference_no' => $reference)));
-        if($exists){
+        if ($exists) {
             $this->generateReferenceNumber();
-        }    
+        }
 
         //
         return $reference;
@@ -409,7 +412,7 @@ class PqmpsController extends AppController
                     if (!empty($pqmp['Pqmp']['reference_no']) && $pqmp['Pqmp']['reference_no'] == 'new') {
 
                         //call a function to generate the reference number
-                        $reference = $this->generateReferenceNumber();                       
+                        $reference = $this->generateReferenceNumber();
                         $this->Pqmp->saveField('reference_no', $reference);
                     }
                     //bokelo
@@ -848,6 +851,29 @@ class PqmpsController extends AppController
             $this->request->data['Pqmp']['facility_address'] = $this->Auth->User('institution_address');
             $this->request->data['Pqmp']['facility_phone'] = $this->Auth->User('institution_contact');
             $this->request->data['Pqmp']['contact_number'] = $this->Auth->User('phone_no');
+        }
+    }
+
+    // function to delete a report
+    public function reporter_delete($id = null)
+    {
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            throw new NotFoundException(__('Invalid report'));
+        }
+        $this->request->onlyAllow('post', 'delete');
+        //read the report
+        $report = $this->Pqmp->read(null, $id);
+        //update the report status to deleted
+        $report['Pqmp']['deleted'] = true;
+        $report['Pqmp']['deleted_date'] = date('Y-m-d H:i:s');
+        //save the report withouth validation
+        if ($this->Pqmp->save($report, array('validate' => false, 'deep' => true))) {
+            $this->Session->setFlash(__('The report has been deleted'), 'flash_success');
+            $this->redirect(array('action' => 'index'));
+        } else {
+            $this->Session->setFlash(__('The report could not be deleted. Please, try again.'), 'flash_error');
+            $this->redirect(array('action' => 'index'));
         }
     }
 }

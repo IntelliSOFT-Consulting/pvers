@@ -31,7 +31,7 @@ class UsersController extends AppController {
         parent::beforeFilter();
         // remove initDb
         // $this->initDB();
-        $this->Auth->allow('register', 'login', 'api_register', 'api_token', 'api_forgotPassword', 'activate_account', 'forgotPassword', 'resetPassword', 'logout', 'initDB');
+        $this->Auth->allow('register', 'login', 'api_register', 'api_token', 'api_forgotPassword', 'activate_account', 'forgotPassword', 'resetPassword', 'logout');
     }
 
 
@@ -1111,6 +1111,7 @@ class UsersController extends AppController {
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_add');
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_edit');
         $this->Acl->allow($group, 'controllers/Pqmps/reporter_view');
+        $this->Acl->allow($group, 'controllers/Pqmps/reporter_delete');
 
         $this->Acl->allow($group, 'controllers/Devices/reporter_index');
         $this->Acl->allow($group, 'controllers/Devices/reporter_add');

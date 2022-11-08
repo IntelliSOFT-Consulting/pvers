@@ -309,8 +309,8 @@
         <th><?php echo $this->Paginator->sort('brand_name'); ?></th>
         <th><?php echo $this->Paginator->sort('patient_name'); ?></th>
         <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
-        <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
         <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>
+        <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
        </thead>
@@ -339,8 +339,8 @@
         <td><?php echo h($device['Device']['brand_name']); ?>&nbsp;</td>
         <td><?php echo h($device['Device']['patient_name']); ?>&nbsp;</td>
         <td><?php echo h($device['Device']['reporter_date']); ?>&nbsp;</td>
-        <td><?php echo h($device['Device']['submitted_date']); ?>&nbsp;</td>
         <td><?php echo h($device['Device']['created']); ?>&nbsp;</td>
+        <td><?php echo h($device['Device']['submitted_date']); ?>&nbsp;</td>
         <td class="actions">
             <?php 
               if($device['Device']['submitted'] > 1) {
@@ -359,6 +359,12 @@
                 echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>' ,
                   array('controller' => 'devices', 'action' => 'edit', $device['Device']['id']),
                   array('escape' => false));
+              }
+              echo "&nbsp;";
+              // Check if the user is a reporter and report not submitted and not a health program
+              if($redir == 'reporter' && $device['Device']['submitted'] ==0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+                echo $this->Form->postLink('<span class="label label-warning tooltipper" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" aria-hidden="true"></i> Delete </span>', array('controller' => 'devices' , 'action' => 'delete', $device['Device']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $device['Device']['id'].'?
+                Note: This action cannot be undone.'));
               }
             ?>            
         </td>

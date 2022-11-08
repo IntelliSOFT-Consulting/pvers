@@ -43,6 +43,8 @@ class MedicationsController extends AppController {
         if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Medication.user_id'] = $this->Auth->User('id');        
         if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Medication.submitted'] = array(2);  
         // $criteria['Medication.user_id'] = $this->Auth->User('id');
+        //add deleted=false to criteria
+        $criteria['Medication.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Medication.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation', 'MedicationProduct');
@@ -750,4 +752,27 @@ class MedicationsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+      // function to delete a report
+      public function reporter_delete($id = null)
+      {
+          $this->Medication->id = $id;
+          if (!$this->Medication->exists()) {
+              throw new NotFoundException(__('Invalid report'));
+          }
+          $this->request->onlyAllow('post', 'delete');
+          //read the report
+          $report = $this->Medication->read(null, $id);
+          //update the report status to deleted
+          $report['Medication']['deleted'] = true;
+          $report['Medication']['deleted_date'] = date('Y-m-d H:i:s');
+          //save the report withouth validation
+          if ($this->Medication->save($report, array('validate' => false, 'deep' => true))) {
+              $this->Session->setFlash(__('The report has been deleted'), 'flash_success');
+              $this->redirect(array('action' => 'index'));
+          } else {
+              $this->Session->setFlash(__('The report could not be deleted. Please, try again.'), 'flash_error');
+              $this->redirect(array('action' => 'index'));
+          }
+      }
 }

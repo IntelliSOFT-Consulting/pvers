@@ -228,6 +228,21 @@ class Transfusion extends AppModel {
                 'message'  => 'Please provide reporter\'s phone number'
             ),
         ),
+          //ensure reporter phone is numeric and 10 digits
+          'reporter_phone' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'minLength' => array(
+                'rule' => array('minLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'maxLength' => array(
+                'rule' => array('maxLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+        ),
     );
 	public function ageOrDate($field = null) {
 		return !empty($field['date_of_birth']) || !empty($field['age_years']);

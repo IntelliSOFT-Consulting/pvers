@@ -72,7 +72,7 @@
       <?php
         echo $this->Paginator->counter(array(
         'format' => __('Page <span class="badge">{:page}</span> of <span class="badge">{:pages}</span>,
-                showing <span class="badge">{:current}</span> Site Inspections out of
+                showing <span class="badge">{:current}</span> Notifications out of
                 <span class="badge badge-inverse">{:count}</span> total, starting on record <span class="badge">{:start}</span>,
                 ending on <span class="badge">{:end}</span>')
         ));

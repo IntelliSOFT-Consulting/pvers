@@ -276,9 +276,9 @@
         <th><?php echo $this->Paginator->sort('report_title'); ?></th>
         <th><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? $this->Paginator->sort('patient_name') : $this->Paginator->sort('gender'); ?></th>
         <?php if($redir == 'manager') { ?><th><?php echo $this->Paginator->sort('vigiflow_ref'); ?></th> <?php } ?>
-        <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>        
+        <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>  
+        <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>      
         <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
-        <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
           </tr>
        </thead>
@@ -309,8 +309,8 @@
         <td><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? h($sadr['Sadr']['patient_name']) : h($sadr['Sadr']['gender']); ?>&nbsp;</td>
         <?php if($redir == 'manager') { ?><td><?php echo h($sadr['Sadr']['vigiflow_ref']); echo "\n".$sadr['Sadr']['vigiflow_date']; ?></td> <?php } ?>
         <td><?php echo h($sadr['Sadr']['reporter_date']); ?>&nbsp;</td>
-        <td><?php echo h($sadr['Sadr']['submitted_date']); ?>&nbsp;</td>
         <td><?php echo h($sadr['Sadr']['created']); ?>&nbsp;</td>
+        <td><?php echo h($sadr['Sadr']['submitted_date']); ?>&nbsp;</td>
         <td class="actions">
             <?php 
               if($sadr['Sadr']['submitted'] > 1) {

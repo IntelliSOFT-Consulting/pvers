@@ -136,6 +136,8 @@ class SadrsController extends AppController
         $criteria = $this->Sadr->parseCriteria($this->passedArgs);
         if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Sadr.user_id'] = $this->Auth->User('id');
         if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Sadr.submitted'] = array(2);
+        // add deleted condition to criteria
+        $criteria['Sadr.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
         $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrDescription', 'Designation', 'SadrListOfMedicine');

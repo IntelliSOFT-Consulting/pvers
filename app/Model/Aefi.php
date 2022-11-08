@@ -354,6 +354,22 @@ class Aefi extends AppModel {
                 'message'  => 'Please provide a valid phone number'
             ),
         ),
+
+        //ensure reporter phone is numeric and 10 digits
+        'reporter_phone' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'minLength' => array(
+                'rule' => array('minLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'maxLength' => array(
+                'rule' => array('maxLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+        ),
     );
 
 	public function atLeastOne($field = null) {
