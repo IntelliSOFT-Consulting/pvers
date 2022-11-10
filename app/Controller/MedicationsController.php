@@ -45,6 +45,11 @@ class MedicationsController extends AppController {
         // $criteria['Medication.user_id'] = $this->Auth->User('id');
         //add deleted=false to criteria
         $criteria['Medication.deleted'] = false;
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Medication.submitted'] = array(0,1);
+        }else{
+            $criteria['Medication.submitted'] = array(2,3);
+        }
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Medication.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation', 'MedicationProduct');
@@ -133,7 +138,12 @@ class MedicationsController extends AppController {
         $criteria = $this->Medication->parseCriteria($this->passedArgs);
         // $criteria['Medication.submitted'] = 2;
         $criteria['Medication.copied !='] = '1';
-        if (!isset($this->passedArgs['submit'])) $criteria['Medication.submitted'] = array(2, 3);
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Medication.submitted'] = array(0,1);
+        }else{
+            $criteria['Medication.submitted'] = array(2,3);
+        }
+        // if (!isset($this->passedArgs['submit'])) $criteria['Medication.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Medication.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation', 'MedicationProduct');

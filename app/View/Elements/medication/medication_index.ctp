@@ -206,7 +206,17 @@ $this->assign('MED', 'active');
             ?>
           </td>
           <td>
-
+            <?php
+            echo $this->Form->input('submitted', array(
+              'label' => array('class' => 'required', 'text' => 'Report Status'),
+              'empty' => true,
+              'hiddenField' => false,
+              'options' => array(
+                '0' => 'Submitted',
+                '1' => 'Unsubmitted'
+              )
+            ));
+            ?>
           </td>
           <td>
             <?php
@@ -262,10 +272,10 @@ $this->assign('MED', 'active');
           <td>
             <?php
             // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
-            echo $this->Form->input('submit', array(
-              'type' => 'checkbox', 'hiddenField' => false,
-              'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
-            ));
+            // echo $this->Form->input('submit', array(
+            //   'type' => 'checkbox', 'hiddenField' => false,
+            //   'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
+            // ));
             ?>
           </td>
           <td></td>
@@ -387,8 +397,8 @@ $this->assign('MED', 'active');
               echo "&nbsp;";
 
               // check if the user is a reporter and the report is not submitted
-              if ($redir == 'reporter' && $medication['Medication']['submitted'] ==0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
-                echo $this->Form->postLink('<span class="label label-warning tooltipper" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete </span>', array('controller' => 'medications', 'action' => 'delete', $medication['Medication']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $medication['Medication']['id'].'?
+              if ($redir == 'reporter' && $medication['Medication']['submitted'] == 0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+                echo $this->Form->postLink('<span class="label label-warning tooltipper" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete </span>', array('controller' => 'medications', 'action' => 'delete', $medication['Medication']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $medication['Medication']['id'] . '?
                 Note: This action cannot be undone.'));
               }
 

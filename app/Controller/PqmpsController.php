@@ -55,6 +55,11 @@ class PqmpsController extends AppController
         // $criteria['Pqmp.user_id'] = $this->Auth->User('id');
         // add deleted to criteria
         $criteria['Pqmp.deleted'] = false;
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Pqmp.submitted'] = array(0, 1);
+        } else {
+            $criteria['Pqmp.submitted'] = array(2, 3);
+        }
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Country', 'Designation');
@@ -151,7 +156,13 @@ class PqmpsController extends AppController
 
         $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
         $criteria['Pqmp.copied !='] = '1';
-        if (!isset($this->passedArgs['submit'])) $criteria['Pqmp.submitted'] = array(2, 3);
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Pqmp.submitted'] = array(0, 1);
+        } else {
+            $criteria['Pqmp.submitted'] = array(2, 3);
+        }
+
+        // if (!isset($this->passedArgs['submit'])) $criteria['Pqmp.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Country', 'Designation');

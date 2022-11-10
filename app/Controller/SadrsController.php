@@ -135,7 +135,15 @@ class SadrsController extends AppController
 
         $criteria = $this->Sadr->parseCriteria($this->passedArgs);
         if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') $criteria['Sadr.user_id'] = $this->Auth->User('id');
-        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program') $criteria['Sadr.submitted'] = array(2);
+        if ($this->Session->read('Auth.User.user_type') == 'Public Health Program'){
+             $criteria['Sadr.submitted'] = array(2);
+        }else{
+            if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+                $criteria['Sadr.submitted'] = array(0, 1);
+            } else {
+                $criteria['Sadr.submitted'] = array(2, 3);
+            }
+        }
         // add deleted condition to criteria
         $criteria['Sadr.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
@@ -200,7 +208,12 @@ class SadrsController extends AppController
 
         $criteria = $this->Sadr->parseCriteria($this->passedArgs);
         $criteria['Sadr.name_of_institution'] = $this->Auth->User('name_of_institution');
-        $criteria['Sadr.submitted'] = array(1, 2);
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Sadr.submitted'] = array(0, 1);
+        } else {
+            $criteria['Sadr.submitted'] = array(2, 3);
+        }
+        // $criteria['Sadr.submitted'] = array(1, 2);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
         $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrListOfMedicine', 'SadrDescription', 'Designation');
@@ -228,11 +241,15 @@ class SadrsController extends AppController
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (!empty($this->request->query['pages'])) $this->paginate['limit'] = $this->request->query['pages'];
         else $this->paginate['limit'] = reset($this->page_options);
-
-        $criteria = $this->Sadr->parseCriteria($this->passedArgs);
-        // $criteria['Sadr.submitted'] = 2;
+        //  $criteria['Sadr.submitted'] = 2;
         $criteria['Sadr.copied !='] = '1';
-        if (!isset($this->passedArgs['submit'])) $criteria['Sadr.submitted'] = array(2, 3);
+        // check if the user has select unsubmited sadrs
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Sadr.submitted'] = array(0, 1);
+        } else {
+            $criteria['Sadr.submitted'] = array(2, 3);
+        }
+        // if (!isset($this->passedArgs['submit'])) $criteria['Sadr.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
         $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrListOfMedicine', 'SadrDescription', 'Designation', 'User');
@@ -957,7 +974,7 @@ class SadrsController extends AppController
         $sadr['Sadr']['deleted_date'] = date("Y-m-d H:i:s");
         if ($this->Sadr->save($sadr, array('validate' => false))) {
             //displat message with reference number 
-            $this->Session->setFlash(__('SADR Report ' . $sadr['Sadr']['reference_no'] . ' has been deleted'), 'alerts/flash_info'); 
+            $this->Session->setFlash(__('SADR Report ' . $sadr['Sadr']['reference_no'] . ' has been deleted'), 'alerts/flash_info');
             $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(__('SADR was not deleted'), 'alerts/flash_error');

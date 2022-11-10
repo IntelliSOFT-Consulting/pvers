@@ -36,6 +36,7 @@ class Transfusion extends AppModel {
         'reporter' => array('type' => 'query', 'method' => 'reporterFilter', 'encode' => true),
         'designation_id' => array('type' => 'value'),
         'gender' => array('type' => 'value'),
+        'submitted' => array('type' => 'value'),
         'submit' => array('type' => 'query', 'method' => 'orConditions', 'encode' => true),
     );
 

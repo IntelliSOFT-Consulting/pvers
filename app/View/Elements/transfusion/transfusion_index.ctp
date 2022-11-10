@@ -297,6 +297,25 @@ $this->assign('TRN', 'active');
           </td>
         </tr>
         <tr>
+        <tr>
+          <!-- Added -->
+          <td>
+            <?php
+            echo $this->Form->input('submitted', array(
+              'type' => 'select',
+              'empty' => true,
+              'options' => array(
+                '0' => 'Submitted',
+                '1' => 'Unsubmitted'
+              ),
+              'label' => array('class' => 'required', 'text' => 'Report Status')
+            ));
+            ?>
+          </td>
+          <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+
+          <!-- End -->
+        </tr>
           <td><label for="TransfusionPages" class="required">Pages</label></td>
           <td>
             <?php
@@ -311,10 +330,10 @@ $this->assign('TRN', 'active');
           <td>
             <?php
             // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
-            echo $this->Form->input('submit', array(
-              'type' => 'checkbox', 'hiddenField' => false,
-              'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
-            ));
+            // echo $this->Form->input('submit', array(
+            //   'type' => 'checkbox', 'hiddenField' => false,
+            //   'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
+            // ));
             ?>
           </td>
           <td></td>

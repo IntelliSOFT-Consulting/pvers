@@ -43,6 +43,11 @@ class TransfusionsController extends AppController {
 
         // add deleted=false to criteria
         $criteria['Transfusion.deleted'] = false;
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Transfusion.submitted'] = array(0,1);
+        } else{
+            $criteria['Transfusion.submitted'] = array(2,3);
+        }
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation', 'Pint');
@@ -127,7 +132,12 @@ class TransfusionsController extends AppController {
         $criteria = $this->Transfusion->parseCriteria($this->passedArgs);
         // $criteria['Transfusion.submitted'] = 2;
         $criteria['Transfusion.copied !='] = '1';
-        if (!isset($this->passedArgs['submit'])) $criteria['Transfusion.submitted'] = array(2, 3);
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Transfusion.submitted'] = array(0,1);
+        } else{
+            $criteria['Transfusion.submitted'] = array(2,3);
+        }
+        // if (!isset($this->passedArgs['submit'])) $criteria['Transfusion.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation', 'Pint');

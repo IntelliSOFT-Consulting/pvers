@@ -139,7 +139,6 @@ $this->Html->script('highcharts/modules/data', array('inline' => false));
 </div>
 
 <script type="text/javascript">
-  // create a datepicker for end_date
   $(function() {
     $(".start_date").datepicker({
       changeMonth: true,
@@ -155,8 +154,6 @@ $this->Html->script('highcharts/modules/data', array('inline' => false));
       maxDate: new Date(),
     });
   });
-
-
 
 
   $(function() {

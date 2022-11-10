@@ -240,6 +240,23 @@ $this->assign('AEFI', 'active');
           </td>
         </tr>
         <tr>
+          <td>
+            <h5>Report Status</h5>
+            <?php
+            echo $this->Form->input('submitted', array(
+              'options' => array('1' => 'UnSubmitted', '2' => 'Submitted'), 'legend' => false,
+              'type' => 'radio'
+            ));
+            ?>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
           <td><label for="AefiPages" class="required">Pages</label></td>
           <td>
             <?php
@@ -254,10 +271,10 @@ $this->assign('AEFI', 'active');
           <td>
             <?php
             // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
-            echo $this->Form->input('submit', array(
-              'type' => 'checkbox', 'hiddenField' => false,
-              'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
-            ));
+            // echo $this->Form->input('submit', array(
+            //   'type' => 'checkbox', 'hiddenField' => false,
+            //   'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
+            // ));
             ?>
           </td>
           <td></td>

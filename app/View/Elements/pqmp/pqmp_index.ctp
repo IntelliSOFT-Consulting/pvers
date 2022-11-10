@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 $this->assign('PQMP', 'active');
 ?>
 
@@ -195,6 +198,18 @@ $this->assign('PQMP', 'active');
               ),
               'label' => array('class' => 'required', 'text' => 'Product formulation')
             ));
+
+            // Radio buttons with label text
+            echo $this->Form->input('submitted', array(
+              'label' => array('class' => 'required', 'text' => 'Report Status'),
+              'empty' => true, 
+              'hiddenField' => false,
+              'options' => array(
+                '0' => 'Submitted',
+                '1' => 'Unsubmitted'
+              )
+            ));
+
             ?>
           </td>
           <td>
@@ -384,8 +399,6 @@ $this->assign('PQMP', 'active');
                     array('escape' => false)
                   );
                   echo "&nbsp;";
-                 
-
                 }
               }
               echo "&nbsp;";
@@ -402,7 +415,7 @@ $this->assign('PQMP', 'active');
                   '<span class="label label-warning tooltipper" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i> Delete </span>',
                   array('action' => 'delete', $pqmp['Pqmp']['id']),
                   array('escape' => false),
-                  __('Are you sure you want to delete # %s?', $pqmp['Pqmp']['id'].'?
+                  __('Are you sure you want to delete # %s?', $pqmp['Pqmp']['id'] . '?
                   NOTE:This action cannot be undone.')
                 );
               }

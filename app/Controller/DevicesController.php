@@ -31,6 +31,11 @@ class DevicesController extends AppController
         $criteria['Device.user_id'] = $this->Auth->User('id');
         //add deleted = 0 to criteria
         $criteria['Device.deleted'] = false;
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Device.submitted'] = array(0,1);
+        }else{
+            $criteria['Device.submitted'] = array(2,3);
+        }
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation');
@@ -123,7 +128,12 @@ class DevicesController extends AppController
 
         $criteria = $this->Device->parseCriteria($this->passedArgs);
         $criteria['Device.copied !='] = '1';
-        if (!isset($this->passedArgs['submit'])) $criteria['Device.submitted'] = array(2, 3);
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Device.submitted'] = array(0,1);
+        }else{
+            $criteria['Device.submitted'] = array(2,3);
+        }
+        // if (!isset($this->passedArgs['submit'])) $criteria['Device.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation');
