@@ -41,7 +41,7 @@
         <table class="table table-condensed" style="margin-bottom: 2px;">
             <tbody>
               <tr>
-                <td colspan="2">
+                <td>
                     <?php
                       echo $this->Form->input('start_date',
                         array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
@@ -52,7 +52,19 @@
                                   <em class="accordion-toggle">clear!</em></a>',
                             'label' => false, 'placeHolder' => 'End Date'));
                     ?>
-                </td>            
+                </td> 
+                <td>
+                    <?php
+                      echo $this->Form->input('start_date',
+                        array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index', 'after' => '-to-',
+                            'label' => array('class' => 'required', 'text' => 'Report Dates'), 'placeHolder' => 'Start Date'));
+                      echo $this->Form->input('end_date',
+                        array('div' => false, 'type' => 'text', 'class' => 'input-small unauthorized_index',
+                             'after' => '<a style="font-weight:normal" onclick="$(\'.unauthorized_index\').val(\'\');" >
+                                  <em class="accordion-toggle">clear!</em></a>',
+                            'label' => false, 'placeHolder' => 'End Date'));
+                    ?>
+                </td>              
                 <td>
                     <?php
                       echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
