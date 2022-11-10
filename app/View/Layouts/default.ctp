@@ -131,8 +131,7 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
               </dl>
               <dl class="contact-list">
                 <dt>Tel:</dt>
-                <dd>+254795743049
-                </dd>
+                <dd>+254795743049</dd>
               </dl>
             </div>
             <div class="span4 social-inner ">
