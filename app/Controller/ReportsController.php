@@ -79,8 +79,7 @@ class ReportsController extends AppController {
 
     public function filters()
     { 
-        $vaccine =$this->request->data['Report']['vaccine_name'];
-        //get all ADRs with the vaccine name from the sadrs_list_of_drugs table
+         $vaccine =$this->request->data['Report']['vaccine_name']; 
         $this->loadModel('SadrListOfDrug');
         $sadr_ids = $this->SadrListOfDrug->find('list', array(
             'conditions' => array('SadrListOfDrug.drug_name LIKE' => '%'.$vaccine.'%'),
@@ -88,8 +87,24 @@ class ReportsController extends AppController {
         ));
         // return unique sadr ids alongside the vaccine name
         $sadr_ids = array_unique($sadr_ids);
+        // create an array of reaction and count
+        $data= array();
         foreach ($sadr_ids as $key => $value) {
-            echo $value;
+          // get the reaction for each sadr id
+            $reaction = $this->Sadr->find('first', array(
+                'conditions' => array('Sadr.id' => $value),
+                'fields' => array('Sadr.reaction')
+            ));
+            // check if the reaction is already in the array
+            if (array_key_exists($reaction['Sadr']['reaction'], $data)) {
+                // if it is, increment the count
+                $data[$reaction['Sadr']['reaction']] += 1;
+            } else {
+                // if it is not, add it to the array
+                $data[$reaction['Sadr']['reaction']] = 1;
+            }
+             print_r($data);
+
             
         }
             

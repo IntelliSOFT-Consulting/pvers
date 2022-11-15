@@ -350,7 +350,7 @@ class SadrFollowupsController extends AppController {
 		$this->set('attachments', $sadrFollowup['Attachment']);
 		$routes = $this->SadrFollowup->SadrListOfDrug->Route->find('list');
 		$this->set(compact('routes'));
-		$frequency = $this->SadrFollowup->SadrListOfDrug->Frequency->find('list');
+		$frequency = $this->SadrFollowup->SadrListOfDrug->Frequency->find('list',);
 		$this->set(compact('frequency'));
 		$dose = $this->SadrFollowup->SadrListOfDrug->Dose->find('list');
 		$this->set(compact('dose'));
