@@ -478,7 +478,7 @@ class TransfusionsController extends AppController {
 
         //$transfusion = $this->request->data;
         $counties = $this->Transfusion->County->find('list');
-        $designations = $this->Transfusion->Designation->find('list');
+        $designations = $this->Transfusion->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('counties', 'designations'));
     }
 
@@ -657,7 +657,7 @@ class TransfusionsController extends AppController {
         $this->set('transfusion', $transfusion);
 
         $counties = $this->Transfusion->County->find('list');
-		$designations = $this->Transfusion->Designation->find('list');
+		$designations = $this->Transfusion->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
 		$this->set(compact('counties', 'designations'));
     }
 

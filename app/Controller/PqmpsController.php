@@ -514,7 +514,7 @@ class PqmpsController extends AppController
         $this->set(compact('counties'));
         $sub_counties = $this->Pqmp->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
-        $designations = $this->Pqmp->Designation->find('list');
+        $designations = $this->Pqmp->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
         $countries = $this->Pqmp->Country->find('list');
         $this->set('countries', $countries);
@@ -709,7 +709,7 @@ class PqmpsController extends AppController
         $this->set(compact('counties'));
         $sub_counties = $this->Pqmp->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
-        $designations = $this->Pqmp->Designation->find('list');
+        $designations = $this->Pqmp->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
         $countries = $this->Pqmp->Country->find('list');
         $this->set('countries', $countries);

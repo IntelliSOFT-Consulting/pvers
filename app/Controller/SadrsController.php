@@ -138,10 +138,14 @@ class SadrsController extends AppController
         if ($this->Session->read('Auth.User.user_type') == 'Public Health Program'){
              $criteria['Sadr.submitted'] = array(2);
         }else{
-            if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            if (isset($this->request->query['submitted'])){
+                if($this->request->query['submitted'] == 1) {
                 $criteria['Sadr.submitted'] = array(0, 1);
-            } else {
+                } else {
                 $criteria['Sadr.submitted'] = array(2, 3);
+                }
+            }else{
+                $criteria['Sadr.submitted'] = array(0, 1, 2, 3);
             }
         }
         // add deleted condition to criteria
@@ -743,7 +747,7 @@ class SadrsController extends AppController
         $this->set(compact('counties'));
         $sub_counties = $this->Sadr->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
-        $designations = $this->Sadr->Designation->find('list');
+        $designations = $this->Sadr->Designation->find('list', array('order' => array('Designation.name' => 'ASC'))); 
         $this->set(compact('designations'));
         $routes = $this->Sadr->SadrListOfDrug->Route->find('list');
         $this->set(compact('routes'));
@@ -949,7 +953,10 @@ class SadrsController extends AppController
         $this->set(compact('counties'));
         $sub_counties = $this->Sadr->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
-        $designations = $this->Sadr->Designation->find('list');
+
+        // get designations ordered by name descending
+        $designations = $this->Sadr->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        // $designations = $this->Sadr->Designation->find('list');
         $this->set(compact('designations'));
         $routes = $this->Sadr->SadrListOfDrug->Route->find('list');
         $this->set(compact('routes'));

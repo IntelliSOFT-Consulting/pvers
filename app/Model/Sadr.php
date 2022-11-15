@@ -256,13 +256,13 @@ class Sadr extends AppModel {
                 'message'  => 'The Unique form ID provided does not exist.'
             ),
         ),*/
-		/*'report_title' => array(
+		'report_title' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
                 'required' => true,
                 'message'  => 'Please provide a title for the report'
             ),
-        ),*/
+        ),
 		'patient_name' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
@@ -292,41 +292,15 @@ class Sadr extends AppModel {
                 'message'  => 'Please specify at least one product category'
             ),
         ),
-
-		// check if age_group is not blank if date_of_birth is blank and vice versa
-		'age_group' => array(
-			'ageOrDate' => array(
-				'rule'     => 'ageOrDate',
-				'allowEmpty' => true,
-				'message'  => 'Please specify the age group'
-			),
-		),
-
-		// check if date_of_birth is not blank if age_group is blank and vice versa
+ 
 		'date_of_birth' => array(
-			'ageOrDate' => array(
-				'rule'     => 'ageOrDate',
+            'ageOrDate' => array(
+                'rule'     => 'ageOrDate',
+                // 'required' => false,
 				'allowEmpty' => true,
-				'message'  => 'Please specify the date of birth'
-			),
-		),
-
-		// 'date_of_birth' => array(
-        //     'ageOrDate' => array(
-        //         'rule'     => 'ageOrDate',
-        //         // 'required' => true,
-		// 		// 'allowEmpty' => true,
-        //         'message'  => 'Please specify the patient\'s date / Year of birth or age group'
-        //     ),
-        // ),
-		// 'age_group' => array(
-        //     'ageOrDate' => array(
-        //         'rule'     => 'ageOrDate',
-        //         // 'required' => true,
-		// 		// 'allowEmpty' => true,
-        //         'message'  => 'Please specify the patient\'s date / Year of birth or age group'
-        //     ),
-        // ),
+                'message'  => 'Please specify the patient\'s date / Year of birth or age in months'
+            ),
+        ),
 		'county_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -379,6 +353,13 @@ class Sadr extends AppModel {
                 'message'  => 'The date / year of birth cannot be less than the date of birth of the patient'
             ),
         ),
+		'reaction' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide a reaction'
+            ),
+        ),
 		'description_of_reaction' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
@@ -386,6 +367,14 @@ class Sadr extends AppModel {
                 'message'  => 'Please provide a brief description of the reaction'
             ),
         ),
+		'sample' => array(
+			'atleastOneSuspect' => array(
+                'rule'     => 'atleastOneSuspect',
+                'required' => false,
+                'message'  => 'Please select at least one suspect drug'
+            ),
+			
+		),
 		'action_taken' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',
@@ -400,6 +389,7 @@ class Sadr extends AppModel {
                 'required' => true,
                 'message'  => 'Please specify if the reaction was serious'
             ),
+			
         ),
         'outcome' => array(
             'notBlank' => array(
@@ -463,6 +453,17 @@ class Sadr extends AppModel {
 		)
 	);
 
+	public function atleastOneSuspect($field=null)
+	{
+		if (!empty($this->data['SadrListOfDrug'])) {
+			foreach ($this->data['SadrListOfDrug'] as $val) {
+				if ($val['suspected_drug'] == 1) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	public function dateAfterStartDates($field = null) {
 		if (!empty($this->data['SadrListOfDrug'])) {
 			foreach ($this->data['SadrListOfDrug'] as $val) {
@@ -495,7 +496,7 @@ class Sadr extends AppModel {
 	}
 
 	public function ageOrDate($field = null) {
-		return !empty($field['date_of_birth']['year']) || !empty($this->data['Sadr']['age_group']);
+		return !empty($this->data['Sadr']['date_of_birth']['year']) || !empty($this->data['Sadr']['age_group']);
 	}
 
 	public function reportOn($field = null) {

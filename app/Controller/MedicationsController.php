@@ -557,7 +557,7 @@ class MedicationsController extends AppController {
         //$medication = $this->request->data;
 
         $counties = $this->Medication->County->find('list');
-        $designations = $this->Medication->Designation->find('list');
+        $designations = $this->Medication->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('counties', 'designations'));
     }
 
@@ -740,7 +740,7 @@ class MedicationsController extends AppController {
         $this->set('medication', $medication);
 
    		$counties = $this->Medication->County->find('list');
-		$designations = $this->Medication->Designation->find('list');
+		$designations = $this->Medication->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
 		$this->set(compact('counties', 'designations'));
     }
 /**

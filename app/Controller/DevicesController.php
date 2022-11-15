@@ -515,7 +515,7 @@ class DevicesController extends AppController
         //$device = $this->request->data;
         $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
-        $designations = $this->Device->Designation->find('list');
+        $designations = $this->Device->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
     }
 
@@ -705,7 +705,7 @@ class DevicesController extends AppController
 
         $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
-        $designations = $this->Device->Designation->find('list');
+        $designations = $this->Device->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
     }
 
@@ -754,7 +754,7 @@ class DevicesController extends AppController
         $this->set('attachments', $device['Attachment']);
         $counties = $this->Device->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
-        $designations = $this->Device->Designation->find('list');
+        $designations = $this->Device->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
     }
     /**

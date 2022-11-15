@@ -61,11 +61,11 @@ $this->Html->script('sadr', array('inline' => false));
 					<p class="controls" id="sadr_edit_tip"> <span class="label label-important">Tip:</span> Fields marked with <span style="color:red;">*</span> are mandatory</p>
 					<?php
 					echo $this->Form->input('report_title', array(
-						'label' => array('class' => 'control-label required', 'text' => 'REPORT TITLE'),
+						'label' => array('class' => 'control-label required', 'text' => 'REPORT TITLE<span style="color:red;">*</span>'),
 						'placeholder' => 'this content title..', 'title' => 'Report Title',
 						'data-content' => 'Appropriate title for the report e.g Nevirapine related Rash',
 						'after' => '<p class="help-block"> e.g Nevirapine related rash </p></div>',
-						'class' => 'span9 mapop',
+						'class' => 'span9',
 					));
 					?>
 				</div>
@@ -106,11 +106,6 @@ $this->Html->script('sadr', array('inline' => false));
                                                                     <label class="checkbox">',
 						'after' => 'Medicinal product </label>',
 					));
-					// echo $this->Form->input('blood_products', array(
-					//         'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
-					//                                 'between' => '<input type="hidden" value="0" id="Sadr_blood_products_" name="data[Sadr][blood_products]">
-					//                                                 <label class="checkbox">',
-					//                                 'after' => 'Blood and blood products </label>',));
 					echo $this->Form->input('herbal_product', array(
 						'type' => 'checkbox',   'label' => false, 'div' => false, 'class' => false, 'hiddenField' => false,
 						'between' => '<input type="hidden" value="0" id="Sadr_herbal_product_" name="data[Sadr][herbal_product]">
@@ -225,15 +220,15 @@ $this->Html->script('sadr', array('inline' => false));
 								'adolescent' => 'adolescent [12-17 years]',
 								'adult' => 'adult [18-64 years]',
 								'elderly' => 'elderly [>65 years]',
-							), 
+							),
 							'label' => array('class' => 'control-label required', 'text' => 'AGE GROUP'),
 							'after' => '<a onclick="$(\'#SadrAgeGroup\').removeAttr(\'disabled\'); $(\'#SadrAgeGroup\').val(\'\');
 									$(\'.birthdate\').attr(\'disabled\',\'disabled\'); $(\'.birthdate\').val(\'\');" >
 								<em class="accordion-toggle">clear!</em></a> </div>',
 						));
 						//disable age group if birthdate is selected
-						 
-						
+
+
 						?>
 					</div>
 					<?php
@@ -397,6 +392,13 @@ $this->Html->script('sadr', array('inline' => false));
 						'label' => array('class' => 'control-label required', 'text' => 'DIAGNOSIS'),
 						'after' => '<p class="help-block"> (What was the patient being treated for before getting the reaction) </p></div>',
 					));
+					echo $this->Form->input('reaction', array(
+						'label' => array('class' => 'control-label required', 'text' => 'REACTION <span style="color:red;">*</span>'),
+						'placeholder' => 'type here...', 'title' => 'Reaction',
+						'data-content' => 'e.g Nevirapine related Rash',
+						'after' => '<p class="help-block"> e.g Nevirapine related rash </p></div>',
+						'class' => 'span5 mapop',
+					));
 
 					echo $this->Form->input('date_of_onset_of_reaction', array(
 						'type' => 'date',
@@ -425,7 +427,7 @@ $this->Html->script('sadr', array('inline' => false));
 			<!--/row-->
 			<hr>
 			<?php echo $this->element('multi/list_of_drugs'); ?>
-
+			 
 			<?php echo $this->element('multi/list_of_medicines'); ?>
 
 			<div class="row-fluid">
@@ -505,6 +507,7 @@ $this->Html->script('sadr', array('inline' => false));
 					echo $this->Form->input('lab_investigation', array(
 						'rows' => 2, 'label' => array('class' => 'control-label required', 'text' => 'Any lab investigations and results'),
 					));
+
 
 					?>
 					<p class="required">Outcome <span style="color:red;">*</span></p>
@@ -750,7 +753,7 @@ $this->Html->script('sadr', array('inline' => false));
 					);
 					echo $this->Form->input('reporter_phone', array(
 						'div' => array('class' => 'control-group'),
-						'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.'. ' <span style="color:red;">*</span>')
+						'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.' . ' <span style="color:red;">*</span>')
 					));
 
 					echo $this->Form->input('reporter_date', array(
@@ -813,7 +816,7 @@ $this->Html->script('sadr', array('inline' => false));
 					));
 					echo $this->Form->input('reporter_phone_diff', array(
 						'div' => array('class' => 'control-group'), 'class' => 'diff',
-						'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.'. ' <span style="color:red;">*</span>')
+						'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.' . ' <span style="color:red;">*</span>')
 					));
 					echo $this->Form->input('reporter_date_diff', array(
 						'type' => 'text', 'class' => 'date-pick-field diff',

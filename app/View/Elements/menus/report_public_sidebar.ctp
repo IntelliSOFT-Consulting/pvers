@@ -7,6 +7,12 @@
       </li>      
       <li class="divider"></li>
       <li class="nav-header"><i class="fa fa-ambulance" aria-hidden="true"></i> SUSPECTED ADVERSE DRUG REACTIONS</li>
+      <li class="<?php echo $this->fetch('upgrade/summary'); ?>">
+        <?php
+            echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Summary',  array('controller' => 'reports', 'action'=>'summary', 'admin' => false ),
+                      array('escape' => false));
+        ?>
+      </li>
       <li class="<?php echo $this->fetch('sadrs-by-age'); ?>">
         <?php
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Age groups',  array('controller' => 'reports', 'action'=>'sadrs_by_age', 'admin' => false ),

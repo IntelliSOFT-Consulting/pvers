@@ -134,6 +134,10 @@
 						<td style="width: 70%;"><strong><?php echo $sadr['Sadr']['diagnosis'] ?></strong></td>
 					</tr>
 					<tr>
+						<td style="width: 30%;">REACTION:</td>
+						<td style="width: 70%;"><strong><?php echo $sadr['Sadr']['reaction'] ?></strong></td>
+					</tr>
+					<tr>
 						<td style="width: 25%;">DATE OF ONSET OF REACTION:</td>
 						<td style="width: 25%;"><strong><?php
 							// pr($sadr['Sadr']['date_of_onset_of_reaction']);

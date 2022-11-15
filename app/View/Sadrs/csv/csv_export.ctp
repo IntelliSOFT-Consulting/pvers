@@ -15,7 +15,7 @@ $header = array(
 	'age_group' => 'Age Group', 'pregnancy_status' => 'Pregnancy Status',
 	'known_allergy' => 'Known allergy', 'known_allergy_specify' => 'Allergy',
 	'onset_date' => 'Date of onset', 'drugs' => 'Generic names',
-	'brands' => 'Brand names', 'batch_no' => 'Batch Number', 'manufacturers' => 'Manufacturers', 'start_date' => 'Start Date', 'end_date' => 'End Date',
+	'brands' => 'Brand names', 'batch_no' => 'Batch Number', 'manufacturers' => 'Manufacturers', 'start_date' => 'Start Date', 'end_date' => 'End Date','drug_indication'=>'Indication','suspected_drug'=>'Suspected Drug',
 	'med_drug_name' => 'Medicine Drug Name', 'med_brand_name' => 'Medicine Brand Name', 'med_batch_no' => 'Medicine Batch Number', 'med_manufacturer' => 'Medicine Manufacturer', 'med_dose' => 'Medicine Dose', 'med_start_date' => 'Medicine Start Date', 'med_stop_date' => 'Medicine Stop Date', 'med_indication' => 'Medicine Indication',
 	'indications' => 'Indications', 'reaction_resolve' => 'Rechallenge',
 	'reaction_reappear' => 'Reaction reappear', 'severity' => 'Severity',
@@ -101,13 +101,18 @@ foreach ($csadrs as $csadr) :
 				(isset($row[$key])) ? $row[$key] .= '; ' . $sadrListOfDrug['stop_date'] : $row[$key] = $sadrListOfDrug['stop_date'];
 			}
 			(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/', '""', $row[$key]) . '"' : $row[$key] = '""';
-		} elseif ($key == 'indications') {
+		} elseif ($key == 'drug_indication') {
 			foreach ($csadr['SadrListOfDrug'] as $sadrListOfDrug) {
 				(isset($row[$key])) ? $row[$key] .= '; ' . $sadrListOfDrug['indication'] : $row[$key] = $sadrListOfDrug['indication'];
 			}
 			(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/', '""', $row[$key]) . '"' : $row[$key] = '""';
 		}
-
+		elseif ($key == 'suspected_drug') {
+			foreach ($csadr['SadrListOfDrug'] as $sadrListOfDrug) {
+				(isset($row[$key])) ? $row[$key] .= '; ' . $sadrListOfDrug['suspected_drug'] : $row[$key] = $sadrListOfDrug['suspected_drug'];
+			}
+			(isset($row[$key])) ? $row[$key] = '"' . preg_replace('/"/', '""', $row[$key]) . '"' : $row[$key] = '""';
+		}
 		// Start of Medicines
 		//  `med_drug_name`, `med_brand_name`, `med_batch_no`, `med_manufacturer`, `med_dose`, `med_start_date`, `med_stop_date`, `med_indication`
 		elseif ($key == 'med_drug_name') {

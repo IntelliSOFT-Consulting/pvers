@@ -5,15 +5,16 @@ App::uses('AppModel', 'Model');
  *
  * @property Sadr $Sadr
  */
-class SadrListOfDrug extends AppModel {
+class SadrListOfDrug extends AppModel
+{
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'Sadr' => array(
 			'className' => 'Sadr',
@@ -109,13 +110,6 @@ class SadrListOfDrug extends AppModel {
 				'message'  => 'Please specify the frequency'
 			),
 		),
-		/*'Indication' => array(
-			'notBlank' => array(
-				'rule'     => 'notBlank',
-				'required' => true,
-				'message'  => 'Please specify the indication'
-			),
-		),*/
 		'start_date' => array(
 			'ifSuspected' => array(
 				'rule'     => 'ifSuspected',
@@ -127,23 +121,35 @@ class SadrListOfDrug extends AppModel {
 				'message'  => 'The start date must come before the stop date'
 			),
 		),
+
+		// 'suspected_drug' => array(
+		// 	'oneSelected' => array(
+		// 		'rule'     => 'oneSelected',
+		// 		'required' => true,
+		// 		'message'  => 'Required field'
+		// 	),
+		// ),
 	);
 
-	public function beforeStopDate($field = null){
-		if(!empty($this->data['SadrListOfDrug']['stop_date'])) {
+ 
+	public function beforeStopDate($field = null)
+	{
+		if (!empty($this->data['SadrListOfDrug']['stop_date'])) {
 			return (strtotime($field['start_date']) <= strtotime($this->data['SadrListOfDrug']['stop_date']));
 		}
 		return true;
-    }
+	}
 
-	public function ifSuspected($field = null){
-		if($this->data['SadrListOfDrug']['suspected_drug']) {
+	public function ifSuspected($field = null)
+	{
+		if ($this->data['SadrListOfDrug']['suspected_drug']) {
 			return (!empty($field['start_date']));
 		}
 		return true;
-    }
+	}
 
-	public function beforeSave($options = array()) {
+	public function beforeSave($options = array())
+	{
 		if (!empty($this->data['SadrListOfDrug']['start_date'])) {
 			$this->data['SadrListOfDrug']['start_date'] = $this->dateFormatBeforeSave($this->data['SadrListOfDrug']['start_date']);
 		}
@@ -153,7 +159,8 @@ class SadrListOfDrug extends AppModel {
 		return true;
 	}
 
-	public function afterFind($results, $primary = false) {
+	public function afterFind($results, $primary = false)
+	{
 		foreach ($results as $key => $val) {
 			if (isset($val['SadrListOfDrug']['start_date'])) {
 				$results[$key]['SadrListOfDrug']['start_date'] = $this->dateFormatAfterFind($val['SadrListOfDrug']['start_date']);
@@ -164,5 +171,4 @@ class SadrListOfDrug extends AppModel {
 		}
 		return $results;
 	}
-
 }

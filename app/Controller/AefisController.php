@@ -740,7 +740,7 @@ class AefisController extends AppController
         $this->set(compact('counties'));
         $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
-        $designations = $this->Aefi->Designation->find('list');
+        $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
         $vaccines = $this->Aefi->AefiListOfVaccine->Vaccine->find('list');
         $this->set(compact('vaccines'));
@@ -940,7 +940,7 @@ class AefisController extends AppController
         $this->set(compact('counties'));
         $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
-        $designations = $this->Aefi->Designation->find('list');
+        $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
         $vaccines = $this->Aefi->AefiListOfVaccine->Vaccine->find('list');
         $this->set(compact('vaccines'));

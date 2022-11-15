@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\Deprecated;
+
 App::uses('AppController', 'Controller');
 /**
  * PreviousDates Controller
@@ -18,7 +21,7 @@ class ReportsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'sadrs_by_age',
+        $this->Auth->allow('index','summary', 'sadrs_by_age',
                 'sadrs_by_medicine',
                 'sadrs_by_gender',
                 'sadrs_by_county', 'sadrs_by_month',
@@ -58,7 +61,7 @@ class ReportsController extends AppController {
                 'saes_by_year',
                 'saes_by_gender',
                 'saes_by_medicine',
-                'saes_by_concomittant');
+                'saes_by_concomittant','filters');
         if ($this->RequestHandler->isMobile()) {
             // $this->layout = 'Emails/html/default';
             $this->is_mobile = true;
@@ -74,7 +77,58 @@ class ReportsController extends AppController {
      * @return void
     */
 
+    public function filters()
+    { 
+        $vaccine =$this->request->data['Report']['vaccine_name'];
+        //get all ADRs with the vaccine name from the sadrs_list_of_drugs table
+        $this->loadModel('SadrListOfDrug');
+        $sadr_ids = $this->SadrListOfDrug->find('list', array(
+            'conditions' => array('SadrListOfDrug.drug_name LIKE' => '%'.$vaccine.'%'),
+            'fields' => array('SadrListOfDrug.sadr_id')
+        ));
+        // return unique sadr ids alongside the vaccine name
+        $sadr_ids = array_unique($sadr_ids);
+        foreach ($sadr_ids as $key => $value) {
+            echo $value;
+            
+        }
+            
+        exit;
+    }
+
     public function index() {
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
+
+        //check if user is logged in
+        if ($this->Auth->loggedIn()) {
+            $this->set('user', $this->Auth->user());
+        }else{
+            // check if user has checked the agreement checkbox
+            if ($this->request->is('post')) { 
+                
+                if ($this->request->data['agree'] == 1) {
+                    $this->Session->write('agree', true);
+                    $this->redirect(array('action' => 'index'));
+                }else{
+                    $this->Session->setFlash(__('You must agree to the terms and conditions to access the search function'), 'flash_error');
+                }
+            }
+            // get the agree session variable
+            $agree = $this->Session->read('agree');
+            if ($agree == true) {
+                $this->render('landing');
+            }else{
+                
+            $this->render('public');
+            }
+
+            //clear the session variable
+            $this->Session->delete('agree');
+
+
+
+        }
 
     }
 
@@ -109,12 +163,82 @@ class ReportsController extends AppController {
             'group' => array('Designation.name','Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
+
 
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('sadrs_by_designation');
     }
-    
+    public function summary() {
+
+        // Load Data for Counties
+        $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
+        if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+        if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
+        $geo = $this->Sadr->find('all', array(
+            'fields' => array('County.county_name', 'COUNT(*) as cnt'),
+            'contain' => array('County'),
+            'conditions' => $criteria,
+            'group' => array('County.county_name','County.id'),
+            'having' => array('COUNT(*) >' => 0),
+        ));     
+
+        //get all the counties in the system without any relation
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+
+
+        // Get All SADRs by Gender
+        $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
+        if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+        if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
+        $sex = $this->Sadr->find('all', array(
+            'fields' => array('gender', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => $criteria,
+            'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+
+
+        // GET SUMMARY BY AGE GROUP
+        $criteria['Sadr.submitted'] = array(1, 2);
+        $criteria['Sadr.copied !='] = '1';
+        if(!empty($this->request->data['Report']['start_date']) && !empty($this->request->data['Report']['end_date'])) 
+                $criteria['Sadr.created between ? and ?'] = array(date('Y-m-d', strtotime($this->request->data['Report']['start_date'])), date('Y-m-d', strtotime($this->request->data['Report']['end_date'])));
+        if($this->Auth->User('user_type') == 'County Pharmacist') $criteria['Sadr.county_id'] = $this->Auth->User('county_id');
+        $case = "((case 
+                when trim(age_group) in ('neonate', 'infant', 'child', 'adolescent', 'adult', 'elderly') then age_group
+                when year(now()) - right(date_of_birth, 4) between 0 and 1 then 'infant'
+                when year(now()) - right(date_of_birth, 4) between 1 and 10 then 'child'
+                when year(now()) - right(date_of_birth, 4) between 18 and 65 then 'adult'
+                when year(now()) - right(date_of_birth, 4) between 10 and 18 then 'adolescent'
+                when year(now()) - right(date_of_birth, 4) between 65 and 155 then 'elderly'
+                else 'unknown'
+               end))";
+
+        $age = $this->Sadr->find('all', array(
+            'fields' => array($case.' as ager', 'COUNT(*) as cnt'),
+            'contain' => array(),
+            'conditions' => $criteria,
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        )); 
+        
+
+        $this->set(compact('counties'));
+        $this->set(compact('geo'));
+        $this->set(compact('sex'));
+        $this->set(compact('age'));
+
+        $this->set('_serialize', 'geo','counties','sex','age');
+        $this->render('upgrade/summary');
+    } 
     public function sadrs_by_age() {
         $criteria['Sadr.submitted'] = array(1, 2);
         $criteria['Sadr.copied !='] = '1';
@@ -138,7 +262,8 @@ class ReportsController extends AppController {
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         )); 
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('sadrs_by_age');
@@ -157,7 +282,8 @@ class ReportsController extends AppController {
             'group' => array('IF(Sadr.serious IS NULL or Sadr.serious = "", "No", Sadr.serious)'),
             'having' => array('COUNT(*) >' => 0),
         )); 
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1373,7 +1499,7 @@ class ReportsController extends AppController {
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
             'contain' => array('County'),
             'conditions' => $criteria,
-            'group' => array('County.county_name'),
+            'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -1571,7 +1697,7 @@ class ReportsController extends AppController {
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
             'contain' => array('County'),
             'conditions' => $criteria,
-            'group' => array('County.county_name'),
+            'group' => array('County.county_name','County.id'),
             'having' => array('COUNT(*) >' => 0),
         )); 
 
@@ -1862,6 +1988,14 @@ class ReportsController extends AppController {
             'group' => array('ConcomittantDrug.generic_name'),
             'having' => array('COUNT(distinct ConcomittantDrug.sae_id) >' => 0),
         )); 
+
+        $this->set(compact('data'));
+        $this->set('_serialize', 'data');
+    }
+
+    public function agreenment()
+    {
+        
 
         $this->set(compact('data'));
         $this->set('_serialize', 'data');

@@ -13,7 +13,7 @@
     <h4>GET STARTED</h4>
     <div class="inner_section">
         <div class="launch">
-            <a href="/padrs/add">
+            <a href="/users/mpublic">
                 <img src="/img/public2.png" />
                 <span>Public Reporter</span>
             </a>
@@ -24,7 +24,7 @@
     </div>
     <div class="inner_section">
         <div class="launch">
-            <a href="/users/login" >
+            <a href="/users/provider" >
                 <img src="/img/health2.png" />
                 <span>Healthcare Provider</span>
             </a>
@@ -35,7 +35,7 @@
     </div>
     <div class="inner_section">
         <div class="launch">
-            <a href="/users/login">
+            <a href="/users/holder">
                 <img src="/img/health2.png" />
                 <span>Market Authorization Holder</span>
             </a>

@@ -287,6 +287,16 @@
 
 				</tbody>
 		  </table>
+		  <?php
+
+echo $this->Form->input('sample', array(
+	// create a hidden input with the same name as the input
+	'type' => 'hidden',
+	'id' => 'sample',
+	'value' => 'dammy',
+	'class' => 'autosave-ignore',
+));
+?>
 		</div><!--/span-->
 	</div><!--/row-->
 	<hr>
