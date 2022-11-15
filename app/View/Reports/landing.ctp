@@ -9,38 +9,73 @@ $this->Html->css('upgrade', false, array('inline' => false));
 <hr>
 
 <div class="container marketing">
-    <hr>
+  <hr>
+  <?php
+  echo $this->Form->create('Report', array('url' => array('controller' => 'reports', 'action' => 'landing')));
+  ?>
+  <table class="table table-condensed" style="margin-bottom: 2px;">
+    <tbody>
+      <tr>
+        <td style="width: 70%;">
+          <?php
+          echo $this->Form->input(
+            'vaccine_name',
+            array(
+              'div' => false, 'type' => 'text', 'class' => 'input-large vaccine_name', 'after' => '',
+              'label' => array('class' => 'required', 'text' => ''), 'placeHolder' => 'Enter the name of the drug'
+              // add id and name to the input
+
+            )
+          );
+          ?>
+        </td>
+
+        <td>
+          <?php
+          echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
+            'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
+            'style' => array('margin-bottom: 5px')
+          ));
+          ?>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- check id session has results -->
+  <?php if ($this->Session->check('results')) : ?>
     <?php
-    echo $this->Form->create('Report', array('url' => array('controller' => 'reports', 'action' => 'filters')));
-    ?>
-    <table class="table table-condensed" style="margin-bottom: 2px;">
-      <tbody> 
-        <tr>
-          <td style="width: 70%;">
-            <?php
-            echo $this->Form->input(
-              'vaccine_name',
-              array(
-                'div' => false, 'type' => 'text', 'class' => 'input-large vaccine_name', 'after' => '',
-                'label' => array('class' => 'required', 'text' => ''), 'placeHolder' => 'Enter the name of the drug'
-                // add id and name to the input
+    $results = $this->Session->read('results');
+    if ($results) { ?>
+      <table class="table table-condensed" style="margin-bottom: 2px;">
+        <tbody>
+          <tr>
+            <td style="width: 70%;">
+              <?php echo  'There are ' . $count . ' reports with this active ingedient <b>' . $vaccine . ' </b>' ?>
 
-              )
-            );
-            ?>
-          </td>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h3>Reported Potential side effects</h3>
+            </td>
+          </tr>
+          <?php foreach ($data as $key => $dt) : ?>
+            <tr>
+              <td>
+                
+                <p style="text-align: left;"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><?php echo $key.'('.$dt.')' ?> </p>
+              </td>
+              
+            </tr>
+          <?php endforeach; ?>
 
-          <td>
-            <?php
-            echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
-              'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false, 
-              'style' => array('margin-bottom: 5px')
-            ));
-            ?> 
-          </td>
-        </tr>
-      </tbody>
+        </tbody>
       </table>
+    <?php } ?>
+  <?php endif; ?>
+  <hr>
 </div>
 
 <!-- add script to autocomplete the vaccine name -->
@@ -60,5 +95,3 @@ $this->Html->css('upgrade', false, array('inline' => false));
     });
   });
 </script>
-
-
