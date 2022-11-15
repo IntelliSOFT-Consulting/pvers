@@ -23,7 +23,10 @@ $this->Html->css('upgrade', false, array('inline' => false));
             array(
               'div' => false, 'type' => 'text', 'class' => 'input-large vaccine_name', 'after' => '',
               'label' => array('class' => 'required', 'text' => ''), 'placeHolder' => 'Enter the name of the drug'
-              // add id and name to the input
+              // add a clear button
+
+              ,'after' => '<a style="font-weight:normal" onclick="$(\'.vaccine_name\').val(\'\');" >
+              <em class="accordion-toggle">clear!</em></a>',
 
             )
           );
@@ -61,19 +64,31 @@ $this->Html->css('upgrade', false, array('inline' => false));
               <h3>Reported Potential side effects</h3>
             </td>
           </tr>
-          <?php foreach ($data as $key => $dt) : ?>
+          <!-- check if data is not empty  -->
+          <?php if (!empty($data)) : ?>
+
+            <?php foreach ($data as $key => $dt) : ?>
+              <tr>
+                <td>
+
+                  <p style="text-align: left;"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><?php echo $key . '(' . $dt . ')' ?> </p>
+                </td>
+
+              </tr>
+            <?php endforeach; ?>
+            <!-- add esle statemet -->
+          <?php else : ?>
             <tr>
               <td>
-                
-                <p style="text-align: left;"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><?php echo $key.'('.$dt.')' ?> </p>
+                <p style="text-align: left;">No data found</p>
               </td>
-              
             </tr>
-          <?php endforeach; ?>
 
+          <?php endif; ?>
         </tbody>
       </table>
     <?php } ?>
+
   <?php endif; ?>
   <hr>
 </div>
@@ -92,6 +107,7 @@ $this->Html->css('upgrade', false, array('inline' => false));
         $(this).val(ui.item.value);
 
       }
-    });
+    }); 
+
   });
 </script>
