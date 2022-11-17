@@ -1,13 +1,15 @@
 <?php
 $this->assign('Summaries', 'active');
-$this->Html->script('bootstrap/bootstrap-carousel', array('inline' => false));
 $this->Html->script('home', array('inline' => false));
 $this->Html->script('holder/holder', array('inline' => false));
 $this->Html->css('landing', false, array('inline' => false));
 $this->Html->css('upgrade', false, array('inline' => false));
+$this->Html->css('summary', null, array('inline' => false));
+$this->Html->script('highcharts/highcharts', array('inline' => false));
+$this->Html->script('highcharts/modules/data', array('inline' => false));
+
 ?>
 <hr>
-
 <div class="container marketing">
   <hr>
   <?php
@@ -16,31 +18,36 @@ $this->Html->css('upgrade', false, array('inline' => false));
   <table class="table table-condensed" style="margin-bottom: 2px;">
     <tbody>
       <tr>
-        <td style="width: 70%;">
-          <?php
-          echo $this->Form->input(
-            'vaccine_name',
-            array(
-              'div' => false, 'type' => 'text', 'class' => 'input-large vaccine_name', 'after' => '',
-              'label' => array('class' => 'required', 'text' => ''), 'placeHolder' => 'Enter the name of the drug'
-              // add a clear button
+        <div class="card">
+          <div class="card-body">
+            <td style="width: 70%;">
 
-              ,'after' => '<a style="font-weight:normal" onclick="$(\'.vaccine_name\').val(\'\');" >
-              <em class="accordion-toggle">clear!</em></a>',
+              <?php
+              echo $this->Form->input(
+                'vaccine_name',
+                array(
+                  'div' => false, 'type' => 'text', 'class' => 'input-large vaccine_name', 'after' => '',
+                  'label' => array('class' => 'required', 'text' => ''), 'placeHolder' => 'Enter the name of the drug',
+                  'after' => '<a style="font-weight:normal" onclick="$(\'.vaccine_name\').val(\'\');" ><em class="accordion-toggle">clear!</em></a>',
 
-            )
-          );
-          ?>
-        </td>
+                )
+              );
+              ?>
+            </td>
 
-        <td>
-          <?php
-          echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
-            'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
-            'style' => array('margin-bottom: 5px')
-          ));
-          ?>
-        </td>
+            <td>
+              <?php
+              echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
+                'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
+                // disable the submit button
+                'disabled' => true, 'id' => 'submit',
+                'style' => array('margin-bottom: 5px')
+              ));
+              ?>
+
+            </td>
+          </div>
+        </div>
       </tr>
     </tbody>
   </table>
@@ -71,22 +78,144 @@ $this->Html->css('upgrade', false, array('inline' => false));
               <tr>
                 <td>
 
-                  <p style="text-align: left;"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><?php echo $key . '(' . $dt . ')' ?> </p>
+                  <p style="text-align: left;"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><?php echo $key . ' (' . $dt . ' ADR(s) )' ?> </p>
                 </td>
+              <tr>
 
+              <?php endforeach; ?>
+              <!-- add esle statemet -->
+            <?php else : ?>
+              <tr>
+                <td>
+                  <div class="alert alert-info">
+                    <p style="text-align: left;"> <strong>Info!</strong> No data found</p>
+                  </div>
+                </td>
               </tr>
-            <?php endforeach; ?>
-            <!-- add esle statemet -->
-          <?php else : ?>
-            <tr>
-              <td>
-                <p style="text-align: left;">No data found</p>
-              </td>
-            </tr>
 
-          <?php endif; ?>
+            <?php endif; ?>
         </tbody>
       </table>
+      <?php if (!empty($data)) : ?>
+        <div class="row-fluid">
+          <div class="span6">
+            <h4>Geographical Distribution</h4>
+            <div id="sadrs-by-county"></div>
+
+            <hr>
+
+            <table class="table table-condensed table-bordered" id="datatable8">
+              <thead>
+                <tr>
+                  <th>County</th>
+                  <th>ADRs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($county as $key => $value) {
+                  echo "<tr>";
+                  echo "<th>" . $value['County']['county_name'] . "</th>";
+                  echo "<td>" . $value[0]['cnt'] . "</td>";
+                  echo "</tr>";
+                }
+                ?>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="span6">
+            <h4>Patient Sex Distribution</h4>
+            <div id="sadrs-by-gender"></div>
+
+            <hr>
+
+            <table class="table table-condensed table-bordered" id="sex">
+              <thead>
+                <tr>
+                  <th>Sex</th>
+                  <th>ADRs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($sex as $key => $value) {
+                  echo "<tr>";
+                  echo "<th>" . $value['Sadr']['gender'] . "</th>";
+                  echo "<td>" . $value[0]['cnt'] . "</td>";
+                  echo "</tr>";
+                }
+                ?>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span6">
+            <h4>Age Distribution</h4>
+            <div id="sadrs-by-age"></div>
+
+            <hr>
+
+            <table class="table table-condensed table-bordered" id="age">
+              <thead>
+                <tr>
+                  <th>Age group</th>
+                  <th>ADRs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($age as $key => $value) {
+                  echo "<tr>";
+                  echo "<th>" . $value[0]['ager'] . "</th>";
+                  echo "<td>" . $value[0]['cnt'] . "</td>";
+                  echo "</tr>";
+                }
+                ?>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="span6">
+            <h4>SADRs Per Year</h4>
+            <div id="sadrs-by-year"></div>
+
+            <hr>
+
+            <table class="table table-condensed table-bordered" id="year">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>ADRs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($year as $key => $value) {
+                  echo "<tr>";
+                  echo "<th>" . $value[0]['year'] . "</th>";
+                  echo "<td>" . $value[0]['cnt'] . "</td>";
+                  echo "</tr>";
+                }
+                ?>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      <?php else : ?>
+        <div style="min-height: 360px;"></div>
+
+      <?php endif; ?>
+
+    <?php } else { ?>
+      <!-- show div with min height 360px -->
+      <div style="min-height: 420px;"></div>
+
     <?php } ?>
 
   <?php endif; ?>
@@ -96,6 +225,16 @@ $this->Html->css('upgrade', false, array('inline' => false));
 <!-- add script to autocomplete the vaccine name -->
 <script type="text/javascript">
   $(document).ready(function() {
+
+    // check is vaccine_name is empty
+    if ($('.vaccine_name').val() == '') {
+      // disable the submit button
+      $('#submit').prop('disabled', true);
+    } else {
+      // enable the submit button
+      $('#submit').prop('disabled', false);
+    }
+
     $(".vaccine_name").autocomplete({
       source: "<?php echo $this->webroot; ?>drug_dictionaries/autocomplete",
       minLength: 2,
@@ -107,7 +246,121 @@ $this->Html->css('upgrade', false, array('inline' => false));
         $(this).val(ui.item.value);
 
       }
-    }); 
+    });
 
+    //  when vaccine_name text box is changed
+    $('.vaccine_name').change(function() {
+      // check if the value is not empty
+      if ($(this).val() != '') {
+        // enable the submit button
+        $('#submit').prop('disabled', false);
+      } else {
+        // disable the submit button
+        $('#submit').prop('disabled', true);
+      }
+    });
+
+  });
+</script>
+
+
+<script type="text/javascript">
+  Highcharts.chart('sadrs-by-county', {
+    data: {
+      table: 'datatable8'
+    },
+    chart: {
+      type: 'bar'
+    },
+    title: {
+      text: ''
+    },
+    yAxis: {
+      allowDecimals: false,
+      title: {
+        text: 'Units'
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return '<b>' + this.series.name + '</b><br/>' +
+          this.point.y + ' ' + this.point.name.toLowerCase();
+      }
+    }
+  });
+
+  Highcharts.chart('sadrs-by-year', {
+    colors: [ '#66CDAA', '#00FA9A', '#00FF7F', '#3CB371', '#2E8B57', '#F5FFFA', '#00FF00', '#32CD32', '#98FB98', '#90EE90', '#8FBC8F', '#00FF7F', '#3CB371', '#2E8B57', '#228B22', '#008000','#556B2F', '#66CDAA', '#8FBC8F', '#20B2AA', '#2E8B57', '#008080', '#008B8B', '#00CED1', '#7FFFD4', '#B0E0E6', '#5F9EA0', '#4682B4', '#B0C4DE', '#778899','#48D1CC', '#20B2AA', '#40E0D0', '#7FFFD4', '#006400', '#9ACD32', '#6B8E23', '#808000', '#556B2F', '#6B8E23', '#808000', ],
+    data: {
+      table: 'year'
+    },
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: ''
+    },
+    yAxis: {
+      allowDecimals: false,
+      title: {
+        text: 'Units'
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return '<b>' + this.series.name + '</b><br/>' +
+          this.point.y + ' ' + this.point.name.toLowerCase();
+      }
+    }
+  });
+  Highcharts.chart('sadrs-by-gender', {
+    colors: ['#556B2F', '#66CDAA', '#8FBC8F', '#20B2AA', '#2E8B57', '#008080', '#008B8B', '#00CED1', '#7FFFD4', '#B0E0E6', '#5F9EA0', '#4682B4', '#B0C4DE', '#778899','#48D1CC', '#20B2AA', '#40E0D0', '#7FFFD4', '#66CDAA', '#00FA9A', '#00FF7F', '#3CB371', '#2E8B57', '#F5FFFA', '#00FF00', '#32CD32', '#98FB98', '#90EE90', '#8FBC8F', '#00FF7F', '#3CB371', '#2E8B57', '#228B22', '#008000', '#006400', '#9ACD32', '#6B8E23', '#808000', '#556B2F', '#6B8E23', '#808000', ],
+    data: {
+      table: 'sex'
+    },
+    chart: {
+      type: 'pie'
+    },
+    title: {
+      text: ''
+    },
+    yAxis: {
+      allowDecimals: false,
+      title: {
+        text: 'Units'
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return '<b>' + this.series.name + '</b><br/>' +
+          this.point.y + ' ' + this.point.name.toLowerCase();
+      }
+    }
+  });
+  Highcharts.chart('sadrs-by-age', {
+    // change the display color of the chart from a list of dim gray to light purple
+    colors: ['#48D1CC', '#20B2AA', '#40E0D0', '#7FFFD4', '#66CDAA', '#00FA9A', '#00FF7F', '#3CB371', '#2E8B57', '#F5FFFA', '#00FF00', '#32CD32', '#98FB98', '#90EE90', '#8FBC8F', '#00FF7F', '#3CB371', '#2E8B57', '#228B22', '#008000', '#006400', '#9ACD32', '#6B8E23', '#808000', '#556B2F', '#6B8E23', '#808000', '#556B2F', '#66CDAA', '#8FBC8F', '#20B2AA', '#2E8B57', '#008080', '#008B8B', '#00CED1', '#7FFFD4', '#B0E0E6', '#5F9EA0', '#4682B4', '#B0C4DE', '#778899'],
+
+    data: {
+      table: 'age'
+    },
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: ''
+    },
+    yAxis: {
+      allowDecimals: false,
+      title: {
+        text: 'Units'
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return '<b>' + this.series.name + '</b><br/>' +
+          this.point.y + ' ' + this.point.name.toLowerCase();
+      }
+    }
   });
 </script>

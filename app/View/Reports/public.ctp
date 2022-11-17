@@ -44,7 +44,7 @@ $this->Html->css('upgrade', false, array('inline' => false));
                     related to or caused by that product.
                 </li>
                 <li>
-                    Information in VigiAccess on potential side effects should not be
+                    Information in PvERS on potential side effects should not be
                     interpreted as meaning that the medicinal product or its active
                     substance either caused the observed effect or is unsafe to
                     use. Confirming a causal link is a complex process that requires a

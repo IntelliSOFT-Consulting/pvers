@@ -4,7 +4,7 @@ $this->assign('CMS', 'active');
 
 <!-- CMS
     ================================================== -->
-<h3>Content Management System <small>(WHO Drug Dictionary)</small></h3>
+<h3>Content Management System <small>(AUTO DRUGS)</small></h3>
 <p>Search for the content that you wish to modify and change accordingly.</p>
 <hr>
 <div class="row-fluid" style="margin-bottom: 9px;">
@@ -88,9 +88,7 @@ $this->assign('CMS', 'active');
                         <th><?php echo $this->Paginator->sort('isPreferred'); ?></th>
                         <th><?php echo $this->Paginator->sort('countryOfSales'); ?></th>
                         <th><?php echo $this->Paginator->sort('activeIngredients'); ?></th>
-                        <th><?php echo $this->Paginator->sort('atcs'); ?></th>
-                        <th><?php echo $this->Paginator->sort('created'); ?></th>
-                        <th><?php echo $this->Paginator->sort('modified'); ?></th>
+                        <th><?php echo $this->Paginator->sort('atcs'); ?></th> 
                         <th class="actions"><?php echo __('Actions'); ?></th>
                     </thead>
                     <tbody>
@@ -98,21 +96,20 @@ $this->assign('CMS', 'active');
                         $counder = ($this->request->paging['AutoDrug']['page'] - 1) * $this->request->paging['AutoDrug']['limit'];
                         foreach ($autoDrugs as $autoDrug) : ?>
                             <tr>
-                                <td><?php echo h($autoDrug['AutoDrug']['id']); ?>&nbsp;</td>
+                            <td><p class="tablenums"><?php $counder++; echo $counder;?>.</p></td>
                                 <td><?php echo h($autoDrug['AutoDrug']['drugName']); ?>&nbsp;</td>
                                 <td><?php echo h($autoDrug['AutoDrug']['drugCode']); ?>&nbsp;</td>
-                                <td><?php echo h($autoDrug['AutoDrug']['isGeneric']); ?>&nbsp;</td>
-                                <td><?php echo h($autoDrug['AutoDrug']['isPreferred']); ?>&nbsp;</td>
+                                <td><?php echo h($autoDrug['AutoDrug']['isGeneric'])?'Y':'N'; ?>&nbsp;</td>
+                                <td><?php echo h($autoDrug['AutoDrug']['isPreferred'])?'Y':'N'; ?>&nbsp;</td>
                                 <td><?php echo h($autoDrug['AutoDrug']['countryOfSales']); ?>&nbsp;</td>
                                 <td><?php echo h($autoDrug['AutoDrug']['activeIngredients']); ?>&nbsp;</td>
-                                <td><?php echo h($autoDrug['AutoDrug']['atcs']); ?>&nbsp;</td>
-                                <td><?php echo h($autoDrug['AutoDrug']['created']); ?>&nbsp;</td>
-                                <td><?php echo h($autoDrug['AutoDrug']['modified']); ?>&nbsp;</td>
-                                <td class="actions">
-                                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $autoDrug['AutoDrug']['id'])); ?>
-                                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $autoDrug['AutoDrug']['id'])); ?>
-                                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $autoDrug['AutoDrug']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $autoDrug['AutoDrug']['id']))); ?>
-                                </td>
+                                <td><?php echo h($autoDrug['AutoDrug']['atcs']); ?>&nbsp;</td> 
+                                <td>
+									<?php echo $this->Html->link('<span class="label label-info"><i class="icon-pencil icon-white"></i> Edit</span>' , 
+											array('controller' => 'auto_drugs', 'action' => 'edit', $autoDrug['AutoDrug']['id']), array('escape' => false)); ?>&nbsp;
+									<?php echo $this->Form->postLink(__('<span class="label label-important"><i class="icon-trash icon-white"></i> Delete</span>'), 
+											array('action' => 'delete', $autoDrug['AutoDrug']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $autoDrug['AutoDrug']['id'])); ?>&nbsp;
+								</td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

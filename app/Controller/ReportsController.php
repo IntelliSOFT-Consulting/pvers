@@ -98,8 +98,9 @@ class ReportsController extends AppController
         // return unique sadr ids alongside the vaccine name
         $sadr_ids = array_unique($sadr_ids);
         // create an array of reaction and count
+        // debug($sadr_ids);
         $data = null;
-        $count=0;
+        $count = 0;
         foreach ($sadr_ids as $key => $value) {
             $count++;
             // get the reaction for each sadr id
@@ -111,12 +112,58 @@ class ReportsController extends AppController
             $data[$reaction['Sadr']['reaction']] = $this->Sadr->find('count', array(
                 'conditions' => array('Sadr.reaction' => $reaction['Sadr']['reaction'])
             ));
-
         }
-        // debug($data);
-        // exit;
+        // $criteria['Sadr.submitted'] = array(2, 3);
+        $criteria['Sadr.id'] = $sadr_ids;
+        $county = $this->Sadr->find('all', array(
+            'fields' => array('County.county_name', 'COUNT(*) as cnt'),
+            'contain' => array('County'),
+            'conditions' => $criteria,
+            'group' => array('County.county_name', 'County.id'),
+            'having' => array('COUNT(*) >' => 0),
+        ));
+
+        //    Age Group
+        $case = "((case 
+    when trim(age_group) in ('neonate', 'infant', 'child', 'adolescent', 'adult', 'elderly') then age_group
+    when year(now()) - right(date_of_birth, 4) between 0 and 1 then 'infant'
+    when year(now()) - right(date_of_birth, 4) between 1 and 10 then 'child'
+    when year(now()) - right(date_of_birth, 4) between 18 and 65 then 'adult'
+    when year(now()) - right(date_of_birth, 4) between 10 and 18 then 'adolescent'
+    when year(now()) - right(date_of_birth, 4) between 65 and 155 then 'elderly'
+    else 'unknown'
+   end))";
+
+        $age = $this->Sadr->find('all', array(
+            'fields' => array($case . ' as ager', 'COUNT(*) as cnt'),
+            'contain' => array(),
+            'conditions' => $criteria,
+            'group' => array($case),
+            'having' => array('COUNT(*) >' => 0),
+        ));
+
+        // SEX
+        $sex = $this->Sadr->find('all', array(
+            'fields' => array('gender', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => $criteria,
+            'group' => array('gender'),
+            'having' => array('COUNT(*) >' => 0),
+        ));
+
+        // YEAR
+        $year = $this->Sadr->find('all', array(
+            'fields' => array('year(ifnull(created, created)) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => $criteria,
+            'group' => array('year(ifnull(created, created))'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        ));
+
+        $this->set('_serialize', 'data');
         $this->Session->write('results', true);
-        $this->set(compact('data','vaccine','count'));
+        $this->set(compact('data', 'vaccine', 'count', 'county', 'age','sex','year'));
         $this->set('_serialize', 'data');
     }
 

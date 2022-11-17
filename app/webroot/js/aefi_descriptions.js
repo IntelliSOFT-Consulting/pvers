@@ -2,7 +2,9 @@ $(function() {
     // Multi Drugs Handling
     $("#addAefiDescription").on("click", addAefiDescriptions);
     $(document).on('click', '.removeAefiDescription', removeAefiDescription);
-
+    // add on change to autocomplete
+    $(document).on('change', '.autocomplete', autocomplete);
+     
     // Multi Drugs Handling
     function addAefiDescriptions() {
         var se = $("#aefi-descriptions .aefi-description-group").last().find('button').attr('id');
@@ -17,7 +19,7 @@ $(function() {
                     <div class="span12">\
                       <input type="hidden" name="data[AefiDescription][{i}][id]" class="" id="AefiDescription{i}Id">\
                       <div class="control-group">\
-                        <textarea name="data[AefiDescription][{i}][description]" class="span12" rows="2" id="AefiDescription{i}Description"></textarea>\
+                        <textarea name="data[AefiDescription][{i}][description]" class="span12 autocomplete" rows="2" id="AefiDescription{i}Description"></textarea>\
                       </div>\
                     </div>\
                     <div class="row-fluid">\
@@ -37,6 +39,11 @@ $(function() {
 
     }
 
+    function autocomplete() {
+        $("#Description").autocomplete({
+            source: "/meddras/autocomplete.json"
+        });
+    }
     function removeAefiDescription() {
         intId = parseFloat($(this).attr('id').replace('aefi_descriptionsButton', ''));
         

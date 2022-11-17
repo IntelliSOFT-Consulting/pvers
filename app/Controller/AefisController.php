@@ -150,9 +150,9 @@ class AefisController extends AppController
         // Added criteria for reporter
         $criteria['Aefi.deleted'] = false;
         if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
-            $criteria['Aefi.submitted'] = array(0,1);
+            $criteria['Aefi.submitted'] = array(0, 1);
         } elseif (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 2) {
-            $criteria['Aefi.submitted'] = array(2,3);
+            $criteria['Aefi.submitted'] = array(2, 3);
         }
 
         $this->paginate['conditions'] = $criteria;
@@ -244,10 +244,14 @@ class AefisController extends AppController
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
         // $criteria['Aefi.submitted'] = 2;
         $criteria['Aefi.copied !='] = '1';
-        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
-            $criteria['Aefi.submitted'] = array(0,1);
-        } elseif (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 2) {
-            $criteria['Aefi.submitted'] = array(2,3);
+        if (isset($this->request->query['submitted'])) {
+            if ($this->request->query['submitted'] == 1) {
+                $criteria['Aefi.submitted'] = array(0, 1);
+            } else {
+                $criteria['Aefi.submitted'] = array(2, 3);
+            }
+        } else {
+            $criteria['Aefi.submitted'] = array(2, 3);
         }
         // if (!isset($this->passedArgs['submit'])) $criteria['Aefi.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;

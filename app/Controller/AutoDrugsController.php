@@ -2,6 +2,9 @@
 App::uses('AppController', 'Controller');
 //use HttpSocket
 App::uses('HttpSocket', 'Network/Http');
+
+//uses curl
+App::uses('HttpSocketCurl', 'Network/Http');
 /**
  * AutoDrugs Controller
  *
@@ -69,22 +72,40 @@ class AutoDrugsController extends AppController
 	}
 	public function admin_add()
 	{
-		# make api call to get all drugs
 		$HttpSocket = new HttpSocket();
-
-		//Request Access Token
-		$initiate = $HttpSocket->get(
-			'https://umc-ext-dev-apim-01.azure-api.net/global-api/v1/regional-drugs',
-			array('header' => array(
+		$options = array(
+			'header' => array(
 				'umc-client-key' => '1f47dbc26c524fbbb8d6f3e2b9244434',
 				'umc-license-key' => 801,
-				''
-			))
+				'Content-Type' => 'application/json',
+			)
+		);
+		// //Request Access Token
+		$initiate = $HttpSocket->get(
+			'https://umc-ext-dev-apim-01.azure-api.net/global-api/v1/regional-drugs',
+			false,
+			$options
 		);
 		if ($initiate->isOk()) {
-
-			$body = $initiate->body;
-			$this->Flash->success($body);
+			$data = $initiate->body;
+			$data = json_decode($data);
+			// for each data in the array
+			$this->AutoDrug->query('TRUNCATE TABLE auto_drugs');
+			//create a array to store the data 
+			foreach ($data as $drug) { 
+				// save the drug to the database
+				$this->AutoDrug->create();
+				$this->AutoDrug->save(array(
+					'drugName' => $drug->drugName,
+					'drugCode' => $drug->drugCode,
+					'isGeneric' => $drug->isGeneric,
+					'isPreferred' => $drug->isPreferred,
+					'countryOfSales' => json_encode($drug->countryOfSales),
+					'activeIngredients' => json_encode($drug->activeIngredients),
+					'atcs' => json_encode($drug->atcs),  
+				));
+			} 
+			$this->Flash->success('Drug list successfully updated');
 			$this->redirect($this->referer());
 		} else {
 			$body = $initiate->body;
@@ -100,7 +121,7 @@ class AutoDrugsController extends AppController
 	 * @param string $id
 	 * @return void
 	 */
-	public function edit($id = null)
+	public function admin_edit($id = null)
 	{
 		if (!$this->AutoDrug->exists($id)) {
 			throw new NotFoundException(__('Invalid auto drug'));
@@ -125,7 +146,7 @@ class AutoDrugsController extends AppController
 	 * @param string $id
 	 * @return void
 	 */
-	public function delete($id = null)
+	public function admin_delete($id = null)
 	{
 		if (!$this->AutoDrug->exists($id)) {
 			throw new NotFoundException(__('Invalid auto drug'));
