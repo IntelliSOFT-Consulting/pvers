@@ -42,8 +42,9 @@ app/Console/cake acl grant Group.2 controllers/Users/edit
 app/Console/cake acl grant Group.2 controllers/Users/admin_index
 app/Console/cake acl grant Group.2 controllers/Users/admin_add
 app/Console/cake acl grant Group.2 controllers/Notifications
-app/Console/cake acl grant Group.2 controllers/Comments
+app/Console/cake acl grant Group.2 controllers/Comments 
 app/Console/cake acl grant Group.2 controllers/Reports
+app/Console/cake acl grant Group.2 controllers/AefiDescriptions
 
 # Allow reporters to some 
 echo "*************** Assign Reporter Permissions  *******************"
@@ -114,6 +115,7 @@ app/Console/cake acl grant Group.3 controllers/MedicationProducts/delete
 app/Console/cake acl grant Group.3 controllers/Pints/delete
 app/Console/cake acl grant Group.3 controllers/Comments
 app/Console/cake acl grant Group.3 controllers/Reports
+app/Console/cake acl grant Group.3 controllers/AefiDescriptions
 
 # Allow institution administrators to some 
 echo "*************** Assign Institution Managers Permissions  *******************"

@@ -1,8 +1,7 @@
 <?php
 	
-	$header = array('id' => '#', 'reference_no' => 'Reference No.', 'report_type' => 'Type', 'name_of_institution' => 'Institution',
-		'counties' => 'County',
-		// 'patient_name' => 'Patient name', 
+	$header = array('id' => '#', 'reference_no' => 'Reference No.',  'name_of_institution' => 'Institution','report_type' => 'Type',
+		'counties' => 'County','sub_counties' => 'Sub-County', 		
 		'date_born' => 'Date of birth',
 		'age_months' => 'Age in months', 'gender' => 'Gender',
 		'patient_county' => 'Patient county', 'vaccination_center' => 'Vaccination center',
@@ -29,9 +28,7 @@
 		'diluent_expiry' => 'Diluent expiry',
 		'serious' => 'Reaction serious', 'serious_yes' => 'Reason for seriousness',
 		'outcome' => 'Outcome',
-		'designations' => 'Reporter designation',
-		//'reporter_name' => 'Reporter', 'reporter_email' => 'Reporter email',
-		//'reporter_phone' => 'Reporter phone', 
+		'designations' => 'Reporter designation', 
 		'device' => 'Sending Device', 
 		'created' => 'Date Created', 'reporter_date' => 'Report Date'
 		);
@@ -50,6 +47,14 @@
 	$header['treatment_given'] = 'Treatment given';
 
 
+	// if header has patient_name then order it to follow the sub_counties
+	if(isset($header['patient_name'])) {
+		$patient_name = $header['patient_name'];
+		unset($header['patient_name']);
+		$header = array_slice($header, 0, 6, true) + array('patient_name' => $patient_name) + array_slice($header, 6, count($header) - 1, true);
+	}
+
+
 	echo implode(',', $header)."\n";
 	foreach ($caefis as $caefi):
 		$content = '';
@@ -59,8 +64,10 @@
 				$row[$key] = '"' . preg_replace('/"/','""',$caefi['Aefi'][$key]) . '"';
 			} elseif ($key == 'counties') {
 				$row[$key] = '"' . preg_replace('/"/','""',$caefi['County']['county_name']) . '"';
-			} elseif ($key == 'designations') {
-				$row[$key] = '"' . preg_replace('/"/','""',$caefi['Designation']['name']) . '"';
+			} elseif ($key == 'sub_counties') {
+				$row[$key] = '"' . preg_replace('/"/','""',$caefi['SubCounty']['sub_county_name']) . '"';
+			}  elseif ($key == 'designations') {
+							$row[$key] = '"' . preg_replace('/"/','""',$caefi['Designation']['name']) . '"';
 			} elseif ($key == 'date_born') {
 				$dob = ''; $bod = $caefi['Aefi']['date_of_birth'];
 				if (!empty($bod['year'])) {

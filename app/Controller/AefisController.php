@@ -170,6 +170,8 @@ class AefisController extends AppController
         $this->set('page_options', $this->page_options);
         $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
+        $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+        $this->set(compact('sub_counties'));
         $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
@@ -229,6 +231,8 @@ class AefisController extends AppController
         $this->set('page_options', $this->page_options);
         $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
+        $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+        $this->set(compact('sub_counties'));
         $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
@@ -256,7 +260,7 @@ class AefisController extends AppController
         // if (!isset($this->passedArgs['submit'])) $criteria['Aefi.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
+        $this->paginate['contain'] = array('County','SubCounty', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -269,6 +273,8 @@ class AefisController extends AppController
         $this->set('page_options', $this->page_options);
         $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
+         $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+        $this->set(compact('sub_counties'));
         $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
@@ -445,7 +451,7 @@ class AefisController extends AppController
             )
         ));
         $this->set('aefi', $aefi);
-        // $this->render('pdf/view');
+        
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'AEFI_' . $id . '.pdf',  'orientation' => 'portrait');
@@ -943,6 +949,9 @@ class AefisController extends AppController
         $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
         $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+       
+    //    debug($sub_counties);
+    //    exit;
         $this->set(compact('sub_counties'));
         $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));

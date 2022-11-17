@@ -2,8 +2,35 @@ $(function() {
     // Multi Drugs Handling
     $("#addAefiDescription").on("click", addAefiDescriptions);
     $(document).on('click', '.removeAefiDescription', removeAefiDescription);
-    // add on change to autocomplete
-    $(document).on('change', '.autocomplete', autocomplete);
+    $(document).on("click", "#addAefiDescription", reloadStuff);
+    // Multi reactions Handling
+    reloadStuff();
+    function reloadStuff() {
+        var cache001 = {},
+            lastXhr001;
+        $(".other_reactions").autocomplete({
+            source: function (request, response) {
+                var term = request.term;
+                if (term in cache001) {
+                    response(cache001[term]);
+                    return;
+                }
+
+                lastXhr001 = $.getJSON(
+                    "/meddras/autocomplete.json",
+                    request,
+                    function (data, status, xhr) {
+                        cache001[term] = data;
+                        if (xhr === lastXhr001) {
+                            response(data);
+                        }
+                    }
+                );
+            },
+        });
+    }
+    	 
+    // Multi Drugs Handling
      
     // Multi Drugs Handling
     function addAefiDescriptions() {
@@ -19,7 +46,7 @@ $(function() {
                     <div class="span12">\
                       <input type="hidden" name="data[AefiDescription][{i}][id]" class="" id="AefiDescription{i}Id">\
                       <div class="control-group">\
-                        <textarea name="data[AefiDescription][{i}][description]" class="span12 autocomplete" rows="2" id="AefiDescription{i}Description"></textarea>\
+                        <textarea name="data[AefiDescription][{i}][description]" class="span12 other_reactions" rows="2" id="AefiDescription{i}Description"></textarea>\
                       </div>\
                     </div>\
                     <div class="row-fluid">\

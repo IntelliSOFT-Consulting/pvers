@@ -96,6 +96,7 @@ $this->Html->script('highcharts/modules/data', array('inline' => false));
             <?php endif; ?>
         </tbody>
       </table>
+      <hr>
       <?php if (!empty($data)) : ?>
         <div class="row-fluid">
           <div class="span6">

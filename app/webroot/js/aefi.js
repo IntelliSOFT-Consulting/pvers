@@ -1,15 +1,67 @@
   $( function() {
     
-    $( "#AefiCountyId" ).combobox();
+    // $( "#AefiCountyId" ).combobox();
+	// allow typing in the combobox 
+	// $( "#AefiCountyId" ).combobox('option', 'forceSelect', false);
     $( "#toggle" ).on( "click", function() {
       // $( "#combobox" ).toggle();
       $( "#AefiCountyId" ).toggle();
+	  console.log('toggle');
     });
 
     if($('#AefiReportType').val() == 'Followup') {
         $('#AefiReporterEditForm :input').attr('readonly', 'readonly');
         $('.editable :input').prop('disabled', false).attr('readonly', false);
+
+		// Open up the lab results section 
     }
+	// when done typing in the county field, get the sub-counties
+	
+
+	// when county is selected, populate the sub-counties
+	$('#AefiCountyId').change(function() {
+		var county_id = $(this).val();
+		 
+        $.ajax({
+            url: '/sub_counties/autocomplete/' + county_id+'.json',
+            success: function(data) {
+               
+                // get the select element
+                var select = $('#AefiSubCountyId');
+                // clear the select
+                select.empty();
+                // add the options
+                $.each(data, function(key, value) {
+                    select.append('<option value=' + key + '>' + value + '</option>');
+                }
+                );
+            }
+        });		 
+	});
+
+	// apply the same to the patient county
+	// vaccination_county 
+	$('#AefiVaccinationCounty').change(function() {
+		var county_id = $(this).val();
+		$.ajax({
+            url: '/sub_counties/autocomplete/' + county_id+'.json',
+            success: function(data) {
+               
+                // get the select patient_sub_county
+
+
+                var select = $('#AefiPatientSubCounty');
+                // clear the select
+                select.empty();
+                // add the options
+                $.each(data, function(key, value) {
+                    select.append('<option value=' + key + '>' + value + '</option>');
+                }
+                );
+            }
+        });	
+	});
+
 
     //Person submitting
     $('.person-submit').on('change',function() {
