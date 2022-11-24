@@ -46,15 +46,7 @@ class MeddrasController extends AppController
 		}
 		$this->set('groups', array_values($groups));
 		$this->set('_serialize', 'groups');
-	
-		// $groupers = $this->Meddra->finder($this->request->query['term']);
-
-		// $groups = array();
-		// foreach ($groupers as $key => $value) {
-		// 	$groups[] = $value['Meddra']['llt_name'];
-		// }
-		// $this->set('groups', array_values($groups));
-		// $this->set('_serialize', 'groups');
+	 
 	}
 
 	public function api_autocomplete($query = null)

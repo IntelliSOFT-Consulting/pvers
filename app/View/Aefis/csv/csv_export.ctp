@@ -1,36 +1,17 @@
 <?php
 	
 	$header = array('id' => '#', 'reference_no' => 'Reference No.',  'name_of_institution' => 'Institution','report_type' => 'Type',
-		'counties' => 'County','sub_counties' => 'Sub-County', 		
-		'date_born' => 'Date of birth',
-		'age_months' => 'Age in months', 'gender' => 'Gender',
-		'patient_county' => 'Patient county', 'vaccination_center' => 'Vaccination center',
-		'vaccination_type' => 'Vaccination service', 'vaccination_county' => 'Vaccination county',
-		'bcg' => 'BCG Lymphadenitis', 'convulsion' => 'Convulsion',
-		'urticaria' => 'Generalized urticaria', 'high_fever' => 'High Fever',
-		'abscess' => 'Injection site abscess', 'local_reaction' => 'Severe Local Reaction',
-		'anaphylaxis' => 'Anaphylaxis', 'meningitis' => 'Encephalopathy',
-		'paralysis' => 'Paralysis', 'toxic_shock' => 'Toxic shock',
-		'complaint_other' => 'Other', 'complaint_other_specify' => 'Specify',
-		'date_aefi_started' => 'Date AEFI started', 
-		'times_aefi_started' => 'Time AEFI started', 
-		'vaccines' => 'Vaccines',
-		'vaccination_doses' => 'Vaccination doses',
-		'vaccination_dates' => 'Vaccination dates',
-		'vaccination_times' => 'Vaccination times',
-		'vaccination_routes' => 'Vaccination routes',
-		'vaccination_sites' => 'Vaccination sites',
-		'vaccination_batch' => 'Batch/Lot No.',
-		'manufacturers' => 'Vaccine Manufacturers',
-		'vaccination_expiry' => 'Vaccine expiry',
-		'diluent_batch' => 'Diluent batch',
-		'diluent_manufacturers' => 'Diluent manufacturers',
-		'diluent_expiry' => 'Diluent expiry',
-		'serious' => 'Reaction serious', 'serious_yes' => 'Reason for seriousness',
-		'outcome' => 'Outcome',
-		'designations' => 'Reporter designation', 
-		'device' => 'Sending Device', 
-		'created' => 'Date Created', 'reporter_date' => 'Report Date'
+		'counties' => 'County','date_born' => 'Date of birth','age_months' => 'Age in months', 'gender' => 'Gender','patient_county' => 'Patient county',
+		'vaccination_center' => 'Vaccination center','vaccination_type' => 'Vaccination service', 'vaccination_county' => 'Vaccination county',
+		'bcg' => 'BCG Lymphadenitis', 'convulsion' => 'Convulsion','urticaria' => 'Generalized urticaria', 'high_fever' => 'High Fever',
+		'abscess' => 'Injection site abscess', 'local_reaction' => 'Severe Local Reaction','anaphylaxis' => 'Anaphylaxis', 'meningitis' => 'Encephalopathy',
+		'paralysis' => 'Paralysis', 'toxic_shock' => 'Toxic shock','complaint_other' => 'Other', 'complaint_other_specify' => 'Specify',
+		'date_aefi_started' => 'Date AEFI started','times_aefi_started' => 'Time AEFI started','vaccines' => 'Vaccines','vaccination_doses' => 'Vaccination doses',
+		'vaccination_dates' => 'Vaccination dates','vaccination_times' => 'Vaccination times','vaccination_routes' => 'Vaccination routes',
+		'vaccination_sites' => 'Vaccination sites','vaccination_batch' => 'Batch/Lot No.','manufacturers' => 'Vaccine Manufacturers',
+		'vaccination_expiry' => 'Vaccine expiry','diluent_batch' => 'Diluent batch','diluent_manufacturers' => 'Diluent manufacturers',
+		'diluent_expiry' => 'Diluent expiry','serious' => 'Reaction serious', 'serious_yes' => 'Reason for seriousness','outcome' => 'Outcome',
+		'designations' => 'Reporter designation','device' => 'Sending Device','created' => 'Date Created','submitted_date'=>'Date Submitted', 'reporter_date' => 'Report Date'
 		);
 	
 	if($this->Session->read('Auth.User.user_type') != 'Public Health Program') {
@@ -51,7 +32,7 @@
 	if(isset($header['patient_name'])) {
 		$patient_name = $header['patient_name'];
 		unset($header['patient_name']);
-		$header = array_slice($header, 0, 6, true) + array('patient_name' => $patient_name) + array_slice($header, 6, count($header) - 1, true);
+		$header = array_slice($header, 0, 7, true) + array('patient_name' => $patient_name) + array_slice($header, 7, count($header) - 1, true);
 	}
 
 
@@ -64,9 +45,11 @@
 				$row[$key] = '"' . preg_replace('/"/','""',$caefi['Aefi'][$key]) . '"';
 			} elseif ($key == 'counties') {
 				$row[$key] = '"' . preg_replace('/"/','""',$caefi['County']['county_name']) . '"';
-			} elseif ($key == 'sub_counties') {
-				$row[$key] = '"' . preg_replace('/"/','""',$caefi['SubCounty']['sub_county_name']) . '"';
-			}  elseif ($key == 'designations') {
+			} 
+			// elseif ($key == 'sub_counties') {
+			// 	$row[$key] = '"' . preg_replace('/"/','""',$caefi['SubCounty']['sub_county_name']) . '"';
+			// } 
+			 elseif ($key == 'designations') {
 							$row[$key] = '"' . preg_replace('/"/','""',$caefi['Designation']['name']) . '"';
 			} elseif ($key == 'date_born') {
 				$dob = ''; $bod = $caefi['Aefi']['date_of_birth'];
@@ -148,4 +131,3 @@
 		}
 		echo implode(',', $row) . "\n";
 	endforeach;
-?>
