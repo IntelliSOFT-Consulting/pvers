@@ -123,7 +123,7 @@
                 </div>
                 
                 <div class="span4 formbackp" style="padding: 4px;">
-                  <h5>PQMP</h5>
+                  <h5>PQHPT</h5>
                     <?php
                       echo '<ol>';
                       foreach ($pqmps as $pqmp) {
@@ -141,8 +141,8 @@
                         }
                       }
                       echo '</ol>';
-                    echo $this->Html->link('All PQMPs >>', array('controller' => 'pqmps', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
-                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report PQMP', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New PQMP?'));
+                    echo $this->Html->link('All PQHPTs >>', array('controller' => 'pqmps', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report PQHPT', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New PQHPT?'));
                     ?>
                 </div>
             </div>

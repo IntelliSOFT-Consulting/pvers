@@ -15,7 +15,7 @@ $(document).ready(function() {
           dateFormat:'dd-mm-yy'
       });
       
-	//If SADR disable PQMP and vice versa
+	//If SADR disable PQHPT and vice versa
 	$('#pqmp').hide();
 	$('#sadr').hide();
     $('input[name="data[Padr][report_sadr]"]').click(function(){ 

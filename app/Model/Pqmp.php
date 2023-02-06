@@ -248,6 +248,20 @@ class Pqmp extends AppModel
                 'message'  => 'Please describe the complaint in detail'
             ),
         ),
+        'adverse_reaction' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please select if advers reaction'
+            ),
+        ),
+        'medication_error' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please select if medication error'
+            ),
+        ),
         'reporter_name' => array(
             'notBlank' => array(
                 'rule'     => 'notBlank',

@@ -3,7 +3,7 @@
 ?>
       <!-- ATTACHMENT
     ================================================== -->
-	<h3>SADR AND PQMP FILE ATTACHMENTS<small> Filter, Search, and download Attachments</small></h3>
+	<h3>SADR AND PQHPT FILE ATTACHMENTS<small> Filter, Search, and download Attachments</small></h3>
 		<hr>
 <div class="row-fluid" style="margin-bottom: 9px;">	
 	<div class="span2 columns">

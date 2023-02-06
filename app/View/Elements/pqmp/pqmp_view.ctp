@@ -1,5 +1,5 @@
 <?php
-	$this->assign('PQMP', 'active');
+	$this->assign('PQHPT', 'active');
 	$ichecked = "&#x2611;";
     $nchecked = "&#x2610;";
 ?>
@@ -194,6 +194,13 @@
 						<strong><?php echo $pqmp['Pqmp']['complaint_description'] ?></strong></td>
 					</tr>
 					<tr>
+						<td>Did the drug result in an adverse reaction? <br>
+						<strong><?php echo $pqmp['Pqmp']['adverse_reaction'] ?></strong></td>
+					</tr><tr>
+						<td>Did the product result in a medication error<br>
+						<strong><?php echo $pqmp['Pqmp']['medication_error'] ?></strong></td>
+					</tr>
+					<tr>
 						<td>Was the cold chain maintained for both transportation and storage? &nbsp;
 						<strong><?php echo $pqmp['Pqmp']['cold_chain'] ?></strong></td>
 					</tr>
@@ -289,7 +296,7 @@
 				</tr>
 				<tr>
 					<td style="width: 25%;">Contact Number:</td>
-					<td style="width: 25%;"><strong><?php echo $pqmp['Pqmp']['contact_number'] ?></strong></td>
+					<td style="width: 25%;"><strong><?php echo $pqmp['Pqmp']['reporter_phone'] ?></strong></td>
 					<td style="width: 25%;">Reporter's Email:</td>
 					<td style="width: 25%;"><strong><?php echo $pqmp['Pqmp']['reporter_email'] ?></strong></td>
 				</tr>

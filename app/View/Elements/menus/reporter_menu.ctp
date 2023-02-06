@@ -21,10 +21,10 @@
                 array('controller' => 'aefis', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
          } ?>
      </li>
-     <li class="<?php echo $this->fetch('PQMP') ?>">
+     <li class="<?php echo $this->fetch('PQHPT') ?>">
         <?php
          if($this->Session->read('Auth.User.health_program')!="Cancer/Oncology program"){
-            echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> PQMPs',
+            echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> PQHPTs',
                 array('controller' => 'pqmps', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
           } ?>
      </li>

@@ -1,5 +1,5 @@
 <?php
-    $this->assign('PQMP', 'active');        
+    $this->assign('PQHPT', 'active');        
     echo $this->Session->flash();
 ?>
 
@@ -7,7 +7,7 @@
   // echo $this->element('pqmp/pqmp_edit'); 
 ?>
 
-      <!-- PQMP
+      <!-- PQHPT
     ================================================== -->
 <section id="pqmpsview">
     <ul class="nav nav-tabs">

@@ -45,7 +45,7 @@
                     ?>
                 </div>
                 <div class="span4 formbackp" style="padding: 4px;">
-                  <h5>PQMP</h5>
+                  <h5>PQHPT</h5>
                     <?php
                       echo '<ol>';
                       foreach ($pqmps as $pqmp) {

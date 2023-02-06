@@ -7,7 +7,7 @@
 <div id="pqmps-by-seriousness"></div>
 
 <hr>
-<h4>PQMPs by Seriousness</h4>
+<h4>PQHPTs by Seriousness</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -36,7 +36,7 @@ Highcharts.chart('pqmps-by-seriousness', {
         type: 'pie'
     },
     title: {
-        text: 'PQMPs by Seriousness'
+        text: 'PQHPTs by Seriousness'
     },
     yAxis: {
         allowDecimals: false,

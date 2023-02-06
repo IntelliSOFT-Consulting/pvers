@@ -2,7 +2,7 @@
 
 use function PHPSTORM_META\type;
 
-$this->assign('PQMP', 'active');
+$this->assign('PQHPT', 'active');
 ?>
 
 <div class="row-fluid">
@@ -16,7 +16,7 @@ $this->assign('PQMP', 'active');
         <div class="span12">
           <?php
           if ($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Html->link(
-            '<i class="fa fa-file-o" aria-hidden="true"></i> New PQMP',
+            '<i class="fa fa-file-o" aria-hidden="true"></i> New PQHPT',
             array('controller' => 'pqmps', 'action' => 'add'),
             array('escape' => false, 'class' => 'btn btn-success')
           );
@@ -29,7 +29,7 @@ $this->assign('PQMP', 'active');
     <div class="marketing">
       <div class="row-fluid">
         <div class="span12">
-          <h3>PQMP:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small></h3>
+          <h3>PQHPT:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small></h3>
           <hr class="soften" style="margin: 7px 0px;">
         </div>
       </div>
@@ -319,7 +319,7 @@ $this->assign('PQMP', 'active');
       <?php
       echo $this->Paginator->counter(array(
         'format' => __('Page <span class="badge">{:page}</span> of <span class="badge">{:pages}</span>,
-                showing <span class="badge">{:current}</span> PQMPs out of
+                showing <span class="badge">{:current}</span> PQHPTs out of
                 <span class="badge badge-inverse">{:count}</span> total, starting on record <span class="badge">{:start}</span>,
                 ending on <span class="badge">{:end}</span>')
       ));

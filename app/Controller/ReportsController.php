@@ -788,7 +788,7 @@ class ReportsController extends AppController
     }
 
     /**
-     * PQMP reports methods
+     * PQHPT reports methods
      * 
      */
     public function pqmps_by_designation()

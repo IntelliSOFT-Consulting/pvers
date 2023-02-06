@@ -1,5 +1,5 @@
 <?php
-	$this->assign('PQMP', 'active');
+	$this->assign('PQHPT', 'active');
 	// pr($this->Session->read('Auth.User.initial_email'));
  ?>
  
@@ -51,8 +51,8 @@
 						'label' => 'Go to report',
 						'value' => 'Save',
 						'class' => 'btn btn-primary',
-						'id' => 'SadrSubmitEmail', 'title'=>'Start a New PQMP', 
-						'data-content' => 'Please provide us with your email address to start filling in the PQMP.',
+						'id' => 'SadrSubmitEmail', 'title'=>'Start a New PQHPT', 
+						'data-content' => 'Please provide us with your email address to start filling in the PQHPT.',
 						'div' => array(
 							'class' => 'form-actions',
 						)

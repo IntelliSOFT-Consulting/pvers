@@ -2,9 +2,9 @@
 	$this->assign('REPORTS', 'active');
 	$this->Html->script('jqprint.0.3', array('inline' => false));
 ?>
-      <!-- PQMP
+      <!-- PQHPT
     ================================================== -->
-	<h3>POOR QUALITY MEDICINAL PRODUCTS REPORTS<small> Filter, Search, and export PQMP Reports</small></h3>
+	<h3>POOR QUALITY MEDICINAL PRODUCTS REPORTS<small> Filter, Search, and export PQHPT Reports</small></h3>
 		<hr>
 		<?php
 			$aC = $bC = $dC = $eC = $fC = $gC = $submitted = '';
@@ -196,7 +196,7 @@
 					<?php
 						echo $this->Paginator->counter(array(
 						'format' => __('Page <span class="badge">{:page}</span> of <span class="badge">{:pages}</span>,
-										showing <span class="badge">{:current}</span> PQMPS out of
+										showing <span class="badge">{:current}</span> PQHPT out of
 										<span class="badge badge-inverse">{:count}</span> total, starting on record <span class="badge">{:start}</span>,
 										ending on <span class="badge">{:end}</span>')
 						));
@@ -256,10 +256,10 @@
 									<?php
 										if(!$eC) {
 											echo $this->Form->postLink(__('<span class="label tooltipper" title="Archive"><i class="icon-folder-close icon-white"></i> </span>'),
-											array('action' => 'archive', $pqmp['Pqmp']['id']), array('escape' => false), __('Are you sure you want to Archive the PQMP Report Number %s?', $pqmp['Pqmp']['id']));
+											array('action' => 'archive', $pqmp['Pqmp']['id']), array('escape' => false), __('Are you sure you want to Archive the PQHPT Report Number %s?', $pqmp['Pqmp']['id']));
 										}?>&nbsp;
 									<?php echo $this->Form->postLink(__('<span class="label label-important tooltipper" title="Delete"><i class="icon-trash icon-white"></i> </span>'),
-											array('action' => 'delete', $pqmp['Pqmp']['id']), array('escape' => false), __('Are you sure you want to Delete the PQMP Report Number %s?', $pqmp['Pqmp']['id'])); ?>&nbsp;
+											array('action' => 'delete', $pqmp['Pqmp']['id']), array('escape' => false), __('Are you sure you want to Delete the PQHPT Report Number %s?', $pqmp['Pqmp']['id'])); ?>&nbsp;
 
 								</td>
 							</tr>

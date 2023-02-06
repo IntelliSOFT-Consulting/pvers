@@ -99,8 +99,8 @@ Patient’s identity is held in strict confidence and program staff is not is no
 						'label' => 'Go to report',
 						'value' => 'Save',
 						'class' => 'btn btn-primary',
-						'id' => 'SadrSubmitEmail', 'title'=>'Start a New PQMP', 
-						'data-content' => 'Please provide us with your email address to start filling in the PQMP.',
+						'id' => 'SadrSubmitEmail', 'title'=>'Start a New PQHPT', 
+						'data-content' => 'Please provide us with your email address to start filling in the PQHPT.',
 						'div' => array(
 							'class' => 'form-actions',
 						)

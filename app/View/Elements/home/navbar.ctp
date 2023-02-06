@@ -53,8 +53,8 @@
 				<li class="<?php echo $this->fetch('SADR') ?>">
 					<?php echo $this->Html->link('SADR', array('controller' => 'sadrs', 'action' => 'add'));?>
 				</li>
-				<li class="<?php echo $this->fetch('PQMP') ?>">
-					<?php echo $this->Html->link('PQMP', array('controller' => 'pqmps', 'action' => 'add'));?>
+				<li class="<?php echo $this->fetch('PQHPT') ?>">
+					<?php echo $this->Html->link('PQHPT', array('controller' => 'pqmps', 'action' => 'add'));?>
 				</li>
 			    </ul>
           </div>
