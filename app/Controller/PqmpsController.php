@@ -402,10 +402,10 @@ class PqmpsController extends AppController
             throw new NotFoundException(__('Invalid PQHPT'));
         }
         $pqmp = $this->Pqmp->read(null, $id);
-        if ($pqmp['Pqmp']['submitted'] > 1) {
-            $this->Session->setFlash(__('The pqmp has been submitted'), 'alerts/flash_info');
-            $this->redirect(array('action' => 'view', $this->Pqmp->id));
-        }
+        // if ($pqmp['Pqmp']['submitted'] > 1) {
+        //     $this->Session->setFlash(__('The pqmp has been submitted'), 'alerts/flash_info');
+        //     $this->redirect(array('action' => 'view', $this->Pqmp->id));
+        // }
         if ($pqmp['Pqmp']['user_id'] !== $this->Auth->user('id')) {
             $this->Session->setFlash(__('You don\'t have permission to edit this PQHPT!!'), 'alerts/flash_error');
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -489,15 +489,35 @@ class PqmpsController extends AppController
                         // CakeResque::enqueue('default', 'GenericNotificationShell', array('sendNotification', $datum));
                     }
                     //**********************************    END   *********************************
+                    $message1 = "The PQHPT has been submitted to PPB. Please create a new SADR for the PQHPT.";
+                    $message2 = "The PQHPT has been submitted to PPB. Please create a new Blood Transfusion Reaction for the PQHPT";
+                    $message3 = "The PQHPT has been submitted to PPB. Please create a new Medical Device Incident for the PQHPT";
+                    $message4 = "The PQHPT has been submitted to PPB. Please create a new AEFI for the PQHPT";
+
+
                     if ($pqmp['Pqmp']['therapeutic_ineffectiveness']) {
-                        $this->Session->setFlash(__('The PQHPT has been submitted to PPB. Please create a new SADR for the PQHPT.'), 'alerts/flash_success');
+                        $this->Session->setFlash(__($message1), 'alerts/flash_success');
                         $this->redirect(array('controller' => 'sadrs', 'action' => 'add', 'reporter' => true));
                     } else {
-                        if($pqmp['Pqmp']['adverse_reaction']=="Yes"){
-                            $this->Session->setFlash(__('The PQHPT has been submitted to PPB -> Adverse Drug Reaction is Yes'), 'alerts/flash_success');
-                            $this->redirect(array('action' => 'view', $this->Pqmp->id));
+                        if ($pqmp['Pqmp']['adverse_reaction'] == "Yes") {
+                            if ($pqmp['Pqmp']['medicinal_product'] || $pqmp['Pqmp']['herbal_product'] || $pqmp['Pqmp']['cosmeceuticals']) {
+                                $this->Session->setFlash(__($message1), 'alerts/flash_success');
+                                $this->redirect(array('controller' => 'sadrs', 'action' => 'add', $this->Pqmp->id, 'reporter' => true));
+                            }
+                            if ($pqmp['Pqmp']['blood_products']) {
+                                $this->Session->setFlash(__($message2), 'alerts/flash_success');
+                                $this->redirect(array('controller' => 'transfusions', 'action' => 'add', $this->Pqmp->id, 'reporter' => true));
+                            }
+                            if ($pqmp['Pqmp']['medical_device']) {
+                                $this->Session->setFlash(__($message3), 'alerts/flash_success');
+                                $this->redirect(array('controller' => 'devices', 'action' => 'add', $this->Pqmp->id, 'reporter' => true));
+                            }
+                            if ($pqmp['Pqmp']['product_vaccine']) {
+                                $this->Session->setFlash(__($message4), 'alerts/flash_success');
+                                $this->redirect(array('controller' => 'aefis', 'action' => 'add', $this->Pqmp->id, 'reporter' => true));
+                            }
                         }
-                        if($pqmp['Pqmp']['medication_error']=="Yes"){
+                        if ($pqmp['Pqmp']['medication_error'] == "Yes") {
                             $this->Session->setFlash(__('The PQHPT has been submitted to PPB -> Medication error is Yes'), 'alerts/flash_success');
                             $this->redirect(array('action' => 'view', $this->Pqmp->id));
                         }

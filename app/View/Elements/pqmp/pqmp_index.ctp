@@ -286,10 +286,10 @@ $this->assign('PQHPT', 'active');
           <td>
             <?php
             // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
-            echo $this->Form->input('submit', array(
-              'type' => 'checkbox', 'hiddenField' => false,
-              'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
-            ));
+            // echo $this->Form->input('submit', array(
+            //   'type' => 'checkbox', 'hiddenField' => false,
+            //   'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
+            // ));
             ?>
           </td>
           <td></td>

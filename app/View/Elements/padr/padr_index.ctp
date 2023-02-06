@@ -163,7 +163,23 @@ echo $this->Session->flash();
             ?>
           </td>
         </tr>
-      
+       <!-- Added -->
+       <td>
+            <?php
+            echo $this->Form->input('submitted', array(
+              'type' => 'select',
+              'empty' => true,
+              'options' => array(
+                '0' => 'Submitted',
+                '1' => 'Unsubmitted'
+              ),
+              'label' => array('class' => 'required', 'text' => 'Report Status')
+            ));
+            ?>
+          </td>
+          <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+
+          <!-- End -->
         <tr>
           <td><label for="PadrPages" class="required">Pages</label></td>
           <td>

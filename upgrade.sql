@@ -3,3 +3,6 @@ ALTER TABLE `sadrs` CHANGE `reaction` `reaction` VARCHAR(500) CHARACTER SET lati
 ALTER TABLE `pqmps` ADD `adverse_reaction` TINYINT NOT NULL DEFAULT '0' AFTER `contact_number`, ADD `medication_error` TINYINT NOT NULL DEFAULT '0' AFTER `adverse_reaction`;
 ALTER TABLE `pqmps` CHANGE `adverse_reaction` `adverse_reaction` VARCHAR(255) NULL DEFAULT NULL, CHANGE `medication_error` `medication_error` VARCHAR(255) NULL DEFAULT NULL;
 ALTER TABLE `sadrs` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`;
+ALTER TABLE `transfusions` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
+ALTER TABLE `devices` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
+ALTER TABLE `aefis` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`

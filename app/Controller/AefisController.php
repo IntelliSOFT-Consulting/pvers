@@ -539,17 +539,14 @@ class AefisController extends AppController
      * @return void
      */
 
-    public function reporter_add()
-    {
-        // $count = $this->Aefi->find('count',  array('conditions' => array(
-        //     'Aefi.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
-        // $count++;
-        // $count = ($count < 10) ? "0$count" : $count;
+    public function reporter_add($id=null)
+    { 
         $this->Aefi->create();
         $this->Aefi->save(['Aefi' => [
             'user_id' => $this->Auth->User('id'),
             'reference_no' => 'new', //'AEFI/'.date('Y').'/'.$count,
             'report_type' => 'Initial',
+            'pqmp_id' =>$id,
             'designation_id' => $this->Auth->User('designation_id'),
             'county_id' => $this->Auth->User('county_id'),
             'institution_code' => $this->Auth->User('institution_code'),
@@ -563,7 +560,7 @@ class AefisController extends AppController
         $this->Session->setFlash(__('The AEFI has been created'), 'alerts/flash_success');
         $this->redirect(array('action' => 'edit', $this->Aefi->id));
     }
-
+    
     public function reporter_followup($id = null)
     {
         if ($this->request->is('post')) {

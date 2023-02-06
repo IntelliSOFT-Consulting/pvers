@@ -306,17 +306,14 @@ class DevicesController extends AppController
      * @return void
      */
 
-    public function reporter_add()
-    {
-        // $count = $this->Device->find('count',  array('conditions' => array(
-        //     'Device.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
-        // $count++;
-        // $count = ($count < 10) ? "0$count" : $count;
+    public function reporter_add($id=null)
+    { 
         $this->Device->create();
         $this->Device->save(['Device' => [
             'user_id' => $this->Auth->User('id'),
             'reference_no' => 'new', //'MD/'.date('Y').'/'.$count,
             'report_type' => 'Initial',
+            'pqmp_id' =>$id,
             'designation_id' => $this->Auth->User('designation_id'),
             'county_id' => $this->Auth->User('county_id'),
             'institution_code' => $this->Auth->User('institution_code'),
@@ -330,6 +327,7 @@ class DevicesController extends AppController
         $this->Session->setFlash(__('The Medical Device Incident has been created'), 'alerts/flash_success');
         $this->redirect(array('action' => 'edit', $this->Device->id));
     }
+   
 
     public function reporter_followup($id = null)
     {

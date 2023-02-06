@@ -59,7 +59,7 @@ app/Console/cake acl grant Group.3 controllers/Sadrs/reporter_followup
 app/Console/cake acl grant Group.3 controllers/Sadrs/reporter_edit
 app/Console/cake acl grant Group.3 controllers/Sadrs/reporter_view
 app/Console/cake acl grant Group.3 controllers/Sadrs/institutionCodes
-app/Console/cake acl grant Group.3 controllers/Sadrs/reporter_delete
+app/Console/cake acl grant Group.3 controllers/Sadrs/reporter_delete 
 
 app/Console/cake acl grant Group.3 controllers/Aefis/aefiIndex
 app/Console/cake acl grant Group.3 controllers/Aefis/institutionCodes
@@ -68,7 +68,7 @@ app/Console/cake acl grant Group.3 controllers/Aefis/reporter_add
 app/Console/cake acl grant Group.3 controllers/Aefis/reporter_followup
 app/Console/cake acl grant Group.3 controllers/Aefis/reporter_edit
 app/Console/cake acl grant Group.3 controllers/Aefis/reporter_view
-app/Console/cake acl grant Group.3 controllers/Aefis/reporter_delete
+app/Console/cake acl grant Group.3 controllers/Aefis/reporter_delete 
 
 app/Console/cake acl grant Group.3 controllers/Pqmps/reporter_index
 app/Console/cake acl grant Group.3 controllers/Pqmps/reporter_add
@@ -81,7 +81,7 @@ app/Console/cake acl grant Group.3 controllers/Devices/reporter_add
 app/Console/cake acl grant Group.3 controllers/Devices/reporter_followup
 app/Console/cake acl grant Group.3 controllers/Devices/reporter_edit
 app/Console/cake acl grant Group.3 controllers/Devices/reporter_view
-app/Console/cake acl grant Group.3 controllers/Devices/reporter_delete
+app/Console/cake acl grant Group.3 controllers/Devices/reporter_delete 
 
 app/Console/cake acl grant Group.3 controllers/Medications/reporter_index
 app/Console/cake acl grant Group.3 controllers/Medications/reporter_add
@@ -95,7 +95,7 @@ app/Console/cake acl grant Group.3 controllers/Transfusions/reporter_add
 app/Console/cake acl grant Group.3 controllers/Transfusions/reporter_followup
 app/Console/cake acl grant Group.3 controllers/Transfusions/reporter_edit
 app/Console/cake acl grant Group.3 controllers/Transfusions/reporter_view
-app/Console/cake acl grant Group.3 controllers/Transfusions/reporter_delete
+app/Console/cake acl grant Group.3 controllers/Transfusions/reporter_delete 
 
 app/Console/cake acl grant Group.3 controllers/SadrFollowups/sadrIndex
 app/Console/cake acl grant Group.3 controllers/SadrFollowups/followupIndex

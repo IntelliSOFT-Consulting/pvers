@@ -340,7 +340,8 @@ class TransfusionsController extends AppController {
         }
     }
 
-	public function reporter_add() {        
+ 
+    public function reporter_add($id=null) {        
         $count = $this->Transfusion->find('count',  array('conditions' => array(
             'Transfusion.created BETWEEN ? and ?' => array(date("Y-01-01 00:00:00"), date("Y-m-d H:i:s")))));
         $count++;
@@ -349,6 +350,7 @@ class TransfusionsController extends AppController {
         $this->Transfusion->save(['Transfusion' => ['user_id' => $this->Auth->User('id'),  
             'reference_no' => 'new',//'BT/'.date('Y').'/'.$count,
             'report_type' => 'Initial', 
+            'pqmp_id' =>$id,
             'designation_id' => $this->Auth->User('designation_id'), 
             'county_id' => $this->Auth->User('county_id'), 
             'institution_code' => $this->Auth->User('institution_code'), 

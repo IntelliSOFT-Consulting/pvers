@@ -1177,6 +1177,7 @@ class UsersController extends AppController
         $this->Acl->allow($group, 'controllers/Sadrs/reporter_view');
         $this->Acl->allow($group, 'controllers/Sadrs/institutionCodes');
         $this->Acl->allow($group, 'controllers/Sadrs/reporter_delete');
+        $this->Acl->allow($group, 'controllers/Sadrs/reporter_addfrompqmp');
 
         $this->Acl->allow($group, 'controllers/Aefis/aefiIndex');
         $this->Acl->allow($group, 'controllers/Aefis/institutionCodes');
@@ -1222,6 +1223,7 @@ class UsersController extends AppController
 
         $this->Acl->allow($group, 'controllers/SadrListOfDrugs/delete');
         $this->Acl->allow($group, 'controllers/SadrListOfMedicines/delete');
+        
 
         $this->Acl->allow($group, 'controllers/AefiListOfVaccines/delete');
         $this->Acl->allow($group, 'controllers/ListOfDevices/delete');
@@ -1266,3 +1268,4 @@ class UsersController extends AppController
         exit;
     }
 }
+
