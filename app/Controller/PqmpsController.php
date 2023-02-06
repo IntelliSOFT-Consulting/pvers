@@ -402,10 +402,10 @@ class PqmpsController extends AppController
             throw new NotFoundException(__('Invalid PQHPT'));
         }
         $pqmp = $this->Pqmp->read(null, $id);
-        // if ($pqmp['Pqmp']['submitted'] > 1) {
-        //     $this->Session->setFlash(__('The pqmp has been submitted'), 'alerts/flash_info');
-        //     $this->redirect(array('action' => 'view', $this->Pqmp->id));
-        // }
+        if ($pqmp['Pqmp']['submitted'] > 1) {
+            $this->Session->setFlash(__('The pqmp has been submitted'), 'alerts/flash_info');
+            $this->redirect(array('action' => 'view', $this->Pqmp->id));
+        }
         if ($pqmp['Pqmp']['user_id'] !== $this->Auth->user('id')) {
             $this->Session->setFlash(__('You don\'t have permission to edit this PQHPT!!'), 'alerts/flash_error');
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -493,6 +493,7 @@ class PqmpsController extends AppController
                     $message2 = "The PQHPT has been submitted to PPB. Please create a new Blood Transfusion Reaction for the PQHPT";
                     $message3 = "The PQHPT has been submitted to PPB. Please create a new Medical Device Incident for the PQHPT";
                     $message4 = "The PQHPT has been submitted to PPB. Please create a new AEFI for the PQHPT";
+                    $message5 = "The PQHPT has been submitted to PPB. Please create a new Medication Error for the PQHPT";
 
 
                     if ($pqmp['Pqmp']['therapeutic_ineffectiveness']) {
@@ -518,8 +519,8 @@ class PqmpsController extends AppController
                             }
                         }
                         if ($pqmp['Pqmp']['medication_error'] == "Yes") {
-                            $this->Session->setFlash(__('The PQHPT has been submitted to PPB -> Medication error is Yes'), 'alerts/flash_success');
-                            $this->redirect(array('action' => 'view', $this->Pqmp->id));
+                            $this->Session->setFlash(__($message5), 'alerts/flash_success');
+                            $this->redirect(array('controller' => 'medications', 'action' => 'add', $this->Pqmp->id, 'reporter' => true));
                         }
                         $this->Session->setFlash(__('The PQHPT has been submitted to PPB'), 'alerts/flash_success');
                         $this->redirect(array('action' => 'view', $this->Pqmp->id));

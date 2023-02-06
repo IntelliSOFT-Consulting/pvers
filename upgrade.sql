@@ -6,3 +6,4 @@ ALTER TABLE `sadrs` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`;
 ALTER TABLE `transfusions` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
 ALTER TABLE `devices` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
 ALTER TABLE `aefis` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
+ALTER TABLE `medications` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
