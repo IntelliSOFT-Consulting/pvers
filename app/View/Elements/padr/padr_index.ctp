@@ -18,7 +18,9 @@ echo $this->Session->flash();
       );
     }
     ?>
-    <h3>Public ADRs:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small></h3>
+    <h3>Public ADRs:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small> <?php
+            echo $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> Upload Excel', array('action' => 'upload'), array('class' => 'btn btn-success', 'escape' => false));
+            ?></h3>  
     <hr class="soften" style="margin: 7px 0px;">
   </div>
 </div>

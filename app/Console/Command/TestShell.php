@@ -12,14 +12,9 @@ class TestShell extends AppShell {
     public function main() {
        $this->out('Hello world.');
        $email = new CakeEmail();
-       $email->config('gmail');
-       //$email->template('default');
-       //$email->emailFormat('html');
-       //$email->from(array('eddyokemwa@gmail.com' => 'My test'));
-       $email->to('kiprotich.japheth19@gmail.com');
-       // $email->subject(Configure::read('Emails.registration.subject'));
-       $email->subject('test email');
-       //$email->viewVars(array('message' => 'This is a dummy message. seen'));
+       $email->config('gmail'); 
+       $email->to('kiprotich.japheth19@gmail.com'); 
+       $email->subject('test email'); 
        if(!$email->send('My message to youhouhou')) {
            $this->log($email, 'test_email');
        }
