@@ -43,6 +43,9 @@
 	//API ROUTING: DASHBOARD PAGE
 	Router::connect('/api', array('controller' => 'users', 'action' => 'dashboard', 'api' => true));	
 
+	// Add the mini manager role
+	Router::connect('/reviewer', array('controller' => 'users', 'action' => 'dashboard', 'reviewer' => true));	
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

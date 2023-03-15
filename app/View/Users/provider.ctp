@@ -23,7 +23,7 @@ $this->Html->css('upgrade', false, array('inline' => false));
         <div class="span6">
             <h5><i class="fa fa-users" aria-hidden="true"></i> Any member of the public or patient </h5>
             <p><img src="/img/public2.png" style="width: 140px; margin-right: 10px;" class="pull-left"> Any member of the public is able to report any cases of adverse drug reactions or incidents involving medical devices. For minors, parents/gaurdians can report on their behalf.</p>
-            <p><a class="btn btn-primary " href="/padrs/add">Submit a Report &raquo;</a></p>
+            <p><a class="btn btn-primary " href="/users/login">Submit a Report &raquo;</a></p>
         </div>
     </div>
 

@@ -31,7 +31,9 @@ class FrequenciesController extends AppController {
 
 	public function api_index() {
 		$this->Frequency->recursive = -1;
-		$this->set('frequencies', $this->Frequency->find('list', array('order' => array('Frequency.name' => 'asc'))));
+		$this->set('frequencies', $this->Frequency->find('list'
+		//  ,array('order' => array('Frequency.name' => 'asc'))
+		));
 		$this->set('_serialize', array('frequencies'));
 	}
 

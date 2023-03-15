@@ -91,7 +91,8 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
                   if($this->Session->read('Auth.User.group_id') == '1') echo $this->element('menus/admin_menu') ;
                   if($this->Session->read('Auth.User.group_id') == '2') echo $this->element('menus/manager_menu');
                   if($this->Session->read('Auth.User.group_id') == '3') echo $this->element('menus/reporter_menu');
-                  if($this->Session->read('Auth.User.group_id') == '4') echo $this->element('menus/partner_menu');                 
+                  if($this->Session->read('Auth.User.group_id') == '4') echo $this->element('menus/partner_menu');   
+                  if($this->Session->read('Auth.User.group_id') == '6') echo $this->element('menus/reviewer_menu');              
               }
           ?>
     			<?php echo $this->Flash->render(); ?>

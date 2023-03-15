@@ -30,7 +30,9 @@ class CountriesController extends AppController {
 
 	public function api_index() {
 		$this->Country->recursive = -1;
-		$this->set('countries', $this->Country->find('list', array('order' => array('Country.name' => 'asc'))));
+		$this->set('countries', $this->Country->find('list'
+		, array('order' => array('Country.id' => 'asc'))
+	));
 		$this->set('_serialize', array('countries'));
 	}
 

@@ -31,7 +31,9 @@ class RoutesController extends AppController {
 
 	public function api_index() {
 		$this->Route->recursive = -1;
-		$this->set('routes', $this->Route->find('list', array('order' => array('Route.name' => 'asc'))));
+		$this->set('routes', $this->Route->find('list'
+		// , array('order' => array('Route.name' => 'asc'))
+	));
 		$this->set('_serialize', array('routes'));
 	}
 

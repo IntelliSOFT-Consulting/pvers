@@ -31,7 +31,7 @@ $this->Html->css('upgrade', false, array('inline' => false));
     </div>
     <div class="inner_section">
         <div class="launch">
-            <a href="/users/holder">
+            <a href="/users/login">
                 <img src="/img/health2.png" />
                 <span>Market Authorization Holder</span>
             </a>

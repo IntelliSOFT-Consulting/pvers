@@ -119,6 +119,8 @@ class AppController extends Controller {
             if($this->Auth->User('group_id') == '2')  $redir = 'manager';
             if($this->Auth->User('group_id') == '3')  $redir = 'reporter';
             if($this->Auth->User('group_id') == '4')  $redir = 'partner';
+            // Add the mini manager role
+            if($this->Auth->User('group_id') == '6')  $redir = 'reviewer';
 
               $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
               $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'admin' => false);
