@@ -163,6 +163,45 @@ class MedicationsController extends AppController {
         $this->set('medications', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+
+    public function reviewer_index()
+    {
+        # code...
+        $this->Prg->commonProcess();
+        $page_options = array('25' => '25', '20' => '20');
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+            else $this->paginate['limit'] = reset($page_options);
+
+        $criteria = $this->Medication->parseCriteria($this->passedArgs);
+        // $criteria['Medication.submitted'] = 2;
+        $criteria['Medication.copied !='] = '1';
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Medication.submitted'] = array(0,1);
+        }else{
+            $criteria['Medication.submitted'] = array(2,3);
+        }
+
+        $criteria['Medication.assigned_to'] = $this->Auth->User('id');
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Medication.created' => 'desc');
+        $this->paginate['contain'] = array('County', 'Designation', 'MedicationProduct');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+          $this->csv_export($this->Medication->find('all', 
+                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+              ));
+        }
+        //end pdf export
+        $this->set('page_options', $page_options);
+        $counties = $this->Medication->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Medication->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $this->set('medications', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
+
     private function csv_export($cmedications = ''){
         //todo: check if data exists in $users
         $this->response->download('MEDICATIONs_'.date('Ymd_Hi').'.csv'); // <= setting the file name

@@ -185,6 +185,45 @@ class PqmpsController extends AppController
         $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    public function reviewer_index()
+    {
+        # code...
+        $this->Prg->commonProcess();
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
+        else $this->paginate['limit'] = reset($this->page_options);
+
+        $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
+        $criteria['Pqmp.copied !='] = '1';
+        if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
+            $criteria['Pqmp.submitted'] = array(0, 1);
+        } else {
+            $criteria['Pqmp.submitted'] = array(2, 3);
+        }
+ 
+        $criteria['Pqmp.assigned_to'] = $this->Auth->User('id');
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Pqmp.created' => 'desc');
+        $this->paginate['contain'] = array('County', 'Country', 'Designation');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+            $this->csv_export($this->Pqmp->find(
+                'all',
+                array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
+            ));
+        }
+        //end pdf export
+        $this->set('page_options', $this->page_options);
+        $counties = $this->Pqmp->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $countries = $this->Pqmp->Country->find('list', array('order' => array('Country.name' => 'ASC')));
+        $this->set(compact('countries'));
+        $designations = $this->Pqmp->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $this->set('pqmps', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
+
     private function csv_export($cpqmps = '')
     {
         //todo: check if data exists in $users

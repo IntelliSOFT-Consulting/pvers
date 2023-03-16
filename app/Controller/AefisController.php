@@ -280,6 +280,50 @@ class AefisController extends AppController
         $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
 
+    public function reviewer_index()
+    {
+        # code...
+        $this->Prg->commonProcess();
+        if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
+        if (!empty($this->request->query['pages'])) $this->paginate['limit'] = $this->request->query['pages'];
+        else $this->paginate['limit'] = reset($this->page_options);
+
+        $criteria = $this->Aefi->parseCriteria($this->passedArgs);
+        // $criteria['Aefi.submitted'] = 2;
+        $criteria['Aefi.copied !='] = '1';
+        if (isset($this->request->query['submitted'])) {
+            if ($this->request->query['submitted'] == 1) {
+                $criteria['Aefi.submitted'] = array(0, 1);
+            } else {
+                $criteria['Aefi.submitted'] = array(2, 3);
+            }
+        } else {
+            $criteria['Aefi.submitted'] = array(2, 3);
+        }
+        
+        $criteria['Aefi.assigned_to'] = $this->Auth->User('id');
+        $this->paginate['conditions'] = $criteria;
+        $this->paginate['order'] = array('Aefi.created' => 'desc');
+        $this->paginate['contain'] = array('County','SubCounty', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
+
+        //in case of csv export
+        if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
+            $this->csv_export($this->Aefi->find(
+                'all',
+                array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'], 'limit' => 1000)
+            ));
+        }
+        //end pdf export
+        $this->set('page_options', $this->page_options);
+        $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+         $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+        $this->set(compact('sub_counties'));
+        $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $this->set('aefis', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
+
     private function csv_export($caefis = '')
     {
         //todo: check if data exists in $users

@@ -108,7 +108,7 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
 
     </div><!--/.fluid-container-->
 
-    <footer class="section footer-classic footer-<?php echo $redir; ?> context-dark bg-image"><!-- 474b35 37462d-->
+    <footer style="background-color: #37462D;" class="section footer-classic footer-<?php echo $redir; ?> context-dark bg-image"><!-- 474b35 37462d-->
         <div class="container-fluid">
           <div class="row-fluid">
             <div class="span4">

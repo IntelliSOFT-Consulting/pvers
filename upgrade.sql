@@ -7,3 +7,14 @@ ALTER TABLE `transfusions` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_i
 ALTER TABLE `devices` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
 ALTER TABLE `aefis` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
 ALTER TABLE `medications` ADD `pqmp_id` INT(11) NULL DEFAULT NULL AFTER `user_id`
+
+
+-- Report Assignment --
+ALTER TABLE `aefis` ADD `assigned_to` INT(11) NULL AFTER `reporter_date_diff`, ADD `assigned_by` INT(11) NULL AFTER `assigned_to`, ADD `assigned_date` DATETIME NULL AFTER `assigned_by`;
+ALTER TABLE `sadrs` ADD `assigned_to` INT(11) NULL AFTER `reporter_date_diff`, ADD `assigned_by` INT(11) NULL AFTER `assigned_to`, ADD `assigned_date` DATETIME NULL AFTER `assigned_by`;
+ALTER TABLE `pqmps` ADD `assigned_to` INT(11) NULL AFTER `reporter_date_diff`, ADD `assigned_by` INT(11) NULL AFTER `assigned_to`, ADD `assigned_date` DATETIME NULL AFTER `assigned_by`;
+ALTER TABLE `devices` ADD `assigned_to` INT(11) NULL AFTER `reporter_date_diff`, ADD `assigned_by` INT(11) NULL AFTER `assigned_to`, ADD `assigned_date` DATETIME NULL AFTER `assigned_by`;
+ALTER TABLE `medications` ADD `assigned_to` INT(11) NULL AFTER `reporter_date_diff`, ADD `assigned_by` INT(11) NULL AFTER `assigned_to`, ADD `assigned_date` DATETIME NULL AFTER `assigned_by`;
+ALTER TABLE `transfusions` ADD `assigned_to` INT(11) NULL AFTER `reporter_date_diff`, ADD `assigned_by` INT(11) NULL AFTER `assigned_to`, ADD `assigned_date` DATETIME NULL AFTER `assigned_by`;
+ALTER TABLE `padrs` ADD `assigned_to` INT(11) NULL AFTER `reporter_date_diff`, ADD `assigned_by` INT(11) NULL AFTER `assigned_to`, ADD `assigned_date` DATETIME NULL AFTER `assigned_by`;
+ALTER TABLE `saes` ADD `assigned_to` INT(11) NULL AFTER `reporter_email`, ADD `assigned_by` INT(11) NULL AFTER `assigned_to`, ADD `assigned_date` DATETIME NULL AFTER `assigned_by`;

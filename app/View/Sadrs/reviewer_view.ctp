@@ -9,7 +9,7 @@ $this->assign('SADR', 'active');
     <?php if (isset($sadr['SadrOriginal']['id']) && !empty($sadr['SadrOriginal']['id'])) { ?> <li><a href="#formoriginal" data-toggle="tab">Original</a></li> <?php } ?>
     <li class="active"><a href="#formview" data-toggle="tab"><?php echo (!empty($sadr['Sadr']['reference_no'])) ? $sadr['Sadr']['reference_no'] : $sadr['Sadr']['id']; ?></a></li>
     <li><a href="#external_report_comments" data-toggle="tab">Feedback (<?php echo count((isset($sadr['SadrOriginal']['id']) && !empty($sadr['SadrOriginal']['id'])) ? $sadr['SadrOriginal']['ExternalComment'] : $sadr['ExternalComment']); ?>)</a></li>
-    <li><a href="#assign_manager" data-toggle="tab">Assign Manager </a></li>
+   
   </ul>
 
   <div class="tab-content">
@@ -91,57 +91,6 @@ $this->assign('SADR', 'active');
         </div>
       </div>
     </div>
-    <div class="tab-pane" id="assign_manager">
-      <!-- 12600 Letters debat -->
-      <div class="amend-form">
-        <?php
-         
-        if(!empty($sadr['Sadr']['assigned_to'])){
-
-        }else{
-        ?>
-        <h5 class="text-info"><u>Assign Report</u></h5>
-        <div class="row-fluid">
-          <div class="span4 center">
-            <?php
-            echo $this->Form->create('Sadr', array(
-              'url' => array(
-                'controller' => 'sadrs',
-                'action' => 'assign',
-
-              ),
-              'type' => 'file',
-              'class' => false,
-              'inputDefaults' => array(
-                'div' => array('class' => 'control-group'),
-                'label' => array('class' => 'control-label'),
-                'between' => '<div class="controls">',
-                'after' => '</div>',
-                'class' => '',
-                'format' => array('before', 'label', 'between', 'input', 'after', 'error'),
-                'error' => array('attributes' => array('class' => 'controls help-block')),
-              ),
-            ));
-            ?>
-            <?php
-            echo $this->Form->input('assigned_by', ['type' => 'hidden', 'value' => $this->Session->read('Auth.User.id')]);
-            echo $this->Form->input('report_id', ['type' => 'hidden', 'value' => $sadr['Sadr']['id']]);
-            echo $this->Form->input('assigned_to', ['label' => array('class' => 'required'), 'options' => $managers]);
-            echo $this->Form->input('content', ['label' => array('class' => 'required', 'text' => 'Reminder Note'), 'type' => 'textarea']);
-            ?>
-            <div class="form-group">
-              <div class="span12">
-                <button type="submit" class="btn btn-success active"><i class="fa fa-save" aria-hidden="true"></i> Assign</button>
-              </div>
-            </div>
-            <?php echo $this->Form->end() ?>
-
-          </div>
-        </div>
-        <?php
-        }
-        ?>
-      </div>
-    </div>
+    
   </div>
 </section>

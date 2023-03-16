@@ -247,6 +247,7 @@ echo $this->Session->flash();
           <td>
           <h5>Report Status</h5>
             <?php
+            
             echo $this->Form->input('submitted', array(
               'options' => array('1' => 'UnSubmitted', '2' => 'Submitted'), 'legend' => false,
               'type' => 'radio'
@@ -268,11 +269,7 @@ echo $this->Session->flash();
             ?>
           </td>
           <td>
-            <?php
-            // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
-            // echo $this->Form->input('submit', array('type' => 'checkbox', 'hiddenField' => false, 
-            //     'label' => array('class' => '', 'text' => 'Include Unsubmitted?')));
-            ?>
+           
 
           </td>
           <td></td>
@@ -377,20 +374,14 @@ echo $this->Session->flash();
                 echo "&nbsp;";
                 if ($redir == 'reporter' and $this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> Followup </span>', array('controller' => 'sadrs', 'action' => 'followup', $sadr['Sadr']['id']), array('escape' => false), __('Add a followup report?'));
                 echo "&nbsp;";
-                if ($redir == 'manager') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'sadrs', 'action' => 'download', $sadr['Sadr']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
+                if ($redir == 'manager'||$redir == 'reviewer') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'sadrs', 'action' => 'download', $sadr['Sadr']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
                 echo "&nbsp;";
-                if ($redir == 'manager' && empty($sadr['Sadr']['vigiflow_ref']) && $sadr['Sadr']['copied'] == 2) echo $this->Html->link(
+                if (($redir == 'manager'||$redir == 'reviewer') && empty($sadr['Sadr']['vigiflow_ref']) && $sadr['Sadr']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-warning tooltipper" title="Send to vigiflow"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Vigiflow </span>',
                   array('controller' => 'sadrs', 'action' => 'vigiflow', $sadr['Sadr']['id'], 'manager' => false),
                   array('escape' => false)
                 );
-                echo "&nbsp;";
-
-
-                // if($redir == 'manager' && empty($sadr['Sadr']['webradr_ref']) && $sadr['Sadr']['copied'] == 2) echo $this->Html->link('<span class="label label-info tooltipper" title="Send to Yellow Card"><i class="fa fa-upload" aria-hidden="true"></i> Yellow Card </span>' ,
-                //   array('controller' => 'sadrs', 'action' => 'yellowcard', $sadr['Sadr']['id'], 'manager' => false),
-                //   array('escape' => false));
-                // echo "&nbsp;";
+                echo "&nbsp;"; 
 
                 if ($redir == 'manager' && $sadr['Sadr']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Copy & Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
@@ -398,7 +389,7 @@ echo $this->Session->flash();
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if ($redir == 'manager' && $sadr['Sadr']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'sadrs', 'action' => 'copy', $sadr['Sadr']['id']), array('escape' => false), __('Create a clean copy to edit?'));
+                if (($redir == 'manager'||$redir == 'reviewer') && $sadr['Sadr']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'sadrs', 'action' => 'copy', $sadr['Sadr']['id']), array('escape' => false), __('Create a clean copy to edit?'));
               } else {
                 if ($redir == 'reporter' and $this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
@@ -406,7 +397,7 @@ echo $this->Session->flash();
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if ($redir == 'manager') echo $this->Html->link(
+                if ($redir == 'manager'||$redir == 'reviewer') echo $this->Html->link(
                   '<span class="label label-info tooltipper" title="View"><i class="fa fa-eye" aria-hidden="true"></i> View </span>',
                   array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
                   array('escape' => false)

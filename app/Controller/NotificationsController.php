@@ -131,6 +131,9 @@ class NotificationsController extends AppController {
 	public function manager_index() {
         $this->index();
     }
+    public function reviewer_index() {
+        $this->index();
+    }
 
 /**
  * view method

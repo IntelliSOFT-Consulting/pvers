@@ -79,33 +79,38 @@ class PadrsController extends AppController
         $this->set(compact('designations'));
         $this->set('padrs', Sanitize::clean($this->paginate(), array('encode' => false)));
     }
-
-    /*public function api_index() {
+ 
+    public function reviewer_index()
+    {
+        # code...
         $this->Prg->commonProcess();
+        // debug($this->request->query['pages']);
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
-        if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-            else $this->paginate['limit'] = reset($this->page_options);
-
+        if (!empty($this->request->query['pages'])) $this->paginate['limit'] = $this->request->query['pages'];
+        else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Padr->parseCriteria($this->passedArgs);
 
+        $criteria['Padr.assigned_to'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
-        $this->paginate['order'] = array('Padr.created' => 'desc');
+        $this->paginate['order'] = array('Padr.id' => 'DESC');
         $this->paginate['contain'] = array('County');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
-          $this->csv_export($this->Padr->find('all', 
-                  array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'contain' => $this->paginate['contain'])
-              ));
+            $this->csv_export($this->Padr->find(
+                'all',
+                array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'limit' => 10000)
+            ));
         }
-        //end csv export
-        
-        $this->set([
-            'page_options', $this->page_options,
-            'padrs' => Sanitize::clean($this->paginate(), array('encode' => false)),
-            '_serialize' => ['padrs', 'page_options']]);
-    }*/
+        //end pdf export
+        $this->set('page_options', $this->page_options);
+        $counties = $this->Padr->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $designations = $this->Padr->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $this->set('padrs', Sanitize::clean($this->paginate(), array('encode' => false)));
+    }
 
     private function csv_export($cpadrs = '')
     {
