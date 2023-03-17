@@ -324,7 +324,7 @@ echo $this->Session->flash();
           <th><?php echo $this->Paginator->sort('reference_no'); ?></th>
           <th><?php echo $this->Paginator->sort('report_title'); ?></th>
           <th><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? $this->Paginator->sort('patient_name') : $this->Paginator->sort('gender'); ?></th>
-          <?php if ($redir == 'manager') { ?><th><?php echo $this->Paginator->sort('vigiflow_ref'); ?></th> <?php } ?>
+          <?php if ($redir == 'manager'||$redir == 'reviewer') { ?><th><?php echo $this->Paginator->sort('vigiflow_ref'); ?></th> <?php } ?>
           <th><?php echo $this->Paginator->sort('reporter_date', 'Date reported'); ?></th>
           <th><?php echo $this->Paginator->sort('created', 'Date created'); ?></th>
           <th><?php echo $this->Paginator->sort('submitted_date', 'Date Submitted'); ?></th>
@@ -358,7 +358,7 @@ echo $this->Session->flash();
                 ?>&nbsp;
             </td>
             <td><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? h($sadr['Sadr']['patient_name']) : h($sadr['Sadr']['gender']); ?>&nbsp;</td>
-            <?php if ($redir == 'manager') { ?><td><?php echo h($sadr['Sadr']['vigiflow_ref']);
+            <?php if ($redir == 'manager'||$redir == 'reviewer') { ?><td><?php echo h($sadr['Sadr']['vigiflow_ref']);
                                                     echo "\n" . $sadr['Sadr']['vigiflow_date']; ?></td> <?php } ?>
             <td><?php echo h($sadr['Sadr']['reporter_date']); ?>&nbsp;</td>
             <td><?php echo h($sadr['Sadr']['created']); ?>&nbsp;</td>
@@ -383,7 +383,7 @@ echo $this->Session->flash();
                 );
                 echo "&nbsp;"; 
 
-                if ($redir == 'manager' && $sadr['Sadr']['copied'] == 2) echo $this->Html->link(
+                if (($redir == 'manager'||$redir == 'reviewer') && $sadr['Sadr']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Copy & Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
                   array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
                   array('escape' => false)

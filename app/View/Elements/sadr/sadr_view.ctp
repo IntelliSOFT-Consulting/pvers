@@ -73,7 +73,7 @@
 						<td style="width: 25%;">ADDRESS: </td>
 						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['address'] ?>	</strong></td>
 						<td style="width: 25%;">SUB-COUNTY: </td>
-						<td style="width: 25%;"><strong><?php echo $sadr['SubCounty']['sub_county_name'] ?>	</strong></td>
+						<td style="width: 25%;"><strong><?php echo (!empty($sadr['Sadr']['sub_county_id']))? $sadr['SubCounty']['sub_county_name']:'' ?>	</strong></td>
 					</tr>
 					<tr>
 						<td style="width: 25%;">INSTITUTION CODE: </td>

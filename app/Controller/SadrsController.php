@@ -450,8 +450,7 @@ class SadrsController extends AppController
                 'SadrOriginal', 'SadrOriginal.SadrDescription', 'SadrOriginal.SadrListOfDrug', 'SadrOriginal.SadrListOfDrug.Route', 'SadrOriginal.SadrListOfDrug.Frequency', 'SadrOriginal.SadrListOfDrug.Dose', 'SadrOriginal.SadrListOfMedicine', 'SadrOriginal.SadrListOfMedicine.Route', 'SadrOriginal.SadrListOfMedicine.Frequency', 'SadrOriginal.SadrListOfMedicine.Dose', 'SadrOriginal.County', 'SadrOriginal.SubCounty', 'SadrOriginal.Attachment', 'SadrOriginal.Designation', 'SadrOriginal.ExternalComment'
             )
         ));
-        $managers = $this->Sadr->User->find('list', array(
-            'fields' => array('User.username'),
+        $managers = $this->Sadr->User->find('list', array( 
             'conditions' => array(
                 'User.group_id' => 6,
                 'User.is_active' => 1
@@ -485,6 +484,25 @@ class SadrsController extends AppController
 
 
         $this->Session->setFlash(__('The SADR has been assigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
+
+    public function manager_unassign($id = null)
+    {
+        # code...
+        $this->Sadr->id = $id;
+        if (!$this->Sadr->exists()) {
+            $this->Session->setFlash(__('Could not verify the SADR report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Sadr->saveField('assigned_by', '');
+        $this->Sadr->saveField('assigned_to', '');
+        $this->Sadr->saveField('assigned_date', '');
+
+        // Send an asignment alert::::
+
+
+        $this->Session->setFlash(__('The SADR has been unassigned successfully'), 'alerts/flash_success');
         $this->redirect(array('action' => 'view', $id));
     }
 

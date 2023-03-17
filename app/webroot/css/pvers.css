@@ -2,10 +2,18 @@
 
 /* Body and structure
 -------------------------------------------------- */
-body {
+/* body {
     padding-top: 60px;
     /*padding-bottom: 40px;*/
+
+body {
+  padding-top: 60px;
+  /* min-height: 100vh;
+  display: flex;
+  flex-direction: column; */
 }
+ 
+
 .sidebar-nav {
 	padding: 9px 0;
 }
@@ -51,6 +59,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6dbbf', end
 
 .navbar-manager .navbar-inner {
 	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ebd7ed+0,feffe8+100 */
+background: #ebd7ed; /* Old browsers */
+background: -moz-linear-gradient(top,  #ebd7ed 0%, #feffe8 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ebd7ed 0%,#feffe8 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ebd7ed 0%,#feffe8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebd7ed', endColorstr='#feffe8',GradientType=0 ); /* IE6-9 */
+}
+.navbar-reviewer .navbar-inner { 
 background: #ebd7ed; /* Old browsers */
 background: -moz-linear-gradient(top,  #ebd7ed 0%, #feffe8 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top,  #ebd7ed 0%,#feffe8 100%); /* Chrome10-25,Safari5.1-6 */
@@ -152,6 +167,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ee8fa', end
 }
 .footer-manager {
   background: #354b48;
+}
+.footer-reviewer {
+  background: #354b48;
+ 
+}
+.footer- {
+  background: #354b48;
+  position: fixed;
+  bottom: 0;
+  width: 100%; 
+  padding: 10px 0;
 }
 .footer-admin {
   background: #061e1b;
