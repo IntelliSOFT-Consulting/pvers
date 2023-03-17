@@ -372,7 +372,12 @@ class PqmpsController extends AppController
                 'PqmpOriginal', 'PqmpOriginal.Country', 'PqmpOriginal.County', 'PqmpOriginal.SubCounty', 'PqmpOriginal.Attachment', 'PqmpOriginal.Designation', 'PqmpOriginal.ExternalComment'
             )
         ));
-        $this->set('pqmp', $pqmp);
+        $managers=$this->Pqmp->User->find('list',array(
+            'conditions'=>array(
+                'User.group_id'=>6
+            )
+        ));
+        $this->set(['pqmp'=>$pqmp,'managers'=>$managers]);
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'PQMP_' . $id . '.pdf',  'orientation' => 'portrait');
@@ -380,11 +385,50 @@ class PqmpsController extends AppController
         }
     }
 
+
+    // Assign the report to the evaluator
+    public function manager_assign()
+    {
+        # code...
+        $id = $this->request->data['Pqmp']['report_id'];
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            $this->Session->setFlash(__('Could not verify the Pqmp report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Pqmp->saveField('assigned_by', $this->request->data['Pqmp']['assigned_by']);
+        $this->Pqmp->saveField('assigned_to', $this->request->data['Pqmp']['assigned_to']);
+        $this->Pqmp->saveField('assigned_date', date("Y-m-d H:i:s"));
+
+        // Send an asignment alert::::
+
+
+        $this->Session->setFlash(__('The Pqmp has been assigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
+
+    public function manager_unassign($id = null)
+    {
+        # code...
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            $this->Session->setFlash(__('Could not verify the Pqmp report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Pqmp->saveField('assigned_by', '');
+        $this->Pqmp->saveField('assigned_to', '');
+        $this->Pqmp->saveField('assigned_date', ''); 
+
+        $this->Session->setFlash(__('The Pqmp has been unassigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
+
     /**
      * add method
      *
      * @return void
      */
+
 
     public function reporter_add()
     {

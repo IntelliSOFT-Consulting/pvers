@@ -260,7 +260,7 @@ class AefisController extends AppController
         // if (!isset($this->passedArgs['submit'])) $criteria['Aefi.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County','SubCounty', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
+        $this->paginate['contain'] = array('County', 'SubCounty', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -273,7 +273,7 @@ class AefisController extends AppController
         $this->set('page_options', $this->page_options);
         $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
-         $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+        $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
         $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
@@ -300,11 +300,11 @@ class AefisController extends AppController
         } else {
             $criteria['Aefi.submitted'] = array(2, 3);
         }
-        
+
         $criteria['Aefi.assigned_to'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Aefi.created' => 'desc');
-        $this->paginate['contain'] = array('County','SubCounty', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
+        $this->paginate['contain'] = array('County', 'SubCounty', 'AefiListOfVaccine', 'AefiDescription', 'AefiListOfVaccine.Vaccine', 'Designation');
 
         //in case of csv export
         if (isset($this->request->params['ext']) && $this->request->params['ext'] == 'csv') {
@@ -317,7 +317,7 @@ class AefisController extends AppController
         $this->set('page_options', $this->page_options);
         $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
         $this->set(compact('counties'));
-         $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+        $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
         $this->set(compact('sub_counties'));
         $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
         $this->set(compact('designations'));
@@ -482,6 +482,51 @@ class AefisController extends AppController
             $this->redirect('/');
         }
 
+        $this->general_view($id);
+    }
+
+
+    // Assign the report to the evaluator
+    public function manager_assign()
+    {
+        # code...
+        $id = $this->request->data['Aefi']['report_id'];
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            $this->Session->setFlash(__('Could not verify the Aefi report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Aefi->saveField('assigned_by', $this->request->data['Aefi']['assigned_by']);
+        $this->Aefi->saveField('assigned_to', $this->request->data['Aefi']['assigned_to']);
+        $this->Aefi->saveField('assigned_date', date("Y-m-d H:i:s"));
+
+        // Send an asignment alert::::
+
+
+        $this->Session->setFlash(__('The Aefi has been assigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
+
+    public function manager_unassign($id = null)
+    {
+        # code...
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            $this->Session->setFlash(__('Could not verify the Aefi report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Aefi->saveField('assigned_by', '');
+        $this->Aefi->saveField('assigned_to', '');
+        $this->Aefi->saveField('assigned_date', '');
+
+        $this->Session->setFlash(__('The Aefi has been unassigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
+
+    // Common functions
+    public function general_view($id = null)
+    {
+        # code...
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'AEFI_' . $id . '.pdf',  'orientation' => 'portrait');
             // $this->response->download('AEFI_'.$aefi['Aefi']['id'].'.pdf');
@@ -494,8 +539,13 @@ class AefisController extends AppController
                 'AefiOriginal', 'AefiOriginal.AefiListOfVaccine', 'AefiOriginal.AefiDescription', 'AefiOriginal.AefiListOfVaccine.Vaccine', 'AefiOriginal.County', 'AefiOriginal.SubCounty', 'AefiOriginal.Attachment', 'AefiOriginal.Designation', 'AefiOriginal.ExternalComment'
             )
         ));
-        $this->set('aefi', $aefi);
-        
+        $managers = $this->Aefi->User->find('list', array(
+            'conditions' => array(
+                'User.group_id' => 6
+            )
+        ));
+        $this->set(['aefi' => $aefi, 'managers' => $managers]);
+
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'AEFI_' . $id . '.pdf',  'orientation' => 'portrait');
@@ -503,6 +553,117 @@ class AefisController extends AppController
         }
     }
 
+    public function general_copy($id = null)
+    {
+        # code...
+        if ($this->request->is('post')) {
+            $this->Aefi->id = $id;
+            if (!$this->Aefi->exists()) {
+                throw new NotFoundException(__('Invalid AEFI'));
+            }
+            $aefi = Hash::remove($this->Aefi->find(
+                'first',
+                array(
+                    'contain' => array('AefiListOfVaccine'),
+                    'conditions' => array('Aefi.id' => $id)
+                )
+            ), 'Aefi.id');
+            if ($aefi['Aefi']['copied']) {
+                $this->Session->setFlash(__('A clean copy already exists. Click on edit to update changes.'), 'alerts/flash_error');
+                return $this->redirect(array('action' => 'index'));
+            }
+            $aefi = Hash::remove($aefi, 'AefiListOfVaccine.{n}.id');
+            $data_save = $aefi['Aefi'];
+            if (isset($aefi['AefiListOfVaccine']))  $data_save['AefiListOfVaccine'] = $aefi['AefiListOfVaccine'];
+            $data_save['aefi_id'] = $id;
+            $data_save['user_id'] = $this->Auth->User('id');;
+            $this->Aefi->saveField('copied', 1);
+            $data_save['copied'] = 2;
+
+            if ($this->Aefi->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
+                $this->Session->setFlash(__('Clean copy of ' . $data_save['reference_no'] . ' has been created'), 'alerts/flash_info');
+                return $this->redirect(array('action' => 'edit', $this->Aefi->id));
+            } else {
+                $this->Session->setFlash(__('The clean copy could not be created. Please, try again.'), 'alerts/flash_error');
+                return $this->redirect($this->referer());
+            }
+        }
+    }
+
+    public function general_edit($id = null)
+    {
+        # code...
+        $aefi = $this->Aefi->read(null, $id);
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $validate = false;
+            if (isset($this->request->data['submitReport'])) {
+                $validate = 'first';
+            }
+            if ($this->Aefi->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
+                if (isset($this->request->data['submitReport'])) {
+                    $this->Aefi->saveField('submitted', 2);
+                    $this->Aefi->saveField('submitted_date', date("Y-m-d H:i:s"));
+                    $aefi = $this->Aefi->read(null, $id);
+
+                    $this->Session->setFlash(__('The AEFI has been submitted to PPB'), 'alerts/flash_success');
+                    $this->redirect(array('action' => 'view', $this->Aefi->id));
+                }
+                // debug($this->request->data);
+                $this->Session->setFlash(__('The AEFI has been saved'), 'alerts/flash_success');
+                $this->redirect($this->referer());
+            } else {
+                $this->Session->setFlash(__('The AEFI could not be saved. Please, try again.'), 'alerts/flash_error');
+            }
+        } else {
+            $this->request->data = $this->Aefi->read(null, $id);
+        }
+
+        //Manager will always edit a copied report
+        $aefi = $this->Aefi->find('first', array(
+            'conditions' => array('Aefi.id' => $aefi['Aefi']['aefi_id']),
+            'contain' => array('AefiListOfVaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
+        ));
+        $this->set('aefi', $aefi);
+
+        $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
+        $this->set(compact('counties'));
+        $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
+
+        $this->set(compact('sub_counties'));
+        $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
+        $this->set(compact('designations'));
+        $vaccines = $this->Aefi->AefiListOfVaccine->Vaccine->find('list');
+        $this->set(compact('vaccines'));
+    }
+
+    // EVALUATOR FUNCTIONS::::
+    public function reviewer_view($id = null)
+    {
+        # code...
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            $this->Session->setFlash(__('Could not verify the medical devices report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        $this->general_view($id);
+    }
+
+    public function reviewer_copy($id = null)
+    {
+        # code...
+        $this->general_copy($id);
+    }
+    public function reviewer_edit($id = null)
+    {
+        # code...
+        $this->Aefi->id = $id;
+        if (!$this->Aefi->exists()) {
+            throw new NotFoundException(__('Invalid AEFI'));
+        }
+        $this->general_edit($id);
+    }
     /**
      * download methods
      */
@@ -583,14 +744,14 @@ class AefisController extends AppController
      * @return void
      */
 
-    public function reporter_add($id=null)
-    { 
+    public function reporter_add($id = null)
+    {
         $this->Aefi->create();
         $this->Aefi->save(['Aefi' => [
             'user_id' => $this->Auth->User('id'),
             'reference_no' => 'new', //'AEFI/'.date('Y').'/'.$count,
             'report_type' => 'Initial',
-            'pqmp_id' =>$id,
+            'pqmp_id' => $id,
             'designation_id' => $this->Auth->User('designation_id'),
             'county_id' => $this->Auth->User('county_id'),
             'institution_code' => $this->Auth->User('institution_code'),
@@ -604,7 +765,7 @@ class AefisController extends AppController
         $this->Session->setFlash(__('The AEFI has been created'), 'alerts/flash_success');
         $this->redirect(array('action' => 'edit', $this->Aefi->id));
     }
-    
+
     public function reporter_followup($id = null)
     {
         if ($this->request->is('post')) {
@@ -914,38 +1075,7 @@ class AefisController extends AppController
 
     public function manager_copy($id = null)
     {
-        if ($this->request->is('post')) {
-            $this->Aefi->id = $id;
-            if (!$this->Aefi->exists()) {
-                throw new NotFoundException(__('Invalid AEFI'));
-            }
-            $aefi = Hash::remove($this->Aefi->find(
-                'first',
-                array(
-                    'contain' => array('AefiListOfVaccine'),
-                    'conditions' => array('Aefi.id' => $id)
-                )
-            ), 'Aefi.id');
-            if ($aefi['Aefi']['copied']) {
-                $this->Session->setFlash(__('A clean copy already exists. Click on edit to update changes.'), 'alerts/flash_error');
-                return $this->redirect(array('action' => 'index'));
-            }
-            $aefi = Hash::remove($aefi, 'AefiListOfVaccine.{n}.id');
-            $data_save = $aefi['Aefi'];
-            if (isset($aefi['AefiListOfVaccine']))  $data_save['AefiListOfVaccine'] = $aefi['AefiListOfVaccine'];
-            $data_save['aefi_id'] = $id;
-            $data_save['user_id'] = $this->Auth->User('id');;
-            $this->Aefi->saveField('copied', 1);
-            $data_save['copied'] = 2;
-
-            if ($this->Aefi->saveAssociated($data_save, array('deep' => true, 'validate' => false))) {
-                $this->Session->setFlash(__('Clean copy of ' . $data_save['reference_no'] . ' has been created'), 'alerts/flash_info');
-                return $this->redirect(array('action' => 'edit', $this->Aefi->id));
-            } else {
-                $this->Session->setFlash(__('The clean copy could not be created. Please, try again.'), 'alerts/flash_error');
-                return $this->redirect($this->referer());
-            }
-        }
+        $this->general_copy($id);
     }
 
     public function manager_edit($id = null)
@@ -954,50 +1084,7 @@ class AefisController extends AppController
         if (!$this->Aefi->exists()) {
             throw new NotFoundException(__('Invalid AEFI'));
         }
-        $aefi = $this->Aefi->read(null, $id);
-
-        if ($this->request->is('post') || $this->request->is('put')) {
-            $validate = false;
-            if (isset($this->request->data['submitReport'])) {
-                $validate = 'first';
-            }
-            if ($this->Aefi->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
-                if (isset($this->request->data['submitReport'])) {
-                    $this->Aefi->saveField('submitted', 2);
-                    $this->Aefi->saveField('submitted_date', date("Y-m-d H:i:s"));
-                    $aefi = $this->Aefi->read(null, $id);
-
-                    $this->Session->setFlash(__('The AEFI has been submitted to PPB'), 'alerts/flash_success');
-                    $this->redirect(array('action' => 'view', $this->Aefi->id));
-                }
-                // debug($this->request->data);
-                $this->Session->setFlash(__('The AEFI has been saved'), 'alerts/flash_success');
-                $this->redirect($this->referer());
-            } else {
-                $this->Session->setFlash(__('The AEFI could not be saved. Please, try again.'), 'alerts/flash_error');
-            }
-        } else {
-            $this->request->data = $this->Aefi->read(null, $id);
-        }
-
-        //Manager will always edit a copied report
-        $aefi = $this->Aefi->find('first', array(
-            'conditions' => array('Aefi.id' => $aefi['Aefi']['aefi_id']),
-            'contain' => array('AefiListOfVaccine', 'AefiDescription', 'County', 'SubCounty', 'Attachment', 'Designation', 'ExternalComment')
-        ));
-        $this->set('aefi', $aefi);
-
-        $counties = $this->Aefi->County->find('list', array('order' => array('County.county_name' => 'ASC')));
-        $this->set(compact('counties'));
-        $sub_counties = $this->Aefi->SubCounty->find('list', array('order' => array('SubCounty.sub_county_name' => 'ASC')));
-       
-    //    debug($sub_counties);
-    //    exit;
-        $this->set(compact('sub_counties'));
-        $designations = $this->Aefi->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
-        $this->set(compact('designations'));
-        $vaccines = $this->Aefi->AefiListOfVaccine->Vaccine->find('list');
-        $this->set(compact('vaccines'));
+        $this->general_edit($id);
     }
 
 

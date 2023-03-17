@@ -329,7 +329,7 @@ $this->assign('AEFI', 'active');
           <th><?php echo $this->Paginator->sort('reference_no'); ?></th>
           <th><?php echo $this->Paginator->sort('report_type'); ?></th>
           <th><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? $this->Paginator->sort('patient_name') : $this->Paginator->sort('gender'); ?></th>
-          <?php if ($redir == 'manager') { ?>
+          <?php if ($redir == 'manager' || $redir == 'reviewer') { ?>
 
             <th><?php echo $this->Paginator->sort('vigiflow_ref'); ?></th>
             <!-- <th><?php echo $this->Paginator->sort('webradr_ref'); ?></th> -->
@@ -366,7 +366,7 @@ $this->assign('AEFI', 'active');
                 ?>&nbsp;
             </td>
             <td><?php echo ($this->Session->read('Auth.User.user_type') != 'Public Health Program') ? h($aefi['Aefi']['patient_name']) : $aefi['Aefi']['gender']; ?>&nbsp;</td>
-            <?php if ($redir == 'manager') { ?>
+            <?php if ($redir == 'manager'|| $redir == 'reviewer') { ?>
               <td><?php echo h($aefi['Aefi']['vigiflow_ref']);
                   echo "\n" . $aefi['Aefi']['vigiflow_date']; ?></td>
               <!-- <td> <?php echo h($aefi['Aefi']['webradr_ref']);
@@ -384,9 +384,9 @@ $this->assign('AEFI', 'active');
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if ($redir == 'manager') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'aefis', 'action' => 'download', $aefi['Aefi']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
+                if (($redir == 'manager'|| $redir == 'reviewer')) echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'aefis', 'action' => 'download', $aefi['Aefi']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
                 echo "&nbsp;";
-                if ($redir == 'manager' && empty($aefi['Aefi']['vigiflow_ref']) && $aefi['Aefi']['copied'] == 2) echo $this->Html->link(
+                if (($redir == 'manager'|| $redir == 'reviewer') && empty($aefi['Aefi']['vigiflow_ref']) && $aefi['Aefi']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-warning tooltipper" title="Send to vigiflow"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Vigiflow </span>',
                   array('controller' => 'aefis', 'action' => 'vigiflow', $aefi['Aefi']['id'], 'manager' => false),
                   array('escape' => false)
@@ -403,13 +403,13 @@ $this->assign('AEFI', 'active');
                 // if($redir == 'manager') echo $this->Html->link('<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>' ,
                 //   array('controller' => 'aefis', 'action' => 'edit', $aefi['Aefi']['id']),
                 //   array('escape' => false));
-                if ($redir == 'manager' && $aefi['Aefi']['copied'] == 2) echo $this->Html->link(
+                if (($redir == 'manager'|| $redir == 'reviewer') && $aefi['Aefi']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Copy & Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
                   array('controller' => 'aefis', 'action' => 'edit', $aefi['Aefi']['id']),
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if ($redir == 'manager' && $aefi['Aefi']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'aefis', 'action' => 'copy', $aefi['Aefi']['id']), array('escape' => false), __('Create a clean copy to edit?'));
+                if (($redir == 'manager'|| $redir == 'reviewer') && $aefi['Aefi']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'aefis', 'action' => 'copy', $aefi['Aefi']['id']), array('escape' => false), __('Create a clean copy to edit?'));
               } else {
                 if ($redir == 'reporter' and $this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',

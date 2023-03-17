@@ -295,7 +295,12 @@ class DevicesController extends AppController
                 'DeviceOriginal', 'DeviceOriginal.ListOfDevice', 'DeviceOriginal.County',  'DeviceOriginal.Attachment', 'DeviceOriginal.Designation', 'DeviceOriginal.ExternalComment'
             )
         ));
-        $this->set('device', $device);
+        $managers=$this->Device->User->find('list',array(
+            'conditions'=>array(
+                'User.group_id'=>6
+            )
+        ));
+        $this->set(['device'=>$device,'managers'=>$managers]);
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
@@ -333,6 +338,44 @@ class DevicesController extends AppController
         }
     }
 
+
+
+    // Assign the report to the evaluator
+    public function manager_assign()
+    {
+        # code...
+        $id = $this->request->data['Device']['report_id'];
+        $this->Device->id = $id;
+        if (!$this->Device->exists()) {
+            $this->Session->setFlash(__('Could not verify the Device report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Device->saveField('assigned_by', $this->request->data['Device']['assigned_by']);
+        $this->Device->saveField('assigned_to', $this->request->data['Device']['assigned_to']);
+        $this->Device->saveField('assigned_date', date("Y-m-d H:i:s"));
+
+        // Send an asignment alert::::
+
+
+        $this->Session->setFlash(__('The Device has been assigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
+
+    public function manager_unassign($id = null)
+    {
+        # code...
+        $this->Device->id = $id;
+        if (!$this->Device->exists()) {
+            $this->Session->setFlash(__('Could not verify the Device report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Device->saveField('assigned_by', '');
+        $this->Device->saveField('assigned_to', '');
+        $this->Device->saveField('assigned_date', ''); 
+
+        $this->Session->setFlash(__('The Device has been unassigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
     /**
      * add method
      *

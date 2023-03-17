@@ -337,7 +337,13 @@ class MedicationsController extends AppController {
                 'contain' => array('MedicationProduct', 'County', 'Attachment', 'Designation', 'ExternalComment',
                    'MedicationOriginal.MedicationProduct', 'MedicationOriginal.County', 'MedicationOriginal.Attachment', 'MedicationOriginal.Designation', 'MedicationOriginal.ExternalComment' )
             ));
-        $this->set('medication', $medication);
+            $managers=$this->Medication->User->find('list',array(
+                'conditions'=>array(
+                    'User.group_id'=>6
+                )
+            ));
+            $this->set(['medication'=>$medication,'managers'=>$managers]);
+     
         // $this->render('pdf/view');
 
         if (strpos($this->request->url, 'pdf') !== false) {
@@ -346,6 +352,42 @@ class MedicationsController extends AppController {
         }
     }
 
+    // Assign the report to the evaluator
+    public function manager_assign()
+    {
+        # code...
+        $id = $this->request->data['Medication']['report_id'];
+        $this->Medication->id = $id;
+        if (!$this->Medication->exists()) {
+            $this->Session->setFlash(__('Could not verify the Medication report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Medication->saveField('assigned_by', $this->request->data['Medication']['assigned_by']);
+        $this->Medication->saveField('assigned_to', $this->request->data['Medication']['assigned_to']);
+        $this->Medication->saveField('assigned_date', date("Y-m-d H:i:s"));
+
+        // Send an asignment alert::::
+
+
+        $this->Session->setFlash(__('The Medication has been assigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
+
+    public function manager_unassign($id = null)
+    {
+        # code...
+        $this->Medication->id = $id;
+        if (!$this->Medication->exists()) {
+            $this->Session->setFlash(__('Could not verify the Medication report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Medication->saveField('assigned_by', '');
+        $this->Medication->saveField('assigned_to', '');
+        $this->Medication->saveField('assigned_date', ''); 
+
+        $this->Session->setFlash(__('The Medication has been unassigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
 
 /**
  * download methods
