@@ -200,7 +200,7 @@ class PqmpsController extends AppController
         } else {
             $criteria['Pqmp.submitted'] = array(2, 3);
         }
- 
+
         $criteria['Pqmp.assigned_to'] = $this->Auth->User('id');
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
@@ -360,6 +360,12 @@ class PqmpsController extends AppController
             $this->redirect('/');
         }
 
+        $this->general_view($id);
+    }
+
+    public function general_view($id = null)
+    {
+        # code...
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'PQMP_' . $id . '.pdf',  'orientation' => 'portrait');
             // $this->response->download('PQMP_'.$pqmp['Pqmp']['id'].'.pdf');
@@ -372,19 +378,18 @@ class PqmpsController extends AppController
                 'PqmpOriginal', 'PqmpOriginal.Country', 'PqmpOriginal.County', 'PqmpOriginal.SubCounty', 'PqmpOriginal.Attachment', 'PqmpOriginal.Designation', 'PqmpOriginal.ExternalComment'
             )
         ));
-        $managers=$this->Pqmp->User->find('list',array(
-            'conditions'=>array(
-                'User.group_id'=>6
+        $managers = $this->Pqmp->User->find('list', array(
+            'conditions' => array(
+                'User.group_id' => 6
             )
         ));
-        $this->set(['pqmp'=>$pqmp,'managers'=>$managers]);
+        $this->set(['pqmp' => $pqmp, 'managers' => $managers]);
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'PQMP_' . $id . '.pdf',  'orientation' => 'portrait');
             $this->response->download('PQMP_' . $pqmp['Pqmp']['id'] . '.pdf');
         }
     }
-
 
     // Assign the report to the evaluator
     public function manager_assign()
@@ -417,10 +422,38 @@ class PqmpsController extends AppController
         }
         $this->Pqmp->saveField('assigned_by', '');
         $this->Pqmp->saveField('assigned_to', '');
-        $this->Pqmp->saveField('assigned_date', ''); 
+        $this->Pqmp->saveField('assigned_date', '');
 
         $this->Session->setFlash(__('The Pqmp has been unassigned successfully'), 'alerts/flash_success');
         $this->redirect(array('action' => 'view', $id));
+    }
+
+
+    // Evaluator Roles:
+    public function reviewer_view($id = null)
+    {
+        # code...
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            $this->Session->setFlash(__('Could not verify the PQHPT report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+
+        $this->general_view($id);
+    }
+    public function reviewer_edit($id = null)
+    {
+        # code...
+        $this->Pqmp->id = $id;
+        if (!$this->Pqmp->exists()) {
+            throw new NotFoundException(__('Invalid PQHPT'));
+        }
+        $this->general_edit($id);
+    }
+    public function reviewer_copy($id = null)
+    {
+        # code...
+        $this->general_copy($id);
     }
 
     /**
@@ -747,6 +780,11 @@ class PqmpsController extends AppController
 
     public function manager_copy($id = null)
     {
+        $this->general_copy($id);
+    }
+    public function general_copy($id = null)
+    {
+        # code...
         if ($this->request->is('post')) {
             $this->Pqmp->id = $id;
             if (!$this->Pqmp->exists()) {
@@ -785,6 +823,12 @@ class PqmpsController extends AppController
         if (!$this->Pqmp->exists()) {
             throw new NotFoundException(__('Invalid PQHPT'));
         }
+        $this->general_edit($id);
+    }
+
+    public function general_edit($id = null)
+    {
+        # code...
         $pqmp = $this->Pqmp->read(null, $id);
         if ($this->request->is('post') || $this->request->is('put')) {
             $validate = false;
@@ -826,7 +870,6 @@ class PqmpsController extends AppController
         $countries = $this->Pqmp->Country->find('list');
         $this->set('countries', $countries);
     }
-
     public function admin_edit($id = null)
     {
         $this->set('title_for_layout', 'Edit Pqmp ' . $id);
