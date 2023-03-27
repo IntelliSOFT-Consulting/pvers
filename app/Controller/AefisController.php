@@ -246,7 +246,7 @@ class AefisController extends AppController
         else $this->paginate['limit'] = reset($this->page_options);
 
         $criteria = $this->Aefi->parseCriteria($this->passedArgs);
-        // $criteria['Aefi.submitted'] = 2;
+        $criteria['Aefi.deleted'] = false;
         $criteria['Aefi.copied !='] = '1';
         if (isset($this->request->query['submitted'])) {
             if ($this->request->query['submitted'] == 1) {
@@ -1090,8 +1090,20 @@ class AefisController extends AppController
 
 
     // DELETE SECTION
+
+    public function manager_delete($id = null)
+    {
+        # code...
+        $this->common_delete($id);
+    }
     public function reporter_delete($id = null)
     {
+        $this->common_delete($id);
+    }
+
+    public function common_delete($id = null)
+    {
+        # code...
         $this->Aefi->id = $id;
         if (!$this->Aefi->exists()) {
             throw new NotFoundException(__('Invalid AEFI'));
@@ -1108,8 +1120,8 @@ class AefisController extends AppController
         } else {
             // get the error message
             $errors = $this->Aefi->validationErrors;
-            debug($errors);
-            exit;
+            // debug($errors);
+            // exit;
             $this->Session->setFlash(__('The AEFI could not be deleted. Please, try again.' . $errors), 'alerts/flash_error');
         }
 

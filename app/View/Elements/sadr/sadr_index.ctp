@@ -410,7 +410,7 @@ echo $this->Session->flash();
                 array('escape' => false)
               );
               // Check if the user is a reporter and the report is not submitted
-              if ($redir == 'reporter' && $sadr['Sadr']['submitted'] == 0) {
+              if (($redir == 'reporter' || $redir == 'manager') && $sadr['Sadr']['submitted'] == 0) {
                 echo "&nbsp;";
                 echo $this->Form->postLink('<span class="label label-warning tooltipper" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete </span>', array('controller' => 'sadrs', 'action' => 'delete', $sadr['Sadr']['id']), array('escape' => false), __('Are you sure you want to delete this report?
                 Note: This action cannot be undone.'));

@@ -217,7 +217,8 @@ class SadrsController extends AppController
         } else {
             $criteria['Sadr.submitted'] = array(2, 3);
         }
-        // $criteria['Sadr.submitted'] = array(1, 2);
+        // add deleted condition to criteria
+        $criteria['Sadr.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
         $this->paginate['contain'] = array('County', 'SadrListOfDrug', 'SadrListOfMedicine', 'SadrDescription', 'Designation');
@@ -253,6 +254,8 @@ class SadrsController extends AppController
         } else {
             $criteria['Sadr.submitted'] = array(2, 3);
         }
+        // add deleted condition to criteria
+        $criteria['Sadr.deleted'] = false;
         // if (!isset($this->passedArgs['submit'])) $criteria['Sadr.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Sadr.created' => 'desc');
@@ -450,7 +453,7 @@ class SadrsController extends AppController
                 'SadrOriginal', 'SadrOriginal.SadrDescription', 'SadrOriginal.SadrListOfDrug', 'SadrOriginal.SadrListOfDrug.Route', 'SadrOriginal.SadrListOfDrug.Frequency', 'SadrOriginal.SadrListOfDrug.Dose', 'SadrOriginal.SadrListOfMedicine', 'SadrOriginal.SadrListOfMedicine.Route', 'SadrOriginal.SadrListOfMedicine.Frequency', 'SadrOriginal.SadrListOfMedicine.Dose', 'SadrOriginal.County', 'SadrOriginal.SubCounty', 'SadrOriginal.Attachment', 'SadrOriginal.Designation', 'SadrOriginal.ExternalComment'
             )
         ));
-        $managers = $this->Sadr->User->find('list', array( 
+        $managers = $this->Sadr->User->find('list', array(
             'conditions' => array(
                 'User.group_id' => 6,
                 'User.is_active' => 1
@@ -1097,8 +1100,20 @@ class SadrsController extends AppController
         $dose = $this->Sadr->SadrListOfDrug->Dose->find('list');
         $this->set(compact('dose'));
     }
+
+    public function manager_delete($id = null)
+    {
+        # code...
+        $this->common_delete($id);
+    }
     public function reporter_delete($id = null)
     {
+        $this->common_delete($id);
+    }
+
+    public function common_delete($id = null)
+    {
+        # code...
         $this->Sadr->id = $id;
         if (!$this->Sadr->exists()) {
             throw new NotFoundException(__('Invalid SADR'));
@@ -1114,9 +1129,10 @@ class SadrsController extends AppController
         if ($this->Sadr->save($sadr, array('validate' => false))) {
             //displat message with reference number 
             $this->Session->setFlash(__('SADR Report ' . $sadr['Sadr']['reference_no'] . ' has been deleted'), 'alerts/flash_info');
-            $this->redirect(array('action' => 'index'));
+
+            $this->redirect($this->referer());
         }
         $this->Session->setFlash(__('SADR was not deleted'), 'alerts/flash_error');
-        $this->redirect(array('action' => 'index'));
+        $this->redirect($this->referer());
     }
 }

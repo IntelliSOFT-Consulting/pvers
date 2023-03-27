@@ -312,50 +312,55 @@ $this->assign('TRN', 'active');
             ));
             ?>
           </td>
-          <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
 
           <!-- End -->
         </tr>
-          <td><label for="TransfusionPages" class="required">Pages</label></td>
-          <td>
-            <?php
-            echo $this->Form->input('pages', array(
-              'type' => 'select', 'div' => false, 'class' => 'input-small', 'selected' => $this->request->params['paging']['Transfusion']['limit'],
-              'empty' => true,
-              'options' => $page_options,
-              'label' => false,
-            ));
-            ?>
-          </td>
-          <td>
-            <?php
-            // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
-            // echo $this->Form->input('submit', array(
-            //   'type' => 'checkbox', 'hiddenField' => false,
-            //   'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
-            // ));
-            ?>
-          </td>
-          <td></td>
-          <td>
-            <?php
-            echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
-              'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
-              'formnovalidate' => 'formnovalidate',
-              'style' => array('margin-bottom: 5px')
-            ));
-            ?>
-          </td>
-          <td>
-            <?php
-            echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));
-            ?>
-          </td>
-          <td>
-            <?php
-            echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv', '?' => $this->request->query), array('class' => 'btn btn-success', 'escape' => false));
-            ?>
-          </td>
+        <td><label for="TransfusionPages" class="required">Pages</label></td>
+        <td>
+          <?php
+          echo $this->Form->input('pages', array(
+            'type' => 'select', 'div' => false, 'class' => 'input-small', 'selected' => $this->request->params['paging']['Transfusion']['limit'],
+            'empty' => true,
+            'options' => $page_options,
+            'label' => false,
+          ));
+          ?>
+        </td>
+        <td>
+          <?php
+          // echo $this->Form->checkbox('submitted', array('hiddenField' => false, 'label' => 'Submitted'));
+          // echo $this->Form->input('submit', array(
+          //   'type' => 'checkbox', 'hiddenField' => false,
+          //   'label' => array('class' => '', 'text' => 'Include Unsubmitted?')
+          // ));
+          ?>
+        </td>
+        <td></td>
+        <td>
+          <?php
+          echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
+            'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
+            'formnovalidate' => 'formnovalidate',
+            'style' => array('margin-bottom: 5px')
+          ));
+          ?>
+        </td>
+        <td>
+          <?php
+          echo $this->Html->link('<i class="icon-remove"></i> Clear', array('action' => 'index'), array('class' => 'btn', 'escape' => false, 'style' => array('margin-bottom: 5px')));
+          ?>
+        </td>
+        <td>
+          <?php
+          echo $this->Html->link('<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel', array('action' => 'index', 'ext' => 'csv', '?' => $this->request->query), array('class' => 'btn btn-success', 'escape' => false));
+          ?>
+        </td>
         </tr>
       </tbody>
     </table>
@@ -422,13 +427,13 @@ $this->assign('TRN', 'active');
                 echo "&nbsp;";
                 if ($redir == 'reporter') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> Followup </span>', array('controller' => 'transfusions', 'action' => 'followup', $transfusion['Transfusion']['id']), array('escape' => false), __('Add a followup report?'));
                 echo "&nbsp;";
-                if (($redir == 'manager' || $redir == 'reviewer')&& $transfusion['Transfusion']['copied'] == 2) echo $this->Html->link(
+                if (($redir == 'manager' || $redir == 'reviewer') && $transfusion['Transfusion']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Copy & Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
                   array('controller' => 'transfusions', 'action' => 'edit', $transfusion['Transfusion']['id']),
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if (($redir == 'manager' || $redir == 'reviewer')&& $transfusion['Transfusion']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'transfusions', 'action' => 'copy', $transfusion['Transfusion']['id']), array('escape' => false), __('Create a clean copy to edit?'));
+                if (($redir == 'manager' || $redir == 'reviewer') && $transfusion['Transfusion']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'transfusions', 'action' => 'copy', $transfusion['Transfusion']['id']), array('escape' => false), __('Create a clean copy to edit?'));
               } else {
                 if ($redir == 'reporter') echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
@@ -446,8 +451,8 @@ $this->assign('TRN', 'active');
 
               // check if report has not been submitted and user is reporter
 
-              if($redir == 'reporter' && $transfusion['Transfusion']['submitted'] ==0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
-                echo $this->Form->postLink('<span class="label label-warning tooltipper" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" aria-hidden="true"></i> Delete </span>', array('controller' => 'transfusions' , 'action' => 'delete', $transfusion['Transfusion']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $transfusion['Transfusion']['id'].'?
+              if (($redir == 'reporter' || $redir == 'manager') && $transfusion['Transfusion']['submitted'] == 0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+                echo $this->Form->postLink('<span class="label label-warning tooltipper" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" aria-hidden="true"></i> Delete </span>', array('controller' => 'transfusions', 'action' => 'delete', $transfusion['Transfusion']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $transfusion['Transfusion']['id'] . '?
                 Note: This action cannot be undone.'));
               }
 

@@ -39,13 +39,13 @@
              </li>
              <li class="<?php echo $this->fetch('MED') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-chain-broken" aria-hidden="true"></i> Medications',
+                    echo $this->Html->link('<i class="fa fa-chain-broken" aria-hidden="true"></i> Medications Errors',
                         array('controller' => 'medications', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
              <li class="<?php echo $this->fetch('TRN') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusions',
+                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusion Reaction',
                         array('controller' => 'transfusions', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>

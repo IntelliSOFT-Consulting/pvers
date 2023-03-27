@@ -125,6 +125,8 @@ class PqmpsController extends AppController
         $criteria = $this->Pqmp->parseCriteria($this->passedArgs);
         $criteria['Pqmp.facility_name'] = $this->Auth->User('name_of_institution');
         $criteria['Pqmp.submitted'] = array(1, 2);
+        // add deleted to criteria
+        $criteria['Pqmp.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Country', 'Designation');
@@ -161,7 +163,8 @@ class PqmpsController extends AppController
         } else {
             $criteria['Pqmp.submitted'] = array(2, 3);
         }
-
+        // add deleted to criteria
+        $criteria['Pqmp.deleted'] = false;
         // if (!isset($this->passedArgs['submit'])) $criteria['Pqmp.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Pqmp.created' => 'desc');
@@ -1021,8 +1024,18 @@ class PqmpsController extends AppController
     }
 
     // function to delete a report
+    public function manager_delete($id = null)
+    {
+        # code...
+        $this->common_delete($id);
+    }
     public function reporter_delete($id = null)
     {
+        $this->common_delete($id);
+    }
+    public function common_delete($id = null)
+    {
+        # code...
         $this->Pqmp->id = $id;
         if (!$this->Pqmp->exists()) {
             throw new NotFoundException(__('Invalid report'));
@@ -1036,10 +1049,10 @@ class PqmpsController extends AppController
         //save the report withouth validation
         if ($this->Pqmp->save($report, array('validate' => false, 'deep' => true))) {
             $this->Session->setFlash(__('The report has been deleted'), 'flash_success');
-            $this->redirect(array('action' => 'index'));
+            $this->redirect($this->referer());
         } else {
             $this->Session->setFlash(__('The report could not be deleted. Please, try again.'), 'flash_error');
-            $this->redirect(array('action' => 'index'));
+            $this->redirect($this->referer());
         }
     }
 }

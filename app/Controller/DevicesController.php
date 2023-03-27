@@ -99,6 +99,8 @@ class DevicesController extends AppController
         $criteria = $this->Device->parseCriteria($this->passedArgs);
         $criteria['Device.name_of_institution'] = $this->Auth->User('name_of_institution');
         $criteria['Device.submitted'] = array(1, 2);
+        //add deleted = 0 to criteria
+        $criteria['Device.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation');
@@ -133,6 +135,8 @@ class DevicesController extends AppController
         } else {
             $criteria['Device.submitted'] = array(2, 3);
         }
+        //add deleted = 0 to criteria
+        $criteria['Device.deleted'] = false;
         // if (!isset($this->passedArgs['submit'])) $criteria['Device.submitted'] = array(2, 3);
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Device.created' => 'desc');
@@ -781,7 +785,7 @@ class DevicesController extends AppController
         if (!$this->Device->exists()) {
             throw new NotFoundException(__('Invalid DEVICE'));
         }
-      $this->general_edit($id);
+        $this->general_edit($id);
     }
 
     public function general_edit($id = null)
@@ -935,8 +939,19 @@ class DevicesController extends AppController
     }
 
     // function to delete a report
+
+    public function manager_delete($id = null)
+    {
+        # code...
+        $this->common_delete($id);
+    }
     public function reporter_delete($id = null)
     {
+        $this->common_delete($id);
+    }
+    public function common_delete($id = null)
+    {
+        # code...
         $this->Device->id = $id;
         if (!$this->Device->exists()) {
             throw new NotFoundException(__('Invalid report'));
@@ -950,10 +965,10 @@ class DevicesController extends AppController
         //save the report withouth validation
         if ($this->Device->save($report, array('validate' => false, 'deep' => true))) {
             $this->Session->setFlash(__('The report has been deleted'), 'flash_success');
-            $this->redirect(array('action' => 'index'));
+            $this->redirect($this->referer());
         } else {
             $this->Session->setFlash(__('The report could not be deleted. Please, try again.'), 'flash_error');
-            $this->redirect(array('action' => 'index'));
+            $this->redirect($this->referer());
         }
     }
 }

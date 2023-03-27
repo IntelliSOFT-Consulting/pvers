@@ -202,7 +202,7 @@ $this->assign('PQHPT', 'active');
             // Radio buttons with label text
             echo $this->Form->input('submitted', array(
               'label' => array('class' => 'required', 'text' => 'Report Status'),
-              'empty' => true, 
+              'empty' => true,
               'hiddenField' => false,
               'options' => array(
                 '0' => 'Submitted',
@@ -384,13 +384,13 @@ $this->assign('PQHPT', 'active');
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if (($redir == 'manager'|| $redir == 'reviewer')  && $pqmp['Pqmp']['copied'] == 2) echo $this->Html->link(
+                if (($redir == 'manager' || $redir == 'reviewer')  && $pqmp['Pqmp']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Copy & Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
                   array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id']),
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if (($redir == 'manager'|| $redir == 'reviewer') && $pqmp['Pqmp']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'pqmps', 'action' => 'copy', $pqmp['Pqmp']['id']), array('escape' => false), __('Create a clean copy to edit?'));
+                if (($redir == 'manager' || $redir == 'reviewer') && $pqmp['Pqmp']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'pqmps', 'action' => 'copy', $pqmp['Pqmp']['id']), array('escape' => false), __('Create a clean copy to edit?'));
               } else {
                 if ($redir == 'reporter' and $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
                   echo $this->Html->link(
@@ -410,7 +410,7 @@ $this->assign('PQHPT', 'active');
               echo "&nbsp;";
 
               // Check if the user is a reporter and the pqmp is not submitted
-              if ($redir == 'reporter' && $pqmp['Pqmp']['submitted'] == 0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+              if (($redir == 'reporter' || $redir == 'manager') && $pqmp['Pqmp']['submitted'] == 0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
                 echo $this->Form->postLink(
                   '<span class="label label-warning tooltipper" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i> Delete </span>',
                   array('action' => 'delete', $pqmp['Pqmp']['id']),

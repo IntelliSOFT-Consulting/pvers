@@ -75,11 +75,13 @@ class TransfusionsController extends AppController
 
         $page_options = array('5' => '5', '10' => '10', '25' => '25');
         (!empty($this->request->query('pages'))) ? $this->paginate['limit'] = $this->request->query('pages') :  $this->paginate['limit'] = reset($page_options);
-
+ 
 
         $criteria = $this->Transfusion->parseCriteria($this->passedArgs);
         $criteria['Transfusion.user_id'] = $this->Auth->User('id');
 
+        // add deleted=false to criteria
+        $criteria['Transfusion.deleted'] = false;
         $this->paginate['conditions'] = $criteria;
         $this->paginate['order'] = array('Transfusion.created' => 'desc');
         $this->paginate['contain'] = array('County', 'Designation', 'Pint');
@@ -107,9 +109,11 @@ class TransfusionsController extends AppController
         $page_options = array('25' => '25', '20' => '20');
         if (!empty($this->passedArgs['start_date']) || !empty($this->passedArgs['end_date'])) $this->passedArgs['range'] = true;
         if (isset($this->passedArgs['pages']) && !empty($this->passedArgs['pages'])) $this->paginate['limit'] = $this->passedArgs['pages'];
-        else $this->paginate['limit'] = reset($page_options);
+        else $this->paginate['limit'] = reset($page_options); 
 
         $criteria = $this->Transfusion->parseCriteria($this->passedArgs);
+        // add deleted=false to criteria
+        $criteria['Transfusion.deleted'] = false;
         $criteria['Transfusion.user_id'] = $this->Auth->User('id');
         $criteria['Transfusion.submitted'] = array(1, 2);
         $this->paginate['conditions'] = $criteria;
@@ -139,7 +143,8 @@ class TransfusionsController extends AppController
         else $this->paginate['limit'] = reset($page_options);
 
         $criteria = $this->Transfusion->parseCriteria($this->passedArgs);
-        // $criteria['Transfusion.submitted'] = 2;
+        // add deleted=false to criteria
+        $criteria['Transfusion.deleted'] = false;
         $criteria['Transfusion.copied !='] = '1';
         if (isset($this->request->query['submitted']) && $this->request->query['submitted'] == 1) {
             $criteria['Transfusion.submitted'] = array(0, 1);
@@ -844,8 +849,20 @@ class TransfusionsController extends AppController
     }
 
     // function to delete a report
+
+    public function manager_delete($id = null)
+    {
+        # code...
+        $this->common_delete($id);
+    }
     public function reporter_delete($id = null)
     {
+        $this->common_delete($id);
+       
+    }
+    public function common_delete($id = null)
+    {
+        # code...
         $this->Transfusion->id = $id;
         if (!$this->Transfusion->exists()) {
             throw new NotFoundException(__('Invalid report'));
@@ -859,10 +876,10 @@ class TransfusionsController extends AppController
         //save the report withouth validation
         if ($this->Transfusion->save($report, array('validate' => false, 'deep' => true))) {
             $this->Session->setFlash(__('The report has been deleted'), 'flash_success');
-            $this->redirect(array('action' => 'index'));
+            $this->redirect($this->referer());
         } else {
             $this->Session->setFlash(__('The report could not be deleted. Please, try again.'), 'flash_error');
-            $this->redirect(array('action' => 'index'));
+            $this->redirect($this->referer());
         }
     }
 }

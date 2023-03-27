@@ -429,7 +429,7 @@ $this->assign('DEV', 'active');
               }
               echo "&nbsp;";
               // Check if the user is a reporter and report not submitted and not a health program
-              if ($redir == 'reporter' && $device['Device']['submitted'] == 0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
+              if (($redir == 'reporter'|| $redir == 'manager') && $device['Device']['submitted'] == 0 && $this->Session->read('Auth.User.user_type') != 'Public Health Program') {
                 echo $this->Form->postLink('<span class="label label-warning tooltipper" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" aria-hidden="true"></i> Delete </span>', array('controller' => 'devices', 'action' => 'delete', $device['Device']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $device['Device']['id'] . '?
                 Note: This action cannot be undone.'));
               }
