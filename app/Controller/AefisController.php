@@ -716,8 +716,9 @@ class AefisController extends AppController
             array('header' => array('umc-client-key' => Configure::read('vigiflow_key')))
         );
 
-        // debug($results->code);
-        // debug($results->body);
+        debug($results->code);
+        debug($results->body);
+        exit();
         if ($results->isOk()) {
             $body = $results->body;
             $this->Aefi->saveField('vigiflow_message', $body);

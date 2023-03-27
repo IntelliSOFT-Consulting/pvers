@@ -364,21 +364,21 @@ $this->assign('MED', 'active');
                 echo "&nbsp;";
                 if ($redir == 'reporter' and $this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> Followup </span>', array('controller' => 'medications', 'action' => 'followup', $medication['Medication']['id']), array('escape' => false), __('Add a followup report?'));
                 echo "&nbsp;";
-                if ($redir == 'manager') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'medications', 'action' => 'download', $medication['Medication']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
+                if ($redir == 'manager'||$redir == 'reviewer') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'medications', 'action' => 'download', $medication['Medication']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
                 echo "&nbsp;";
-                if ($redir == 'manager' && empty($medication['Medication']['vigiflow_ref'])  && $medication['Medication']['copied'] == 2) echo $this->Html->link(
+                if (($redir == 'manager'||$redir == 'reviewer') && empty($medication['Medication']['vigiflow_ref'])  && $medication['Medication']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-warning tooltipper" title="Send to vigiflow"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Vigiflow </span>',
                   array('controller' => 'medications', 'action' => 'vigiflow', $medication['Medication']['id'], 'manager' => false),
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if ($redir == 'manager' && $medication['Medication']['copied'] == 2) echo $this->Html->link(
+                if (($redir == 'manager'||$redir == 'reviewer') && $medication['Medication']['copied'] == 2) echo $this->Html->link(
                   '<span class="label label-success tooltipper" title="Copy & Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
                   array('controller' => 'medications', 'action' => 'edit', $medication['Medication']['id']),
                   array('escape' => false)
                 );
                 echo "&nbsp;";
-                if ($redir == 'manager' && $medication['Medication']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'medications', 'action' => 'copy', $medication['Medication']['id']), array('escape' => false), __('Create a clean copy to edit?'));
+                if (($redir == 'manager'||$redir == 'reviewer') && $medication['Medication']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'medications', 'action' => 'copy', $medication['Medication']['id']), array('escape' => false), __('Create a clean copy to edit?'));
               } else {
                 // if($redir != 'manager' && $medication['Medication']['copied'] != 2) 
                 if ($redir == 'reporter' and $this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Html->link(

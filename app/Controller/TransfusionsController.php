@@ -325,6 +325,12 @@ class TransfusionsController extends AppController
 
     public function manager_view($id = null)
     {
+       $this->general_view($id);
+    }
+
+    public function general_view( $id = null)
+    {
+        # code...
         $this->Transfusion->id = $id;
         if (!$this->Transfusion->exists()) {
             $this->Session->setFlash(__('Could not verify the TRANSFUSION report ID. Please ensure the ID is correct.'), 'flash_error');
@@ -357,7 +363,6 @@ class TransfusionsController extends AppController
             $this->response->download('TRANSFUSION_' . $transfusion['Transfusion']['id'] . '.pdf');
         }
     }
-
 
     // Assign the report to the evaluator
     public function manager_assign()
@@ -394,6 +399,25 @@ class TransfusionsController extends AppController
 
         $this->Session->setFlash(__('The Transfusion has been unassigned successfully'), 'alerts/flash_success');
         $this->redirect(array('action' => 'view', $id));
+    }
+
+
+    // Evaluator Functions::::
+    public function reviewer_view($id = null)
+    {
+        # code...
+        $this->general_view($id);
+    }
+    public function reviewer_copy( $id = null)
+    {
+        # code...
+        $this->general_copy($id);
+    }
+
+    public function reviewer_edit( $id = null)
+    {
+        # code...
+        $this->general_edit($id);
     }
     /**
      * add method
@@ -708,6 +732,12 @@ class TransfusionsController extends AppController
 
     public function manager_copy($id = null)
     {
+        $this->general_copy($id);
+       
+    }
+    public function general_copy($id = null)
+    {
+        # code...
         if ($this->request->is('post')) {
             $this->Transfusion->id = $id;
             if (!$this->Transfusion->exists()) {
@@ -745,6 +775,12 @@ class TransfusionsController extends AppController
 
     public function manager_edit($id = null)
     {
+        $this->general_edit($id);
+       
+    }
+    public function general_edit( $id= null)
+    {
+        # code...
         $this->Transfusion->id = $id;
         if (!$this->Transfusion->exists()) {
             throw new NotFoundException(__('Invalid TRANSFUSION'));

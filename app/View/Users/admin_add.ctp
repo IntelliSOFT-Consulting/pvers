@@ -1,7 +1,7 @@
 <?php
 $this->assign('LOGIN', 'active');
 $this->Html->script('widgets', array('inline' => false));
-$this->Html->script('user', array('inline' => false));
+$this->Html->script('user', array('inline' => false)); 
 ?>
 
 <div class="row-fluid">
@@ -64,7 +64,11 @@ $this->Html->script('user', array('inline' => false));
 							'label' => array('class' => 'control-label required', 'text' => 'Confirm New Password' . ' <span style="color:red;">*</span>'),
 						));
 						echo $this->Form->input('is_active', array('label' => array('class' => 'control-label', 'text' => 'Is Active?'),));
-						// echo $this->Form->input('is_admin', array('label' => array('class' => 'control-label', 'text' => 'Is Admin?'), ));
+						echo $this->Form->input('active_date', array(
+							'type' => 'text', 'class' => 'date-pick-field',
+							'label' => array('class' => 'control-label', 'text' => 'Active Date'),
+						));
+					 
 						echo $this->Form->input('user_type', array(
 							'type' => 'select', 'label' => array('class' => 'control-label', 'text' => 'User Type'),
 							'empty' => true, 'options' => ['Market Authority' => 'Market Authority', 'County Pharmacist' => 'County Pharmacist', 'Public Health Program' => 'Public Health Program']

@@ -79,6 +79,32 @@ class UsersController extends AppController
                     $this->redirect($this->Auth->logout());
                 }
 
+                // Check if it's the mini manager::: Check active date
+                if ($this->Auth->User('group_id') == '6') {
+                    $active_date = $this->Auth->User('active_date');
+                    if (!empty($active_date)) {
+                        // check if valid
+                        // debug($active_date);
+                        // exit;
+                        $today = date('Y-m-d');
+                        $active_date_obj = date('Y-m-d', strtotime($active_date));
+
+                        if ($active_date_obj < $today) {
+                            // $active_date is earlier than today, return an error
+                            $this->Session->setFlash('Your account has expired! Please contact PPB.', 'alerts/flash_error');
+                            $this->redirect($this->Auth->logout()); 
+                        } else {
+                            $this->Session->setFlash('The account is active and can proceed to login .', 'alerts/flash_success');
+                            $this->redirect($this->Auth->logout());
+                        }
+                    } else {
+                        // do something if $active_date is null or empty
+                        $this->Session->setFlash('Your account has expired! Please contact PPB.', 'alerts/flash_error');
+                        $this->redirect($this->Auth->logout());
+                    }
+                }
+
+
                 if ($this->Auth->User('group_id') == '1') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'admin' => true));
                 if ($this->Auth->User('group_id') == '2') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'manager' => true));
                 if ($this->Auth->User('group_id') == '3') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'reporter' => true));
@@ -237,10 +263,14 @@ class UsersController extends AppController
                 // pr($this->request->data);
             }
         }
+        $user = $this->Auth->User();
+        // debug($user['id']);
+        // exit;
         $this->User->Designation->recursive = -1;
         $this->set('designation', $this->User->Designation->findById($this->Auth->user('designation_id'), array('name')));
         $this->User->County->recursive = -1;
         $this->set('county', $this->User->County->findById($this->Auth->user('county_id'), array('county_name')));
+        $this->set('user', $user);
     }
 
     public function api_changePassword()
@@ -870,7 +900,7 @@ class UsersController extends AppController
             'limit' => 7, 'contain' => array(),
             'fields' => array('Sadr.id', 'Sadr.user_id', 'Sadr.report_title', 'Sadr.submitted', 'Sadr.reference_no', 'Sadr.created', 'Sadr.serious'),
             'order' => array('Sadr.created' => 'desc'),
-            'conditions' => array('Sadr.submitted >' => 1,'Sadr.assigned_to'=>$this->Auth->User('id')),
+            'conditions' => array('Sadr.submitted >' => 1, 'Sadr.assigned_to' => $this->Auth->User('id')),
         ));
         $this->set('sadrs', $sadrs);
 
@@ -879,7 +909,7 @@ class UsersController extends AppController
             'fields' => array('Aefi.id', 'Aefi.user_id', 'Aefi.submitted', 'Aefi.reference_no', 'Aefi.created', 'Aefi.serious'),
             'contain' => array('AefiListOfVaccine', 'AefiListOfVaccine.Vaccine'),
             'order' => array('Aefi.created' => 'desc'),
-            'conditions' => array('Aefi.submitted >' => 1,'Aefi.assigned_to'=>$this->Auth->User('id')),
+            'conditions' => array('Aefi.submitted >' => 1, 'Aefi.assigned_to' => $this->Auth->User('id')),
         ));
         $this->set('aefis', $aefis);
 
@@ -887,7 +917,7 @@ class UsersController extends AppController
             'limit' => 7, 'contain' => array(),
             'fields' => array('Pqmp.id', 'Pqmp.user_id', 'Pqmp.submitted', 'Pqmp.brand_name', 'Pqmp.reference_no', 'Pqmp.created', 'Pqmp.product_formulation', 'Pqmp.therapeutic_ineffectiveness', 'Pqmp.particulate_matter'),
             'order' => array('Pqmp.created' => 'desc'),
-            'conditions' => array('Pqmp.submitted >' => 1,'Pqmp.assigned_to'=>$this->Auth->User('id')),
+            'conditions' => array('Pqmp.submitted >' => 1, 'Pqmp.assigned_to' => $this->Auth->User('id')),
         ));
         $this->set('pqmps', $pqmps);
 
@@ -895,7 +925,7 @@ class UsersController extends AppController
             'limit' => 7, 'contain' => array(),
             'fields' => array('Device.id', 'Device.user_id', 'Device.submitted', 'Device.report_title', 'Device.reference_no', 'Device.created', 'Device.serious'),
             'order' => array('Device.created' => 'desc'),
-            'conditions' => array('Device.submitted >' => 1,'Device.assigned_to'=>$this->Auth->User('id')),
+            'conditions' => array('Device.submitted >' => 1, 'Device.assigned_to' => $this->Auth->User('id')),
         ));
         $this->set('devices', $devices);
 
@@ -903,7 +933,7 @@ class UsersController extends AppController
             'limit' => 7, 'contain' => array('MedicationProduct'),
             'fields' => array('Medication.id', 'Medication.user_id', 'Medication.submitted', 'Medication.reference_no', 'Medication.created'),
             'order' => array('Medication.created' => 'desc'),
-            'conditions' => array('Medication.submitted >' => 1,'Medication.assigned_to'=>$this->Auth->User('id')),
+            'conditions' => array('Medication.submitted >' => 1, 'Medication.assigned_to' => $this->Auth->User('id')),
         ));
         $this->set('medications', $medications);
 
@@ -911,15 +941,15 @@ class UsersController extends AppController
             'limit' => 7, 'contain' => array(),
             'fields' => array('Transfusion.id', 'Transfusion.user_id', 'Transfusion.reference_no', 'Transfusion.diagnosis', 'Transfusion.submitted', 'Transfusion.created', 'Transfusion.created'),
             'order' => array('Transfusion.created' => 'desc'),
-            'conditions' => array('Transfusion.submitted >' => 1,'Transfusion.assigned_to'=>$this->Auth->User('id')),
+            'conditions' => array('Transfusion.submitted >' => 1, 'Transfusion.assigned_to' => $this->Auth->User('id')),
         ));
         $this->set('transfusions', $transfusions);
 
         $padrs = $this->User->Padr->find('all', array(
             'limit' => 7, 'contain' => array(),
-            'fields' => array('Padr.id', 'Padr.reporter_name', 'Padr.patient_name', 'Padr.reference_no', 'Padr.created','Padr.assigned_to'),
+            'fields' => array('Padr.id', 'Padr.reporter_name', 'Padr.patient_name', 'Padr.reference_no', 'Padr.created', 'Padr.assigned_to'),
             'order' => array('Padr.created' => 'desc'),
-            'conditions' => array('Padr.assigned_to'=>$this->Auth->User('id')),
+            'conditions' => array('Padr.assigned_to' => $this->Auth->User('id')),
         ));
         $this->set('padrs', $padrs);
 
@@ -927,7 +957,7 @@ class UsersController extends AppController
             'limit' => 7, 'contain' => array(),
             'fields' => array('Sae.id', 'Sae.form_type', 'Sae.reference_no', 'Sae.created'),
             'order' => array('Sae.created' => 'desc'),
-            'conditions'=>array('Sae.assigned_to'=>$this->Auth->User('id'))
+            'conditions' => array('Sae.assigned_to' => $this->Auth->User('id'))
         ));
         $this->set('saes', $saes);
 

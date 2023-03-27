@@ -40,7 +40,7 @@
 				<dt>Institution Contact</dt>
 				<dd><?php echo $this->Session->read('Auth.User.institution_contact') ?> &nbsp; </dd>
 				<dt>County</dt>
-				<dd><?php echo ($county['County']['county_name']) ?> &nbsp; </dd>
+				<dd><?php if(!empty($user->county_id)) echo ($county['County']['county_name']) ?> &nbsp; </dd>
 				<dt></dt>
 				<dd>
 					<?php echo $this->Html->link('edit', array('action' => 'edit', $this->Session->read('Auth.User.id')), array('class' => 'btn btn-primary')); ?>

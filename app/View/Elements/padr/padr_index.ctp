@@ -18,9 +18,14 @@ echo $this->Session->flash();
       );
     }
     ?>
-    <h3>Public ADRs:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small> <?php
-            echo $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> Upload Excel', array('action' => 'upload'), array('class' => 'btn btn-success', 'escape' => false));
-            ?></h3>  
+    <h3>Public ADRs:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small>
+      <?php
+      if ($redir == 'manager') { ?>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#uploadModal"><i class="fa fa-plus" aria-hidden="true"></i> Upload Excel</button>
+      <?php  }
+      //  echo $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> Upload Excel', array('action' => 'upload'), array('class' => 'btn btn-success', 'escape' => false));
+      ?>
+    </h3>
     <hr class="soften" style="margin: 7px 0px;">
   </div>
 </div>
@@ -165,23 +170,28 @@ echo $this->Session->flash();
             ?>
           </td>
         </tr>
-       <!-- Added -->
-       <td>
-            <?php
-            echo $this->Form->input('submitted', array(
-              'type' => 'select',
-              'empty' => true,
-              'options' => array(
-                '0' => 'Submitted',
-                '1' => 'Unsubmitted'
-              ),
-              'label' => array('class' => 'required', 'text' => 'Report Status')
-            ));
-            ?>
-          </td>
-          <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+        <!-- Added -->
+        <td>
+          <?php
+          echo $this->Form->input('submitted', array(
+            'type' => 'select',
+            'empty' => true,
+            'options' => array(
+              '0' => 'Submitted',
+              '1' => 'Unsubmitted'
+            ),
+            'label' => array('class' => 'required', 'text' => 'Report Status')
+          ));
+          ?>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
 
-          <!-- End -->
+        <!-- End -->
         <tr>
           <td><label for="PadrPages" class="required">Pages</label></td>
           <td>
@@ -328,6 +338,39 @@ echo $this->Session->flash();
     </table>
   </div>
 </div>
+
+
+<!-- Excel Upload Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        <h4 class="modal-title" id="assignModalHeader">Upload Reports</h4>
+      </div>
+      <div class="modal-body">
+
+
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>
+                  Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Excell Modal -->
 
 
 <script type="text/javascript">

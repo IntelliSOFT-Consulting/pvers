@@ -321,6 +321,12 @@ class MedicationsController extends AppController {
     }
 
     public function manager_view($id = null) {
+        $this->general_view($id);
+    }
+
+    public function general_view($id = null)
+    {
+        # code...
         $this->Medication->id = $id;
         if (!$this->Medication->exists()) {
             $this->Session->setFlash(__('Could not verify the MEDICATION report ID. Please ensure the ID is correct.'), 'flash_error');
@@ -387,6 +393,25 @@ class MedicationsController extends AppController {
 
         $this->Session->setFlash(__('The Medication has been unassigned successfully'), 'alerts/flash_success');
         $this->redirect(array('action' => 'view', $id));
+    }
+
+    // Evaluator Functions:::
+    public function reviewer_view($id = null)
+    {
+        # code...
+        $this->general_view($id);
+    }
+
+    public function reviewer_copy( $id = null)
+    {
+        # code...
+        $this->general_copy($id);
+    }
+
+    public function reviewer_edit( $id = null)
+    {
+        # code...
+        $this->general_edit($id);
     }
 
 /**
@@ -747,6 +772,13 @@ class MedicationsController extends AppController {
     }
 
     public function manager_copy($id = null) {
+        $this->general_copy($id);
+        
+    }
+
+    public function general_copy($id = null)
+    {
+        # code...
         if ($this->request->is('post')) {
             $this->Medication->id = $id;
             if (!$this->Medication->exists()) {
@@ -779,8 +811,14 @@ class MedicationsController extends AppController {
             }
         }
     }
-
 	public function manager_edit($id = null) { 
+        $this->general_edit($id);
+        
+    }
+
+    public function general_edit( $id = null)
+    {
+        # code...
         $this->Medication->id = $id;
         if (!$this->Medication->exists()) {
             throw new NotFoundException(__('Invalid MEDICATION'));
@@ -821,6 +859,7 @@ class MedicationsController extends AppController {
 		$designations = $this->Medication->Designation->find('list', array('order' => array('Designation.name' => 'ASC')));
 		$this->set(compact('counties', 'designations'));
     }
+
 /**
  * delete method
  *
