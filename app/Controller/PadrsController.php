@@ -71,6 +71,7 @@ class PadrsController extends AppController
                 array('conditions' => $this->paginate['conditions'], 'order' => $this->paginate['order'], 'limit' => 10000)
             ));
         }
+      
         //end pdf export
         $this->set('page_options', $this->page_options);
         $counties = $this->Padr->County->find('list', array('order' => array('County.county_name' => 'ASC')));
@@ -145,6 +146,18 @@ class PadrsController extends AppController
 
     public function manager_view($id = null)
     {
+        $this->general_view($id);
+    }
+
+    public function reviewer_view($id = null)
+    {
+        # code...
+        $this->general_view($id);
+    }
+
+    public function general_view($id = null)
+    {
+        # code...
         $this->Padr->id = $id;
         if (!$this->Padr->exists($id)) {
             throw new NotFoundException(__('Invalid padr'));
@@ -152,12 +165,59 @@ class PadrsController extends AppController
         }
         $options = array('conditions' => array('Padr.' . $this->Padr->primaryKey => $id));
         $padr = $this->Padr->find('first', $options);
-        $this->set('padr', $this->Padr->find('first', $options));
+        $managers = $this->Padr->User->find('list', array(
+            'conditions' => array(
+                'User.group_id' => 6,
+                'User.is_active' => 1
+            )
+        ));
+    
+        $this->set(['padr'=>$this->Padr->find('first', $options),'managers' => $managers]);
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'PADR_' . $id . '.pdf',  'orientation' => 'portrait');
             $this->response->download('PADR_' . str_replace($padr['Padr']['reference_no'], '/', '_') . '.pdf');
         }
+    }
+
+    // Assign the report to the evaluator
+    public function manager_assign()
+    {
+        # code...
+        $id = $this->request->data['Padr']['report_id'];
+        $this->Padr->id = $id;
+        if (!$this->Padr->exists()) {
+            $this->Session->setFlash(__('Could not verify the Padr report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Padr->saveField('assigned_by', $this->request->data['Padr']['assigned_by']);
+        $this->Padr->saveField('assigned_to', $this->request->data['Padr']['assigned_to']);
+        $this->Padr->saveField('assigned_date', date("Y-m-d H:i:s"));
+
+        // Send an asignment alert::::
+
+
+        $this->Session->setFlash(__('The Padr has been assigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
+    }
+
+    public function manager_unassign($id = null)
+    {
+        # code...
+        $this->Padr->id = $id;
+        if (!$this->Padr->exists()) {
+            $this->Session->setFlash(__('Could not verify the Padr report ID. Please ensure the ID is correct.'), 'flash_error');
+            $this->redirect('/');
+        }
+        $this->Padr->saveField('assigned_by', '');
+        $this->Padr->saveField('assigned_to', '');
+        $this->Padr->saveField('assigned_date', '');
+
+        // Send an asignment alert::::
+
+
+        $this->Session->setFlash(__('The Padr has been unassigned successfully'), 'alerts/flash_success');
+        $this->redirect(array('action' => 'view', $id));
     }
 
     public function api_view($token = null)
@@ -323,8 +383,8 @@ class PadrsController extends AppController
     {
         # code...
         if ($this->request->is('post')) {
-            if (!empty($this->request->data['Padrs']['excel_file']['tmp_name'])) {
-                $file = $this->request->data['Padrs']['excel_file'];
+            if (!empty($this->request->data['Padr']['excel_file']['tmp_name'])) {
+                $file = $this->request->data['Padr']['excel_file'];
                 $ext = substr(strtolower(strrchr($file['name'], '.')), 1);
                 $arr_ext = array('csv');
                 if (in_array($ext, $arr_ext)) {
@@ -367,12 +427,14 @@ class PadrsController extends AppController
                     }
                     fclose($file);
                     $this->Flash->success(__('File uploaded successfully.'), 'flash_success');
-                    $this->redirect(array('action' => 'manager_index'));
+                    $this->redirect($this->referer());
                 } else {
                     $this->Flash->error(__('The report could not be saved. Please, try again.'), 'flash_error');
+                    $this->redirect($this->referer());
                 }
             } else {
-                $this->Flash->error(__('The report could not be saved. Please, try again.'), 'flash_error');
+                $this->Flash->error(__('The report could not be saved. Please, try again with a valid csv file'), 'flash_error');
+                $this->redirect($this->referer());
             }
         }
         $counties = $this->Padr->County->find('list', array('order' => array('County.county_name')));

@@ -93,10 +93,7 @@ class UsersController extends AppController
                             // $active_date is earlier than today, return an error
                             $this->Session->setFlash('Your account has expired! Please contact PPB.', 'alerts/flash_error');
                             $this->redirect($this->Auth->logout()); 
-                        } else {
-                            $this->Session->setFlash('The account is active and can proceed to login .', 'alerts/flash_success');
-                            $this->redirect($this->Auth->logout());
-                        }
+                        } 
                     } else {
                         // do something if $active_date is null or empty
                         $this->Session->setFlash('Your account has expired! Please contact PPB.', 'alerts/flash_error');
