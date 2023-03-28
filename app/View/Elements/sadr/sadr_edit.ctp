@@ -427,11 +427,11 @@ $this->Html->script('sadr', array('inline' => false));
 			<!--/row-->
 			<hr>
 			<?php echo $this->element('multi/list_of_drugs'); ?>
-			 
+
 			<?php echo $this->element('multi/list_of_medicines'); ?>
 
 			<div class="row-fluid">
-				<div class="span6">
+				<div class="span6 editable">
 					<h5 style="color: #884805;">Dechallenge/Rechallenge</h5>
 					<?php
 					echo "<p>Did the reaction resolve after the drug was stopped or when the dose was reduced?</p>";
@@ -503,13 +503,15 @@ $this->Html->script('sadr', array('inline' => false));
                                 </div> </div>',
 						'options' => array('N/A' => 'N/A'),
 					));
-
-					echo $this->Form->input('lab_investigation', array(
-						'rows' => 2, 'label' => array('class' => 'control-label required', 'text' => 'Any lab investigations and results'),
-					));
-
-
 					?>
+					<div class="editable"><?php
+											echo $this->Form->input('lab_investigation', array(
+												'rows' => 2, 'label' => array('class' => 'control-label required ', 'text' => 'Any lab investigations and results'),
+											));
+
+
+											?>
+					</div>
 					<p class="required">Outcome <span style="color:red;">*</span></p>
 					<?php
 					echo $this->Form->input('outcome', array(
@@ -614,10 +616,15 @@ $this->Html->script('sadr', array('inline' => false));
 						'error' => array('attributes' => array('wrap' => 'p', 'class' => 'required error')),
 						'before' => '<label class="radio inline">',
 						'after' => '</label> 
-                                     <span class="help-inline" style="padding-top: 5px;"> <a class="tooltipper" data-original-title="Clears the checked value"
-                                     onclick="$(\'.serious,.serious_reason\').removeAttr(\'checked disabled\')">
-                                     <em class="accordion-toggle">clear!</em></a> </span>
-                                     </div> </div>',
+                <span class="help-inline" style="padding-top: 5px;">
+                    <a class="tooltipper" data-original-title="Clears the checked value"
+                        onclick="$(\'.serious,.serious_reason\').removeAttr(\'checked disabled\')"
+                        id="clearButton">
+                        <em class="accordion-toggle">clear!</em>
+                    </a>
+                </span>
+            </div>
+        </div>',
 						'options' => array('No' => 'No'),
 					));
 					?>
@@ -714,10 +721,10 @@ $this->Html->script('sadr', array('inline' => false));
 			<?php echo $this->element('help/assessment'); ?>
 
 			<div class="row-fluid">
-				<div class="span12">
+				<div class="span12 editable">
 					<?php
-					echo $this->Form->input('any_other_comment', array('class' => 'span8',  'rows' => '2', 'label' => array(
-						'class' => 'control-label',
+					echo $this->Form->input('any_other_comment', array('class' => 'span8 ',  'rows' => '2', 'label' => array(
+						'class' => 'control-label ',
 						'text' => 'ANY OTHER COMMENT'
 					)));
 					?>

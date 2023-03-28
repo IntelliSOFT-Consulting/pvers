@@ -76,7 +76,12 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
           <ul class="nav">
             <li class="<?php echo $this->fetch('Home'); ?>"><a href="/"><i class="fa fa-home"></i> Home</a></li>
             <li class="<?php echo $this->fetch('About'); ?>"><a href="/pages/about"><i class="fa fa-book"></i> About</a></li>
-            <li class="<?php echo $this->fetch('PADR'); ?>"><a href="/padrs/add"><i class="fa fa-pencil" aria-hidden="true"></i> Report</a></li>
+            <?php if ($this->Session->read('Auth.User')) {
+               
+            } else {
+              echo '<li class="' . $this->fetch('PADR') . '">' . $this->Html->link('<i class="fa fa-pencil"></i> Report', array('controller' => 'padrs', 'action' => 'add'), array('escape' => false)) . '</li>';
+            } ?>
+            
             <li class="<?php echo $this->fetch('Summaries'); ?>"><a href="/reports/index"><i class="fa fa-bar-chart" aria-hidden="true"></i> Summaries</a></li>
             <li class="<?php echo $this->fetch('ContactUs'); ?>"><a href="/feedbacks/add"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Contact us</a></li>
           </ul>

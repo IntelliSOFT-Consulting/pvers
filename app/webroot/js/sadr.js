@@ -3,11 +3,53 @@ $(document).ready(function () {
     $("#SadrCountyId").combobox();
 
     if ($('#SadrReportType').val() == 'Followup') {
-        $('#SadrReporterEditForm :input').attr('readonly', 'readonly');
-        // $('#SadrReporterEditForm select').prop('disabled', true);
-        // $('#SadrReporterEditForm input:checkbox').prop('disabled', true);
+        $('#SadrReporterEditForm :input').attr('readonly', 'readonly');  
+        $('.editable :input').prop('disabled', false).attr('readonly', false); 
+        if ($('#SadrSeriousYes').is(':checked')) {
+            console.log('Yes was selected initially'); 
+            $('#SadrSeriousNo').prop('disabled', true); // disable the "No" option
+            $('#clearButton').prop('disabled', true);
+        } 
 
-        $('.editable :input').prop('disabled', false).attr('readonly', false);
+        // Handle the scale for severity
+        if ($('#SadrSeverityMild').is(':checked')) {
+            $('#SadrSeverityMild').prop('disabled', false); 
+            $('#SadrSeverityModerate').prop('disabled', false); 
+            $('#SadrSeveritySevere').prop('disabled', false);
+            $('#SadrSeverityFatal').prop('disabled', false);
+            $('#SadrSeverityUnknown').prop('disabled', true);
+        }
+        if ($('#SadrSeverityModerate').is(':checked')) {
+            $('#SadrSeverityMild').prop('disabled', true); 
+            $('#SadrSeverityModerate').prop('disabled', false); 
+            $('#SadrSeveritySevere').prop('disabled', false);
+            $('#SadrSeverityFatal').prop('disabled', false);
+            $('#SadrSeverityUnknown').prop('disabled', true);
+        }
+        if ($('#SadrSeveritySevere').is(':checked')) {
+            $('#SadrSeverityMild').prop('disabled', true); 
+            $('#SadrSeverityModerate').prop('disabled', true); 
+            $('#SadrSeveritySevere').prop('disabled', false);
+            $('#SadrSeverityFatal').prop('disabled', false);
+            $('#SadrSeverityUnknown').prop('disabled', true);
+        }
+        if ($('#SadrSeverityFatal').is(':checked')) {
+            $('#SadrSeverityMild').prop('disabled', true); 
+            $('#SadrSeverityModerate').prop('disabled', true); 
+            $('#SadrSeveritySevere').prop('disabled', true);
+            $('#SadrSeverityFatal').prop('disabled', false);
+            $('#SadrSeverityUnknown').prop('disabled', true);
+        }
+        if ($('#SadrSeverityUnknown').is(':checked')) {
+            $('#SadrSeverityMild').prop('disabled', false); 
+            $('#SadrSeverityModerate').prop('disabled', false); 
+            $('#SadrSeveritySevere').prop('disabled', false);
+            $('#SadrSeverityFatal').prop('disabled', false);
+            $('#SadrSeverityUnknown').prop('disabled', false);
+        }
+
+        
+
     }
 
     //Person submitting

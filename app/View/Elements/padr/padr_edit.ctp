@@ -289,15 +289,8 @@ $this->Html->css('padr', false, array('inline' => false));
                                 'between' => '<input type="hidden" value="0" id="Medication_sadr_died_" name="data[Padr][sadr_died]">
                                                                     <label class="checkbox">',
                                 'after' => 'Patient died </label>',
-                            ));
-
-
-
-                            // echo $this->Form->input('User.reactors', array('multiple' => 'checkbox', 'options' => ['red yes' => 'red eyes', 'vomitting' => 'vomitting']));
-                            ?>
-                        </div>
-                        <!--/span-->
-                        <div class="span4">
+                            ));  ?>
+                        
                             <?php
                             echo $this->Form->input('description_of_reaction', array(
                                 'class' => 'span11', 'rows' => '1', 'between' => false, 'div' => false,

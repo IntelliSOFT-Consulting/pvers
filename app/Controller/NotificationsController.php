@@ -135,6 +135,15 @@ class NotificationsController extends AppController {
         $this->index();
     }
 
+    public function csv_export($notifications = null)
+    {
+        # code...
+        $this->response->download('Notifications_' . date('Ymd_Hi') . '.csv'); // <= setting the file name
+        $this->set(compact('notifications'));
+        $this->layout = false;
+        $this->render('csv_export');
+    }
+
 /**
  * view method
  *

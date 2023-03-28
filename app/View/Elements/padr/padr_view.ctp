@@ -110,11 +110,10 @@ $nchecked = "&#x2610;";
                             <p> <?php echo ($padr['Padr']['sadr_urination']   ? $ichecked : $nchecked); ?> Abnormal changes with urination </p>
                             <p> <?php echo ($padr['Padr']['sadr_eyes']   ? $ichecked : $nchecked); ?> Red, painful eyes </p>
                             <p> <?php echo ($padr['Padr']['sadr_died']   ? $ichecked : $nchecked); ?> Patient died </p>
-
-                        </td>
-                        <td style="width: 30%;">
-                            Other side effects experienced:
-                            <br><strong><?php echo $padr['Padr']['description_of_reaction'] ?></strong>
+                            <p>
+                                Other side effects experienced:
+                                <br><strong><?php echo $padr['Padr']['description_of_reaction'] ?></strong>
+                            </p>
                         </td>
                         <td>
                             When did the reaction start?
@@ -223,7 +222,7 @@ $nchecked = "&#x2610;";
                             } elseif ($outcome == 'unknown') {
                                 echo 'Unknown';
                             }
-                            ?> </td> 
+                            ?> </td>
                         <td style="width: 30%;"></td>
                         <td style="width: 25%;"></td>
                     </tr>

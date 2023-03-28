@@ -531,7 +531,9 @@ class UsersController extends AppController
         }
         $groups = $this->User->Group->find('list');
         $this->set(compact('groups'));
-        $designations = $this->User->Designation->find('list');
+        $designations = $this->User->Designation->find('list',array(
+            'order'=>array('Designation.name'=>'asc')
+        ));
         $this->set(compact('designations'));
         $counties = $this->User->County->find('list');
         $this->set(compact('counties'));
@@ -618,7 +620,9 @@ class UsersController extends AppController
         }
         $counties = $this->User->County->find('list', array('order' => 'County.county_name ASC'));
         $this->set(compact('counties'));
-        $designations = $this->User->Designation->find('list');
+        $designations = $this->User->Designation->find('list',array(
+            'order'=>array('Designation.name'=>'asc')
+        ));
         $this->set(compact('designations'));
     }
 
@@ -699,7 +703,9 @@ class UsersController extends AppController
         }
         $counties = $this->User->County->find('list', array('order' => 'County.county_name ASC'));
         $this->set(compact('counties'));
-        $designations = $this->User->Designation->find('list');
+        $designations = $this->User->Designation->find('list',array(
+            'order'=>array('Designation.name'=>'asc')
+        ));
         $this->set(compact('designations'));
     }
 
@@ -1060,7 +1066,9 @@ class UsersController extends AppController
         } else {
             $this->request->data = $this->User->read(null, $id);
         }
-        $designations = $this->User->Designation->find('list');
+        $designations = $this->User->Designation->find('list',array(
+            'order'=>array('Designation.name'=>'asc')
+        ));
         $this->set(compact('designations'));
         $counties = $this->User->County->find('list');
         $this->set(compact('counties'));
@@ -1138,7 +1146,9 @@ class UsersController extends AppController
         }
         $groups = $this->User->Group->find('list');
         $this->set(compact('groups'));
-        $designations = $this->User->Designation->find('list');
+        $designations = $this->User->Designation->find('list',array(
+            'order'=>array('Designation.name'=>'asc')
+        ));
         $this->set(compact('designations'));
         $counties = $this->User->County->find('list');
         $this->set(compact('counties'));
