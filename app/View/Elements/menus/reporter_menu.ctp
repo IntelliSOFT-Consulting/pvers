@@ -28,6 +28,13 @@
                 array('controller' => 'pqmps', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
           } ?>
      </li>
+     <li class="<?php echo $this->fetch('CE2B') ?>">
+        <?php
+         if($this->Session->read('Auth.User.user_type')=="Market Authority"){
+            echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> E2Bs',
+                array('controller' => 'ce2bs', 'action'=>'index', 'reporter' => true ), array('escape' => false ));
+          } ?>
+     </li>
      <li class="<?php echo $this->fetch('DEV') ?>">
         <?php
             if($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Html->link('<i class="fa fa-stethoscope" aria-hidden="true"></i> Devices',

@@ -358,11 +358,6 @@ class SadrsController extends AppController
             $this->redirect('/');
         }
 
-        if (strpos($this->request->url, 'pdf') !== false) {
-            $this->pdfConfig = array('filename' => 'SADR_' . $id . '.pdf',  'orientation' => 'portrait');
-            // $this->response->download('SADR_'.$sadr['Sadr']['id'].'.pdf');
-        }
-
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['continueEditing'])) {
                 $this->Sadr->saveField('submitted', 0);

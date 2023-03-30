@@ -80,12 +80,9 @@ class UsersController extends AppController
                 }
 
                 // Check if it's the mini manager::: Check active date
-                if ($this->Auth->User('group_id') == '6') {
+                if ($this->Auth->User('group_id') == '5') {
                     $active_date = $this->Auth->User('active_date');
-                    if (!empty($active_date)) {
-                        // check if valid
-                        // debug($active_date);
-                        // exit;
+                    if (!empty($active_date)) { 
                         $today = date('Y-m-d');
                         $active_date_obj = date('Y-m-d', strtotime($active_date));
 
@@ -105,9 +102,8 @@ class UsersController extends AppController
                 if ($this->Auth->User('group_id') == '1') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'admin' => true));
                 if ($this->Auth->User('group_id') == '2') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'manager' => true));
                 if ($this->Auth->User('group_id') == '3') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'reporter' => true));
-                if ($this->Auth->User('group_id') == '4') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'partner' => true));
-                // mini manager role
-                if ($this->Auth->User('group_id') == '6') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'reviewer' => true));
+                if ($this->Auth->User('group_id') == '4') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'partner' => true)); 
+                if ($this->Auth->User('group_id') == '5') $this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'reviewer' => true));
             } else {
                 $this->Session->setFlash('Your username or password is incorrect.', 'alerts/flash_error');
             }

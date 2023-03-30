@@ -47,10 +47,13 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
   echo $this->fetch('css');
   echo $this->fetch('script');
   echo $this->Html->meta('icon', $this->webroot . 'img/favicon.ico');
+  // echo $this->Html->css('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css') ;
+  // echo $this->Html->script('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js');
+  
   ?>
 </head>
 
-<body class="">
+<body">
   <div class="navbar navbar-<?php echo $redir; ?> navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
@@ -89,15 +92,15 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
     </div>
   </div>
 
-  <div class="container-fluid">
+  <div class="container-fluid" id="page-container>
     <div id="content">
       <?php
       if ($this->Session->read('Auth.User.group_id')) {
         if ($this->Session->read('Auth.User.group_id') == '1') echo $this->element('menus/admin_menu');
         if ($this->Session->read('Auth.User.group_id') == '2') echo $this->element('menus/manager_menu');
         if ($this->Session->read('Auth.User.group_id') == '3') echo $this->element('menus/reporter_menu');
-        if ($this->Session->read('Auth.User.group_id') == '4') echo $this->element('menus/partner_menu');
-        if ($this->Session->read('Auth.User.group_id') == '6') echo $this->element('menus/reviewer_menu');
+        if ($this->Session->read('Auth.User.group_id') == '4') echo $this->element('menus/partner_menu'); 
+        if ($this->Session->read('Auth.User.group_id') == '5') echo $this->element('menus/reviewer_menu');
       }
       ?>
       <?php echo $this->Flash->render(); ?>
@@ -112,7 +115,7 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
 
   </div><!--/.fluid-container-->
 
-  <footer class="section footer-classic footer-<?php echo $redir; ?> context-dark bg-image"><!-- 474b35 37462d-->
+  <footer id="footer" class="section footer-classic footer-<?php echo $redir; ?> context-dark bg-image"><!-- 474b35 37462d-->
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span4">
