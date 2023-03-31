@@ -172,6 +172,12 @@
     min-height: 100px;
   }
 
+  .blank_login{
+    min-height: 130px;
+  }
+  .blank_forgot{
+    min-height: 175px;
+  }
 .accordion .card{
     background-color: #F7F7F7;
 }
@@ -195,5 +201,9 @@
   .accordion .card-header .card-title {
     /* adjust styles as needed */
     margin-bottom: 15px;
+  }
+  #submit-report {
+    height: 120px;
+    text-align: center;
   }
   

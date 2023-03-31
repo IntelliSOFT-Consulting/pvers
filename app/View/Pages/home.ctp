@@ -15,12 +15,12 @@ $this->Html->css('upgrade', false, array('inline' => false));
         <img src="/img/public2.png" />
             <div class="launch"> 
               
-            <span style="display: flex; align-items: center; align-self: center; text-align: center; margin-left: 20px;">Public Reporter</span>   
+            <span style="display: flex; align-items: center; align-self: center; text-align: center; margin-left: 20px;">General Public</span>   
             </div>
         </a>
     </div>
     <div class="inner_section" id="section" > 
-        <a href="/users/login">
+        <a href="/users/provider">
         <img src="/img/health2.png" />
             <div class="launch">
                 <span style="display: flex; align-items: center; align-self: center; text-align: center;">Healthcare Provider</span>
@@ -29,7 +29,7 @@ $this->Html->css('upgrade', false, array('inline' => false));
     </div>
     <div class="inner_section" id="section" >
         
-        <a href="/users/login">
+        <a href="/users/provider">
         <img src="/img/health2.png" />
             <div class="launch">
                 <span style="display: flex; align-items: center; align-self: center; text-align: center;">Market Authorisation Holder</span>

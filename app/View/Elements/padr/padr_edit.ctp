@@ -428,9 +428,10 @@ $this->Html->css('padr', false, array('inline' => false));
                 'options' => array(
                     'recovered/resolved' => 'Recovered/resolved',
                     'recovering/resolving' => 'Recovering/resolving',
-                    'recovered/resolved with sequelae' => 'Recovered/resolved with sequelae',
+                    'recovered/resolved with sequelae' => 'Recovered/resolved with sequelae', //sequele meaning: you've recovered but still has hidden
+                    // 'recovered/resolved with sequelae' => 'Recovered/resolved with long term effects', //sequele meaning: you've recovered but still has hidden effects
                     'not recovered/not resolved' => 'Not recovered/not resolved',
-                    'fatal' => 'Fatal',
+                    'death' => 'Death',
                     'unknown' => 'Unknown',
                 ),
                 'label' => array('class' => 'control-label required', 'text' => 'Outcome'),
