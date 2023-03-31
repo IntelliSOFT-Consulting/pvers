@@ -23,17 +23,23 @@
     font-size: 20px;
     width: 100%;
 }
+
 .footer_text {
     text-align: center;
-    margin: auto;  
+    margin: auto;
     width: 100%;
     text-transform: uppercase;
 
 }
-#section{
-    background-color: #F7F7F7; position: relative; padding: 0; margin: 15;
+
+#section {
+    background-color: #F7F7F7;
+    position: relative;
+    padding: 0;
+    margin: 15;
 }
- /* Home Container */
+
+/* Home Container */
 .home_container {
     width: 750px;
     margin: 20px auto 0;
@@ -49,33 +55,36 @@
     color: #646464;
     font-size: 16px;
 }
+
 .card {
     background-color: #ffffff;
     border: 1px solid #cccccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-  }
- 
-
-#parent_card{ 
-    background-color:  #F7F7F7;
 }
+
+
+#parent_card {
+    background-color: #F7F7F7;
+}
+
 .inner_section {
     position: relative;
     width: 207px;
     min-height: 200px;
     display: inline-block;
-    margin: 10px 15px; 
+    margin: 10px 15px;
     background: #fff;
     padding: 5px;
     border-radius: 11px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     z-index: 2;
-    vertical-align: top; 
+    vertical-align: top;
     justify-content: flex-start;
 }
+
 .inner_section_drugs {
     position: relative;
     width: 100%;
@@ -96,18 +105,22 @@
 }
 
 .launch {
-    background-color: #fff; 
+    background-color: #fff;
     width: 100%;
-    height: 100px; 
-    position: absolute; 
-    bottom: 0; 
-    display: flex; 
-    align-items: center; 
-    margin: 0; padding: 0;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
     border-radius: 11px;
 }
-.display{
-    display: flex; align-items: center; align-self: center;
+
+.display {
+    display: flex;
+    align-items: center;
+    align-self: center;
 }
 
 .launch img {
@@ -154,3 +167,33 @@
 .info-details>div {
     margin: 10px 0;
 }
+
+.blank_public{
+    min-height: 100px;
+  }
+
+.accordion .card{
+    background-color: #F7F7F7;
+}
+.accordion .card-header:after {
+    font-family: 'FontAwesome';
+    float: right;  
+    content: "\f077";
+    font-weight: bold;
+}
+
+.accordion .card-header.collapsed:after {
+    /* symbol for "collapsed" panels */
+    font-weight: bold;
+    content: "\f078";
+}
+.accordion .card-header {
+    border-bottom: 1px solid #dee2e6;
+    /* other styles */
+  }
+  
+  .accordion .card-header .card-title {
+    /* adjust styles as needed */
+    margin-bottom: 15px;
+  }
+  

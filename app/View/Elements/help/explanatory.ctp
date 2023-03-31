@@ -89,5 +89,5 @@
 				  </div>
 				</div>
 			</div>
-		</div><!--/span-->
-	</div><!--/row-->
+		</div>
+	</div>
