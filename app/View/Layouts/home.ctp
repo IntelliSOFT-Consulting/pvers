@@ -113,35 +113,34 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
 
   </div><!--/.fluid-container-->
 
-  <footer class="section footer-classic footer-<?php echo $redir; ?> context-dark bg-image"><!-- 474b35 37462d-->
+  <footer id="footer" class="section footer-classic footer-<?php echo $redir; ?> context-dark bg-image"><!-- 474b35 37462d-->
     <div class="container-fluid">
+
       <div class="row-fluid">
-        <div class="span4">
+      <div class="span3"> 
+      </div>
+        <div class="span2">
           <div class="pr-xl-4">
             <a class="brand" href="/"><img class="brand-logo-light" src="/img/doktari.png"></a>
-            <p> Ensuring Safety, Quality and Efficacy of Medicines.</p>
-            <!-- Rights-->
-            <p class="rights"><span>&copy; </span><span class="copyright-year"><?php echo date('Y'); ?></span><span> </span><span>Pharmacy and Poisons Board</span><span>. </span><span>All Rights Reserved.</span></p>
+            <p class="uppercase"> Ensuring Safety, Quality and Efficacy of Medicines.</p>           
           </div>
         </div>
-        <div class="span4">
-          <h5>Contacts</h5>
-          <dl class="contact-list">
-            <dt>Address:</dt>
-            <dd>Lenana Road, Nairobi</dd>
+        <div class="span2"> 
+          <dl class="contact-list" style="text-align: center;"> 
+          <dt>CONTACTS:</dt>
+            <dd>Address:Lenana Road, Nairobi</dd>
           </dl>
-          <dl class="contact-list">
-            <dt>email:</dt>
+          <dl class="contact-list" style="text-align: center;">
+            <dt>EMAIL:</dt>
             <dd><a href="mailto:#">pv@pharmacyboardkenya.org</a></dd>
             <dd><a href="mailto:#">regulatory@pharmacyboardkenya.org</a></dd>
           </dl>
-          <dl class="contact-list">
-            <dt>Tel:</dt>
-            <dd>+254795743049
-            </dd>
+          <dl class="contact-list" style="text-align: center;">
+            <dt >TEL:</dt>
+            <dd>+254795743049</dd>
           </dl>
         </div>
-        <div class="span4 social-inner ">
+        <div class="span2 social-inner ">
           <h5>Links</h5>
           <ul class="nav-list">
             <li><a href="#">About</a></li>
@@ -150,10 +149,15 @@ $cakeDescription = __d('cake_dev', 'PvERS: the Pharmacovigilance Electronic Repo
             <li><a href="#">Contacts</a></li>
           </ul>
         </div>
+        <div class="span3"> 
+      </div>
+      </div>
+      <hr class="dark-line">
+      <div class="footer_text">
+      <p class="rights"><span>&copy; </span><span class="copyright-year"><?php echo date('Y'); ?></span><span> </span><span>Pharmacy and Poisons Board</span><span>. </span><span>All Rights Reserved.</span></p>
       </div>
     </div>
   </footer>
-
 </body>
 
 </html>

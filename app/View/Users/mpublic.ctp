@@ -102,5 +102,8 @@ $this->Html->css('upgrade', false, array('inline' => false));
             </div>
         </div>
     </div>
+    <div class="row-fluid">
+        <div class="blank_public"></div>
+    </div>
 </div>
  

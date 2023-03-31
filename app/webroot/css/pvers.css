@@ -12,29 +12,56 @@
 */
 body {
   padding-top: 60px;
-  margin: 0; 
-} 
- 
+  margin: 0;
+  height: 100%;
+}
+
+.blank {
+  min-height: 218px;
+}
+.blank_public{
+  min-height: 0px;
+}
+.blank_faq{
+  min-height: 545px;
+}
+.blank_contact{
+  min-height: 146px;
+}
+.blank_report{
+  min-height: 140px;
+}
+.blank_report_landing{
+  min-height: 100px;
+}
+
+
+.dark-line {
+  border: none;
+  border-top: 2px solid #333;
+  margin: 0px;
+  padding: 0px;
+}
 
 .footer-default {
-  background: #37462d; 
+  background: #37462D;
 }
 
 .footer-reporter {
-  background: #35354b;
+  background: #37462D;
 }
 
 .footer-manager {
-  background: #354b48;
+  background: #37462D;
 }
 
 .footer-reviewer {
-  background: #354b48;
+  background: #37462D;
 
 }
 
 .footer- {
-  background: #354b48;
+  background: #37462D;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -231,6 +258,10 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .social-container .col {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -338,7 +369,15 @@ p.tablenums {
 }
 
 hr.darker {
-  border-top: 2px solid #c8c8be;
+  border-top: 2px solid #5a5554;
+}
+
+.footer_text {
+  text-align: center;
+  padding-top: 15px;
+  width: 100%;
+  text-transform: uppercase;
+
 }
 
 .center-pills {
@@ -370,6 +409,7 @@ h6 {
 
 hr {
   margin: 5px;
+  color: #061e1b;
 }
 
 .table-pvborderless {

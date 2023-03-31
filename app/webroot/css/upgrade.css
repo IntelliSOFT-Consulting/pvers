@@ -20,11 +20,20 @@
     text-align: center;
     margin: 35px auto 25px;
     color: #646464;
-    font-size: 24px;
+    font-size: 20px;
     width: 100%;
 }
+.footer_text {
+    text-align: center;
+    margin: auto;  
+    width: 100%;
+    text-transform: uppercase;
 
-/* Home Container */
+}
+#section{
+    background-color: #F7F7F7; position: relative; padding: 0; margin: 15;
+}
+ /* Home Container */
 .home_container {
     width: 750px;
     margin: 20px auto 0;
@@ -33,6 +42,13 @@
     /* background: #f8f8f8; */
     z-index: 2;
 }
+
+.home_container>h4 {
+    margin: 0;
+    text-align: center;
+    color: #646464;
+    font-size: 16px;
+}
 .card {
     background-color: #ffffff;
     border: 1px solid #cccccc;
@@ -40,12 +56,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
   }
-.home_container>h4 {
-    margin: 0;
-    text-align: center;
-    color: #646464;
-    font-size: 16px;
-}
+ 
 
 #parent_card{ 
     background-color:  #F7F7F7;

@@ -91,6 +91,7 @@ class ReportsController extends AppController
     {
         $vaccine = $this->request->data['Report']['vaccine_name'];
         $this->loadModel('SadrListOfDrug');
+        $this->loadModel('Sadr');
         $sadr_ids = $this->SadrListOfDrug->find('list', array(
             'conditions' => array('SadrListOfDrug.drug_name LIKE' => '%' . $vaccine . '%'),
             'fields' => array('SadrListOfDrug.sadr_id')
@@ -109,9 +110,11 @@ class ReportsController extends AppController
                 'fields' => array('Sadr.reaction')
             ));
             // get the count of each reaction
-            $data[$reaction['Sadr']['reaction']] = $this->Sadr->find('count', array(
-                'conditions' => array('Sadr.reaction' => $reaction['Sadr']['reaction'])
-            ));
+            if ($reaction) {
+                $data[$reaction['Sadr']['reaction']] = $this->Sadr->find('count', array(
+                    'conditions' => array('Sadr.reaction' => $reaction['Sadr']['reaction'])
+                ));
+            }
         }
         // $criteria['Sadr.submitted'] = array(2, 3);
         $criteria['Sadr.id'] = $sadr_ids;
@@ -163,11 +166,16 @@ class ReportsController extends AppController
 
         $this->set('_serialize', 'data');
         $this->Session->write('results', true);
-        $this->set(compact('data', 'vaccine', 'count', 'county', 'age','sex','year'));
+        $this->set(compact('data', 'vaccine', 'count', 'county', 'age', 'sex', 'year'));
         $this->set('_serialize', 'data');
     }
-
-    public function index()
+public function index()
+{
+    # code...
+    $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+    $this->set(compact('counties'));
+}
+    public function index_latest()
     {
         $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
         $this->set(compact('counties'));
