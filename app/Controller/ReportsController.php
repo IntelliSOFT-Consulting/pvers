@@ -311,13 +311,24 @@ public function index()
             'having' => array('COUNT(*) >' => 0),
         ));
 
+        // SADRs per Year
+        $year = $this->Sadr->find('all', array(
+            'fields' => array('year(ifnull(created, created)) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => $criteria,
+            'group' => array('year(ifnull(created, created))'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        ));
+
 
         $this->set(compact('counties'));
         $this->set(compact('geo'));
         $this->set(compact('sex'));
         $this->set(compact('age'));
+        $this->set(compact('year'));
 
-        $this->set('_serialize', 'geo', 'counties', 'sex', 'age');
+        $this->set('_serialize', 'geo', 'counties', 'sex', 'age','year');
         $this->render('upgrade/summary');
     }
     public function sadrs_by_age()
@@ -454,7 +465,8 @@ public function index()
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -512,7 +524,8 @@ public function index()
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -532,7 +545,8 @@ public function index()
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -552,7 +566,8 @@ public function index()
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -607,7 +622,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('aefis_by_age');
@@ -673,7 +689,8 @@ public function index()
             'group' => array('Vaccine.vaccine_name', 'Vaccine.id'),
             'having' => array('COUNT(distinct AefiListOfVaccine.aefi_id) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -692,7 +709,8 @@ public function index()
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -750,7 +768,8 @@ public function index()
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -770,7 +789,8 @@ public function index()
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -790,7 +810,8 @@ public function index()
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -813,7 +834,8 @@ public function index()
             'group' => array('Designation.name', 'Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('pqmps_by_designation');
@@ -835,7 +857,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -856,7 +879,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -876,7 +900,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -921,7 +946,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -941,7 +967,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -962,7 +989,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -981,7 +1009,8 @@ public function index()
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1000,7 +1029,8 @@ public function index()
             'group' => array('Country.name', 'Country.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1020,7 +1050,8 @@ public function index()
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1040,7 +1071,8 @@ public function index()
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1069,7 +1101,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1102,7 +1135,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1137,7 +1171,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1160,7 +1195,8 @@ public function index()
             'group' => array('Designation.name', 'Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('devices_by_designation');
@@ -1191,7 +1227,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('devices_by_age');
@@ -1211,7 +1248,8 @@ public function index()
             'group' => array('Device.serious'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1230,7 +1268,8 @@ public function index()
             'group' => array('serious_yes'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1249,7 +1288,8 @@ public function index()
             'group' => array('ListOfDevice.brand_name'),
             'having' => array('COUNT(distinct ListOfDevice.device_id) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1268,7 +1308,8 @@ public function index()
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1287,7 +1328,8 @@ public function index()
             'group' => array('outcome'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1307,7 +1349,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1323,10 +1366,11 @@ public function index()
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
             'contain' => array('County'),
             'conditions' => $criteria,
-            'group' => array('County.county_name'),
+            'group' => array('County.county_name','County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1346,7 +1390,8 @@ public function index()
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1366,7 +1411,8 @@ public function index()
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1389,7 +1435,8 @@ public function index()
             'group' => array('Designation.name', 'Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('medications_by_designation');
@@ -1420,7 +1467,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('medications_by_age');
@@ -1441,7 +1489,8 @@ public function index()
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1461,7 +1510,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1481,7 +1531,8 @@ public function index()
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1506,7 +1557,8 @@ public function index()
             'group' => array('MedicationProduct.product_name_i'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1530,7 +1582,8 @@ public function index()
             'group' => array('MedicationProduct.product_name_ii'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1575,7 +1628,8 @@ public function index()
             'group' => array('MedicationProduct.generic_name_i'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1620,7 +1674,8 @@ public function index()
             'group' => array('MedicationProduct.generic_name_ii'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1639,7 +1694,8 @@ public function index()
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1659,7 +1715,8 @@ public function index()
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1679,7 +1736,8 @@ public function index()
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1706,7 +1764,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1733,7 +1792,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1756,7 +1816,8 @@ public function index()
             'group' => array('Designation.name', 'Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('transfusions_by_designation');
@@ -1787,7 +1848,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('transfusions_by_age');
@@ -1808,7 +1870,8 @@ public function index()
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1827,7 +1890,8 @@ public function index()
             'group' => array('adverse_reaction'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1846,7 +1910,8 @@ public function index()
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1866,7 +1931,8 @@ public function index()
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1886,7 +1952,8 @@ public function index()
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1924,7 +1991,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1944,7 +2012,8 @@ public function index()
             'group' => array('previous_transfusion'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1964,7 +2033,8 @@ public function index()
             'group' => array('previous_reactions'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1995,7 +2065,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('saes_by_age');
@@ -2014,7 +2085,8 @@ public function index()
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2032,7 +2104,8 @@ public function index()
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2057,7 +2130,8 @@ public function index()
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2073,7 +2147,8 @@ public function index()
             'group' => array('causality'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2089,7 +2164,8 @@ public function index()
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2105,7 +2181,8 @@ public function index()
             'group' => array('manufacturer_name'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2121,7 +2198,8 @@ public function index()
             'group' => array('application_id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2135,7 +2213,8 @@ public function index()
             'group' => array('SuspectedDrug.generic_name'),
             'having' => array('COUNT(distinct SuspectedDrug.sae_id) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2149,7 +2228,8 @@ public function index()
             'group' => array('ConcomittantDrug.generic_name'),
             'having' => array('COUNT(distinct ConcomittantDrug.sae_id) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }

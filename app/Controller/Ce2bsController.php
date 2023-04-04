@@ -134,6 +134,52 @@ class Ce2bsController extends AppController
             }
             if ($this->Ce2b->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
+
+
+                    // handle the file upload here::
+                    // debug($this->request->data);
+                    // exit;
+
+
+                    // $file = new File($this->request->data['e2b_file_data']['tmp_name']);
+                    // $xmlString = $file->read();
+                    // //End file contents
+     
+    
+                    // try {
+                    //     $xmlObject = Xml::build($xmlString); // Here will throw an exception
+                    // } catch (XmlException $e) {
+                    //     $this->Flash->error('Not a valid E2B file. ' . $e->getMessage());
+                    //     return $this->redirect(['action' => 'edit',$this->Ce2b->id]);
+                    // }
+                    // $report->e2b_content = iconv(
+                    //     mb_detect_encoding($xmlString, mb_detect_order(), true),
+                    //     'utf-8//IGNORE',
+                    //     $xmlString
+                    // ); //iconv(mb_detect_encoding($xmlString), "UTF-8", $xmlString);
+                    // $var = (date("Y") == 2019) ? 28 : 1;
+                    // // $ref = $this->Ce2bs->find()->count() + 1;
+                    // //$ref = $this->Ce2bs->find('all', ['conditions' => ['date_format(Ce2bs.created,"%Y")' => date("Y"), 'Ce2bs.reference_number IS NOT' => null]])->count() + $var;
+                    // $ref = $this->Ce2bs->find()->select(['Ce2bs.reference_number'])
+                    //     ->distinct(['Ce2bs.reference_number'])
+                    //     ->where(['date_format(Ce2bs.created,"%Y")' => date("Y"), 'Ce2bs.reference_number IS NOT' => null])
+                    //     ->count() + $var;
+                    // $ce2b->reference_number = (($ce2b->reference_number)) ?? 'CE2B' . $ref . '/' . date('Y');
+                    // try {
+                    //     if ($this->Ce2bs->save($ce2b)) {
+                    //         $datum = $this->Imports->newEntity(['filename' => $this->request->data['e2b_file']['name']]);
+                    //         $this->Imports->save($datum);
+    
+                    //         $this->Flash->success(__('The E2B File has been saved.'));
+    
+                    //         return $this->redirect(['action' => 'index']);
+                    //     }
+                    // } catch (\PDOException $e) {
+                    //     $this->Flash->error('The E2B File was not saved. ' . $e->getMessage());
+                    //     return $this->redirect(['action' => 'add']);
+                    // }
+
+
                     $this->Ce2b->saveField('submitted', 2);
                     $this->Ce2b->saveField('submitted_date', date("Y-m-d H:i:s"));
                     //lucian

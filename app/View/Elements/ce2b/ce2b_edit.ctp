@@ -69,7 +69,7 @@ $this->Html->script('ce2b', array('inline' => false));
                             'text' => 'COMMENT(s)'
                         )
                     ));
-                    echo $this->Form->input('e2b_file_here', array(
+                    echo $this->Form->input('e2b_file_data', array(
                         'label' => array(
                             'class' => 'control-label required', 
                             'text' => 'XML File <span style="color:red;">*</span>'),

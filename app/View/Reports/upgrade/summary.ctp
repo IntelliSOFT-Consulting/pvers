@@ -153,7 +153,7 @@ $this->Html->css('summary', null, array('inline' => false));
                     <?php
                     foreach ($year as $key => $value) {
                         echo "<tr>";
-                        echo "<th>" . $value[0]['ager'] . "</th>";
+                        echo "<th>" . $value[0]['year'] . "</th>";
                         echo "<td>" . $value[0]['cnt'] . "</td>";
                         echo "</tr>";
                     }

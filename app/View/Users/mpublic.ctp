@@ -15,7 +15,7 @@ $this->Html->css('upgrade', false, array('inline' => false));
     <div class="row-fluid">
         <div class="span8">
             <h2> What can you report on?</h2><br>
-            <p>Any member of the public is able to report any cases of adverse drug<br>reactions or incidents involving medical devices. For minors, parents/gaurdians<br>can report on their behalf.</p>
+            <p>Any member of the public is able to report any cases of adverse drug<br>reactions or incidents involving medical devices and poor quality medical products. For minors, parents/gaurdians<br>can report on their behalf.</p>
             <p>
                 <a class="btn btn-primary btn-lg" href="/padrs/add">
                     <span style="line-height: 60px;">Submit a Report</span>
