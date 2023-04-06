@@ -5,6 +5,7 @@ App::uses('CakeText', 'Utility');
 App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
 App::uses('Router', 'Routing');
+App::uses('Xml', 'Utility');
 
 
 /**
@@ -135,60 +136,47 @@ class Ce2bsController extends AppController
             if ($this->Ce2b->saveAssociated($this->request->data, array('validate' => $validate, 'deep' => true))) {
                 if (isset($this->request->data['submitReport'])) {
 
+                    try {
+                        $file = $this->request->data['Ce2b']['e2b_file_data'];
+                        $xmlString = file_get_contents($file['tmp_name']);
+                        $xml = Xml::build($xmlString);
+                        // Find all the messagereceiveridentifier elements
+                        $elements = $xml->xpath('//messagereceiveridentifier');
 
-                    // handle the file upload here::
-                    // debug($this->request->data);
-                    // exit;
-
-
-                    // $file = new File($this->request->data['e2b_file_data']['tmp_name']);
-                    // $xmlString = $file->read();
-                    // //End file contents
-     
-    
-                    // try {
-                    //     $xmlObject = Xml::build($xmlString); // Here will throw an exception
-                    // } catch (XmlException $e) {
-                    //     $this->Flash->error('Not a valid E2B file. ' . $e->getMessage());
-                    //     return $this->redirect(['action' => 'edit',$this->Ce2b->id]);
-                    // }
-                    // $report->e2b_content = iconv(
-                    //     mb_detect_encoding($xmlString, mb_detect_order(), true),
-                    //     'utf-8//IGNORE',
-                    //     $xmlString
-                    // ); //iconv(mb_detect_encoding($xmlString), "UTF-8", $xmlString);
-                    // $var = (date("Y") == 2019) ? 28 : 1;
-                    // // $ref = $this->Ce2bs->find()->count() + 1;
-                    // //$ref = $this->Ce2bs->find('all', ['conditions' => ['date_format(Ce2bs.created,"%Y")' => date("Y"), 'Ce2bs.reference_number IS NOT' => null]])->count() + $var;
-                    // $ref = $this->Ce2bs->find()->select(['Ce2bs.reference_number'])
-                    //     ->distinct(['Ce2bs.reference_number'])
-                    //     ->where(['date_format(Ce2bs.created,"%Y")' => date("Y"), 'Ce2bs.reference_number IS NOT' => null])
-                    //     ->count() + $var;
-                    // $ce2b->reference_number = (($ce2b->reference_number)) ?? 'CE2B' . $ref . '/' . date('Y');
-                    // try {
-                    //     if ($this->Ce2bs->save($ce2b)) {
-                    //         $datum = $this->Imports->newEntity(['filename' => $this->request->data['e2b_file']['name']]);
-                    //         $this->Imports->save($datum);
-    
-                    //         $this->Flash->success(__('The E2B File has been saved.'));
-    
-                    //         return $this->redirect(['action' => 'index']);
-                    //     }
-                    // } catch (\PDOException $e) {
-                    //     $this->Flash->error('The E2B File was not saved. ' . $e->getMessage());
-                    //     return $this->redirect(['action' => 'add']);
-                    // }
+                        // Loop through the elements and extract their values
+                        $valid = false;
+                        foreach ($elements as $element) {
+                            $value = (string) $element;
+                            if ($value == 'KE') {
+                                $valid = true;
+                            }
+                        }
+                        if (!$valid) {
+                            $this->Session->setFlash(__('The Ce2b file is not valid. Please try again later'), 'alerts/flash_error');
+                            $this->redirect(array('action' => 'edit', $this->Ce2b->id));
+                        }
+                        try {
+                            $xmlString = $xml->asXML();
+                            $this->Ce2b->saveField('e2b_content', $xmlString);
+                        } catch (Exception $e) {
+                            $this->Session->setFlash(__('Whoops! experienced problems uploading file. Please try again later'), 'alerts/flash_error');
+                            $this->redirect(array('action' => 'edit', $this->Ce2b->id));
+                        }
+                    } catch (XmlException $e) {
+                        $this->Session->setFlash(__('Whoops! experienced problems uploading file. Please try again later'), 'alerts/flash_error');
+                        $this->redirect(array('action' => 'edit', $this->Ce2b->id));
+                    }
 
 
-                    $this->Ce2b->saveField('submitted', 2);
-                    $this->Ce2b->saveField('submitted_date', date("Y-m-d H:i:s"));
                     //lucian
                     // if(empty($sadr->reference_no)) {
                     if (!empty($ce2b['Ce2b']['reference_no']) && $ce2b['Ce2b']['reference_no'] == 'new') {
                         $reference = $this->generateReferenceNumber();
                         $this->Ce2b->saveField('reference_no', $reference);
+                        $this->Ce2b->saveField('submitted', 2);
+                        $this->Ce2b->saveField('submitted_date', date("Y-m-d H:i:s"));
                     }
-                    //bokelo
+
                     // $ce2b = $this->Ce2b->read(null, $id);
 
                     // //******************       Send Email and Notifications to Reporter and Managers          *****************************
@@ -281,13 +269,34 @@ class Ce2bsController extends AppController
         if (!$this->Ce2b->exists()) {
             $this->Session->setFlash(__('Could not verify the Ce2b report ID. Please ensure the ID is correct.'), 'flash_error');
             $this->redirect('/');
-        } 
+        }
         $ce2b = $this->Ce2b->find('first', array(
             'conditions' => array('Ce2b.id' => $id),
-            'contain' => array('Designation','Attachment','ExternalComment')
+            'contain' => array('Designation', 'Attachment', 'ExternalComment')
         ));
-        
-        $this->set('ce2b', $ce2b);
+
+        $data = [];
+        try {
+            $xml = $ce2b['Ce2b']['e2b_content'];
+            $xml = Xml::build($xml);
+            $elements = $xml->xpath('//*');
+
+            foreach ($elements as $element) {
+                $key = $element->getName();
+                $value = (string) $element;
+                if ($key == 'ichicsr' || $key == 'ichicsrmessageheader') {
+                    continue;
+                } else {
+                    $data[] = [
+                        'key' => $key,
+                        'value' => $value
+                    ];
+                }
+            }
+        } catch (Exception $e) {
+        }
+
+        $this->set(['ce2b' => $ce2b, 'data' => $data]);
 
         if (strpos($this->request->url, 'pdf') !== false) {
             $this->pdfConfig = array('filename' => 'Ce2b' . $id . '.pdf',  'orientation' => 'portrait');

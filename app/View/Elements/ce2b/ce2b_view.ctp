@@ -60,6 +60,17 @@ $nchecked = "&#x2610;";
                         <td style="width: 10%;">Value </td>
                         <td style="width: 10%;">Help </td>
                     </tr>
+                    <?php
+
+                    foreach($data as $dt){?>
+                    
+                   
+                    <tr>
+                        <td style="width: 10%;"><?php echo $dt['key'] ?> </td>
+                        <td style="width: 10%;"> <?php echo $dt['value'] ?></td>
+                        <td style="width: 10%;"> </td>
+                    </tr>
+                    <?php } ?>
                 </table>
                 <hr>
 
