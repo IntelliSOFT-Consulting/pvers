@@ -19,12 +19,7 @@ echo $this->Session->flash();
         }
         ?>
         <h3>Ce2b Reports:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view reports</small>
-            <?php
-            if ($redir == 'manager') { ?>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#uploadModal"><i class="fa fa-plus" aria-hidden="true"></i> Upload Excel</button>
-            <?php  }
-            //  echo $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> Upload Excel', array('action' => 'upload'), array('class' => 'btn btn-success', 'escape' => false));
-            ?>
+           
         </h3>
         <hr class="soften" style="margin: 7px 0px;">
     </div>
@@ -192,19 +187,20 @@ echo $this->Session->flash();
                                     array('escape' => false)
                                 );
                                 echo "&nbsp;";
-                                if ($redir == 'manager' || $redir == 'reviewer') echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Download E2B file"> <i class="fa fa-etsy" aria-hidden="true"></i> 2 <i class="fa fa-bold" aria-hidden="true"></i> </span>', array('controller' => 'padrs', 'action' => 'download', $ce2b['Ce2b']['id'], 'ext' => 'xml', 'manager' => false), array('escape' => false), __('Download E2B?'));
-                                echo "&nbsp;";
+                               
                                 if ($redir == 'manager') echo $this->Html->link(
                                     '<span class="label label-warning tooltipper" title="Send to vigiflow"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Vigiflow </span>',
                                     array('controller' => 'ce2bs', 'action' => 'vigiflow', $ce2b['Ce2b']['id'], 'manager' => false),
                                     array('escape' => false)
                                 );
                                 echo "&nbsp;";
-                                if ($redir == 'manager' || $redir == 'reviewer') echo $this->Html->link(
+                                if (($redir == 'manager' || $redir == 'reviewer') && $ce2b['Ce2b']['copied'] == 2) echo $this->Html->link(
                                     '<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
                                     array('controller' => 'ce2bs', 'action' => 'edit', $ce2b['Ce2b']['id']),
                                     array('escape' => false)
                                 );
+                                echo "&nbsp;";
+                                if (($redir == 'manager' || $redir == 'reviewer') && $ce2b['Ce2b']['copied'] == 0) echo $this->Form->postLink('<span class="badge badge-success tooltipper" data-toggle="tooltip" title="Copy & Edit"> <i class="fa fa-copy" aria-hidden="true"></i> Copy </span>', array('controller' => 'ce2bs', 'action' => 'copy', $ce2b['Ce2b']['id']), array('escape' => false), __('Create a clean copy to edit?'));
                             } else {
                                 if ($redir == 'reporter') echo $this->Html->link(
                                     '<span class="label label-success tooltipper" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </span>',
