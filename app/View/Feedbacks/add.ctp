@@ -88,7 +88,9 @@
 
 	</div>
 </div>
-
+<div class="row-fluid">
+	<div class="blank_contact"></div>
+</div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 jQuery('.creload').on('click', function() {

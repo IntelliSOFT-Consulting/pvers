@@ -76,7 +76,9 @@ class CommentsController extends AppController {
     public function manager_report_feedback() {
         $this->report_feedback();
     }
-
+    public function reviewer_report_feedback() {
+      $this->report_feedback();
+  }
     public function reporter_report_feedback() {
         $this->report_feedback();
     }

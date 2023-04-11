@@ -22,7 +22,7 @@
                 echo $this->Form->input('Transfusion.report_type', array('type' => 'hidden'));                    
                 echo $this->Form->input('Transfusion.reference_no', array('type' => 'hidden'));
             ?>
-            <p><b>(FOM20/MIP/PMS/SOP/001)</b></p>
+            <p><b>(FOM20/HPT/VMS/SOP/001)</b></p>
             <div class="row-fluid">
                 <div class="span12">
                     <?php
@@ -33,7 +33,7 @@
                     <h5>MINISTRY OF HEALTH</h5>
                     <h5>PHARMACY AND POISONS BOARD</h5>
                     <h5>P.O. Box 27663-00506 NAIROBI</h5>
-                    <h5>Tel: +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)</h5>
+                    <h5>Tel: +254795743049</h5>
                     <h5><b>Email:</b> pv@pharmacyboardkenya.org</h5>
                     <h5 style="color: red;">ADVERSE TRANSFUSION REACTION FORM </h5>
                     </div>
@@ -97,7 +97,7 @@
                     ?>
                     <div class="well-mine" style="background-color: #f0f099;">
                     <?php
-                        echo $this->Form->input('date_of_birth', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH'),));
+                        echo $this->Form->input('date_of_birth', array('type' => 'text', 'class' => 'date-pick-field', 'label' => array('class' => 'control-label required', 'text' => 'DATE OF BIRTH'.'<span style="color:red;">*</span>'),));
                     ?>
                     <h5 class="controls">--OR--</h5>
                     <?php
@@ -881,7 +881,7 @@
                                 array('label' => array('class' => 'control-label required', 'text' => 'Cadre/designation '.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone', array(
                             'div' => array('class' => 'control-group'),
-                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.'.'<span style="color:red;">*</span>')
                         ));
                         
                         echo $this->Form->input('reporter_date', array(

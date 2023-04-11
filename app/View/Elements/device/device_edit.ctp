@@ -22,7 +22,7 @@
                 echo $this->Form->input('Device.report_type', array('type' => 'hidden'));                    
                 echo $this->Form->input('Device.reference_no', array('type' => 'hidden'));
             ?>
-            <p><b>(FOM019/MIP/PMS/SOP/001)</b></p>
+            <p><b>(FOM019/HPT/VMS/SOP/001)</b></p>
             <div class="row-fluid">
                 <div class="span12">
                     <?php
@@ -33,7 +33,7 @@
                         <h4>MINISTRY OF HEALTH</h4>
                         <h5>PHARMACY AND POISONS BOARD</h5>
                         <h5>P.O. Box 27663-00506 NAIROBI</h5>
-                        <h5>Tel: +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)</h5>
+                        <h5>Tel: +254795743049</h5>
                         <h5><b>Email:</b> pv@pharmacyboardkenya.org/medicaldevices@pharmacyboardkenya.org</h5>
                         <h5 style="color: red;">MEDICAL DEVICES INCIDENT REPORTING FORM</h5>
                     </div>

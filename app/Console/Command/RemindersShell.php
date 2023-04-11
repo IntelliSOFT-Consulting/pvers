@@ -4,6 +4,7 @@ App::uses('ThemeView', 'View');
 App::uses('HtmlHelper', 'View/Helper');
 
 class RemindersShell extends AppShell {
+  
     public $uses = array('Aefi', 'Sadr', 'Pqmp', 'Device', 'Medication', 'Transfusion', 'Message', 'Reminder');
 
     public function main() {
@@ -104,7 +105,7 @@ class RemindersShell extends AppShell {
                 $html = new HtmlHelper(new ThemeView());
                 $message = $this->Message->find('first', array('conditions' => array('name' => 'reporter_reminder_email')));
                 $variables = array(
-                  'name' => $pqmp['User']['name'], 'reference_no' => $pqmp['Pqmp']['reference_no'], 'type' => 'PQMP', 'created' => $pqmp['Pqmp']['created'],
+                  'name' => $pqmp['User']['name'], 'reference_no' => $pqmp['Pqmp']['reference_no'], 'type' => 'PQHPT', 'created' => $pqmp['Pqmp']['created'],
                   'reference_link' => $html->link($pqmp['Pqmp']['reference_no'], array('controller' => 'pqmps', 'action' => 'edit', $pqmp['Pqmp']['id'], 'reporter' => true, 'full_base' => true), 
                     array('escape' => false)),
                   'modified' => $pqmp['Pqmp']['modified']

@@ -1,8 +1,8 @@
 <?php
-  $this->assign('PQMP', 'active');
+  $this->assign('PQHPT', 'active');
  ?>
 
-      <!-- PQMP
+      <!-- PQHPT
     ================================================== -->
 <section id="pqmpsview">
   <ul id="reviewer_tab" class="nav nav-tabs">

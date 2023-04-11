@@ -1,7 +1,7 @@
 <?php
 	$this->assign('REPORTS', 'active');
 ?>
-      <!-- PQMP
+      <!-- PQHPT
     ================================================== -->
 	<h3>SUSPECTED ADVERSE DRUG REACTION FOLLOW UP REPORTS<small> Filter, Search, and export SADR Follow UP Reports</small></h3>
 		<hr>

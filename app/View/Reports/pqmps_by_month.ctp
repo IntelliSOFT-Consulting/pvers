@@ -7,12 +7,12 @@
 <div id="pqmps-by-month"></div>
 
 <hr>
-<h4>PQMPs by Month</h4>
+<h4>PQHPTs by Month</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
             <th>Month</th>
-            <th>PQMPs</th>
+            <th>PQHPTs</th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@ Highcharts.chart('pqmps-by-month', {
         type: 'column'
     },
     title: {
-        text: 'PQMPs by Month'
+        text: 'PQHPTs by Month'
     },
     yAxis: {
         allowDecimals: false,

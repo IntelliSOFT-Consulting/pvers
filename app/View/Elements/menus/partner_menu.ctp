@@ -19,9 +19,9 @@
                         array('controller' => 'aefis', 'action'=>'index', 'partner' => true ), array('escape' => false ));
                     ?>
              </li>
-             <li class="<?php echo $this->fetch('PQMP') ?>">
+             <li class="<?php echo $this->fetch('PQHPT') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> PQMPs',
+                    echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> PQHPTs',
                         array('controller' => 'pqmps', 'action'=>'index', 'partner' => true ), array('escape' => false ));
                     ?>
              </li>
@@ -39,7 +39,7 @@
              </li>
              <li class="<?php echo $this->fetch('TRN') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusion Reactions',
+                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusion Reaction',
                         array('controller' => 'transfusions', 'action'=>'index', 'partner' => true ), array('escape' => false ));
                     ?>
              </li>

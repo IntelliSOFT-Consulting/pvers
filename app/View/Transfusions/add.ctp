@@ -1,5 +1,5 @@
 <?php
-	$this->assign('PQMP', 'active');
+	$this->assign('PQHPT', 'active');
 	// pr($this->Session->read('Auth.User.initial_email'));
  ?>
  
@@ -49,7 +49,7 @@
 											<strong>THE PHARMACY AND POISONS BOARD</strong><br>
 											Lenana Road.<br>
 											<abbr title="Post Office Box">P.O. Box</abbr> 27663-00506 NAIROBI<br>
-											<abbr title="Telephone Number">Tel:</abbr> +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)
+											<abbr title="Telephone Number">Tel:</abbr> +254795743049
 											<abbr title="Fascimile">Fax:</abbr> (020)-2713431 / 2713409 <br>
 											E-mail: <a href="mailto:#">pv@pharmacyboardkenya.org</a>
 
@@ -99,8 +99,8 @@
 						'label' => 'Go to report',
 						'value' => 'Save',
 						'class' => 'btn btn-primary',
-						'id' => 'SadrSubmitEmail', 'title'=>'Start a New PQMP', 
-						'data-content' => 'Please provide us with your email address to start filling in the PQMP.',
+						'id' => 'SadrSubmitEmail', 'title'=>'Start a New PQHPT', 
+						'data-content' => 'Please provide us with your email address to start filling in the PQHPT.',
 						'div' => array(
 							'class' => 'form-actions',
 						)

@@ -7,12 +7,12 @@
 <div id="pqmps-by-complaint"></div>
 
 <hr>
-<h4>PQMPs by Complaint</h4>
+<h4>PQHPTs by Complaint</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
             <th>Complaint</th>
-            <th>PQMPs</th>
+            <th>PQHPTs</th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@ Highcharts.chart('pqmps-by-complaint', {
         type: 'column'
     },
     title: {
-        text: 'PQMPs by Complaint'
+        text: 'PQHPTs by Complaint'
     },
     yAxis: {
         allowDecimals: false,

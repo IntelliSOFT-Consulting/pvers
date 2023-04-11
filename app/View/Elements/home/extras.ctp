@@ -12,7 +12,7 @@
 
 		            </ul>                    
 					<ul class="footer-links clearfix">  	
-						<li class="<?php echo $this->fetch('PQMP') ?>">PQMP</li>
+						<li class="<?php echo $this->fetch('PQHPT') ?>">PQHPT</li>
 						<li class="<?php echo $this->fetch('LOGIN') ?>">Log in</li>
 					</ul>
 				</div> <!-- /span4 -->

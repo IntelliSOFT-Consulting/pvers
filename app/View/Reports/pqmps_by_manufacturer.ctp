@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Manufacturer</th>
-            <th>PQMPs</th>
+            <th>PQHPTs</th>
         </tr>
     </thead>
     <tbody>

@@ -67,7 +67,7 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::load('DebugKit'); // Loads a single plugin named DebugKit
  */
 
-CakePlugin::load('DebugKit');
+CakePlugin::load('DebugKit', ['bootstrap' => false]);
 CakePlugin::load('AclExtras');
 CakePlugin::load('Utils');
 CakePlugin::load('Search');
@@ -132,10 +132,10 @@ Configure::write('API.token.pepper', 'touch2d34asdfpad'); //'https://api.who-umc
 
 // usernameAT=afyamoja
 // apiKey=6347d9066545048e3d0ec2cc11034186861dc47c96c4bc268f9bac61899a357c
-Configure::write('africastalking_api', 'https://api.africastalking.com/version1/messaging'); 
-Configure::write('africastalking_username', 'afyamoja'); 
-Configure::write('africastalking_from', 'INTELLISOFT'); 
-Configure::write('africastalking_key', '6347d9066545048e3d0ec2cc11034186861dc47c96c4bc268f9bac61899a357c'); 
+// Configure::write('africastalking_api', 'https://api.africastalking.com/version1/messaging'); 
+// Configure::write('africastalking_username', 'ppb'); 
+// Configure::write('africastalking_from', 'PPB'); 
+// Configure::write('africastalking_key', 'f5b353d8c1b7aff4ddc0a3bab96c5dc184b5c711e8ce529531083538507dbbc8'); 
 
 spl_autoload_register(function ($class) {
     foreach (App::path('Vendor') as $base) {

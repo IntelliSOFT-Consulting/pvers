@@ -72,7 +72,9 @@
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Year',  array('controller' => 'reports', 'action'=>'sadrs_by_year', 'admin' => false ),
                       array('escape' => false));
         ?>
-      </li>
+      </li> 
+      <?php
+                if($this->Session->read('Auth.User.health_program')!="Cancer/Oncology program"){?>
       <li class="nav-header"><i class="fa fa-child" aria-hidden="true"></i> ADVERSE EVENT FOLLOWING IMMUNIZATION</li>
       <li class="<?php echo $this->fetch('aefis-by-designation'); ?>">
         <?php
@@ -140,6 +142,9 @@
                       array('escape' => false));
         ?>
       </li>
+      <?php } 
+
+      if($this->Session->read('Auth.User.health_program')!="Cancer/Oncology program"){?>
       <li class="nav-header"><i class="fa fa-medkit" aria-hidden="true"></i> POOR QUALITY MEDICINAL PRODUCTS</li>
       <li class="<?php echo $this->fetch('pqmps-by-designation'); ?>">
         <?php
@@ -207,6 +212,8 @@
                       array('escape' => false));
         ?>
       </li>
+      <?php } ?>
+    <?php  if($this->Session->read('Auth.User.health_program')!="Cancer/Oncology program"){?>
       <li class="nav-header"><i class="fa fa-stethoscope" aria-hidden="true"></i> Medical Devices</li>
       <li class="<?php echo $this->fetch('devices-by-designation'); ?>">
         <?php
@@ -273,6 +280,7 @@
                       array('escape' => false));
         ?>
       </li>
+      <?php }?>
       <li class="nav-header"><i class="fa fa-chain-broken" aria-hidden="true"></i> Medication Errors</li>
       <li class="<?php echo $this->fetch('medications-by-designation'); ?>">
         <?php
@@ -359,6 +367,7 @@
         ?>
       </li>
       <li class="divider"></li>
+      <?php  if($this->Session->read('Auth.User.health_program')!="Cancer/Oncology program"){?>
       <li class="nav-header"><i class="fa fa-eyedropper" aria-hidden="true"></i> Blood Transfusion</li>
       <li class="<?php echo $this->fetch('transfusions-by-designation'); ?>">
         <?php
@@ -413,5 +422,6 @@
             echo $this->Html->link('<i class="fa fa-caret-right" aria-hidden="true"></i> Year',  array('controller' => 'reports', 'action'=>'transfusions_by_year', 'admin' => false ), array('escape' => false));
         ?>
       </li>
+      <?php }?>
       <li class="divider"></li>
     </ul>

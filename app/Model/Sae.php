@@ -20,6 +20,7 @@ class Sae extends AppModel {
             'range' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'Sae.created BETWEEN ? AND ?'),
             'start_date' => array('type' => 'query', 'method' => 'dummy'),
             'end_date' => array('type' => 'query', 'method' => 'dummy'),
+            
             'drug_name' => array('type' => 'query', 'method' => 'findByDrugName', 'encode' => true),
         );
     public function makeRangeCondition($data = array()) {

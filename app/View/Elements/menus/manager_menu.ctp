@@ -25,12 +25,18 @@
                         array('controller' => 'aefis', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
-             <li class="<?php echo $this->fetch('PQMP') ?>">
+             <li class="<?php echo $this->fetch('PQHPT') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> PQMPs',
+                    echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> PQHPTs',
                         array('controller' => 'pqmps', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
+             <li class="<?php echo $this->fetch('CE2B') ?>">
+        <?php
+             echo $this->Html->link('<i class="fa fa-medkit" aria-hidden="true"></i> E2Bs',
+             array('controller' => 'ce2bs', 'action'=>'index', 'manager' => true ), array('escape' => false ));
+            ?>
+     </li>
              <li class="<?php echo $this->fetch('DEV') ?>">
                 <?php
                     echo $this->Html->link('<i class="fa fa-stethoscope" aria-hidden="true"></i> Devices',
@@ -39,13 +45,13 @@
              </li>
              <li class="<?php echo $this->fetch('MED') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-chain-broken" aria-hidden="true"></i> Medications',
+                    echo $this->Html->link('<i class="fa fa-chain-broken" aria-hidden="true"></i> Medications Errors',
                         array('controller' => 'medications', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>
              <li class="<?php echo $this->fetch('TRN') ?>">
                 <?php
-                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusions',
+                    echo $this->Html->link('<i class="fa fa-eyedropper" aria-hidden="true"></i> Transfusion Reaction',
                         array('controller' => 'transfusions', 'action'=>'index', 'manager' => true ), array('escape' => false ));
                     ?>
              </li>

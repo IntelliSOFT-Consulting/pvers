@@ -8,7 +8,7 @@
 <div id="pqmps-by-designation"></div>
 
 <hr>
-<h4>PQMPs by Designation</h4>
+<h4>PQHPTs by Designation</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
@@ -38,7 +38,7 @@ Highcharts.chart('pqmps-by-designation', {
         type: 'column'
     },
     title: {
-        text: 'PQMPs by Designation'
+        text: 'PQHPTs by Designation'
     },
     yAxis: {
         allowDecimals: false,

@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Facility</th>
-            <th>PQMPs</th>
+            <th>PQHPTs</th>
         </tr>
     </thead>
     <tbody>

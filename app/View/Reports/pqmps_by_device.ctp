@@ -7,12 +7,12 @@
 <div id="pqmps-by-device"></div>
 
 <hr>
-<h4>PQMPs by Medical Device</h4>
+<h4>PQHPTs by Medical Device</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
             <th>Medical Device</th>
-            <th>PQMPs</th>
+            <th>PQHPTs</th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@ Highcharts.chart('pqmps-by-device', {
         type: 'column'
     },
     title: {
-        text: 'PQMPs by Medical Device'
+        text: 'PQHPTs by Medical Device'
     },
     yAxis: {
         allowDecimals: false,

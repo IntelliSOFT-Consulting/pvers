@@ -27,6 +27,7 @@ class Padr extends AppModel {
         'reporter' => array('type' => 'query', 'method' => 'reporterFilter', 'encode' => true),
         'designation_id' => array('type' => 'value'),
         'gender' => array('type' => 'value'),
+		'submitted' => array('type' => 'value'),
         'submit' => array('type' => 'query', 'method' => 'orConditions', 'encode' => true),
     );
 
@@ -134,6 +135,28 @@ class Padr extends AppModel {
                 'message'  => 'Please provide a patient\'s name or initials'
             ),
         ),
+		'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+				'required' => true,
+                'message'  => 'Please provide phone number'
+            ),
+        ),
+		  //ensure reporter phone is numeric and 10 digits
+		  'reporter_phone' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'minLength' => array(
+                'rule' => array('minLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'maxLength' => array(
+                'rule' => array('maxLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+        ),
 		'date_of_birth' => array(
             'ageOrDate' => array(
                 'rule'     => 'ageOrDate',
@@ -194,20 +217,35 @@ class Padr extends AppModel {
                 'message'  => 'Please provide the name of the reporter'
             ),
         ),
-		'reporter_email' => array(
-            'emailOrMobile' => array(
-                'rule'     => 'emailOrMobile',
-                // 'allowEmpty' => true,
-                'message'  => 'Please provide email or phone number'
+		// 'reporter_email' => array(
+        //     'emailOrMobile' => array(
+        //         'rule'     => 'emailOrMobile',
+        //         // 'allowEmpty' => true,
+        //         'message'  => 'Please provide email or phone number'
+        //     ),
+        // ),
+		'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+				'required' => true,
+                'message'  => 'Please provide phone number'
             ),
         ),
-		'reporter_phone' => array(
-            'emailOrMobile' => array(
-                'rule'     => 'emailOrMobile',
-                // 'allowEmpty' => true,
-                'message'  => 'Please provide email or phone number'
+		  //ensure reporter phone is numeric and 10 digits
+		  'reporter_phone' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please provide a valid phone number',
             ),
-        )
+            'minLength' => array(
+                'rule' => array('minLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'maxLength' => array(
+                'rule' => array('maxLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+        ),
 	);
 
 	public function atLeastYear($field = null) {

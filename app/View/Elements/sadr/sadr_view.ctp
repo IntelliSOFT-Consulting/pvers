@@ -13,7 +13,7 @@
 			<div id="printAreade">
 				<div class="formback">
 
-				<p><b>(FOM001/MIP/PMS/SOP/001)</b></p>
+				<p><b>(FOM001/HPT/VMS/SOP/001)</b></p>
 	            <div class="row-fluid">
 	                <div class="span12">
 	                    <?php
@@ -24,7 +24,7 @@
 	                      <h4>MINISTRY OF HEALTH</h4>
 	                      <h5>PHARMACY AND POISONS BOARD</h5>
 	                      <h5>P.O. Box 27663-00506 NAIROBI</h5>
-	                      <h5>Tel: +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)</h5>
+	                      <h5>Tel: +254795743049</h5>
 	                      <h5><b>Email:</b> pv@pharmacyboardkenya.org</h5>
 	                    <h5 style="color: red;">SUSPECTED ADVERSE DRUG REACTION REPORTING FORM</h5>
 	                    </div>
@@ -73,7 +73,7 @@
 						<td style="width: 25%;">ADDRESS: </td>
 						<td style="width: 25%;"><strong><?php echo $sadr['Sadr']['address'] ?>	</strong></td>
 						<td style="width: 25%;">SUB-COUNTY: </td>
-						<td style="width: 25%;"><strong><?php echo $sadr['SubCounty']['sub_county_name'] ?>	</strong></td>
+						<td style="width: 25%;"><strong><?php echo (!empty($sadr['Sadr']['sub_county_id']))? $sadr['SubCounty']['sub_county_name']:'' ?>	</strong></td>
 					</tr>
 					<tr>
 						<td style="width: 25%;">INSTITUTION CODE: </td>
@@ -132,6 +132,10 @@
 					<tr>
 						<td style="width: 30%;">DIAGNOSIS:</td>
 						<td style="width: 70%;"><strong><?php echo $sadr['Sadr']['diagnosis'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 30%;">REACTION:</td>
+						<td style="width: 70%;"><strong><?php echo $sadr['Sadr']['reaction'] ?></strong></td>
 					</tr>
 					<tr>
 						<td style="width: 25%;">DATE OF ONSET OF REACTION:</td>

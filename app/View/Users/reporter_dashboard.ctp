@@ -7,7 +7,66 @@
     <div class="row-fluid">
         <div class="span8">
             <h4 class="text-success">Reports</h4>
+            
+      <?php  if($this->Session->read('Auth.User.health_program')=="Cancer/Oncology program"){?>
+        <div class="row-fluid">
+            
+            <div class="span4 formback" style="padding: 4px;">
+              <h5>SADRS</h5>
+              <?php
+                echo '<ol>';
+                foreach ($sadrs as $sadr) {
+                  if($sadr['Sadr']['submitted'] > 1) {
+                    echo "<li>";
+                      echo $this->Html->link($sadr['Sadr']['report_title'].' <small class="muted">('.$sadr['Sadr']['reference_no'].')</small>', array('controller' => 'sadrs', 'action' => 'view', $sadr['Sadr']['id']),
+                        array('escape' => false, 'class' => 'text-'.((isset($sadr['Sadr']['serious']) && $sadr['Sadr']['serious'] == 'Yes') ? 'error' : 'success')));
+                      echo "&nbsp;";
+                      echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'sadrs' , 'action' => 'followup', $sadr['Sadr']['id']), array('escape' => false), __('Add a followup report?'));
+                    echo "</li>";
+                  } else {
+                    echo "<li>";
+                      echo $this->Html->link($sadr['Sadr']['reference_no'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'sadrs', 'action' => 'edit', $sadr['Sadr']['id']),
+                        array('escape' => false)); 
+                    echo "</li>";
+                  }
+                }
+                echo '</ol>';
+                echo $this->Html->link('All SADRs >>', array('controller' => 'sadrs', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                if($this->Session->read('Auth.User.user_type') != 'Public Health Program') echo $this->Form->postLink('Report SADR', array('controller' => 'sadrs' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini pull-right'), __('Report New ADR?'));
+
+                
+              ?>
+            </div>
+           
+                <div class="span4 formbackm" style="padding: 4px;">  
+                  <h5>Medication Errors</h5>                  
+                    <?php
+                      echo '<ol>';
+                      foreach ($medications as $medication) {
+                        if($medication['Medication']['submitted'] > 1) {
+                          $generic_name_i = (!empty($medication['MedicationProduct'][0]['generic_name_i'])) ? $medication['MedicationProduct'][0]['generic_name_i'] : $medication['Medication']['reference_no'];
+                          echo "<li>";
+                            echo $this->Html->link($generic_name_i.' <small class="muted">('.$medication['Medication']['reference_no'].')</small>', array('controller' => 'medications', 'action' => 'view', $medication['Medication']['id']),
+                              array('escape' => false, 'class' => 'text-success'));  
+                          echo "&nbsp;";
+                          echo $this->Form->postLink('<span class="label label-inverse tooltipper" data-toggle="tooltip" title="Add follow up report"> <i class="fa fa-facebook" aria-hidden="true"></i> </span>', array('controller' => 'medications' , 'action' => 'followup', $medication['Medication']['id']), array('escape' => false), __('Add a followup report?'));
+                          echo "</li>";
+                        } else {
+                          echo "<li>";
+                            echo $this->Html->link($medication['Medication']['reference_no'].' <small class="muted">(unsubmitted)</small>', array('controller' => 'medications', 'action' => 'edit', $medication['Medication']['id']),
+                              array('escape' => false)); 
+                          echo "</li>";
+                        }
+                      }
+                      echo '</ol>';
+                    echo $this->Html->link('All Errors >>', array('controller' => 'medications', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report Medication Error', array('controller' => 'medications' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New Medication Error?'));
+                    ?>
+                </div>
+              </div>
+      <?php } else{?>
             <div class="row-fluid">
+            
                 <div class="span4 formback" style="padding: 4px;">
                   <h5>SADRS</h5>
                   <?php
@@ -34,8 +93,9 @@
                     
                   ?>
                 </div>
-                <div class="span4 formbacka" style="padding: 4px;">   
-                  <h5>AEFI</h5>                 
+                 
+                <div class="span4 formbacka" style="padding: 4px;">    
+                  <h5>AEFI </h5>                  
                     <?php
                       echo '<ol>';
                       foreach ($aefis as $aefi) {
@@ -59,9 +119,11 @@
                     echo $this->Html->link('All AEFIs >>', array('controller' => 'aefis', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
                     if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report AEFI', array('controller' => 'aefis' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New AEFI?'));
                     ?>
+                   
                 </div>
+                
                 <div class="span4 formbackp" style="padding: 4px;">
-                  <h5>PQMP</h5>
+                  <h5>PQHPT</h5>
                     <?php
                       echo '<ol>';
                       foreach ($pqmps as $pqmp) {
@@ -79,8 +141,8 @@
                         }
                       }
                       echo '</ol>';
-                    echo $this->Html->link('All PQMPs >>', array('controller' => 'pqmps', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
-                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report PQMP', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New PQMP?'));
+                    echo $this->Html->link('All PQHPTs >>', array('controller' => 'pqmps', 'action' => 'index'), array('escape' => false, 'class' => 'btn btn-link'));
+                    if($this->Session->read('Auth.User.user_type') != 'Public Health Program')   echo $this->Form->postLink('Report PQHPT', array('controller' => 'pqmps' , 'action' => 'add'), array('class' => 'btn btn-success pull-right btn-mini'), __('Report New PQHPT?'));
                     ?>
                 </div>
             </div>
@@ -172,9 +234,9 @@
                       <div class="tab-pane" id="internal_report_comments">12600 Letters debat</div>
                     </div> -->
                 </div>
-            </div>
-        </div>
-
+            </div> 
+            <?php } ?>
+        </div> 
         <div class="span4"><!-- Notifications -->          
           <h4 class="text-warning">Notifications!</h4>
           <div class="thumbnail">

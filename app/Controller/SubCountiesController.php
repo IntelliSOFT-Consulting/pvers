@@ -17,7 +17,42 @@ class SubCountiesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('api_index');
+		$this->Auth->allow('api_index','autocomplete');
+	}
+
+	public function autocomplete($county = null)
+	{
+
+		$sub_counties = $this->SubCounty->find('list', 
+		// $sub_counties = $this->SubCounty->find('all', 
+			array(
+				'conditions' => array(
+					'SubCounty.county_id' => $county
+				),
+				'fields' => array('SubCounty.id', 'SubCounty.sub_county_name'),
+				'limit' => 10
+			)
+		);
+		//return the results as a json array
+		$this->set('sub_counties', $sub_counties);
+		$this->set('_serialize', 'sub_counties');
+		 
+
+		// get sub_counties where county id = $county
+		// $sub_counties = $this->SubCounty->find('all', array(
+		// 	'conditions' => array(
+		// 		'SubCounty.county_id' => $county
+		// 	),
+		// 	'fields' => array('SubCounty.id', 'SubCounty.sub_county_name'),
+		// 	'limit' => 10
+		// ));
+		// // return the results
+		// $groups = array();
+		// foreach ($sub_counties as $key => $value) {
+		// 	$groups[] = $value['SubCounty']['sub_county_name'];
+		// }
+		// $this->set('groups', array_values($groups));
+		// $this->set('_serialize', 'groups');
 	}
 /**
  * index method

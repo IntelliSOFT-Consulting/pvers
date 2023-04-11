@@ -1,6 +1,6 @@
 <?php
 	$this->Html->script('jqprint.0.3', array('inline' => false));
-	$this->assign('PQMP', 'active');
+	$this->assign('PQHPT', 'active');
  ?>
 
 
@@ -38,8 +38,8 @@
 						'label' => 'Submit',
 						'value' => 'Save',
 						'class' => 'btn btn-primary',
-						'id' => 'SadrFeedback', 'title'=>'Start a New PQMP',
-						'data-content' => 'Please provide us with your email address to start filling in the PQMP.',
+						'id' => 'SadrFeedback', 'title'=>'Start a New PQHPT',
+						'data-content' => 'Please provide us with your email address to start filling in the PQHPT.',
 						'div' => array(
 							'class' => 'form-actions',
 						)
@@ -92,7 +92,7 @@
 	   <div id="pqmpPrintArea">
 			<div class="vformbackp">
 				<?php
-					echo $this->Html->image('pqmp_header.gif', array('alt' => 'PQMP'));
+					echo $this->Html->image('pqmp_header.gif', array('alt' => 'PQHPT'));
 				?>
 				<br>
 				<br>

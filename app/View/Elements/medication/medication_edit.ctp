@@ -21,7 +21,7 @@
                 echo $this->Form->input('Medication.report_type', array('type' => 'hidden'));                    
                 echo $this->Form->input('Medication.reference_no', array('type' => 'hidden'));
             ?>
-            <p><b>(FOM21/MIP/PMS/SOP/001)</b></p>
+            <p><b>(FOM21/HPT/VMS/SOP/001)</b></p>
             <div class="row-fluid">
                 <div class="span12">
                     <?php
@@ -32,7 +32,7 @@
                         <h4>MINISTRY OF HEALTH</h4>
                         <h5>PHARMACY AND POISONS BOARD</h5>
                         <h5>P.O. Box 27663-00506 NAIROBI</h5>
-                        <h5>Tel: +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)</h5>
+                        <h5>Tel: +254795743049</h5>
                         <h5><b>Email:</b> pv@pharmacyboardkenya.org</h5>
                         <h5 style="color: red;">MEDICATION ERROR REPORTING FORM </h5>
                     </div>
@@ -597,7 +597,7 @@
                                 array('label' => array('class' => 'control-label required', 'text' => 'Cadre/designation '.' <span style="color:red;">*</span>'), 'empty'=>true ));
                         echo $this->Form->input('reporter_phone', array(
                             'div' => array('class' => 'control-group'),
-                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.')
+                            'label' => array('class' => 'control-label required', 'text' => 'PHONE NO.'.' <span style="color:red;">*</span>')
                         ));
                         
                         echo $this->Form->input('reporter_date', array(

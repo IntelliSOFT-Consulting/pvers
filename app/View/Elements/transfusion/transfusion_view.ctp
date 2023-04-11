@@ -7,7 +7,7 @@
 
 				<table style="width: 100%;">
 					<tr>
-						<td><p><b>(FOM20/MIP/PMS/SOP/001)</b></p></td>
+						<td><p><b>(FOM20/HPT/VMS/SOP/001)</b></p></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">
@@ -15,7 +15,7 @@
 		                    <h5>MINISTRY OF HEALTH</h5>
 		                    <h5>PHARMACY AND POISONS BOARD</h5>
 		                    <h5>P.O. Box 27663-00506 NAIROBI</h5>
-		                    <h5>Tel: +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)</h5>
+		                    <h5>Tel: +254795743049</h5>
 		                    <h5><b>Email:</b> pv@pharmacyboardkenya.org</h5>
 		                    <h5 style="color: red;">ADVERSE TRANSFUSION REACTION FORM </h5>
 		                    </div>
@@ -32,7 +32,7 @@
 				<hr>
 
 
-				<table style="width: 100%;">
+				<table style='width: 100%;'>
 					<tr>
 						<td colspan="4"><h4 style="text-align: center; color: #884805;">PATIENT INFORMATION</h4> </td>
 					</tr>

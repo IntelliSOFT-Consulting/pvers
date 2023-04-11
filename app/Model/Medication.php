@@ -43,6 +43,7 @@ class Medication extends AppModel {
         'reporter' => array('type' => 'query', 'method' => 'reporterFilter', 'encode' => true),
         'designation_id' => array('type' => 'value'),
         'gender' => array('type' => 'value'),
+        'submitted' => array('type' => 'value'),
         'submit' => array('type' => 'query', 'method' => 'orConditions', 'encode' => true),
     );
 
@@ -294,7 +295,29 @@ class Medication extends AppModel {
                 'required' => true,
                 'message'  => 'Please provide a valid email address'
             ),
-        )
+        ),
+        'reporter_phone' => array(
+            'notBlank' => array(
+                'rule'     => 'notBlank',
+                'required' => true,
+                'message'  => 'Please provide valid phone number'
+            ),
+        ),
+          //ensure reporter phone is numeric and 10 digits
+          'reporter_phone' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'minLength' => array(
+                'rule' => array('minLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+            'maxLength' => array(
+                'rule' => array('maxLength', 10),
+                'message' => 'Please provide a valid phone number',
+            ),
+        ),
     );
 
     public function ageOrDate($field = null) {

@@ -1,0 +1,209 @@
+.clint-logo-wrapper {
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.clint-logo-wrapper img {
+    max-width: 200px;
+    vertical-align: middle;
+    max-height: 120px;
+}
+
+.clint-logo-wrapper span {
+    vertical-align: middle;
+    color: #888;
+    font-size: 20px;
+}
+
+.header_text {
+    text-align: center;
+    margin: 35px auto 25px;
+    color: #646464;
+    font-size: 20px;
+    width: 100%;
+}
+
+.footer_text {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    text-transform: uppercase;
+
+}
+
+#section {
+    background-color: #F7F7F7;
+    position: relative;
+    padding: 0;
+    margin: 15;
+}
+
+/* Home Container */
+.home_container {
+    width: 750px;
+    margin: 20px auto 0;
+    padding: 0 15px 20px;
+    overflow: hidden;
+    /* background: #f8f8f8; */
+    z-index: 2;
+}
+
+.home_container>h4 {
+    margin: 0;
+    text-align: center;
+    color: #646464;
+    font-size: 16px;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+
+#parent_card {
+    background-color: #F7F7F7;
+}
+
+.inner_section {
+    position: relative;
+    width: 207px;
+    min-height: 200px;
+    display: inline-block;
+    margin: 10px 15px;
+    background: #fff;
+    padding: 5px;
+    border-radius: 11px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    z-index: 2;
+    vertical-align: top;
+    justify-content: flex-start;
+}
+
+.inner_section_drugs {
+    position: relative;
+    width: 100%;
+    min-height: 20px;
+    display: inline-block;
+    margin: 10px 15px;
+    background: #fff;
+    padding: 0px;
+    border-radius: 11px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    z-index: 2;
+    vertical-align: top;
+}
+
+.inner_section:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.launch {
+    background-color: #fff;
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border-radius: 11px;
+}
+
+.display {
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.launch img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 15px auto;
+}
+
+.launch span {
+    min-height: 55px;
+    display: inline-block;
+    color: #6d4926;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.info {
+    padding: 10px;
+    position: relative;
+}
+
+.info-icon {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    display: inline-block;
+    cursor: pointer;
+    width: 17px;
+    height: 17px;
+    background-color: transparent;
+    border: 1px solid darkgray;
+    padding: 0px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.info-details {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.info-details>div {
+    margin: 10px 0;
+}
+
+.blank_public{
+    min-height: 100px;
+  }
+
+  .blank_login{
+    min-height: 130px;
+  }
+  .blank_forgot{
+    min-height: 175px;
+  }
+.accordion .card{
+    background-color: #F7F7F7;
+}
+.accordion .card-header:after {
+    font-family: 'FontAwesome';
+    float: right;  
+    content: "\f077";
+    font-weight: bold;
+}
+
+.accordion .card-header.collapsed:after {
+    /* symbol for "collapsed" panels */
+    font-weight: bold;
+    content: "\f078";
+}
+.accordion .card-header {
+    border-bottom: 1px solid #dee2e6;
+    /* other styles */
+  }
+  
+  .accordion .card-header .card-title {
+    /* adjust styles as needed */
+    margin-bottom: 15px;
+  }
+  #submit-report {
+    height: 120px;
+    text-align: center;
+  }
+  

@@ -30,7 +30,9 @@ class DosesController extends AppController {
 
 	public function api_index() {
 		$this->Dose->recursive = -1;
-		$this->set('doses', $this->Dose->find('list', array('order' => array('Dose.name' => 'asc'))));
+		$this->set('doses', $this->Dose->find('list'
+		// , array('order' => array('Dose.name' => 'asc'))
+	));
 		$this->set('_serialize', array('doses'));
 	}
 

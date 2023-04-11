@@ -49,7 +49,7 @@ class EmailConfig {
         'port' => 465,
 		'timeout' => 30,
         'username' => 'regulatory@pharmacyboardkenya.org',
-        'password' => 'qhYjEMKkv=v35c?*',
+        'password' => 'lbetlikyrqhebbjh',
         'transport' => 'Smtp'
     );
 

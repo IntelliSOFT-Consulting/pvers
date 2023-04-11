@@ -58,6 +58,44 @@ class SadrListOfMedicine extends AppModel {
 				'message'  => 'Please specify the brand name for past medical history'
 			),
 		),
+
+		//add validation for dose, route and frequency
+		'batch_no' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the batch no for past medical history'
+			),
+		),
+		'manufacturer' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the manufacturer for past medical history'
+			),
+		),
+		 //add validation for dose, route and frequency
+		'dose' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the dose for past medical history'
+			),
+		),
+		'route_id' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the route for past medical history'
+			),
+		),
+		'frequency_id' => array(
+			'notBlank' => array(
+				'rule'     => 'notBlank',
+				'required' => true,
+				'message'  => 'Please specify the frequency for past medical history'
+			),
+		),
 	);
 
 	public function beforeSave($options = array()) {

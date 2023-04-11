@@ -7,12 +7,12 @@
 <div id="pqmps-by-category"></div>
 
 <hr>
-<h4>PQMPs by Product category</h4>
+<h4>PQHPTs by Product category</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
             <th>Product Category</th>
-            <th>PQMPs</th>
+            <th>PQHPTs</th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@ Highcharts.chart('pqmps-by-category', {
         type: 'column'
     },
     title: {
-        text: 'PQMPs by Product category'
+        text: 'PQHPTs by Product category'
     },
     yAxis: {
         allowDecimals: false,

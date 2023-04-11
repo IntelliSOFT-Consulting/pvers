@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+	$('.date-pick-field').datepicker({
+		minDate: new Date(), 
+		dateFormat:'yy-mm-dd'
+	});
+
 	var cache2 = {},	lastXhr;
 	$( "#UserInstitutionCode" ).autocomplete({
 		source: function( request, response ) {

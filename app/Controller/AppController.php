@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application level Controller
  *
@@ -30,7 +31,8 @@ App::uses('Controller', 'Controller');
  * @package     app.Controller
  * @link        https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
+class AppController extends Controller
+{
     public $components = array(
         'Acl',
         // 'Auth' => array(
@@ -40,7 +42,7 @@ class AppController extends Controller {
         // ),
         // 'Auth' => array('Jwtoken'),
         // 'Auth',
-        'RequestHandler' => array('viewClassMap' => array('csv' => 'CsvView.Csv')), 
+        'RequestHandler' => array('viewClassMap' => array('csv' => 'CsvView.Csv')),
         'Session',
         'Flash',
         'DebugKit.Toolbar'
@@ -48,15 +50,17 @@ class AppController extends Controller {
 
     public $helpers = array('Html', 'Form', 'Session');
 
-    public function isAuthorized($user = null) {
+    public function isAuthorized($user = null)
+    {
         // Any registered user can access public functions
         if (!empty($user)) {
             return (bool) ($user['group_id'] == '3');
         }
         // return true;
-        return false;        
+        return false;
     }
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $redir = 'default';
         if (isset($this->request->prefix) && $this->request->prefix == 'api') {
             // $this->Auth->authenticate['JwtAuth.JwtToken'] = array(
@@ -84,7 +88,7 @@ class AppController extends Controller {
             // $this->Auth->authenticate = array(
             //     'Form' => array('userModel' => 'Member')
             // );
-            
+
             $this->set('redir', 'api');
             $this->set('root', '/');
         } else {
@@ -104,7 +108,7 @@ class AppController extends Controller {
             //     ),  
             //     'Form' 
             // );
-            
+
             $this->Auth->authError = __('<div class="alert alert-error">
                                             <button data-dismiss="alert" class="close">&times;</button>
                                             <h4><strong>Sorry!</strong> You don\'t have sufficient permissions to access the location.</h4>
@@ -114,15 +118,16 @@ class AppController extends Controller {
                                             <button data-dismiss="alert" class="close">&times;</button>
                                             <h4>Invalid e-mail / password combination.  Please try again.</h4>
                                          </div>', true);
-            
-            if($this->Auth->User('group_id') == '1')  $redir = 'admin';
-            if($this->Auth->User('group_id') == '2')  $redir = 'manager';
-            if($this->Auth->User('group_id') == '3')  $redir = 'reporter';
-            if($this->Auth->User('group_id') == '4')  $redir = 'partner';
 
-              $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
-              $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'admin' => false);
-              $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'dashboard', $redir => true);
+            if ($this->Auth->User('group_id') == '1')  $redir = 'admin';
+            if ($this->Auth->User('group_id') == '2')  $redir = 'manager';
+            if ($this->Auth->User('group_id') == '3')  $redir = 'reporter';
+            if ($this->Auth->User('group_id') == '4')  $redir = 'partner'; 
+            if ($this->Auth->User('group_id') == '5')  $redir = 'reviewer';
+
+            $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
+            $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'admin' => false);
+            $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'dashboard', $redir => true);
 
             $this->Auth->authError = __('<div class="alert alert-error">
                           <button data-dismiss="alert" class="close">&times;</button>
@@ -139,9 +144,10 @@ class AppController extends Controller {
 
 
 
-    protected function _attachments($model = null){
+    protected function _attachments($model = null)
+    {
         if (!empty($this->request->data['Attachment'])) {
-            for ($i = 0; $i <= count($this->request->data['Attachment'])-1; $i++) { 
+            for ($i = 0; $i <= count($this->request->data['Attachment']) - 1; $i++) {
                 $this->request->data['Attachment'][$i]['model'] = $model;
 
                 $file = explode(',', $this->request->data['Attachment'][$i]['file']);
@@ -150,14 +156,14 @@ class AppController extends Controller {
                 $end = strpos($mystring, ';');
                 $start2 = strpos($mystring, '/');
                 $start3 = strpos($mystring, ':');
-                $fileExt = substr($mystring, $start2+1, $end - $start2-1); //jpeg
-                $fileType = substr($mystring, $start3+1, $end - $start3-1); //image/jpeg
+                $fileExt = substr($mystring, $start2 + 1, $end - $start2 - 1); //jpeg
+                $fileType = substr($mystring, $start3 + 1, $end - $start3 - 1); //image/jpeg
 
                 //decode it
                 $data = base64_decode($file[1]);
 
-                $filename =  (isset($this->request->data['Attachment'][$i]['filename'])) ? uniqid().'-'. $this->request->data['Attachment'][$i]['filename'] :  uniqid().'.' . $fileExt;
-                $file_dir = WWW_ROOT . 'files' .DS. 'Attachments' .DS. 'file' .DS. $filename;
+                $filename =  (isset($this->request->data['Attachment'][$i]['filename'])) ? uniqid() . '-' . $this->request->data['Attachment'][$i]['filename'] :  uniqid() . '.' . $fileExt;
+                $file_dir = WWW_ROOT . 'files' . DS . 'Attachments' . DS . 'file' . DS . $filename;
                 // $file_dir = MEDIA_TRANSFER .DS. $filename;
                 //file create
                 file_put_contents($file_dir, $data);
@@ -175,8 +181,7 @@ class AppController extends Controller {
                 $this->request->data['Attachment'][$i]['file']['error'] = 0;
                 $this->request->data['Attachment'][$i]['file']['size'] = $filesize;
                 $this->request->data['Attachment'][$i]['group'] = 'attachment';
-           }
-        }        
+            }
+        }
     }
-
 }

@@ -1,8 +1,8 @@
 <?php
-	$this->assign('PQMP', 'active');
+	$this->assign('PQHPT', 'active');
  ?>
 
-      <!-- PQMP
+      <!-- PQHPT
     ================================================== -->
     <section id="pqmpsadd">
 		<h3>Poor Quality Medicinal Products Reports <small>(PINK FORMS)</small></h3>
@@ -16,7 +16,7 @@
 						<ul class="nav nav-list">
 						  <li class="nav-header"> </li>
 						  <li class="<?php if(!isset($this->request->params['named']['submit'])) echo 'active';?>">
-							<?php echo $this->Html->link('<i class="icon-book"></i> All PQMP Reports', array('controller' => 'pqmps', 'action' => 'pqmpIndex'), array('escape' => false)); ?>
+							<?php echo $this->Html->link('<i class="icon-book"></i> All PQHPT Reports', array('controller' => 'pqmps', 'action' => 'pqmpIndex'), array('escape' => false)); ?>
 						  </li>
 						  <li class="<?php if(isset($this->request->params['named']['submit']) && $this->request->params['named']['submit'] == '2') echo 'active';?>">
 							<?php echo $this->Html->link('<span class="badge badge-success">1</span> Submitted',
@@ -160,7 +160,7 @@
 						<?php
 							echo $this->Paginator->counter(array(
 							'format' => __('Page <span class="badge">{:page}</span> of <span class="badge">{:pages}</span>,
-											showing <span class="badge">{:current}</span> PQMPS out of
+											showing <span class="badge">{:current}</span> PQHPT out of
 											<span class="badge badge-inverse">{:count}</span> total, starting on record <span class="badge">{:start}</span>,
 											ending on <span class="badge">{:end}</span>')
 							));

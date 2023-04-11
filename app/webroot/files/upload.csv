@@ -1,0 +1,10 @@
+phone_number,person_reporting,guardian_name,patient_name,patient_initials,date_of_birth,age_in_years,age_group,gender,county,vaccine_received,other_vaccine_received,vaccine_batch_number,reaction_onset,reaction_experienced,more_reactions,other_reactions,date_created
+254700112233,Report Name,Guardian Name,Imeja Test,JK,12/12/2000,38,Adult,Male,47,AstraZeneca,Johnson and Johnson,QWERTY12345,1/1/2023,Rash,Sample Name,None,1/1/2023
+254700112233,Report Name,Guardian Name,Test Imeja,SC,12/12/2000,74,Elderly,Female,47,AstraZeneca,Johnson and Johnson,QWERTY12346,1/1/2023,Rash,Sample Name,None,1/1/2023
+254700112233,Report Name,Guardian Name,Imeja Test,JK,12/12/2000,56,Adult,Male,47,AstraZeneca,Johnson and Johnson,QWERTY12347,1/1/2023,Rash,Sample Name,None,1/1/2023
+254700112233,Report Name,Guardian Name,Test Imeja,SC,12/12/2000,66,Elderly,Female,47,AstraZeneca,Johnson and Johnson,QWERTY12348,1/1/2023,Rash,Sample Name,None,1/1/2023
+254700112233,Report Name,Guardian Name,Imeja Test,JK,12/12/2000,75,Adult,Male,47,AstraZeneca,Johnson and Johnson,QWERTY12349,1/1/2023,Rash,Sample Name,None,1/1/2023
+254700112233,Report Name,Guardian Name,Test Imeja,SC,12/12/2000,81,Elderly,Female,47,AstraZeneca,Johnson and Johnson,QWERTY12350,1/1/2023,Rash,Sample Name,None,1/1/2023
+254700112233,Report Name,Guardian Name,Imeja Test,JK,12/12/2000,32,Adult,Male,47,AstraZeneca,Johnson and Johnson,QWERTY12351,1/1/2023,Rash,Sample Name,None,1/1/2023
+254700112233,Report Name,Guardian Name,Test Imeja,SC,12/12/2000,70,Elderly,Female,47,AstraZeneca,Johnson and Johnson,QWERTY12352,1/1/2023,Rash,Sample Name,None,1/1/2023
+254700112233,Report Name,Guardian Name,Imeja Test,JK,12/12/2000,48,Adult,Male,47,AstraZeneca,Johnson and Johnson,QWERTY12353,1/1/2023,Rash,Sample Name,None,1/1/2023

@@ -1,5 +1,5 @@
 <?php
-    $this->assign('PQMP', 'active');
+    $this->assign('PQHPT', 'active');
 ?>
 
 

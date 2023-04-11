@@ -20,9 +20,9 @@
                 <thead>
                   <tr>
                     <th colspan="2" style="width: 15%"> <label class="required">INN/Generic Name</label></th>
-                    <th> <label>Brand Name</label></th>
-                    <th> <label>Batch/ Lot No.</label></th>
-                    <th> <label>Manufacturer</label></th>
+                    <th> <label>Brand Name<span style="color:red;">*</span></label></th>
+                    <th> <label>Batch/ Lot No. <span style="color:red;">*</span></label></th>
+                    <th> <label>Manufacturer <span style="color:red;">*</span></label></th>
                     <th colspan="2" style="width: 13%;">
                       <label class="required">DOSE <span style="color:red;">*</span></label>
                     </th>

@@ -18,12 +18,12 @@
             <table id="listOfDevicesTable"  class="table table-bordered table-condensed table-pvborder">
                 <thead>
                   <tr>
-                    <th colspan="2" style="width: 15%"> <label class="required">Brand Name/Commercial Name</label></th>
-                    <th> <label class="required">Serial/Lot No.</label></th>
-                    <th> <label class="required">Common Name</label></th>
-                    <th> <label class="required">Manufacturer's Name</label></th>
-                    <th> <label class="required">Manufacture Date </label></th>
-                    <th> <label class="required">Expiry date </label></th>
+                    <th colspan="2" style="width: 15%"> <label class="required">Brand Name/Commercial Name<span style="color:red;">*</span></label></th>
+                    <th> <label class="required">Serial/Lot No.<span style="color:red;">*</span></label></th>
+                    <th> <label class="required">Common Name<span style="color:red;">*</span></label></th>
+                    <th> <label class="required">Manufacturer's Name<span style="color:red;">*</span></label></th>
+                    <th> <label class="required">Manufacture Date<span style="color:red;">*</span></label></th>
+                    <th> <label class="required">Expiry date<span style="color:red;">*</span> </label></th>
                     <th> # </th>
                   </tr>
                 </thead>

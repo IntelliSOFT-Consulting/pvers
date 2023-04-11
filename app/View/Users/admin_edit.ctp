@@ -1,7 +1,7 @@
 <?php  
 	$this->assign('USERS', 'active');
  	$this->Html->script('widgets', array('inline' => false));
-	$this->Html->script('user', array('inline' => false));
+	$this->Html->script('user', array('inline' => false)); 
 ?>
 
 <div class="row-fluid"> 	
@@ -57,13 +57,17 @@
 						'type' => 'password',
 						'label' => array('class' => 'control-label required', 'text' => 'Confirm New Password'.' <span style="color:red;">*</span>'), ));						
 				echo $this->Form->input('is_active', array('label' => array('class' => 'control-label', 'text' => 'Is Active?'), ));		
-				// echo $this->Form->input('is_admin', array('label' => array('class' => 'control-label', 'text' => 'Is Admin?'), ));		
+				echo $this->Form->input('active_date', array(
+					'type' => 'text', 'class' => 'date-pick-field',
+					'label' => array('class' => 'control-label', 'text' => 'Active Date'),
+				));
+			 
 				echo $this->Form->input('user_type', array('type' => 'select', 'label' => array('class' => 'control-label', 'text' => 'User Type'),
 						'empty' => true, 'options' => ['Market Authority' => 'Market Authority', 'County Pharmacist' => 'County Pharmacist', 'Public Health Program' => 'Public Health Program']));
 				echo $this->Form->input('sponsor_email', array('type' => 'email', 'label' => array('class' => 'control-label', 'text' => 'Company email'),));
 				echo $this->Form->input('health_program', array( 'type' => 'select', 'options' => ['Malaria program' => 'Malaria program', 'National Vaccines and immunisation program' => 'National Vaccines and immunisation program', 
 										'Neglected tropical diseases program' => 'Neglected tropical diseases program', 'MNCAH Priority Medicines' => 'MNCAH Priority Medicines', 'TB program' => 'TB program', 
-										'NASCOP program' => 'NASCOP program'], 'empty' => true,
+										'NASCOP program' => 'NASCOP program', 'Cancer/Oncology program' => 'Cancer/Oncology program'], 'empty' => true,
 										'label' => array('class' => 'control-label', 'text' => 'Public Health Program')));
 				?>
 		</div><!--/span-->

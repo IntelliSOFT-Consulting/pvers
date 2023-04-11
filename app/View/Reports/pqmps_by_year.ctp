@@ -7,12 +7,12 @@
 <div id="pqmps-by-year"></div>
 
 <hr>
-<h4>PQMPs by Year</h4>
+<h4>PQHPTs by Year</h4>
 <table class="table table-condensed table-bordered" id="datatable8">
     <thead>
         <tr>
             <th>Year</th>
-            <th>PQMPs</th>
+            <th>PQHPTs</th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@ Highcharts.chart('pqmps-by-year', {
         type: 'column'
     },
     title: {
-        text: 'PQMPs by Year'
+        text: 'PQHPTs by Year'
     },
     yAxis: {
         allowDecimals: false,

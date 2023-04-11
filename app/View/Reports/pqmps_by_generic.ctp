@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>Generic</th>
-            <th>PQMPs</th>
+            <th>PQHPTs</th>
         </tr>
     </thead>
     <tbody>

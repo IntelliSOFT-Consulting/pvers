@@ -1,5 +1,5 @@
 <?php
-	$this->assign('PQMP', 'active');
+	$this->assign('PQHPT', 'active');
 	$this->Html->script('jquery.ui.core', array('inline' => false));
 	$this->Html->script('jquery.ui.widget', array('inline' => false));
 	$this->Html->script('jquery.ui.button', array('inline' => false));
@@ -8,7 +8,7 @@
  	$this->Html->script('widgets', array('inline' => false));
  	$this->Html->script('pqmp', array('inline' => false));
 ?>
-  <!-- PQMP EDIT
+  <!-- PQHPT EDIT
 ================================================== -->
 <section id="pqmpsedit">
 	<div class="row-fluid">
@@ -38,7 +38,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<?php
-						echo $this->Html->image('pqmp_header.gif', array('alt' => 'PQMP'));
+						echo $this->Html->image('pqmp_header.gif', array('alt' => 'PQHPT'));
 					?>
 				</div>
 			</div><br>

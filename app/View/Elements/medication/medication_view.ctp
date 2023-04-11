@@ -7,7 +7,7 @@
 
 				<table style="width: 100%;">
 					<tr>
-						<td><p><b>(FOM21/MIP/PMS/SOP/001)</b></p></td>
+						<td><p><b>(FOM21/HPT/VMS/SOP/001)</b></p></td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">
@@ -17,7 +17,7 @@
 		                    <h4>MINISTRY OF HEALTH</h4>
 		                    <h4>PHARMACY AND POISONS BOARD</h4>
 		                    <h4>P.O. Box 27663-00506 NAIROBI</h4>
-		                    <h4>Tel: +254 709 770 100/+254 709 770 xxx (Replace xxx with extension)</h4>
+		                    <h4>Tel: +254795743049</h4>
 		                    <h4><b>Email:</b> pv@pharmacyboardkenya.org</h4>
 		                    <h4 style="color: red;">MEDICATION ERROR REPORTING FORM </h4>
 						</td>
