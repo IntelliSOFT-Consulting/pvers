@@ -1,0 +1,44 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    container_name: pvers_db
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme.
+      MYSQL_DATABASE: pvers
+      MYSQL_USER: changeme
+      MYSQL_PASSWORD: changeme.
+      UPLOAD_LIMIT: 10000000000
+    ports:
+      - "9990:3306"
+    networks:
+      - mydb
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql 
+      - ~/pvers-mysql-data:/var/lib/mysql
+  web:
+    build: .
+    container_name: pvers_web
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html/
+    ports:
+      - "8790:80"
+    networks:
+      - mydb
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pvers_admin
+    ports:
+      - 8199:80
+    environment:
+      MYSQL_USER: changeme
+      MYSQL_PASSWORD: changeme.
+      MYSQL_ROOT_PASSWORD: changeme.
+      UPLOAD_LIMIT: 10000000000
+    networks:
+      - mydb 
+
+networks:
+  mydb: 
