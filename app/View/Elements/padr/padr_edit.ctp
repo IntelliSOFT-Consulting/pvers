@@ -86,14 +86,25 @@ $this->Html->css('padr', false, array('inline' => false));
 
                         ?>
                     </div>
-                    <div class="span1"><label class="required text-warning tooltipper" style="padding-top: 5px; text-align: right;" data-original-title="Enter either email/phone or both">--OR--</label></div>
+                    <div class="span1"><label class="required text-warning tooltipper" style="padding-top: 5px; text-align: right;" data-original-title="Enter either email/phone or both"></label></div>
                     <div class="span6">
                         <?php
+                        // echo $this->Form->input('reporter_phone', array(
+                        //     'div' => array('class' => 'control-group'), 'required' => false,
+                            
+                        //     'label' => array('class' => 'control-label required', 'text' => 'Mobile No.<span style="color:red;">*</span>'),
+                            
+                        // ));
                         echo $this->Form->input('reporter_phone', array(
-                            'div' => array('class' => 'control-group'), 'required' => false,
-                            'label' => array('class' => 'control-label required', 'text' => 'Mobile No.')
+                            'label' => array('class' => 'control-label required', 'text' => 'Mobile No.<span style="color:red;">*</span>'),
+                            'placeholder' => '', 'title' => 'Mobile No.',
+                            'data-content' => 'It is important for follow up by the Pharmacy and Poisons Board and to obtain additional information as well as providing you with the feedback',
+                            'after' => '<p class="help-block"> Your phone number is important for follow up by the Pharmacy and Poisons Board and to obtain additional information as well as providing you with the feedback </p></div>',
+                            // 'class' => 'span9',
                         ));
                         ?>
+                        <span></span>
+                        
                     </div>
                 </div>
             </div>
@@ -417,9 +428,10 @@ $this->Html->css('padr', false, array('inline' => false));
                 'options' => array(
                     'recovered/resolved' => 'Recovered/resolved',
                     'recovering/resolving' => 'Recovering/resolving',
-                    'recovered/resolved with sequelae' => 'Recovered/resolved with sequelae',
+                    'recovered/resolved with sequelae' => 'Recovered/resolved with sequelae', //sequele meaning: you've recovered but still has hidden
+                    // 'recovered/resolved with sequelae' => 'Recovered/resolved with long term effects', //sequele meaning: you've recovered but still has hidden effects
                     'not recovered/not resolved' => 'Not recovered/not resolved',
-                    'fatal' => 'Fatal',
+                    'death' => 'Death',
                     'unknown' => 'Unknown',
                 ),
                 'label' => array('class' => 'control-label required', 'text' => 'Outcome'),

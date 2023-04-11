@@ -1,18 +1,15 @@
 <?php
 $this->assign('Summaries', 'active');
 $this->Html->script('bootstrap/bootstrap-carousel', array('inline' => false));
-$this->Html->script('home', array('inline' => false));
-$this->Html->script('holder/holder', array('inline' => false));
-$this->Html->css('landing', false, array('inline' => false));
-$this->Html->css('upgrade', false, array('inline' => false));
+$this->Html->script('about', array('inline' => false));
+$this->Html->css('home', false, array('inline' => false));
+$this->Html->css('pvers', false, array('inline' => false));
 ?>
-<hr>
-
-<div class="container marketing">
-    <hr>
+<div class="home_container">
+    <br>
     <h4 style="text-align: left;">Data Privacy</h4><br>
-    <hr>
     <div class="row-fluid">
+        <hr>
         <div class="span10">
             <p>
                 Due to strict data protection laws and agreements between WHO
@@ -27,7 +24,6 @@ $this->Html->css('upgrade', false, array('inline' => false));
     </div>
 
     <h4 style="text-align: left;">Important points to consider</h4><br>
-    <hr>
     <div class="row-fluid">
         <div class="span10">
             <p> PVers is intended as a useful starting point for people who
@@ -58,7 +54,6 @@ $this->Html->css('upgrade', false, array('inline' => false));
     </div>
     <div class="row-fluid">
         <div class="span10">
-            <!-- Add a horizontal form with checkbox and button -->
 
             <p> To access the search function, you must confirm that you have read and
                 understood the above statements.</p>
@@ -89,7 +84,6 @@ $this->Html->css('upgrade', false, array('inline' => false));
 
             )); ?>
             <hr>
-          
 
         </div>
     </div>

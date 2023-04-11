@@ -101,7 +101,8 @@ class Aefi extends AppModel {
             return $cond;
         }
 
-	public function makeRangeCondition($data = array()) {
+	
+        public function makeRangeCondition($data = array()) {
 		if(!empty($data['start_date'])) $start_date = date('Y-m-d', strtotime($data['start_date']));
 		else $start_date = date('Y-m-d', strtotime('2012-05-01'));
 

@@ -1,0 +1,13 @@
+2023-04-11 11:17:35,701 CRIT Supervisor running as root (no user in config file)
+2023-04-11 11:17:35,703 INFO supervisord started with pid 7
+2023-04-11 11:17:36,707 INFO spawned: 'apache' with pid 10
+2023-04-11 11:17:36,710 INFO spawned: 'cake_queue_worker' with pid 11
+2023-04-11 11:17:36,779 INFO exited: cake_queue_worker (exit status 244; not expected)
+2023-04-11 11:17:37,797 INFO success: apache entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2023-04-11 11:17:37,800 INFO spawned: 'cake_queue_worker' with pid 27
+2023-04-11 11:17:37,851 INFO exited: cake_queue_worker (exit status 244; not expected)
+2023-04-11 11:17:39,853 INFO spawned: 'cake_queue_worker' with pid 36
+2023-04-11 11:17:39,894 INFO exited: cake_queue_worker (exit status 244; not expected)
+2023-04-11 11:17:42,899 INFO spawned: 'cake_queue_worker' with pid 45
+2023-04-11 11:17:42,945 INFO exited: cake_queue_worker (exit status 244; not expected)
+2023-04-11 11:17:43,946 INFO gave up: cake_queue_worker entered FATAL state, too many start retries too quickly

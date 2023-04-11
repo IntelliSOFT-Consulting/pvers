@@ -16,6 +16,7 @@ app/Console/cake acl grant Group.2 controllers/Devices
 app/Console/cake acl grant Group.2 controllers/Medications
 app/Console/cake acl grant Group.2 controllers/Transfusions
 app/Console/cake acl grant Group.2 controllers/Padrs
+app/Console/cake acl grant Group.2 controllers/Ce2bs
 app/Console/cake acl grant Group.2 controllers/Saes
 app/Console/cake acl grant Group.2 controllers/Attachments
 app/Console/cake acl grant Group.2 controllers/Counties
@@ -75,6 +76,13 @@ app/Console/cake acl grant Group.3 controllers/Pqmps/reporter_add
 app/Console/cake acl grant Group.3 controllers/Pqmps/reporter_edit
 app/Console/cake acl grant Group.3 controllers/Pqmps/reporter_view
 app/Console/cake acl grant Group.3 controllers/Pqmps/reporter_delete
+
+
+app/Console/cake acl grant Group.3 controllers/Ce2bs/reporter_index
+app/Console/cake acl grant Group.3 controllers/Ce2bs/reporter_add
+app/Console/cake acl grant Group.3 controllers/Ce2bs/reporter_edit
+app/Console/cake acl grant Group.3 controllers/Ce2bs/reporter_view
+app/Console/cake acl grant Group.3 controllers/Ce2bs/reporter_delete 
 
 app/Console/cake acl grant Group.3 controllers/Devices/reporter_index
 app/Console/cake acl grant Group.3 controllers/Devices/reporter_add
@@ -149,48 +157,50 @@ app/Console/cake acl grant Group.4 controllers/Notifications/delete
 app/Console/cake acl grant Group.4 controllers/Comments
 app/Console/cake acl grant Group.4 controllers/Reports
 
+ 
 
 # Allow mini managers to some controllers
 echo "*************** Assign Mini Managers Permissions  *******************"
-app/Console/cake acl deny Group.6 controllers
-app/Console/cake acl grant Group.6 controllers/Users/reviewer_dashboard
-app/Console/cake acl grant Group.6 controllers/Sadrs
-app/Console/cake acl grant Group.6 controllers/Aefis
-app/Console/cake acl grant Group.6 controllers/SadrFollowups
-app/Console/cake acl grant Group.6 controllers/Pqmps
-app/Console/cake acl grant Group.6 controllers/Devices
-app/Console/cake acl grant Group.6 controllers/Medications
-app/Console/cake acl grant Group.6 controllers/Transfusions
-app/Console/cake acl grant Group.6 controllers/Padrs
-app/Console/cake acl grant Group.6 controllers/Saes
-app/Console/cake acl grant Group.6 controllers/Attachments
-app/Console/cake acl grant Group.6 controllers/Counties
-app/Console/cake acl grant Group.6 controllers/Countries
-app/Console/cake acl grant Group.6 controllers/Designations
-app/Console/cake acl grant Group.6 controllers/Doses
-app/Console/cake acl grant Group.6 controllers/DrugDictionaries
-app/Console/cake acl grant Group.6 controllers/FacilityCodes
-app/Console/cake acl grant Group.6 controllers/Feedbacks
-app/Console/cake acl grant Group.6 controllers/Frequencies
-app/Console/cake acl grant Group.6 controllers/HelpInfos
-app/Console/cake acl grant Group.6 controllers/Messages
-app/Console/cake acl grant Group.6 controllers/Routes
-app/Console/cake acl grant Group.6 controllers/SadrListOfDrugs
-app/Console/cake acl grant Group.6 controllers/SadrListOfMedicines
-app/Console/cake acl grant Group.6 controllers/AefiListOfVaccines
-app/Console/cake acl grant Group.6 controllers/ListOfDevices
-app/Console/cake acl grant Group.6 controllers/MedicationProducts
-app/Console/cake acl grant Group.6 controllers/Pints
-app/Console/cake acl grant Group.6 controllers/WhoDrugs
-app/Console/cake acl grant Group.6 controllers/Pages
-app/Console/cake acl grant Group.6 controllers/Users/changePassword
-app/Console/cake acl grant Group.6 controllers/Users/edit
-app/Console/cake acl grant Group.6 controllers/Users/admin_index
-app/Console/cake acl grant Group.6 controllers/Users/admin_add
-app/Console/cake acl grant Group.6 controllers/Notifications
-app/Console/cake acl grant Group.6 controllers/Comments 
-app/Console/cake acl grant Group.6 controllers/Reports
-app/Console/cake acl grant Group.6 controllers/AefiDescriptions
+app/Console/cake acl deny Group.5 controllers
+app/Console/cake acl grant Group.5 controllers/Users/reviewer_dashboard
+app/Console/cake acl grant Group.5 controllers/Sadrs
+app/Console/cake acl grant Group.5 controllers/Aefis
+app/Console/cake acl grant Group.5 controllers/SadrFollowups
+app/Console/cake acl grant Group.5 controllers/Pqmps
+app/Console/cake acl grant Group.5 controllers/Devices
+app/Console/cake acl grant Group.5 controllers/Medications
+app/Console/cake acl grant Group.5 controllers/Transfusions
+app/Console/cake acl grant Group.5 controllers/Padrs
+app/Console/cake acl grant Group.5 controllers/Ce2bs
+app/Console/cake acl grant Group.5 controllers/Saes
+app/Console/cake acl grant Group.5 controllers/Attachments
+app/Console/cake acl grant Group.5 controllers/Counties
+app/Console/cake acl grant Group.5 controllers/Countries
+app/Console/cake acl grant Group.5 controllers/Designations
+app/Console/cake acl grant Group.5 controllers/Doses
+app/Console/cake acl grant Group.5 controllers/DrugDictionaries
+app/Console/cake acl grant Group.5 controllers/FacilityCodes
+app/Console/cake acl grant Group.5 controllers/Feedbacks
+app/Console/cake acl grant Group.5 controllers/Frequencies
+app/Console/cake acl grant Group.5 controllers/HelpInfos
+app/Console/cake acl grant Group.5 controllers/Messages
+app/Console/cake acl grant Group.5 controllers/Routes
+app/Console/cake acl grant Group.5 controllers/SadrListOfDrugs
+app/Console/cake acl grant Group.5 controllers/SadrListOfMedicines
+app/Console/cake acl grant Group.5 controllers/AefiListOfVaccines
+app/Console/cake acl grant Group.5 controllers/ListOfDevices
+app/Console/cake acl grant Group.5 controllers/MedicationProducts
+app/Console/cake acl grant Group.5 controllers/Pints
+app/Console/cake acl grant Group.5 controllers/WhoDrugs
+app/Console/cake acl grant Group.5 controllers/Pages
+app/Console/cake acl grant Group.5 controllers/Users/changePassword
+app/Console/cake acl grant Group.5 controllers/Users/edit
+app/Console/cake acl grant Group.5 controllers/Users/admin_index
+app/Console/cake acl grant Group.5 controllers/Users/admin_add
+app/Console/cake acl grant Group.5 controllers/Notifications
+app/Console/cake acl grant Group.5 controllers/Comments 
+app/Console/cake acl grant Group.5 controllers/Reports
+app/Console/cake acl grant Group.5 controllers/AefiDescriptions
 
 
 echo "*************** Completed  *******************"

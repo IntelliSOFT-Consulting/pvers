@@ -91,6 +91,7 @@ class ReportsController extends AppController
     {
         $vaccine = $this->request->data['Report']['vaccine_name'];
         $this->loadModel('SadrListOfDrug');
+        $this->loadModel('Sadr');
         $sadr_ids = $this->SadrListOfDrug->find('list', array(
             'conditions' => array('SadrListOfDrug.drug_name LIKE' => '%' . $vaccine . '%'),
             'fields' => array('SadrListOfDrug.sadr_id')
@@ -109,9 +110,11 @@ class ReportsController extends AppController
                 'fields' => array('Sadr.reaction')
             ));
             // get the count of each reaction
-            $data[$reaction['Sadr']['reaction']] = $this->Sadr->find('count', array(
-                'conditions' => array('Sadr.reaction' => $reaction['Sadr']['reaction'])
-            ));
+            if ($reaction) {
+                $data[$reaction['Sadr']['reaction']] = $this->Sadr->find('count', array(
+                    'conditions' => array('Sadr.reaction' => $reaction['Sadr']['reaction'])
+                ));
+            }
         }
         // $criteria['Sadr.submitted'] = array(2, 3);
         $criteria['Sadr.id'] = $sadr_ids;
@@ -163,11 +166,16 @@ class ReportsController extends AppController
 
         $this->set('_serialize', 'data');
         $this->Session->write('results', true);
-        $this->set(compact('data', 'vaccine', 'count', 'county', 'age','sex','year'));
+        $this->set(compact('data', 'vaccine', 'count', 'county', 'age', 'sex', 'year'));
         $this->set('_serialize', 'data');
     }
-
-    public function index()
+public function index()
+{
+    # code...
+    $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+    $this->set(compact('counties'));
+}
+    public function index_latest()
     {
         $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
         $this->set(compact('counties'));
@@ -303,13 +311,24 @@ class ReportsController extends AppController
             'having' => array('COUNT(*) >' => 0),
         ));
 
+        // SADRs per Year
+        $year = $this->Sadr->find('all', array(
+            'fields' => array('year(ifnull(created, created)) as year', 'COUNT(*) as cnt'),
+            'contain' => array(), 'recursive' => -1,
+            'conditions' => $criteria,
+            'group' => array('year(ifnull(created, created))'),
+            'order' => array('year'),
+            'having' => array('COUNT(*) >' => 0),
+        ));
+
 
         $this->set(compact('counties'));
         $this->set(compact('geo'));
         $this->set(compact('sex'));
         $this->set(compact('age'));
+        $this->set(compact('year'));
 
-        $this->set('_serialize', 'geo', 'counties', 'sex', 'age');
+        $this->set('_serialize', 'geo', 'counties', 'sex', 'age','year');
         $this->render('upgrade/summary');
     }
     public function sadrs_by_age()
@@ -446,7 +465,8 @@ class ReportsController extends AppController
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -504,7 +524,8 @@ class ReportsController extends AppController
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -524,7 +545,8 @@ class ReportsController extends AppController
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -544,7 +566,8 @@ class ReportsController extends AppController
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sadr->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -599,7 +622,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('aefis_by_age');
@@ -665,7 +689,8 @@ class ReportsController extends AppController
             'group' => array('Vaccine.vaccine_name', 'Vaccine.id'),
             'having' => array('COUNT(distinct AefiListOfVaccine.aefi_id) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -684,7 +709,8 @@ class ReportsController extends AppController
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -742,7 +768,8 @@ class ReportsController extends AppController
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -762,7 +789,8 @@ class ReportsController extends AppController
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -782,7 +810,8 @@ class ReportsController extends AppController
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Aefi->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -805,7 +834,8 @@ class ReportsController extends AppController
             'group' => array('Designation.name', 'Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('pqmps_by_designation');
@@ -827,7 +857,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -848,7 +879,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -868,7 +900,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -913,7 +946,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -933,7 +967,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -954,7 +989,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -973,7 +1009,8 @@ class ReportsController extends AppController
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -992,7 +1029,8 @@ class ReportsController extends AppController
             'group' => array('Country.name', 'Country.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1012,7 +1050,8 @@ class ReportsController extends AppController
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1032,7 +1071,8 @@ class ReportsController extends AppController
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1061,7 +1101,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1094,7 +1135,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1129,7 +1171,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Pqmp->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1152,7 +1195,8 @@ class ReportsController extends AppController
             'group' => array('Designation.name', 'Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('devices_by_designation');
@@ -1183,7 +1227,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('devices_by_age');
@@ -1203,7 +1248,8 @@ class ReportsController extends AppController
             'group' => array('Device.serious'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1222,7 +1268,8 @@ class ReportsController extends AppController
             'group' => array('serious_yes'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1241,7 +1288,8 @@ class ReportsController extends AppController
             'group' => array('ListOfDevice.brand_name'),
             'having' => array('COUNT(distinct ListOfDevice.device_id) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1260,7 +1308,8 @@ class ReportsController extends AppController
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1279,7 +1328,8 @@ class ReportsController extends AppController
             'group' => array('outcome'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1299,7 +1349,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1315,10 +1366,11 @@ class ReportsController extends AppController
             'fields' => array('County.county_name', 'COUNT(*) as cnt'),
             'contain' => array('County'),
             'conditions' => $criteria,
-            'group' => array('County.county_name'),
+            'group' => array('County.county_name','County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1338,7 +1390,8 @@ class ReportsController extends AppController
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1358,7 +1411,8 @@ class ReportsController extends AppController
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Device->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1381,7 +1435,8 @@ class ReportsController extends AppController
             'group' => array('Designation.name', 'Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('medications_by_designation');
@@ -1412,7 +1467,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('medications_by_age');
@@ -1433,7 +1489,8 @@ class ReportsController extends AppController
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1453,7 +1510,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1473,7 +1531,8 @@ class ReportsController extends AppController
             'order' => array('COUNT(*) DESC'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1498,7 +1557,8 @@ class ReportsController extends AppController
             'group' => array('MedicationProduct.product_name_i'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1522,7 +1582,8 @@ class ReportsController extends AppController
             'group' => array('MedicationProduct.product_name_ii'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1567,7 +1628,8 @@ class ReportsController extends AppController
             'group' => array('MedicationProduct.generic_name_i'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1612,7 +1674,8 @@ class ReportsController extends AppController
             'group' => array('MedicationProduct.generic_name_ii'),
             'having' => array('COUNT(distinct MedicationProduct.medication_id) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1631,7 +1694,8 @@ class ReportsController extends AppController
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1651,7 +1715,8 @@ class ReportsController extends AppController
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1671,7 +1736,8 @@ class ReportsController extends AppController
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1698,7 +1764,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1725,7 +1792,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Medication->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1748,7 +1816,8 @@ class ReportsController extends AppController
             'group' => array('Designation.name', 'Designation.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('transfusions_by_designation');
@@ -1779,7 +1848,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('transfusions_by_age');
@@ -1800,7 +1870,8 @@ class ReportsController extends AppController
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1819,7 +1890,8 @@ class ReportsController extends AppController
             'group' => array('adverse_reaction'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1838,7 +1910,8 @@ class ReportsController extends AppController
             'group' => array('County.county_name', 'County.id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1858,7 +1931,8 @@ class ReportsController extends AppController
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1878,7 +1952,8 @@ class ReportsController extends AppController
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1916,7 +1991,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1936,7 +2012,8 @@ class ReportsController extends AppController
             'group' => array('previous_transfusion'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1956,7 +2033,8 @@ class ReportsController extends AppController
             'group' => array('previous_reactions'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Transfusion->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -1987,7 +2065,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
         $this->render('saes_by_age');
@@ -2006,7 +2085,8 @@ class ReportsController extends AppController
             'order' => array('salit'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2024,7 +2104,8 @@ class ReportsController extends AppController
             'order' => array('year'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2049,7 +2130,8 @@ class ReportsController extends AppController
             'group' => array($case),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2065,7 +2147,8 @@ class ReportsController extends AppController
             'group' => array('causality'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2081,7 +2164,8 @@ class ReportsController extends AppController
             'group' => array('gender'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2097,7 +2181,8 @@ class ReportsController extends AppController
             'group' => array('manufacturer_name'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2113,7 +2198,8 @@ class ReportsController extends AppController
             'group' => array('application_id'),
             'having' => array('COUNT(*) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2127,7 +2213,8 @@ class ReportsController extends AppController
             'group' => array('SuspectedDrug.generic_name'),
             'having' => array('COUNT(distinct SuspectedDrug.sae_id) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }
@@ -2141,7 +2228,8 @@ class ReportsController extends AppController
             'group' => array('ConcomittantDrug.generic_name'),
             'having' => array('COUNT(distinct ConcomittantDrug.sae_id) >' => 0),
         ));
-
+        $counties = $this->Sae->County->find('list', array('order' => 'County.county_name ASC'));
+        $this->set(compact('counties'));
         $this->set(compact('data'));
         $this->set('_serialize', 'data');
     }

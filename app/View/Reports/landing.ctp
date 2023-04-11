@@ -9,11 +9,248 @@ $this->Html->css('upgrade', false, array('inline' => false));
 $this->Html->css('summary', null, array('inline' => false));
 $this->Html->script('highcharts/highcharts', array('inline' => false));
 $this->Html->script('highcharts/modules/data', array('inline' => false));
+$this->Html->css('pvers', false, array('inline' => false));
+$this->Html->css('home', false, array('inline' => false));
 
 
 ?>
+<div class="landing_container">
+  <h5 style="margin-left: 20px;"><b>Note:</b> Result is presented for an active ingredient </h5>
+  <div class="row-fluid">
+    <hr>
+    <div class="span11">
+      <div class="card">
+        <div class="card-body">
+          <td style="width: 70%;">
+            <?php
+            echo $this->Form->create('Report', array('url' => array('controller' => 'reports', 'action' => 'landing')));
 
-<div class="container marketing" id="landing">
+            echo $this->Form->input(
+              'vaccine_name',
+              array(
+                'div' => false, 'type' => 'text', 'class' => 'input-large vaccine_name', 'after' => '',
+                'label' => array('class' => 'required', 'text' => ''), 'placeHolder' => 'Enter the name of the drug',
+                'after' => '<a style="font-weight:normal" onclick="$(\'.vaccine_name\').val(\'\');" ><em class="accordion-toggle">clear!</em></a>',
+
+              )
+            );
+            ?>
+          </td>
+
+          <td>
+            <?php
+            echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array(
+              'class' => 'btn btn-primary', 'div' => 'control-group', 'div' => false,
+              // disable the submit button
+              'disabled' => true, 'id' => 'submit',
+              'style' => array('margin-bottom: 5px')
+            ));
+            ?>
+
+          </td>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php if ($this->Session->check('results')) : ?>
+    <?php
+    $results = $this->Session->read('results');
+    if ($results) { ?>
+      <div class="row-fluid">
+        <hr>
+        <div class="span11">
+          <div class="card">
+            <div class="card-body">
+              <p>
+                <?php echo  'Active ingedient <b>' . $vaccine . ' </b>' ?></p>
+              <p> <?php echo  'There are <b>' . $count . '</b> reports with this active ingedient' ?></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <hr>
+        <div class="span11">
+          <div class="card">
+            <div class="card-header">
+              <h3>Reported potential side effects</h3>
+            </div>
+            <hr>
+            <div class="card-body">
+
+              <?php if (!empty($data)) : ?>
+
+                <?php foreach ($data as $key => $dt) : ?>
+                  <tr>
+                    <td>
+
+                      <p style="text-align: left;"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><?php echo $key . ' (' . $dt . ' ADR(s) )' ?> </p>
+                    </td>
+                  <tr>
+
+                  <?php endforeach; ?>
+                <?php else : ?>
+                  <tr>
+                    <td>
+                      <div class="alert alert-info">
+                        <p style="text-align: left;"> <strong>Info!</strong> No data found</p>
+                      </div>
+                    </td>
+                  </tr>
+
+                <?php endif; ?>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <hr>
+        <div class="span5">
+          <div class="card">
+            <div class="card-header">
+              <h4>Geographical Distribution</h4>
+            </div>
+            <div class="card-body">
+              <div class="tabs">
+                <ul style="background-color: transparent;">
+                  <li style="background-color: #d3d3d3;  border: none;"><a href="#tabs-chart"><i class="fa fa-pie-chart"></i>Chart</a></li>
+                  <li style="background-color: #d3d3d3;  border: none;"><a href="#tabs-table"><i class="fa fa-table"></i>Table</a></li>
+                </ul>
+                <div id="tabs-chart">
+                  <div id="sadrs-by-county"></div>
+                </div>
+                <div id="tabs-table">
+                  <table class="table table-condensed table-bordered" id="datatable8">
+                    <thead>
+                      <tr>
+                        <th>County</th>
+                        <th>ADRs</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      foreach ($county as $key => $value) {
+                        echo "<tr>";
+                        echo "<th>" . $value['County']['county_name'] . "</th>";
+                        echo "<td>" . $value[0]['cnt'] . "</td>";
+                        echo "</tr>";
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="span5">
+          <div class="card">
+            <div class="card-header">
+              <h4>Patient Sex Distribution</h4>
+            </div>
+            <div class="card-body">
+              <div class="tabs">
+                <ul style="background-color: transparent;">
+                  <li style="background-color: #d3d3d3;  border: none;"><a href="#tabs-chart"><i class="fa fa-pie-chart"></i>Chart</a></li>
+                  <li style="background-color: #d3d3d3;  border: none;"><a href="#tabs-table"><i class="fa fa-table"></i>Table</a></li>
+                </ul>
+                <div id="tabs-chart">
+                  <div id="sadrs-by-gender"></div>
+                </div>
+                <div id="tabs-table">
+
+                  <table class="table table-condensed table-bordered" id="sex">
+                    <thead>
+                      <tr>
+                        <th>Sex</th>
+                        <th>ADRs</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      foreach ($sex as $key => $value) {
+                        echo "<tr>";
+                        echo "<th>" . $value['Sadr']['gender'] . "</th>";
+                        echo "<td>" . $value[0]['cnt'] . "</td>";
+                        echo "</tr>";
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <hr>
+        <div class="span5">
+          <div class="card">
+            <div class="card-header">  <h4>Age Distribution</h4></div>
+            <div class="card-body">
+          
+                <div class="tabs">
+                  <ul style="background-color: transparent;">
+                      <li style="background-color: #d3d3d3;  border: none;"><a href="#tabs-chart"><i class="fa fa-pie-chart"></i>Chart</a></li>
+                      <li style="background-color: #d3d3d3;  border: none;"><a href="#tabs-table"><i class="fa fa-table"></i>Table</a></li>
+                  </ul>
+                  <div id="tabs-chart">
+                    <div id="sadrs-by-age"></div>
+                  </div>
+                  <div id="tabs-table">
+                    <table class="table table-condensed table-bordered" id="age">
+                      <thead>
+                        <tr>
+                          <th>Age group</th>
+                          <th>ADRs</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        foreach ($age as $key => $value) {
+                          echo "<tr>";
+                          echo "<th>" . $value[0]['ager'] . "</th>";
+                          echo "<td>" . $value[0]['cnt'] . "</td>";
+                          echo "</tr>";
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="span5">
+          <div class="card">
+            <div class="card-header">    <h4>ADRs Per Year</h4></div>
+            <div class="card-body">
+          
+               
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <hr>
+        <div class="span11">
+          <div class="card">
+            <div class="card-body">
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  <?php endif; ?>
+  <!-- <div class="home_container">
+    <br>
   <h5 style="margin-left: 20px;"><b>Note:</b> Result is presented for an active ingredient </h5>
   <div class="inner_section_drugs">
     <div class="launch">
@@ -58,9 +295,8 @@ $this->Html->script('highcharts/modules/data', array('inline' => false));
       </table>
     </div>
   </div>
-
-  <!-- check id session has results -->
-  <?php if ($this->Session->check('results')) : ?>
+ 
+  <?php if (!$this->Session->check('results')) : ?>
     <?php
     $results = $this->Session->read('results');
     if ($results) { ?>
@@ -78,8 +314,7 @@ $this->Html->script('highcharts/modules/data', array('inline' => false));
                 <td>
                   <h3>Reported Potential side effects</h3>
                 </td>
-              </tr>
-              <!-- check if data is not empty  -->
+              </tr> 
               <?php if (!empty($data)) : ?>
 
                 <?php foreach ($data as $key => $dt) : ?>
@@ -90,8 +325,7 @@ $this->Html->script('highcharts/modules/data', array('inline' => false));
                     </td>
                   <tr>
 
-                  <?php endforeach; ?>
-                  <!-- add esle statemet -->
+                  <?php endforeach; ?> 
                 <?php else : ?>
                   <tr>
                     <td>
@@ -269,16 +503,18 @@ $this->Html->script('highcharts/modules/data', array('inline' => false));
 
       <?php endif; ?>
 
-    <?php } else { ?>
-      <!-- show div with min height 360px -->
+    <?php } else { ?> 
       <div style="min-height: 420px;"></div>
 
     <?php } ?>
 
   <?php endif; ?>
 
+</div> -->
+  <div class="row-fluid">
+    <div class="blank_faq"></div>
+  </div>
 </div>
-
 <!-- add script to autocomplete the vaccine name -->
 <script type="text/javascript">
   $(document).ready(function() {
