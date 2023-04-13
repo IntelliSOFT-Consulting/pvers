@@ -1,0 +1,8 @@
+2023-04-12 15:15:11,325 CRIT Supervisor running as root (no user in config file)
+2023-04-12 15:15:11,328 INFO supervisord started with pid 7
+2023-04-12 15:15:12,329 INFO spawned: 'apache' with pid 10
+2023-04-12 15:15:13,390 INFO success: apache entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2023-04-13 07:00:52,982 CRIT Supervisor running as root (no user in config file)
+2023-04-13 07:00:52,986 INFO supervisord started with pid 7
+2023-04-13 07:00:53,988 INFO spawned: 'apache' with pid 10
+2023-04-13 07:00:55,133 INFO success: apache entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
